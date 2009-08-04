@@ -1,0 +1,94 @@
+//
+// Prefix header for all source files of the 'webgnosus_client' target in the 'webgnosus_client' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// Define the debugging state
+#define DEBUG_SEND      YES
+#define DEBUG_RECV      YES
+#define DEBUG_DELEGATE  YES
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// Global configuration 
+#define kMESSAGE_CACHE_SIZE                     10          // number of messages cached in message views
+#define kCELL_WIDTH                             320.0       // size of table cells
+#define kDISPLAY_WIDTH                          270.0       // width of message display portion of table cell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// GridView configuration
+#define kGRID_X_OFFSET                          20.0
+#define kGRID_Y_OFFSET                          40.0
+#define kGRID_BORDER_WIDTH                      2.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+//LabelGridView configuration
+#define kLABEL_GRID_FONT_SIZE                   13.0
+#define kLABEL_GRID_FONT                        "Helvetica"
+#define kLABEL_GRID_HEIGHT                      12.0
+#define kLABEL_OFFSET                           5.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// XDataMessageLabelCell configurations
+#define kXDATA_MESSAGE_CELL_HEIGHT_PAD          55.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// MessageCell configuration
+#define kMESSAGE_FONT_SIZE                      17.0
+#define kMESSAGE_HEIGHT_PAD                     30.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// default configurations used by MessageCellFactory
+#define kMESSAGE_HEIGHT_DEFAULT                 30.0    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// display mode setting used in ContactChatViewController and RosterViewController
+#define kCONTACTS_MODE                          0
+#define kMESSAGE_MODE                           0
+#define kRESOURCE_MODE                          1
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// adjust message size for edit mode when cell has status indicator
+#define kLARGE_MESSAGE_WITH_STATUS_WIDTH        235.0
+#define kSMALL_MESSAGE_WITH_STATUS_WIDTH        180.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// RosterCell height
+#define kROSTER_CELL_HEIGHT                     45.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// height of section title used in some table views
+#define kCELL_SECTION_TITLE_HEIGHT              30.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// time series graph configuration
+#define kTIME_SERIES_CELL_HEIGHT_PAD            35.0
+
+#define kTIME_SERIES_HEIGHT                     50.0
+#define kTIME_SERIES_X_OFFSET                   20.0
+#define kTIME_SERIES_Y_OFFSET                   20.0
+
+#define kTIME_SERIES_LABEL_HEIGHT               15.0
+#define kTIME_SERIES_LABEL_WIDTH                270.0
+#define kTIME_SERIES_LABEL_X_OFFSET             0.0
+#define kTIME_SERIES_LABEL_Y_OFFSET             0.0
+
+#define kTIME_SERIES_STAT_CELL_HEIGHT           10.0
+#define kTIME_SERIES_STAT_CELL_WIDTH            120.0
+#define kTIME_SERIES_STAT_CELL_X_OFFSET         10.0
+#define kTIME_SERIES_STAT_CELL_Y_OFFSET         17.0
+
+#define kTIME_SERIES_TITLE_SIZE                 13.0
+#define kTIME_SERIES_LABEL_FONT                 "Helvetica"
+
+#define kTIME_SERIES_GRAPH_HEIGHT               40.0
+#define kTIME_SERIES_GRAPH_WIDTH                150.0
+#define kTIME_SERIES_GRAPH_X_OFFSET             0.0
+#define kTIME_SERIES_GRAPH_Y_OFFSET             5.0
+#define kTIME_SERIES_GRAPH_LINE_WIDTH           1.0
+
+

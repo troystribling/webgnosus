@@ -1,0 +1,1510 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05080DB90FBA6A05007FE920 /* TimeSeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05080DB80FBA6A05007FE920 /* TimeSeriesCell.m */; };
+		05080DBA0FBA6A05007FE920 /* TimeSeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05080DB80FBA6A05007FE920 /* TimeSeriesCell.m */; };
+		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
+		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
+		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
+		051AB4830F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
+		052800D30FA54D4A007337FD /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D20FA54D4A007337FD /* libidn.a */; };
+		052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D40FA54D63007337FD /* libidn-simulator.a */; };
+		0559F44C0FC8786A00DEC85F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4460FC8786A00DEC85F /* GraphView.m */; };
+		0559F44D0FC8786A00DEC85F /* GraphViewRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4490FC8786A00DEC85F /* GraphViewRectangle.m */; };
+		0559F44E0FC8786A00DEC85F /* TimeSeriesGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F44B0FC8786A00DEC85F /* TimeSeriesGraphView.m */; };
+		0559F44F0FC8786A00DEC85F /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4460FC8786A00DEC85F /* GraphView.m */; };
+		0559F4500FC8786A00DEC85F /* GraphViewRectangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4490FC8786A00DEC85F /* GraphViewRectangle.m */; };
+		0559F4510FC8786A00DEC85F /* TimeSeriesGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F44B0FC8786A00DEC85F /* TimeSeriesGraphView.m */; };
+		0559F4590FC878F500DEC85F /* Commands.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4540FC878F400DEC85F /* Commands.m */; };
+		0559F45A0FC878F500DEC85F /* ConstantTimeSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4560FC878F500DEC85F /* ConstantTimeSeries.m */; };
+		0559F45B0FC878F500DEC85F /* TimeSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4580FC878F500DEC85F /* TimeSeries.m */; };
+		0559F45C0FC878F500DEC85F /* Commands.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4540FC878F400DEC85F /* Commands.m */; };
+		0559F45D0FC878F500DEC85F /* ConstantTimeSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4560FC878F500DEC85F /* ConstantTimeSeries.m */; };
+		0559F45E0FC878F500DEC85F /* TimeSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4580FC878F500DEC85F /* TimeSeries.m */; };
+		0559F4760FC8A95C00DEC85F /* ActiveUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4750FC8A95C00DEC85F /* ActiveUsersCell.m */; };
+		0559F4770FC8A95C00DEC85F /* ActiveUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0559F4750FC8A95C00DEC85F /* ActiveUsersCell.m */; };
+		05C6E9490F0F176F009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
+		05C6E95C0F0F17FA009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
+		05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
+		05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		05C6E99A0F0F1B77009BD7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		05C6E9B60F0F1B77009BD7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		05C6E9B70F0F1B77009BD7C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		05C6E9B80F0F1B77009BD7C8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		05C6E9B90F0F1B77009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
+		05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
+		05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
+		05CE068E0FB906630036DF5E /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06850FB906630036DF5E /* account-off-led.jpg */; };
+		05CE068F0FB906630036DF5E /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06860FB906630036DF5E /* account-on-led.jpg */; };
+		05CE06910FB906630036DF5E /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06880FB906630036DF5E /* main_icon.png */; };
+		05CE06920FB906630036DF5E /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06890FB906630036DF5E /* message_background.jpg */; };
+		05CE06930FB906630036DF5E /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068A0FB906630036DF5E /* roster-section.jpg */; };
+		05CE06940FB906630036DF5E /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068B0FB906630036DF5E /* tabbar-accounts.png */; };
+		05CE06950FB906630036DF5E /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068C0FB906630036DF5E /* tabbar-roster.png */; };
+		05CE06960FB906630036DF5E /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068D0FB906630036DF5E /* tabbar-streams.png */; };
+		05CE06970FB906630036DF5E /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06850FB906630036DF5E /* account-off-led.jpg */; };
+		05CE06980FB906630036DF5E /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06860FB906630036DF5E /* account-on-led.jpg */; };
+		05CE069A0FB906630036DF5E /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06880FB906630036DF5E /* main_icon.png */; };
+		05CE069B0FB906630036DF5E /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06890FB906630036DF5E /* message_background.jpg */; };
+		05CE069C0FB906630036DF5E /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068A0FB906630036DF5E /* roster-section.jpg */; };
+		05CE069D0FB906630036DF5E /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068B0FB906630036DF5E /* tabbar-accounts.png */; };
+		05CE069E0FB906630036DF5E /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068C0FB906630036DF5E /* tabbar-roster.png */; };
+		05CE069F0FB906630036DF5E /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068D0FB906630036DF5E /* tabbar-streams.png */; };
+		05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
+		05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
+		05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
+		05CE074D0FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */; };
+		05CE074E0FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
+		05CE074F0FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
+		05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
+		05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
+		05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
+		05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
+		05CE07540FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */; };
+		05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
+		05CE07560FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
+		05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
+		05CE075D0FB909DB0036DF5E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075A0FB909DB0036DF5E /* AsyncSocket.m */; };
+		05CE075E0FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
+		05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075A0FB909DB0036DF5E /* AsyncSocket.m */; };
+		05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
+		05CE076B0FB90A280036DF5E /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07640FB90A280036DF5E /* ActivityView.m */; };
+		05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
+		05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
+		05CE076F0FB90A280036DF5E /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07640FB90A280036DF5E /* ActivityView.m */; };
+		05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
+		05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
+		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
+		05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
+		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
+		05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
+		05DC8C8B0FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */; };
+		05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
+		05DC8C8D0FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
+		05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
+		05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
+		05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */; };
+		05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
+		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
+		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
+		05DC8CA10FBB15EB0018AEEF /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */; };
+		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
+		05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
+		05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
+		05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
+		05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
+		05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
+		05DC8CA80FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */; };
+		05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
+		05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
+		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
+		05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
+		05DC8CAD0FBB15EB0018AEEF /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */; };
+		05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
+		05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
+		05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
+		05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
+		05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
+		05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
+		05DC8CB40FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */; };
+		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
+		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
+		05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
+		05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
+		05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
+		05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
+		05E206EA0FB9004100FCFC94 /* XMPPxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206AB0FB9004100FCFC94 /* XMPPxData.m */; };
+		05E206EB0FB9004100FCFC94 /* XMPPTransports.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206AE0FB9004100FCFC94 /* XMPPTransports.m */; };
+		05E206EC0FB9004100FCFC94 /* LibIDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B20FB9004100FCFC94 /* LibIDN.m */; };
+		05E206ED0FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */; };
+		05E206EE0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */; };
+		05E206EF0FB9004100FCFC94 /* XMPPQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BA0FB9004100FCFC94 /* XMPPQuery.m */; };
+		05E206F00FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */; };
+		05E206F10FB9004100FCFC94 /* XMPPRosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */; };
+		05E206F20FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C00FB9004100FCFC94 /* XMPPRosterQuery.m */; };
+		05E206F30FB9004100FCFC94 /* XMPPAuthorize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C30FB9004100FCFC94 /* XMPPAuthorize.m */; };
+		05E206F40FB9004100FCFC94 /* XMPPBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C60FB9004100FCFC94 /* XMPPBind.m */; };
+		05E206F50FB9004100FCFC94 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C80FB9004100FCFC94 /* XMPPError.m */; };
+		05E206F60FB9004100FCFC94 /* XMPPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CA0FB9004100FCFC94 /* XMPPSession.m */; };
+		05E206F70FB9004100FCFC94 /* XMPPIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CD0FB9004100FCFC94 /* XMPPIQ.m */; };
+		05E206F80FB9004100FCFC94 /* XMPPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CF0FB9004100FCFC94 /* XMPPMessage.m */; };
+		05E206F90FB9004100FCFC94 /* XMPPPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D10FB9004100FCFC94 /* XMPPPresence.m */; };
+		05E206FA0FB9004100FCFC94 /* XMPPStanza.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D30FB9004100FCFC94 /* XMPPStanza.m */; };
+		05E206FB0FB9004100FCFC94 /* XMPPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D60FB9004100FCFC94 /* XMPPStream.m */; };
+		05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D80FB9004100FCFC94 /* XMPPStreamError.m */; };
+		05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */; };
+		05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
+		05E206FF0FB9004100FCFC94 /* SCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */; };
+		05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
+		05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
+		05E207030FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
+		05E207040FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
+		05E207050FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
+		05E207060FB9004100FCFC94 /* XMPPxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206AB0FB9004100FCFC94 /* XMPPxData.m */; };
+		05E207070FB9004100FCFC94 /* XMPPTransports.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206AE0FB9004100FCFC94 /* XMPPTransports.m */; };
+		05E207080FB9004100FCFC94 /* LibIDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B20FB9004100FCFC94 /* LibIDN.m */; };
+		05E207090FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */; };
+		05E2070A0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */; };
+		05E2070B0FB9004100FCFC94 /* XMPPQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BA0FB9004100FCFC94 /* XMPPQuery.m */; };
+		05E2070C0FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */; };
+		05E2070D0FB9004100FCFC94 /* XMPPRosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */; };
+		05E2070E0FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C00FB9004100FCFC94 /* XMPPRosterQuery.m */; };
+		05E2070F0FB9004100FCFC94 /* XMPPAuthorize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C30FB9004100FCFC94 /* XMPPAuthorize.m */; };
+		05E207100FB9004100FCFC94 /* XMPPBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C60FB9004100FCFC94 /* XMPPBind.m */; };
+		05E207110FB9004100FCFC94 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C80FB9004100FCFC94 /* XMPPError.m */; };
+		05E207120FB9004100FCFC94 /* XMPPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CA0FB9004100FCFC94 /* XMPPSession.m */; };
+		05E207130FB9004100FCFC94 /* XMPPIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CD0FB9004100FCFC94 /* XMPPIQ.m */; };
+		05E207140FB9004100FCFC94 /* XMPPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CF0FB9004100FCFC94 /* XMPPMessage.m */; };
+		05E207150FB9004100FCFC94 /* XMPPPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D10FB9004100FCFC94 /* XMPPPresence.m */; };
+		05E207160FB9004100FCFC94 /* XMPPStanza.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D30FB9004100FCFC94 /* XMPPStanza.m */; };
+		05E207170FB9004100FCFC94 /* XMPPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D60FB9004100FCFC94 /* XMPPStream.m */; };
+		05E207180FB9004100FCFC94 /* XMPPStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D80FB9004100FCFC94 /* XMPPStreamError.m */; };
+		05E207190FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */; };
+		05E2071A0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
+		05E2071B0FB9004100FCFC94 /* SCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */; };
+		05E2071C0FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
+		05E2071E0FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
+		05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207220FB9016B00FCFC94 /* DDXMLDocument.m */; };
+		05E2072B0FB9016B00FCFC94 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207240FB9016B00FCFC94 /* DDXMLElement.m */; };
+		05E2072C0FB9016B00FCFC94 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207260FB9016B00FCFC94 /* DDXMLNode.m */; };
+		05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207290FB9016B00FCFC94 /* NSStringAdditions.m */; };
+		05E2072E0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207220FB9016B00FCFC94 /* DDXMLDocument.m */; };
+		05E2072F0FB9016B00FCFC94 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207240FB9016B00FCFC94 /* DDXMLElement.m */; };
+		05E207300FB9016B00FCFC94 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207260FB9016B00FCFC94 /* DDXMLNode.m */; };
+		05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207290FB9016B00FCFC94 /* NSStringAdditions.m */; };
+		05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
+		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
+		05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
+		05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
+		05E207EE0FB9046500FCFC94 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountsViewController.m */; };
+		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
+		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
+		05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
+		05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
+		05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
+		05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
+		05E207F50FB9046500FCFC94 /* ContactChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* ContactChatViewController.m */; };
+		05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
+		05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
+		05E207FA0FB9046500FCFC94 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CD0FB9046500FCFC94 /* GridView.m */; };
+		05E207FB0FB9046500FCFC94 /* LabelGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CF0FB9046500FCFC94 /* LabelGridView.m */; };
+		05E207FD0FB9046500FCFC94 /* BodyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D40FB9046500FCFC94 /* BodyMessageCell.m */; };
+		05E207FE0FB9046500FCFC94 /* EthernetInterfaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D60FB9046500FCFC94 /* EthernetInterfaceCell.m */; };
+		05E207FF0FB9046500FCFC94 /* FileSystemUsageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D80FB9046500FCFC94 /* FileSystemUsageCell.m */; };
+		05E208000FB9046500FCFC94 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DA0FB9046500FCFC94 /* MessageCell.m */; };
+		05E208010FB9046500FCFC94 /* MessageCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */; };
+		05E208020FB9046500FCFC94 /* UptimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DE0FB9046500FCFC94 /* UptimeCell.m */; };
+		05E208030FB9046500FCFC94 /* XDataMessageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E00FB9046500FCFC94 /* XDataMessageLabelCell.m */; };
+		05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */; };
+		05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
+		05E208060FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
+		05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
+		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E208090FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
+		05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
+		05E2080B0FB9046500FCFC94 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountsViewController.m */; };
+		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
+		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
+		05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
+		05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
+		05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
+		05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
+		05E208120FB9046500FCFC94 /* ContactChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* ContactChatViewController.m */; };
+		05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
+		05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
+		05E208170FB9046500FCFC94 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CD0FB9046500FCFC94 /* GridView.m */; };
+		05E208180FB9046500FCFC94 /* LabelGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CF0FB9046500FCFC94 /* LabelGridView.m */; };
+		05E2081A0FB9046500FCFC94 /* BodyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D40FB9046500FCFC94 /* BodyMessageCell.m */; };
+		05E2081B0FB9046500FCFC94 /* EthernetInterfaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D60FB9046500FCFC94 /* EthernetInterfaceCell.m */; };
+		05E2081C0FB9046500FCFC94 /* FileSystemUsageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D80FB9046500FCFC94 /* FileSystemUsageCell.m */; };
+		05E2081D0FB9046500FCFC94 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DA0FB9046500FCFC94 /* MessageCell.m */; };
+		05E2081E0FB9046500FCFC94 /* MessageCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */; };
+		05E2081F0FB9046500FCFC94 /* UptimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DE0FB9046500FCFC94 /* UptimeCell.m */; };
+		05E208200FB9046500FCFC94 /* XDataMessageLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E00FB9046500FCFC94 /* XDataMessageLabelCell.m */; };
+		05E208210FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */; };
+		05E208220FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
+		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
+		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
+		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E7B47C0FCB224100387714 /* ConnectedTcpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B47B0FCB224100387714 /* ConnectedTcpSocketsCell.m */; };
+		05E7B47D0FCB224100387714 /* ConnectedTcpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B47B0FCB224100387714 /* ConnectedTcpSocketsCell.m */; };
+		05E7B4840FCB22C100387714 /* UdpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4830FCB22C100387714 /* UdpSocketsCell.m */; };
+		05E7B4850FCB22C100387714 /* UdpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4830FCB22C100387714 /* UdpSocketsCell.m */; };
+		05E7B4D30FCB287F00387714 /* ProcessesUsingMostCpuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4D20FCB287F00387714 /* ProcessesUsingMostCpuCell.m */; };
+		05E7B4D40FCB287F00387714 /* ProcessesUsingMostCpuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4D20FCB287F00387714 /* ProcessesUsingMostCpuCell.m */; };
+		05E7B4D70FCB28A000387714 /* ProcessesUsingMostMemoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4D60FCB28A000387714 /* ProcessesUsingMostMemoryCell.m */; };
+		05E7B4D80FCB28A000387714 /* ProcessesUsingMostMemoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B4D60FCB28A000387714 /* ProcessesUsingMostMemoryCell.m */; };
+		05E7B5AB0FCB383800387714 /* LargestOpenFilesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B5AA0FCB383800387714 /* LargestOpenFilesCell.m */; };
+		05E7B5AC0FCB383800387714 /* LargestOpenFilesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B5AA0FCB383800387714 /* LargestOpenFilesCell.m */; };
+		05E7B5AF0FCB384E00387714 /* LargestFilesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B5AE0FCB384E00387714 /* LargestFilesCell.m */; };
+		05E7B5B00FCB384E00387714 /* LargestFilesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7B5AE0FCB384E00387714 /* LargestFilesCell.m */; };
+		05E85D140FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
+		05E85D150FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
+		05EE58980FD1AC850068BC5C /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE58970FD1AC850068BC5C /* XMPPClientManager.m */; };
+		05EE58990FD1AC850068BC5C /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE58970FD1AC850068BC5C /* XMPPClientManager.m */; };
+		05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59160FD1C3600068BC5C /* account-error-led.jpg */; };
+		05EE59180FD1C3600068BC5C /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59160FD1C3600068BC5C /* account-error-led.jpg */; };
+		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
+		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
+		05F786550FCAD70A00207237 /* ListeningTcpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F786540FCAD70A00207237 /* ListeningTcpSocketsCell.m */; };
+		05F786560FCAD70A00207237 /* ListeningTcpSocketsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F786540FCAD70A00207237 /* ListeningTcpSocketsCell.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05080DB70FBA6A05007FE920 /* TimeSeriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSeriesCell.h; sourceTree = "<group>"; };
+		05080DB80FBA6A05007FE920 /* TimeSeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSeriesCell.m; sourceTree = "<group>"; };
+		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
+		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
+		052800D40FA54D63007337FD /* libidn-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-simulator.a"; sourceTree = "<group>"; };
+		0559F4450FC8786A00DEC85F /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		0559F4460FC8786A00DEC85F /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		0559F4470FC8786A00DEC85F /* GraphViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewData.h; sourceTree = "<group>"; };
+		0559F4480FC8786A00DEC85F /* GraphViewRectangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewRectangle.h; sourceTree = "<group>"; };
+		0559F4490FC8786A00DEC85F /* GraphViewRectangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewRectangle.m; sourceTree = "<group>"; };
+		0559F44A0FC8786A00DEC85F /* TimeSeriesGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSeriesGraphView.h; sourceTree = "<group>"; };
+		0559F44B0FC8786A00DEC85F /* TimeSeriesGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSeriesGraphView.m; sourceTree = "<group>"; };
+		0559F4530FC878F400DEC85F /* Commands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Commands.h; sourceTree = "<group>"; };
+		0559F4540FC878F400DEC85F /* Commands.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Commands.m; sourceTree = "<group>"; };
+		0559F4550FC878F500DEC85F /* ConstantTimeSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantTimeSeries.h; sourceTree = "<group>"; };
+		0559F4560FC878F500DEC85F /* ConstantTimeSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantTimeSeries.m; sourceTree = "<group>"; };
+		0559F4570FC878F500DEC85F /* TimeSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeSeries.h; sourceTree = "<group>"; };
+		0559F4580FC878F500DEC85F /* TimeSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeSeries.m; sourceTree = "<group>"; };
+		0559F4740FC8A95C00DEC85F /* ActiveUsersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveUsersCell.h; sourceTree = "<group>"; };
+		0559F4750FC8A95C00DEC85F /* ActiveUsersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveUsersCell.m; sourceTree = "<group>"; };
+		05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
+		05CE06850FB906630036DF5E /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-off-led.jpg"; path = "Resources/Images/account-off-led.jpg"; sourceTree = "<group>"; };
+		05CE06860FB906630036DF5E /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-on-led.jpg"; path = "Resources/Images/account-on-led.jpg"; sourceTree = "<group>"; };
+		05CE06880FB906630036DF5E /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_icon.png; path = Resources/Images/main_icon.png; sourceTree = "<group>"; };
+		05CE06890FB906630036DF5E /* message_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = message_background.jpg; path = Resources/Images/message_background.jpg; sourceTree = "<group>"; };
+		05CE068A0FB906630036DF5E /* roster-section.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "roster-section.jpg"; path = "Resources/Images/roster-section.jpg"; sourceTree = "<group>"; };
+		05CE068B0FB906630036DF5E /* tabbar-accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-accounts.png"; path = "Resources/Images/tabbar-accounts.png"; sourceTree = "<group>"; };
+		05CE068C0FB906630036DF5E /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-roster.png"; path = "Resources/Images/tabbar-roster.png"; sourceTree = "<group>"; };
+		05CE068D0FB906630036DF5E /* tabbar-streams.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-streams.png"; path = "Resources/Images/tabbar-streams.png"; sourceTree = "<group>"; };
+		05CE073C0FB909CA0036DF5E /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
+		05CE073D0FB909CA0036DF5E /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
+		05CE073E0FB909CA0036DF5E /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
+		05CE073F0FB909CA0036DF5E /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
+		05CE07400FB909CA0036DF5E /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		05CE07410FB909CA0036DF5E /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		05CE07420FB909CA0036DF5E /* ModelUpdateDelgate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelUpdateDelgate.h; sourceTree = "<group>"; };
+		05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelUpdateDelgate.m; sourceTree = "<group>"; };
+		05CE07440FB909CA0036DF5E /* RosterItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemModel.h; sourceTree = "<group>"; };
+		05CE07450FB909CA0036DF5E /* RosterItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemModel.m; sourceTree = "<group>"; };
+		05CE07460FB909CA0036DF5E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		05CE07470FB909CA0036DF5E /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		05CE07480FB909CA0036DF5E /* WebgnosusDbi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebgnosusDbi.h; sourceTree = "<group>"; };
+		05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebgnosusDbi.m; sourceTree = "<group>"; };
+		05CE07590FB909DB0036DF5E /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		05CE075A0FB909DB0036DF5E /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		05CE075B0FB909DB0036DF5E /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		05CE07630FB90A280036DF5E /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		05CE07640FB90A280036DF5E /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		05CE07650FB90A280036DF5E /* NSObjectiPhoneAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectiPhoneAdditions.h; sourceTree = "<group>"; };
+		05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectiPhoneAdditions.m; sourceTree = "<group>"; };
+		05CE07690FB90A280036DF5E /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomSwitch.h; sourceTree = "<group>"; };
+		05CE076A0FB90A280036DF5E /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
+		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
+		05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppCommandCell.xib; sourceTree = "<group>"; };
+		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
+		05DC8C850FBB15C60018AEEF /* RosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterCell.xib; sourceTree = "<group>"; };
+		05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataMessageLabelCell.xib; sourceTree = "<group>"; };
+		05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOptionsController.xib; sourceTree = "<group>"; };
+		05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
+		05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
+		05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
+		05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppViewController.xib; sourceTree = "<group>"; };
+		05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAccountViewController.xib; sourceTree = "<group>"; };
+		05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
+		05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterSectionViewController.xib; sourceTree = "<group>"; };
+		05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterViewController.xib; sourceTree = "<group>"; };
+		05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
+		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
+		05E206A30FB9004100FCFC94 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		05E206A40FB9004100FCFC94 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		05E206A50FB9004100FCFC94 /* NSXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLElementAdditions.h; sourceTree = "<group>"; };
+		05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSXMLElementAdditions.m; sourceTree = "<group>"; };
+		05E206A80FB9004100FCFC94 /* XMPPCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCommand.h; sourceTree = "<group>"; };
+		05E206A90FB9004100FCFC94 /* XMPPCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPCommand.m; sourceTree = "<group>"; };
+		05E206AA0FB9004100FCFC94 /* XMPPxData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPxData.h; sourceTree = "<group>"; };
+		05E206AB0FB9004100FCFC94 /* XMPPxData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPxData.m; sourceTree = "<group>"; };
+		05E206AD0FB9004100FCFC94 /* XMPPTransports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPTransports.h; sourceTree = "<group>"; };
+		05E206AE0FB9004100FCFC94 /* XMPPTransports.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTransports.m; sourceTree = "<group>"; };
+		05E206B00FB9004100FCFC94 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idn-int.h"; sourceTree = "<group>"; };
+		05E206B10FB9004100FCFC94 /* LibIDN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibIDN.h; sourceTree = "<group>"; };
+		05E206B20FB9004100FCFC94 /* LibIDN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibIDN.m; sourceTree = "<group>"; };
+		05E206B30FB9004100FCFC94 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringprep.h; sourceTree = "<group>"; };
+		05E206B50FB9004100FCFC94 /* XMPPAuthorizationQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPAuthorizationQuery.h; sourceTree = "<group>"; };
+		05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAuthorizationQuery.m; sourceTree = "<group>"; };
+		05E206B70FB9004100FCFC94 /* XMPPClientVersionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQuery.h; sourceTree = "<group>"; };
+		05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQuery.m; sourceTree = "<group>"; };
+		05E206B90FB9004100FCFC94 /* XMPPQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPQuery.h; sourceTree = "<group>"; };
+		05E206BA0FB9004100FCFC94 /* XMPPQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPQuery.m; sourceTree = "<group>"; };
+		05E206BB0FB9004100FCFC94 /* XMPPRegisterQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterQuery.h; sourceTree = "<group>"; };
+		05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterQuery.m; sourceTree = "<group>"; };
+		05E206BD0FB9004100FCFC94 /* XMPPRosterItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRosterItem.h; sourceTree = "<group>"; };
+		05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRosterItem.m; sourceTree = "<group>"; };
+		05E206BF0FB9004100FCFC94 /* XMPPRosterQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRosterQuery.h; sourceTree = "<group>"; };
+		05E206C00FB9004100FCFC94 /* XMPPRosterQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRosterQuery.m; sourceTree = "<group>"; };
+		05E206C20FB9004100FCFC94 /* XMPPAuthorize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPAuthorize.h; sourceTree = "<group>"; };
+		05E206C30FB9004100FCFC94 /* XMPPAuthorize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAuthorize.m; sourceTree = "<group>"; };
+		05E206C50FB9004100FCFC94 /* XMPPBind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPBind.h; sourceTree = "<group>"; };
+		05E206C60FB9004100FCFC94 /* XMPPBind.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPBind.m; sourceTree = "<group>"; };
+		05E206C70FB9004100FCFC94 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
+		05E206C80FB9004100FCFC94 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
+		05E206C90FB9004100FCFC94 /* XMPPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPSession.h; sourceTree = "<group>"; };
+		05E206CA0FB9004100FCFC94 /* XMPPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPSession.m; sourceTree = "<group>"; };
+		05E206CC0FB9004100FCFC94 /* XMPPIQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPIQ.h; sourceTree = "<group>"; };
+		05E206CD0FB9004100FCFC94 /* XMPPIQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPIQ.m; sourceTree = "<group>"; };
+		05E206CE0FB9004100FCFC94 /* XMPPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessage.h; sourceTree = "<group>"; };
+		05E206CF0FB9004100FCFC94 /* XMPPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessage.m; sourceTree = "<group>"; };
+		05E206D00FB9004100FCFC94 /* XMPPPresence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPresence.h; sourceTree = "<group>"; };
+		05E206D10FB9004100FCFC94 /* XMPPPresence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPresence.m; sourceTree = "<group>"; };
+		05E206D20FB9004100FCFC94 /* XMPPStanza.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPStanza.h; sourceTree = "<group>"; };
+		05E206D30FB9004100FCFC94 /* XMPPStanza.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStanza.m; sourceTree = "<group>"; };
+		05E206D50FB9004100FCFC94 /* XMPPStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPStream.h; sourceTree = "<group>"; };
+		05E206D60FB9004100FCFC94 /* XMPPStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStream.m; sourceTree = "<group>"; };
+		05E206D70FB9004100FCFC94 /* XMPPStreamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPStreamError.h; sourceTree = "<group>"; };
+		05E206D80FB9004100FCFC94 /* XMPPStreamError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStreamError.m; sourceTree = "<group>"; };
+		05E206D90FB9004100FCFC94 /* XMPPStreamFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPStreamFeatures.h; sourceTree = "<group>"; };
+		05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStreamFeatures.m; sourceTree = "<group>"; };
+		05E206DC0FB9004100FCFC94 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
+		05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
+		05E206DE0FB9004100FCFC94 /* SCNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNotificationManager.h; sourceTree = "<group>"; };
+		05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNotificationManager.m; sourceTree = "<group>"; };
+		05E206E00FB9004100FCFC94 /* XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPP.h; sourceTree = "<group>"; };
+		05E206E10FB9004100FCFC94 /* XMPPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClient.h; sourceTree = "<group>"; };
+		05E206E20FB9004100FCFC94 /* XMPPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClient.m; sourceTree = "<group>"; };
+		05E206E50FB9004100FCFC94 /* XMPPJID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPJID.h; sourceTree = "<group>"; };
+		05E206E60FB9004100FCFC94 /* XMPPJID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPJID.m; sourceTree = "<group>"; };
+		05E207200FB9016B00FCFC94 /* DDXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXML.h; sourceTree = "<group>"; };
+		05E207210FB9016B00FCFC94 /* DDXMLDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLDocument.h; sourceTree = "<group>"; };
+		05E207220FB9016B00FCFC94 /* DDXMLDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLDocument.m; sourceTree = "<group>"; };
+		05E207230FB9016B00FCFC94 /* DDXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLElement.h; sourceTree = "<group>"; };
+		05E207240FB9016B00FCFC94 /* DDXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLElement.m; sourceTree = "<group>"; };
+		05E207250FB9016B00FCFC94 /* DDXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLNode.h; sourceTree = "<group>"; };
+		05E207260FB9016B00FCFC94 /* DDXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDXMLNode.m; sourceTree = "<group>"; };
+		05E207270FB9016B00FCFC94 /* DDXMLPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDXMLPrivate.h; sourceTree = "<group>"; };
+		05E207280FB9016B00FCFC94 /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
+		05E207290FB9016B00FCFC94 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
+		05E207A80FB903F100FCFC94 /* WebgnosusClientAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebgnosusClientAppDelegate.h; path = Application/WebgnosusClientAppDelegate.h; sourceTree = "<group>"; };
+		05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebgnosusClientAppDelegate.m; path = Application/WebgnosusClientAppDelegate.m; sourceTree = "<group>"; };
+		05E207AE0FB9046500FCFC94 /* AccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
+		05E207AF0FB9046500FCFC94 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
+		05E207B00FB9046500FCFC94 /* AccountOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOptionsController.h; sourceTree = "<group>"; };
+		05E207B10FB9046500FCFC94 /* AccountOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOptionsController.m; sourceTree = "<group>"; };
+		05E207B20FB9046500FCFC94 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		05E207B30FB9046500FCFC94 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		05E207B40FB9046500FCFC94 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
+		05E207B50FB9046500FCFC94 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
+		05E207B60FB9046500FCFC94 /* EditAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountViewController.h; sourceTree = "<group>"; };
+		05E207B70FB9046500FCFC94 /* EditAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountViewController.m; sourceTree = "<group>"; };
+		05E207B80FB9046500FCFC94 /* SelectAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAccountViewController.h; sourceTree = "<group>"; };
+		05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAccountViewController.m; sourceTree = "<group>"; };
+		05E207BB0FB9046500FCFC94 /* AgentXmppCommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppCommandCell.h; sourceTree = "<group>"; };
+		05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppCommandCell.m; sourceTree = "<group>"; };
+		05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppViewController.h; sourceTree = "<group>"; };
+		05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppViewController.m; sourceTree = "<group>"; };
+		05E207BF0FB9046500FCFC94 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		05E207C00FB9046500FCFC94 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		05E207C10FB9046500FCFC94 /* ContactChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactChatViewController.h; sourceTree = "<group>"; };
+		05E207C20FB9046500FCFC94 /* ContactChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactChatViewController.m; sourceTree = "<group>"; };
+		05E207C30FB9046500FCFC94 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		05E207C40FB9046500FCFC94 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		05E207C50FB9046500FCFC94 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
+		05E207C60FB9046500FCFC94 /* HistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryViewController.m; sourceTree = "<group>"; };
+		05E207CC0FB9046500FCFC94 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
+		05E207CD0FB9046500FCFC94 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		05E207CE0FB9046500FCFC94 /* LabelGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelGridView.h; sourceTree = "<group>"; };
+		05E207CF0FB9046500FCFC94 /* LabelGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelGridView.m; sourceTree = "<group>"; };
+		05E207D30FB9046500FCFC94 /* BodyMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyMessageCell.h; sourceTree = "<group>"; };
+		05E207D40FB9046500FCFC94 /* BodyMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyMessageCell.m; sourceTree = "<group>"; };
+		05E207D50FB9046500FCFC94 /* EthernetInterfaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EthernetInterfaceCell.h; sourceTree = "<group>"; };
+		05E207D60FB9046500FCFC94 /* EthernetInterfaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EthernetInterfaceCell.m; sourceTree = "<group>"; };
+		05E207D70FB9046500FCFC94 /* FileSystemUsageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSystemUsageCell.h; sourceTree = "<group>"; };
+		05E207D80FB9046500FCFC94 /* FileSystemUsageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSystemUsageCell.m; sourceTree = "<group>"; };
+		05E207D90FB9046500FCFC94 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		05E207DA0FB9046500FCFC94 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCellFactory.h; sourceTree = "<group>"; };
+		05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCellFactory.m; sourceTree = "<group>"; };
+		05E207DD0FB9046500FCFC94 /* UptimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UptimeCell.h; sourceTree = "<group>"; };
+		05E207DE0FB9046500FCFC94 /* UptimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UptimeCell.m; sourceTree = "<group>"; };
+		05E207DF0FB9046500FCFC94 /* XDataMessageLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataMessageLabelCell.h; sourceTree = "<group>"; };
+		05E207E00FB9046500FCFC94 /* XDataMessageLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataMessageLabelCell.m; sourceTree = "<group>"; };
+		05E207E20FB9046500FCFC94 /* AcceptBuddyRequestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AcceptBuddyRequestView.h; sourceTree = "<group>"; };
+		05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AcceptBuddyRequestView.m; sourceTree = "<group>"; };
+		05E207E40FB9046500FCFC94 /* AddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddContactViewController.h; sourceTree = "<group>"; };
+		05E207E50FB9046500FCFC94 /* AddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactViewController.m; sourceTree = "<group>"; };
+		05E207E60FB9046500FCFC94 /* RosterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterCell.h; sourceTree = "<group>"; };
+		05E207E70FB9046500FCFC94 /* RosterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterCell.m; sourceTree = "<group>"; };
+		05E207E80FB9046500FCFC94 /* RosterSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSectionViewController.h; sourceTree = "<group>"; };
+		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
+		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
+		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E7B47A0FCB224100387714 /* ConnectedTcpSocketsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedTcpSocketsCell.h; sourceTree = "<group>"; };
+		05E7B47B0FCB224100387714 /* ConnectedTcpSocketsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedTcpSocketsCell.m; sourceTree = "<group>"; };
+		05E7B4820FCB22C100387714 /* UdpSocketsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpSocketsCell.h; sourceTree = "<group>"; };
+		05E7B4830FCB22C100387714 /* UdpSocketsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpSocketsCell.m; sourceTree = "<group>"; };
+		05E7B4D10FCB287F00387714 /* ProcessesUsingMostCpuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessesUsingMostCpuCell.h; sourceTree = "<group>"; };
+		05E7B4D20FCB287F00387714 /* ProcessesUsingMostCpuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessesUsingMostCpuCell.m; sourceTree = "<group>"; };
+		05E7B4D50FCB28A000387714 /* ProcessesUsingMostMemoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessesUsingMostMemoryCell.h; sourceTree = "<group>"; };
+		05E7B4D60FCB28A000387714 /* ProcessesUsingMostMemoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessesUsingMostMemoryCell.m; sourceTree = "<group>"; };
+		05E7B5A90FCB383800387714 /* LargestOpenFilesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargestOpenFilesCell.h; sourceTree = "<group>"; };
+		05E7B5AA0FCB383800387714 /* LargestOpenFilesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargestOpenFilesCell.m; sourceTree = "<group>"; };
+		05E7B5AD0FCB384E00387714 /* LargestFilesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LargestFilesCell.h; sourceTree = "<group>"; };
+		05E7B5AE0FCB384E00387714 /* LargestFilesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LargestFilesCell.m; sourceTree = "<group>"; };
+		05E85D120FBC64210048092A /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
+		05E85D130FBC64210048092A /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
+		05EE58960FD1AC850068BC5C /* XMPPClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientManager.h; sourceTree = "<group>"; };
+		05EE58970FD1AC850068BC5C /* XMPPClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientManager.m; sourceTree = "<group>"; };
+		05EE59160FD1C3600068BC5C /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-error-led.jpg"; path = "Resources/Images/account-error-led.jpg"; sourceTree = "<group>"; };
+		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		05F786530FCAD70A00207237 /* ListeningTcpSocketsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListeningTcpSocketsCell.h; sourceTree = "<group>"; };
+		05F786540FCAD70A00207237 /* ListeningTcpSocketsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListeningTcpSocketsCell.m; sourceTree = "<group>"; };
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* WebgnosusClient_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebgnosusClient_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05C6E9B50F0F1B77009BD7C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C6E9B60F0F1B77009BD7C8 /* Foundation.framework in Frameworks */,
+				05C6E9B70F0F1B77009BD7C8 /* UIKit.framework in Frameworks */,
+				05C6E9B80F0F1B77009BD7C8 /* CoreGraphics.framework in Frameworks */,
+				05C6E9B90F0F1B77009BD7C8 /* CFNetwork.framework in Frameworks */,
+				05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */,
+				05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */,
+				051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
+				052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				05C6E9490F0F176F009BD7C8 /* CFNetwork.framework in Frameworks */,
+				05C6E95C0F0F17FA009BD7C8 /* SystemConfiguration.framework in Frameworks */,
+				05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */,
+				051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
+				052800D30FA54D4A007337FD /* libidn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05509F6E0F34F38600C19E19 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				05EE59160FD1C3600068BC5C /* account-error-led.jpg */,
+				05CE06850FB906630036DF5E /* account-off-led.jpg */,
+				05CE06860FB906630036DF5E /* account-on-led.jpg */,
+				05CE06880FB906630036DF5E /* main_icon.png */,
+				05CE06890FB906630036DF5E /* message_background.jpg */,
+				05CE068A0FB906630036DF5E /* roster-section.jpg */,
+				05CE068B0FB906630036DF5E /* tabbar-accounts.png */,
+				05CE068C0FB906630036DF5E /* tabbar-roster.png */,
+				05CE068D0FB906630036DF5E /* tabbar-streams.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		0559F4440FC8786A00DEC85F /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				0559F4450FC8786A00DEC85F /* GraphView.h */,
+				0559F4460FC8786A00DEC85F /* GraphView.m */,
+				0559F4470FC8786A00DEC85F /* GraphViewData.h */,
+				0559F4480FC8786A00DEC85F /* GraphViewRectangle.h */,
+				0559F4490FC8786A00DEC85F /* GraphViewRectangle.m */,
+				0559F44A0FC8786A00DEC85F /* TimeSeriesGraphView.h */,
+				0559F44B0FC8786A00DEC85F /* TimeSeriesGraphView.m */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		0559F4520FC878F400DEC85F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0559F4530FC878F400DEC85F /* Commands.h */,
+				0559F4540FC878F400DEC85F /* Commands.m */,
+				0559F4550FC878F500DEC85F /* ConstantTimeSeries.h */,
+				0559F4560FC878F500DEC85F /* ConstantTimeSeries.m */,
+				0559F4570FC878F500DEC85F /* TimeSeries.h */,
+				0559F4580FC878F500DEC85F /* TimeSeries.m */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		058868B50F0FC6E80076891D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				05DC8C910FBB15EB0018AEEF /* ViewControllers */,
+				05DC8C810FBB15C60018AEEF /* TableCells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		058868B60F0FC9190076891D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				051AB4810F1068C500DD01DC /* webgnosus.db */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		05C6E8A00F0F0D8B009BD7C8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				05E207A80FB903F100FCFC94 /* WebgnosusClientAppDelegate.h */,
+				05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		05CE073B0FB909CA0036DF5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				05CE073C0FB909CA0036DF5E /* AccountModel.h */,
+				05CE073D0FB909CA0036DF5E /* AccountModel.m */,
+				05CE073E0FB909CA0036DF5E /* ContactModel.h */,
+				05CE073F0FB909CA0036DF5E /* ContactModel.m */,
+				05CE07400FB909CA0036DF5E /* MessageModel.h */,
+				05CE07410FB909CA0036DF5E /* MessageModel.m */,
+				05CE07420FB909CA0036DF5E /* ModelUpdateDelgate.h */,
+				05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */,
+				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
+				05CE07450FB909CA0036DF5E /* RosterItemModel.m */,
+				05CE07460FB909CA0036DF5E /* UserModel.h */,
+				05CE07470FB909CA0036DF5E /* UserModel.m */,
+				05CE07480FB909CA0036DF5E /* WebgnosusDbi.h */,
+				05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */,
+				05EE58960FD1AC850068BC5C /* XMPPClientManager.h */,
+				05EE58970FD1AC850068BC5C /* XMPPClientManager.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		05CE07580FB909DB0036DF5E /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				05CE07590FB909DB0036DF5E /* AsyncSocket.h */,
+				05CE075A0FB909DB0036DF5E /* AsyncSocket.m */,
+				05CE075B0FB909DB0036DF5E /* AsyncUdpSocket.h */,
+				05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */,
+			);
+			path = AsyncSocket;
+			sourceTree = "<group>";
+		};
+		05CE07620FB90A280036DF5E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				05CE07630FB90A280036DF5E /* ActivityView.h */,
+				05CE07640FB90A280036DF5E /* ActivityView.m */,
+				05CE07650FB90A280036DF5E /* NSObjectiPhoneAdditions.h */,
+				05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */,
+				05CE07690FB90A280036DF5E /* UICustomSwitch.h */,
+				05CE076A0FB90A280036DF5E /* UICustomSwitch.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		05DC8C810FBB15C60018AEEF /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
+				05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */,
+				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
+				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
+				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
+				05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */,
+			);
+			name = TableCells;
+			path = Resources/Views/TableCells;
+			sourceTree = "<group>";
+		};
+		05DC8C910FBB15EB0018AEEF /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */,
+				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
+				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
+				05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */,
+				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
+				05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */,
+				05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */,
+				05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */,
+				05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */,
+				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
+				05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */,
+				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
+			);
+			name = ViewControllers;
+			path = Resources/Views/ViewControllers;
+			sourceTree = "<group>";
+		};
+		05E206A10FB9004100FCFC94 /* XmppFramework */ = {
+			isa = PBXGroup;
+			children = (
+				05E206A20FB9004100FCFC94 /* Categories */,
+				05E206A70FB9004100FCFC94 /* Command */,
+				05E206AC0FB9004100FCFC94 /* Extensions */,
+				05E206AF0FB9004100FCFC94 /* LibIDN */,
+				05E206B40FB9004100FCFC94 /* Queries */,
+				05E206C10FB9004100FCFC94 /* SASL */,
+				05E206C40FB9004100FCFC94 /* Session */,
+				05E206CB0FB9004100FCFC94 /* Stanzas */,
+				05E206D40FB9004100FCFC94 /* Stream */,
+				05E206DB0FB9004100FCFC94 /* Utility */,
+				05E206E00FB9004100FCFC94 /* XMPP.h */,
+				05E206E10FB9004100FCFC94 /* XMPPClient.h */,
+				05E206E20FB9004100FCFC94 /* XMPPClient.m */,
+				05E206E50FB9004100FCFC94 /* XMPPJID.h */,
+				05E206E60FB9004100FCFC94 /* XMPPJID.m */,
+			);
+			path = XmppFramework;
+			sourceTree = "<group>";
+		};
+		05E206A20FB9004100FCFC94 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				05E206A30FB9004100FCFC94 /* NSDataAdditions.h */,
+				05E206A40FB9004100FCFC94 /* NSDataAdditions.m */,
+				05E206A50FB9004100FCFC94 /* NSXMLElementAdditions.h */,
+				05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		05E206A70FB9004100FCFC94 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				05E206A80FB9004100FCFC94 /* XMPPCommand.h */,
+				05E206A90FB9004100FCFC94 /* XMPPCommand.m */,
+				05E206AA0FB9004100FCFC94 /* XMPPxData.h */,
+				05E206AB0FB9004100FCFC94 /* XMPPxData.m */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
+		05E206AC0FB9004100FCFC94 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				05E206AD0FB9004100FCFC94 /* XMPPTransports.h */,
+				05E206AE0FB9004100FCFC94 /* XMPPTransports.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		05E206AF0FB9004100FCFC94 /* LibIDN */ = {
+			isa = PBXGroup;
+			children = (
+				05E206B00FB9004100FCFC94 /* idn-int.h */,
+				05E206B10FB9004100FCFC94 /* LibIDN.h */,
+				05E206B20FB9004100FCFC94 /* LibIDN.m */,
+				05E206B30FB9004100FCFC94 /* stringprep.h */,
+			);
+			path = LibIDN;
+			sourceTree = "<group>";
+		};
+		05E206B40FB9004100FCFC94 /* Queries */ = {
+			isa = PBXGroup;
+			children = (
+				05E206B50FB9004100FCFC94 /* XMPPAuthorizationQuery.h */,
+				05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */,
+				05E206B70FB9004100FCFC94 /* XMPPClientVersionQuery.h */,
+				05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */,
+				05E206B90FB9004100FCFC94 /* XMPPQuery.h */,
+				05E206BA0FB9004100FCFC94 /* XMPPQuery.m */,
+				05E206BB0FB9004100FCFC94 /* XMPPRegisterQuery.h */,
+				05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */,
+				05E206BD0FB9004100FCFC94 /* XMPPRosterItem.h */,
+				05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */,
+				05E206BF0FB9004100FCFC94 /* XMPPRosterQuery.h */,
+				05E206C00FB9004100FCFC94 /* XMPPRosterQuery.m */,
+			);
+			path = Queries;
+			sourceTree = "<group>";
+		};
+		05E206C10FB9004100FCFC94 /* SASL */ = {
+			isa = PBXGroup;
+			children = (
+				05E206C20FB9004100FCFC94 /* XMPPAuthorize.h */,
+				05E206C30FB9004100FCFC94 /* XMPPAuthorize.m */,
+			);
+			path = SASL;
+			sourceTree = "<group>";
+		};
+		05E206C40FB9004100FCFC94 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				05E206C50FB9004100FCFC94 /* XMPPBind.h */,
+				05E206C60FB9004100FCFC94 /* XMPPBind.m */,
+				05E206C70FB9004100FCFC94 /* XMPPError.h */,
+				05E206C80FB9004100FCFC94 /* XMPPError.m */,
+				05E206C90FB9004100FCFC94 /* XMPPSession.h */,
+				05E206CA0FB9004100FCFC94 /* XMPPSession.m */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		05E206CB0FB9004100FCFC94 /* Stanzas */ = {
+			isa = PBXGroup;
+			children = (
+				05E206CC0FB9004100FCFC94 /* XMPPIQ.h */,
+				05E206CD0FB9004100FCFC94 /* XMPPIQ.m */,
+				05E206CE0FB9004100FCFC94 /* XMPPMessage.h */,
+				05E206CF0FB9004100FCFC94 /* XMPPMessage.m */,
+				05E206D00FB9004100FCFC94 /* XMPPPresence.h */,
+				05E206D10FB9004100FCFC94 /* XMPPPresence.m */,
+				05E206D20FB9004100FCFC94 /* XMPPStanza.h */,
+				05E206D30FB9004100FCFC94 /* XMPPStanza.m */,
+			);
+			path = Stanzas;
+			sourceTree = "<group>";
+		};
+		05E206D40FB9004100FCFC94 /* Stream */ = {
+			isa = PBXGroup;
+			children = (
+				05E206D50FB9004100FCFC94 /* XMPPStream.h */,
+				05E206D60FB9004100FCFC94 /* XMPPStream.m */,
+				05E206D70FB9004100FCFC94 /* XMPPStreamError.h */,
+				05E206D80FB9004100FCFC94 /* XMPPStreamError.m */,
+				05E206D90FB9004100FCFC94 /* XMPPStreamFeatures.h */,
+				05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */,
+			);
+			path = Stream;
+			sourceTree = "<group>";
+		};
+		05E206DB0FB9004100FCFC94 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				05E206DC0FB9004100FCFC94 /* MulticastDelegate.h */,
+				05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */,
+				05E206DE0FB9004100FCFC94 /* SCNotificationManager.h */,
+				05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		05E2071F0FB9016B00FCFC94 /* KissXML */ = {
+			isa = PBXGroup;
+			children = (
+				05E207200FB9016B00FCFC94 /* DDXML.h */,
+				05E207210FB9016B00FCFC94 /* DDXMLDocument.h */,
+				05E207220FB9016B00FCFC94 /* DDXMLDocument.m */,
+				05E207230FB9016B00FCFC94 /* DDXMLElement.h */,
+				05E207240FB9016B00FCFC94 /* DDXMLElement.m */,
+				05E207250FB9016B00FCFC94 /* DDXMLNode.h */,
+				05E207260FB9016B00FCFC94 /* DDXMLNode.m */,
+				05E207270FB9016B00FCFC94 /* DDXMLPrivate.h */,
+				05E207280FB9016B00FCFC94 /* NSStringAdditions.h */,
+				05E207290FB9016B00FCFC94 /* NSStringAdditions.m */,
+			);
+			path = KissXML;
+			sourceTree = "<group>";
+		};
+		05E207AC0FB9046500FCFC94 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				05E207AD0FB9046500FCFC94 /* Accounts */,
+				05E207BA0FB9046500FCFC94 /* Chat */,
+				0559F4440FC8786A00DEC85F /* Graph */,
+				05E207C70FB9046500FCFC94 /* Grid */,
+				05E207D00FB9046500FCFC94 /* MessageCells */,
+				05E207E10FB9046500FCFC94 /* Roster */,
+				05E85D110FBC64210048092A /* Utilities */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		05E207AD0FB9046500FCFC94 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				05E207AE0FB9046500FCFC94 /* AccountCell.h */,
+				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
+				05E207B00FB9046500FCFC94 /* AccountOptionsController.h */,
+				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
+				05E207B20FB9046500FCFC94 /* AccountsViewController.h */,
+				05E207B30FB9046500FCFC94 /* AccountsViewController.m */,
+				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
+				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
+				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
+				05E207B70FB9046500FCFC94 /* EditAccountViewController.m */,
+				05E207B80FB9046500FCFC94 /* SelectAccountViewController.h */,
+				05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		05E207BA0FB9046500FCFC94 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				05E207BB0FB9046500FCFC94 /* AgentXmppCommandCell.h */,
+				05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */,
+				05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */,
+				05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */,
+				05E207BF0FB9046500FCFC94 /* ChatViewController.h */,
+				05E207C00FB9046500FCFC94 /* ChatViewController.m */,
+				05E207C10FB9046500FCFC94 /* ContactChatViewController.h */,
+				05E207C20FB9046500FCFC94 /* ContactChatViewController.m */,
+				05E207C30FB9046500FCFC94 /* MessageViewController.h */,
+				05E207C40FB9046500FCFC94 /* MessageViewController.m */,
+				05E207C50FB9046500FCFC94 /* HistoryViewController.h */,
+				05E207C60FB9046500FCFC94 /* HistoryViewController.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		05E207C70FB9046500FCFC94 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				05E207CC0FB9046500FCFC94 /* GridView.h */,
+				05E207CD0FB9046500FCFC94 /* GridView.m */,
+				05E207CE0FB9046500FCFC94 /* LabelGridView.h */,
+				05E207CF0FB9046500FCFC94 /* LabelGridView.m */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		05E207D00FB9046500FCFC94 /* MessageCells */ = {
+			isa = PBXGroup;
+			children = (
+				05F786520FCAD5CF00207237 /* LableGrid */,
+				05E207D30FB9046500FCFC94 /* BodyMessageCell.h */,
+				05E207D40FB9046500FCFC94 /* BodyMessageCell.m */,
+				05E207D90FB9046500FCFC94 /* MessageCell.h */,
+				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
+				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
+				05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */,
+				05080DB70FBA6A05007FE920 /* TimeSeriesCell.h */,
+				05080DB80FBA6A05007FE920 /* TimeSeriesCell.m */,
+				05E207DF0FB9046500FCFC94 /* XDataMessageLabelCell.h */,
+				05E207E00FB9046500FCFC94 /* XDataMessageLabelCell.m */,
+			);
+			path = MessageCells;
+			sourceTree = "<group>";
+		};
+		05E207E10FB9046500FCFC94 /* Roster */ = {
+			isa = PBXGroup;
+			children = (
+				05E207E20FB9046500FCFC94 /* AcceptBuddyRequestView.h */,
+				05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */,
+				05E207E40FB9046500FCFC94 /* AddContactViewController.h */,
+				05E207E50FB9046500FCFC94 /* AddContactViewController.m */,
+				05E207E60FB9046500FCFC94 /* RosterCell.h */,
+				05E207E70FB9046500FCFC94 /* RosterCell.m */,
+				05E207E80FB9046500FCFC94 /* RosterSectionViewController.h */,
+				05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */,
+				05E207EA0FB9046500FCFC94 /* RosterViewController.h */,
+				05E207EB0FB9046500FCFC94 /* RosterViewController.m */,
+			);
+			path = Roster;
+			sourceTree = "<group>";
+		};
+		05E85D110FBC64210048092A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				05E85D120FBC64210048092A /* CellUtils.h */,
+				05E85D130FBC64210048092A /* CellUtils.m */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		05F786520FCAD5CF00207237 /* LableGrid */ = {
+			isa = PBXGroup;
+			children = (
+				0559F4740FC8A95C00DEC85F /* ActiveUsersCell.h */,
+				0559F4750FC8A95C00DEC85F /* ActiveUsersCell.m */,
+				05E7B47A0FCB224100387714 /* ConnectedTcpSocketsCell.h */,
+				05E7B47B0FCB224100387714 /* ConnectedTcpSocketsCell.m */,
+				05E207D50FB9046500FCFC94 /* EthernetInterfaceCell.h */,
+				05E207D60FB9046500FCFC94 /* EthernetInterfaceCell.m */,
+				05E207D70FB9046500FCFC94 /* FileSystemUsageCell.h */,
+				05E207D80FB9046500FCFC94 /* FileSystemUsageCell.m */,
+				05E7B5AD0FCB384E00387714 /* LargestFilesCell.h */,
+				05E7B5AE0FCB384E00387714 /* LargestFilesCell.m */,
+				05E7B5A90FCB383800387714 /* LargestOpenFilesCell.h */,
+				05E7B5AA0FCB383800387714 /* LargestOpenFilesCell.m */,
+				05F786530FCAD70A00207237 /* ListeningTcpSocketsCell.h */,
+				05F786540FCAD70A00207237 /* ListeningTcpSocketsCell.m */,
+				05E7B4D10FCB287F00387714 /* ProcessesUsingMostCpuCell.h */,
+				05E7B4D20FCB287F00387714 /* ProcessesUsingMostCpuCell.m */,
+				05E7B4D50FCB28A000387714 /* ProcessesUsingMostMemoryCell.h */,
+				05E7B4D60FCB28A000387714 /* ProcessesUsingMostMemoryCell.m */,
+				05E7B4820FCB22C100387714 /* UdpSocketsCell.h */,
+				05E7B4830FCB22C100387714 /* UdpSocketsCell.m */,
+				05E207DD0FB9046500FCFC94 /* UptimeCell.h */,
+				05E207DE0FB9046500FCFC94 /* UptimeCell.m */,
+			);
+			name = LableGrid;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0559F4520FC878F400DEC85F /* Data */,
+				05C6E8A00F0F0D8B009BD7C8 /* Application */,
+				05CE07580FB909DB0036DF5E /* AsyncSocket */,
+				05E2071F0FB9016B00FCFC94 /* KissXML */,
+				05CE073B0FB909CA0036DF5E /* Models */,
+				05E207AC0FB9046500FCFC94 /* Views */,
+				05CE07620FB90A280036DF5E /* Utilities */,
+				05E206A10FB9004100FCFC94 /* XmppFramework */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* web.gnos.us.app */,
+				05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* WebgnosusClient_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				058868B60F0FC9190076891D /* Data */,
+				05509F6E0F34F38600C19E19 /* Images */,
+				058868B50F0FC6E80076891D /* Views */,
+				05EE59930FD21B110068BC5C /* Default.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				052800D20FA54D4A007337FD /* libidn.a */,
+				051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */,
+				05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */,
+				05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */,
+				05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				052800D40FA54D63007337FD /* libidn-simulator.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05C6E9930F0F1B77009BD7C8 /* webgnosus_client_simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05C6E9BE0F0F1B77009BD7C8 /* Build configuration list for PBXNativeTarget "webgnosus_client_simulator" */;
+			buildPhases = (
+				05C6E9940F0F1B77009BD7C8 /* Resources */,
+				05C6E9990F0F1B77009BD7C8 /* Sources */,
+				05C6E9B50F0F1B77009BD7C8 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = webgnosus_client_simulator;
+			productName = webgnosus_client;
+			productReference = 05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1D6058900D05DD3D006BFB54 /* webgnosus_client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "webgnosus_client" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = webgnosus_client;
+			productName = webgnosus_client;
+			productReference = 1D6058910D05DD3D006BFB54 /* web.gnos.us.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "webgnosus_client" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* webgnosus_client */,
+				05C6E9930F0F1B77009BD7C8 /* webgnosus_client_simulator */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05C6E9940F0F1B77009BD7C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */,
+				051AB4830F1068C500DD01DC /* webgnosus.db in Resources */,
+				05CE068E0FB906630036DF5E /* account-off-led.jpg in Resources */,
+				05CE068F0FB906630036DF5E /* account-on-led.jpg in Resources */,
+				05CE06910FB906630036DF5E /* main_icon.png in Resources */,
+				05CE06920FB906630036DF5E /* message_background.jpg in Resources */,
+				05CE06930FB906630036DF5E /* roster-section.jpg in Resources */,
+				05CE06940FB906630036DF5E /* tabbar-accounts.png in Resources */,
+				05CE06950FB906630036DF5E /* tabbar-roster.png in Resources */,
+				05CE06960FB906630036DF5E /* tabbar-streams.png in Resources */,
+				05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */,
+				05DC8C8D0FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
+				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
+				05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */,
+				05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
+				05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
+				05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
+				05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
+				05DC8CAD0FBB15EB0018AEEF /* AddContactViewController.xib in Resources */,
+				05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
+				05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
+				05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
+				05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
+				05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
+				05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
+				05DC8CB40FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */,
+				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
+				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
+				05EE59180FD1C3600068BC5C /* account-error-led.jpg in Resources */,
+				05EE59950FD21B110068BC5C /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				051AB4820F1068C500DD01DC /* webgnosus.db in Resources */,
+				05CE06970FB906630036DF5E /* account-off-led.jpg in Resources */,
+				05CE06980FB906630036DF5E /* account-on-led.jpg in Resources */,
+				05CE069A0FB906630036DF5E /* main_icon.png in Resources */,
+				05CE069B0FB906630036DF5E /* message_background.jpg in Resources */,
+				05CE069C0FB906630036DF5E /* roster-section.jpg in Resources */,
+				05CE069D0FB906630036DF5E /* tabbar-accounts.png in Resources */,
+				05CE069E0FB906630036DF5E /* tabbar-roster.png in Resources */,
+				05CE069F0FB906630036DF5E /* tabbar-streams.png in Resources */,
+				05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */,
+				05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
+				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
+				05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */,
+				05DC8C8B0FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
+				05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
+				05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
+				05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
+				05DC8CA10FBB15EB0018AEEF /* AddContactViewController.xib in Resources */,
+				05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
+				05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
+				05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
+				05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
+				05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
+				05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
+				05DC8CA80FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */,
+				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
+				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
+				05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */,
+				05EE59940FD21B110068BC5C /* Default.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05C6E9990F0F1B77009BD7C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05C6E99A0F0F1B77009BD7C8 /* main.m in Sources */,
+				05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */,
+				05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */,
+				05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */,
+				05E206EA0FB9004100FCFC94 /* XMPPxData.m in Sources */,
+				05E206EB0FB9004100FCFC94 /* XMPPTransports.m in Sources */,
+				05E206EC0FB9004100FCFC94 /* LibIDN.m in Sources */,
+				05E206ED0FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */,
+				05E206EE0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */,
+				05E206EF0FB9004100FCFC94 /* XMPPQuery.m in Sources */,
+				05E206F00FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */,
+				05E206F10FB9004100FCFC94 /* XMPPRosterItem.m in Sources */,
+				05E206F20FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */,
+				05E206F30FB9004100FCFC94 /* XMPPAuthorize.m in Sources */,
+				05E206F40FB9004100FCFC94 /* XMPPBind.m in Sources */,
+				05E206F50FB9004100FCFC94 /* XMPPError.m in Sources */,
+				05E206F60FB9004100FCFC94 /* XMPPSession.m in Sources */,
+				05E206F70FB9004100FCFC94 /* XMPPIQ.m in Sources */,
+				05E206F80FB9004100FCFC94 /* XMPPMessage.m in Sources */,
+				05E206F90FB9004100FCFC94 /* XMPPPresence.m in Sources */,
+				05E206FA0FB9004100FCFC94 /* XMPPStanza.m in Sources */,
+				05E206FB0FB9004100FCFC94 /* XMPPStream.m in Sources */,
+				05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */,
+				05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */,
+				05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */,
+				05E206FF0FB9004100FCFC94 /* SCNotificationManager.m in Sources */,
+				05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */,
+				05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */,
+				05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */,
+				05E2072B0FB9016B00FCFC94 /* DDXMLElement.m in Sources */,
+				05E2072C0FB9016B00FCFC94 /* DDXMLNode.m in Sources */,
+				05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
+				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
+				05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */,
+				05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
+				05E207EE0FB9046500FCFC94 /* AccountsViewController.m in Sources */,
+				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
+				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
+				05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
+				05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
+				05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
+				05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */,
+				05E207F50FB9046500FCFC94 /* ContactChatViewController.m in Sources */,
+				05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */,
+				05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */,
+				05E207FA0FB9046500FCFC94 /* GridView.m in Sources */,
+				05E207FB0FB9046500FCFC94 /* LabelGridView.m in Sources */,
+				05E207FD0FB9046500FCFC94 /* BodyMessageCell.m in Sources */,
+				05E207FE0FB9046500FCFC94 /* EthernetInterfaceCell.m in Sources */,
+				05E207FF0FB9046500FCFC94 /* FileSystemUsageCell.m in Sources */,
+				05E208000FB9046500FCFC94 /* MessageCell.m in Sources */,
+				05E208010FB9046500FCFC94 /* MessageCellFactory.m in Sources */,
+				05E208020FB9046500FCFC94 /* UptimeCell.m in Sources */,
+				05E208030FB9046500FCFC94 /* XDataMessageLabelCell.m in Sources */,
+				05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */,
+				05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */,
+				05E208060FB9046500FCFC94 /* RosterCell.m in Sources */,
+				05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */,
+				05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */,
+				05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */,
+				05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */,
+				05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */,
+				05CE07540FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */,
+				05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */,
+				05CE07560FB909CA0036DF5E /* UserModel.m in Sources */,
+				05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
+				05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */,
+				05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */,
+				05CE076F0FB90A280036DF5E /* ActivityView.m in Sources */,
+				05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
+				05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */,
+				05080DBA0FBA6A05007FE920 /* TimeSeriesCell.m in Sources */,
+				05E85D140FBC64210048092A /* CellUtils.m in Sources */,
+				0559F44F0FC8786A00DEC85F /* GraphView.m in Sources */,
+				0559F4500FC8786A00DEC85F /* GraphViewRectangle.m in Sources */,
+				0559F4510FC8786A00DEC85F /* TimeSeriesGraphView.m in Sources */,
+				0559F45C0FC878F500DEC85F /* Commands.m in Sources */,
+				0559F45D0FC878F500DEC85F /* ConstantTimeSeries.m in Sources */,
+				0559F45E0FC878F500DEC85F /* TimeSeries.m in Sources */,
+				0559F4760FC8A95C00DEC85F /* ActiveUsersCell.m in Sources */,
+				05F786550FCAD70A00207237 /* ListeningTcpSocketsCell.m in Sources */,
+				05E7B47D0FCB224100387714 /* ConnectedTcpSocketsCell.m in Sources */,
+				05E7B4850FCB22C100387714 /* UdpSocketsCell.m in Sources */,
+				05E7B4D40FCB287F00387714 /* ProcessesUsingMostCpuCell.m in Sources */,
+				05E7B4D80FCB28A000387714 /* ProcessesUsingMostMemoryCell.m in Sources */,
+				05E7B5AC0FCB383800387714 /* LargestOpenFilesCell.m in Sources */,
+				05E7B5B00FCB384E00387714 /* LargestFilesCell.m in Sources */,
+				05EE58990FD1AC850068BC5C /* XMPPClientManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				05E207030FB9004100FCFC94 /* NSDataAdditions.m in Sources */,
+				05E207040FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */,
+				05E207050FB9004100FCFC94 /* XMPPCommand.m in Sources */,
+				05E207060FB9004100FCFC94 /* XMPPxData.m in Sources */,
+				05E207070FB9004100FCFC94 /* XMPPTransports.m in Sources */,
+				05E207080FB9004100FCFC94 /* LibIDN.m in Sources */,
+				05E207090FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */,
+				05E2070A0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */,
+				05E2070B0FB9004100FCFC94 /* XMPPQuery.m in Sources */,
+				05E2070C0FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */,
+				05E2070D0FB9004100FCFC94 /* XMPPRosterItem.m in Sources */,
+				05E2070E0FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */,
+				05E2070F0FB9004100FCFC94 /* XMPPAuthorize.m in Sources */,
+				05E207100FB9004100FCFC94 /* XMPPBind.m in Sources */,
+				05E207110FB9004100FCFC94 /* XMPPError.m in Sources */,
+				05E207120FB9004100FCFC94 /* XMPPSession.m in Sources */,
+				05E207130FB9004100FCFC94 /* XMPPIQ.m in Sources */,
+				05E207140FB9004100FCFC94 /* XMPPMessage.m in Sources */,
+				05E207150FB9004100FCFC94 /* XMPPPresence.m in Sources */,
+				05E207160FB9004100FCFC94 /* XMPPStanza.m in Sources */,
+				05E207170FB9004100FCFC94 /* XMPPStream.m in Sources */,
+				05E207180FB9004100FCFC94 /* XMPPStreamError.m in Sources */,
+				05E207190FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */,
+				05E2071A0FB9004100FCFC94 /* MulticastDelegate.m in Sources */,
+				05E2071B0FB9004100FCFC94 /* SCNotificationManager.m in Sources */,
+				05E2071C0FB9004100FCFC94 /* XMPPClient.m in Sources */,
+				05E2071E0FB9004100FCFC94 /* XMPPJID.m in Sources */,
+				05E2072E0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */,
+				05E2072F0FB9016B00FCFC94 /* DDXMLElement.m in Sources */,
+				05E207300FB9016B00FCFC94 /* DDXMLNode.m in Sources */,
+				05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
+				05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
+				05E208090FB9046500FCFC94 /* AccountCell.m in Sources */,
+				05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
+				05E2080B0FB9046500FCFC94 /* AccountsViewController.m in Sources */,
+				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
+				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
+				05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
+				05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
+				05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
+				05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */,
+				05E208120FB9046500FCFC94 /* ContactChatViewController.m in Sources */,
+				05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */,
+				05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */,
+				05E208170FB9046500FCFC94 /* GridView.m in Sources */,
+				05E208180FB9046500FCFC94 /* LabelGridView.m in Sources */,
+				05E2081A0FB9046500FCFC94 /* BodyMessageCell.m in Sources */,
+				05E2081B0FB9046500FCFC94 /* EthernetInterfaceCell.m in Sources */,
+				05E2081C0FB9046500FCFC94 /* FileSystemUsageCell.m in Sources */,
+				05E2081D0FB9046500FCFC94 /* MessageCell.m in Sources */,
+				05E2081E0FB9046500FCFC94 /* MessageCellFactory.m in Sources */,
+				05E2081F0FB9046500FCFC94 /* UptimeCell.m in Sources */,
+				05E208200FB9046500FCFC94 /* XDataMessageLabelCell.m in Sources */,
+				05E208210FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */,
+				05E208220FB9046500FCFC94 /* AddContactViewController.m in Sources */,
+				05E208230FB9046500FCFC94 /* RosterCell.m in Sources */,
+				05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */,
+				05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */,
+				05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */,
+				05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */,
+				05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */,
+				05CE074D0FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */,
+				05CE074E0FB909CA0036DF5E /* RosterItemModel.m in Sources */,
+				05CE074F0FB909CA0036DF5E /* UserModel.m in Sources */,
+				05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
+				05CE075D0FB909DB0036DF5E /* AsyncSocket.m in Sources */,
+				05CE075E0FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */,
+				05CE076B0FB90A280036DF5E /* ActivityView.m in Sources */,
+				05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
+				05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */,
+				05080DB90FBA6A05007FE920 /* TimeSeriesCell.m in Sources */,
+				05E85D150FBC64210048092A /* CellUtils.m in Sources */,
+				0559F44C0FC8786A00DEC85F /* GraphView.m in Sources */,
+				0559F44D0FC8786A00DEC85F /* GraphViewRectangle.m in Sources */,
+				0559F44E0FC8786A00DEC85F /* TimeSeriesGraphView.m in Sources */,
+				0559F4590FC878F500DEC85F /* Commands.m in Sources */,
+				0559F45A0FC878F500DEC85F /* ConstantTimeSeries.m in Sources */,
+				0559F45B0FC878F500DEC85F /* TimeSeries.m in Sources */,
+				0559F4770FC8A95C00DEC85F /* ActiveUsersCell.m in Sources */,
+				05F786560FCAD70A00207237 /* ListeningTcpSocketsCell.m in Sources */,
+				05E7B47C0FCB224100387714 /* ConnectedTcpSocketsCell.m in Sources */,
+				05E7B4840FCB22C100387714 /* UdpSocketsCell.m in Sources */,
+				05E7B4D30FCB287F00387714 /* ProcessesUsingMostCpuCell.m in Sources */,
+				05E7B4D70FCB28A000387714 /* ProcessesUsingMostMemoryCell.m in Sources */,
+				05E7B5AB0FCB383800387714 /* LargestOpenFilesCell.m in Sources */,
+				05E7B5AF0FCB384E00387714 /* LargestFilesCell.m in Sources */,
+				05EE58980FD1AC850068BC5C /* XMPPClientManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		05C6E9BF0F0F1B77009BD7C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebgnosusClient_Prefix.pch;
+				INFOPLIST_FILE = "Info Simulator.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+			};
+			name = Debug;
+		};
+		05C6E9C00F0F1B77009BD7C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebgnosusClient_Prefix.pch;
+				INFOPLIST_FILE = "Info Simulator.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+			};
+			name = Release;
+		};
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebgnosusClient_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4757AA5C-AAE5-41BD-A182-0CE08B04B2A5";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = WebgnosusClient_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				OTHER_LDFLAGS = "-lxml2";
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05C6E9BE0F0F1B77009BD7C8 /* Build configuration list for PBXNativeTarget "webgnosus_client_simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05C6E9BF0F0F1B77009BD7C8 /* Debug */,
+				05C6E9C00F0F1B77009BD7C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "webgnosus_client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "webgnosus_client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
