@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'webgnosus_client' target in the 'webgnosus_client' project
+// Prefix header for all source files of the 'webgnosus' target in the 'webgnosus' project
 //
 
 #ifdef __OBJC__
@@ -63,32 +63,4 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // height of section title used in some table views
 #define kCELL_SECTION_TITLE_HEIGHT              30.0
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// time series graph configuration
-#define kTIME_SERIES_CELL_HEIGHT_PAD            35.0
-
-#define kTIME_SERIES_HEIGHT                     50.0
-#define kTIME_SERIES_X_OFFSET                   20.0
-#define kTIME_SERIES_Y_OFFSET                   20.0
-
-#define kTIME_SERIES_LABEL_HEIGHT               15.0
-#define kTIME_SERIES_LABEL_WIDTH                270.0
-#define kTIME_SERIES_LABEL_X_OFFSET             0.0
-#define kTIME_SERIES_LABEL_Y_OFFSET             0.0
-
-#define kTIME_SERIES_STAT_CELL_HEIGHT           10.0
-#define kTIME_SERIES_STAT_CELL_WIDTH            120.0
-#define kTIME_SERIES_STAT_CELL_X_OFFSET         10.0
-#define kTIME_SERIES_STAT_CELL_Y_OFFSET         17.0
-
-#define kTIME_SERIES_TITLE_SIZE                 13.0
-#define kTIME_SERIES_LABEL_FONT                 "Helvetica"
-
-#define kTIME_SERIES_GRAPH_HEIGHT               40.0
-#define kTIME_SERIES_GRAPH_WIDTH                150.0
-#define kTIME_SERIES_GRAPH_X_OFFSET             0.0
-#define kTIME_SERIES_GRAPH_Y_OFFSET             5.0
-#define kTIME_SERIES_GRAPH_LINE_WIDTH           1.0
-
 

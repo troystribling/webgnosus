@@ -1,6 +1,6 @@
 //
 //  XMPPIQ.m
-//  webgnosus_client
+//  webgnosus
 //
 //  Created by Troy Stribling on 3/29/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.

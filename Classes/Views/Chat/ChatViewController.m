@@ -1,6 +1,6 @@
 //
 //  ChatViewController.m
-//  webgnosus_client
+//  webgnosus
 //fullJID
 //  Created by Troy Stribling on 2/28/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.

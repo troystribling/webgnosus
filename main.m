@@ -1,6 +1,6 @@
 //
 //  main.m
-//  webgnosus_client
+//  webgnosus
 //
 //  Created by Troy Stribling on 1/1/09.
 //  Copyright Plan-B Research 2009. All rights reserved.

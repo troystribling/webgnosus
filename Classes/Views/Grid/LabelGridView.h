@@ -1,6 +1,6 @@
 //
 //  LabelGridView.h
-//  webgnosus_client
+//  webgnosus
 //
 //  Created by Troy Stribling on 4/18/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.

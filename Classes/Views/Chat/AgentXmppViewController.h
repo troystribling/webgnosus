@@ -1,6 +1,6 @@
 //
 //  AgentXmppViewController.h
-//  webgnosus_client
+//  webgnosus
 //
 //  Created by Troy Stribling on 3/23/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.

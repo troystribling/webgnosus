@@ -1,32 +1,22 @@
 //
-//  GraphView.h
-//  webgnosus_client
+//  XMPPDiscoInfoQuery.h
+//  webgnosus
 //
-//  Created by Troy Stribling on 4/18/09.
+//  Created by Troy Stribling on 8/4/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <UIKit/UIKit.h>
-#import "GraphViewData.h"
+#import <Foundation/Foundation.h>
+#import "XMPPQuery.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class TimeSeries;
-@class GraphViewRectangle;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface GraphView : UIView {
-    NSMutableArray* graphData;   
-    NSMutableArray* rectangles;
-}
+@interface XMPPDiscoInfoQuery : XMPPQuery 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) NSMutableArray* graphData;
-@property (nonatomic, retain) NSMutableArray* rectangles;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)frame;
-- (void)addGraphData:(id<GraphViewData>)data;
-- (void)addRect:(GraphViewRectangle*)rect;
 
 @end

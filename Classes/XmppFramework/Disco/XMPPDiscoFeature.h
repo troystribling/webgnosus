@@ -1,22 +1,19 @@
 //
-//  ProcessesUsingMostMemoryCell.h
-//  webgnosus_client
+//  XMPPDiscoFeature.h
+//  webgnosus
 //
-//  Created by Troy Stribling on 5/25/09.
+//  Created by Troy Stribling on 8/4/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "XDataMessageLabelCell.h"
+#import "DDXML.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ProcessesUsingMostMemoryCell : XDataMessageLabelCell <XDataMessageLabelGridView> {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
+@interface XMPPDiscoFeature : NSXMLElement
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

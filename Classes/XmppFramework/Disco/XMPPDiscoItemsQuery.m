@@ -1,56 +1,58 @@
 //
-//  XMPPBind.m
+//  XMPPDiscoItemsQuery.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/4/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPBind.h"
+#import "XMPPDiscoItemsQuery.h"
+#import "XMPPDiscoItem.h"
 #import "NSXMLElementAdditions.h"
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPBind
+@implementation XMPPDiscoItemsQuery
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPBind
+#pragma mark XMPPDiscoItemsQuery
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPBind*)createFromElement:(NSXMLElement*)element {
-	XMPPBind* result = (XMPPBind*)element;
-	result->isa = [XMPPBind class];
++ (XMPPDiscoItemsQuery*)createFromElement:(NSXMLElement*)element {
+	XMPPDiscoItemsQuery* result = (XMPPDiscoItemsQuery*)element;
+	result->isa = [XMPPDiscoItemsQuery class];
 	return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPBind*)init {
-	if(self = [super initWithName:@"bind"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-bind"]];
+- (XMPPDiscoItemsQuery*)initWithNode:(NSString*)itemsNode {
+	if(self = [super initWithName:@"command"]) {
+        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/disco#items"]];
+        [self addNode:itemsNode];
 	}
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPBind*)initWithResource:(NSString*)bindResource {
-	if([self init]) {
-        [self addResource:bindResource];
-	}
-	return self;
+- (NSString*)node {
+    return [[self attributeForName:@"node"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)resource {
-    return [[self elementForName:@"resource"] stringValue];
+- (void)addNode:(NSString*)val {
+    [self addAttributeWithName:@"node" stringValue:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addResource:(NSString*)val {
-    [self addChild:[NSXMLElement elementWithName:@"resource" stringValue:val]];
+- (NSArray*)items {
+    return [self elementsForName:@"item"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addItem:(XMPPDiscoItem*)val {
+    [self addChild:val];
 }
 
 @end

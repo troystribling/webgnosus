@@ -1,23 +1,30 @@
 //
-//  UptimeCell.h
-//  webgnosus_client
+//  XMPPDiscoItemsQuery.h
+//  webgnosus
 //
-//  Created by Troy Stribling on 4/16/09.
+//  Created by Troy Stribling on 8/4/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <UIKit/UIKit.h>
-#import "XDataMessageLabelCell.h"
+#import <Foundation/Foundation.h>
+#import "XMPPQuery.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class XMPPDiscoItem;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface UptimeCell : XDataMessageLabelCell <XDataMessageLabelGridView> {
-}
+@interface XMPPDiscoItemsQuery : XMPPQuery
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoItemsQuery*)createFromElement:(NSXMLElement*)element;
+- (XMPPDiscoItemsQuery*)initWithNode:(NSString*)itemsNode;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)node;
+- (void)addNode:(NSString*)val;
+
+- (NSArray*)items;
+- (void)addItem:(XMPPDiscoItem*)val;
 
 @end
