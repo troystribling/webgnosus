@@ -16,7 +16,23 @@
 @interface XMPPDiscoIdentity : NSXMLElement
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoIdentity*)createFromElement:(NSXMLElement*)element;
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory;
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory andIname:(NSString*)identIname;
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname andNode:(NSString*)identNode;
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname node:(NSString*)identNode andType:(NSString*)identType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-    
+- (NSString*)node;
+- (void)addNode:(NSString*)val;
+
+- (NSString*)iname;
+- (void)addIname:(NSString*)val;
+
+- (NSString*)category;
+- (void)addCategory:(NSString*)val;
+
+- (NSString*)type;
+- (void)addType:(NSString*)val;
+
 @end

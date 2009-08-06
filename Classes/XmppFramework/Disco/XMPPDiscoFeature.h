@@ -16,7 +16,11 @@
 @interface XMPPDiscoFeature : NSXMLElement
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoFeature*)createFromElement:(NSXMLElement*)element;
+- (XMPPDiscoFeature*)initWithVar:(NSString*)featVar;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)var;
+- (void)addVar:(NSString*)val;
 
 @end

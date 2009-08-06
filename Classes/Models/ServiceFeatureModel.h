@@ -1,34 +1,38 @@
 //
-//  XMPPDiscoInfoQuery.h
+//  ServiceFeatureModel.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/4/09.
+//  Created by Troy Stribling on 8/5/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "XMPPQuery.h"
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPDiscoFeature;
-@class XMPPDiscoIdentity;
+#import <sqlite3.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPDiscoInfoQuery : XMPPQuery 
+@interface ServiceFeatureModel : NSObject {
+    NSInteger pk;
+	NSInteger serviceItemPk;
+    NSString* var;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPDiscoInfoQuery*)createFromElement:(NSXMLElement*)element;
-- (XMPPDiscoInfoQuery*)initWithNode:(NSString*)itemsNode;
+@property (nonatomic, assign) NSInteger pk;
+@property (nonatomic, assign) NSInteger serviceItemPk;
+@property (nonatomic, retain) NSString* var;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node;
-- (void)addNode:(NSString*)val;
++ (NSInteger)count;
++ (void)drop;
++ (void)create;
++ (NSMutableArray*)findAll;
++ (AccountModel*)findFirst;
 
-- (NSArray*)features;
-- (void)addFeature:(XMPPDiscoFeature*)val;
-
-- (NSArray*)identities;
-- (void)addIdentity:(XMPPDiscoIdentity*)val;
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)insert;
+- (void)destroy;
+- (void)load;
+- (void)update;
 
 @end

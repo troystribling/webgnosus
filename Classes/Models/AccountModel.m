@@ -208,8 +208,29 @@
 		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
 	}
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
-	YES;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isReady {
+    if (self.connectionState == AccountAuthenticated || self.connectionState == AccountRosterUpdated) {
+        return YES;
+    } 
+    return NO;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)hasError {
+    if (self.connectionState > AccountRosterUpdated) {
+        return YES;
+    }
+    return NO;
+}
+
+//===================================================================================================================================
+#pragma mark AccountModel PrivateAPI
+
+//===================================================================================================================================
+#pragma mark WebgnosusDbiDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
@@ -240,28 +261,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)isReady {
-    if (self.connectionState == AccountAuthenticated || self.connectionState == AccountRosterUpdated) {
-        return YES;
-    } 
-    return NO;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)hasError {
-    if (self.connectionState > AccountRosterUpdated) {
-        return YES;
-    }
-    return NO;
-}
-
-//===================================================================================================================================
-#pragma mark AccountModel PrivateAPI
-
-//===================================================================================================================================
-#pragma mark WebgnosusDbiDelegate
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)collectAllFromResult:(sqlite3_stmt*)result andOutputTo:(NSMutableArray*)output {
 	AccountModel* model = [[AccountModel alloc] init];
 	[model setAttributesWithStatement:result];
@@ -272,10 +271,6 @@
 + (void)collectFromResult:(sqlite3_stmt*)result andOutputTo:(id)output {
 	[output setAttributesWithStatement:result];
 }
-
-//===================================================================================================================================
-#pragma mark WebgnosusDbiDelegate
-
 
 //===================================================================================================================================
 #pragma mark NSObject

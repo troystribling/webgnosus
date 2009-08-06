@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050A4161102A6F5B00D0A54A /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A4160102A6F5B00D0A54A /* ServiceItemModel.m */; };
+		050A4162102A6F5B00D0A54A /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A4160102A6F5B00D0A54A /* ServiceItemModel.m */; };
+		050A4165102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A4164102A6F7D00D0A54A /* ServiceFeatureModel.m */; };
+		050A4166102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A4164102A6F7D00D0A54A /* ServiceFeatureModel.m */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
@@ -236,6 +240,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050A415F102A6F5B00D0A54A /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
+		050A4160102A6F5B00D0A54A /* ServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemModel.m; sourceTree = "<group>"; };
+		050A4163102A6F7D00D0A54A /* ServiceFeatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceFeatureModel.h; sourceTree = "<group>"; };
+		050A4164102A6F7D00D0A54A /* ServiceFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFeatureModel.m; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
@@ -550,6 +558,10 @@
 				05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */,
 				05EE58960FD1AC850068BC5C /* XMPPClientManager.h */,
 				05EE58970FD1AC850068BC5C /* XMPPClientManager.m */,
+				050A415F102A6F5B00D0A54A /* ServiceItemModel.h */,
+				050A4160102A6F5B00D0A54A /* ServiceItemModel.m */,
+				050A4163102A6F7D00D0A54A /* ServiceFeatureModel.h */,
+				050A4164102A6F7D00D0A54A /* ServiceFeatureModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1161,6 +1173,8 @@
 				0534810C10292D41002E6E2D /* XMPPDiscoFeature.m in Sources */,
 				0534811410292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */,
 				0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */,
+				050A4162102A6F5B00D0A54A /* ServiceItemModel.m in Sources */,
+				050A4166102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1257,8 @@
 				0534810B10292D41002E6E2D /* XMPPDiscoFeature.m in Sources */,
 				0534811310292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */,
 				0534811710292E5B002E6E2D /* XMPPDiscoItem.m in Sources */,
+				050A4161102A6F5B00D0A54A /* ServiceItemModel.m in Sources */,
+				050A4165102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

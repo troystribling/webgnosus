@@ -27,9 +27,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPDiscoItemsQuery*)init {
+	if(self = (XMPPDiscoItemsQuery*)[super initWithXMLNS:@"http://jabber.org/protocol/disco#items"]) {
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoItemsQuery*)initWithNode:(NSString*)itemsNode {
-	if(self = [super initWithName:@"command"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/disco#items"]];
+	if(self = [self init]) {
         [self addNode:itemsNode];
 	}
 	return self;
