@@ -13,6 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceItemModel : NSObject {
     NSInteger pk;
+	NSInteger accountPk;
     NSString* node;
     NSString* jid;
     NSString* iname;
@@ -22,6 +23,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
+@property (nonatomic, assign) NSInteger accountPk;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* jid;
 @property (nonatomic, retain) NSString* iname;
@@ -33,7 +35,6 @@
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
-+ (AccountModel*)findFirst;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

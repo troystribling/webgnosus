@@ -48,17 +48,10 @@
 	return output;
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (ServiceFeatureModel*)findFirst {
-	ServiceFeatureModel* model = [[ServiceFeatureModel alloc] init];
-	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:@"SELECT * FROM serviceFeatures LIMIT 1" andOutputTo:model];
-	return model;
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (var, serviceItemPk) values ('%@, %d)", self.var, self.serviceItemPk];	
+	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (var, serviceItemPk) values ('%@', %d)", self.var, self.serviceItemPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
 
