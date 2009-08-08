@@ -1,8 +1,8 @@
 //
-//  XMPPCommand.m
+//  XMPPPubSubItems.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -11,28 +11,28 @@
 #import "DDXML.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPxData;
+@class XMPPPubSubItem;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPCommand : NSXMLElement 
+@interface XMPPPubSubItems : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPCommand*)createFromElement:(NSXMLElement*)element;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode action:(NSString*)cmdAction andData:(XMPPxData*)cmdData;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode action:(NSString*)cmdAction data:(XMPPxData*)cmdData andStatus:(NSString*)cmdStatus;
++ (XMPPPubSubItems*)createFromElement:(NSXMLElement*)element;
+- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode;
+- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId;
+- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId andMaxItems:(NSInteger)itemMaxItems;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)node;
 - (void)addNode:(NSString*)val;
 
-- (NSString*)action;
-- (void)addAction:(NSString*)val;
+- (NSInteger)subId;
+- (void)addSubId:(NSInteger)val;
 
-- (NSString*)status;
-- (void)addStatus:(NSString*)val;
+- (NSInteger)maxItems;
+- (void)addMaxItems:(NSInteger)val;
 
-- (XMPPxData*)data;
-- (void)addData:(XMPPxData*)child;
+- (NSArray*)items;
+- (void)addItem:(XMPPPubSubItem*)val;
 
 @end

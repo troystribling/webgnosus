@@ -1,8 +1,8 @@
 //
-//  XMPPCommand.m
+//  XMPPPubSubItem.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -14,23 +14,16 @@
 @class XMPPxData;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPCommand : NSXMLElement 
+@interface XMPPPubSubItem : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPCommand*)createFromElement:(NSXMLElement*)element;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode action:(NSString*)cmdAction andData:(XMPPxData*)cmdData;
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode action:(NSString*)cmdAction data:(XMPPxData*)cmdData andStatus:(NSString*)cmdStatus;
++ (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element;
+- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData;
+- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData andItemId:(NSInteger)itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node;
-- (void)addNode:(NSString*)val;
-
-- (NSString*)action;
-- (void)addAction:(NSString*)val;
-
-- (NSString*)status;
-- (void)addStatus:(NSString*)val;
+- (NSInteger)itemId;
+- (void)addItemId:(NSInteger)val;
 
 - (XMPPxData*)data;
 - (void)addData:(XMPPxData*)child;

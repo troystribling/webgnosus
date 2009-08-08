@@ -224,6 +224,12 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E2F5CA102DF37200C7912F /* XMPPPubSubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5C7102DF37200C7912F /* XMPPPubSubItem.m */; };
+		05E2F5CB102DF37200C7912F /* XMPPPubSubItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5C9102DF37200C7912F /* XMPPPubSubItems.m */; };
+		05E2F5CC102DF37200C7912F /* XMPPPubSubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5C7102DF37200C7912F /* XMPPPubSubItem.m */; };
+		05E2F5CD102DF37200C7912F /* XMPPPubSubItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5C9102DF37200C7912F /* XMPPPubSubItems.m */; };
+		05E2F5D0102DF85000C7912F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5CF102DF85000C7912F /* XMPPPubSubEvent.m */; };
+		05E2F5D1102DF85000C7912F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F5CF102DF85000C7912F /* XMPPPubSubEvent.m */; };
 		05E85D140FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
 		05E85D150FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
 		05EE58980FD1AC850068BC5C /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE58970FD1AC850068BC5C /* XMPPClientManager.m */; };
@@ -428,6 +434,12 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E2F5C6102DF37200C7912F /* XMPPPubSubItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubItem.h; sourceTree = "<group>"; };
+		05E2F5C7102DF37200C7912F /* XMPPPubSubItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubItem.m; sourceTree = "<group>"; };
+		05E2F5C8102DF37200C7912F /* XMPPPubSubItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubItems.h; sourceTree = "<group>"; };
+		05E2F5C9102DF37200C7912F /* XMPPPubSubItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubItems.m; sourceTree = "<group>"; };
+		05E2F5CE102DF85000C7912F /* XMPPPubSubEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEvent.h; sourceTree = "<group>"; };
+		05E2F5CF102DF85000C7912F /* XMPPPubSubEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubEvent.m; sourceTree = "<group>"; };
 		05E85D120FBC64210048092A /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
 		05E85D130FBC64210048092A /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
 		05EE58960FD1AC850068BC5C /* XMPPClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientManager.h; sourceTree = "<group>"; };
@@ -627,6 +639,7 @@
 		05E206A10FB9004100FCFC94 /* XmppFramework */ = {
 			isa = PBXGroup;
 			children = (
+				05E2F5B6102DC37300C7912F /* PubSub */,
 				0534810010292C94002E6E2D /* Disco */,
 				05E206A20FB9004100FCFC94 /* Categories */,
 				05E206A70FB9004100FCFC94 /* Command */,
@@ -878,6 +891,19 @@
 				05E207EB0FB9046500FCFC94 /* RosterViewController.m */,
 			);
 			path = Roster;
+			sourceTree = "<group>";
+		};
+		05E2F5B6102DC37300C7912F /* PubSub */ = {
+			isa = PBXGroup;
+			children = (
+				05E2F5C6102DF37200C7912F /* XMPPPubSubItem.h */,
+				05E2F5C7102DF37200C7912F /* XMPPPubSubItem.m */,
+				05E2F5C8102DF37200C7912F /* XMPPPubSubItems.h */,
+				05E2F5C9102DF37200C7912F /* XMPPPubSubItems.m */,
+				05E2F5CE102DF85000C7912F /* XMPPPubSubEvent.h */,
+				05E2F5CF102DF85000C7912F /* XMPPPubSubEvent.m */,
+			);
+			path = PubSub;
 			sourceTree = "<group>";
 		};
 		05E85D110FBC64210048092A /* Utilities */ = {
@@ -1175,6 +1201,9 @@
 				0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */,
 				050A4162102A6F5B00D0A54A /* ServiceItemModel.m in Sources */,
 				050A4166102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */,
+				05E2F5CA102DF37200C7912F /* XMPPPubSubItem.m in Sources */,
+				05E2F5CB102DF37200C7912F /* XMPPPubSubItems.m in Sources */,
+				05E2F5D1102DF85000C7912F /* XMPPPubSubEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1259,6 +1288,9 @@
 				0534811710292E5B002E6E2D /* XMPPDiscoItem.m in Sources */,
 				050A4161102A6F5B00D0A54A /* ServiceItemModel.m in Sources */,
 				050A4165102A6F7D00D0A54A /* ServiceFeatureModel.m in Sources */,
+				05E2F5CC102DF37200C7912F /* XMPPPubSubItem.m in Sources */,
+				05E2F5CD102DF37200C7912F /* XMPPPubSubItems.m in Sources */,
+				05E2F5D0102DF85000C7912F /* XMPPPubSubEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
