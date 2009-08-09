@@ -57,26 +57,30 @@
 	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
                                  self.subId, self.node, self.subscription, self.jid, self.accountPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE pk = %d", self.pk];	
-	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE pk = %d", self.pk];	
+	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
+    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE node = '%@'", self.node];
 	[[WebgnosusDbi instance] selectForModel:[SubscriptionsModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-    [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
-     self.subId, self.node, self.subscription, self.jid, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
+            self.subId, self.node, self.subscription, self.jid, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //===================================================================================================================================
@@ -109,6 +113,7 @@
 	SubscriptionsModel* model = [[SubscriptionsModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

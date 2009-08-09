@@ -55,26 +55,30 @@
 	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO publications (node, jid, accountPk) values ('%@', '%@', %d)", 
                                  self.node, self.jid, self.accountPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM publications WHERE pk = %d", self.pk];	
-	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM publications WHERE pk = %d", self.pk];	
+	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
+    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM publications WHERE node = '%@'", self.node];
 	[[WebgnosusDbi instance] selectForModel:[PublicationModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-    [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET node = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
-     self.node, self.jid, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET node = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
+            self.node, self.jid, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //===================================================================================================================================
@@ -102,6 +106,7 @@
 	PublicationModel* model = [[PublicationModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

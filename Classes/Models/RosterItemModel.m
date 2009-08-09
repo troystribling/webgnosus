@@ -38,14 +38,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)account {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT COUNT(pk)  FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, account.pk];
-	return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT COUNT(pk)  FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, account.pk];
+    NSInteger count = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];;
+    [selectStatement release];
+	return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)account {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d AND type = 'available'", bareJid, account.pk];
-	return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+    NSInteger maxVal = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+    [selectStatement release];
+	return maxVal;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +75,7 @@
 	NSString *selectStatement = 
         [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE accountPk = %d", account.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
+    [selectStatement release];
 	return output;
 }
 
@@ -80,6 +85,7 @@
 	NSString *selectStatement = 
         [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND resource <> '%@'", account.jid, account.pk, account.resource];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
+    [selectStatement release];
 	return output;
 }
 
@@ -89,6 +95,7 @@
 	NSString *selectStatement = 
         [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, account.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
+    [selectStatement release];
 	return output;
 }
 
@@ -101,6 +108,7 @@
     if (model.pk == 0) {
         model = nil;
     }
+    [selectStatement release];
 	return model;
 }
 
@@ -122,6 +130,7 @@
 	}
 	RosterItemModel* model = [[RosterItemModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -139,6 +148,7 @@
 	selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND type = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, account.pk, bareJid, account.pk];
 	RosterItemModel* model = [[RosterItemModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -156,6 +166,7 @@
 	NSString* deleteStatement = 
         [[NSString alloc] initWithFormat:@"DELETE FROM roster WHERE accountPk = %d", account.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -165,6 +176,7 @@
 	NSString *selectStatement = 
         [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND type = 'available'", bareJid];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:rosterItems];    
+    [selectStatement release];
     if ([rosterItems count] > 0) {
         isAvailable = YES;
     }
@@ -194,6 +206,7 @@
                  self.jid, self.host, self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -209,6 +222,7 @@
                  self.jid, self.host, self.status, self.show, self.type, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -216,6 +230,7 @@
 	NSString *insertStatement = 
 		[[NSString alloc] initWithFormat:@"DELETE FROM roster WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -227,6 +242,7 @@
 		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
     }
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -288,6 +304,7 @@
 	RosterItemModel* model = [[RosterItemModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

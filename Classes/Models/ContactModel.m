@@ -62,9 +62,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByPk:(NSInteger)requestPk {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE pk = %d", requestPk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE pk = %d", requestPk];
 	ContactModel* model = [[ContactModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -73,10 +74,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)account {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", 
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", 
                                     requestJid, account.pk];
 	ContactModel* model = [[ContactModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -88,6 +90,7 @@
 	NSString* deleteStatement = 
         [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE accountPk = %d", account.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

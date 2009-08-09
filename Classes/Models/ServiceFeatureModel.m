@@ -53,18 +53,21 @@
 - (void)insert {
 	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (var, serviceItemPk) values ('%@', %d)", self.var, self.serviceItemPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceFeatures WHERE pk = %d", self.pk];	
-	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceFeatures WHERE pk = %d", self.pk];	
+	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
+    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE var = '%@' AND serviceItemPk = %d", self.var, self.serviceItemPk];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -72,6 +75,7 @@
 	NSString* updateStatement = 
         [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET var = '%@', serviceItemPk = %d WHERE pk = %d", self.var, self.serviceItemPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //===================================================================================================================================
@@ -95,6 +99,7 @@
 	ServiceFeatureModel* model = [[ServiceFeatureModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

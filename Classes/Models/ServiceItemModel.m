@@ -58,26 +58,30 @@
 	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (node, jid, iname, category, type, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d)", 
                                     self.node, self.jid, self.iname, self.category, self.type, self.accountPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceItems WHERE pk = %d", self.pk];	
-	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceItems WHERE pk = %d", self.pk];	
+	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
+    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE node = '%@' AND jid = '%@'", self.node, self.jid];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-    [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET node = '%@', jid = '%@', iname = '%@', category = '%@', type = '%@', accountPk = %d WHERE pk = %d", 
-        self.node, self.jid, self.iname, self.category, self.type, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET node = '%@', jid = '%@', iname = '%@', category = '%@', type = '%@', accountPk = %d WHERE pk = %d", 
+            self.node, self.jid, self.iname, self.category, self.type, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //===================================================================================================================================
@@ -113,6 +117,7 @@
 	ServiceItemModel* model = [[ServiceItemModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

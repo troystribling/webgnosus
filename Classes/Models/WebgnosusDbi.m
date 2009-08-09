@@ -117,7 +117,7 @@ static NSString* dbFileName = @"webgnosus.db";
 	if ([model respondsToSelector:@selector(collectFromResult:andOutputTo:)] ) {
 		[model collectFromResult:statementPrepared andOutputTo:result];
 	} else {
-		NSLog(@"model does not implement respondsToSelector:andOtputTo:");
+		NSLog(@"Model does not implement respondsToSelector:andOtputTo:");
 	}
 	if (sqlite3_finalize(statementPrepared)) {
 		[self logError:statement];
@@ -133,7 +133,7 @@ static NSString* dbFileName = @"webgnosus.db";
 			[model collectAllFromResult:statementPrepared andOutputTo:results];
 		}
 	} else {
-		NSLog(@"model does not implement collecAllFromResult:andOtputTo:");
+		NSLog(@"Model does not implement collecAllFromResult:andOtputTo:");
 	}
 	if (sqlite3_finalize(statementPrepared)) {
 		[self logError:statement];

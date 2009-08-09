@@ -74,6 +74,7 @@
 	}
 	AccountModel* model = [[AccountModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -98,6 +99,7 @@
 	}
 	AccountModel* model = [[AccountModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -110,6 +112,7 @@
 		[[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE pk = %d", requestPk];
 	AccountModel* model = [[AccountModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
     if (model.pk == 0) {
        model = nil;
     }
@@ -158,6 +161,7 @@
                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -173,6 +177,7 @@
                  self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port, self.pk];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -197,6 +202,7 @@
 	NSString *insertStatement = 
 		[[NSString alloc] initWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -208,6 +214,7 @@
 		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
 	}
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -265,6 +272,7 @@
 	AccountModel* model = [[AccountModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
