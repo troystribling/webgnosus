@@ -105,6 +105,7 @@
 	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO contacts (jid, host, nickname, clientName, clientVersion, contactState, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d, %d)", 
                                      self.jid, self.host, self.nickname, self.clientName, self.clientVersion, self.contactState, self.accountPk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -112,18 +113,21 @@
     NSString* updateStatement = [[NSString alloc] initWithFormat:@"UPDATE contacts SET jid = '%@', host = '%@', nickname = '%@', clientName = '%@', clientVersion = '%@', contactState = %d, accountPk = %d WHERE pk = %d", 
          self.jid, self.host, self.nickname, self.clientName, self.clientVersion, self.contactState, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
 	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
+    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -172,6 +176,7 @@
 	ContactModel* model = [[ContactModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
+    [model release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

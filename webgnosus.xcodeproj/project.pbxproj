@@ -114,6 +114,10 @@
 		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
 		05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
+		05E06BD7102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E06BD6102F27EF00E3B8B8 /* SubscriptionsModel.m */; };
+		05E06BD8102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E06BD6102F27EF00E3B8B8 /* SubscriptionsModel.m */; };
+		05E06BDB102F280000E3B8B8 /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E06BDA102F280000E3B8B8 /* PublicationModel.m */; };
+		05E06BDC102F280000E3B8B8 /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E06BDA102F280000E3B8B8 /* PublicationModel.m */; };
 		05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
 		05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
 		05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
@@ -327,6 +331,10 @@
 		05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
+		05E06BD5102F27EF00E3B8B8 /* SubscriptionsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsModel.h; sourceTree = "<group>"; };
+		05E06BD6102F27EF00E3B8B8 /* SubscriptionsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsModel.m; sourceTree = "<group>"; };
+		05E06BD9102F280000E3B8B8 /* PublicationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicationModel.h; sourceTree = "<group>"; };
+		05E06BDA102F280000E3B8B8 /* PublicationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicationModel.m; sourceTree = "<group>"; };
 		05E206A30FB9004100FCFC94 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		05E206A40FB9004100FCFC94 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		05E206A50FB9004100FCFC94 /* NSXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLElementAdditions.h; sourceTree = "<group>"; };
@@ -590,6 +598,10 @@
 				050A4160102A6F5B00D0A54A /* ServiceItemModel.m */,
 				050A4163102A6F7D00D0A54A /* ServiceFeatureModel.h */,
 				050A4164102A6F7D00D0A54A /* ServiceFeatureModel.m */,
+				05E06BD5102F27EF00E3B8B8 /* SubscriptionsModel.h */,
+				05E06BD6102F27EF00E3B8B8 /* SubscriptionsModel.m */,
+				05E06BD9102F280000E3B8B8 /* PublicationModel.h */,
+				05E06BDA102F280000E3B8B8 /* PublicationModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1232,6 +1244,8 @@
 				05E2F70A102E660700C7912F /* XMPPPubSupOwner.m in Sources */,
 				05E2F74A102E6C8800C7912F /* XMPPPubSubPublish.m in Sources */,
 				05E2F7B3102E769500C7912F /* XMPPPubSub.m in Sources */,
+				05E06BD8102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */,
+				05E06BDC102F280000E3B8B8 /* PublicationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1323,6 +1337,8 @@
 				05E2F70B102E660700C7912F /* XMPPPubSupOwner.m in Sources */,
 				05E2F74B102E6C8800C7912F /* XMPPPubSubPublish.m in Sources */,
 				05E2F7B4102E769500C7912F /* XMPPPubSub.m in Sources */,
+				05E06BD7102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */,
+				05E06BDB102F280000E3B8B8 /* PublicationModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

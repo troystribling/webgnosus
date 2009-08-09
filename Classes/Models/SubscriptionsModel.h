@@ -1,35 +1,43 @@
 //
-//  XMPPMessage.m
+//  SubscriptionsModel.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/9/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "XMPPStanza.h"
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPPubSubEvent;
+#import <sqlite3.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPMessage : XMPPStanza
+@interface SubscriptionsModel : NSObject {
+    NSInteger pk;
+	NSInteger accountPk;
+	NSInteger subId;
+    NSString* node;
+    NSString* subscription;
+    NSString* jid;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, assign) NSInteger pk;
+@property (nonatomic, assign) NSInteger accountPk;
+@property (nonatomic, assign) NSInteger subId;
+@property (nonatomic, retain) NSString* node;
+@property (nonatomic, retain) NSString* subscription;
+@property (nonatomic, retain) NSString* jid;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPMessage*)createFromElement:(NSXMLElement*)element;
-- (XMPPMessage*)initWithType:(NSString*)msgType toJID:(NSString*)msgTo andBody:(NSString*)msgBody;
++ (NSInteger)count;
++ (void)drop;
++ (void)create;
++ (NSMutableArray*)findAll;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)body;
-- (void)addBody:(NSString*)val;
-
-- (XMPPPubSubEvent*)event;
-- (void)addEvent:(XMPPPubSubEvent*)val;
-
-- (BOOL)isChatMessage;
-- (BOOL)hasBody;
+- (void)insert;
+- (void)destroy;
+- (void)load;
+- (void)update;
 
 @end

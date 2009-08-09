@@ -24,6 +24,7 @@
 - (NSString*)node;
 - (void)addNode:(NSString*)val;
 
+- (XMPPPubSubItem*)item;
 - (void)addItem:(XMPPPubSubItem*)val;
 
 
