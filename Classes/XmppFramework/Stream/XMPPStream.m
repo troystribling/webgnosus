@@ -1,7 +1,14 @@
+//
+//  XMPPStream.m
+//  webgnosus
+//
+//  Created by Troy Stribling on 3/29/09.
+//  Copyright 2009 Plan-B Research. All rights reserved.
+//
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPStream.h"
 #import "AsyncSocket.h"
-#import "NSXMLElementAdditions.h"
 #import "NSDataAdditions.h"
 #import "XMPPIQ.h"
 #import "XMPPMessage.h"

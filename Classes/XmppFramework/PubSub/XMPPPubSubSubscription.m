@@ -1,5 +1,5 @@
 //
-//  XMPPPubSubItems.m
+//  XMPPPubSubSubscription.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/8/09.
@@ -7,49 +7,24 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubItems.h"
-#import "XMPPPubSubItem.h"
+#import "XMPPPubSubSubscription.h"
+#import "XMPPJID.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubItems
+@implementation XMPPPubSubSubscription
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubItems
+#pragma mark XMPPPubSubSubscription
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubItems*)createFromElement:(NSXMLElement*)element {
-	XMPPPubSubItems* result = (XMPPPubSubItems*)element;
-	result->isa = [XMPPPubSubItems class];
++ (XMPPPubSubSubscription*)createFromElement:(NSXMLElement*)element {
+	XMPPPubSubSubscription* result = (XMPPPubSubSubscription*)element;
+	result->isa = [XMPPPubSubSubscription class];
 	return result;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode {
-	if(self = [super initWithName:@"items"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
-        [self addNode:itemNode];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId {
-	if([self initWithNode:itemNode]) {
-        [self addSubId:itemSubId];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId andMaxItems:(NSInteger)itemMaxItems {
-	if([self initWithNode:itemNode andSubId:itemSubId]) {
-        [self addMaxItems:itemMaxItems];
-	}
-	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -59,6 +34,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addNode:(NSString*)val {
+    [self addAttributeWithName:@"node" stringValue:val];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)subscription {
+    return [[self attributeForName:@"subscription"] stringValue];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addsubScription:(NSString*)val {
     [self addAttributeWithName:@"node" stringValue:val];
 }
 
@@ -73,23 +58,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)maxItems {
-    return [[[self attributeForName:@"max_items"] stringValue] integerValue];
+- (XMPPJID*)JID {
+    return [XMPPJID jidWithString:[[self attributeForName:@"jid"] stringValue]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addMaxItems:(NSInteger)val {
-    [self addAttributeWithName:@"max_items" stringValue:[NSString stringWithFormat:@"%d'", val]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)items {
-    return [self elementsForName:@"item"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addItem:(XMPPPubSubItem*)val {
-    [self addChild:val];
+- (void)addJID:(NSString*)val {
+    [self addAttributeWithName:@"jid" stringValue:val];
 }
 
 @end

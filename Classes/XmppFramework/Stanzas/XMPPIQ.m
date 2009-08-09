@@ -16,7 +16,6 @@
 #import "XMPPBind.h"
 #import "XMPPSession.h"
 #import "XMPPCommand.h"
-#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

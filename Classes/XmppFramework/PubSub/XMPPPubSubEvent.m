@@ -16,10 +16,23 @@
 @implementation XMPPPubSubEvent
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+
+//===================================================================================================================================
+#pragma mark XMPPPubSubEvent
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubEvent*)createFromElement:(NSXMLElement*)element {
 	XMPPPubSubEvent* result = (XMPPPubSubEvent*)element;
 	result->isa = [XMPPPubSubEvent class];
 	return result;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPPubSubEvent*)init {
+	if(self = [super initWithName:@"event"]) {
+        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
+	}
+	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

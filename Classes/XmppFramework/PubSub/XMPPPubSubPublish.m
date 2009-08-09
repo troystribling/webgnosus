@@ -1,54 +1,54 @@
 //
-//  XMPPError.m
+//  XMPPPubSubPublish.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPError.h"
+#import "XMPPPubSubPublish.h"
+#import "XMPPPubSubItem.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPError
+@implementation XMPPPubSubPublish
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPBind
+#pragma mark XMPPPubSubPublish
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPError*)createFromElement:(NSXMLElement*)element {
-	XMPPError* result = (XMPPError*)element;
-	result->isa = [XMPPError class];
++ (XMPPPubSubPublish*)createFromElement:(NSXMLElement*)element {
+	XMPPPubSubPublish* result = (XMPPPubSubPublish*)element;
+	result->isa = [XMPPPubSubPublish class];
 	return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPError*)init {
-	if(self = [super initWithName:@"error"]) {
+- (XMPPPubSubPublish*)initWithNode:(NSString*)itemNode {
+	if(self = [super initWithName:@"publish"]) {
+        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub"]];
+        [self addNode:itemNode];
 	}
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPError*)initWithType:(NSString*)errorType {
-	if([self init]) {
-        [self addType:errorType];
-	}
-	return self;
+- (NSString*)node {
+    return [[self attributeForName:@"node"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)type {
-    return [[self attributeForName:@"type"] stringValue];
+- (void)addNode:(NSString*)val {
+    [self addAttributeWithName:@"node" stringValue:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addType:(NSString*)val {
-    [self addAttributeWithName:@"type" stringValue:val];
+- (void)addItem:(XMPPPubSubItem*)val {
+    [self addChild:val];
 }
 
 @end

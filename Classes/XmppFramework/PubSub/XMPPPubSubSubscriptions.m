@@ -1,54 +1,41 @@
 //
-//  XMPPError.m
+//  XMPPPubSubSubscriptions.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 8/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPError.h"
+#import "XMPPPubSubSubscriptions.h"
+#import "XMPPPubSubSubscription.h"
+#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPError
+@implementation XMPPPubSubSubscriptions
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPBind
+#pragma mark XMPPPubSubSubscriptions
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPError*)createFromElement:(NSXMLElement*)element {
-	XMPPError* result = (XMPPError*)element;
-	result->isa = [XMPPError class];
++ (XMPPPubSubSubscriptions*)createFromElement:(NSXMLElement*)element {
+	XMPPPubSubSubscriptions* result = (XMPPPubSubSubscriptions*)element;
+	result->isa = [XMPPPubSubSubscriptions class];
 	return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPError*)init {
-	if(self = [super initWithName:@"error"]) {
-	}
-	return self;
+- (NSArray*)subscriptions {
+    return [self elementsForName:@"subscription"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPError*)initWithType:(NSString*)errorType {
-	if([self init]) {
-        [self addType:errorType];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)type {
-    return [[self attributeForName:@"type"] stringValue];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addType:(NSString*)val {
-    [self addAttributeWithName:@"type" stringValue:val];
+- (void)addSubscription:(XMPPPubSubSubscription*)val {
+    [self addChild:val];
 }
 
 @end

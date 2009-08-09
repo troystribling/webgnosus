@@ -9,7 +9,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubItem.h"
 #import "XMPPxData.h"
-#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +18,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPDiscoItem
+#pragma mark XMPPPubSubItem
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element {
@@ -31,16 +30,18 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData {
 	if(self = [super initWithName:@"item"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]]
+        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
         [self addData:itemData];
 	}
+    return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData andItemId:(NSInteger)itemId {
-	if(self = [super initWithData:itemData]) {
-        [self addItemId:itemData];
+	if(self = [self initWithData:itemData]) {
+        [self addItemId:itemId];
 	}
+    return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

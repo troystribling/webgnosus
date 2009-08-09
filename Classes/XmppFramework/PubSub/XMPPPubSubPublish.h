@@ -1,5 +1,5 @@
 //
-//  XMPPPubSubItem.h
+//  XMPPPubSubPublish.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/8/09.
@@ -11,21 +11,20 @@
 #import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPxData;
+@class XMPPPubSubItem;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubItem : NSXMLElement 
+@interface XMPPPubSubPublish : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element;
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData;
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData andItemId:(NSInteger)itemId;
++ (XMPPPubSubPublish*)createFromElement:(NSXMLElement*)element;
+- (XMPPPubSubPublish*)initWithNode:(NSString*)itemNode;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)itemId;
-- (void)addItemId:(NSInteger)val;
+- (NSString*)node;
+- (void)addNode:(NSString*)val;
 
-- (XMPPxData*)data;
-- (void)addData:(XMPPxData*)child;
+- (void)addItem:(XMPPPubSubItem*)val;
+
 
 @end

@@ -20,7 +20,6 @@
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
-#import "NSXMLElementAdditions.h"
 #import "MulticastDelegate.h"
 #import "SCNotificationManager.h"
 
