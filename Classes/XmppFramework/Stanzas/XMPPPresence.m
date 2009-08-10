@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPresence.h"
+#import "XMPPClient.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPresence
@@ -97,6 +99,28 @@
 - (void)addPriority:(NSString*)val {
 	[self addChild:[NSXMLElement elementWithName:@"priority" stringValue:val]];	
 }
+
+//===================================================================================================================================
+#pragma mark XMPPRosterQuery Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid {
+    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]];
+    [[client xmppStream] sendElement:pres];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid{
+    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]];
+    [[client xmppStream] sendElement:pres];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid {
+    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]];
+    [[client xmppStream] sendElement:pres];
+}
+
 
 //===================================================================================================================================
 #pragma mark XMPPStanza
