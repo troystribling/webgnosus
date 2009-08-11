@@ -10,6 +10,9 @@
 #import <Foundation/Foundation.h>
 #import "NSXMLElementAdditions.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@class XMPPStream;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPAuthorize : NSXMLElement 
 
@@ -25,5 +28,9 @@
 
 - (NSString*)plainCredentials;
 - (void)addPlainCredentials:(NSString*)val;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)send:(XMPPStream*)stream auth:(XMPPAuthorize*)auth ;
++ (void)authenticate:(XMPPStream*)stream user:(NSString*)username withPassword:(NSString*)password resource:(NSString*)resource;
 
 @end

@@ -281,7 +281,7 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendElement:(NSXMLElement *)element {
+- (void)sendElement:(NSXMLElement*)element {
 	[xmppStream sendElement:element];
 }
 

@@ -22,7 +22,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #if TARGET_OS_IPHONE
-// Note: You may need to add the CFNetwork Framework to your project
 #import <CFNetwork/CFNetwork.h>
 #endif
 
@@ -268,7 +267,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)supportsDigestMD5Authentication {
     return [[self streamFeatures] supportsDigestMD5Authentication];
-	return NO;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -287,7 +285,6 @@
 				NSLog(@"SEND: %@", auth);
 			}
 			[self.asyncSocket writeData:[[auth XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];			
-			self.tempPassword = password;
 		}
 		else if([self supportsPlainAuthentication]) {
 			NSString* payload = [NSString stringWithFormat:@"%C%@%C%@", 0, username, 0, password];
@@ -309,6 +306,7 @@
 			}
 			[self.asyncSocket writeData:[[auth XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
         }
+        self.tempPassword = password;
         self.authUsername = username;
         self.authResource = resource;
         self.state = STATE_AUTH_1;        
@@ -319,13 +317,8 @@
 #pragma mark General Methods
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSXMLElement*)streamFeaturesAsElement {
-    return 	[self.rootElement elementForName:@"stream:features"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPStreamFeatures*)streamFeatures {
-    return [XMPPStreamFeatures createFromElement:[self streamFeaturesAsElement]]; 
+    return [XMPPStreamFeatures createFromElement:[self.rootElement elementForName:@"stream:features"]]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -335,10 +328,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendElement:(NSXMLElement *)element {
-	if(self.state == STATE_CONNECTED)
-	{
-		NSString *elementStr = [element XMLString];
-		
+	if(self.state == STATE_CONNECTED) {
+		NSString *elementStr = [element XMLString];		
 		if(DEBUG_SEND) {
 			NSLog(@"SEND: %@", elementStr);
 		}
@@ -348,8 +339,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag {
-	if(self.state == STATE_CONNECTED)
-	{
+	if(self.state == STATE_CONNECTED) {
 		NSString *elementStr = [element XMLString];
 		
 		if(DEBUG_SEND) {

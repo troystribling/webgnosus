@@ -74,7 +74,6 @@
 - (void)authenticateUser:(NSString *)username withPassword:(NSString *)password resource:(NSString *)resource;
 
 - (XMPPStreamFeatures*)streamFeatures;
-- (NSXMLElement*)streamFeaturesAsElement;
 - (float)serverXmppStreamVersionNumber;
 
 - (void)sendElement:(NSXMLElement *)element;
