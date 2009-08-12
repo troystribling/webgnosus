@@ -11,6 +11,7 @@
 #import "RosterItemModel.h"
 #import "ContactModel.h"
 #import "MessageModel.h"
+#import "AccountModel.h"
 
 #import "XMPPClient.h"
 #import "XMPPJID.h"
@@ -297,7 +298,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)writeToLog:(XMPPClient*)sender message:(NSString*)message {
-	NSString* msg = [NSString alloc] initWithFormat:@"XMPPMessageDelegate %@; JID %@", message, [sender.myJID full]];
+	NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@; JID %@", message, [sender.myJID full]];
 	NSLog(msg);
     [msg release];
 }
