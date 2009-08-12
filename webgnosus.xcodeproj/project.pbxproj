@@ -242,8 +242,12 @@
 		05E2F74B102E6C8800C7912F /* XMPPPubSubPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F749102E6C8800C7912F /* XMPPPubSubPublish.m */; };
 		05E2F7B3102E769500C7912F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F7B2102E769500C7912F /* XMPPPubSub.m */; };
 		05E2F7B4102E769500C7912F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E2F7B2102E769500C7912F /* XMPPPubSub.m */; };
-		05E85D140FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
-		05E85D150FBC64210048092A /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E85D130FBC64210048092A /* CellUtils.m */; };
+		05E7BA291032468700F62369 /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA281032468700F62369 /* XMPPMessageDelegate.m */; };
+		05E7BA2A1032468700F62369 /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA281032468700F62369 /* XMPPMessageDelegate.m */; };
+		05E7BA2D103252FA00F62369 /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA2C103252FA00F62369 /* AlertViewManager.m */; };
+		05E7BA2E103252FA00F62369 /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA2C103252FA00F62369 /* AlertViewManager.m */; };
+		05E7BA471032536B00F62369 /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA461032536B00F62369 /* CellUtils.m */; };
+		05E7BA481032536B00F62369 /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7BA461032536B00F62369 /* CellUtils.m */; };
 		05EE58980FD1AC850068BC5C /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE58970FD1AC850068BC5C /* XMPPClientManager.m */; };
 		05EE58990FD1AC850068BC5C /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EE58970FD1AC850068BC5C /* XMPPClientManager.m */; };
 		05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59160FD1C3600068BC5C /* account-error-led.jpg */; };
@@ -464,8 +468,12 @@
 		05E2F749102E6C8800C7912F /* XMPPPubSubPublish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubPublish.m; sourceTree = "<group>"; };
 		05E2F7B1102E769500C7912F /* XMPPPubSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSub.h; sourceTree = "<group>"; };
 		05E2F7B2102E769500C7912F /* XMPPPubSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSub.m; sourceTree = "<group>"; };
-		05E85D120FBC64210048092A /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
-		05E85D130FBC64210048092A /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
+		05E7BA271032468700F62369 /* XMPPMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageDelegate.h; sourceTree = "<group>"; };
+		05E7BA281032468700F62369 /* XMPPMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageDelegate.m; sourceTree = "<group>"; };
+		05E7BA2B103252FA00F62369 /* AlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewManager.h; sourceTree = "<group>"; };
+		05E7BA2C103252FA00F62369 /* AlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewManager.m; sourceTree = "<group>"; };
+		05E7BA451032536B00F62369 /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
+		05E7BA461032536B00F62369 /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
 		05EE58960FD1AC850068BC5C /* XMPPClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientManager.h; sourceTree = "<group>"; };
 		05EE58970FD1AC850068BC5C /* XMPPClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientManager.m; sourceTree = "<group>"; };
 		05EE59160FD1C3600068BC5C /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-error-led.jpg"; path = "Resources/Images/account-error-led.jpg"; sourceTree = "<group>"; };
@@ -684,6 +692,8 @@
 				05E206E20FB9004100FCFC94 /* XMPPClient.m */,
 				05E206E50FB9004100FCFC94 /* XMPPJID.h */,
 				05E206E60FB9004100FCFC94 /* XMPPJID.m */,
+				05E7BA271032468700F62369 /* XMPPMessageDelegate.h */,
+				05E7BA281032468700F62369 /* XMPPMessageDelegate.m */,
 			);
 			path = XmppFramework;
 			sourceTree = "<group>";
@@ -833,7 +843,10 @@
 				05E207C70FB9046500FCFC94 /* Grid */,
 				05E207D00FB9046500FCFC94 /* MessageCells */,
 				05E207E10FB9046500FCFC94 /* Roster */,
-				05E85D110FBC64210048092A /* Utilities */,
+				05E7BA2B103252FA00F62369 /* AlertViewManager.h */,
+				05E7BA2C103252FA00F62369 /* AlertViewManager.m */,
+				05E7BA451032536B00F62369 /* CellUtils.h */,
+				05E7BA461032536B00F62369 /* CellUtils.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -940,15 +953,6 @@
 				05E2F7B2102E769500C7912F /* XMPPPubSub.m */,
 			);
 			path = PubSub;
-			sourceTree = "<group>";
-		};
-		05E85D110FBC64210048092A /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				05E85D120FBC64210048092A /* CellUtils.h */,
-				05E85D130FBC64210048092A /* CellUtils.m */,
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -1227,7 +1231,6 @@
 				05CE076F0FB90A280036DF5E /* ActivityView.m in Sources */,
 				05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
 				05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */,
-				05E85D140FBC64210048092A /* CellUtils.m in Sources */,
 				05EE58990FD1AC850068BC5C /* XMPPClientManager.m in Sources */,
 				053480FF10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */,
 				0534810410292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */,
@@ -1246,6 +1249,9 @@
 				05E2F7B3102E769500C7912F /* XMPPPubSub.m in Sources */,
 				05E06BD8102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */,
 				05E06BDC102F280000E3B8B8 /* PublicationModel.m in Sources */,
+				05E7BA2A1032468700F62369 /* XMPPMessageDelegate.m in Sources */,
+				05E7BA2E103252FA00F62369 /* AlertViewManager.m in Sources */,
+				05E7BA481032536B00F62369 /* CellUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1320,7 +1326,6 @@
 				05CE076B0FB90A280036DF5E /* ActivityView.m in Sources */,
 				05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
 				05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */,
-				05E85D150FBC64210048092A /* CellUtils.m in Sources */,
 				05EE58980FD1AC850068BC5C /* XMPPClientManager.m in Sources */,
 				053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */,
 				0534810310292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */,
@@ -1339,6 +1344,9 @@
 				05E2F7B4102E769500C7912F /* XMPPPubSub.m in Sources */,
 				05E06BD7102F27EF00E3B8B8 /* SubscriptionsModel.m in Sources */,
 				05E06BDB102F280000E3B8B8 /* PublicationModel.m in Sources */,
+				05E7BA291032468700F62369 /* XMPPMessageDelegate.m in Sources */,
+				05E7BA2D103252FA00F62369 /* AlertViewManager.m in Sources */,
+				05E7BA471032536B00F62369 /* CellUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

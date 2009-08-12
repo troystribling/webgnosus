@@ -9,6 +9,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPMessage.h"
 #import "XMPPPubSubEvent.h"
+#import "XMPPClient.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPMessage
@@ -71,6 +73,15 @@
 		return ((body != nil) && ([body length] > 0));
 	}	
 	return NO;
+}
+
+//===================================================================================================================================
+#pragma mark XMPPMessage
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)chat:(XMPPClient*)client messageBody:(NSString*)body toJID:(XMPPJID*)jid {
+    XMPPMessage* msg = [[self alloc] initWithType:@"chat" toJID:[jid full] andBody:body];
+	[client sendElement:msg];
 }
 
 @end

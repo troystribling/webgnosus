@@ -52,7 +52,7 @@
 + (void)get:(XMPPClient*)client {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get"];
     [iq addQuery:[[self alloc] init]];
-    [[client xmppStream] sendElement:iq];
+    [client sendElement:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@
         [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
         XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
         [iq addQuery:query];
-        [[client xmppStream] sendElement:iq];
+        [client sendElement:iq];
     }
 }
 
@@ -73,7 +73,7 @@
         [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
         XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
         [iq addQuery:query];
-        [[client xmppStream] sendElement:iq];
+        [client sendElement:iq];
     }
 }
 

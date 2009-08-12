@@ -101,24 +101,24 @@
 }
 
 //===================================================================================================================================
-#pragma mark XMPPRosterQuery Messages
+#pragma mark XMPPPresence Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]];
-    [[client xmppStream] sendElement:pres];
+    [client sendElement:pres];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid{
     XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]];
-    [[client xmppStream] sendElement:pres];
+    [client sendElement:pres];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]];
-    [[client xmppStream] sendElement:pres];
+    [client sendElement:pres];
 }
 
 

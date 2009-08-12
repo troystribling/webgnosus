@@ -12,6 +12,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPxData;
+@class XMPPClient;
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPCommand : NSXMLElement 
@@ -34,5 +36,9 @@
 
 - (XMPPxData*)data;
 - (void)addData:(XMPPxData*)child;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node toJID:(XMPPJID*)jid;
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters toJID:(XMPPJID*)jid;
 
 @end
