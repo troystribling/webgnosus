@@ -239,21 +239,21 @@
     [xmppStream sendElement:iq];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)acceptBuddyRequest:(XMPPJID*)jid {
-	// send presence response
-	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
-	
-	// add user to our roster
-    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-    [iq addQuery:query];
-    [xmppStream sendElement:iq];
-	
-	// subscribe to the contact presence
-	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
-}
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)acceptBuddyRequest:(XMPPJID*)jid {
+//	// send presence response
+//	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
+//	
+//	// add user to our roster
+//    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+//    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
+//    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+//    [iq addQuery:query];
+//    [xmppStream sendElement:iq];
+//	
+//	// subscribe to the contact presence
+//	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rejectBuddyRequest:(XMPPJID *)jid {
@@ -300,6 +300,7 @@
 //===================================================================================================================================
 #pragma mark Commands
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendCommand:(NSString*)method toJID:(XMPPJID*)jid {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:method andAction:@"execute"];
@@ -361,7 +362,6 @@
     XMPPCommand* command = [iq command];
 	if([[query className] isEqualToString:@"XMPPRosterQuery"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterItems:iq];
-//        [self onDidReceiveRosterItems:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"result"]) {
         [self onDidReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
@@ -383,15 +383,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceivePresence:(XMPPPresence*)presence {
 	if([[presence type] isEqualToString:@"subscribe"]) {
-        [self onDidReceiveBuddyRequest:[presence fromJID]];
+        [multicastDelegate  xmppClient:self didReceiveBuddyRequest:[presence fromJID]];
 	} else if ([[presence type] isEqualToString:@"subscribed"]) {
-        [self onDidAcceptBuddyRequest:[presence fromJID]];
+        [multicastDelegate  xmppClient:self didAcceptBuddyRequest:[presence fromJID]];
 	} else if ([[presence type] isEqualToString:@"unsubscribed"]) {
-        [self onDidRejectBuddyRequest:[presence fromJID]];
+        [multicastDelegate  xmppClient:self didRejectBuddyRequest:[presence fromJID]];
 	} else if ([[presence type] isEqualToString:@"error"]) {
-        [self onDidReceiveErrorPresence:presence];
+        [multicastDelegate  xmppClient:self didReceiveErrorPresence:presence];
     } else {
-        [self onDidReceivePresence:presence];
+        [multicastDelegate  xmppClient:self didReceivePresence:presence];
 	}
 }
 
@@ -518,37 +518,37 @@
 //- (void)onDidRemoveFromRoster:(XMPPRosterItem*)item {
 //	[multicastDelegate xmppClient:self didRemoveFromRoster:item];
 //}
-
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidFinishReceivingRosterItems:(XMPPIQ*)iq {
-	[multicastDelegate xmppClient:self didFinishReceivingRosterItems:iq];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveErrorPresence:(XMPPPresence*)presence {
-	[multicastDelegate xmppClient:self didReceiveErrorPresence:presence];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceivePresence:(XMPPPresence*)presence {
-	[multicastDelegate xmppClient:self didReceivePresence:presence];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveBuddyRequest:(XMPPJID *)buddyJid {
-    [multicastDelegate xmppClient:self didReceiveBuddyRequest:buddyJid];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidAcceptBuddyRequest:(XMPPJID *)buddyJid {
-    [multicastDelegate xmppClient:self didAcceptBuddyRequest:buddyJid];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidRejectBuddyRequest:(XMPPJID *)buddyJid {
-    [multicastDelegate xmppClient:self didRejectBuddyRequest:buddyJid];
-}
-
+//- (void)onDidFinishReceivingRosterItems:(XMPPIQ*)iq {
+//	[multicastDelegate xmppClient:self didFinishReceivingRosterItems:iq];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)onDidReceiveErrorPresence:(XMPPPresence*)presence {
+//	[multicastDelegate xmppClient:self didReceiveErrorPresence:presence];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)onDidReceivePresence:(XMPPPresence*)presence {
+//	[multicastDelegate xmppClient:self didReceivePresence:presence];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)onDidReceiveBuddyRequest:(XMPPJID *)buddyJid {
+//    [multicastDelegate xmppClient:self didReceiveBuddyRequest:buddyJid];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)onDidAcceptBuddyRequest:(XMPPJID *)buddyJid {
+//    [multicastDelegate xmppClient:self didAcceptBuddyRequest:buddyJid];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)onDidRejectBuddyRequest:(XMPPJID *)buddyJid {
+//    [multicastDelegate xmppClient:self didRejectBuddyRequest:buddyJid];
+//}
+//
 //===================================================================================================================================
 #pragma mark service discovery
 //-----------------------------------------------------------------------------------------------------------------------------------

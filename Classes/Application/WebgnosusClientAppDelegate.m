@@ -25,6 +25,7 @@
 #import "ActivityView.h"
 #import "ContactModel.h"
 #import "RosterItemModel.h"
+#import "AlertViewManager.h"
 
 #import "ModelUpdateDelgate.h"
 
@@ -102,8 +103,8 @@
 		return;
 	}	
 	[dbi open];
-	[[XMPPClientManager instance] addDelegate:self];
 	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
+	[[XMPPClientManager instance] addDelegate:self];
     [self openActivatedAccounts];
     self.tabBarController = [[UITabBarController alloc] init];	
 	self.navRosterViewController = [self createNavigationController:self.rosterViewController];
@@ -124,9 +125,9 @@
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     AcceptBuddyRequestView* buddyRequestView = (AcceptBuddyRequestView*)alertView;
     if (buttonIndex == 0) {
-        [ModelUpdateDelgate xmppClient:buddyRequestView.xmppClient rejectBuddyRequest:buddyRequestView.buddyJid];        
+        [XMPPPresence decline:buddyRequestView.xmppClient JID:buddyRequestView.buddyJid];        
     } else if (buttonIndex == 1) {
-        [ModelUpdateDelgate xmppClient:buddyRequestView.xmppClient acceptBuddyRequest:buddyRequestView.buddyJid];        
+        [XMPPMessageDelegate acceptBuddyRequest:buddyRequestView.xmppClient JID:buddyRequestView.buddyJid];
     }
 }
 
@@ -151,30 +152,30 @@
 
 //===================================================================================================================================
 #pragma mark Connection
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientConnecting:(XMPPClient*)sender {
-	[ModelUpdateDelgate xmppClientConnecting:sender];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidConnect:(XMPPClient*)sender {
-    [self updateAccountConnectionState:AccountConnected forClient:sender];
-	[ModelUpdateDelgate xmppClientDidConnect:sender];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidNotConnect:(XMPPClient*)sender {
-    [self updateAccountConnectionState:AccountConnectionError forClient:sender];
-	[ModelUpdateDelgate xmppClientDidNotConnect:sender];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidDisconnect:(XMPPClient*)sender {
-    [self updateAccountConnectionState:AccountNotConnected forClient:sender];
-	[ModelUpdateDelgate xmppClientDidDisconnect:sender];
-}
-
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClientConnecting:(XMPPClient*)sender {
+//	[ModelUpdateDelgate xmppClientConnecting:sender];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClientDidConnect:(XMPPClient*)sender {
+//    [self updateAccountConnectionState:AccountConnected forClient:sender];
+//	[ModelUpdateDelgate xmppClientDidConnect:sender];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClientDidNotConnect:(XMPPClient*)sender {
+//    [self updateAccountConnectionState:AccountConnectionError forClient:sender];
+//	[ModelUpdateDelgate xmppClientDidNotConnect:sender];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClientDidDisconnect:(XMPPClient*)sender {
+//    [self updateAccountConnectionState:AccountNotConnected forClient:sender];
+//	[ModelUpdateDelgate xmppClientDidDisconnect:sender];
+//}
+//
 //===================================================================================================================================
 #pragma mark Authentication
 
@@ -206,9 +207,9 @@
 	[ModelUpdateDelgate xmppClient:sender didReceiveMessage:message];
 }
 
-//===================================================================================================================================
-#pragma mark Roster
-
+////===================================================================================================================================
+//#pragma mark Roster
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
 //- (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
 //    [ModelUpdateDelgate xmppClient:sender didAddToRoster:item];
@@ -224,18 +225,17 @@
 //    [self updateAccountConnectionState:AccountRosterUpdated forClient:sender];
 //	[ModelUpdateDelgate xmppClient:sender didFinishReceivingRosterItems:iq];
 //}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
-	[ModelUpdateDelgate xmppClient:sender didReceivePresence:presence];
-}
-
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
+//	[ModelUpdateDelgate xmppClient:sender didReceivePresence:presence];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence {
     NSString* title = [[presence toJID] full];
     NSString* message = [[NSString alloc] initWithFormat:@"Error with contact '%@'", [[presence fromJID] full]];
-    [ModelUpdateDelgate showAlert:title withMessage:message];
-	[ModelUpdateDelgate xmppClient:sender didReceiveErrorPresence:presence];
+    [AlertViewManager showAlert:title withMessage:message];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -247,22 +247,20 @@
             AcceptBuddyRequestView* buddyRequestView = [[AcceptBuddyRequestView alloc] initWithClient:sender buddyJid:buddyJid andDelegate:self];
             [buddyRequestView show];	
             [buddyRequestView release];
-        } else {
-            [ModelUpdateDelgate xmppClient:sender acceptBuddyRequest:buddyJid];        
         }
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid {
-	[ModelUpdateDelgate xmppClient:sender didAcceptBuddyRequest:buddyJid];
-}
-
+//- (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid {
+//	[ModelUpdateDelgate xmppClient:sender didAcceptBuddyRequest:buddyJid];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid {
-	[ModelUpdateDelgate xmppClient:sender didRejectBuddyRequest:buddyJid];
-}
-
+//- (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid {
+//	[ModelUpdateDelgate xmppClient:sender didRejectBuddyRequest:buddyJid];
+//}
+//
 //===================================================================================================================================
 #pragma mark Service Discovery
 

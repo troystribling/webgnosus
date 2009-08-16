@@ -113,30 +113,30 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 
 //===================================================================================================================================
 #pragma mark Connection
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClientConnecting:(XMPPClient *)sender {
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientConnecting to: %@"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClientDidConnect:(XMPPClient *)sender {
-    AccountModel* account = [self accountForXMPPClient:sender];
-    if (account) {
-    }
-    [ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidConnect to: %@"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClientDidNotConnect:(XMPPClient *)sender {
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidNotConnect to: %@"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClientDidDisconnect:(XMPPClient *)sender {
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidDisconnect from: %@"];
-}
-
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClientConnecting:(XMPPClient *)sender {
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientConnecting to: %@"];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClientDidConnect:(XMPPClient *)sender {
+//    AccountModel* account = [self accountForXMPPClient:sender];
+//    if (account) {
+//    }
+//    [ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidConnect to: %@"];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClientDidNotConnect:(XMPPClient *)sender {
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidNotConnect to: %@"];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClientDidDisconnect:(XMPPClient *)sender {
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidDisconnect from: %@"];
+//}
+//
 //===================================================================================================================================
 #pragma mark registration
 
@@ -213,93 +213,93 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 //}
 //
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
-    AccountModel* account = [self accountForXMPPClient:sender];
-    if (account) {
-        XMPPJID* fromJid = [presence fromJID];
-        NSString* fromResource = [fromJid resource];
-        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
-        if (!rosterItem) {
-            rosterItem = [[RosterItemModel alloc] init]; 
-            rosterItem.jid = [fromJid bare];
-            rosterItem.resource = fromResource;
-            rosterItem.host = [fromJid domain];
-            rosterItem.accountPk = account.pk;
-            rosterItem.clientName = @"";
-            rosterItem.clientVersion = @"";
-            [rosterItem insert];
-            [rosterItem load];
-        }
-        NSString* showVal = [presence show];
-        if (showVal) {
-            rosterItem.show = showVal;
-        } else {
-            rosterItem.show = @"";
-        }
-        NSString* statusVal = [presence status];
-        if (statusVal) {
-            rosterItem.status = statusVal;
-        } else {
-            rosterItem.status = @"";
-        }
-        rosterItem.priority = [presence priority];
-        rosterItem.type = [presence type];
-        [rosterItem update];
-        if ([rosterItem.type isEqualToString:@"available"]) {
-            [sender getClientVersionForJid:[presence fromJID]];
-        } 
-        ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
-        RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
-        contact.clientName = maxPriorityRosteritem.clientName;
-        contact.clientVersion = maxPriorityRosteritem.clientVersion;
-        [contact update];
-        [contact release];
-        [rosterItem release];
-    }
-    [ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceivePresence from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
+//    AccountModel* account = [self accountForXMPPClient:sender];
+//    if (account) {
+//        XMPPJID* fromJid = [presence fromJID];
+//        NSString* fromResource = [fromJid resource];
+//        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
+//        if (!rosterItem) {
+//            rosterItem = [[RosterItemModel alloc] init]; 
+//            rosterItem.jid = [fromJid bare];
+//            rosterItem.resource = fromResource;
+//            rosterItem.host = [fromJid domain];
+//            rosterItem.accountPk = account.pk;
+//            rosterItem.clientName = @"";
+//            rosterItem.clientVersion = @"";
+//            [rosterItem insert];
+//            [rosterItem load];
+//        }
+//        NSString* showVal = [presence show];
+//        if (showVal) {
+//            rosterItem.show = showVal;
+//        } else {
+//            rosterItem.show = @"";
+//        }
+//        NSString* statusVal = [presence status];
+//        if (statusVal) {
+//            rosterItem.status = statusVal;
+//        } else {
+//            rosterItem.status = @"";
+//        }
+//        rosterItem.priority = [presence priority];
+//        rosterItem.type = [presence type];
+//        [rosterItem update];
+//        if ([rosterItem.type isEqualToString:@"available"]) {
+//            [sender getClientVersionForJid:[presence fromJID]];
+//        } 
+//        ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
+//        RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
+//        contact.clientName = maxPriorityRosteritem.clientName;
+//        contact.clientVersion = maxPriorityRosteritem.clientVersion;
+//        [contact update];
+//        [contact release];
+//        [rosterItem release];
+//    }
+//    [ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceivePresence from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence  {
-    AccountModel* account = [self accountForXMPPClient:sender];
-    ContactModel* contact = [ContactModel findByJid:[[presence fromJID] bare] andAccount:account];
-    contact.contactState = ContactHasError;
-    [contact update];
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceiveErrorPresence from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence  {
+//    AccountModel* account = [self accountForXMPPClient:sender];
+//    ContactModel* contact = [ContactModel findByJid:[[presence fromJID] bare] andAccount:account];
+//    contact.contactState = ContactHasError;
+//    [contact update];
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceiveErrorPresence from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID *)buddyJid {
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceiveBuddyRequest from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID *)buddyJid {
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didReceiveBuddyRequest from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid {
-    [self addContact:sender withJid:buddyJid];
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didAcceptBuddyRequest from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid {
+//    [self addContact:sender withJid:buddyJid];
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didAcceptBuddyRequest from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid {
-    [ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didRejectBuddyRequest from: %@"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender acceptBuddyRequest:(XMPPJID*)buddyJid {
-    [self addContact:sender withJid:buddyJid];
-    AccountModel* account = [self accountForXMPPClient:sender];
-    if (account) {
-        [sender acceptBuddyRequest:buddyJid];
-    }
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:acceptBuddyRequest from: %@"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender rejectBuddyRequest:(XMPPJID*)buddyJid {
-    [sender rejectBuddyRequest:buddyJid];
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:rejectBuddyRequest from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid {
+//    [ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didRejectBuddyRequest from: %@"];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClient:(XMPPClient*)sender acceptBuddyRequest:(XMPPJID*)buddyJid {
+//    [self addContact:sender withJid:buddyJid];
+//    AccountModel* account = [self accountForXMPPClient:sender];
+//    if (account) {
+//        [sender acceptBuddyRequest:buddyJid];
+//    }
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:acceptBuddyRequest from: %@"];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//+ (void)xmppClient:(XMPPClient*)sender rejectBuddyRequest:(XMPPJID*)buddyJid {
+//    [sender rejectBuddyRequest:buddyJid];
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:rejectBuddyRequest from: %@"];
+//}
+//
 //===================================================================================================================================
 #pragma mark Service Discovery
 

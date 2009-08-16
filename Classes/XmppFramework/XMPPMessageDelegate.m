@@ -28,9 +28,6 @@
 @interface XMPPMessageDelegate (PrivateAPI)
 
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message;
-- (void)removeContact:(XMPPClient*)client withJid:(XMPPJID*)contactJid;
-- (void)addContact:(XMPPClient*)client withJid:(XMPPJID*)contactJid;
-- (void)updateAccountConnectionState:(AccountConnectionState)title forClient:(XMPPClient*)client;
 
 @end
 
@@ -45,6 +42,54 @@
     return [AccountModel findByFullJid:[client.myJID full]];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)removeContact:(XMPPClient*)client JID:(XMPPJID*)contactJid {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ContactModel* contact = [ContactModel findByJid:[contactJid bare] andAccount:account];	
+        if (contact) {
+            [contact destroy];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)addContact:(XMPPClient*)client JID:(XMPPJID*)contactJid {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ContactModel* contact = [ContactModel findByJid:[contactJid bare] andAccount:account];	
+        if (contact == nil) {
+            contact = [[ContactModel alloc] init];
+            contact.accountPk = account.pk;	
+            contact.jid = [contactJid bare];
+            contact.host = [contactJid domain];
+            contact.clientName = @"Unknown";
+            contact.clientVersion = @"Unknown";
+            contact.contactState = ContactIsOk;
+            contact.nickname = contact.jid;
+            [contact insert];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)updateAccountConnectionState:(AccountConnectionState)state forClient:(XMPPClient*)client { 
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    account.connectionState = state;
+    [account update];
+}
+
+//===================================================================================================================================
+#pragma mark Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)acceptBuddyRequest:(XMPPClient*)client JID:(XMPPJID*)buddyJid {
+    [XMPPMessageDelegate addContact:client JID:buddyJid];
+    [XMPPPresence accept:client JID:buddyJid];
+    [XMPPPresence subscribe:client JID:buddyJid];
+    [XMPPRosterQuery update:client JID:buddyJid];
+}
+
 //===================================================================================================================================
 #pragma mark Connection
 
@@ -55,20 +100,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidConnect:(XMPPClient *)client {
+    [self writeToLog:client message:@"xmppClientDidConnect"];
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     if (account) {
     }
-    [self writeToLog:client message:@"xmppClientDidConnect"];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountConnected forClient:client];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidNotConnect:(XMPPClient *)client {
 	[self writeToLog:client message:@"xmppClientDidNotConnect"];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountConnectionError forClient:client];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidDisconnect:(XMPPClient *)client {
 	[self writeToLog:client message:@"xmppClientDidDisconnect"];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountNotConnected forClient:client];
 }
 
 //===================================================================================================================================
@@ -120,19 +168,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didAddToRoster:(XMPPRosterItem*)item {
 	[self writeToLog:client message:@"xmppClient:didAddToRoster"];
-    [self addContact:client withJid:[item jid]];
+    [XMPPMessageDelegate addContact:client JID:[item jid]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didRemoveFromRoster:(XMPPRosterItem*)item {
 	[self writeToLog:client message:@"xmppClient:didRemoveFromRoster"];
-    [self removeContact:client withJid:[item jid]];
+    [XMPPMessageDelegate removeContact:client JID:[item jid]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
 	[self writeToLog:client message:@"didFinishReceivingRosterItems"];
-    [self updateAccountConnectionState:AccountRosterUpdated forClient:client];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountRosterUpdated forClient:client];
 }
 
 //===================================================================================================================================
@@ -140,84 +188,81 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePresence:(XMPPPresence*)presence {
-//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//    if (account) {
-//        XMPPJID* fromJid = [presence fromJID];
-//        NSString* fromResource = [fromJid resource];
-//        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
-//        if (!rosterItem) {
-//            rosterItem = [[RosterItemModel alloc] init]; 
-//            rosterItem.jid = [fromJid bare];
-//            rosterItem.resource = fromResource;
-//            rosterItem.host = [fromJid domain];
-//            rosterItem.accountPk = account.pk;
-//            rosterItem.clientName = @"";
-//            rosterItem.clientVersion = @"";
-//            [rosterItem insert];
-//            [rosterItem load];
-//        }
-//        NSString* showVal = [presence show];
-//        if (showVal) {
-//            rosterItem.show = showVal;
-//        } else {
-//            rosterItem.show = @"";
-//        }
-//        NSString* statusVal = [presence status];
-//        if (statusVal) {
-//            rosterItem.status = statusVal;
-//        } else {
-//            rosterItem.status = @"";
-//        }
-//        rosterItem.priority = [presence priority];
-//        rosterItem.type = [presence type];
-//        [rosterItem update];
-//        if ([rosterItem.type isEqualToString:@"available"]) {
-//            [client getClientVersionForJid:[presence fromJID]];
-//        } 
-//        ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
-//        RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
-//        contact.clientName = maxPriorityRosteritem.clientName;
-//        contact.clientVersion = maxPriorityRosteritem.clientVersion;
-//        [contact update];
-//        [contact release];
-//        [rosterItem release];
-//    }
     [self writeToLog:client message:@"xmppClient:didReceivePresence"];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        XMPPJID* fromJid = [presence fromJID];
+        NSString* fromResource = [fromJid resource];
+        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
+        if (!rosterItem) {
+            rosterItem = [[RosterItemModel alloc] init]; 
+            rosterItem.jid = [fromJid bare];
+            rosterItem.resource = fromResource;
+            rosterItem.host = [fromJid domain];
+            rosterItem.accountPk = account.pk;
+            rosterItem.clientName = @"";
+            rosterItem.clientVersion = @"";
+            [rosterItem insert];
+            [rosterItem load];
+        }
+        NSString* showVal = [presence show];
+        if (showVal) {
+            rosterItem.show = showVal;
+        } else {
+            rosterItem.show = @"";
+        }
+        NSString* statusVal = [presence status];
+        if (statusVal) {
+            rosterItem.status = statusVal;
+        } else {
+            rosterItem.status = @"";
+        }
+        rosterItem.priority = [presence priority];
+        rosterItem.type = [presence type];
+        [rosterItem update];
+        if ([rosterItem.type isEqualToString:@"available"]) {
+            [client getClientVersionForJid:[presence fromJID]];
+        } 
+        ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
+        RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
+        contact.clientName = maxPriorityRosteritem.clientName;
+        contact.clientVersion = maxPriorityRosteritem.clientVersion;
+        [contact update];
+        [contact release];
+        [rosterItem release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveErrorPresence:(XMPPPresence*)presence  {
-//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//    ContactModel* contact = [ContactModel findByJid:[[presence fromJID] bare] andAccount:account];
-//    contact.contactState = ContactHasError;
-//    [contact update];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    ContactModel* contact = [ContactModel findByJid:[[presence fromJID] bare] andAccount:account];
+    contact.contactState = ContactHasError;
+    [contact update];
 	[self writeToLog:client message:@"xmppClient:didReceiveErrorPresence"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveBuddyRequest:(XMPPJID *)buddyJid {
+- (void)xmppClient:(XMPPClient*)client didReceiveBuddyRequest:(XMPPJID*)buddyJid {
 	[self writeToLog:client message:@"xmppClient:didReceiveBuddyRequest"];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ContactModel* contact = [ContactModel findByJid:[buddyJid bare] andAccount:account];	
+        if (contact) {
+            [XMPPMessageDelegate acceptBuddyRequest:client JID:buddyJid];
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didAcceptBuddyRequest:(XMPPJID*)buddyJid {
-//    [self addContact:client withJid:buddyJid];
+    [XMPPMessageDelegate addContact:client JID:buddyJid];
 	[self writeToLog:client message:@"xmppClient:didAcceptBuddyRequest"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didRejectBuddyRequest:(XMPPJID*)buddyJid {
     [self writeToLog:client message:@"xmppClient:didRejectBuddyRequest"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client acceptBuddyRequest:(XMPPJID*)buddyJid {
-//    [self addContact:client withJid:buddyJid];
-//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//    if (account) {
-//        [client acceptBuddyRequest:buddyJid];
-//    }
-	[self writeToLog:client message:@"xmppClient:acceptBuddyRequest"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -322,43 +367,6 @@
 	NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
 	NSLog(msg);
     [msg release];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeContact:(XMPPClient*)client withJid:(XMPPJID*)contactJid {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        ContactModel* contact = [ContactModel findByJid:[contactJid bare] andAccount:account];	
-        if (contact) {
-            [contact destroy];
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addContact:(XMPPClient*)client withJid:(XMPPJID*)contactJid {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        ContactModel* contact = [ContactModel findByJid:[contactJid bare] andAccount:account];	
-        if (contact == nil) {
-            contact = [[ContactModel alloc] init];
-            contact.accountPk = account.pk;	
-            contact.jid = [contactJid bare];
-            contact.host = [contactJid domain];
-            contact.clientName = @"Unknown";
-            contact.clientVersion = @"Unknown";
-            contact.contactState = ContactIsOk;
-            contact.nickname = contact.jid;
-            [contact insert];
-        }
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateAccountConnectionState:(AccountConnectionState)state forClient:(XMPPClient*)client { 
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    account.connectionState = state;
-    [account update];
 }
 
 @end

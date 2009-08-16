@@ -9,15 +9,21 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 #import "NSXMLElementAdditions.h"
+#import "AccountModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPClient;
 @class AccountModel;
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPMessageDelegate : NSObject
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)accountForXMPPClient:(XMPPClient*)client;
++ (void)removeContact:(XMPPClient*)client JID:(XMPPJID*)contactJid;
++ (void)addContact:(XMPPClient*)client JID:(XMPPJID*)contactJid;
++ (void)updateAccountConnectionState:(AccountConnectionState)title forClient:(XMPPClient*)client;
++ (void)acceptBuddyRequest:(XMPPClient*)client JID:(XMPPJID*)buddyJid;
 
 @end
