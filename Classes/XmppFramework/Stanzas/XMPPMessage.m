@@ -8,9 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPMessage.h"
-#import "XMPPPubSubEvent.h"
-#import "XMPPClient.h"
-#import "XMPPJID.h"
+#import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPMessage
@@ -46,21 +44,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubEvent*)event {
-    XMPPPubSubEvent* evt = nil;
-    NSXMLElement* evtElement = [self elementForName:@"event"];
-    if (evtElement) {
-        evt = [XMPPPubSubEvent createFromElement:evtElement];
-    }
-    return evt;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addEvent:(XMPPPubSubEvent*)val {
-    [self addChild:val];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isChatMessage {
 	return [[[self attributeForName:@"type"] stringValue] isEqualToString:@"chat"];
 }
@@ -73,15 +56,6 @@
 		return ((body != nil) && ([body length] > 0));
 	}	
 	return NO;
-}
-
-//===================================================================================================================================
-#pragma mark XMPPMessage
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)chat:(XMPPClient*)client messageBody:(NSString*)body toJID:(XMPPJID*)jid {
-    XMPPMessage* msg = [[self alloc] initWithType:@"chat" toJID:[jid full] andBody:body];
-	[client sendElement:msg];
 }
 
 @end

@@ -8,12 +8,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import "DDXML.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPxData;
-@class XMPPClient;
-@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPCommand : NSXMLElement 
@@ -25,6 +23,9 @@
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode action:(NSString*)cmdAction data:(XMPPxData*)cmdData andStatus:(NSString*)cmdStatus;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPxData*)data;
+- (void)addData:(XMPPxData*)child;
+
 - (NSString*)node;
 - (void)addNode:(NSString*)val;
 
@@ -33,12 +34,5 @@
 
 - (NSString*)status;
 - (void)addStatus:(NSString*)val;
-
-- (XMPPxData*)data;
-- (void)addData:(XMPPxData*)child;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node toJID:(XMPPJID*)jid;
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters toJID:(XMPPJID*)jid;
 
 @end

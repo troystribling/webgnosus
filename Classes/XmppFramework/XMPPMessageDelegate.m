@@ -53,9 +53,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClientDidConnect:(XMPPClient *)sender {
-//    AccountModel* account = [self accountForXMPPClient:sender];
-//    if (account) {
-//    }
+    AccountModel* account = [self accountForXMPPClient:sender];
+    if (account) {
+    }
     [self writeToLog:sender message:@"xmppClientDidConnect"];
 }
 
@@ -74,12 +74,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClientDidRegister:(XMPPClient *)sender {
-	[self writeToLog:sender message:@"xmppClientDidRegister at: %@"];
+	[self writeToLog:sender message:@"xmppClientDidRegister"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClient:(XMPPClient*)sender didNotRegister:(NSXMLElement*)error {
-	[self writeToLog:sender message:@"xmppClient:didNotRegister at: %@"];
+	[self writeToLog:sender message:@"xmppClient:didNotRegister"];
 }
 
 //===================================================================================================================================
@@ -87,12 +87,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
-	[self writeToLog:sender message:@"xmppClientDidAuthenticate at: %@"];
+	[self writeToLog:sender message:@"xmppClientDidAuthenticate"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClient:(XMPPClient*)sender didNotAuthenticate:(NSXMLElement*)error {
-	[self writeToLog:sender message:@"xmppClient:didNotAuthenticate at: %@"];
+	[self writeToLog:sender message:@"xmppClient:didNotAuthenticate"];
 }
 
 //===================================================================================================================================
@@ -253,7 +253,7 @@
 //                contact.clientVersion = version.clientVersion;
 //                [contact update];
 //            }
-//            [self writeToLog:sender message:@"xmppClient:didReceiveClientVersionResult"];
+            [self writeToLog:sender message:@"xmppClient:didReceiveClientVersionResult"];
 //        }
 //    }
 }
@@ -263,11 +263,12 @@
 //    if (![[sender.myJID full] isEqualToString:[[iq fromJID] full]]) {
 //        [sender sendClientVersion:[[XMPPClientVersionQuery alloc] initWithName:@"web.gnos.us" andVersion:@"0.0"] forIQ:iq];
 //    }
-	[self writeToLog:sender message:@"xmppClient:didReceiveClientVersion"];
+	[self writeToLog:sender message:@"xmppClient:didReceiveClientVersionRequest"];
 }
 
 //===================================================================================================================================
 #pragma mark Commands
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
 //    XMPPCommand* command = [iq command];
@@ -298,7 +299,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)writeToLog:(XMPPClient*)sender message:(NSString*)message {
-	NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@; JID %@", message, [sender.myJID full]];
+	NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [sender.myJID full]];
 	NSLog(msg);
     [msg release];
 }

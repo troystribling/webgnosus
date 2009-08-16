@@ -16,17 +16,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClientManager : NSObject {
 	NSMutableDictionary* xmppClientDictionary;
+    NSMutableArray* delegates;
 	id delegate;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (retain) NSMutableDictionary* xmppClientDictionary;
-@property (retain) id delegate;
+@property (retain) NSMutableArray* delegates;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPClientManager*)instance;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addDelegate:(id)delegate;
 - (XMPPClient*)xmppClientForAccount:(AccountModel*)account;
 - (void)openConnectionForAccount:(AccountModel*)account;
 - (XMPPClient*)xmppClientForAccount:(AccountModel*)account andDelegateTo:(id)clientDelegate;

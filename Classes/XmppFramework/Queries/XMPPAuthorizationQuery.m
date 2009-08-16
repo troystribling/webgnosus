@@ -7,15 +7,8 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "NSDataAdditions.h"
 #import "XMPPAuthorizationQuery.h"
-#import "XMPPStream.h"
-#import "XMPPIQ.h"
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPAuthorizationQuery (PrivateAPI)
-
-@end
+#import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPAuthorizationQuery
@@ -70,23 +63,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addResource:(NSString*)val {
 	[self addChild:[NSXMLElement elementWithName:@"resource" stringValue:val]];	
-}
-
-//===================================================================================================================================
-#pragma mark XMPPAuthorizationQuery Messages
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPStream*)stream user:(NSString*)username withPassword:(NSString*)password resource:(NSString*)resource {
-    NSString *rootID = [[stream.rootElement attributeForName:@"id"] stringValue];
-    NSString *digestStr = [NSString stringWithFormat:@"%@%@", rootID, password];
-    NSData *digestData = [digestStr dataUsingEncoding:NSUTF8StringEncoding];			
-    NSString *digest = [[digestData sha1Digest] hexStringValue];			
-    XMPPIQ* auth = [[XMPPIQ alloc] initWithType:@"set"];
-    [auth addQuery:[[XMPPAuthorizationQuery alloc] initWithUsername:username digest:digest andResource:resource]];			
-    if(DEBUG_SEND) {
-        NSLog(@"SEND: %@", [auth XMLString]);
-    }
-    [stream sendElement:auth];
 }
 
 @end

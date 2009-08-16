@@ -16,11 +16,18 @@
 static XMPPClientManager* thisXMPPClientManager = nil;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface XMPPClientManager (PrivateAPI)
+
+- (void)addDelegatesToClient:(XMPPClient*)xmppClient;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPClientManager
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize xmppClientDictionary;
-@synthesize delegate;
+@synthesize delegates;
 
 //===================================================================================================================================
 #pragma mark XMPPClientManager
@@ -44,6 +51,11 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 		[xmppClientDictionary setValue:xmppClient forKey:[account fullJID]];
 	}
 	return xmppClient;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addDelegate:(id)del {
+    [delegates addObject:del];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +95,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 //----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPClient*)createXMPPClientForAccount:(AccountModel*)account {
 	XMPPClient* xmppClient = [[XMPPClient alloc] init];
-	[xmppClient addDelegate:self.delegate];
+	[self addDelegatesToClient:xmppClient];
 	XMPPJID* jid;
 	if (account.resource) {
 		jid = [XMPPJID jidWithString:account.jid resource:account.resource];
@@ -98,6 +110,16 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 }
 
 //===================================================================================================================================
+#pragma mark MessageModel PrivateApi
+
+//----------------------------------------------------------------------------------------------------------------------------------
+- (void)addDelegatesToClient:(XMPPClient*)xmppClient {
+    for(int i = 0; i < [delegates count]; i++) {        
+        [xmppClient addDelegate:[delegates objectAtIndex:i]];
+    }
+}
+
+//===================================================================================================================================
 #pragma mark NSObject
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -105,6 +127,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
     self = [super init];
     thisXMPPClientManager = self;
 	self.xmppClientDictionary = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.delegates = [[NSMutableArray alloc] initWithCapacity:10];
     return self;
 }
 

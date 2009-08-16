@@ -196,13 +196,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-    [ContactModel destroyAllByAccount:self];
-    [RosterItemModel destroyAllByAccount:self];
-    [MessageModel destroyAllByAccount:self];
-	NSString *insertStatement = 
-		[[NSString alloc] initWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
-	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
+//    [ContactModel destroyAllByAccount:self];
+//    [RosterItemModel destroyAllByAccount:self];
+//    [MessageModel destroyAllByAccount:self];
+//	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
+//	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+//    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

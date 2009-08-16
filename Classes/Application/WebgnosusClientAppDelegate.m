@@ -12,6 +12,7 @@
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
 #import "XMPPClientManager.h"
+#import "XMPPMessageDelegate.h"
 #import "DDXML.h"
 
 #import "WebgnosusClientAppDelegate.h"
@@ -101,7 +102,8 @@
 		return;
 	}	
 	[dbi open];
-	[[XMPPClientManager instance] setDelegate:self];
+	[[XMPPClientManager instance] addDelegate:self];
+	[[XMPPClientManager instance] addDelegate:[XMPPMessageDelegate class]];
     [self openActivatedAccounts];
     self.tabBarController = [[UITabBarController alloc] init];	
 	self.navRosterViewController = [self createNavigationController:self.rosterViewController];

@@ -9,9 +9,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPRosterQuery.h"
 #import "XMPPRosterItem.h"
-#import "XMPPClient.h"
-#import "XMPPJID.h"
-#import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPRosterQuery
@@ -43,38 +40,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addItem:(XMPPRosterItem*)val {
     [self addChild:val];
-}
-
-//===================================================================================================================================
-#pragma mark XMPPRosterQuery Messages
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get"];
-    [iq addQuery:[[self alloc] init]];
-    [client sendElement:iq];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)update:(XMPPClient*)client JID:(XMPPJID*)jid {
-	if (jid) {
-        XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-        [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
-        XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-        [iq addQuery:query];
-        [client sendElement:iq];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)remove:(XMPPClient*)client JID:(XMPPJID*)jid {
-	if(jid) {	
-        XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-        [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
-        XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-        [iq addQuery:query];
-        [client sendElement:iq];
-    }
 }
 
 @end

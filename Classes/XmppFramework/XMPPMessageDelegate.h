@@ -47,16 +47,18 @@
 + (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message;
 
 // roster
-+ (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item;
 + (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item;
++ (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item;
 + (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq;
+
 + (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence;
 + (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)sender;
 + (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID*)buddyJid;
 + (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid;
 + (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid;
-+ (void)xmppClient:(XMPPClient*)sender acceptBuddyRequest:(XMPPJID*)buddyJid;
-+ (void)xmppClient:(XMPPClient*)sender rejectBuddyRequest:(XMPPJID*)buddyJid;
+
+//+ (void)xmppClient:(XMPPClient*)sender acceptBuddyRequest:(XMPPJID*)buddyJid;
+//+ (void)xmppClient:(XMPPClient*)sender rejectBuddyRequest:(XMPPJID*)buddyJid;
 
 // service discovery
 + (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq;

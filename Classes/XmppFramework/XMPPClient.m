@@ -20,6 +20,7 @@
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
+#import "NSXMLElementAdditions.h"
 #import "MulticastDelegate.h"
 #import "SCNotificationManager.h"
 
@@ -281,7 +282,7 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendElement:(NSXMLElement*)element {
+- (void)sendElement:(NSXMLElement *)element {
 	[xmppStream sendElement:element];
 }
 
@@ -417,16 +418,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)attemptReconnect:(id)ignore {
 	NSLog(@"XMPPClient: attempReconnect method called...");
-	
-//	if([xmppStream isDisconnected]) {
-//		SCNetworkConnectionFlags reachabilityStatus;
-//		BOOL success = SCNetworkCheckReachabilityByName("google.com", &reachabilityStatus);
-//		
-//		if(success && (reachabilityStatus & kSCNetworkFlagsReachable))
-//		{
-			[self connect];
-//		}
-//	}
+    [self connect];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

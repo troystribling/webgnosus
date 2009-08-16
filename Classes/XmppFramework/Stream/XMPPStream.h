@@ -1,14 +1,6 @@
-//
-//  XMPPStream.m
-//  webgnosus
-//
-//  Created by Troy Stribling on 3/29/09.
-//  Copyright 2009 Plan-B Research. All rights reserved.
-//
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import "DDXML.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AsyncSocket;
@@ -74,6 +66,7 @@
 - (void)authenticateUser:(NSString *)username withPassword:(NSString *)password resource:(NSString *)resource;
 
 - (XMPPStreamFeatures*)streamFeatures;
+- (NSXMLElement*)streamFeaturesAsElement;
 - (float)serverXmppStreamVersionNumber;
 
 - (void)sendElement:(NSXMLElement *)element;

@@ -11,8 +11,6 @@
 #import "XMPPStanza.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPClient;
-@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPresence : XMPPStanza
@@ -36,10 +34,5 @@
 
 - (int)priority;
 - (void)addPriority:(NSString*)val;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid;
-+ (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid;
-+ (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid;
 
 @end

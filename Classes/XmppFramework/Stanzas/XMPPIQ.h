@@ -22,7 +22,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPIQ*)createFromElement:(NSXMLElement*)element;
++ (XMPPIQ*)createFromElement:(NSXMLElement *)element;
 - (XMPPIQ*)initWithType:(NSString*)iqType;
 - (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqTo;
 

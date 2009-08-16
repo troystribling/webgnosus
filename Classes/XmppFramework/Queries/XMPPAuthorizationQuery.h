@@ -11,7 +11,6 @@
 #import "XMPPQuery.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPStream;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPAuthorizationQuery : XMPPQuery 
@@ -29,8 +28,5 @@
 
 - (int)resource;
 - (void)addResource:(NSString*)val;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPStream*)stream user:(NSString*)username withPassword:(NSString*)password resource:(NSString*)resource;
 
 @end

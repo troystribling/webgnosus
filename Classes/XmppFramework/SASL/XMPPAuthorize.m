@@ -7,10 +7,8 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "NSDataAdditions.h"
 #import "XMPPAuthorize.h"
-#import "XMPPStream.h"
-#import "XMPPAuthorizationQuery.h"
+#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -71,39 +69,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addPlainCredentials:(NSString*)val {
     [self setStringValue:val];
-}
-
-//===================================================================================================================================
-#pragma mark XMPPAuthorize PrivateAPI
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)send:(XMPPStream*)stream auth:(XMPPAuthorize*)auth {
-    if(DEBUG_SEND) {
-        NSLog(@"SEND: %@", auth);
-    }
-    [stream sendElement:auth];
-}
-
-//===================================================================================================================================
-#pragma mark XMPPAuthorize Messages
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)authenticate:(XMPPStream*)stream user:(NSString*)username withPassword:(NSString*)password resource:(NSString*)resource {
-    if([stream supportsDigestMD5Authentication]) {
-        XMPPAuthorize* auth = [[self alloc] initWithMechanism:@"DIGEST-MD5"];	
-		[self send:stream auth:auth];
-        if(DEBUG_SEND) {
-            NSLog(@"SEND: %@", auth);
-        }
-        [stream sendElement:auth];
-    } else if([stream supportsPlainAuthentication]) {
-        NSString* payload = [NSString stringWithFormat:@"%C%@%C%@", 0, username, 0, password];
-        NSString* base64 = [[payload dataUsingEncoding:NSUTF8StringEncoding] base64Encoded];			
-        XMPPAuthorize* auth = [[self alloc] initWithMechanism:@"PLAIN" andPlainCredentials:base64];			
-		[self  send:stream auth:auth];
-    } else {
-        [XMPPAuthorizationQuery set:stream user:username withPassword:password resource:resource];
-    }
 }
 
 @end
