@@ -701,10 +701,6 @@
 			isa = PBXGroup;
 			children = (
 				05D1ED661037BE8800DB3B3F /* PubSub */,
-				05D1ECA41037B58400DB3B3F /* XMPPClientManager.h */,
-				05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */,
-				05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */,
-				05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */,
 				0534810010292C94002E6E2D /* Disco */,
 				05E206A20FB9004100FCFC94 /* Categories */,
 				05E206A70FB9004100FCFC94 /* Command */,
@@ -719,8 +715,12 @@
 				05E206E00FB9004100FCFC94 /* XMPP.h */,
 				05E206E10FB9004100FCFC94 /* XMPPClient.h */,
 				05E206E20FB9004100FCFC94 /* XMPPClient.m */,
+				05D1ECA41037B58400DB3B3F /* XMPPClientManager.h */,
+				05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */,
 				05E206E50FB9004100FCFC94 /* XMPPJID.h */,
 				05E206E60FB9004100FCFC94 /* XMPPJID.m */,
+				05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */,
+				05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */,
 			);
 			path = XmppFramework;
 			sourceTree = "<group>";
@@ -867,15 +867,15 @@
 		05E207AC0FB9046500FCFC94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
-				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
-				05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */,
-				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05E207AD0FB9046500FCFC94 /* Accounts */,
 				05E207BA0FB9046500FCFC94 /* Chat */,
 				05E207C70FB9046500FCFC94 /* Grid */,
 				05E207D00FB9046500FCFC94 /* MessageCells */,
 				05E207E10FB9046500FCFC94 /* Roster */,
+				05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */,
+				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
+				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
+				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";

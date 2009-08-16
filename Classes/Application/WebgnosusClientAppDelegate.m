@@ -103,7 +103,7 @@
 	}	
 	[dbi open];
 	[[XMPPClientManager instance] addDelegate:self];
-	[[XMPPClientManager instance] addDelegate:[XMPPMessageDelegate class]];
+	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
     [self openActivatedAccounts];
     self.tabBarController = [[UITabBarController alloc] init];	
 	self.navRosterViewController = [self createNavigationController:self.rosterViewController];
@@ -210,20 +210,20 @@
 #pragma mark Roster
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
-    [ModelUpdateDelgate xmppClient:sender didAddToRoster:item];
-}
-
+//- (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
+//    [ModelUpdateDelgate xmppClient:sender didAddToRoster:item];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
-	[ModelUpdateDelgate xmppClient:sender didRemoveFromRoster:item];
-}
-
+//- (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
+//	[ModelUpdateDelgate xmppClient:sender didRemoveFromRoster:item];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
-    [self updateAccountConnectionState:AccountRosterUpdated forClient:sender];
-	[ModelUpdateDelgate xmppClient:sender didFinishReceivingRosterItems:iq];
-}
+//- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
+//    [self updateAccountConnectionState:AccountRosterUpdated forClient:sender];
+//	[ModelUpdateDelgate xmppClient:sender didFinishReceivingRosterItems:iq];
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {

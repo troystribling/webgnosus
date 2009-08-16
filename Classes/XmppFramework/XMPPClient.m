@@ -360,7 +360,8 @@
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
 	if([[query className] isEqualToString:@"XMPPRosterQuery"]) {
-        [self onDidReceiveRosterItems:iq];
+        [multicastDelegate  xmppClient:self didReceiveRosterItems:iq];
+//        [self onDidReceiveRosterItems:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"result"]) {
         [self onDidReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
@@ -492,31 +493,31 @@
 //===================================================================================================================================
 #pragma mark roster
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveRosterItems:(XMPPIQ*)iq {
-    XMPPRosterQuery* query = (XMPPRosterQuery*)[iq query];
-    NSArray* items = [query items];		
-    int i;
-    for(i = 0; i < [items count]; i++) {
-        XMPPRosterItem* item = [XMPPRosterItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];            
-        if([item.subscription isEqualToString:@"remove"]) {
-            [self onDidRemoveFromRoster:item];
-        }
-        else {
-            [self onDidAddToRoster:item];
-        }
-    }
-    [self onDidFinishReceivingRosterItems:iq];
-}
-
+//- (void)onDidReceiveRosterItems:(XMPPIQ*)iq {
+//    XMPPRosterQuery* query = (XMPPRosterQuery*)[iq query];
+//    NSArray* items = [query items];		
+//    int i;
+//    for(i = 0; i < [items count]; i++) {
+//        XMPPRosterItem* item = [XMPPRosterItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];            
+//        if([item.subscription isEqualToString:@"remove"]) {
+//            [self onDidRemoveFromRoster:item];
+//        }
+//        else {
+//            [self onDidAddToRoster:item];
+//        }
+//    }
+//    [self onDidFinishReceivingRosterItems:iq];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidAddToRoster:(XMPPRosterItem*)item {
-	[multicastDelegate  xmppClient:self didAddToRoster:item];
-}
-
+//- (void)onDidAddToRoster:(XMPPRosterItem*)item {
+//	[multicastDelegate  xmppClient:self didAddToRoster:item];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidRemoveFromRoster:(XMPPRosterItem*)item {
-	[multicastDelegate xmppClient:self didRemoveFromRoster:item];
-}
+//- (void)onDidRemoveFromRoster:(XMPPRosterItem*)item {
+//	[multicastDelegate xmppClient:self didRemoveFromRoster:item];
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onDidFinishReceivingRosterItems:(XMPPIQ*)iq {

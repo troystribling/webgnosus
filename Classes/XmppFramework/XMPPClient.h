@@ -105,32 +105,40 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface NSObject (XMPPClientDelegate)
 
+// connection
 - (void)xmppClientConnecting:(XMPPClient*)sender;
 - (void)xmppClientDidConnect:(XMPPClient*)sender;
 - (void)xmppClientDidNotConnect:(XMPPClient*)sender;
 - (void)xmppClientDidDisconnect:(XMPPClient*)sender;
 
+// registration
 - (void)xmppClientDidRegister:(XMPPClient*)sender;
 - (void)xmppClient:(XMPPClient*)sender didNotRegister:(NSXMLElement*)error;
 
+// authentication
 - (void)xmppClientDidAuthenticate:(XMPPClient*)sender;
 - (void)xmppClient:(XMPPClient*)sender didNotAuthenticate:(NSXMLElement*)error;
 
+// roster
+- (void)xmppClient:(XMPPClient*)client didReceiveRosterItems:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item;
 - (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item;
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq;
+
+// presence
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)sender;
 - (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)sender;
 - (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID*)buddyJid;
 - (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid;
 - (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid;
 
-- (void)xmppClient:(XMPPClient*)sender didReceiveIQ:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message;
-
+// version discovery
 - (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionRequest:(XMPPIQ*)iq;
 
+// applications
+- (void)xmppClient:(XMPPClient*)sender didReceiveIQ:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message;
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq;
 
 @end

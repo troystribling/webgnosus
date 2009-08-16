@@ -196,22 +196,22 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 #pragma mark Roster
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
-    [self removeContact:sender withJid:[item jid]];
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didRemoveFromRoster from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
+//    [self removeContact:sender withJid:[item jid]];
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClient:didRemoveFromRoster from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
-    [self addContact:sender withJid:[item jid]];
-	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidUpdateRoster from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
+//    [self addContact:sender withJid:[item jid]];
+//	[ModelUpdateDelgate writeToLog:sender message:@"xmppClientDidUpdateRoster from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
-	[ModelUpdateDelgate writeToLog:sender message:@"didFinishReceivingRosterItems from: %@"];
-}
-
+//+ (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
+//	[ModelUpdateDelgate writeToLog:sender message:@"didFinishReceivingRosterItems from: %@"];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
     AccountModel* account = [self accountForXMPPClient:sender];
