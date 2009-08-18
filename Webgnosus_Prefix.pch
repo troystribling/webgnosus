@@ -8,10 +8,14 @@
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// Define application configuration
+#define kAPP_NAME       "web.gnos.us"
+#define kAPP_VERSION    "0.0"
+#define kOS_VERSION     "iPhone"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // Define the debugging state
-#define DEBUG_SEND      YES
-#define DEBUG_RECV      YES
-#define DEBUG_DELEGATE  YES
+#define DEBUG      YES
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Global configuration 

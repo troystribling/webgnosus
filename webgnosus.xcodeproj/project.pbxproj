@@ -590,14 +590,6 @@
 		05CE073B0FB909CA0036DF5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				05D1ED8A1037BFBB00DB3B3F /* PublicationModel.h */,
-				05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */,
-				05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */,
-				05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */,
-				05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */,
-				05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */,
-				05D1ED901037BFBB00DB3B3F /* SubscriptionsModel.h */,
-				05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */,
 				05CE073C0FB909CA0036DF5E /* AccountModel.h */,
 				05CE073D0FB909CA0036DF5E /* AccountModel.m */,
 				05CE073E0FB909CA0036DF5E /* ContactModel.h */,
@@ -606,8 +598,16 @@
 				05CE07410FB909CA0036DF5E /* MessageModel.m */,
 				05CE07420FB909CA0036DF5E /* ModelUpdateDelgate.h */,
 				05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */,
+				05D1ED8A1037BFBB00DB3B3F /* PublicationModel.h */,
+				05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */,
 				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
 				05CE07450FB909CA0036DF5E /* RosterItemModel.m */,
+				05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */,
+				05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */,
+				05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */,
+				05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */,
+				05D1ED901037BFBB00DB3B3F /* SubscriptionsModel.h */,
+				05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */,
 				05CE07460FB909CA0036DF5E /* UserModel.h */,
 				05CE07470FB909CA0036DF5E /* UserModel.m */,
 				05CE07480FB909CA0036DF5E /* WebgnosusDbi.h */,
@@ -889,8 +889,8 @@
 				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
 				05E207B20FB9046500FCFC94 /* AccountsViewController.h */,
 				05E207B30FB9046500FCFC94 /* AccountsViewController.m */,
-				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
+				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
 				05E207B70FB9046500FCFC94 /* EditAccountViewController.m */,
 				05E207B80FB9046500FCFC94 /* SelectAccountViewController.h */,
@@ -964,13 +964,13 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				05E206A10FB9004100FCFC94 /* XmppFramework */,
 				05C6E8A00F0F0D8B009BD7C8 /* Application */,
 				05CE07580FB909DB0036DF5E /* AsyncSocket */,
 				05E2071F0FB9016B00FCFC94 /* KissXML */,
 				05CE073B0FB909CA0036DF5E /* Models */,
 				05E207AC0FB9046500FCFC94 /* Views */,
 				05CE07620FB90A280036DF5E /* Utilities */,
+				05E206A10FB9004100FCFC94 /* XmppFramework */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

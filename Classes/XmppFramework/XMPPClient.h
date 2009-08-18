@@ -92,10 +92,6 @@
 - (void)sendCommand:(NSString*)method toJID:(XMPPJID*)jid;
 - (void)sendCommand:(NSString*)method withParameter:(NSMutableDictionary*)parameters toJID:(XMPPJID*)jid;
 
-// service discovery
-- (void)sendClientVersion:(XMPPClientVersionQuery*)version forIQ:(XMPPIQ*)iq;
-- (void)getClientVersionForJid:(XMPPJID*)jid;
-
 @end
 
 //-----------------------------------------------------------------------------------------------------------------------------------

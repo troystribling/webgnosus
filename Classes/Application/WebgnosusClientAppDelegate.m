@@ -203,10 +203,10 @@
 #pragma mark Message
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message {
-	[ModelUpdateDelgate xmppClient:sender didReceiveMessage:message];
-}
-
+//- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message {
+//	[ModelUpdateDelgate xmppClient:sender didReceiveMessage:message];
+//}
+//
 ////===================================================================================================================================
 //#pragma mark Roster
 //
@@ -262,23 +262,23 @@
 //}
 //
 //===================================================================================================================================
-#pragma mark Service Discovery
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq {
-	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionResult:iq];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionRequest:(XMPPIQ*)iq {
-	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionRequest:iq];
-}
-
+//#pragma mark Service Discovery
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq {
+//	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionResult:iq];
+//}
+//
+////-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionRequest:(XMPPIQ*)iq {
+//	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionRequest:iq];
+//}
+//
 //===================================================================================================================================
-#pragma mark Commands
+//#pragma mark Commands
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-	[ModelUpdateDelgate xmppClient:sender didReceiveCommandResult:iq];
-}
+//- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
+//	[ModelUpdateDelgate xmppClient:sender didReceiveCommandResult:iq];
+//}
 
 @end

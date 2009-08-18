@@ -167,7 +167,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)connect {
-	[self onConnecting];
+    [multicastDelegate  xmppClientConnecting:self];
     [xmppStream connectToHost:domain onPort:port withVirtualHost:[myJID domain]];
 }
 
@@ -214,7 +214,7 @@
     [xmppStream sendElement:iq];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addBuddy:(XMPPJID*)jid {
 	if(jid == nil) return;
 	
@@ -239,43 +239,25 @@
     [xmppStream sendElement:iq];
 }
 
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)acceptBuddyRequest:(XMPPJID*)jid {
-//	// send presence response
-//	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
-//	
-//	// add user to our roster
-//    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-//    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
-//    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-//    [iq addQuery:query];
-//    [xmppStream sendElement:iq];
-//	
-//	// subscribe to the contact presence
-//	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
-//}
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)acceptBuddyRequest:(XMPPJID*)jid {
+	// send presence response
+	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
+	
+	// add user to our roster
+    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+    [iq addQuery:query];
+    [xmppStream sendElement:iq];
+	
+	// subscribe to the contact presence
+	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rejectBuddyRequest:(XMPPJID *)jid {
 	[xmppStream sendElement:[[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]]];
-}
-
-//===================================================================================================================================
-#pragma mark Service Discovery
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendClientVersion:(XMPPClientVersionQuery*)version forIQ:(XMPPIQ*)iq {
-    XMPPIQ* responseIQ = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full]];
-    [responseIQ addStanzaID:[iq stanzaID]];
-    [responseIQ addQuery:version];
-	[self sendElement:responseIQ];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)getClientVersionForJid:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[XMPPClientVersionQuery alloc] init]];
-	[self sendElement:iq];
 }
 
 //===================================================================================================================================
@@ -330,18 +312,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStreamDidOpen:(XMPPStream*)sender {
-	[self onDidConnect];
+    [multicastDelegate xmppClientDidConnect:self];
     [self authenticateUser];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStreamDidRegister:(XMPPStream*)sender {
-	[self onDidRegister];
+	[multicastDelegate xmppClientDidRegister:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream *)sender didNotRegister:(NSXMLElement*)error {
-	[self onDidNotRegister:error];
+	[multicastDelegate xmppClient:self didNotRegister:error];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -363,21 +345,19 @@
 	if([[query className] isEqualToString:@"XMPPRosterQuery"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterItems:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"result"]) {
-        [self onDidReceiveClientVersionResult:iq];
+        [multicastDelegate  xmppClient:self didReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
-        [self onDidReceiveClientVersionRequest:iq];
-	} else if ([[query className] isEqualToString:@"XMPPRPCMethodResponse"] && [[iq type] isEqualToString:@"result"]) {
-        [self onDidReceiveMethodResponse:iq];
+        [multicastDelegate  xmppClient:self didReceiveClientVersionRequest:iq];
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
-        [self onDidReceiveCommandResult:iq];
+        [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
     } else {
-		[self onDidReceiveIQ:iq];
+        [multicastDelegate xmppClient:self didReceiveIQ:iq];
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceiveMessage:(XMPPMessage*)message {
-	[self onDidReceiveMessage:message];
+    [multicastDelegate xmppClient:self didReceiveMessage:message];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -403,14 +383,14 @@
 		if([xmppStream isAuthenticated]) {
 			[self performSelector:@selector(attemptReconnect:) withObject:nil afterDelay:4.0];
 		} else {
-			[self onDidNotConnect];
+            [multicastDelegate xmppClientDidNotConnect:self];
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStreamDidClose:(XMPPStream *)sender {
-	[self onDidDisconnect];
+	[multicastDelegate xmppClientDidDisconnect:self];
 }
 
 //===================================================================================================================================
@@ -433,38 +413,38 @@
 #pragma mark PrivateAPI:
 
 //===================================================================================================================================
-#pragma mark connection
+//#pragma mark connection
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onConnecting {
-	[multicastDelegate xmppClientConnecting:self];
-}
-
+//- (void)onConnecting {
+//	[multicastDelegate xmppClientConnecting:self];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidConnect {
-	[multicastDelegate xmppClientDidConnect:self];
-}
-
+//- (void)onDidConnect {
+//	[multicastDelegate xmppClientDidConnect:self];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidNotConnect {
-	[multicastDelegate xmppClientDidNotConnect:self];
-}
-
+//- (void)onDidNotConnect {
+//	[multicastDelegate xmppClientDidNotConnect:self];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidDisconnect {
-    [multicastDelegate xmppClientDidDisconnect:self];
-}
+//- (void)onDidDisconnect {
+//    [multicastDelegate xmppClientDidDisconnect:self];
+//}
 
 //===================================================================================================================================
-#pragma mark resgistration
+//#pragma mark resgistration
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidRegister {
-	[multicastDelegate xmppClientDidRegister:self];
-}
-
+//- (void)onDidRegister {
+//	[multicastDelegate xmppClientDidRegister:self];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidNotRegister:(NSXMLElement*)error {
-	[multicastDelegate xmppClient:self didNotRegister:error];
-}
+//- (void)onDidNotRegister:(NSXMLElement*)error {
+//	[multicastDelegate xmppClient:self didNotRegister:error];
+//}
 
 //===================================================================================================================================
 #pragma mark authentication
@@ -479,19 +459,19 @@
 }
 
 //===================================================================================================================================
-#pragma mark messaging
+//#pragma mark messaging
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveIQ:(XMPPIQ*)iq {
-	[multicastDelegate xmppClient:self didReceiveIQ:iq];
-}
-
+//- (void)onDidReceiveIQ:(XMPPIQ*)iq {
+//	[multicastDelegate xmppClient:self didReceiveIQ:iq];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveMessage:(XMPPMessage*)message {
-	[multicastDelegate xmppClient:self didReceiveMessage:message];
-}
-
+//- (void)onDidReceiveMessage:(XMPPMessage*)message {
+//	[multicastDelegate xmppClient:self didReceiveMessage:message];
+//}
+//
 //===================================================================================================================================
-#pragma mark roster
+//#pragma mark roster
 //-----------------------------------------------------------------------------------------------------------------------------------
 //- (void)onDidReceiveRosterItems:(XMPPIQ*)iq {
 //    XMPPRosterQuery* query = (XMPPRosterQuery*)[iq query];
@@ -550,22 +530,22 @@
 //}
 //
 //===================================================================================================================================
-#pragma mark service discovery
+//#pragma mark service discovery
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveClientVersionResult:(XMPPIQ*)iq {
-	[multicastDelegate xmppClient:self didReceiveClientVersionResult:iq];
-}
-
+//- (void)onDidReceiveClientVersionResult:(XMPPIQ*)iq {
+//	[multicastDelegate xmppClient:self didReceiveClientVersionResult:iq];
+//}
+//
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveClientVersionRequest:(XMPPIQ*)iq {
-	[multicastDelegate xmppClient:self didReceiveClientVersionRequest:iq];
-}
-
+//- (void)onDidReceiveClientVersionRequest:(XMPPIQ*)iq {
+//	[multicastDelegate xmppClient:self didReceiveClientVersionRequest:iq];
+//}
+//
 //===================================================================================================================================
-#pragma mark Commands
+//#pragma mark Commands
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onDidReceiveCommandResult:(XMPPIQ*)iq {
-	[multicastDelegate xmppClient:self didReceiveCommandResult:iq];
-}
+//- (void)onDidReceiveCommandResult:(XMPPIQ*)iq {
+//	[multicastDelegate xmppClient:self didReceiveCommandResult:iq];
+//}
 
 @end

@@ -139,14 +139,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath { 
 	[tableView beginUpdates]; 
 	if (editingStyle == UITableViewCellEditingStyleDelete) { 
+		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade]; 
 		AccountModel*  account = [self.accounts objectAtIndex:indexPath.row]; 
 		[[XMPPClientManager instance] removeXMPPClientForAccount:account];
-		[self.accounts removeObjectAtIndex:indexPath.row]; 
 		[account destroy];
-		[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade]; 
+		[self.accounts removeObjectAtIndex:indexPath.row]; 
 	} 
     [tableView endUpdates];	
 }

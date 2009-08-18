@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPClientVersionQuery.h"
+#import "XMPPIQ.h"
+#import "XMPPJID.h"
+#import "XMPPClient.h"
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +45,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPClientVersionQuery*)initWithName:(NSString*)name version:(NSString*)version andOs:(NSString*)os {
+	if(self = [self init]) {
+        [self addClientName:name];
+        [self addClientVersion:version];
+        [self addClientOs:os];
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)clientName {
     return [[self elementForName:@"name"] stringValue];
 }
@@ -59,6 +72,36 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addClientVersion:(NSString*)val {
     [self addChild:[NSXMLElement elementWithName:@"version" stringValue:val]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)clientOs {
+    return [[self elementForName:@"os"] stringValue];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addClientOs:(NSString*)val {
+    [self addChild:[NSXMLElement elementWithName:@"os" stringValue:val]];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientVersionQuery Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    [iq addQuery:[[self alloc] init]];
+	[client sendElement:iq];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)result:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
+    XMPPClientVersionQuery* version = 
+        [[self alloc] initWithName:[NSString stringWithUTF8String:kAPP_NAME] version:[NSString stringWithUTF8String:kAPP_VERSION] andOs:[NSString stringWithUTF8String:kOS_VERSION]];
+    XMPPIQ* responseIQ = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full]];
+    [responseIQ addStanzaID:[iq stanzaID]];
+    [responseIQ addQuery:version];
+	[client sendElement:responseIQ];
 }
 
 @end

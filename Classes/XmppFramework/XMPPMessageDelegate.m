@@ -221,7 +221,7 @@
         rosterItem.type = [presence type];
         [rosterItem update];
         if ([rosterItem.type isEqualToString:@"available"]) {
-            [client getClientVersionForJid:[presence fromJID]];
+            [XMPPClientVersionQuery get:client JID:[presence fromJID]];
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
@@ -267,7 +267,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client rejectBuddyRequest:(XMPPJID*)buddyJid {
-//    [client rejectBuddyRequest:buddyJid];
+    [XMPPPresence decline:client JID:buddyJid];
 	[self writeToLog:client message:@"xmppClient:rejectBuddyRequest"];
 }
 
@@ -276,33 +276,38 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveClientVersionResult:(XMPPIQ*)iq {
-//    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
-//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//    if (account) {
-//        XMPPJID* fromJid = [iq fromJID];
-//        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
-//        if (rosterItem) {
-//            rosterItem.clientName = version.clientName; 
-//            rosterItem.clientVersion = version.clientVersion;
-//            [rosterItem update];
-//            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
-//            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
-//            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
-//                contact.clientName = version.clientName; 
-//                contact.clientVersion = version.clientVersion;
-//                [contact update];
-//            }
-            [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
-//        }
-//    }
+    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
+    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        XMPPJID* fromJid = [iq fromJID];
+        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
+        if (rosterItem) {
+            rosterItem.clientName = version.clientName; 
+            rosterItem.clientVersion = version.clientVersion;
+            [rosterItem update];
+            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
+            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
+            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
+                contact.clientName = version.clientName; 
+                contact.clientVersion = version.clientVersion;
+                [contact update];
+            }
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveClientVersionRequest:(XMPPIQ*)iq {
-//    if (![[client.myJID full] isEqualToString:[[iq fromJID] full]]) {
-//        [client sendClientVersion:[[XMPPClientVersionQuery alloc] initWithName:@"web.gnos.us" andVersion:@"0.0"] forIQ:iq];
-//    }
-	[self writeToLog:client message:@"xmppClient:didReceiveClientVersionRequest"];
+    NSString* fromJID = [[iq fromJID] full];
+    if (![[client.myJID full] isEqualToString:fromJID]) {
+        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:fromJID andAccount:account];  
+        if (rosterItem) {
+            [XMPPClientVersionQuery result:client forIQ:iq];
+            [self writeToLog:client message:@"xmppClient:didReceiveClientVersionRequest"];
+        }
+    }
 }
 
 //===================================================================================================================================
@@ -315,48 +320,48 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveMessage:(XMPPMessage*)message {
-    //    if ([message hasBody]) {
-    //        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    //        if (account) {
-    //            XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
-    //            MessageModel* messageModel = [[MessageModel alloc] init];
-    //            messageModel.fromJid = [fromJid full];
-    //            messageModel.accountPk = account.pk;
-    //            messageModel.messageText = [message body];
-    //            messageModel.toJid = [account fullJID];
-    //            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    //            messageModel.textType = MessageTextTypeBody;
-    //            messageModel.node = @"nonode";
-    //            [messageModel insert];
-    //            [messageModel release];
-    //        }
-    //    }
 	[self writeToLog:client message:@"xmppClient:didReceiveMessage"];
+    if ([message hasBody]) {
+        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+        if (account) {
+            XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
+            MessageModel* messageModel = [[MessageModel alloc] init];
+            messageModel.fromJid = [fromJid full];
+            messageModel.accountPk = account.pk;
+            messageModel.messageText = [message body];
+            messageModel.toJid = [account fullJID];
+            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.textType = MessageTextTypeBody;
+            messageModel.node = @"nonode";
+            [messageModel insert];
+            [messageModel release];
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq {
-//    XMPPCommand* command = [iq command];
-//    if (command) {
-//        XMPPxData* cmdData = [command data];
-//        if (cmdData) {
-//            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//            if (account) {
-//                XMPPJID* fromJid = [XMPPJID jidWithString:[[iq fromJID] full]];
-//                MessageModel* messageModel = [[MessageModel alloc] init];
-//                messageModel.fromJid = [fromJid full];
-//                messageModel.accountPk = account.pk;
-//                messageModel.messageText = [cmdData XMLString];
-//                messageModel.toJid = [account fullJID];
-//                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-//                messageModel.textType = MessageTextTypeCommandResponse;
-//                messageModel.node = [command node];
-//                [messageModel insert];
-//                [messageModel release];
-//            }
-//        }
-//    }
 	[self writeToLog:client message:@"xmppClient:didReceiveCommandResult"];
+    XMPPCommand* command = [iq command];
+    if (command) {
+        XMPPxData* cmdData = [command data];
+        if (cmdData) {
+            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+            if (account) {
+                XMPPJID* fromJid = [XMPPJID jidWithString:[[iq fromJID] full]];
+                MessageModel* messageModel = [[MessageModel alloc] init];
+                messageModel.fromJid = [fromJid full];
+                messageModel.accountPk = account.pk;
+                messageModel.messageText = [cmdData XMLString];
+                messageModel.toJid = [account fullJID];
+                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+                messageModel.textType = MessageTextTypeCommandResponse;
+                messageModel.node = [command node];
+                [messageModel insert];
+                [messageModel release];
+            }
+        }
+    }
 }
 
 //===================================================================================================================================
@@ -364,9 +369,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message {
-	NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
-	NSLog(msg);
-    [msg release];
+    if(DEBUG) {
+        NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
+        NSLog(msg);
+        [msg release];
+    }
 }
 
 @end

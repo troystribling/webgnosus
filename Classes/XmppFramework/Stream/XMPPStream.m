@@ -239,7 +239,7 @@
 			XMPPRegisterQuery* regQuery = [[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password];
             [reg addQuery:regQuery];			
 
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", [reg XMLString]);
 			}
 			[self.asyncSocket writeData:[[reg XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -276,7 +276,7 @@
 	{
 		if([self supportsDigestMD5Authentication]) {
             XMPPAuthorize* auth = [[XMPPAuthorize alloc] initWithMechanism:@"DIGEST-MD5"];			
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", auth);
 			}
 			[self.asyncSocket writeData:[[auth XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];			
@@ -286,7 +286,7 @@
 			NSString* payload = [NSString stringWithFormat:@"%C%@%C%@", 0, username, 0, password];
 			NSString* base64 = [[payload dataUsingEncoding:NSUTF8StringEncoding] base64Encoded];			
             XMPPAuthorize* auth = [[XMPPAuthorize alloc] initWithMechanism:@"PLAIN" andPlainCredentials:base64];			
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", [auth XMLString]);
 			}
 			[self.asyncSocket writeData:[[auth XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -297,7 +297,7 @@
 			NSString *digest = [[digestData sha1Digest] hexStringValue];			
             XMPPIQ* auth = [[XMPPIQ alloc] initWithType:@"set"];
             [auth addQuery:[[XMPPAuthorizationQuery alloc] initWithUsername:username digest:digest andResource:resource]];			
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", [auth XMLString]);
 			}
 			[self.asyncSocket writeData:[[auth XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -332,7 +332,7 @@
 	{
 		NSString *elementStr = [element XMLString];
 		
-		if(DEBUG_SEND) {
+		if(DEBUG) {
 			NSLog(@"SEND: %@", elementStr);
 		}
 		[self.asyncSocket writeData:[elementStr dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -345,7 +345,7 @@
 	{
 		NSString *elementStr = [element XMLString];
 		
-		if(DEBUG_SEND) {
+		if(DEBUG) {
 			NSLog(@"SEND: %@", elementStr);
 		}
 		[self.asyncSocket writeData:[elementStr dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:tag];
@@ -365,7 +365,7 @@
 		// TCP connection was just opened - We need to include the opening XML stanza
 		NSString *s1 = @"<?xml version='1.0'?>";
 		
-		if(DEBUG_SEND) {
+		if(DEBUG) {
 			NSLog(@"SEND: %@", s1);
 		}
 		[self.asyncSocket writeData:[s1 dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_START];
@@ -386,7 +386,7 @@
 		s2 = [NSString stringWithFormat:temp, xmlns, xmlns_stream];
 	}
 	
-	if(DEBUG_SEND) {
+	if(DEBUG) {
 		NSLog(@"SEND: %@", s2);
 	}
 	[self.asyncSocket writeData:[s2 dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_START];
@@ -401,7 +401,7 @@
     if([[self streamFeatures] requiresTLS]) {
         self.state = STATE_STARTTLS;        
         NSString *starttls = @"<starttls xmlns='urn:ietf:params:xml:ns:xmpp-tls'/>";        
-        if(DEBUG_SEND) {
+        if(DEBUG) {
             NSLog(@"SEND: %@", starttls);
         }
         [self.asyncSocket writeData:[starttls dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -414,14 +414,14 @@
 		if([self.authResource length] > 0) {
             XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
             [iq addBind:[[XMPPBind alloc] initWithResource:self.authResource]];
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
 			[self.asyncSocket writeData:[[iq XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
 		} else {
             XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
             [iq addBind:[[XMPPBind alloc] init]];						
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
 			[self.asyncSocket writeData:[[iq XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -436,7 +436,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStreamDidOpen:)]) {
 			[self.delegate xmppStreamDidOpen:self];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStreamDidOpen:%p", self);
 		}
 	}
@@ -493,7 +493,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStream:didNotRegister:)]) {
 			[self.delegate xmppStream:self didNotRegister:response];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didNotRegister:%@", self, [response XMLString]);
 		}
 	}
@@ -505,7 +505,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStreamDidRegister:)]) {
 			[self.delegate xmppStreamDidRegister:self];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStreamDidRegister:%p", self);
 		}
 	}
@@ -533,7 +533,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 				[self.delegate xmppStream:self didNotAuthenticate:response];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
@@ -558,7 +558,7 @@
 			NSXMLElement *cr = [NSXMLElement elementWithName:@"response" xmlns:@"urn:ietf:params:xml:ns:xmpp-sasl"];
 			[cr setStringValue:[auth base64EncodedFullResponse]];
 			
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", [cr XMLString]);
 			}
 			[self.asyncSocket writeData:[[cr XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -583,7 +583,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 				[self.delegate xmppStream:self didNotAuthenticate:response];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
@@ -608,7 +608,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 				[self.delegate xmppStream:self didNotAuthenticate:response];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
@@ -624,7 +624,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStreamDidAuthenticate:)]) {
 				[self.delegate xmppStreamDidAuthenticate:self];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStreamDidAuthenticate:%p", self);
 			}
 		}
@@ -651,7 +651,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 				[self.delegate xmppStream:self didNotAuthenticate:response];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
@@ -664,7 +664,7 @@
 			// Create and send empty challenge response element
 			NSXMLElement *cr = [NSXMLElement elementWithName:@"response" xmlns:@"urn:ietf:params:xml:ns:xmpp-sasl"];
 			
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", [cr XMLString]);
 			}
 			[self.asyncSocket writeData:[[cr XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -690,7 +690,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 			[self.delegate xmppStream:self didNotAuthenticate:response];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 		}
 	}
@@ -709,7 +709,7 @@
 		{
             XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
             [iq addSession:[[XMPPSession alloc] init]];
-			if(DEBUG_SEND) {
+			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
 			[self.asyncSocket writeData:[[iq XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -725,7 +725,7 @@
 			if([self.delegate respondsToSelector:@selector(xmppStreamDidAuthenticate:)]) {
 				[self.delegate xmppStreamDidAuthenticate:self];
 			}
-			else if(DEBUG_DELEGATE) {
+			else if(DEBUG) {
 				NSLog(@"xmppStreamDidAuthenticate:%p", self);
 			}
 		}
@@ -737,7 +737,7 @@
 		
         XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
         [iq addBind:[[XMPPBind alloc] init]];
-		if(DEBUG_SEND) {
+		if(DEBUG) {
 			NSLog(@"SEND: %@", iq);
 		}
 		[self.asyncSocket writeData:[[iq XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
@@ -756,7 +756,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStreamDidAuthenticate:)]) {
 			[self.delegate xmppStreamDidAuthenticate:self];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStreamDidAuthenticate:%p", self);
 		}
 	}
@@ -768,7 +768,7 @@
 		if([self.delegate respondsToSelector:@selector(xmppStream:didNotAuthenticate:)]) {
 			[self.delegate xmppStream:self didNotAuthenticate:response];
 		}
-		else if(DEBUG_DELEGATE) {
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 		}
 	}
@@ -824,7 +824,7 @@
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
 	NSString *dataAsStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
-	if(DEBUG_RECV) {
+	if(DEBUG) {
 		NSLog(@"RECV: %@", dataAsStr);
 	}
 	
@@ -878,7 +878,7 @@
 				if([self.delegate respondsToSelector:@selector(xmppStreamDidOpen:)]) {
 					[self.delegate xmppStreamDidOpen:self];
 				}
-				else if(DEBUG_DELEGATE) {
+				else if(DEBUG) {
 					NSLog(@"xmppStreamDidOpen:%p", self);
 				}
 			}
@@ -966,7 +966,7 @@
 		{
 			[self.delegate xmppStream:self didReceiveIQ:[XMPPIQ createFromElement:element]];
 		}
-		else if(DEBUG_DELEGATE)
+		else if(DEBUG)
 		{
 			NSLog(@"xmppStream:%p didReceiveIQ:%@", self, [element XMLString]);
 		}
@@ -977,7 +977,7 @@
 		{
 			[self.delegate xmppStream:self didReceiveMessage:[XMPPMessage createFromElement:element]];
 		}
-		else if(DEBUG_DELEGATE)
+		else if(DEBUG)
 		{
 			NSLog(@"xmppStream:%p didReceiveMessage:%@", self, [element XMLString]);
 		}
@@ -988,7 +988,7 @@
 		{
 			[self.delegate xmppStream:self didReceivePresence:[XMPPPresence createFromElement:element]];
 		}
-		else if(DEBUG_DELEGATE)
+		else if(DEBUG)
 		{
 			NSLog(@"xmppStream:%p didReceivePresence:%@", self, [element XMLString]);
 		}
@@ -999,7 +999,7 @@
 		{
 			[self.delegate xmppStream:self didReceiveError:element];
 		}
-		else if(DEBUG_DELEGATE)
+		else if(DEBUG)
 		{
 			NSLog(@"xmppStream:%p didReceiveError:%@", self, [element XMLString]);
 		}
@@ -1037,7 +1037,7 @@
 	if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveError:)]) {
 		[self.delegate xmppStream:self didReceiveError:err];
 	}
-	else if(DEBUG_DELEGATE) {
+	else if(DEBUG) {
 		NSLog(@"xmppStream:%p didReceiveError:%@", self, err);
 	}
 }
@@ -1074,7 +1074,7 @@
 	if([self.delegate respondsToSelector:@selector(xmppStreamDidClose:)]) {
 		[self.delegate xmppStreamDidClose:self];
 	}
-	else if(DEBUG_DELEGATE) {
+	else if(DEBUG) {
 		NSLog(@"xmppStreamDidClose:%p", self);
 	}
 }
@@ -1109,7 +1109,7 @@
 		
 		NSString *authStr = [[[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding] autorelease];
 		
-		if(DEBUG_RECV) {
+		if(DEBUG) {
 			NSLog(@"decoded challenge: %@", authStr);
 		}
 		
@@ -1247,7 +1247,7 @@
 	[localBuffer appendFormat:@"response=%@,", [self response]];
 	[localBuffer appendFormat:@"charset=utf-8"];
 	
-	if(DEBUG_SEND) {
+	if(DEBUG) {
 		NSLog(@"decoded response: %@", localBuffer);
 	}
 	
