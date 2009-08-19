@@ -83,11 +83,21 @@
 #pragma mark Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)addBuddy:(XMPPClient*)client JID:(XMPPJID*)buddyJid {
+    if (buddyJid) {
+        [XMPPRosterQuery update:client JID:buddyJid];
+        [XMPPPresence subscribe:client JID:buddyJid];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)acceptBuddyRequest:(XMPPClient*)client JID:(XMPPJID*)buddyJid {
-    [XMPPMessageDelegate addContact:client JID:buddyJid];
-    [XMPPPresence accept:client JID:buddyJid];
-    [XMPPPresence subscribe:client JID:buddyJid];
-    [XMPPRosterQuery update:client JID:buddyJid];
+    if (buddyJid) {
+        [XMPPMessageDelegate addContact:client JID:buddyJid];
+        [XMPPPresence accept:client JID:buddyJid];
+        [XMPPPresence subscribe:client JID:buddyJid];
+        [XMPPRosterQuery update:client JID:buddyJid];
+    }
 }
 
 //===================================================================================================================================
@@ -138,11 +148,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidAuthenticate:(XMPPClient *)client {
 	[self writeToLog:client message:@"xmppClientDidAuthenticate"];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticated forClient:client];
+    [XMPPRosterQuery get:client];
+    [XMPPPresence goOnline:client withPriority:(NSInteger)1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didNotAuthenticate:(NSXMLElement*)error {
 	[self writeToLog:client message:@"xmppClient:didNotAuthenticate"];
+    [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticationError forClient:client];
 }
 
 //===================================================================================================================================
@@ -263,12 +277,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didRejectBuddyRequest:(XMPPJID*)buddyJid {
     [self writeToLog:client message:@"xmppClient:didRejectBuddyRequest"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client rejectBuddyRequest:(XMPPJID*)buddyJid {
-    [XMPPPresence decline:client JID:buddyJid];
-	[self writeToLog:client message:@"xmppClient:rejectBuddyRequest"];
 }
 
 //===================================================================================================================================

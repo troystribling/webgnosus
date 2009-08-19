@@ -18,6 +18,7 @@
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"
+#import "XMPPCommand.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AgentXmppViewController (PrivateAPI)
@@ -101,7 +102,7 @@
 - (void)sendDeviceCommand:(NSIndexPath*)indexPath toJID:(XMPPJID*)toJID {
     NSDictionary* commandInfo = [self commandAtIndexPath:indexPath];
     XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [xmppClient sendCommand:[commandInfo objectForKey:@"method"] toJID:toJID];
+    [XMPPCommand set:xmppClient commandNode:[commandInfo objectForKey:@"method"] JID:toJID];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

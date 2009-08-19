@@ -27,15 +27,12 @@
 #import "RosterItemModel.h"
 #import "AlertViewManager.h"
 
-#import "ModelUpdateDelgate.h"
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface WebgnosusClientAppDelegate (PrivateAPI)
 
 - (void)openActivatedAccounts;
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController;
 - (void)accountConnectionFailedForClient:(XMPPClient*)sender;
-- (void)updateAccountConnectionState:(AccountConnectionState)title forClient:(XMPPClient*)client;
 
 @end
 
@@ -76,13 +73,6 @@
         [ContactModel destroyAllByAccount:account];
         [[XMPPClientManager instance] openConnectionForAccount:account];
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateAccountConnectionState:(AccountConnectionState)state forClient:(XMPPClient*)client { 
-    AccountModel* account = [ModelUpdateDelgate accountForXMPPClient:client];
-    account.connectionState = state;
-    [account update];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -151,86 +141,8 @@
 #pragma mark XMPPClientDelegate
 
 //===================================================================================================================================
-#pragma mark Connection
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClientConnecting:(XMPPClient*)sender {
-//	[ModelUpdateDelgate xmppClientConnecting:sender];
-//}
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClientDidConnect:(XMPPClient*)sender {
-//    [self updateAccountConnectionState:AccountConnected forClient:sender];
-//	[ModelUpdateDelgate xmppClientDidConnect:sender];
-//}
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClientDidNotConnect:(XMPPClient*)sender {
-//    [self updateAccountConnectionState:AccountConnectionError forClient:sender];
-//	[ModelUpdateDelgate xmppClientDidNotConnect:sender];
-//}
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClientDidDisconnect:(XMPPClient*)sender {
-//    [self updateAccountConnectionState:AccountNotConnected forClient:sender];
-//	[ModelUpdateDelgate xmppClientDidDisconnect:sender];
-//}
-//
-//===================================================================================================================================
-#pragma mark Authentication
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidAuthenticate:(XMPPClient*)sender {
-    [self updateAccountConnectionState:AccountAuthenticated forClient:sender];
-	[ModelUpdateDelgate xmppClientDidAuthenticate:sender];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didNotAuthenticate:(NSXMLElement*)error {
-    [self updateAccountConnectionState:AccountAuthenticationError forClient:sender];
-	[ModelUpdateDelgate xmppClient:sender didNotAuthenticate:error];
-}
-
-//===================================================================================================================================
-#pragma mark IQ
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveIQ:(XMPPIQ*)iq {
-	[ModelUpdateDelgate xmppClient:sender didReceiveIQ:iq];
-}
-
-//===================================================================================================================================
 #pragma mark Message
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message {
-//	[ModelUpdateDelgate xmppClient:sender didReceiveMessage:message];
-//}
-//
-////===================================================================================================================================
-//#pragma mark Roster
-//
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
-//    [ModelUpdateDelgate xmppClient:sender didAddToRoster:item];
-//}
-//
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
-//	[ModelUpdateDelgate xmppClient:sender didRemoveFromRoster:item];
-//}
-//
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
-//    [self updateAccountConnectionState:AccountRosterUpdated forClient:sender];
-//	[ModelUpdateDelgate xmppClient:sender didFinishReceivingRosterItems:iq];
-//}
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
-//	[ModelUpdateDelgate xmppClient:sender didReceivePresence:presence];
-//}
-//
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence {
     NSString* title = [[presence toJID] full];
@@ -240,7 +152,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID*)buddyJid {
-    AccountModel* account = [ModelUpdateDelgate accountForXMPPClient:sender];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:sender];
     if (account) {
         ContactModel* contact = [ContactModel findByJid:[buddyJid bare] andAccount:account];	
         if (contact == nil) {
@@ -250,35 +162,5 @@
         }
     }
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid {
-//	[ModelUpdateDelgate xmppClient:sender didAcceptBuddyRequest:buddyJid];
-//}
-//
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid {
-//	[ModelUpdateDelgate xmppClient:sender didRejectBuddyRequest:buddyJid];
-//}
-//
-//===================================================================================================================================
-//#pragma mark Service Discovery
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq {
-//	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionResult:iq];
-//}
-//
-////-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionRequest:(XMPPIQ*)iq {
-//	[ModelUpdateDelgate xmppClient:sender didReceiveClientVersionRequest:iq];
-//}
-//
-//===================================================================================================================================
-//#pragma mark Commands
-//-----------------------------------------------------------------------------------------------------------------------------------
-//- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-//	[ModelUpdateDelgate xmppClient:sender didReceiveCommandResult:iq];
-//}
 
 @end

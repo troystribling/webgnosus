@@ -105,6 +105,16 @@
 #pragma mark XMPPPresence Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)goOnline:(XMPPClient*)client withPriority:(NSInteger)priority {
+	[client sendElement:[[XMPPPresence alloc] initWithPriority:[NSString stringWithFormat:@"%i", priority]]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)goOffline:(XMPPClient*)client {
+	[client sendElement:[[XMPPPresence alloc] initWithType:@"unavailable"]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]];
     [client sendElement:pres];

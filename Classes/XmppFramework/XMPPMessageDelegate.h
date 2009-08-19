@@ -21,9 +21,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)accountForXMPPClient:(XMPPClient*)client;
++ (void)updateAccountConnectionState:(AccountConnectionState)title forClient:(XMPPClient*)client;
+
 + (void)removeContact:(XMPPClient*)client JID:(XMPPJID*)contactJid;
 + (void)addContact:(XMPPClient*)client JID:(XMPPJID*)contactJid;
-+ (void)updateAccountConnectionState:(AccountConnectionState)title forClient:(XMPPClient*)client;
+
 + (void)acceptBuddyRequest:(XMPPClient*)client JID:(XMPPJID*)buddyJid;
++ (void)addBuddy:(XMPPClient*)client JID:(XMPPJID*)buddyJid;
 
 @end

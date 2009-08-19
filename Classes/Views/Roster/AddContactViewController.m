@@ -17,6 +17,7 @@
 #import "XMPPRosterItem.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
+#import "XMPPMessageDelegate.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddContactViewController (PrivateAPI)
@@ -112,7 +113,7 @@
 	if ([splitJid count] == 2) {
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         XMPPJID* contactJID = [XMPPJID jidWithString:self.newContactJidString];
-        [xmppClient addBuddy:contactJID];
+        [XMPPMessageDelegate addBuddy:xmppClient JID:contactJID];
         self.addContactIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Contact" inView:self.view];
 	} else {
 		[self failureAlert:@"JID is Invalid" message:@""];

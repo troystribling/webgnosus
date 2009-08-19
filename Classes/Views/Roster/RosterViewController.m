@@ -24,6 +24,7 @@
 #import "XMPPClientManager.h"
 #import "XMPPMessage.h"
 #import "XMPPRosterItem.h"
+#import "XMPPRosterQuery.h"
 #import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -353,7 +354,7 @@
         ContactModel* contact = [accountRoster objectAtIndex:indexPath.row]; 
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:account];
 		XMPPJID* contactJID = [XMPPJID jidWithString:contact.jid];
-        [xmppClient removeBuddy:contactJID];
+        [XMPPRosterQuery remove:xmppClient JID:contactJID];
         [ModelUpdateDelgate showConnectingIndicatorInView:self.view];
 	} 
 }

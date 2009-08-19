@@ -9,7 +9,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPCommand.h"
 #import "XMPPxData.h"
-#import "NSXMLElementAdditions.h"
+#import "XMPPClient.h"
+#import "XMPPJID.h"
+#import "XMPPIQ.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -97,6 +99,33 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addData:(XMPPxData*)child {
     [self addChild:child];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPCommand Messages
+
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    [iq addCommand:cmd];
+    [client sendElement:iq];
+    [iq release]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid {
+    NSEnumerator* enumerator = [parameters keyEnumerator];
+    NSString* field;  
+    XMPPxData* cmdData = [[XMPPxData alloc] initWithDataType:@"submit"];
+    while ((field = (NSString*)[enumerator nextObject])) {
+        NSString* fieldVal = (NSString*)[parameters objectForKey:field];
+        [cmdData addField:field withValue:fieldVal]; 
+    }  
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData];
+    [iq addCommand:cmd];
+    [client sendElement:iq];
+    [iq release]; 
 }
 
 @end

@@ -38,6 +38,8 @@
 - (void)addPriority:(NSString*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)goOnline:(XMPPClient*)client withPriority:(NSInteger)priority;
++ (void)goOffline:(XMPPClient*)client;
 + (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid;
 + (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid;
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid;

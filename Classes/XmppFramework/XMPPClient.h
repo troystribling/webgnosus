@@ -72,25 +72,10 @@
 - (void)disconnect;
 - (NSError*)streamError;
 
-// status
-- (void)goOnline;
-- (void)goOffline;
-
-// roster
-- (void)fetchRoster;
-- (void)addBuddy:(XMPPJID *)jid;
-- (void)removeBuddy:(XMPPJID *)jid;
-- (void)acceptBuddyRequest:(XMPPJID *)jid;
-- (void)rejectBuddyRequest:(XMPPJID *)jid;
-
 // send elements
 - (void)sendElement:(NSXMLElement *)element;
 - (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag;
 - (void)sendMessage:(NSString*)body toJID:(XMPPJID *)jid;
-
-// commands
-- (void)sendCommand:(NSString*)method toJID:(XMPPJID*)jid;
-- (void)sendCommand:(NSString*)method withParameter:(NSMutableDictionary*)parameters toJID:(XMPPJID*)jid;
 
 @end
 
