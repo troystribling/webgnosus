@@ -61,7 +61,6 @@
 - (BOOL)supportsPlainAuthentication;
 - (BOOL)supportsDigestMD5Authentication;
 - (void)authenticateUser;
-- (void)registerUser;
 - (BOOL)isSecure;
 - (BOOL)isAuthenticated;
 
@@ -75,7 +74,6 @@
 // send elements
 - (void)sendElement:(NSXMLElement *)element;
 - (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag;
-- (void)sendMessage:(NSString*)body toJID:(XMPPJID *)jid;
 
 @end
 

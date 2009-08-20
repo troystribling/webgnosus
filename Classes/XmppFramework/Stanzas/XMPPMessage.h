@@ -35,6 +35,6 @@
 - (BOOL)hasBody;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)chat:(XMPPClient*)client messageBody:(NSString*)body toJID:(XMPPJID*)jid;
++ (void)chat:(XMPPClient*)client messageBody:(NSString*)body JID:(XMPPJID*)jid;
 
 @end

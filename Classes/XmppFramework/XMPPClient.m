@@ -124,11 +124,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)registerUser {
-	[xmppStream registerUser:[myJID user] withPassword:password];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)supportsPlainAuthentication {
 	return [xmppStream supportsPlainAuthentication];
 }
@@ -178,12 +173,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag {
 	[xmppStream sendElement:element andNotifyMe:tag];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendMessage:(NSString*)body toJID:(XMPPJID*)jid {
-    XMPPMessage* msg = [[XMPPMessage alloc] initWithType:@"chat" toJID:[jid full] andBody:body];
-	[self sendElement:msg];
 }
 
 //===================================================================================================================================

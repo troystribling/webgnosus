@@ -11,6 +11,7 @@
 #import "MessageModel.h"
 #import "AccountModel.h"
 
+#import "XMPPMessage.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"
@@ -51,7 +52,7 @@
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         XMPPJID* partnerJID = [XMPPJID jidWithString:[self.partner fullJID]];
-        [xmppClient sendMessage:enteredMessageText toJID:partnerJID];
+        [XMPPMessage chat:xmppClient messageBody:enteredMessageText JID:partnerJID];
     }    
     [self.messageView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
