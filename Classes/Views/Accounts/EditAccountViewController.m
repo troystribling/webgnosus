@@ -10,7 +10,7 @@
 #import "EditAccountViewController.h"
 #import "UICustomSwitch.h"
 #import "AccountModel.h"
-#import "ModelUpdateDelgate.h"
+#import "AlertViewManager.h"
 #import "ActivityView.h"
 
 #import "XMPPClient.h"
@@ -56,8 +56,8 @@
 - (void)accountConnectionFailed:(NSString*)title {
 	[self.activationSwitch setOn:NO animated:YES];
     [self updateAccountActivation];
-    [ModelUpdateDelgate dismissConnectionIndicator]; 
-    [ModelUpdateDelgate showAlert:title];
+    [AlertViewManager dismissConnectionIndicator]; 
+    [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
 }
 
@@ -71,7 +71,7 @@
 - (BOOL)connect { 
     if (self.activationSwitch.on) {
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [ModelUpdateDelgate showConnectingIndicatorInView:self.view];
+        [AlertViewManager showConnectingIndicatorInView:self.view];
         return NO;
     } else {
         self.account.connectionState = AccountNotConnected;
@@ -153,7 +153,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    [ModelUpdateDelgate dismissConnectionIndicator]; 
+    [AlertViewManager dismissConnectionIndicator]; 
     [self exitView];
 }
 

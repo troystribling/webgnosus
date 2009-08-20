@@ -53,14 +53,12 @@
 		05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
 		05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
 		05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
-		05CE074D0FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */; };
 		05CE074E0FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
 		05CE074F0FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
 		05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
 		05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
 		05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
 		05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
-		05CE07540FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */; };
 		05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
 		05CE07560FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
 		05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
@@ -297,8 +295,6 @@
 		05CE073F0FB909CA0036DF5E /* ContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactModel.m; sourceTree = "<group>"; };
 		05CE07400FB909CA0036DF5E /* MessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
 		05CE07410FB909CA0036DF5E /* MessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
-		05CE07420FB909CA0036DF5E /* ModelUpdateDelgate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelUpdateDelgate.h; sourceTree = "<group>"; };
-		05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelUpdateDelgate.m; sourceTree = "<group>"; };
 		05CE07440FB909CA0036DF5E /* RosterItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemModel.h; sourceTree = "<group>"; };
 		05CE07450FB909CA0036DF5E /* RosterItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemModel.m; sourceTree = "<group>"; };
 		05CE07460FB909CA0036DF5E /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
@@ -596,8 +592,6 @@
 				05CE073F0FB909CA0036DF5E /* ContactModel.m */,
 				05CE07400FB909CA0036DF5E /* MessageModel.h */,
 				05CE07410FB909CA0036DF5E /* MessageModel.m */,
-				05CE07420FB909CA0036DF5E /* ModelUpdateDelgate.h */,
-				05CE07430FB909CA0036DF5E /* ModelUpdateDelgate.m */,
 				05D1ED8A1037BFBB00DB3B3F /* PublicationModel.h */,
 				05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */,
 				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
@@ -1229,7 +1223,6 @@
 				05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */,
 				05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */,
 				05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */,
-				05CE07540FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */,
 				05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */,
 				05CE07560FB909CA0036DF5E /* UserModel.m in Sources */,
 				05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
@@ -1325,7 +1318,6 @@
 				05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */,
 				05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */,
 				05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */,
-				05CE074D0FB909CA0036DF5E /* ModelUpdateDelgate.m in Sources */,
 				05CE074E0FB909CA0036DF5E /* RosterItemModel.m in Sources */,
 				05CE074F0FB909CA0036DF5E /* UserModel.m in Sources */,
 				05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,

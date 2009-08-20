@@ -16,7 +16,6 @@
 #import "ActivityView.h"
 #import "ContactModel.h"
 #import "AccountModel.h"
-#import "ModelUpdateDelgate.h"
 #import "RosterItemModel.h"
 #import "AgentXmppViewController.h"
 #import "CellUtils.h"
@@ -26,6 +25,8 @@
 #import "XMPPRosterItem.h"
 #import "XMPPRosterQuery.h"
 #import "XMPPJID.h"
+#import "XMPPMessageDelegate.h"
+#import "AlertViewManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterViewController (PrivateAPI)
@@ -180,10 +181,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onXmppClientConnectionError:(XMPPClient*)sender {
-    AccountModel* account = [ModelUpdateDelgate accountForXMPPClient:sender];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:sender];
     self.accounts = [AccountModel findAllReady];
     [[XMPPClientManager instance] removeXMPPClientForAccount:account];
-    [ModelUpdateDelgate onStartDismissConnectionIndicatorAndShowErrors];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadRoster];
 }
 
@@ -201,7 +202,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
     self.accounts = [AccountModel findAllReady];
-    [ModelUpdateDelgate onStartDismissConnectionIndicatorAndShowErrors];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -226,7 +227,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
-    [ModelUpdateDelgate dismissConnectionIndicator];
+    [AlertViewManager dismissConnectionIndicator];
     [self loadRoster];
 }
 
@@ -262,8 +263,8 @@
     self.accounts = [AccountModel findAllReady];
     [self rosterAddContactButton];
     [self createSegementedController];
-    [ModelUpdateDelgate onStartshowConnectingIndicatorInView:self.view];
-    [ModelUpdateDelgate onStartDismissConnectionIndicatorAndShowErrors];
+    [AlertViewManager onStartshowConnectingIndicatorInView:self.view];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -355,7 +356,7 @@
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:account];
 		XMPPJID* contactJID = [XMPPJID jidWithString:contact.jid];
         [XMPPRosterQuery remove:xmppClient JID:contactJID];
-        [ModelUpdateDelgate showConnectingIndicatorInView:self.view];
+        [AlertViewManager showConnectingIndicatorInView:self.view];
 	} 
 }
 

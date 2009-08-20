@@ -59,7 +59,6 @@
 - (void)disconnectAfterSending;
 
 - (BOOL)supportsInBandRegistration;
-- (void)registerUser:(NSString *)username withPassword:(NSString *)password;
 
 - (BOOL)supportsPlainAuthentication;
 - (BOOL)supportsDigestMD5Authentication;

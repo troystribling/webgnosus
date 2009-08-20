@@ -11,7 +11,7 @@
 #import "AccountOptionsController.h"
 #import "WebgnosusClientAppDelegate.h"
 #import "AccountModel.h"
-#import "ModelUpdateDelgate.h"
+#import "AlertViewManager.h"
 
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
@@ -58,8 +58,8 @@
 - (void)accountConnectionFailed:(NSString*)title {
     [self.account destroy];
 	[self.activationSwitch setOn:NO animated:YES];
-    [ModelUpdateDelgate dismissConnectionIndicator]; 
-    [ModelUpdateDelgate showAlert:title];
+    [AlertViewManager dismissConnectionIndicator]; 
+    [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
 }
 
@@ -126,7 +126,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    [ModelUpdateDelgate dismissConnectionIndicator]; 
+    [AlertViewManager dismissConnectionIndicator]; 
     [self exitView];
 }
 
@@ -167,16 +167,16 @@
         }
         if (self.activationSwitch.on) {
             [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-            [ModelUpdateDelgate showConnectingIndicatorInView:self.view];
+            [AlertViewManager showConnectingIndicatorInView:self.view];
             shouldReturn = NO;
         }     
         [self.account insert];
         [self.account load];
 	} else {
         if (oldAccount) {
-            [ModelUpdateDelgate showAlert:@"Account Exists"];
+            [AlertViewManager showAlert:@"Account Exists"];
         } else {
-            [ModelUpdateDelgate showAlert:@"JID is Invalid"];
+            [AlertViewManager showAlert:@"JID is Invalid"];
         }
 		shouldReturn = NO;
 	}

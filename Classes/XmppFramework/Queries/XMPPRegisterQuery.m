@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPRegisterQuery.h"
+#import "XMPPClient.h"
+#import "XMPPIQ.h"
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,5 +72,17 @@
 - (void)addEmail:(NSString*)val {
     [self addChild:[NSXMLElement elementWithName:@"email" stringValue:val]];
 }
+
+//===================================================================================================================================
+#pragma mark XMPPRegisterQuery Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client user:(NSString *)username withPassword:(NSString *)password {
+    XMPPIQ* reg = [[XMPPIQ alloc] initWithType:@"set"];
+    XMPPRegisterQuery* regQuery = [[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password];
+    [reg addQuery:regQuery];			    
+	[client sendElement:reg];
+}
+
 
 @end

@@ -125,19 +125,11 @@
 #pragma mark Connection Methods
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Returns YES if the connection is closed, and thus no stream is open.
- * If the stream is neither disconnected, nor connected, then a connection is currently being established.
-**/
 - (BOOL)isDisconnected {
 	return (self.state == STATE_DISCONNECTED);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Returns YES if the connection is open, and the stream has been properly established.
- * If the stream is neither disconnected, nor connected, then a connection is currently being established.
-**/
 - (BOOL)isConnected {
 	return (self.state == STATE_CONNECTED);
 }
@@ -166,48 +158,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Connects to the given host on the given port number.
- * If you pass a port number of 0, the default port number for XMPP traffic (5222) is used.
- * The virtual host name is the name of the XMPP host at the given address that we should communicate with.
- * This is generally the domain identifier of the JID. IE: "gmail.com"
- * 
- * If the virtual host name is nil, or an empty string, a virtual host will not be specified in the XML stream
- * connection. This may be OK in some cases, but some servers require it to start a connection.
- **/
 - (void)connectToHost:(NSString *)hostName onPort:(UInt16)portNumber withVirtualHost:(NSString *)vHostName {
 	[self connectToHost:hostName onPort:portNumber withVirtualHost:vHostName secure:NO];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Connects to the given host on the given port number, using a secure SSL/TLS connection.
- * If you pass a port number of 0, the default port number for secure XMPP traffic (5223) is used.
- * The virtual host name is the name of the XMPP host at the given address that we should communicate with.
- * This is generally the domain identifier of the JID. IE: "gmail.com"
- * 
- * If the virtual host name is nil, or an empty string, a virtual host will not be specified in the XML stream
- * connection. This may be OK in some cases, but some servers require it to start a connection.
-**/
 - (void)connectToSecureHost:(NSString *)hostName onPort:(UInt16)portNumber withVirtualHost:(NSString *)vHostName {
 	[self connectToHost:hostName onPort:portNumber withVirtualHost:vHostName secure:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Closes the connection to the remote host.
-**/
 - (void)disconnect {
 	[self.asyncSocket disconnect];
-	
-	// Note: The state is updated automatically in the onSocketDidDisconnect: method.
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)disconnectAfterSending {
 	[self.asyncSocket disconnectAfterWriting];
-	
-	// Note: The state is updated automatically in the onSocketDidDisconnect: method.
 }
 
 //===================================================================================================================================
@@ -219,35 +186,6 @@
 		return ([[self streamFeatures] supportsInBandRegistration]);
 	}
 	return NO;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * This method attempts to register a new user on the server using the given username and password.
- * The result of this action will be returned via the delegate method xmppStream:didReceiveIQ:
- * 
- * If the XMPPStream is not connected, or the server doesn't support in-band registration, this method does nothing.
-**/
-- (void)registerUser:(NSString *)username withPassword:(NSString *)password {
-	// The only proper time to call this method is after we've connected to the server,
-	// and exchanged the opening XML stream headers
-	if(self.state == STATE_CONNECTED)
-	{
-		if([self supportsInBandRegistration])
-		{
-            XMPPIQ* reg = [[XMPPIQ alloc] initWithType:@"set"];
-			XMPPRegisterQuery* regQuery = [[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password];
-            [reg addQuery:regQuery];			
-
-			if(DEBUG) {
-				NSLog(@"SEND: %@", [reg XMLString]);
-			}
-			[self.asyncSocket writeData:[[reg XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
-			
-			// Update state
-			self.state = STATE_REGISTERING;
-		}
-	}
 }
 
 //===================================================================================================================================
@@ -265,12 +203,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * This method attempts to sign-in to the server using the given username and password.
- * The result of this action will be returned via the delegate method xmppStream:didReceiveIQ:
- *
- * If the XMPPStream is not connected, this method does nothing.
-**/
 - (void)authenticateUser:(NSString*)username withPassword:(NSString*)password resource:(NSString*)resource {
 	if(self.state == STATE_CONNECTED)
 	{
@@ -360,8 +292,7 @@
  * This method handles sending the opening <stream:stream ...> element which is needed in several situations.
 **/
 - (void)sendOpeningNegotiation {
-	if(self.state == STATE_CONNECTING)
-	{
+	if(self.state == STATE_CONNECTING) {
 		// TCP connection was just opened - We need to include the opening XML stanza
 		NSString *s1 = @"<?xml version='1.0'?>";
 		
@@ -375,13 +306,11 @@
 	NSString *xmlns_stream = @"http://etherx.jabber.org/streams";
 	
 	NSString *temp, *s2;
-	if([self.xmppHostName length] > 0)
-	{
+	if([self.xmppHostName length] > 0) {
 		temp = @"<stream:stream xmlns='%@' xmlns:stream='%@' version='1.0' to='%@'>";
 		s2 = [NSString stringWithFormat:temp, xmlns, xmlns_stream, self.xmppHostName];
 	}
-	else
-	{
+	else {
 		temp = @"<stream:stream xmlns='%@' xmlns:stream='%@' version='1.0'>";
 		s2 = [NSString stringWithFormat:temp, xmlns, xmlns_stream];
 	}
@@ -408,8 +337,7 @@
         return;
     }
 		
-	if([[self streamFeatures] requiresBind])
-	{
+	if([[self streamFeatures] requiresBind]) {
 		self.state = STATE_BINDING;		
 		if([self.authResource length] > 0) {
             XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
@@ -446,8 +374,7 @@
 - (void)handleStartTLSResponse:(NSXMLElement *)response {
 	// We're expecting a proceed response
 	// If we get anything else we can safely assume it's the equivalent of a failure response
-	if(![[response name] isEqualToString:@"proceed"])
-	{
+	if(![[response name] isEqualToString:@"proceed"]) {
 		// We can close our TCP connection now
 		[self disconnect];
 		
@@ -525,8 +452,7 @@
 	{
 		// We're expecting a challenge response
 		// If we get anything else we can safely assume it's the equivalent of a failure response
-		if(![[response name] isEqualToString:@"challenge"])
-		{
+		if(![[response name] isEqualToString:@"challenge"]) {
 			// Revert back to connected state (from authenticating state)
 			self.state = STATE_CONNECTED;
 			
@@ -537,8 +463,7 @@
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
-		else
-		{
+		else {
 			// Create authentication object from the given challenge
 			// We'll release this object at the end of this else block
 			XMPPDigestAuthentication *auth = [[XMPPDigestAuthentication alloc] initWithChallenge:response];
@@ -571,8 +496,7 @@
 			self.state = STATE_AUTH_2;
 		}
 	}
-	else if([self supportsPlainAuthentication])
-	{
+	else if([self supportsPlainAuthentication]) {
 		// We're expecting a success response
 		// If we get anything else we can safely assume it's the equivalent of a failure response
 		if(![[response name] isEqualToString:@"success"])
@@ -587,8 +511,7 @@
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
-		else
-		{
+		else {
 			// We are successfully authenticated (via sasl:plain)
 			self.isAuthenticated = YES;
 			
@@ -596,12 +519,10 @@
 			[self sendOpeningNegotiation];
 		}
 	}
-	else
-	{
+	else {
 		// We used the old fashioned jabber:iq:auth mechanism
 		
-		if([[[response attributeForName:@"type"] stringValue] isEqualToString:@"error"])
-		{
+		if([[[response attributeForName:@"type"] stringValue] isEqualToString:@"error"]) {
 			// Revert back to connected state (from authenticating state)
 			self.state = STATE_CONNECTED;
 			
@@ -612,8 +533,7 @@
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
-		else
-		{
+		else {
 			// We are successfully authenticated (via non-sasl:digest)
 			// And we've binded our resource as well
 			self.isAuthenticated = YES;
@@ -636,12 +556,10 @@
  * This method handles the result of our challenge response we sent in handleAuth1 using digest-md5 sasl.
 **/
 - (void)handleAuth2:(NSXMLElement *)response {
-	if([[response name] isEqualToString:@"challenge"])
-	{
+	if([[response name] isEqualToString:@"challenge"]) {
 		XMPPDigestAuthentication *auth = [[[XMPPDigestAuthentication alloc] initWithChallenge:response] autorelease];
 		
-		if(![auth rspauth])
-		{
+		if(![auth rspauth]) {
 			// We're getting another challenge???
 			// I'm not sure what this could possibly be, so for now I'll assume it's a failure
 			
@@ -655,8 +573,7 @@
 				NSLog(@"xmppStream:%p didNotAuthenticate:%@", self, [response XMLString]);
 			}
 		}
-		else
-		{
+		else {
 			// We received another challenge, but it's really just an rspauth
 			// This is supposed to be included in the success element (according to the updated RFC)
 			// but many implementations incorrectly send it inside a second challenge request.
@@ -672,16 +589,14 @@
 			// The state remains in STATE_AUTH_2
 		}
 	}
-	else if([[response name] isEqualToString:@"success"])
-	{
+	else if([[response name] isEqualToString:@"success"]) {
 		// We are successfully authenticated (via sasl:digest-md5)
 		self.isAuthenticated = YES;
 		
 		// Now we start our negotiation over again...
 		[self sendOpeningNegotiation];
 	}
-	else
-	{
+	else {
 		// We received some kind of <failure/> element
 		
 		// Revert back to connected state (from authenticating state)
@@ -717,8 +632,7 @@
 			// Update state
 			self.state = STATE_START_SESSION;
 		}
-		else
-		{
+		else {
 			// Revert back to connected state (from binding state)
 			self.state = STATE_CONNECTED;
 			
@@ -730,8 +644,7 @@
 			}
 		}
 	}
-	else
-	{
+	else {
 		// It appears the server didn't allow our resource choice
 		// We'll simply let the server choose then
 		
@@ -748,8 +661,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleStartSessionResponse:(NSXMLElement *)response {
-	if([[[response attributeForName:@"type"] stringValue] isEqualToString:@"result"])
-	{
+	if([[[response attributeForName:@"type"] stringValue] isEqualToString:@"result"]) {
 		// Revert back to connected state (from start session state)
 		self.state = STATE_CONNECTED;
 		
@@ -760,8 +672,7 @@
 			NSLog(@"xmppStreamDidAuthenticate:%p", self);
 		}
 	}
-	else
-	{
+	else {
 		// Revert back to connected state (from start session state)
 		self.state = STATE_CONNECTED;
 		
@@ -778,10 +689,6 @@
 #pragma mark AsyncSocket Delegate Methods
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Called when a socket is about to connect. This method should return YES to continue, or NO to abort.
- * If aborted, will result in AsyncSocketCanceledError.
-**/
 - (BOOL)onSocketWillConnect:(AsyncSocket *)sock {
 	if(self.isSecure)
 	{
@@ -806,21 +713,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Called when a socket connects and is ready for reading and writing. "host" will be an IP address, not a DNS name.
-**/
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port {
-	// We're now connected with a TCP stream, so it's time to initialize the XML stream
 	[self sendOpeningNegotiation];
-	
-	// Now start reading in the server's XML stream
 	[self.asyncSocket readDataToData:self.terminator withTimeout:TIMEOUT_READ_START tag:TAG_READ_START];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Called when a socket has completed reading the requested data. Not called if there is an error.
-**/
 - (void)onSocket:(AsyncSocket *)sock didReadData:(NSData*)data withTag:(long)tag {
 	NSString *dataAsStr = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 	
@@ -835,8 +733,7 @@
 		
 		[self.buffer appendData:data];
 		
-		if([dataAsStr hasSuffix:@"?>"])
-		{
+		if([dataAsStr hasSuffix:@"?>"]) {
 			// We read in the <?xml version='1.0'?> line
 			// We need to keep reading for the <stream:stream ...> line
 			[self.asyncSocket readDataToData:self.terminator withTimeout:TIMEOUT_READ_START tag:TAG_READ_START];
@@ -856,16 +753,14 @@
 			[self.buffer setLength:0];
 			
 			// Check for RFC compliance
-			if([self serverXmppStreamVersionNumber] >= 1.0)
-			{
+			if([self serverXmppStreamVersionNumber] >= 1.0) {
 				// Update state - we're now onto stream negotiations
 				self.state = STATE_NEGOTIATING;
 				
 				// We need to read in the stream features now
 				[self.asyncSocket readDataToData:self.terminator withTimeout:TIMEOUT_READ_STREAM tag:TAG_READ_STREAM];
 			}
-			else
-			{
+			else {
 				// The server isn't RFC comliant, and won't be sending any stream features
 				
 				// Update state - we're connected now
@@ -889,8 +784,7 @@
 	// We encountered the end of some tag. IE - we found a ">" character.
 	
 	// Is it the end of the stream?
-	if([dataAsStr hasSuffix:@"</stream:stream>"])
-	{
+	if([dataAsStr hasSuffix:@"</stream:stream>"]) {
 		// We can close our TCP connection now
 		[self disconnect];
 		
@@ -903,25 +797,21 @@
 	// Work-around for problem in NSXMLDocument parsing
 	// The parser doesn't like <stream:X> tags unless they're properly namespaced
 	// This namespacing is declared in the opening <stream:stream> tag, but we only parse individual elements
-	if([dataAsStr isEqualToString:@"<stream:features>"])
-	{
+	if([dataAsStr isEqualToString:@"<stream:features>"]) {
 		NSString *fix = @"<stream:features xmlns:stream='http://etherx.jabber.org/streams'>";
 		[self.buffer appendData:[fix dataUsingEncoding:NSUTF8StringEncoding]];
 	}
-	else if([dataAsStr isEqualToString:@"<stream:error>"])
-	{
+	else if([dataAsStr isEqualToString:@"<stream:error>"]) {
 		NSString *fix = @"<stream:error xmlns:stream='http://etherx.jabber.org/streams'>";
 		[self.buffer appendData:[fix dataUsingEncoding:NSUTF8StringEncoding]];
 	}
-	else
-	{
+	else {
 		[self.buffer appendData:data];
 	}
 	
 	NSXMLDocument *xmlDoc = [[[NSXMLDocument alloc] initWithData:self.buffer options:0 error:nil] autorelease];
 	
-	if(!xmlDoc)
-	{
+	if(!xmlDoc) {
 		// We don't have a full XML message fragment yet
 		// Keep reading data from the stream until we get a full fragment
 		[self.asyncSocket readDataToData:self.terminator withTimeout:TIMEOUT_READ_STREAM tag:TAG_READ_STREAM];
@@ -930,96 +820,72 @@
 	
 	NSXMLElement* element = [xmlDoc rootElement];
 	
-	if(self.state == STATE_NEGOTIATING)
-	{
+	if(self.state == STATE_NEGOTIATING) {
 		[element detach];
 		[self.rootElement setChildren:[NSArray arrayWithObject:element]];
         [self handleStreamFeatures];
 	}
-	else if(self.state == STATE_STARTTLS)
-	{
+	else if(self.state == STATE_STARTTLS) {
 		[self handleStartTLSResponse:element];
 	}
-	else if(self.state == STATE_REGISTERING)
-	{
+	else if(self.state == STATE_REGISTERING) {
 		[self handleRegistration:element];
 	}
-	else if(self.state == STATE_AUTH_1)
-	{
+	else if(self.state == STATE_AUTH_1) {
 		[self handleAuth1:element];
 	}
-	else if(self.state == STATE_AUTH_2)
-	{
+	else if(self.state == STATE_AUTH_2) {
 		[self handleAuth2:element];
 	}
-	else if(self.state == STATE_BINDING)
-	{
+	else if(self.state == STATE_BINDING) {
 		[self handleBinding:element];
 	}
-	else if(self.state == STATE_START_SESSION)
-	{
+	else if(self.state == STATE_START_SESSION) {
 		[self handleStartSessionResponse:element];
 	}
-	else if([[element name] isEqualToString:@"iq"])
-	{
-		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveIQ:)])
-		{
+	else if([[element name] isEqualToString:@"iq"]) {
+		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveIQ:)]) {
 			[self.delegate xmppStream:self didReceiveIQ:[XMPPIQ createFromElement:element]];
 		}
-		else if(DEBUG)
-		{
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didReceiveIQ:%@", self, [element XMLString]);
 		}
 	}
-	else if([[element name] isEqualToString:@"message"])
-	{
-		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveMessage:)])
-		{
+	else if([[element name] isEqualToString:@"message"]) {
+		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveMessage:)]) {
 			[self.delegate xmppStream:self didReceiveMessage:[XMPPMessage createFromElement:element]];
 		}
-		else if(DEBUG)
-		{
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didReceiveMessage:%@", self, [element XMLString]);
 		}
 	}
-	else if([[element name] isEqualToString:@"presence"])
-	{
-		if([self.delegate respondsToSelector:@selector(xmppStream:didReceivePresence:)])
-		{
+	else if([[element name] isEqualToString:@"presence"]) {
+		if([self.delegate respondsToSelector:@selector(xmppStream:didReceivePresence:)]) {
 			[self.delegate xmppStream:self didReceivePresence:[XMPPPresence createFromElement:element]];
 		}
-		else if(DEBUG)
-		{
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didReceivePresence:%@", self, [element XMLString]);
 		}
 	}
-	else
-	{
-		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveError:)])
-		{
+	else {
+		if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveError:)]) {
 			[self.delegate xmppStream:self didReceiveError:element];
 		}
-		else if(DEBUG)
-		{
+		else if(DEBUG) {
 			NSLog(@"xmppStream:%p didReceiveError:%@", self, [element XMLString]);
 		}
 	}
 	
 	[self.buffer setLength:0];
 	
-	if([self.asyncSocket isConnected])
-	{
+	if([self.asyncSocket isConnected]) {
 		[self.asyncSocket readDataToData:self.terminator withTimeout:TIMEOUT_READ_STREAM tag:TAG_READ_STREAM];
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Called after data with the given tag has been successfully sent.
-**/
 - (void)onSocket:(AsyncSocket *)sock didWriteDataWithTag:(long)tag {
-	if((tag != TAG_WRITE_STREAM) && (tag != TAG_WRITE_START))
-	{
+	if((tag != TAG_WRITE_STREAM) && (tag != TAG_WRITE_START)) {
 		if([self.delegate respondsToSelector:@selector(xmppStream:didSendElementWithTag:)])
 		{
 			[self.delegate xmppStream:self didSendElementWithTag:tag];
@@ -1028,11 +894,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * In the event of an error, the socket is closed.  You may call "readDataWithTimeout:tag:" during this call-back to
- * get the last bit of data off the socket.  When connecting, this delegate method may be called
- * before onSocket:didConnectToHost:
-**/
 - (void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
 	if([self.delegate respondsToSelector:@selector(xmppStream:didReceiveError:)]) {
 		[self.delegate xmppStream:self didReceiveError:err];
@@ -1043,10 +904,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-/**
- * Called when a socket disconnects with or without error.  If you want to release a socket after it disconnects,
- * do so here. It is not safe to do that during "onSocket:willDisconnectWithError:".
-**/
 - (void)onSocketDidDisconnect:(AsyncSocket *)sock {
 	// Update state
 	self.state = STATE_DISCONNECTED;
