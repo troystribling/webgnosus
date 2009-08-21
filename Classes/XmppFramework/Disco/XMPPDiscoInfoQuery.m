@@ -10,6 +10,9 @@
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoIdentity.h"
 #import "XMPPDiscoFeature.h"
+#import "XMPPClient.h"
+#import "XMPPIQ.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPDiscoInfoQuery
@@ -69,6 +72,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addFeature:(XMPPDiscoFeature*)val {
     [self addChild:val];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPDiscoInfoQuery Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)get:(XMPPClient*)client  JID:(XMPPJID*)jid {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    [iq addQuery:[[self alloc] init]];
+    [client sendElement:iq];
 }
 
 @end

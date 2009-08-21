@@ -85,39 +85,46 @@
 @interface NSObject (XMPPClientDelegate)
 
 // connection
-- (void)xmppClientConnecting:(XMPPClient*)sender;
-- (void)xmppClientDidConnect:(XMPPClient*)sender;
-- (void)xmppClientDidNotConnect:(XMPPClient*)sender;
-- (void)xmppClientDidDisconnect:(XMPPClient*)sender;
+- (void)xmppClientConnecting:(XMPPClient*)client;
+- (void)xmppClientDidConnect:(XMPPClient*)client;
+- (void)xmppClientDidNotConnect:(XMPPClient*)client;
+- (void)xmppClientDidDisconnect:(XMPPClient*)client;
 
 // registration
-- (void)xmppClientDidRegister:(XMPPClient*)sender;
-- (void)xmppClient:(XMPPClient*)sender didNotRegister:(NSXMLElement*)error;
+- (void)xmppClientDidRegister:(XMPPClient*)client;
+- (void)xmppClient:(XMPPClient*)client didNotRegister:(NSXMLElement*)error;
 
 // authentication
-- (void)xmppClientDidAuthenticate:(XMPPClient*)sender;
-- (void)xmppClient:(XMPPClient*)sender didNotAuthenticate:(NSXMLElement*)error;
+- (void)xmppClientDidAuthenticate:(XMPPClient*)client;
+- (void)xmppClient:(XMPPClient*)client didNotAuthenticate:(NSXMLElement*)error;
 
 // roster
 - (void)xmppClient:(XMPPClient*)client didReceiveRosterItems:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item;
-- (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item;
-- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq;
+- (void)xmppClient:(XMPPClient*)client didAddToRoster:(XMPPRosterItem*)item;
+- (void)xmppClient:(XMPPClient*)client didRemoveFromRoster:(XMPPRosterItem*)item;
+- (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq;
 
 // presence
-- (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)sender;
-- (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)sender;
-- (void)xmppClient:(XMPPClient*)sender didReceiveBuddyRequest:(XMPPJID*)buddyJid;
-- (void)xmppClient:(XMPPClient*)sender didAcceptBuddyRequest:(XMPPJID*)buddyJid;
-- (void)xmppClient:(XMPPClient*)sender didRejectBuddyRequest:(XMPPJID*)buddyJid;
+- (void)xmppClient:(XMPPClient*)client didReceivePresence:(XMPPPresence*)sender;
+- (void)xmppClient:(XMPPClient*)client didReceiveErrorPresence:(XMPPPresence*)sender;
+- (void)xmppClient:(XMPPClient*)client didReceiveBuddyRequest:(XMPPJID*)buddyJid;
+- (void)xmppClient:(XMPPClient*)client didAcceptBuddyRequest:(XMPPJID*)buddyJid;
+- (void)xmppClient:(XMPPClient*)client didRejectBuddyRequest:(XMPPJID*)buddyJid;
 
 // version discovery
-- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionResult:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)sender didReceiveClientVersionRequest:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveClientVersionResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveClientVersionRequest:(XMPPIQ*)iq;
 
 // applications
-- (void)xmppClient:(XMPPClient*)sender didReceiveIQ:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)sender didReceiveMessage:(XMPPMessage*)message;
-- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveIQ:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveMessage:(XMPPMessage*)message;
+- (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq;
+
+// disco
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubRoot:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverCommandNodes:(XMPPIQ*)iq;
 
 @end

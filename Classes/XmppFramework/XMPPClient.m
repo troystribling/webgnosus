@@ -214,6 +214,10 @@
         [multicastDelegate  xmppClient:self didReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
         [multicastDelegate  xmppClient:self didReceiveClientVersionRequest:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"result"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoItemsResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"result"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoInfoResult:iq];
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
     } else {
