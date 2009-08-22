@@ -251,6 +251,7 @@
         [rosterItem update];
         if ([rosterItem.type isEqualToString:@"available"]) {
             [XMPPClientVersionQuery get:client JID:[presence fromJID]];
+            [XMPPDiscoItemsQuery get:client JID:[presence fromJID] andNode:@"http://jabber.org/protocol/commands"];
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJid bare] andAccount:account];
@@ -401,7 +402,9 @@
         if ([[[iq fromJID] full] isEqualToString:[[client myJID] domain]]) { 
             [XMPPDiscoInfoQuery get:client JID:[item JID]];
         } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
-            [self xmppClient:client didDiscoverUserPubSubNode:item];
+            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item];
+        } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
+            [[client multicastDelegate] xmppClient:client didDiscoverCommandNodes:item];
         }
     }
 }
@@ -414,7 +417,7 @@
     XMPPError* error = [iq error];	
     if (error) {
         if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]] && [[error condition] isEqualToString:@"item-not-found"]) {
-            [self xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
+            [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
         }
     }
     
@@ -428,7 +431,7 @@
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
-            [self xmppClient:client didDiscoverPubSubService:iq];
+            [[client multicastDelegate] xmppClient:client didDiscoverPubSubService:iq];
         }
     }
     NSArray* features = [query features];		
@@ -445,10 +448,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
-    NSString* node = [[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]];
-    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:node];
+    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:[XMPPMessageDelegate userPubSubRoot:client]];
     [XMPPPubSubSubscription get:client JID:[iq fromJID]];
-    [node release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -464,6 +465,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

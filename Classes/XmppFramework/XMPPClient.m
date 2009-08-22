@@ -17,6 +17,7 @@
 #import "XMPPRosterQuery.h"
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
+#import "XMPPPubSub.h"
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
@@ -178,6 +179,7 @@
 - (void)xmppStream:(XMPPStream*)sender didReceiveIQ:(XMPPIQ*)iq {
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
+    XMPPPubSub* pubsub = [iq pubsub];
 	if([[query className] isEqualToString:@"XMPPRosterQuery"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterItems:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"result"]) {
@@ -194,6 +196,8 @@
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoError:iq];
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
+	} else if (pubsub && [[iq type] isEqualToString:@"result"]) {
+        [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
     } else {
         [multicastDelegate xmppClient:self didReceiveIQ:iq];
 	}

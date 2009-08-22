@@ -84,7 +84,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSub*)pubsub {
-    return [XMPPPubSub createFromElement:[self elementForName:@"pubsub"]];
+    XMPPCommand* iqPubSub = nil;
+    NSXMLElement* pubSubElement = [self elementForName:@"pubsub"];
+    if (pubSubElement) {
+        iqPubSub = [XMPPPubSub createFromElement:pubSubElement];
+    }
+    return iqPubSub;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
