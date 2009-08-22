@@ -386,9 +386,15 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsResult"];
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
     NSArray* items = [query items];		
+	NSString* node = [query node];
+    NSString* userPubSubRoot = [[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]];
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-        [XMPPDiscoInfoQuery get:client JID:[item JID]];
+        if ([[[iq fromJID] full] isEqualToString:[[client myJID] domain]]) { 
+            [XMPPDiscoInfoQuery get:client JID:[item JID]];
+        } else if ([node isEqualToString:userPubSubRoot]) {
+            [self xmppClient:client didDiscoverUserPubSubNode:item];
+        }
     }
 }
 
@@ -396,7 +402,8 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoResult"];
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
-    NSArray* identities = [query identities];		
+    NSArray* identities = [query identities];	
+	NSString* node = [query node];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
@@ -412,11 +419,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
+    NSString* node = [[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]];
+    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:node];
+    [node release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubRoot:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubRoot"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item {
+	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

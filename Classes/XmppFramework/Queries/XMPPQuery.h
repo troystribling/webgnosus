@@ -18,5 +18,7 @@
 - (XMPPQuery*)initWithXMLNS:(NSString*)xmlnsVal;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)node;
+- (void)addNode:(NSString*)val;
 
 @end

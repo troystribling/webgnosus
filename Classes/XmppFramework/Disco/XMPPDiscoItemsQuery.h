@@ -31,5 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client  JID:(XMPPJID*)jid;
++ (void)get:(XMPPClient*)client  JID:(XMPPJID*)jid andNode:(NSString*)node;
 
 @end
