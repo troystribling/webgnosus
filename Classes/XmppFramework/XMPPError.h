@@ -1,5 +1,5 @@
 //
-//  XMPPQuery.m
+//  XMPPError.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/29/09.
@@ -10,17 +10,22 @@
 #import <Foundation/Foundation.h>
 #import "DDXML.h"
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPQuery : NSXMLElement 
+@interface XMPPError : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPQuery*)createFromElement:(NSXMLElement*)element;
-- (XMPPQuery*)initWithXMLNS:(NSString*)xmlnsVal;
++ (XMPPError*)createFromElement:(NSXMLElement*)element;
+- (XMPPError*)init;
+- (XMPPError*)initWithType:(NSString*)errotType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node;
-- (void)addNode:(NSString*)val;
+- (NSString*)type;
+- (void)addType:(NSString*)val;
+
+- (NSString*)code;
+- (void)addCode:(NSString*)val;
+
+- (NSString*)condition;
+- (void)addCondition:(NSString*)val;
 
 @end

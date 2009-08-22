@@ -1,85 +1,80 @@
 //
-//  XMPPPubSubSubscription.m
+//  XMPPError.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/8/09.
+//  Created by Troy Stribling on 3/29/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubSubscription.h"
-#import "XMPPPubSub.h"
-#import "XMPPIQ.h"
-#import "XMPPClient.h"
-#import "XMPPJID.h"
+#import "XMPPError.h"
+#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubSubscription
+@implementation XMPPError
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubSubscription
+#pragma mark XMPPBind
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubSubscription*)createFromElement:(NSXMLElement*)element {
-	XMPPPubSubSubscription* result = (XMPPPubSubSubscription*)element;
-	result->isa = [XMPPPubSubSubscription class];
++ (XMPPError*)createFromElement:(NSXMLElement*)element {
+	XMPPError* result = (XMPPError*)element;
+	result->isa = [XMPPError class];
 	return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node {
-    return [[self attributeForName:@"node"] stringValue];
+- (XMPPError*)init {
+	if(self = [super initWithName:@"error"]) {
+	}
+	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addNode:(NSString*)val {
-    [self addAttributeWithName:@"node" stringValue:val];
+- (XMPPError*)initWithType:(NSString*)errorType {
+	if([self init]) {
+        [self addType:errorType];
+	}
+	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)subscription {
-    return [[self attributeForName:@"subscription"] stringValue];
+- (NSString*)type {
+    return [[self attributeForName:@"type"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addsubScription:(NSString*)val {
-    [self addAttributeWithName:@"node" stringValue:val];
+- (void)addType:(NSString*)val {
+    [self addAttributeWithName:@"type" stringValue:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)subId {
-    return [[[self attributeForName:@"subid"] stringValue] integerValue];
+- (NSString*)code {
+    return [[self attributeForName:@"code"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addSubId:(NSInteger)val {
-    [self addAttributeWithName:@"subid" stringValue:[NSString stringWithFormat:@"%d'", val]];
+- (void)addCode:(NSString*)val {
+    [self addAttributeWithName:@"code" stringValue:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPJID*)JID {
-    return [XMPPJID jidWithString:[[self attributeForName:@"jid"] stringValue]];
+- (NSString*)condition {
+    NSString* name = nil;
+    NSXMLNode* condNode = [self childAtIndex:0];
+    if (condNode) {
+        name = [condNode name];
+    }
+    return name;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addJID:(NSString*)val {
-    [self addAttributeWithName:@"jid" stringValue:val];
-}
-
-//===================================================================================================================================
-#pragma mark XMPPPubSubSubscriptions Messages
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
-    [pubsub addChild:[NSXMLElement elementWithName:@"subscriptions"]];	
-    [iq addPubSub:pubsub];    
-    [client sendElement:iq];
+- (void)addCondition:(NSString*)val {
+    [self addChild:[NSXMLElement elementWithName:val]];	
 }
 
 @end

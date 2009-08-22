@@ -30,7 +30,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSub*)init {
 	if(self = [super initWithName:@"pubsub"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#owner"]];
+        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub"]];
 	}
 	return self;
 }

@@ -20,6 +20,7 @@
 @class XMPPDiscoIdentity;
 @class XMPPDiscoItem;
 @class XMPPClientVersionQuery;
+@class XMPPDiscoItemsQuery;
 @class MulticastDelegate;
 @class SCNotificationManager;
 
@@ -124,10 +125,13 @@
 
 // disco
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubRoot:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item;
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didDiscoverCommandNodes:(XMPPIQ*)iq;
 
 @end

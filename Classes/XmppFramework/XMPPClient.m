@@ -43,36 +43,6 @@
 @synthesize priority;
 
 //===================================================================================================================================
-#pragma mark NSObject
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init {
-	if(self = [super init])
-	{
-		self.multicastDelegate = [[MulticastDelegate alloc] init];		
-		self.priority = 1;
-		self.xmppStream = [[XMPPStream alloc] initWithDelegate:self];				
-		self.scNotificationManager = [[SCNotificationManager alloc] init];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStatusDidChange:) name:@"State:/Network/Global/IPv4" object:scNotificationManager];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)dealloc {
-	[multicastDelegate release];	
-	[domain release];
-	[myJID release];
-	[password release];	
-	[xmppStream setDelegate:nil];
-	[xmppStream disconnect];
-	[xmppStream release];
-	[streamError release];	
-	[scNotificationManager release];	
-	[super dealloc];
-}
-
-//===================================================================================================================================
 #pragma mark Delegation
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -216,8 +186,12 @@
         [multicastDelegate  xmppClient:self didReceiveClientVersionRequest:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"error"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoItemsError:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"error"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoInfoError:iq];
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
     } else {
@@ -281,5 +255,34 @@
 
 //===================================================================================================================================
 #pragma mark PrivateAPI:
+
+//===================================================================================================================================
+#pragma mark NSObject
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init {
+	if(self = [super init]) {
+		self.multicastDelegate = [[MulticastDelegate alloc] init];		
+		self.priority = 1;
+		self.xmppStream = [[XMPPStream alloc] initWithDelegate:self];				
+		self.scNotificationManager = [[SCNotificationManager alloc] init];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStatusDidChange:) name:@"State:/Network/Global/IPv4" object:scNotificationManager];
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)dealloc {
+	[multicastDelegate release];	
+	[domain release];
+	[myJID release];
+	[password release];	
+	[xmppStream setDelegate:nil];
+	[xmppStream disconnect];
+	[xmppStream release];
+	[streamError release];	
+	[scNotificationManager release];	
+	[super dealloc];
+}
 
 @end

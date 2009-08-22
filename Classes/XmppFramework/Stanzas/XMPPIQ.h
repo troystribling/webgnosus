@@ -15,6 +15,8 @@
 @class XMPPSession;
 @class XMPPBind;
 @class XMPPCommand;
+@class XMPPError;
+@class XMPPPubSub;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPIQ : XMPPStanza
@@ -39,4 +41,10 @@
 - (XMPPCommand*)command;
 - (void)addCommand:(XMPPCommand*)child;
 
+- (XMPPError*)error;
+- (void)addError:(XMPPError*)val;
+
+- (XMPPPubSub*)pubsub;
+- (void)addPubSub:(XMPPPubSub*)child;
+    
 @end

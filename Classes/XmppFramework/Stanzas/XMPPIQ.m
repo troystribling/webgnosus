@@ -16,6 +16,8 @@
 #import "XMPPBind.h"
 #import "XMPPSession.h"
 #import "XMPPCommand.h"
+#import "XMPPError.h"
+#import "XMPPPubSub.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoInfoQuery.h"
 #import "NSXMLElementAdditions.h"
@@ -28,7 +30,6 @@
 - (XMPPQuery*) createQueryFromElement;
 
 @end
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPIQ
@@ -82,6 +83,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPPubSub*)pubsub {
+    return [XMPPPubSub createFromElement:[self elementForName:@"pubsub"]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addPubSub:(XMPPPubSub*)child {
+    [self addChild:child];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPBind*)bind {
     XMPPBind* iqBind = nil;
     NSXMLElement* bindElement = [self elementForName:@"bind"];
@@ -109,6 +120,21 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addCommand:(XMPPCommand*)child {
     [self addChild:child];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPError*)error {
+    NSXMLElement* errorElement = [self elementForName:@"error"];
+    XMPPError* errorXMPP = nil;
+    if (errorElement) {
+        errorXMPP = [XMPPError createFromElement:errorElement];
+    }
+    return errorXMPP;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addError:(XMPPError*)val {
+    [self addChild:val];
 }
 
 //===================================================================================================================================

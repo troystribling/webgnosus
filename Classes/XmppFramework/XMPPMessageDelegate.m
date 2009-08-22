@@ -27,6 +27,8 @@
 #import "XMPPDiscoFeature.h"
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
+#import "XMPPError.h"
+#import "XMPPPubSubSubscription.h"
 #import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,8 +41,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPMessageDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+
 //===================================================================================================================================
 #pragma mark XMPPMessageDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)userPubSubRoot:(XMPPClient*)client {
+    return [[[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]] autorelease];	
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)accountForXMPPClient:(XMPPClient*)client {
@@ -385,17 +394,30 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsResult"];
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
-    NSArray* items = [query items];		
 	NSString* node = [query node];
-    NSString* userPubSubRoot = [[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]];
+    NSArray* items = [query items];		
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
         if ([[[iq fromJID] full] isEqualToString:[[client myJID] domain]]) { 
             [XMPPDiscoInfoQuery get:client JID:[item JID]];
-        } else if ([node isEqualToString:userPubSubRoot]) {
+        } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
             [self xmppClient:client didDiscoverUserPubSubNode:item];
         }
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsError"];
+    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
+	NSString* node = [query node];
+    XMPPError* error = [iq error];	
+    if (error) {
+        if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]] && [[error condition] isEqualToString:@"item-not-found"]) {
+            [self xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
+        }
+    }
+    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -403,7 +425,6 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoResult"];
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
     NSArray* identities = [query identities];	
-	NSString* node = [query node];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
@@ -417,10 +438,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
     NSString* node = [[NSString alloc] initWithFormat:@"/home/%@/%@", [[client myJID] domain], [[client myJID] user]];
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:node];
+    [XMPPPubSubSubscription get:client JID:[iq fromJID]];
     [node release];
 }
 
@@ -432,6 +459,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item {
 	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -450,5 +482,16 @@
         [msg release];
     }
 }
+
+//===================================================================================================================================
+#pragma mark NSObject
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init {
+	if(self = [super init])  {
+	}
+	return self;
+}
+
 
 @end
