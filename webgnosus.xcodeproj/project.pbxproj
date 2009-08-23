@@ -97,11 +97,11 @@
 		05D1ED921037BFBB00DB3B3F /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */; };
 		05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
-		05D1ED951037BFBB00DB3B3F /* SubscriptionsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */; };
+		05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
 		05D1ED961037BFBB00DB3B3F /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */; };
 		05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
-		05D1ED991037BFBB00DB3B3F /* SubscriptionsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */; };
+		05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
 		05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
 		05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
 		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
@@ -337,8 +337,8 @@
 		05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFeatureModel.m; sourceTree = "<group>"; };
 		05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
 		05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceItemModel.m; sourceTree = "<group>"; };
-		05D1ED901037BFBB00DB3B3F /* SubscriptionsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionsModel.h; sourceTree = "<group>"; };
-		05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionsModel.m; sourceTree = "<group>"; };
+		05D1ED901037BFBB00DB3B3F /* SubscriptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscriptionModel.h; sourceTree = "<group>"; };
+		05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModel.m; sourceTree = "<group>"; };
 		05D1ED9B1037C07D00DB3B3F /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
 		05D1ED9C1037C07D00DB3B3F /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
 		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
@@ -596,8 +596,8 @@
 				05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */,
 				05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */,
 				05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */,
-				05D1ED901037BFBB00DB3B3F /* SubscriptionsModel.h */,
-				05D1ED911037BFBB00DB3B3F /* SubscriptionsModel.m */,
+				05D1ED901037BFBB00DB3B3F /* SubscriptionModel.h */,
+				05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */,
 				05CE07460FB909CA0036DF5E /* UserModel.h */,
 				05CE07470FB909CA0036DF5E /* UserModel.m */,
 				05CE07480FB909CA0036DF5E /* WebgnosusDbi.h */,
@@ -1234,7 +1234,7 @@
 				05D1ED961037BFBB00DB3B3F /* PublicationModel.m in Sources */,
 				05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
-				05D1ED991037BFBB00DB3B3F /* SubscriptionsModel.m in Sources */,
+				05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
 				05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441E10405872001223C4 /* XMPPError.m in Sources */,
 			);
@@ -1328,7 +1328,7 @@
 				05D1ED921037BFBB00DB3B3F /* PublicationModel.m in Sources */,
 				05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
-				05D1ED951037BFBB00DB3B3F /* SubscriptionsModel.m in Sources */,
+				05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
 				05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441D10405872001223C4 /* XMPPError.m in Sources */,
 			);

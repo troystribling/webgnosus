@@ -1,5 +1,5 @@
 //
-//  SubscriptionsModel.h
+//  SubscriptionModel.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/9/09.
@@ -11,7 +11,7 @@
 #import <sqlite3.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface SubscriptionsModel : NSObject {
+@interface SubscriptionModel : NSObject {
     NSInteger pk;
 	NSInteger accountPk;
 	NSInteger subId;

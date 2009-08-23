@@ -1,5 +1,5 @@
 //
-//  SubscriptionsModel.m
+//  SubscriptionModel.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/9/09.
@@ -7,16 +7,16 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "SubscriptionsModel.h"
+#import "SubscriptionModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface SubscriptionsModel (PrivateAPI)
+@interface SubscriptionModel (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation SubscriptionsModel
+@implementation SubscriptionModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
@@ -47,7 +47,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionsModel class] withStatement:@"SELECT * FROM subscriptions" andOutputTo:output];
+	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:@"SELECT * FROM subscriptions" andOutputTo:output];
 	return output;
 }
 
@@ -70,7 +70,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE node = '%@'", self.node];
-	[[WebgnosusDbi instance] selectForModel:[SubscriptionsModel class] withStatement:selectStatement andOutputTo:self];
+	[[WebgnosusDbi instance] selectForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
 
@@ -84,7 +84,7 @@
 }
 
 //===================================================================================================================================
-#pragma mark SubscriptionsModel PrivateAPI
+#pragma mark SubscriptionModel PrivateAPI
 
 //===================================================================================================================================
 #pragma mark WebgnosusDbiDelegate
@@ -110,7 +110,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)collectAllFromResult:(sqlite3_stmt*)result andOutputTo:(NSMutableArray*)output {
-	SubscriptionsModel* model = [[SubscriptionsModel alloc] init];
+	SubscriptionModel* model = [[SubscriptionModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
     [model release];

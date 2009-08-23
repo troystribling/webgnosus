@@ -12,6 +12,10 @@
 #import "ContactModel.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
+#import "ServiceFeatureModel.h"
+#import "SubscriptionModel.h"
+#import "PublicationModel.h"
 
 #import "XMPPClient.h"
 #import "XMPPJID.h"
@@ -35,6 +39,11 @@
 @interface XMPPMessageDelegate (PrivateAPI)
 
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message;
+- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid;
+- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid;
+- (void)save:(XMPPClient*)client subscription:(XMPPPubSubSubscription*)sub;
+- (void)save:(XMPPClient*)client publication:(XMPPDiscoItem*)sub;
+- (void)save:(XMPPClient*)client command:(XMPPDiscoItem*)cmd;
 
 @end
 
@@ -487,6 +496,26 @@
         NSLog(msg);
         [msg release];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client subscription:(XMPPPubSubSubscription*)sub {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client publication:(XMPPDiscoItem*)sub {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client command:(XMPPDiscoItem*)cmd {
 }
 
 //===================================================================================================================================
