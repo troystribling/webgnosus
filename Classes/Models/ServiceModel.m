@@ -1,88 +1,91 @@
 //
-//  PublicationModel.m
+//  ServiceModel.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/9/09.
+//  Created by Troy Stribling on 8/23/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "PublicationModel.h"
+#import "ServiceModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface PublicationModel (PrivateAPI)
+@interface ServiceModel (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation PublicationModel
+@implementation ServiceModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize accountPk;
-@synthesize node;
 @synthesize jid;
+@synthesize serviceName;
+@synthesize serviceCategory;
+@synthesize serviceType;
 
 //===================================================================================================================================
-#pragma mark PublicationModel
+#pragma mark ServiceModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
-	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM publications"];
+	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM services"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE publications"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE services"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE publications (pk integer primary key, node text, jid text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, serviceName text, serviceCategory text, serviceType text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	[[WebgnosusDbi instance] selectAllForModel:[PublicationModel class] withStatement:@"SELECT * FROM publications" andOutputTo:output];
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:@"SELECT * FROM services" andOutputTo:output];
 	return output;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO publications (node, jid, accountPk) values ('%@', '%@', %d)", 
-                                 self.node, self.jid, self.accountPk];	
+	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
+                                 self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM publications WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM services WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
     [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM publications WHERE node = '%@'", self.node];
-	[[WebgnosusDbi instance] selectForModel:[PublicationModel class] withStatement:selectStatement andOutputTo:self];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND accountPk = %d", 
+                                 self.jid, self.accountPk];
+	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET node = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
-            self.node, self.jid, self.accountPk, self.pk];	
+    [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', serviceName = '%@', serviceCategory = '%@', serviceType = '%@', accountPk = %d WHERE pk = %d", 
+     self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
 
 //===================================================================================================================================
-#pragma mark PublicationModel PrivateAPI
+#pragma mark ServiceModel PrivateAPI
 
 //===================================================================================================================================
 #pragma mark WebgnosusDbiDelegate
@@ -90,20 +93,28 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* nodeVal = (char*)sqlite3_column_text(statement, 1);
-	if (nodeVal != nil) {		
-		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
-	}
-	char* jidVal = (char*)sqlite3_column_text(statement, 2);
+	char* jidVal = (char*)sqlite3_column_text(statement, 1);
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 3);
+	char* inameVal = (char*)sqlite3_column_text(statement, 2);
+	if (inameVal != nil) {		
+		self.serviceName = [[NSString alloc] initWithUTF8String:inameVal];
+	}
+	char* categoryVal = (char*)sqlite3_column_text(statement, 3);
+	if (categoryVal != nil) {		
+		self.serviceCategory = [[NSString alloc] initWithUTF8String:categoryVal];
+	}
+	char* typeVal = (char*)sqlite3_column_text(statement, 3);
+	if (typeVal != nil) {		
+		self.serviceType = [[NSString alloc] initWithUTF8String:typeVal];
+	}
+	self.accountPk = (int)sqlite3_column_int(statement, 5);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)collectAllFromResult:(sqlite3_stmt*)result andOutputTo:(NSMutableArray*)output {
-	PublicationModel* model = [[PublicationModel alloc] init];
+	ServiceModel* model = [[ServiceModel alloc] init];
 	[model setAttributesWithStatement:result];
 	[output addObject:model];
     [model release];

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
+		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
@@ -94,11 +96,9 @@
 		05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */; };
 		05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */; };
 		05D1ED881037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */; };
-		05D1ED921037BFBB00DB3B3F /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */; };
 		05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
 		05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
-		05D1ED961037BFBB00DB3B3F /* PublicationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */; };
 		05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
 		05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
@@ -260,6 +260,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
+		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
@@ -331,8 +333,6 @@
 		05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptions.m; sourceTree = "<group>"; };
 		05D1ED771037BEF200DB3B3F /* XMPPPubSupOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSupOwner.h; sourceTree = "<group>"; };
 		05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSupOwner.m; sourceTree = "<group>"; };
-		05D1ED8A1037BFBB00DB3B3F /* PublicationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicationModel.h; sourceTree = "<group>"; };
-		05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicationModel.m; sourceTree = "<group>"; };
 		05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceFeatureModel.h; sourceTree = "<group>"; };
 		05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFeatureModel.m; sourceTree = "<group>"; };
 		05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
@@ -588,14 +588,14 @@
 				05CE073F0FB909CA0036DF5E /* ContactModel.m */,
 				05CE07400FB909CA0036DF5E /* MessageModel.h */,
 				05CE07410FB909CA0036DF5E /* MessageModel.m */,
-				05D1ED8A1037BFBB00DB3B3F /* PublicationModel.h */,
-				05D1ED8B1037BFBB00DB3B3F /* PublicationModel.m */,
 				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
 				05CE07450FB909CA0036DF5E /* RosterItemModel.m */,
 				05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */,
 				05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */,
 				05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */,
 				05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */,
+				050410F91041C8C2004F7660 /* ServiceModel.h */,
+				050410FA1041C8C2004F7660 /* ServiceModel.m */,
 				05D1ED901037BFBB00DB3B3F /* SubscriptionModel.h */,
 				05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */,
 				05CE07460FB909CA0036DF5E /* UserModel.h */,
@@ -1231,12 +1231,12 @@
 				05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */,
 				05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */,
 				05D1ED881037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */,
-				05D1ED961037BFBB00DB3B3F /* PublicationModel.m in Sources */,
 				05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
 				05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
 				05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441E10405872001223C4 /* XMPPError.m in Sources */,
+				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1325,12 +1325,12 @@
 				05D1ED7E1037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */,
 				05D1ED7F1037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */,
 				05D1ED801037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */,
-				05D1ED921037BFBB00DB3B3F /* PublicationModel.m in Sources */,
 				05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
 				05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
 				05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441D10405872001223C4 /* XMPPError.m in Sources */,
+				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

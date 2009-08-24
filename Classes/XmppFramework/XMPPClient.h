@@ -134,6 +134,5 @@
 - (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didDiscoverCommandNodes:(XMPPIQ*)iq;
 
 @end

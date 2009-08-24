@@ -14,21 +14,21 @@
 @interface ServiceItemModel : NSObject {
     NSInteger pk;
 	NSInteger accountPk;
+    NSString* parentNode;
+    NSString* service;
     NSString* node;
     NSString* jid;
-    NSString* iname;
-    NSString* category;
-    NSString* type;
+    NSString* itemName;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger accountPk;
+@property (nonatomic, retain) NSString* parentNode;
+@property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* jid;
-@property (nonatomic, retain) NSString* iname;
-@property (nonatomic, retain) NSString* category;
-@property (nonatomic, retain) NSString* type;
+@property (nonatomic, retain) NSString* itemName;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;

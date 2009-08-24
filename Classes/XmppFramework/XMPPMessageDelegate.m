@@ -14,8 +14,8 @@
 #import "AccountModel.h"
 #import "ServiceItemModel.h"
 #import "ServiceFeatureModel.h"
+#import "ServiceModel.h"
 #import "SubscriptionModel.h"
-#import "PublicationModel.h"
 
 #import "XMPPClient.h"
 #import "XMPPJID.h"
@@ -39,11 +39,10 @@
 @interface XMPPMessageDelegate (PrivateAPI)
 
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message;
-- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid;
-- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid;
+- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
+- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
+- (void)save:(XMPPClient*)client service:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID;
 - (void)save:(XMPPClient*)client subscription:(XMPPPubSubSubscription*)sub;
-- (void)save:(XMPPClient*)client publication:(XMPPDiscoItem*)sub;
-- (void)save:(XMPPClient*)client command:(XMPPDiscoItem*)cmd;
 
 @end
 
@@ -62,7 +61,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)accountForXMPPClient:(XMPPClient*)client {
-    return [AccountModel findByFullJid:[client.myJID full]];
+    return [[AccountModel findByFullJid:[client.myJID full]] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -405,15 +404,17 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsResult"];
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
 	NSString* node = [query node];
-    NSArray* items = [query items];		
+    NSArray* items = [query items];	
+	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-        if ([[[iq fromJID] full] isEqualToString:[[client myJID] domain]]) { 
+        if ([[serviceJID full] isEqualToString:[[client myJID] domain]]) { 
             [XMPPDiscoInfoQuery get:client JID:[item JID]];
         } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item];
+            [self save:client serviceItem:item forService:serviceJID andParentNode:node];
         } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
-            [[client multicastDelegate] xmppClient:client didDiscoverCommandNodes:item];
+            [self save:client serviceItem:item forService:serviceJID andParentNode:node];
         }
     }
 }
@@ -439,6 +440,7 @@
     NSArray* identities = [query identities];	
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
+        [self save:client service:identity forService:[iq fromJID]];
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
             [[client multicastDelegate] xmppClient:client didDiscoverPubSubService:iq];
         }
@@ -481,11 +483,6 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverCommandNodes:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didDiscoverCommandNodes"];
-}
-
 //===================================================================================================================================
 #pragma mark XMPPMessageDelegate PrivateApi
 
@@ -499,23 +496,42 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid {
+- (void)save:(XMPPClient*)client service:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ServiceModel* service = [[ServiceModel alloc] init];
+        service.accountPk = account.pk;
+        service.jid = [serviceJID full];
+        service.serviceName = [ident iname];
+        service.serviceCategory = [ident category];
+        service.serviceType = [ident type];
+        [service insert];
+        [service release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)item forService:(XMPPJID*)jid {
+- (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
+        serviceItem.accountPk = account.pk;
+        serviceItem.parentNode = parent;
+        serviceItem.itemName = [item iname];
+        serviceItem.jid = [[item JID] full];
+        serviceItem.service = [serviceJID full];
+        serviceItem.node = [item node];
+        [serviceItem insert];
+        [serviceItem release];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID  andParentNode:(NSString*)parent {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client subscription:(XMPPPubSubSubscription*)sub {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)save:(XMPPClient*)client publication:(XMPPDiscoItem*)sub {
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)save:(XMPPClient*)client command:(XMPPDiscoItem*)cmd {
 }
 
 //===================================================================================================================================

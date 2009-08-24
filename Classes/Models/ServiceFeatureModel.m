@@ -20,7 +20,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
-@synthesize serviceItemPk;
+@synthesize accountPk;
+@synthesize parentNode;
+@synthesize service;
 @synthesize var;
 
 //===================================================================================================================================
@@ -38,7 +40,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, var text, serviceItemPk integer, FOREIGN KEY (serviceItemPk) REFERENCES serviceItems(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -51,7 +53,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (var, serviceItemPk) values ('%@', %d)", self.var, self.serviceItemPk];	
+	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, accountPk) values ('%@', '%@', '%@', %d)", 
+                                 self.parentNode, self.service, self.var, self.accountPk];	
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }
@@ -65,7 +68,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE var = '%@' AND serviceItemPk = %d", self.var, self.serviceItemPk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@' AND accountPk = %d", 
+                                 self.parentNode, self.service, self.var, self.accountPk];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
@@ -73,7 +77,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET var = '%@', serviceItemPk = %d WHERE pk = %d", self.var, self.serviceItemPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', accountPk = %d WHERE pk = %d", 
+         self.parentNode, self.service, self.var, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
@@ -87,11 +92,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* varVal = (char*)sqlite3_column_text(statement, 1);
+	char* parentNodeVal = (char*)sqlite3_column_text(statement, 1);
+	if (parentNodeVal != nil) {		
+		self.parentNode = [[NSString alloc] initWithUTF8String:parentNodeVal];
+	}
+	char* serviceVal = (char*)sqlite3_column_text(statement, 2);
+	if (serviceVal != nil) {		
+		self.service = [[NSString alloc] initWithUTF8String:serviceVal];
+	}
+	char* varVal = (char*)sqlite3_column_text(statement, 3);
 	if (varVal != nil) {		
 		self.var = [[NSString alloc] initWithUTF8String:varVal];
 	}
-	self.serviceItemPk = (int)sqlite3_column_int(statement, 2);
+	self.accountPk = (int)sqlite3_column_int(statement, 4);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
