@@ -33,6 +33,7 @@
 #import "XMPPCommand.h"
 #import "XMPPError.h"
 #import "XMPPPubSubSubscription.h"
+#import "XMPPPubSubSubscriptions.h"
 #import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,6 +175,7 @@
     [XMPPRosterQuery get:client];
     [XMPPPresence goOnline:client withPriority:(NSInteger)1];
     [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]]];
+    [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -438,6 +440,8 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoResult"];
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
     NSArray* identities = [query identities];	
+	NSString* node = [query node];
+	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
         [self save:client service:identity forService:[iq fromJID]];
@@ -448,6 +452,7 @@
     NSArray* features = [query features];		
     for(int i = 0; i < [features count]; i++) {
         XMPPDiscoFeature* feature = [XMPPDiscoFeature createFromElement:(NSXMLElement *)[features objectAtIndex:i]];
+        [self save:client serviceFeature:feature forService:serviceJID andParentNode:node];
     }
 }
 
@@ -460,7 +465,7 @@
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:[XMPPMessageDelegate userPubSubRoot:client]];
-    [XMPPPubSubSubscription get:client JID:[iq fromJID]];
+    [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -481,6 +486,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
+    XMPPPubSub* pubsub = [iq pubsub];
+    NSArray* subscriptions = [pubsub subscriptions];	
+    for(int i = 0; i < [subscriptions count]; i++) {
+        XMPPPubSubSubscription* subscription = [XMPPPubSubSubscription createFromElement:(NSXMLElement *)[subscriptions objectAtIndex:i]];
+        [self save:client subscription:subscription];
+    }
 }
 
 //===================================================================================================================================
@@ -527,11 +538,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID  andParentNode:(NSString*)parent {
+- (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
+        serviceFeature.accountPk = account.pk;
+        serviceFeature.parentNode = parent;
+        serviceFeature.var = [feature var];
+        serviceFeature.service = [serviceJID full];
+        [serviceFeature insert];
+        [serviceFeature release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client subscription:(XMPPPubSubSubscription*)sub {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
+        subModel.accountPk = account.pk;
+        subModel.node = [sub node];
+        subModel.subId = [sub subId];
+        subModel.jid = [[sub JID] full];
+        subModel.subscription = [sub subscription];
+        [subModel insert];
+        [subModel release];
+    }
 }
 
 //===================================================================================================================================

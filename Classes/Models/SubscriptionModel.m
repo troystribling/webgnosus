@@ -54,8 +54,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
-                                 self.subId, self.node, self.subscription, self.jid, self.accountPk];	
+    NSString* insertStatement;
+    if (self.jid) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
+                            self.subId, self.node, self.subscription, self.jid, self.accountPk];	
+    } else {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, accountPk) values (%d, '%@', '%@', %d)", 
+                           self.subId, self.node, self.subscription, self.accountPk];	
+    }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }

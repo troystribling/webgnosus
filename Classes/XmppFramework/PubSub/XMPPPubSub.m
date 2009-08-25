@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSub.h"
+#import "XMPPPubSubSubscription.h"
+#import "XMPPPubSubSubscriptions.h"
+#import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSub
@@ -33,6 +36,22 @@
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub"]];
 	}
 	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSArray*)subscriptions {
+    NSArray* subsArray = nil;
+    NSXMLElement* subsElement = [self elementForName:@"subscriptions"];
+    if (subsElement) {
+        subsArray = [[XMPPPubSubSubscriptions createFromElement:subsElement] subscriptions];
+    }
+    [self elementsForName:@"subscription"];
+    return subsArray;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addSubscription:(XMPPPubSubSubscriptions*)val {
+    [self addChild:val];
 }
 
 @end

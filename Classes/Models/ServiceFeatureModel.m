@@ -53,8 +53,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, accountPk) values ('%@', '%@', '%@', %d)", 
-                                 self.parentNode, self.service, self.var, self.accountPk];	
+    NSString* insertStatement;
+    if (self.parentNode) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, accountPk) values ('%@', '%@', '%@', %d)", 
+                           self.parentNode, self.service, self.var, self.accountPk];	
+    } else {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (service, var, accountPk) values ('%@', '%@', %d)", 
+                           self.service, self.var, self.accountPk];	
+    }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }
