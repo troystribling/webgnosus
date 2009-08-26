@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceModel.h"
+#import "AccountModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,11 +52,25 @@
 	return output;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllByAccount:(AccountModel*)account {
+	NSString* deleteStatement = 
+    [[NSString alloc] initWithFormat:@"DELETE FROM services WHERE accountPk = %d", account.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
-                                 self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk];	
+    NSString* insertStatement;
+    if (self.serviceName) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
+                           self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk];	
+    } else {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', %d)", 
+                           self.jid, self.serviceCategory, self.serviceType, self.accountPk];	
+    }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }

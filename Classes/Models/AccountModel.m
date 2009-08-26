@@ -11,6 +11,10 @@
 #import "ContactModel.h"
 #import "RosterItemModel.h"
 #import "MessageModel.h"
+#import "SubscriptionModel.h"
+#import "ServiceModel.h"
+#import "ServiceFeatureModel.h"
+#import "ServiceItemModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -199,6 +203,10 @@
     [ContactModel destroyAllByAccount:self];
     [RosterItemModel destroyAllByAccount:self];
     [MessageModel destroyAllByAccount:self];
+    [ServiceFeatureModel destroyAllByAccount:self];
+    [ServiceItemModel destroyAllByAccount:self];
+    [ServiceModel destroyAllByAccount:self];
+    [SubscriptionModel destroyAllByAccount:self];
 	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];

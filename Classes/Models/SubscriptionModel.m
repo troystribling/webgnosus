@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "SubscriptionModel.h"
+#import "AccountModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,6 +50,14 @@
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:@"SELECT * FROM subscriptions" andOutputTo:output];
 	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllByAccount:(AccountModel*)account {
+	NSString* deleteStatement = 
+    [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", account.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

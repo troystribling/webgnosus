@@ -67,14 +67,14 @@
 #pragma mark XMPPDiscoItemsQuery Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client  JID:(XMPPJID*)jid {
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] init]];
     [client sendElement:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client  JID:(XMPPJID*)jid andNode:(NSString*)node {
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid andNode:(NSString*)node {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] initWithNode:node]];
     [client sendElement:iq];

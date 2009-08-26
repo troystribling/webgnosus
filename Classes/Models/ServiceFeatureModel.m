@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceFeatureModel.h"
+#import "AccountModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +49,14 @@
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceFeatureModel class] withStatement:@"SELECT * FROM serviceFeatures" andOutputTo:output];
 	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllByAccount:(AccountModel*)account {
+	NSString* deleteStatement = 
+    [[NSString alloc] initWithFormat:@"DELETE FROM serviceFeatures WHERE accountPk = %d", account.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

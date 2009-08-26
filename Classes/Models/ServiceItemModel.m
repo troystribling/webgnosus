@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceItemModel.h"
+#import "AccountModel.h"
 #import "WebgnosusDbi.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,11 +53,25 @@
 	return output;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllByAccount:(AccountModel*)account {
+	NSString* deleteStatement = 
+    [[NSString alloc] initWithFormat:@"DELETE FROM serviceItems WHERE accountPk = %d", account.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+    [deleteStatement release];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d)", 
-                                    self.parentNode, self.service, self.node, self.jid, self.itemName, self.accountPk];	
+    NSString* insertStatement;
+    if (self.parentNode) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d)", 
+                            self.parentNode, self.service, self.node, self.jid, self.itemName, self.accountPk];	
+    } else {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
+                           self.service, self.node, self.jid, self.itemName, self.accountPk];	
+    }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
 }

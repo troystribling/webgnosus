@@ -25,6 +25,10 @@
 #import "ActivityView.h"
 #import "ContactModel.h"
 #import "RosterItemModel.h"
+#import "SubscriptionModel.h"
+#import "ServiceModel.h"
+#import "ServiceFeatureModel.h"
+#import "ServiceItemModel.h"
 #import "AlertViewManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +75,10 @@
         [account update];
         [RosterItemModel destroyAllByAccount:account];
         [ContactModel destroyAllByAccount:account];
+        [ServiceFeatureModel destroyAllByAccount:account];
+        [ServiceItemModel destroyAllByAccount:account];
+        [ServiceModel destroyAllByAccount:account];
+        [SubscriptionModel destroyAllByAccount:account];
         [[XMPPClientManager instance] openConnectionForAccount:account];
     }
 }

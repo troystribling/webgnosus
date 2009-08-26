@@ -411,7 +411,13 @@
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
         if ([[serviceJID full] isEqualToString:[[client myJID] domain]]) { 
-            [XMPPDiscoInfoQuery get:client JID:[item JID]];
+            NSString* node = [item node];
+            if (node) {
+                [XMPPDiscoInfoQuery get:client JID:[item JID] andNode:node];
+                [self save:client serviceItem:item forService:serviceJID andParentNode:nil];
+            } else {
+                [XMPPDiscoInfoQuery get:client JID:[item JID]];
+            }
         } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item];
             [self save:client serviceItem:item forService:serviceJID andParentNode:node];
@@ -444,7 +450,9 @@
 	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
-        [self save:client service:identity forService:[iq fromJID]];
+        if (node == nil) {
+            [self save:client service:identity forService:[iq fromJID]];
+        }
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
             [[client multicastDelegate] xmppClient:client didDiscoverPubSubService:iq];
         }
