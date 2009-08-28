@@ -19,6 +19,7 @@
 #import "WebgnosusDbi.h"
 #import "RosterViewController.h"
 #import "AccountsViewController.h"
+#import "EditAccountViewController.h"
 #import "HistoryViewController.h"
 #import "AcceptBuddyRequestView.h"
 #import "AccountModel.h"
@@ -37,6 +38,7 @@
 - (void)openActivatedAccounts;
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController;
 - (void)accountConnectionFailedForClient:(XMPPClient*)sender;
+- (void)createTabBarController;
 
 @end
 
@@ -47,10 +49,12 @@
 @synthesize window;
 @synthesize rosterViewController;
 @synthesize historyViewController;
+@synthesize editAccountViewController;
 @synthesize accountsViewController;
 
 @synthesize tabBarController;
 @synthesize navAccountsViewController;
+@synthesize navEditAccountViewController;
 @synthesize navRosterViewController;
 @synthesize navHistoryViewController;
 
@@ -90,6 +94,18 @@
     return navController;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createTabBarController {
+    self.tabBarController = [[UITabBarController alloc] init];	
+    self.navRosterViewController = [self createNavigationController:self.rosterViewController];
+    self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
+    self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
+    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-streams.png"] tag:0];
+    self.navEditAccountViewController = [self createNavigationController:self.editAccountViewController];	
+    self.navEditAccountViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Configure" image:[UIImage imageNamed:@"tabbar-accounts.png"] tag:2];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navHistoryViewController, self.navEditAccountViewController, nil];	
+}
+
 //===================================================================================================================================
 #pragma mark UIApplicationDelegate
 
@@ -104,15 +120,18 @@
 	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
 	[[XMPPClientManager instance] addDelegate:self];
     [self openActivatedAccounts];
-    self.tabBarController = [[UITabBarController alloc] init];	
-	self.navRosterViewController = [self createNavigationController:self.rosterViewController];
-    self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
-	self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
-    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-streams.png"] tag:0];
-	self.navAccountsViewController = [self createNavigationController:self.accountsViewController];	
-    self.navAccountsViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Accounts" image:[UIImage imageNamed:@"tabbar-accounts.png"] tag:2];
-	self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navHistoryViewController, self.navAccountsViewController, nil];	
-	[window addSubview:tabBarController.view];	
+    [self createTabBarController];
+    UIView* subView;
+    AccountModel* account = [AccountModel findFirstDisplayed];
+    if (account) {
+        subView = self.tabBarController.view;  
+    } else {
+        self.navAccountsViewController = [self createNavigationController:self.accountsViewController];	
+        self.accountsViewController.accountTabBarController = self.tabBarController;
+        [self.navAccountsViewController pushViewController:self.accountsViewController animated:YES]; 
+        subView = self.navAccountsViewController.view;  
+    }
+	[window addSubview:subView];	
     [window makeKeyAndVisible];
 }
 

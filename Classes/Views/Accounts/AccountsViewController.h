@@ -15,11 +15,13 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountsViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
 	UIBarButtonItem* addAccountButton;
+    UITabBarController* accountTabBarController;
 	NSMutableArray* accounts;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* addAccountButton;
+@property (nonatomic, retain) UITabBarController* accountTabBarController;
 @property (nonatomic, retain) NSMutableArray* accounts;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

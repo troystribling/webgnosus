@@ -27,13 +27,15 @@ typedef enum {
 @interface AccountModel : UserModel {
 	NSString* password;
 	BOOL activated;
-    AccountConnectionState connectionState;
+    BOOL displayed;
     NSInteger port;
+    AccountConnectionState connectionState;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSString* password;
 @property (nonatomic, assign) BOOL activated;
+@property (nonatomic, assign) BOOL displayed;
 @property (nonatomic, assign) AccountConnectionState connectionState;
 @property (nonatomic, assign) NSInteger port;
 
@@ -46,11 +48,13 @@ typedef enum {
 + (NSMutableArray*)findAllActivated;
 + (NSMutableArray*)findAllActivatedByConnectionState:(AccountConnectionState)connectionState;
 + (AccountModel*)findFirst;
++ (AccountModel*)findFirstDisplayed;
 + (AccountModel*)findByPk:(NSInteger)requestPk;
 + (AccountModel*)findByFullJid:(NSString*)requestFullJid;
 + (AccountModel*)findByJid:(NSString*)requestJid andResource:(NSString*)requestResource;
 + (BOOL)triedToConnectAll;
 + (NSMutableArray*)findAllReady;
++ (void)setAllNotDisplayed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -59,6 +63,8 @@ typedef enum {
 - (void)update;
 - (NSInteger)activatedAsInteger;
 - (void)setActivatedAsInteger:(NSInteger)value;
+- (NSInteger)displayedAsInteger;
+- (void)setDisplayedAsInteger:(NSInteger)value;
 - (BOOL)isReady;
 - (BOOL)hasError;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;

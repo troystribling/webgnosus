@@ -28,6 +28,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize password;
 @synthesize activated;
+@synthesize displayed;
 @synthesize connectionState;
 @synthesize port;
 
@@ -45,13 +46,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)displayedCount {
+	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM accounts WHERE displayed = 1"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE accounts"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, jid text, password text, resource text, nickname text, host text, activated integer, connectionState integer, port integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, jid text, password text, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -65,6 +71,21 @@
 + (AccountModel*)findFirst {
 	AccountModel* model = [[AccountModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts LIMIT 1" andOutputTo:model];
+    if (model.pk == 0) {
+        [model release];
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (AccountModel*)findFirstDisplayed {
+	AccountModel* model = [[AccountModel alloc] init];
+	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts WHERE displayed = 1 LIMIT 1" andOutputTo:model];
+    if (model.pk == 0) {
+        [model release];
+        model = nil;
+    }
 	return model;
 }
 
@@ -80,6 +101,7 @@
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
+        [model release];
         model = nil;
     }
 	return model;
@@ -151,18 +173,23 @@
     return output;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)setAllNotDisplayed {
+    [[WebgnosusDbi instance]  updateWithStatement:@"UPDATE accounts SET displayed = 0 WHERE displayed = 1"];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
 	NSString* insertStatement;
 	if (self.resource) {
 		insertStatement = 
-			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d)",
-                self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port];	
+			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d, %d)",
+                self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	} else {
 		insertStatement = 
-			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d)", 
-                self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port];	
+			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d, %d)", 
+                self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
@@ -173,12 +200,12 @@
 	NSString* updateStatement;
 	if (self.resource) {
 		updateStatement = 
-			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port, self.pk];	
+			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	} else {
 		updateStatement = 
-			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], self.connectionState, self.port, self.pk];	
+			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
@@ -195,6 +222,20 @@
 		self.activated = YES; 
 	} else {
 		self.activated = NO;
+	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)displayedAsInteger {
+	return self.displayed == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setDisplayedAsInteger:(NSInteger)value {
+	if (value == 1) {
+		self.displayed = YES; 
+	} else {
+		self.displayed = NO;
 	};
 }
 
@@ -270,8 +311,9 @@
 		self.host = [[NSString alloc] initWithUTF8String:hostVal];
 	}
 	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 6)];
-	self.connectionState = (int)sqlite3_column_int(statement, 7);
-	self.port = (int)sqlite3_column_int(statement, 8);
+	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 7)];
+	self.connectionState = (int)sqlite3_column_int(statement, 8);
+	self.port = (int)sqlite3_column_int(statement, 9);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

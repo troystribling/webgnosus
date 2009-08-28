@@ -32,7 +32,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidTextField;
 @synthesize passwordTextField;
-@synthesize activationSwitch;
 @synthesize optionsButton;
 @synthesize account;
 @synthesize host;
@@ -57,7 +56,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)accountConnectionFailed:(NSString*)title {
     [self.account destroy];
-	[self.activationSwitch setOn:NO animated:YES];
     [AlertViewManager dismissConnectionIndicator]; 
     [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
@@ -135,7 +133,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL shouldReturn = YES;
 	NSString* enteredJid = self.jidTextField.text;
 	NSString* enteredPassword = self.passwordTextField.text;
 	NSArray* splitJid = [enteredJid componentsSeparatedByString:@"@"];
@@ -143,7 +140,8 @@
 	if ([splitJid count] == 2 && oldAccount == nil) {
 		self.account.jid = enteredJid;
 		self.account.password = enteredPassword;
-        self.account.activated = self.activationSwitch.on;
+        self.account.activated = YES;
+        self.account.displayed = NO;
         self.account.connectionState = AccountNotConnected;
 		if ([self.host isEqualToString:@""] || self.host == nil) {
 			self.account.host = [splitJid objectAtIndex:1];
@@ -165,11 +163,8 @@
 		} else {
 			self.account.port = self.port;
         }
-        if (self.activationSwitch.on) {
-            [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-            [AlertViewManager showConnectingIndicatorInView:self.view];
-            shouldReturn = NO;
-        }     
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        [AlertViewManager showConnectingIndicatorInView:self.view];
         [self.account insert];
         [self.account load];
 	} else {
@@ -178,12 +173,8 @@
         } else {
             [AlertViewManager showAlert:@"JID is Invalid"];
         }
-		shouldReturn = NO;
 	}
-	if (shouldReturn) {
-		[self exitView];
-	}
-	return shouldReturn; 
+	return NO; 
 }
 
 //===================================================================================================================================

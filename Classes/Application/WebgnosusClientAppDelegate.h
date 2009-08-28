@@ -13,16 +13,19 @@
 @class RosterViewController;
 @class AccountsViewController;
 @class HistoryViewController;
+@class EditAccountViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface WebgnosusClientAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
     IBOutlet UIWindow* window;
     IBOutlet RosterViewController* rosterViewController;
     IBOutlet AccountsViewController* accountsViewController;
+    IBOutlet EditAccountViewController* editAccountViewController;
 	IBOutlet HistoryViewController* historyViewController;
 
     UITabBarController* tabBarController;
     UINavigationController* navAccountsViewController;
+    UINavigationController* navEditAccountViewController;
     UINavigationController* navRosterViewController;	
     UINavigationController* navHistoryViewController;	
 }
@@ -30,11 +33,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIWindow* window;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;
+@property (nonatomic, retain) EditAccountViewController* editAccountViewController;;
 @property (nonatomic, retain) RosterViewController* rosterViewController;
 @property (nonatomic, retain) HistoryViewController* historyViewController;
 
 @property (nonatomic, retain) UITabBarController* tabBarController;
 @property (nonatomic, retain) UINavigationController* navAccountsViewController;
+@property (nonatomic, retain) UINavigationController* navEditAccountViewController;
 @property (nonatomic, retain) UINavigationController* navRosterViewController;
 @property (nonatomic, retain) UINavigationController* navHistoryViewController;
 
