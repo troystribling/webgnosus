@@ -18,7 +18,7 @@
 #import "WebgnosusClientAppDelegate.h"
 #import "WebgnosusDbi.h"
 #import "RosterViewController.h"
-#import "AccountsViewController.h"
+#import "AccountSelectionViewController.h"
 #import "EditAccountViewController.h"
 #import "HistoryViewController.h"
 #import "AcceptBuddyRequestView.h"
@@ -50,7 +50,7 @@
 @synthesize rosterViewController;
 @synthesize historyViewController;
 @synthesize editAccountViewController;
-@synthesize accountsViewController;
+@synthesize accountSelectionViewController;
 
 @synthesize tabBarController;
 @synthesize navAccountsViewController;
@@ -121,17 +121,7 @@
 	[[XMPPClientManager instance] addDelegate:self];
     [self openActivatedAccounts];
     [self createTabBarController];
-    UIView* subView;
-    AccountModel* account = [AccountModel findFirstDisplayed];
-    if (account) {
-        subView = self.tabBarController.view;  
-    } else {
-        self.navAccountsViewController = [self createNavigationController:self.accountsViewController];	
-        self.accountsViewController.accountTabBarController = self.tabBarController;
-        [self.navAccountsViewController pushViewController:self.accountsViewController animated:YES]; 
-        subView = self.navAccountsViewController.view;  
-    }
-	[window addSubview:subView];	
+	[window addSubview:self.tabBarController.view];	
     [window makeKeyAndVisible];
 }
 
@@ -155,7 +145,7 @@
 - (void)dealloc {
 	[self.historyViewController release]; 
 	[self.rosterViewController release];
-	[self.accountsViewController release]; 
+	[self.accountSelectionViewController release]; 
 	[self.navHistoryViewController release];
 	[self.navRosterViewController release];
 	[self.navAccountsViewController release];
@@ -166,6 +156,14 @@
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
+    AccountModel* account = [AccountModel findFirstDisplayed];
+    if (!account) {
+        [window addSubview:self.accountSelectionViewController.view];	
+    }
+}
 
 //===================================================================================================================================
 #pragma mark Message

@@ -68,12 +68,16 @@
 		05CE075E0FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
 		05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075A0FB909DB0036DF5E /* AsyncSocket.m */; };
 		05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
-		05CE076B0FB90A280036DF5E /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07640FB90A280036DF5E /* ActivityView.m */; };
 		05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
 		05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
-		05CE076F0FB90A280036DF5E /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07640FB90A280036DF5E /* ActivityView.m */; };
 		05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
 		05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
+		05CF60B51048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
+		05CF60B61048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
+		05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
+		05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
+		05CF616E1048B141003E012F /* AccountSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountSelectionViewController.xib */; };
+		05CF616F1048B141003E012F /* AccountSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountSelectionViewController.xib */; };
 		05D1EC481037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC491037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC4D1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
@@ -202,7 +206,7 @@
 		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
-		05E207EE0FB9046500FCFC94 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountsViewController.m */; };
+		05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
@@ -225,7 +229,7 @@
 		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E208090FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
-		05E2080B0FB9046500FCFC94 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountsViewController.m */; };
+		05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
@@ -305,12 +309,15 @@
 		05CE075A0FB909DB0036DF5E /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		05CE075B0FB909DB0036DF5E /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		05CE07630FB90A280036DF5E /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
-		05CE07640FB90A280036DF5E /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		05CE07650FB90A280036DF5E /* NSObjectiPhoneAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectiPhoneAdditions.h; sourceTree = "<group>"; };
 		05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectiPhoneAdditions.m; sourceTree = "<group>"; };
 		05CE07690FB90A280036DF5E /* UICustomSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomSwitch.h; sourceTree = "<group>"; };
 		05CE076A0FB90A280036DF5E /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
+		05CF60B31048A413003E012F /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		05CF60B41048A413003E012F /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		05CF61691048AF3D003E012F /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		05CF616A1048AF3D003E012F /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		05CF616D1048B141003E012F /* AccountSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSelectionViewController.xib; sourceTree = "<group>"; };
 		05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageDelegate.h; sourceTree = "<group>"; };
 		05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageDelegate.m; sourceTree = "<group>"; };
 		05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewManager.h; sourceTree = "<group>"; };
@@ -428,8 +435,8 @@
 		05E207AF0FB9046500FCFC94 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
 		05E207B00FB9046500FCFC94 /* AccountOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOptionsController.h; sourceTree = "<group>"; };
 		05E207B10FB9046500FCFC94 /* AccountOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOptionsController.m; sourceTree = "<group>"; };
-		05E207B20FB9046500FCFC94 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
-		05E207B30FB9046500FCFC94 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		05E207B20FB9046500FCFC94 /* AccountSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelectionViewController.h; sourceTree = "<group>"; };
+		05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelectionViewController.m; sourceTree = "<group>"; };
 		05E207B40FB9046500FCFC94 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
 		05E207B50FB9046500FCFC94 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		05E207B60FB9046500FCFC94 /* EditAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountViewController.h; sourceTree = "<group>"; };
@@ -620,8 +627,6 @@
 		05CE07620FB90A280036DF5E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				05CE07630FB90A280036DF5E /* ActivityView.h */,
-				05CE07640FB90A280036DF5E /* ActivityView.m */,
 				05CE07650FB90A280036DF5E /* NSObjectiPhoneAdditions.h */,
 				05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */,
 				05CE07690FB90A280036DF5E /* UICustomSwitch.h */,
@@ -682,6 +687,7 @@
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
 				05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */,
 				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
+				05CF616D1048B141003E012F /* AccountSelectionViewController.xib */,
 			);
 			name = ViewControllers;
 			path = Resources/Views/ViewControllers;
@@ -852,6 +858,8 @@
 				05E207C70FB9046500FCFC94 /* Grid */,
 				05E207D00FB9046500FCFC94 /* MessageCells */,
 				05E207E10FB9046500FCFC94 /* Roster */,
+				05CF60B31048A413003E012F /* ActivityView.h */,
+				05CF60B41048A413003E012F /* ActivityView.m */,
 				05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */,
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
@@ -863,12 +871,14 @@
 		05E207AD0FB9046500FCFC94 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				05CF61691048AF3D003E012F /* AccountsViewController.h */,
+				05CF616A1048AF3D003E012F /* AccountsViewController.m */,
 				05E207AE0FB9046500FCFC94 /* AccountCell.h */,
 				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
 				05E207B00FB9046500FCFC94 /* AccountOptionsController.h */,
 				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
-				05E207B20FB9046500FCFC94 /* AccountsViewController.h */,
-				05E207B30FB9046500FCFC94 /* AccountsViewController.m */,
+				05E207B20FB9046500FCFC94 /* AccountSelectionViewController.h */,
+				05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */,
 				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
@@ -1103,6 +1113,7 @@
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59180FD1C3600068BC5C /* account-error-led.jpg in Resources */,
 				05EE59950FD21B110068BC5C /* Default.png in Resources */,
+				05CF616E1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,6 +1151,7 @@
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */,
 				05EE59940FD21B110068BC5C /* Default.png in Resources */,
+				05CF616F1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,7 +1195,7 @@
 				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
-				05E207EE0FB9046500FCFC94 /* AccountsViewController.m in Sources */,
+				05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
@@ -1212,7 +1224,6 @@
 				05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
 				05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */,
 				05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */,
-				05CE076F0FB90A280036DF5E /* ActivityView.m in Sources */,
 				05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
 				05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */,
 				053480FF10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */,
@@ -1237,6 +1248,8 @@
 				05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441E10405872001223C4 /* XMPPError.m in Sources */,
 				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
+				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
+				05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,7 +1290,7 @@
 				05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E208090FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
-				05E2080B0FB9046500FCFC94 /* AccountsViewController.m in Sources */,
+				05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
@@ -1306,7 +1319,6 @@
 				05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
 				05CE075D0FB909DB0036DF5E /* AsyncSocket.m in Sources */,
 				05CE075E0FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */,
-				05CE076B0FB90A280036DF5E /* ActivityView.m in Sources */,
 				05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
 				05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */,
 				053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */,
@@ -1331,6 +1343,8 @@
 				05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */,
 				05F0441D10405872001223C4 /* XMPPError.m in Sources */,
 				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
+				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
+				05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

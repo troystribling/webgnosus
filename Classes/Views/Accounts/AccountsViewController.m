@@ -127,7 +127,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     AccountModel* account = [self.accounts objectAtIndex:indexPath.row];
     AccountCell* cell = (AccountCell*)[CellUtils createCell:[AccountCell class] forTableView:tableView];
-    cell.jidLabel.text = [[NSString alloc] initWithString:account.jid];
+    cell.jidLabel.text = [[NSString alloc] initWithString:account.nickname];
     if ([account isReady]) {
         cell.connectedImage.image = [UIImage imageNamed:@"account-on-led.jpg"];
     } else if([account hasError]) {

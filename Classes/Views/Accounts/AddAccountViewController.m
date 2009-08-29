@@ -154,7 +154,7 @@
 			self.account.resource = self.resource;
         }
 		if ([self.nickname isEqualToString:@""] || self.nickname == nil) {
-			self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account fullJID]];
+			self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
 		} else {
 			self.account.nickname = self.nickname;
         }

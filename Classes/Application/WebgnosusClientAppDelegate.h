@@ -11,7 +11,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class RosterViewController;
-@class AccountsViewController;
+@class AccountSelectionViewController;
 @class HistoryViewController;
 @class EditAccountViewController;
 
@@ -19,7 +19,7 @@
 @interface WebgnosusClientAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
     IBOutlet UIWindow* window;
     IBOutlet RosterViewController* rosterViewController;
-    IBOutlet AccountsViewController* accountsViewController;
+    IBOutlet AccountSelectionViewController* accountSelectionViewController;
     IBOutlet EditAccountViewController* editAccountViewController;
 	IBOutlet HistoryViewController* historyViewController;
 
@@ -32,7 +32,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIWindow* window;
-@property (nonatomic, retain) AccountsViewController* accountsViewController;
+@property (nonatomic, retain) AccountSelectionViewController* accountSelectionViewController;
 @property (nonatomic, retain) EditAccountViewController* editAccountViewController;;
 @property (nonatomic, retain) RosterViewController* rosterViewController;
 @property (nonatomic, retain) HistoryViewController* historyViewController;
