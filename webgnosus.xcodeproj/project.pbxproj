@@ -36,22 +36,6 @@
 		05C6E9B90F0F1B77009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
 		05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
 		05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
-		05CE068E0FB906630036DF5E /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06850FB906630036DF5E /* account-off-led.jpg */; };
-		05CE068F0FB906630036DF5E /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06860FB906630036DF5E /* account-on-led.jpg */; };
-		05CE06910FB906630036DF5E /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06880FB906630036DF5E /* main_icon.png */; };
-		05CE06920FB906630036DF5E /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06890FB906630036DF5E /* message_background.jpg */; };
-		05CE06930FB906630036DF5E /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068A0FB906630036DF5E /* roster-section.jpg */; };
-		05CE06940FB906630036DF5E /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068B0FB906630036DF5E /* tabbar-accounts.png */; };
-		05CE06950FB906630036DF5E /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068C0FB906630036DF5E /* tabbar-roster.png */; };
-		05CE06960FB906630036DF5E /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068D0FB906630036DF5E /* tabbar-streams.png */; };
-		05CE06970FB906630036DF5E /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06850FB906630036DF5E /* account-off-led.jpg */; };
-		05CE06980FB906630036DF5E /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06860FB906630036DF5E /* account-on-led.jpg */; };
-		05CE069A0FB906630036DF5E /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06880FB906630036DF5E /* main_icon.png */; };
-		05CE069B0FB906630036DF5E /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE06890FB906630036DF5E /* message_background.jpg */; };
-		05CE069C0FB906630036DF5E /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068A0FB906630036DF5E /* roster-section.jpg */; };
-		05CE069D0FB906630036DF5E /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068B0FB906630036DF5E /* tabbar-accounts.png */; };
-		05CE069E0FB906630036DF5E /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068C0FB906630036DF5E /* tabbar-roster.png */; };
-		05CE069F0FB906630036DF5E /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05CE068D0FB906630036DF5E /* tabbar-streams.png */; };
 		05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
 		05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
 		05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
@@ -128,7 +112,6 @@
 		05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
 		05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
 		05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
-		05DC8CA80FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */; };
 		05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
 		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
@@ -140,7 +123,6 @@
 		05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
 		05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
 		05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
-		05DC8CB40FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */; };
 		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
 		05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
@@ -209,7 +191,6 @@
 		05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
-		05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
 		05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
 		05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
 		05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
@@ -232,7 +213,6 @@
 		05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
-		05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */; };
 		05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
 		05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
 		05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
@@ -250,8 +230,28 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
-		05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59160FD1C3600068BC5C /* account-error-led.jpg */; };
-		05EE59180FD1C3600068BC5C /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59160FD1C3600068BC5C /* account-error-led.jpg */; };
+		05E6EFCC1049845800EF924B /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6EFCB1049845800EF924B /* SegmentedListPicker.m */; };
+		05E6EFCD1049845800EF924B /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6EFCB1049845800EF924B /* SegmentedListPicker.m */; };
+		05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
+		05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
+		05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
+		05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
+		05E6F15F104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
+		05E6F160104A07FC00EF924B /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F156104A07FC00EF924B /* message_background.jpg */; };
+		05E6F161104A07FC00EF924B /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F157104A07FC00EF924B /* roster-section.jpg */; };
+		05E6F162104A07FC00EF924B /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F158104A07FC00EF924B /* tabbar-accounts.png */; };
+		05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
+		05E6F164104A07FC00EF924B /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F15A104A07FC00EF924B /* tabbar-streams.png */; };
+		05E6F165104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
+		05E6F166104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
+		05E6F167104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
+		05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
+		05E6F169104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
+		05E6F16A104A07FC00EF924B /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F156104A07FC00EF924B /* message_background.jpg */; };
+		05E6F16B104A07FC00EF924B /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F157104A07FC00EF924B /* roster-section.jpg */; };
+		05E6F16C104A07FC00EF924B /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F158104A07FC00EF924B /* tabbar-accounts.png */; };
+		05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
+		05E6F16E104A07FC00EF924B /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F15A104A07FC00EF924B /* tabbar-streams.png */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
@@ -285,14 +285,6 @@
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
-		05CE06850FB906630036DF5E /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-off-led.jpg"; path = "Resources/Images/account-off-led.jpg"; sourceTree = "<group>"; };
-		05CE06860FB906630036DF5E /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-on-led.jpg"; path = "Resources/Images/account-on-led.jpg"; sourceTree = "<group>"; };
-		05CE06880FB906630036DF5E /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_icon.png; path = Resources/Images/main_icon.png; sourceTree = "<group>"; };
-		05CE06890FB906630036DF5E /* message_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = message_background.jpg; path = Resources/Images/message_background.jpg; sourceTree = "<group>"; };
-		05CE068A0FB906630036DF5E /* roster-section.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "roster-section.jpg"; path = "Resources/Images/roster-section.jpg"; sourceTree = "<group>"; };
-		05CE068B0FB906630036DF5E /* tabbar-accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-accounts.png"; path = "Resources/Images/tabbar-accounts.png"; sourceTree = "<group>"; };
-		05CE068C0FB906630036DF5E /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-roster.png"; path = "Resources/Images/tabbar-roster.png"; sourceTree = "<group>"; };
-		05CE068D0FB906630036DF5E /* tabbar-streams.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tabbar-streams.png"; path = "Resources/Images/tabbar-streams.png"; sourceTree = "<group>"; };
 		05CE073C0FB909CA0036DF5E /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
 		05CE073D0FB909CA0036DF5E /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
 		05CE073E0FB909CA0036DF5E /* ContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactModel.h; sourceTree = "<group>"; };
@@ -363,7 +355,6 @@
 		05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
 		05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterSectionViewController.xib; sourceTree = "<group>"; };
 		05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterViewController.xib; sourceTree = "<group>"; };
-		05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
 		05E206A30FB9004100FCFC94 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
@@ -441,8 +432,6 @@
 		05E207B50FB9046500FCFC94 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		05E207B60FB9046500FCFC94 /* EditAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountViewController.h; sourceTree = "<group>"; };
 		05E207B70FB9046500FCFC94 /* EditAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountViewController.m; sourceTree = "<group>"; };
-		05E207B80FB9046500FCFC94 /* SelectAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectAccountViewController.h; sourceTree = "<group>"; };
-		05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectAccountViewController.m; sourceTree = "<group>"; };
 		05E207BB0FB9046500FCFC94 /* AgentXmppCommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppCommandCell.h; sourceTree = "<group>"; };
 		05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppCommandCell.m; sourceTree = "<group>"; };
 		05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppViewController.h; sourceTree = "<group>"; };
@@ -477,7 +466,18 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
-		05EE59160FD1C3600068BC5C /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "account-error-led.jpg"; path = "Resources/Images/account-error-led.jpg"; sourceTree = "<group>"; };
+		05E6EFCA1049845800EF924B /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
+		05E6EFCB1049845800EF924B /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
+		05E6F151104A07FC00EF924B /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-error-led.jpg"; sourceTree = "<group>"; };
+		05E6F152104A07FC00EF924B /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-off-led.jpg"; sourceTree = "<group>"; };
+		05E6F153104A07FC00EF924B /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-on-led.jpg"; sourceTree = "<group>"; };
+		05E6F154104A07FC00EF924B /* dotted_tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotted_tile.png; sourceTree = "<group>"; };
+		05E6F155104A07FC00EF924B /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_icon.png; sourceTree = "<group>"; };
+		05E6F156104A07FC00EF924B /* message_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = message_background.jpg; sourceTree = "<group>"; };
+		05E6F157104A07FC00EF924B /* roster-section.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "roster-section.jpg"; sourceTree = "<group>"; };
+		05E6F158104A07FC00EF924B /* tabbar-accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-accounts.png"; sourceTree = "<group>"; };
+		05E6F159104A07FC00EF924B /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-roster.png"; sourceTree = "<group>"; };
+		05E6F15A104A07FC00EF924B /* tabbar-streams.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-streams.png"; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
@@ -545,17 +545,19 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				05EE59160FD1C3600068BC5C /* account-error-led.jpg */,
-				05CE06850FB906630036DF5E /* account-off-led.jpg */,
-				05CE06860FB906630036DF5E /* account-on-led.jpg */,
-				05CE06880FB906630036DF5E /* main_icon.png */,
-				05CE06890FB906630036DF5E /* message_background.jpg */,
-				05CE068A0FB906630036DF5E /* roster-section.jpg */,
-				05CE068B0FB906630036DF5E /* tabbar-accounts.png */,
-				05CE068C0FB906630036DF5E /* tabbar-roster.png */,
-				05CE068D0FB906630036DF5E /* tabbar-streams.png */,
+				05E6F151104A07FC00EF924B /* account-error-led.jpg */,
+				05E6F152104A07FC00EF924B /* account-off-led.jpg */,
+				05E6F153104A07FC00EF924B /* account-on-led.jpg */,
+				05E6F154104A07FC00EF924B /* dotted_tile.png */,
+				05E6F155104A07FC00EF924B /* main_icon.png */,
+				05E6F156104A07FC00EF924B /* message_background.jpg */,
+				05E6F157104A07FC00EF924B /* roster-section.jpg */,
+				05E6F158104A07FC00EF924B /* tabbar-accounts.png */,
+				05E6F159104A07FC00EF924B /* tabbar-roster.png */,
+				05E6F15A104A07FC00EF924B /* tabbar-streams.png */,
 			);
 			name = Images;
+			path = Resources/Images;
 			sourceTree = "<group>";
 		};
 		058868B50F0FC6E80076891D /* Views */ = {
@@ -677,6 +679,7 @@
 			children = (
 				05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */,
 				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
+				05CF616D1048B141003E012F /* AccountSelectionViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
 				05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */,
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
@@ -685,9 +688,7 @@
 				05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */,
 				05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */,
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
-				05DC8C9C0FBB15EB0018AEEF /* SelectAccountViewController.xib */,
 				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
-				05CF616D1048B141003E012F /* AccountSelectionViewController.xib */,
 			);
 			name = ViewControllers;
 			path = Resources/Views/ViewControllers;
@@ -864,6 +865,8 @@
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
+				05E6EFCA1049845800EF924B /* SegmentedListPicker.h */,
+				05E6EFCB1049845800EF924B /* SegmentedListPicker.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -879,12 +882,10 @@
 				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
 				05E207B20FB9046500FCFC94 /* AccountSelectionViewController.h */,
 				05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */,
-				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
+				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
 				05E207B70FB9046500FCFC94 /* EditAccountViewController.m */,
-				05E207B80FB9046500FCFC94 /* SelectAccountViewController.h */,
-				05E207B90FB9046500FCFC94 /* SelectAccountViewController.m */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -1085,14 +1086,6 @@
 			files = (
 				05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */,
 				051AB4830F1068C500DD01DC /* webgnosus.db in Resources */,
-				05CE068E0FB906630036DF5E /* account-off-led.jpg in Resources */,
-				05CE068F0FB906630036DF5E /* account-on-led.jpg in Resources */,
-				05CE06910FB906630036DF5E /* main_icon.png in Resources */,
-				05CE06920FB906630036DF5E /* message_background.jpg in Resources */,
-				05CE06930FB906630036DF5E /* roster-section.jpg in Resources */,
-				05CE06940FB906630036DF5E /* tabbar-accounts.png in Resources */,
-				05CE06950FB906630036DF5E /* tabbar-roster.png in Resources */,
-				05CE06960FB906630036DF5E /* tabbar-streams.png in Resources */,
 				05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */,
 				05DC8C8D0FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
 				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
@@ -1108,12 +1101,20 @@
 				05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
 				05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
 				05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
-				05DC8CB40FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */,
 				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
-				05EE59180FD1C3600068BC5C /* account-error-led.jpg in Resources */,
 				05EE59950FD21B110068BC5C /* Default.png in Resources */,
 				05CF616E1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
+				05E6F165104A07FC00EF924B /* account-error-led.jpg in Resources */,
+				05E6F166104A07FC00EF924B /* account-off-led.jpg in Resources */,
+				05E6F167104A07FC00EF924B /* account-on-led.jpg in Resources */,
+				05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */,
+				05E6F169104A07FC00EF924B /* main_icon.png in Resources */,
+				05E6F16A104A07FC00EF924B /* message_background.jpg in Resources */,
+				05E6F16B104A07FC00EF924B /* roster-section.jpg in Resources */,
+				05E6F16C104A07FC00EF924B /* tabbar-accounts.png in Resources */,
+				05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */,
+				05E6F16E104A07FC00EF924B /* tabbar-streams.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1123,14 +1124,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				051AB4820F1068C500DD01DC /* webgnosus.db in Resources */,
-				05CE06970FB906630036DF5E /* account-off-led.jpg in Resources */,
-				05CE06980FB906630036DF5E /* account-on-led.jpg in Resources */,
-				05CE069A0FB906630036DF5E /* main_icon.png in Resources */,
-				05CE069B0FB906630036DF5E /* message_background.jpg in Resources */,
-				05CE069C0FB906630036DF5E /* roster-section.jpg in Resources */,
-				05CE069D0FB906630036DF5E /* tabbar-accounts.png in Resources */,
-				05CE069E0FB906630036DF5E /* tabbar-roster.png in Resources */,
-				05CE069F0FB906630036DF5E /* tabbar-streams.png in Resources */,
 				05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */,
 				05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
 				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
@@ -1146,12 +1139,20 @@
 				05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
 				05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
 				05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
-				05DC8CA80FBB15EB0018AEEF /* SelectAccountViewController.xib in Resources */,
 				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
-				05EE59170FD1C3600068BC5C /* account-error-led.jpg in Resources */,
 				05EE59940FD21B110068BC5C /* Default.png in Resources */,
 				05CF616F1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
+				05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */,
+				05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */,
+				05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */,
+				05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */,
+				05E6F15F104A07FC00EF924B /* main_icon.png in Resources */,
+				05E6F160104A07FC00EF924B /* message_background.jpg in Resources */,
+				05E6F161104A07FC00EF924B /* roster-section.jpg in Resources */,
+				05E6F162104A07FC00EF924B /* tabbar-accounts.png in Resources */,
+				05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */,
+				05E6F164104A07FC00EF924B /* tabbar-streams.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1198,7 +1199,6 @@
 				05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
-				05E207F10FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
 				05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
 				05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
 				05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */,
@@ -1250,6 +1250,7 @@
 				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
 				05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */,
+				05E6EFCD1049845800EF924B /* SegmentedListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,7 +1294,6 @@
 				05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
-				05E2080E0FB9046500FCFC94 /* SelectAccountViewController.m in Sources */,
 				05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
 				05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
 				05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */,
@@ -1345,6 +1345,7 @@
 				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
 				05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */,
+				05E6EFCC1049845800EF924B /* SegmentedListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

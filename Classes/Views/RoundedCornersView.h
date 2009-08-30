@@ -1,28 +1,21 @@
 //
-//  AccountSelectionViewController.h
+//  RoundedCornersView.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/1/09.
+//  Created by Troy Stribling on 8/29/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-@class RoundedCornersView;
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AccountSelectionViewController : UIViewController {
-    UIView* contentView;
-    UIView* contentViewBorder;
+@interface RoundedCornersView : UIView {
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UIView* contentView;
-@property (nonatomic, retain) UIView* contentViewBorder;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addAsSubview:(UIView*)parent;
 
 @end

@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddContactViewController.h"
-#import "SelectAccountViewController.h"
 #import "ContactModel.h"
 #import "AccountModel.h"
 #import "ActivityView.h"
@@ -39,14 +38,6 @@
 
 //===================================================================================================================================
 #pragma mark AddContactViewController
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)selectAccountButtonPressed {
-	SelectAccountViewController* selectAccountViewController = [[SelectAccountViewController alloc] initWithNibName:@"SelectAccountViewController" bundle:nil]; 
-	selectAccountViewController.addContactViewController = self;
-	[self.navigationController pushViewController:selectAccountViewController animated:YES]; 
-	[selectAccountViewController release]; 
-}
 
 //===================================================================================================================================
 #pragma mark AddContactViewController PrivateAPI

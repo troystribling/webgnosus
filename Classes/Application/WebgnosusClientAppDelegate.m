@@ -161,7 +161,7 @@
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
     AccountModel* account = [AccountModel findFirstDisplayed];
     if (!account) {
-        [window addSubview:self.accountSelectionViewController.view];	
+        [self.accountSelectionViewController addAsSubview:window];	
     }
 }
 

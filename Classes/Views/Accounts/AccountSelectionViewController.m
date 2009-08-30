@@ -8,10 +8,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AccountSelectionViewController.h"
+#import "SegmentedListPicker.h"
 #import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountSelectionViewController (PrivateAPI)
+
+- (void)createContentView;
 
 @end
 
@@ -19,12 +22,34 @@
 @implementation AccountSelectionViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize contentView;
+@synthesize contentViewBorder;
 
 //===================================================================================================================================
 #pragma mark AccountsViewController
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addAsSubview:(UIView*)parent {
+    [parent addSubview:self.view];
+    [parent addSubview:self.contentViewBorder];
+    [parent addSubview:self.contentView];
+}
+
 //===================================================================================================================================
 #pragma mark AccountsViewController PrivateApi
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createContentView {
+    CGRect mainRect = self.view.frame;
+    CGFloat scaleFactor = 0.85f;
+    CGFloat boarderWideth = 2.0f;
+    CGFloat xoffset = mainRect.origin.x + (1.0f-scaleFactor)*mainRect.size.width/2.0f;
+    CGFloat yoffset = mainRect.origin.y + (1.0f-scaleFactor)*mainRect.size.height/2.0f;
+    self.contentView = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset, yoffset)];
+    self.contentViewBorder = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset-boarderWideth, yoffset-boarderWideth)];
+    self.contentView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"dotted_tile.png"]];
+    self.contentViewBorder.backgroundColor = [UIColor blackColor];
+}
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -32,6 +57,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
+        [self createContentView];
 	} 
 	return self; 
 } 
