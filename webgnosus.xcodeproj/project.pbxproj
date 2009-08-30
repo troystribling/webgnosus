@@ -60,8 +60,8 @@
 		05CF60B61048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
 		05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
 		05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
-		05CF616E1048B141003E012F /* AccountSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountSelectionViewController.xib */; };
-		05CF616F1048B141003E012F /* AccountSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountSelectionViewController.xib */; };
+		05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
+		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05D1EC481037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC491037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC4D1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
@@ -188,7 +188,7 @@
 		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
-		05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
+		05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
@@ -210,7 +210,7 @@
 		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E208090FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
-		05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */; };
+		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
@@ -309,7 +309,7 @@
 		05CF60B41048A413003E012F /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		05CF61691048AF3D003E012F /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
 		05CF616A1048AF3D003E012F /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
-		05CF616D1048B141003E012F /* AccountSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSelectionViewController.xib; sourceTree = "<group>"; };
+		05CF616D1048B141003E012F /* AccountManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountManagerViewController.xib; sourceTree = "<group>"; };
 		05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageDelegate.h; sourceTree = "<group>"; };
 		05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageDelegate.m; sourceTree = "<group>"; };
 		05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewManager.h; sourceTree = "<group>"; };
@@ -426,8 +426,8 @@
 		05E207AF0FB9046500FCFC94 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
 		05E207B00FB9046500FCFC94 /* AccountOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOptionsController.h; sourceTree = "<group>"; };
 		05E207B10FB9046500FCFC94 /* AccountOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOptionsController.m; sourceTree = "<group>"; };
-		05E207B20FB9046500FCFC94 /* AccountSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSelectionViewController.h; sourceTree = "<group>"; };
-		05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSelectionViewController.m; sourceTree = "<group>"; };
+		05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagerViewController.h; sourceTree = "<group>"; };
+		05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManagerViewController.m; sourceTree = "<group>"; };
 		05E207B40FB9046500FCFC94 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
 		05E207B50FB9046500FCFC94 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		05E207B60FB9046500FCFC94 /* EditAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountViewController.h; sourceTree = "<group>"; };
@@ -679,7 +679,7 @@
 			children = (
 				05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */,
 				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
-				05CF616D1048B141003E012F /* AccountSelectionViewController.xib */,
+				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
 				05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */,
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
@@ -880,8 +880,8 @@
 				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
 				05E207B00FB9046500FCFC94 /* AccountOptionsController.h */,
 				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
-				05E207B20FB9046500FCFC94 /* AccountSelectionViewController.h */,
-				05E207B30FB9046500FCFC94 /* AccountSelectionViewController.m */,
+				05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */,
+				05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
@@ -1104,7 +1104,7 @@
 				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59950FD21B110068BC5C /* Default.png in Resources */,
-				05CF616E1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
+				05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */,
 				05E6F165104A07FC00EF924B /* account-error-led.jpg in Resources */,
 				05E6F166104A07FC00EF924B /* account-off-led.jpg in Resources */,
 				05E6F167104A07FC00EF924B /* account-on-led.jpg in Resources */,
@@ -1142,7 +1142,7 @@
 				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59940FD21B110068BC5C /* Default.png in Resources */,
-				05CF616F1048B141003E012F /* AccountSelectionViewController.xib in Resources */,
+				05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */,
 				05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */,
 				05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */,
 				05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */,
@@ -1196,7 +1196,7 @@
 				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
-				05E207EE0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
+				05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
@@ -1291,7 +1291,7 @@
 				05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E208090FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
-				05E2080B0FB9046500FCFC94 /* AccountSelectionViewController.m in Sources */,
+				05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,

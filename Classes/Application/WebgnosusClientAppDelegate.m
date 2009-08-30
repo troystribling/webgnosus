@@ -18,7 +18,7 @@
 #import "WebgnosusClientAppDelegate.h"
 #import "WebgnosusDbi.h"
 #import "RosterViewController.h"
-#import "AccountSelectionViewController.h"
+#import "AccountManagerViewController.h"
 #import "EditAccountViewController.h"
 #import "HistoryViewController.h"
 #import "AcceptBuddyRequestView.h"
@@ -50,7 +50,7 @@
 @synthesize rosterViewController;
 @synthesize historyViewController;
 @synthesize editAccountViewController;
-@synthesize accountSelectionViewController;
+@synthesize accountManagerViewController;
 
 @synthesize tabBarController;
 @synthesize navAccountsViewController;
@@ -145,7 +145,7 @@
 - (void)dealloc {
 	[self.historyViewController release]; 
 	[self.rosterViewController release];
-	[self.accountSelectionViewController release]; 
+	[self.accountManagerViewController release]; 
 	[self.navHistoryViewController release];
 	[self.navRosterViewController release];
 	[self.navAccountsViewController release];
@@ -161,7 +161,7 @@
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
     AccountModel* account = [AccountModel findFirstDisplayed];
     if (!account) {
-        [self.accountSelectionViewController addAsSubview:window];	
+        [self.accountManagerViewController addAsSubview:window];	
     }
 }
 

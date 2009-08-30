@@ -1,5 +1,5 @@
 //
-//  AccountSelectionViewController.h
+//  AccountManagerViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 1/1/09.
@@ -13,7 +13,7 @@
 @class RoundedCornersView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AccountSelectionViewController : UIViewController {
+@interface AccountManagerViewController : UIViewController {
     UIView* contentView;
     UIView* contentViewBorder;
 }

@@ -1,5 +1,5 @@
 //
-//  AccountSelectionViewController.m
+//  AccountManagerViewController.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 1/1/09.
@@ -7,19 +7,19 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AccountSelectionViewController.h"
+#import "AccountManagerViewController.h"
 #import "SegmentedListPicker.h"
 #import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AccountSelectionViewController (PrivateAPI)
+@interface AccountManagerViewController (PrivateAPI)
 
 - (void)createContentView;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AccountSelectionViewController
+@implementation AccountManagerViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize contentView;
