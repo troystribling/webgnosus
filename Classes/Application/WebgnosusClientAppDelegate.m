@@ -122,6 +122,10 @@
     [self openActivatedAccounts];
     [self createTabBarController];
 	[window addSubview:self.tabBarController.view];	
+    NSInteger count = [AccountModel count];
+    if (count == 0) {
+        [self.accountManagerViewController addAsSubview:window];	
+    }
     [window makeKeyAndVisible];
 }
 
@@ -159,10 +163,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
-    AccountModel* account = [AccountModel findFirstDisplayed];
-    if (!account) {
-        [self.accountManagerViewController addAsSubview:window];	
-    }
+//    AccountModel* account = [AccountModel findFirstDisplayed];
+//    if (!account) {
+//        [self.accountManagerViewController addAsSubview:window];	
+//    }
 }
 
 //===================================================================================================================================

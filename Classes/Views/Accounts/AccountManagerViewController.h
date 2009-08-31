@@ -10,17 +10,24 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class RoundedCornersView;
+@class AddAccountViewController;
+@class EditAccountViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountManagerViewController : UIViewController {
+    IBOutlet AddAccountViewController* addAccountViewController;
+    IBOutlet EditAccountViewController* editAccountViewController;
     UIView* contentView;
     UIView* contentViewBorder;
+    NSString* currentView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIView* contentView;
 @property (nonatomic, retain) UIView* contentViewBorder;
+@property (nonatomic, retain) NSString* currentView;
+@property (nonatomic, retain) AddAccountViewController* addAccountViewController;
+@property (nonatomic, retain) EditAccountViewController* editAccountViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAsSubview:(UIView*)parent;

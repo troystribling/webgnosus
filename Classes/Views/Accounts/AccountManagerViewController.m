@@ -8,13 +8,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AccountManagerViewController.h"
+#import "EditAccountViewController.h"
+#import "AddAccountViewController.h"
+#import "AccountModel.h"
 #import "SegmentedListPicker.h"
-#import "XMPPClientManager.h"
+#import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountManagerViewController (PrivateAPI)
 
-- (void)createContentView;
+- (UIView*)createView:(Class)viewClass;
 
 @end
 
@@ -22,8 +25,11 @@
 @implementation AccountManagerViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize addAccountViewController;
+@synthesize editAccountViewController;
 @synthesize contentView;
 @synthesize contentViewBorder;
+@synthesize currentView;
 
 //===================================================================================================================================
 #pragma mark AccountsViewController
@@ -33,6 +39,14 @@
     [parent addSubview:self.view];
     [parent addSubview:self.contentViewBorder];
     [parent addSubview:self.contentView];
+    self.addAccountViewController.managerView = self.view;        
+    self.addAccountViewController.contentView = self.contentView;        
+    self.addAccountViewController.editView = self.editAccountViewController.view;        
+    if ([AccountModel count] > 0) {
+        [self.contentView addSubview:self.editAccountViewController.view];
+    } else {
+        [self.contentView addSubview:self.addAccountViewController.view];
+    }
 }
 
 //===================================================================================================================================

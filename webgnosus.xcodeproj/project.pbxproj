@@ -187,7 +187,6 @@
 		05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
-		05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
 		05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
@@ -209,7 +208,6 @@
 		05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E208090FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
-		05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B10FB9046500FCFC94 /* AccountOptionsController.m */; };
 		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
@@ -424,8 +422,6 @@
 		05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebgnosusClientAppDelegate.m; path = Application/WebgnosusClientAppDelegate.m; sourceTree = "<group>"; };
 		05E207AE0FB9046500FCFC94 /* AccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
 		05E207AF0FB9046500FCFC94 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
-		05E207B00FB9046500FCFC94 /* AccountOptionsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountOptionsController.h; sourceTree = "<group>"; };
-		05E207B10FB9046500FCFC94 /* AccountOptionsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountOptionsController.m; sourceTree = "<group>"; };
 		05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagerViewController.h; sourceTree = "<group>"; };
 		05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManagerViewController.m; sourceTree = "<group>"; };
 		05E207B40FB9046500FCFC94 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
@@ -878,8 +874,6 @@
 				05CF616A1048AF3D003E012F /* AccountsViewController.m */,
 				05E207AE0FB9046500FCFC94 /* AccountCell.h */,
 				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
-				05E207B00FB9046500FCFC94 /* AccountOptionsController.h */,
-				05E207B10FB9046500FCFC94 /* AccountOptionsController.m */,
 				05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */,
 				05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
@@ -1195,7 +1189,6 @@
 				05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
 				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */,
-				05E207ED0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
 				05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
@@ -1290,7 +1283,6 @@
 				05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
 				05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
 				05E208090FB9046500FCFC94 /* AccountCell.m in Sources */,
-				05E2080A0FB9046500FCFC94 /* AccountOptionsController.m in Sources */,
 				05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,

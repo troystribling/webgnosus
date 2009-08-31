@@ -16,23 +16,19 @@
 @interface AddAccountViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* jidTextField;
 	IBOutlet UITextField* passwordTextField;
-	UIBarButtonItem* optionsButton;
+    UIView* managerView;
+    UIView* contentView;
+    UIView* editView;
     AccountModel* account;
-    NSString* host;
-    NSString* resource;
-    NSString* nickname;
-    NSInteger port;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* jidTextField;
 @property (nonatomic, retain) UITextField* passwordTextField;
-@property (nonatomic, retain) UIBarButtonItem* optionsButton;
+@property (nonatomic, retain) UIView* managerView;
+@property (nonatomic, retain) UIView* contentView;
+@property (nonatomic, retain) UIView* editView;
 @property (nonatomic, assign) AccountModel* account;
-@property (nonatomic, retain) NSString* host;
-@property (nonatomic, retain) NSString* resource;
-@property (nonatomic, retain) NSString* nickname;
-@property (nonatomic, assign) NSInteger port;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

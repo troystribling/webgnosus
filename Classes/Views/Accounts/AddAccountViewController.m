@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddAccountViewController.h"
-#import "AccountOptionsController.h"
 #import "WebgnosusClientAppDelegate.h"
 #import "AccountModel.h"
 #import "AlertViewManager.h"
@@ -19,10 +18,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddAccountViewController (PrivateAPI)
 
-- (void)optionsButtonWasPressed ;
 - (void)failureAlert:(NSString*)title message:(NSString*)message;
 - (void)accountConnectionFailed;
-- (void)exitView;
 
 @end
 
@@ -32,26 +29,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidTextField;
 @synthesize passwordTextField;
-@synthesize optionsButton;
 @synthesize account;
-@synthesize host;
-@synthesize resource;
-@synthesize nickname;
-@synthesize port;
+@synthesize managerView;
+@synthesize contentView;
+@synthesize editView;
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController PrivateApi
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)optionsButtonWasPressed { 
-	AccountOptionsController* addContactViewController = [[AccountOptionsController alloc] initWithNibName:@"AccountOptionsController" bundle:nil]; 
-    addContactViewController.addAccountViewController = self;
-	[self.navigationController pushViewController:addContactViewController animated:YES]; 
-	[addContactViewController release]; 
-}	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)accountConnectionFailed:(NSString*)title {
@@ -61,19 +48,12 @@
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)exitView { 
-    [self.jidTextField resignFirstResponder]; 
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        self.optionsButton = [[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(optionsButtonWasPressed)];
 	} 
 	return self; 
 } 
@@ -81,8 +61,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
 	self.account = [[AccountModel alloc] init];
-    self.navigationItem.rightBarButtonItem = self.optionsButton;
-	self.title = @"Add Account";
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -125,7 +103,12 @@
 - (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager dismissConnectionIndicator]; 
-    [self exitView];
+    if ([AccountModel count] == 1) {
+        [self.view removeFromSuperview];
+        [self.contentView removeFromSuperview];
+        [self.managerView removeFromSuperview];
+    } else {
+    }
 }
 
 //===================================================================================================================================
@@ -143,26 +126,10 @@
         self.account.activated = YES;
         self.account.displayed = NO;
         self.account.connectionState = AccountNotConnected;
-		if ([self.host isEqualToString:@""] || self.host == nil) {
-			self.account.host = [splitJid objectAtIndex:1];
-		} else {
-			self.account.host = self.host;
-		}
-		if ([self.resource isEqualToString:@""] || self.resource == nil) {
-			self.account.resource = @"iPhone";
-		} else {
-			self.account.resource = self.resource;
-        }
-		if ([self.nickname isEqualToString:@""] || self.nickname == nil) {
-			self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
-		} else {
-			self.account.nickname = self.nickname;
-        }
-		if (self.port == 0) {
-            self.account.port = 5222;
-		} else {
-			self.account.port = self.port;
-        }
+        self.account.host = [splitJid objectAtIndex:1];
+        self.account.resource = @"iPhone";
+        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
+        self.account.port = 5222;
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         [AlertViewManager showConnectingIndicatorInView:self.view];
         [self.account insert];
@@ -183,6 +150,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
     [super dealloc];
+    [self.account release];
 }
 
 @end
