@@ -203,6 +203,7 @@
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
     self.accounts = [AccountModel findAllReady];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
+    [self loadRoster];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

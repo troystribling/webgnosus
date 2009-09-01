@@ -36,9 +36,10 @@
 @synthesize nicknameTextField;
 @synthesize passwordTextField;
 @synthesize activationSwitch;
+@synthesize didChangeAccountActivation;
+@synthesize managerView;
 @synthesize accountsViewController;
 @synthesize account;
-@synthesize didChangeAccountActivation;
 
 //===================================================================================================================================
 #pragma mark EditAccountViewController

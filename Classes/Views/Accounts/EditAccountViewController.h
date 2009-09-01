@@ -11,6 +11,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class AccountManagerViewController;
 @class AccountsViewController;
 @class UICustomSwitch;
 
@@ -21,6 +22,7 @@
 	IBOutlet UITextField* passwordTextField;
     IBOutlet UICustomSwitch* activationSwitch;
     BOOL didChangeAccountActivation;
+    AccountManagerViewController* managerView;
     AccountsViewController* accountsViewController;
     AccountModel* account;
 }
@@ -30,9 +32,10 @@
 @property (nonatomic, retain) UITextField* nicknameTextField;
 @property (nonatomic, retain) UITextField* passwordTextField;
 @property (nonatomic, retain) UICustomSwitch* activationSwitch;
+@property (nonatomic, assign) BOOL didChangeAccountActivation;
+@property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, assign) BOOL didChangeAccountActivation;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)accountActivationChanged;

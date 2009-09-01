@@ -31,5 +31,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAsSubview:(UIView*)parent;
+- (void)dismiss;
+- (void)showEditAccountView;
+- (void)showAddAccountView;
 
 @end

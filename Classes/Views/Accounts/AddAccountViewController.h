@@ -11,23 +11,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class AccountManagerViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddAccountViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* jidTextField;
 	IBOutlet UITextField* passwordTextField;
-    UIView* managerView;
-    UIView* contentView;
-    UIView* editView;
+    AccountManagerViewController* managerView;
     AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* jidTextField;
 @property (nonatomic, retain) UITextField* passwordTextField;
-@property (nonatomic, retain) UIView* managerView;
-@property (nonatomic, retain) UIView* contentView;
-@property (nonatomic, retain) UIView* editView;
+@property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, assign) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

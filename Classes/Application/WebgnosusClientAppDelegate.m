@@ -163,10 +163,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
-//    AccountModel* account = [AccountModel findFirstDisplayed];
-//    if (!account) {
-//        [self.accountManagerViewController addAsSubview:window];	
-//    }
+    AccountModel* account = [AccountModel findFirstDisplayed];
+    if (!account) {
+        [self.accountManagerViewController addAsSubview:window];	
+    }
 }
 
 //===================================================================================================================================

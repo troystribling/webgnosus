@@ -8,7 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddAccountViewController.h"
-#import "WebgnosusClientAppDelegate.h"
+#import "AccountManagerViewController.h"
 #import "AccountModel.h"
 #import "AlertViewManager.h"
 
@@ -31,8 +31,6 @@
 @synthesize passwordTextField;
 @synthesize account;
 @synthesize managerView;
-@synthesize contentView;
-@synthesize editView;
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController
@@ -103,12 +101,16 @@
 - (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager dismissConnectionIndicator]; 
+    [self.view removeFromSuperview];
     if ([AccountModel count] == 1) {
-        [self.view removeFromSuperview];
-        [self.contentView removeFromSuperview];
-        [self.managerView removeFromSuperview];
+        [self.managerView dismiss];
     } else {
+        [self.managerView showEditAccountView];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
 }
 
 //===================================================================================================================================
@@ -124,14 +126,18 @@
 		self.account.jid = enteredJid;
 		self.account.password = enteredPassword;
         self.account.activated = YES;
-        self.account.displayed = NO;
         self.account.connectionState = AccountNotConnected;
         self.account.host = [splitJid objectAtIndex:1];
         self.account.resource = @"iPhone";
         self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
         self.account.port = 5222;
+        if ([AccountModel count] > 0) {
+            self.account.displayed = NO;
+        } else {
+            self.account.displayed = YES;
+        }
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [AlertViewManager showConnectingIndicatorInView:self.view];
+        [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
         [self.account insert];
         [self.account load];
 	} else {

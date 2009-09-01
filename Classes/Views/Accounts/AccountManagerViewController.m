@@ -32,25 +32,41 @@
 @synthesize currentView;
 
 //===================================================================================================================================
-#pragma mark AccountsViewController
+#pragma mark AccountManagerViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAsSubview:(UIView*)parent {
     [parent addSubview:self.view];
     [parent addSubview:self.contentViewBorder];
     [parent addSubview:self.contentView];
-    self.addAccountViewController.managerView = self.view;        
-    self.addAccountViewController.contentView = self.contentView;        
-    self.addAccountViewController.editView = self.editAccountViewController.view;        
+    self.addAccountViewController.managerView = self;        
+    self.editAccountViewController.managerView = self;        
     if ([AccountModel count] > 0) {
-        [self.contentView addSubview:self.editAccountViewController.view];
+        [self showEditAccountView];
     } else {
-        [self.contentView addSubview:self.addAccountViewController.view];
+        [self showAddAccountView];
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)dismiss {
+    [self.view removeFromSuperview];
+    [self.contentViewBorder removeFromSuperview];
+    [self.contentView removeFromSuperview];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showEditAccountView {
+    [self.contentView addSubview:self.editAccountViewController.view];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showAddAccountView {
+    [self.contentView addSubview:self.addAccountViewController.view];
+}
+
 //===================================================================================================================================
-#pragma mark AccountsViewController PrivateApi
+#pragma mark AccountManagerViewController PrivateApi
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createContentView {
