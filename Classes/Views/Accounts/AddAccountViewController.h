@@ -19,13 +19,15 @@
 	IBOutlet UITextField* passwordTextField;
     AccountManagerViewController* managerView;
     AccountModel* account;
+    BOOL isFirstAccount;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* jidTextField;
 @property (nonatomic, retain) UITextField* passwordTextField;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
-@property (nonatomic, assign) AccountModel* account;
+@property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, assign) BOOL isFirstAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

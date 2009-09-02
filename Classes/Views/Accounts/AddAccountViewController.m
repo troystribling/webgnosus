@@ -31,6 +31,7 @@
 @synthesize passwordTextField;
 @synthesize account;
 @synthesize managerView;
+@synthesize isFirstAccount;
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController
@@ -58,6 +59,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    if ([AccountModel count] == 0) {
+        self.isFirstAccount = YES;
+    } else {
+        self.isFirstAccount = NO;
+    }    
 	self.account = [[AccountModel alloc] init];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
@@ -65,7 +71,9 @@
 	self.passwordTextField.returnKeyType = UIReturnKeyDone;
     self.passwordTextField.delegate = self;
 	self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.jidTextField becomeFirstResponder]; 
+    if (self.isFirstAccount) {
+        [self.jidTextField becomeFirstResponder]; 
+    }
     [super viewDidLoad];
 }
 

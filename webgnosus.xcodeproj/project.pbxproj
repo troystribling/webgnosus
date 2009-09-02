@@ -92,6 +92,14 @@
 		05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
 		05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
 		05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
+		05D83D5C104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
+		05D83D5D104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
+		05D83D79104ED94F00078131 /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D78104ED94F00078131 /* red-button.png */; };
+		05D83D7A104ED94F00078131 /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D78104ED94F00078131 /* red-button.png */; };
+		05D83D7D104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
+		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
+		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
+		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
 		05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
@@ -105,7 +113,6 @@
 		05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
 		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
-		05DC8CA10FBB15EB0018AEEF /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */; };
 		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
 		05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
 		05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
@@ -116,7 +123,6 @@
 		05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
 		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
-		05DC8CAD0FBB15EB0018AEEF /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */; };
 		05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
 		05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
 		05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
@@ -338,6 +344,10 @@
 		05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModel.m; sourceTree = "<group>"; };
 		05D1ED9B1037C07D00DB3B3F /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
 		05D1ED9C1037C07D00DB3B3F /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
+		05D83D5B104EBF0A00078131 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
+		05D83D78104ED94F00078131 /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
+		05D83D7B104EDCBF00078131 /* green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-button.png"; sourceTree = "<group>"; };
+		05D83D7C104EDCBF00078131 /* grey-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-button.png"; sourceTree = "<group>"; };
 		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
 		05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppCommandCell.xib; sourceTree = "<group>"; };
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
@@ -346,7 +356,6 @@
 		05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOptionsController.xib; sourceTree = "<group>"; };
 		05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
 		05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
-		05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
 		05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppViewController.xib; sourceTree = "<group>"; };
 		05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
 		05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAccountViewController.xib; sourceTree = "<group>"; };
@@ -541,6 +550,10 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05D83D7B104EDCBF00078131 /* green-button.png */,
+				05D83D7C104EDCBF00078131 /* grey-button.png */,
+				05D83D78104ED94F00078131 /* red-button.png */,
+				05D83D5B104EBF0A00078131 /* settings.png */,
 				05E6F151104A07FC00EF924B /* account-error-led.jpg */,
 				05E6F152104A07FC00EF924B /* account-off-led.jpg */,
 				05E6F153104A07FC00EF924B /* account-on-led.jpg */,
@@ -677,7 +690,6 @@
 				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
 				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
-				05DC8C950FBB15EB0018AEEF /* AddContactViewController.xib */,
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
 				05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */,
 				05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */,
@@ -1088,7 +1100,6 @@
 				05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
 				05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
-				05DC8CAD0FBB15EB0018AEEF /* AddContactViewController.xib in Resources */,
 				05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
 				05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
 				05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
@@ -1109,6 +1120,10 @@
 				05E6F16C104A07FC00EF924B /* tabbar-accounts.png in Resources */,
 				05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */,
 				05E6F16E104A07FC00EF924B /* tabbar-streams.png in Resources */,
+				05D83D5D104EBF0A00078131 /* settings.png in Resources */,
+				05D83D7A104ED94F00078131 /* red-button.png in Resources */,
+				05D83D7F104EDCBF00078131 /* green-button.png in Resources */,
+				05D83D80104EDCBF00078131 /* grey-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1126,7 +1141,6 @@
 				05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
 				05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
-				05DC8CA10FBB15EB0018AEEF /* AddContactViewController.xib in Resources */,
 				05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
 				05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
 				05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
@@ -1147,6 +1161,10 @@
 				05E6F162104A07FC00EF924B /* tabbar-accounts.png in Resources */,
 				05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */,
 				05E6F164104A07FC00EF924B /* tabbar-streams.png in Resources */,
+				05D83D5C104EBF0A00078131 /* settings.png in Resources */,
+				05D83D79104ED94F00078131 /* red-button.png in Resources */,
+				05D83D7D104EDCBF00078131 /* green-button.png in Resources */,
+				05D83D7E104EDCBF00078131 /* grey-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
