@@ -75,6 +75,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -140,6 +145,7 @@
         [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
         [self.account insert];
         [self.account load];
+        [[[XMPPClientManager instance] multicastDelegate] didAddAccount];
 	} else {
         if (oldAccount) {
             [AlertViewManager showAlert:@"Account Exists"];

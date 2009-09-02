@@ -31,11 +31,9 @@
 	XMPPJID* myJID;
 	NSString *password;
 	XMPPStream* xmppStream;
-	SCNotificationManager *scNotificationManager;
-    
+	SCNotificationManager *scNotificationManager;    
 	UInt16 port;	
-	int priority;
-    
+	int priority;    
    	NSError* streamError;	 
 }
 

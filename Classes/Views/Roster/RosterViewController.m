@@ -31,6 +31,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterViewController (PrivateAPI)
 
+- (void)addContactButtonWasPressed; 
+- (void)editAccountButtonWasPressed; 
 - (void)createSegementedController;
 - (void)segmentControlSelectionChanged:(id)sender;
 - (void)loadRoster;
@@ -50,6 +52,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addContactButton;
+@synthesize editAccountsButton;
 @synthesize roster;
 @synthesize accounts;
 @synthesize selectedRoster;
@@ -65,6 +68,10 @@
 	AddContactViewController* addContactViewController = [[AddContactViewController alloc] initWithNibName:@"AddContactViewController" bundle:nil]; 
 	[self.navigationController pushViewController:addContactViewController animated:YES]; 
 	[addContactViewController release]; 
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)editAccountButtonWasPressed { 
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +124,7 @@
 - (void)rosterAddContactButton {
     if (self.selectedRoster == kCONTACTS_MODE) {
         self.navigationItem.rightBarButtonItem = self.addContactButton;
-        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        self.navigationItem.leftBarButtonItem = self.editAccountsButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.leftBarButtonItem = nil;
@@ -192,6 +199,17 @@
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didAddAccount {
+    self.accounts = [AccountModel findAllReady];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadRoster];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidConnect:(XMPPClient*)sender {
 }
 
@@ -254,6 +272,7 @@
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
         self.addContactButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactButtonWasPressed)];
+        self.editAccountsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(editAccountButtonWasPressed)];
 	} 
 	return self; 
 } 
@@ -272,6 +291,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.accounts = [AccountModel findAllReady];
     [self addXMPPClientDelgate];
+    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
     [self loadRoster];
 	[super viewWillAppear:animated];
 }
@@ -279,6 +299,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
+    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 	[super viewWillDisappear:animated];
 }
 

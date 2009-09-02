@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPClientManager.h"
+#import "MulticastDelegate.h"
 #import "AccountModel.h"
 #import "AccountModel.h"
 #import "XMPPJID.h"
@@ -27,6 +28,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize xmppClientDictionary;
+@synthesize multicastDelegate;
 @synthesize delegates;
 
 //===================================================================================================================================
@@ -40,6 +42,16 @@ static XMPPClientManager* thisXMPPClientManager = nil;
         }
     }       
     return thisXMPPClientManager;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addAccountUpdateDelegate:(id)mcastDelegate {
+	[multicastDelegate addDelegate:mcastDelegate];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeAccountUpdateDelegate:(id)mcastDelegate  {
+	[multicastDelegate removeDelegate:mcastDelegate];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -74,8 +86,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 - (void)removeXMPPClientForAccount:(AccountModel*)account {
 	XMPPClient* xmppClient = (XMPPClient*)[xmppClientDictionary valueForKey:[account fullJID]];
 	if (xmppClient) {
-		if([xmppClient isConnected])
-		{
+		if([xmppClient isConnected]) {
             [xmppClient removeAllDelgates];
 			[xmppClient disconnect];
             [xmppClient release];
@@ -128,6 +139,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
     thisXMPPClientManager = self;
 	self.xmppClientDictionary = [NSMutableDictionary dictionaryWithCapacity:10];
     self.delegates = [[NSMutableArray alloc] initWithCapacity:10];
+    self.multicastDelegate = [[MulticastDelegate alloc] init];		
     return self;
 }
 

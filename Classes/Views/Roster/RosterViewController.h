@@ -15,6 +15,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
 	UIBarButtonItem* addContactButton;
+	UIBarButtonItem* editAccountsButton;
 	NSMutableArray* roster;
     NSMutableArray* accounts;
     NSInteger selectedRoster;
@@ -22,11 +23,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* addContactButton;
+@property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
 @property (nonatomic, retain) NSMutableArray* roster;
 @property (nonatomic, retain) NSMutableArray* accounts;
 @property (nonatomic, assign) NSInteger selectedRoster;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addContactButtonWasPressed; 
 
 @end
