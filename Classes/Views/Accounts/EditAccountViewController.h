@@ -17,27 +17,28 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController : UIViewController <UITextFieldDelegate> {
-	IBOutlet UILabel* jidLabel;
-	IBOutlet UITextField* nicknameTextField;
 	IBOutlet UITextField* passwordTextField;
-    IBOutlet UICustomSwitch* activationSwitch;
-    BOOL didChangeAccountActivation;
+    IBOutlet UIButton* doneButton;
+    IBOutlet UIButton* deleteButton;
+    IBOutlet UIButton* addButton;
+    IBOutlet UIButton* sendPasswordButton;    
     AccountManagerViewController* managerView;
     AccountsViewController* accountsViewController;
     AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* jidLabel;
-@property (nonatomic, retain) UITextField* nicknameTextField;
 @property (nonatomic, retain) UITextField* passwordTextField;
-@property (nonatomic, retain) UICustomSwitch* activationSwitch;
-@property (nonatomic, assign) BOOL didChangeAccountActivation;
+@property (nonatomic, retain) UIButton* doneButton;
+@property (nonatomic, retain) UIButton* deleteButton;
+@property (nonatomic, retain) UIButton* addButton;
+@property (nonatomic, retain) UIButton* sendPasswordButton;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (IBAction)accountActivationChanged;
+- (IBAction)doneButtonPressed:(id)sender;
+
 
 @end

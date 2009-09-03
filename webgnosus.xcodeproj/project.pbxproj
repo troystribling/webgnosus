@@ -693,10 +693,10 @@
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
 				05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */,
 				05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */,
+				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
 				05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */,
 				05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */,
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
-				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
 			);
 			name = ViewControllers;
 			path = Resources/Views/ViewControllers;

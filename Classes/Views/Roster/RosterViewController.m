@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "RosterViewController.h"
 #import "RosterSectionViewController.h"
+#import "AccountManagerViewController.h"
 #import "RosterCell.h"
 #import "AddContactViewController.h"
 #import "ChatViewController.h"
@@ -53,6 +54,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addContactButton;
 @synthesize editAccountsButton;
+@synthesize accountManagerViewController;
 @synthesize roster;
 @synthesize accounts;
 @synthesize selectedRoster;
@@ -72,6 +74,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
+    [self.accountManagerViewController addAsSubview:self.view.window];	
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------

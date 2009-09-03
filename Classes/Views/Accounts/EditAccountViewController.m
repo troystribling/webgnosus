@@ -19,12 +19,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController (PrivateAPI)
 
-- (void)setAccountActivated;
 - (void)exitView;
-- (void)accountConnectionFailed;
-- (void)updateAccountActivation;
-- (BOOL)connect;
-- (BOOL)changePasssword;
+- (void)changePasssword;
 
 @end
 
@@ -32,11 +28,11 @@
 @implementation EditAccountViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize jidLabel;
-@synthesize nicknameTextField;
 @synthesize passwordTextField;
-@synthesize activationSwitch;
-@synthesize didChangeAccountActivation;
+@synthesize doneButton;
+@synthesize deleteButton;
+@synthesize addButton;
+@synthesize sendPasswordButton;
 @synthesize managerView;
 @synthesize accountsViewController;
 @synthesize account;
@@ -45,55 +41,20 @@
 #pragma mark EditAccountViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (IBAction)accountActivationChanged {
-    [self updateAccountActivation];
-    self.didChangeAccountActivation = YES;
+- (IBAction)doneButtonPressed:(id)sender {
+    [self.managerView dismiss];
 }
 
 //===================================================================================================================================
 #pragma mark EditAccountViewController PrivateApi
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)accountConnectionFailed:(NSString*)title {
-	[self.activationSwitch setOn:NO animated:YES];
-    [self updateAccountActivation];
-    [AlertViewManager dismissConnectionIndicator]; 
-    [AlertViewManager showAlert:title];
-    [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)updateAccountActivation { 
-	self.account.activated = self.activationSwitch.on;
-	[self.account update];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)connect { 
-    if (self.activationSwitch.on) {
-        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [AlertViewManager showConnectingIndicatorInView:self.view];
-        return NO;
-    } else {
-        self.account.connectionState = AccountNotConnected;
-        [self.account update];
-        [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
-        return YES;
-    }  
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)changePasssword {
-    if (self.activationSwitch.on) {
-        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-    } 
-    return YES;
+- (void)changePasssword {
+    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)exitView { 
-    [self.passwordTextField resignFirstResponder]; 
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //===================================================================================================================================
@@ -102,7 +63,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        self.didChangeAccountActivation = NO;
 	} 
 	return self; 
 } 
@@ -110,17 +70,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.activationSwitch.on = self.account.activated;
-    self.jidLabel.text = [self.account fullJID];
-	self.title = @"Edit Account";
-    self.nicknameTextField.text = self.account.nickname;
-    self.nicknameTextField.delegate = self;
-	self.nicknameTextField.returnKeyType = UIReturnKeyDone;
-	self.nicknameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.passwordTextField.delegate = self;
-	self.passwordTextField.returnKeyType = UIReturnKeyDone;
-	self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.passwordTextField becomeFirstResponder]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -141,23 +91,6 @@
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidNotConnect:(XMPPClient *)sender {
-    [self accountConnectionFailed:@"Connection Failed"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient *)sender didNotAuthenticate:(NSXMLElement *)error {
-    [self accountConnectionFailed:@"Authentication Falied"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    [AlertViewManager dismissConnectionIndicator]; 
-    [self exitView];
-}
-
 //===================================================================================================================================
 #pragma mark UITextFieldDelegate
 
@@ -165,18 +98,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     BOOL shouldReturn = YES;
 	NSString* enteredPassword = self.passwordTextField.text;
-    NSString* enteredNickname = self.nicknameTextField.text;
     if (![enteredPassword isEqualToString:@""]) {
         self.account.password = enteredPassword;
-        shouldReturn = [self changePasssword];
-    }
-    if (self.didChangeAccountActivation) {
-        shouldReturn = [self connect];
-    }
-    if ([enteredNickname isEqualToString:@""]) {
-        self.account.nickname = [self.account fullJID];
-    } else {
-        self.account.nickname = enteredNickname;
+        [self changePasssword];
+        shouldReturn = YES;
     }
     [self.account update];
 	if (shouldReturn) {
