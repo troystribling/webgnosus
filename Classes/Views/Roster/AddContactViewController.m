@@ -29,7 +29,6 @@
 @implementation AddContactViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize selectAccountButton;
 @synthesize jidTextField;
 @synthesize accountLabel;
 @synthesize account;
@@ -72,7 +71,6 @@
 	self.title = @"Add Contact";
 	self.account = [AccountModel findFirst];
 	self.accountLabel.text = self.account.jid;
-	[self.selectAccountButton addTarget:self action:@selector(selectAccountButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;

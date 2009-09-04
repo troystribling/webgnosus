@@ -1,5 +1,5 @@
 //
-//  SegmentedListPicker.h
+//  AccountListPicker.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/29/09.
@@ -10,16 +10,18 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface SegmentedListPicker : NSObject {
+@interface AccountListPicker : NSObject {
     UISegmentedControl* segmentedControl;
-    NSArray* listValues;
+    NSMutableArray* accountJIDs;
+    NSInteger currentAccountIndex;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UISegmentedControl* segmentedControl;
-@property (nonatomic, retain) NSArray* listValues;
+@property (nonatomic, retain) NSMutableArray* accountJIDs;
+@property (nonatomic, assign) NSInteger currentAccountIndex;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithList:(NSArray*)list atValue:(NSString*)value;
+- (id)init;
 
 @end

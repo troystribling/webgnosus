@@ -12,6 +12,8 @@
 #import "AccountModel.h"
 #import "AlertViewManager.h"
 #import "ActivityView.h"
+#import "AccountListPicker.h"
+#import "AccountModel.h"
 
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
@@ -35,6 +37,7 @@
 @synthesize sendPasswordButton;
 @synthesize managerView;
 @synthesize accountsViewController;
+@synthesize activeAccounts;
 @synthesize account;
 
 //===================================================================================================================================
@@ -61,16 +64,18 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
-	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
+- (id)initWithCoder:(NSCoder *)coder { 
+	if (self = [super initWithCoder:coder]) { 
 	} 
 	return self; 
 } 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    [super viewDidLoad];
     self.passwordTextField.delegate = self;
+    self.activeAccounts = [[AccountListPicker alloc] init];
+    [self.view addSubview:self.activeAccounts.segmentedControl];
+    [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -234,8 +234,6 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
-		05E6EFCC1049845800EF924B /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6EFCB1049845800EF924B /* SegmentedListPicker.m */; };
-		05E6EFCD1049845800EF924B /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6EFCB1049845800EF924B /* SegmentedListPicker.m */; };
 		05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
 		05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
 		05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
@@ -256,6 +254,12 @@
 		05E6F16C104A07FC00EF924B /* tabbar-accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F158104A07FC00EF924B /* tabbar-accounts.png */; };
 		05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
 		05E6F16E104A07FC00EF924B /* tabbar-streams.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F15A104A07FC00EF924B /* tabbar-streams.png */; };
+		05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
+		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
+		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
+		05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
+		05EAB3151050A39300AF71A2 /* AccountListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3141050A39300AF71A2 /* AccountListPicker.m */; };
+		05EAB3161050A39300AF71A2 /* AccountListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3141050A39300AF71A2 /* AccountListPicker.m */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
@@ -287,7 +291,7 @@
 		05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = web.gnos.us.app; path = "/Users/troy/Develop/iPhone/webgnosus/build/Debug-iphonesimulator/web.gnos.us.app"; sourceTree = "<absolute>"; };
 		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
 		05CE073C0FB909CA0036DF5E /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
 		05CE073D0FB909CA0036DF5E /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
@@ -471,8 +475,6 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
-		05E6EFCA1049845800EF924B /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
-		05E6EFCB1049845800EF924B /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
 		05E6F151104A07FC00EF924B /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-error-led.jpg"; sourceTree = "<group>"; };
 		05E6F152104A07FC00EF924B /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-off-led.jpg"; sourceTree = "<group>"; };
 		05E6F153104A07FC00EF924B /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-on-led.jpg"; sourceTree = "<group>"; };
@@ -483,6 +485,10 @@
 		05E6F158104A07FC00EF924B /* tabbar-accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-accounts.png"; sourceTree = "<group>"; };
 		05E6F159104A07FC00EF924B /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-roster.png"; sourceTree = "<group>"; };
 		05E6F15A104A07FC00EF924B /* tabbar-streams.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-streams.png"; sourceTree = "<group>"; };
+		05EAB2F610509A9700AF71A2 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
+		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		05EAB3131050A39300AF71A2 /* AccountListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountListPicker.h; sourceTree = "<group>"; };
+		05EAB3141050A39300AF71A2 /* AccountListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountListPicker.m; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
@@ -550,6 +556,8 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05EAB2F610509A9700AF71A2 /* left-arrow.png */,
+				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
 				05D83D7B104EDCBF00078131 /* green-button.png */,
 				05D83D7C104EDCBF00078131 /* grey-button.png */,
 				05D83D78104ED94F00078131 /* red-button.png */,
@@ -873,8 +881,6 @@
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
-				05E6EFCA1049845800EF924B /* SegmentedListPicker.h */,
-				05E6EFCB1049845800EF924B /* SegmentedListPicker.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -882,12 +888,14 @@
 		05E207AD0FB9046500FCFC94 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				05CF61691048AF3D003E012F /* AccountsViewController.h */,
-				05CF616A1048AF3D003E012F /* AccountsViewController.m */,
 				05E207AE0FB9046500FCFC94 /* AccountCell.h */,
 				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
+				05EAB3131050A39300AF71A2 /* AccountListPicker.h */,
+				05EAB3141050A39300AF71A2 /* AccountListPicker.m */,
 				05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */,
 				05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */,
+				05CF61691048AF3D003E012F /* AccountsViewController.h */,
+				05CF616A1048AF3D003E012F /* AccountsViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
@@ -976,7 +984,6 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* web.gnos.us.app */,
-				05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1124,6 +1131,8 @@
 				05D83D7A104ED94F00078131 /* red-button.png in Resources */,
 				05D83D7F104EDCBF00078131 /* green-button.png in Resources */,
 				05D83D80104EDCBF00078131 /* grey-button.png in Resources */,
+				05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */,
+				05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1165,6 +1174,8 @@
 				05D83D79104ED94F00078131 /* red-button.png in Resources */,
 				05D83D7D104EDCBF00078131 /* green-button.png in Resources */,
 				05D83D7E104EDCBF00078131 /* grey-button.png in Resources */,
+				05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */,
+				05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,7 +1272,7 @@
 				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
 				05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */,
-				05E6EFCD1049845800EF924B /* SegmentedListPicker.m in Sources */,
+				05EAB3161050A39300AF71A2 /* AccountListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1355,7 +1366,7 @@
 				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
 				05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */,
-				05E6EFCC1049845800EF924B /* SegmentedListPicker.m in Sources */,
+				05EAB3151050A39300AF71A2 /* AccountListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

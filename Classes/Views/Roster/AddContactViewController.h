@@ -15,7 +15,6 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddContactViewController : UIViewController <UITextFieldDelegate> {
-	IBOutlet UIButton* selectAccountButton;
 	IBOutlet UITextField* jidTextField;
 	IBOutlet UILabel* accountLabel;
     AccountModel* account;
@@ -24,7 +23,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UIButton* selectAccountButton;
 @property (nonatomic, retain) UITextField* jidTextField;
 @property (nonatomic, retain) UILabel* accountLabel;
 @property (nonatomic, retain) AccountModel* account;
@@ -32,6 +30,5 @@
 @property (nonatomic, retain) NSString* newContactJidString;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)selectAccountButtonPressed;
 
 @end
