@@ -19,7 +19,6 @@
     MulticastDelegate* multicastDelegate;
 	NSMutableDictionary* xmppClientDictionary;
     NSMutableArray* delegates;
-	id delegate;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

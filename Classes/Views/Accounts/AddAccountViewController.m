@@ -68,6 +68,7 @@
 	NSArray* splitJid = [enteredJid componentsSeparatedByString:@"@"];
     AccountModel* oldAccount = [AccountModel findByJID:enteredJid];
 	if ([splitJid count] == 2 && oldAccount == nil) {
+        [AccountModel setAllNotDisplayed];
 		self.account.jid = enteredJid;
 		self.account.password = enteredPassword;
         self.account.activated = YES;
@@ -76,11 +77,7 @@
         self.account.resource = @"iPhone";
         self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
         self.account.port = 5222;
-        if ([AccountModel count] > 0) {
-            self.account.displayed = NO;
-        } else {
-            self.account.displayed = YES;
-        }
+        self.account.displayed = YES;
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
         [self.account insert];

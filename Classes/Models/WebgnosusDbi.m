@@ -128,7 +128,7 @@ static NSString* dbFileName = @"webgnosus.db";
 - (void)selectAllForModel:(id)model withStatement:(NSString*)statement andOutputTo:(NSMutableArray*)results {
 	sqlite3_stmt* statementPrepared;
 	sqlite3_prepare_v2 (sqlDb, [statement UTF8String], -1, &statementPrepared, NULL);
-	if ([model respondsToSelector:@selector(collectAllFromResult:andOutputTo:)] ) {
+	if ([model respondsToSelector:@selector(collectAllFromResult:andOutputTo:)]) {
 		while (sqlite3_step(statementPrepared) == SQLITE_ROW) {
 			[model collectAllFromResult:statementPrepared andOutputTo:results];
 		}

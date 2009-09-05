@@ -16,6 +16,7 @@
 - (void)segmentControlSelectionChanged:(id)sender;
 - (UIImage*)renderTextAsImage:(CGRect)rect;
 - (void)shiftSelectedItem:(NSInteger)shift;
+- (void)delegateSelectedItemChanged;
 
 @end
 
@@ -26,6 +27,7 @@
 @synthesize items;
 @synthesize selectedItemIndex;
 @synthesize font;
+@synthesize delegate;
 
 //===================================================================================================================================
 #pragma mark SegmentedListPicker
@@ -47,7 +49,6 @@
     }
     return self;
 }
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)selectedItem {
@@ -82,6 +83,7 @@
             [self shiftSelectedItem:1];
             break;
     }
+    [self delegateSelectedItemChanged];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -110,6 +112,14 @@
 	UIGraphicsEndImageContext();
     return textImage;
 }
+ 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)delegateSelectedItemChanged {
+    if ([self.delegate respondsToSelector:@selector(selectedItemChanged:)]) {
+        [self.delegate selectedItemChanged:[self selectedItem]];
+    }
+} 
+    
     
 //===================================================================================================================================
 #pragma mark NSObject
