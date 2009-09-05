@@ -11,10 +11,10 @@
 #import "UICustomSwitch.h"
 #import "AccountModel.h"
 #import "AlertViewManager.h"
+#import "AccountManagerViewController.h"
 #import "ActivityView.h"
-#import "AccountListPicker.h"
+#import "SegmentedListPicker.h"
 #import "AccountModel.h"
-
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 
@@ -22,7 +22,7 @@
 @interface EditAccountViewController (PrivateAPI)
 
 - (void)exitView;
-- (void)changePasssword;
+- (void)initAccountList;
 
 @end
 
@@ -31,6 +31,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize passwordTextField;
+@synthesize reenterPasswordTextField;
 @synthesize doneButton;
 @synthesize deleteButton;
 @synthesize addButton;
@@ -38,7 +39,6 @@
 @synthesize managerView;
 @synthesize accountsViewController;
 @synthesize activeAccounts;
-@synthesize account;
 
 //===================================================================================================================================
 #pragma mark EditAccountViewController
@@ -48,16 +48,56 @@
     [self.managerView dismiss];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)addButtonPressed:(id)sender {
+    [self.view removeFromSuperview];
+    [self.managerView showAddAccountView];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)deleteButtonPressed:(id)sender {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)sendPasswordButtonPressed:(id)sender {
+	NSString* password = self.passwordTextField.text;
+	NSString* reenterPassword = self.reenterPasswordTextField.text;
+    if (![password isEqualToString:@""] && [password isEqualToString:reenterPassword]) {
+        AccountModel* acct = [self account];
+        acct.password = password;
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    } else {
+        [AlertViewManager showAlert:@"Password is Invalid"];
+    }
+}
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (AccountModel*)account {
+    NSString* acct = [self.activeAccounts selectedItem];
+    return [AccountModel findByJID:acct];
+}
+
 //===================================================================================================================================
 #pragma mark EditAccountViewController PrivateApi
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)changePasssword {
-    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+- (void)exitView { 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)exitView { 
+- (void) initAccountList {
+    NSMutableArray* accountJIDs = [[NSMutableArray alloc] initWithCapacity:10];
+    NSInteger selectedAccountIndex;
+    NSArray* acctList = [AccountModel findAllActivated];
+    for (int i = 0; i < [acctList count]; i++) {
+        AccountModel* acct = [acctList objectAtIndex:i];
+        [accountJIDs addObject:[acct jid]];
+        if (acct.displayed) {
+            selectedAccountIndex = i;
+        }
+    }
+    self.activeAccounts = [[SegmentedListPicker alloc] init:accountJIDs withValueAtIndex:selectedAccountIndex  andRect:CGRectMake(15.0f, 45.0f, 240.0f, 30.0f)];
+    [self.view addSubview:(UIView*)self.activeAccounts];
+    [accountJIDs release];
 }
 
 //===================================================================================================================================
@@ -73,8 +113,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     self.passwordTextField.delegate = self;
-    self.activeAccounts = [[AccountListPicker alloc] init];
-    [self.view addSubview:self.activeAccounts.segmentedControl];
+    [self initAccountList];
     [super viewDidLoad];
 }
 
@@ -101,18 +140,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    BOOL shouldReturn = YES;
-	NSString* enteredPassword = self.passwordTextField.text;
-    if (![enteredPassword isEqualToString:@""]) {
-        self.account.password = enteredPassword;
-        [self changePasssword];
-        shouldReturn = YES;
-    }
-    [self.account update];
-	if (shouldReturn) {
-		[self exitView];
-	}
-	return shouldReturn; 
+    [textField resignFirstResponder];
+	return YES; 
 }
 
 //===================================================================================================================================

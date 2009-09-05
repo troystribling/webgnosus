@@ -20,6 +20,7 @@
 
 - (void)failureAlert:(NSString*)title message:(NSString*)message;
 - (void)accountConnectionFailed;
+- (BOOL)saveAccount;
 
 @end
 
@@ -29,12 +30,24 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidTextField;
 @synthesize passwordTextField;
+@synthesize cancelButton;
+@synthesize saveButton;
 @synthesize account;
 @synthesize managerView;
 @synthesize isFirstAccount;
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)cancelButtonPressed:(id)sender {
+    [self.view removeFromSuperview];
+    [self.managerView showEditAccountView];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (IBAction)saveButtonPressed:(id)sender {
+}
 
 //===================================================================================================================================
 #pragma mark AddAccountViewController PrivateApi
@@ -45,6 +58,41 @@
     [AlertViewManager dismissConnectionIndicator]; 
     [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)saveAccount {
+	NSString* enteredJid = self.jidTextField.text;
+	NSString* enteredPassword = self.passwordTextField.text;
+	NSArray* splitJid = [enteredJid componentsSeparatedByString:@"@"];
+    AccountModel* oldAccount = [AccountModel findByJID:enteredJid];
+	if ([splitJid count] == 2 && oldAccount == nil) {
+		self.account.jid = enteredJid;
+		self.account.password = enteredPassword;
+        self.account.activated = YES;
+        self.account.connectionState = AccountNotConnected;
+        self.account.host = [splitJid objectAtIndex:1];
+        self.account.resource = @"iPhone";
+        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
+        self.account.port = 5222;
+        if ([AccountModel count] > 0) {
+            self.account.displayed = NO;
+        } else {
+            self.account.displayed = YES;
+        }
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
+        [self.account insert];
+        [self.account load];
+        [[[XMPPClientManager instance] multicastDelegate] didAddAccount];
+	} else {
+        if (oldAccount) {
+            [AlertViewManager showAlert:@"Account Exists"];
+        } else {
+            [AlertViewManager showAlert:@"JID is Invalid"];
+        }
+	}
+	return NO; 
 }
 
 //===================================================================================================================================
@@ -118,6 +166,7 @@
     if ([AccountModel count] == 1) {
         [self.managerView dismiss];
     } else {
+        [self.view removeFromSuperview];
         [self.managerView showEditAccountView];
     }
 }
@@ -131,37 +180,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-	NSString* enteredJid = self.jidTextField.text;
-	NSString* enteredPassword = self.passwordTextField.text;
-	NSArray* splitJid = [enteredJid componentsSeparatedByString:@"@"];
-    AccountModel* oldAccount = [AccountModel findByJid:enteredJid andResource:@"iPhone"];
-	if ([splitJid count] == 2 && oldAccount == nil) {
-		self.account.jid = enteredJid;
-		self.account.password = enteredPassword;
-        self.account.activated = YES;
-        self.account.connectionState = AccountNotConnected;
-        self.account.host = [splitJid objectAtIndex:1];
-        self.account.resource = @"iPhone";
-        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
-        self.account.port = 5222;
-        if ([AccountModel count] > 0) {
-            self.account.displayed = NO;
-        } else {
-            self.account.displayed = YES;
-        }
-        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
-        [self.account insert];
-        [self.account load];
-        [[[XMPPClientManager instance] multicastDelegate] didAddAccount];
-	} else {
-        if (oldAccount) {
-            [AlertViewManager showAlert:@"Account Exists"];
-        } else {
-            [AlertViewManager showAlert:@"JID is Invalid"];
-        }
-	}
-	return NO; 
+    BOOL shouldReturn = YES;
+    if (self.isFirstAccount) {
+        shouldReturn = [self saveAccount];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return shouldReturn;
 }
 
 //===================================================================================================================================

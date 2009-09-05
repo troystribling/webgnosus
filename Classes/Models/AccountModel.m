@@ -90,39 +90,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (AccountModel*)findByJid:(NSString*)requestJid andResource:(NSString*)requestResource {
-	NSString *selectStatement;
-	if (requestResource) {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND resource = '%@'", requestJid, requestResource];
-	} else {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND resource IS NULL", requestJid];
-	}
-	AccountModel* model = [[AccountModel alloc] init];
-	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
-    if (model.pk == 0) {
-        [model release];
-        model = nil;
-    }
-	return model;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (AccountModel*)findByFullJid:(NSString*)requestFullJid {
-	NSString *selectStatement;
-	NSArray* splitJid = [requestFullJid componentsSeparatedByString:@"/"];
-	if ([splitJid count] > 1) {
-        NSInteger resourceCount = [splitJid count] - 1;
-        id* resourceList = calloc(resourceCount, sizeof(id));
-        [splitJid getObjects:resourceList range:NSMakeRange(1, resourceCount)];
-        NSArray* resourceArray = [NSArray arrayWithObjects:resourceList count:resourceCount];
-        NSString* resourceString = [resourceArray componentsJoinedByString:@"/"];
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND resource = '%@'", 
-                               [splitJid objectAtIndex:0], resourceString];
-	} else {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND resource IS NULL", 
-                               [splitJid objectAtIndex:0]];
-	}
++ (AccountModel*)findByJID:(NSString*)requestJID {
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@'", requestJID];
 	AccountModel* model = [[AccountModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];

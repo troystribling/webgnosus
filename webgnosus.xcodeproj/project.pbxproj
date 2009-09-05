@@ -58,8 +58,6 @@
 		05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
 		05CF60B51048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
 		05CF60B61048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
-		05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
-		05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF616A1048AF3D003E012F /* AccountsViewController.m */; };
 		05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05D1EC481037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
@@ -192,7 +190,6 @@
 		05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207290FB9016B00FCFC94 /* NSStringAdditions.m */; };
 		05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
-		05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
@@ -213,7 +210,6 @@
 		05E208060FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
-		05E208090FB9046500FCFC94 /* AccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207AF0FB9046500FCFC94 /* AccountCell.m */; };
 		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
@@ -258,8 +254,8 @@
 		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
 		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
 		05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
-		05EAB3151050A39300AF71A2 /* AccountListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3141050A39300AF71A2 /* AccountListPicker.m */; };
-		05EAB3161050A39300AF71A2 /* AccountListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EAB3141050A39300AF71A2 /* AccountListPicker.m */; };
+		05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
+		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
@@ -291,7 +287,6 @@
 		05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
-		05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = web.gnos.us.app; path = "/Users/troy/Develop/iPhone/webgnosus/build/Debug-iphonesimulator/web.gnos.us.app"; sourceTree = "<absolute>"; };
 		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
 		05CE073C0FB909CA0036DF5E /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
 		05CE073D0FB909CA0036DF5E /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
@@ -315,8 +310,6 @@
 		05CE076A0FB90A280036DF5E /* UICustomSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomSwitch.m; sourceTree = "<group>"; };
 		05CF60B31048A413003E012F /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		05CF60B41048A413003E012F /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
-		05CF61691048AF3D003E012F /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
-		05CF616A1048AF3D003E012F /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
 		05CF616D1048B141003E012F /* AccountManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountManagerViewController.xib; sourceTree = "<group>"; };
 		05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageDelegate.h; sourceTree = "<group>"; };
 		05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageDelegate.m; sourceTree = "<group>"; };
@@ -433,8 +426,6 @@
 		05E207290FB9016B00FCFC94 /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
 		05E207A80FB903F100FCFC94 /* WebgnosusClientAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebgnosusClientAppDelegate.h; path = Application/WebgnosusClientAppDelegate.h; sourceTree = "<group>"; };
 		05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WebgnosusClientAppDelegate.m; path = Application/WebgnosusClientAppDelegate.m; sourceTree = "<group>"; };
-		05E207AE0FB9046500FCFC94 /* AccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountCell.h; sourceTree = "<group>"; };
-		05E207AF0FB9046500FCFC94 /* AccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountCell.m; sourceTree = "<group>"; };
 		05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManagerViewController.h; sourceTree = "<group>"; };
 		05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManagerViewController.m; sourceTree = "<group>"; };
 		05E207B40FB9046500FCFC94 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
@@ -487,8 +478,9 @@
 		05E6F15A104A07FC00EF924B /* tabbar-streams.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-streams.png"; sourceTree = "<group>"; };
 		05EAB2F610509A9700AF71A2 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
 		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
-		05EAB3131050A39300AF71A2 /* AccountListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountListPicker.h; sourceTree = "<group>"; };
-		05EAB3141050A39300AF71A2 /* AccountListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountListPicker.m; sourceTree = "<group>"; };
+		05ED45E8105163D300DB3396 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
+		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
@@ -881,6 +873,8 @@
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
+				05ED464D1051932B00DB3396 /* SegmentedListPicker.h */,
+				05ED464E1051932B00DB3396 /* SegmentedListPicker.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -888,14 +882,8 @@
 		05E207AD0FB9046500FCFC94 /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				05E207AE0FB9046500FCFC94 /* AccountCell.h */,
-				05E207AF0FB9046500FCFC94 /* AccountCell.m */,
-				05EAB3131050A39300AF71A2 /* AccountListPicker.h */,
-				05EAB3141050A39300AF71A2 /* AccountListPicker.m */,
 				05E207B20FB9046500FCFC94 /* AccountManagerViewController.h */,
 				05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */,
-				05CF61691048AF3D003E012F /* AccountsViewController.h */,
-				05CF616A1048AF3D003E012F /* AccountsViewController.m */,
 				05E207B40FB9046500FCFC94 /* AddAccountViewController.h */,
 				05E207B50FB9046500FCFC94 /* AddAccountViewController.m */,
 				05E207B60FB9046500FCFC94 /* EditAccountViewController.h */,
@@ -984,6 +972,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* web.gnos.us.app */,
+				05ED45E8105163D300DB3396 /* web.gnos.us.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1054,7 +1043,7 @@
 			);
 			name = webgnosus_simulator;
 			productName = webgnosus;
-			productReference = 05C6E9C10F0F1B77009BD7C8 /* web.gnos.us.app */;
+			productReference = 05ED45E8105163D300DB3396 /* web.gnos.us.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1D6058900D05DD3D006BFB54 /* webgnosus */ = {
@@ -1217,7 +1206,6 @@
 				05E2072C0FB9016B00FCFC94 /* DDXMLNode.m in Sources */,
 				05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
 				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
-				05E207EC0FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
@@ -1271,8 +1259,7 @@
 				05F0441E10405872001223C4 /* XMPPError.m in Sources */,
 				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
-				05CF616C1048AF3D003E012F /* AccountsViewController.m in Sources */,
-				05EAB3161050A39300AF71A2 /* AccountListPicker.m in Sources */,
+				05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1311,7 +1298,6 @@
 				05E207300FB9016B00FCFC94 /* DDXMLNode.m in Sources */,
 				05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
 				05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
-				05E208090FB9046500FCFC94 /* AccountCell.m in Sources */,
 				05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
@@ -1365,8 +1351,7 @@
 				05F0441D10405872001223C4 /* XMPPError.m in Sources */,
 				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
-				05CF616B1048AF3D003E012F /* AccountsViewController.m in Sources */,
-				05EAB3151050A39300AF71A2 /* AccountListPicker.m in Sources */,
+				05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

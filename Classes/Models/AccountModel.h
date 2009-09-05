@@ -50,8 +50,7 @@ typedef enum {
 + (AccountModel*)findFirst;
 + (AccountModel*)findFirstDisplayed;
 + (AccountModel*)findByPk:(NSInteger)requestPk;
-+ (AccountModel*)findByFullJid:(NSString*)requestFullJid;
-+ (AccountModel*)findByJid:(NSString*)requestJid andResource:(NSString*)requestResource;
++ (AccountModel*)findByJID:(NSString*)requestJID;
 + (BOOL)triedToConnectAll;
 + (NSMutableArray*)findAllReady;
 + (void)setAllNotDisplayed;

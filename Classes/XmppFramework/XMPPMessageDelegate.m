@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)accountForXMPPClient:(XMPPClient*)client {
-    return [[AccountModel findByFullJid:[client.myJID full]] autorelease];
+    return [AccountModel findByJID:[client.myJID bare]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

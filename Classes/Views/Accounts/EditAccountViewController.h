@@ -13,34 +13,39 @@
 @class AccountModel;
 @class AccountManagerViewController;
 @class AccountsViewController;
-@class AccountListPicker;
+@class SegmentedListPicker;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* passwordTextField;
+ 	IBOutlet UITextField* reenterPasswordTextField;
     IBOutlet UIButton* doneButton;
     IBOutlet UIButton* deleteButton;
     IBOutlet UIButton* addButton;
     IBOutlet UIButton* sendPasswordButton;   
-    AccountListPicker* activeAccounts;
+    SegmentedListPicker* activeAccounts;
     AccountManagerViewController* managerView;
     AccountsViewController* accountsViewController;
-    AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* passwordTextField;
+@property (nonatomic, retain) UITextField* reenterPasswordTextField;
 @property (nonatomic, retain) UIButton* doneButton;
 @property (nonatomic, retain) UIButton* deleteButton;
 @property (nonatomic, retain) UIButton* addButton;
 @property (nonatomic, retain) UIButton* sendPasswordButton;
-@property (nonatomic, retain) AccountListPicker* activeAccounts;
+@property (nonatomic, retain) SegmentedListPicker* activeAccounts;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;
-@property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)doneButtonPressed:(id)sender;
+- (IBAction)addButtonPressed:(id)sender;
+- (IBAction)deleteButtonPressed:(id)sender;
+- (IBAction)sendPasswordButtonPressed:(id)sender;
 
-
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (AccountModel*)account;
+    
 @end

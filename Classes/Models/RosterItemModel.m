@@ -83,7 +83,7 @@
 + (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)account {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	NSString *selectStatement = 
-        [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND resource <> '%@'", account.jid, account.pk, account.resource];
+        [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", account.jid, account.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
     [selectStatement release];
 	return output;

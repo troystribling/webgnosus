@@ -1,5 +1,5 @@
 //
-//  RoundedCornersView.h
+//  SegmentedListPicker.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/29/09.
@@ -10,12 +10,19 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RoundedCornersView : UIView {
-
+@interface SegmentedListPicker : UISegmentedControl {
+    NSArray* items;
+    NSInteger selectedItemIndex;
+    UIFont* font;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, retain) NSArray* items;
+@property (nonatomic, assign) NSInteger selectedItemIndex;
+@property (nonatomic, retain) UIFont* font;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
+- (NSString*)selectedItem;
 
 @end

@@ -39,7 +39,7 @@
 					<object class="IBUITextField" id="190325613">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 87}, {240, 31}}</string>
+						<string key="NSFrame">{{15, 95}, {240, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -70,14 +70,14 @@
 					<object class="IBUITextField" id="510569274">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 126}, {240, 31}}</string>
+						<string key="NSFrame">{{15, 134}, {240, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Renter Password</string>
+						<string key="IBUIPlaceholder">Reenter Password</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -106,7 +106,7 @@
 					<object class="IBUIView" id="233827678">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{14, 212}, {240, 1}}</string>
+						<string key="NSFrame">{{14, 207}, {240, 1}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -117,7 +117,7 @@
 					<object class="IBUIView" id="4692374">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 78}, {240, 1}}</string>
+						<string key="NSFrame">{{15, 86}, {240, 1}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -128,7 +128,7 @@
 					<object class="IBUIView" id="668667358">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{15, 268}, {240, 1}}</string>
+						<string key="NSFrame">{{15, 249}, {240, 1}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -161,7 +161,7 @@
 					<object class="IBUILabel" id="1034938015">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{102, 16}, {62, 21}}</string>
+						<string key="NSFrame">{{102, 18}, {62, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -183,7 +183,7 @@
 					<object class="IBUILabel" id="311697620">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{107, 235}, {102, 21}}</string>
+						<string key="NSFrame">{{107, 220}, {102, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -205,7 +205,7 @@
 					<object class="IBUIButton" id="821600649">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{170, 165}, {85, 35}}</string>
+						<string key="NSFrame">{{170, 173}, {85, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -225,6 +225,7 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
 						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="1040396301"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="299623114">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">grey-button.png</string>
@@ -233,7 +234,7 @@
 					<object class="IBUIButton" id="568985442">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{74, 284}, {85, 35}}</string>
+						<string key="NSFrame">{{76, 258}, {85, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -255,7 +256,7 @@
 					<object class="IBUIButton" id="980188729">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{170, 284}, {85, 35}}</string>
+						<string key="NSFrame">{{169, 258}, {85, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -274,7 +275,7 @@
 					<object class="IBUIButton" id="658175262">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{14, 221}, {85, 35}}</string>
+						<string key="NSFrame">{{14, 216}, {85, 25}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -360,6 +361,41 @@
 					</object>
 					<int key="connectionID">37</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">sendPasswordButtonPressed:</string>
+						<reference key="source" ref="821600649"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">deleteButtonPressed:</string>
+						<reference key="source" ref="568985442"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">40</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">addButtonPressed:</string>
+						<reference key="source" ref="658175262"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">41</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reenterPasswordTextField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="510569274"/>
+					</object>
+					<int key="connectionID">42</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -381,8 +417,6 @@
 							<reference ref="190325613"/>
 							<reference ref="510569274"/>
 							<reference ref="977739031"/>
-							<reference ref="568985442"/>
-							<reference ref="980188729"/>
 							<reference ref="668667358"/>
 							<reference ref="4692374"/>
 							<reference ref="233827678"/>
@@ -390,6 +424,8 @@
 							<reference ref="658175262"/>
 							<reference ref="1034938015"/>
 							<reference ref="821600649"/>
+							<reference ref="980188729"/>
+							<reference ref="568985442"/>
 						</object>
 						<reference key="parent" ref="360949347"/>
 					</object>
@@ -497,7 +533,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>EditAccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{372, 320}, {280, 350}}</string>
+					<string>{{847, 374}, {280, 350}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -534,7 +570,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">38</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -543,8 +579,21 @@
 					<string key="className">EditAccountViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">doneButtonPressed:</string>
-						<string key="NS.object.0">id</string>
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSMutableArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addButtonPressed:</string>
+							<string>deleteButtonPressed:</string>
+							<string>doneButtonPressed:</string>
+							<string>sendPasswordButtonPressed:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+							<string>id</string>
+						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -554,6 +603,7 @@
 							<string>deleteButton</string>
 							<string>doneButton</string>
 							<string>passwordTextField</string>
+							<string>reenterPasswordTextField</string>
 							<string>sendPasswordButton</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -561,6 +611,7 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UITextField</string>
 							<string>UITextField</string>
 							<string>UIButton</string>
 						</object>
