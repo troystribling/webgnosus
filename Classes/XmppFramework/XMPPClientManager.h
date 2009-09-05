@@ -52,5 +52,6 @@
 
 - (void)didAddAccount;
 - (void)didRemoveAccount;
+- (void)didUpdateAccount;
 
 @end

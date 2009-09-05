@@ -38,6 +38,7 @@
 - (void)segmentControlSelectionChanged:(id)sender;
 - (void)loadRoster;
 - (void)rosterAddContactButton;
+- (void)reloadRoster;
 - (NSInteger)rosterCount;
 - (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (UIImage*)getImageForCellStatusAtSection:(NSInteger)section andRow:(NSInteger)row;
@@ -198,15 +199,25 @@
     [self loadRoster];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadRoster {
+    self.accounts = [AccountModel findAllReady];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadRoster];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didAddAccount {
-    self.accounts = [AccountModel findAllReady];
-    [self removeXMPPClientDelgate];
-    [self addXMPPClientDelgate];
-    [self loadRoster];
+    [self reloadRoster];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didRemoveAccount {
+    [self reloadRoster];
 }
 
 //===================================================================================================================================

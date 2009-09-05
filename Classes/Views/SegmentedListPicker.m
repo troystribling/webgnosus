@@ -15,6 +15,7 @@
 
 - (void)segmentControlSelectionChanged:(id)sender;
 - (UIImage*)renderTextAsImage:(CGRect)rect;
+- (void)shiftSelectedItem:(NSInteger)shift;
 
 @end
 
@@ -30,7 +31,7 @@
 #pragma mark SegmentedListPicker
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
+- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
     self.items = list;
     self.selectedItemIndex = index;
     self.font = [UIFont boldSystemFontOfSize:16];
@@ -53,12 +54,45 @@
     return (NSString*)[self.items objectAtIndex:self.selectedItemIndex];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeItem:(NSString*)item {
+    [items removeObject:item];
+    [self shiftSelectedItem:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addItem:(NSString*)item {
+    [items addObject:item];
+}
+
 //===================================================================================================================================
 #pragma mark SegmentedListPicker PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)segmentControlSelectionChanged:(id)sender {
     NSInteger selectedSegment = [(UISegmentedControl*)sender selectedSegmentIndex];
+    switch (selectedSegment) {
+        case 0:
+            [self shiftSelectedItem:-1];
+            break;
+        case 1:
+            [self shiftSelectedItem:1];
+            break;
+        case 2:
+            [self shiftSelectedItem:1];
+            break;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)shiftSelectedItem:(NSInteger)shift {
+    NSInteger listLength = [items count];
+    NSInteger newIndex = self.selectedItemIndex + shift;
+    if (newIndex < 0) {
+        newIndex = listLength - 1;
+    }
+    self.selectedItemIndex = newIndex % listLength;
+    [self setImage:[self renderTextAsImage:self.frame] forSegmentAtIndex:1];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

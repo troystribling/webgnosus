@@ -26,6 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addAccountViewController;
 @synthesize editAccountViewController;
+@synthesize parentView;
 @synthesize contentView;
 @synthesize contentViewBorder;
 @synthesize currentView;
@@ -35,11 +36,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAsSubview:(UIView*)parent {
+    self.parentView = parent;
     [parent addSubview:self.view];
     [parent addSubview:self.contentViewBorder];
     [parent addSubview:self.contentView];
     self.addAccountViewController.managerView = self;        
-    self.editAccountViewController.managerView = self;        
+    self.editAccountViewController.managerView = self;    
+    [self showView];
     if ([AccountModel count] > 0) {
         [self showEditAccountView];
     } else {
@@ -52,6 +55,16 @@
     [self.view removeFromSuperview];
     [self.contentViewBorder removeFromSuperview];
     [self.contentView removeFromSuperview];
+    self.parentView = nil;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)showView {
+    if ([AccountModel count] > 0) {
+        [self showEditAccountView];
+    } else {
+        [self showAddAccountView];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

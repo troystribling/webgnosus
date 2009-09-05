@@ -45,6 +45,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)doneButtonPressed:(id)sender {
+    AccountModel* acct = [self account];
+    [AccountModel setAllNotDisplayed];
+    acct.displayed = YES;
+    [acct update];
     [self.managerView dismiss];
 }
 
@@ -56,6 +60,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)deleteButtonPressed:(id)sender {
+    AccountModel* acct = [self account];
+    [[XMPPClientManager instance] removeXMPPClientForAccount:acct];
+    [acct destroy];
+    [self.activeAccounts removeItem:[acct jid]];
+    [[[XMPPClientManager instance] multicastDelegate] didRemoveAccount];
+    [self.view removeFromSuperview];
+    [self.managerView showView];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

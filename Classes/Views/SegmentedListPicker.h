@@ -11,18 +11,20 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SegmentedListPicker : UISegmentedControl {
-    NSArray* items;
+    NSMutableArray* items;
     NSInteger selectedItemIndex;
     UIFont* font;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) NSArray* items;
+@property (nonatomic, retain) NSMutableArray* items;
 @property (nonatomic, assign) NSInteger selectedItemIndex;
 @property (nonatomic, retain) UIFont* font;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
+- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
 - (NSString*)selectedItem;
+- (void)removeItem:(NSString*)item;
+- (void)addItem:(NSString*)item;
 
 @end
