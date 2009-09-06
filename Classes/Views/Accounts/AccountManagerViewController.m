@@ -43,11 +43,6 @@
     self.addAccountViewController.managerView = self;        
     self.editAccountViewController.managerView = self;    
     [self showView];
-    if ([AccountModel count] > 0) {
-        [self showEditAccountView];
-    } else {
-        [self showAddAccountView];
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

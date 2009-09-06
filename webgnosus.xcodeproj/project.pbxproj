@@ -230,6 +230,8 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
+		05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
 		05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
 		05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
 		05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
@@ -466,6 +468,8 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E5A22E10533DE300D960B7 /* RoundedCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornersView.h; sourceTree = "<group>"; };
+		05E5A22F10533DE300D960B7 /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornersView.m; sourceTree = "<group>"; };
 		05E6F151104A07FC00EF924B /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-error-led.jpg"; sourceTree = "<group>"; };
 		05E6F152104A07FC00EF924B /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-off-led.jpg"; sourceTree = "<group>"; };
 		05E6F153104A07FC00EF924B /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-on-led.jpg"; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
+				05E5A22E10533DE300D960B7 /* RoundedCornersView.h */,
+				05E5A22F10533DE300D960B7 /* RoundedCornersView.m */,
 				05ED464D1051932B00DB3396 /* SegmentedListPicker.h */,
 				05ED464E1051932B00DB3396 /* SegmentedListPicker.m */,
 			);
@@ -1260,6 +1266,7 @@
 				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
 				05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */,
+				05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,6 +1359,7 @@
 				050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */,
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
 				05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */,
+				05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

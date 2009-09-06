@@ -10,14 +10,6 @@
 #import "ActivityView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface UIActionSheet (PrivateAPI)
-
-- (void) setNumberOfRows: (NSInteger) rows;
-- (void) setMessage: (NSString *)message;
-
-@end
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ActivityView (PrivateAPI)
 
 @end
@@ -32,23 +24,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithTitle:(NSString*)title inView:(UIView*)view {
-    if (self = [super initWithTitle:title delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]) {
-        UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-        self.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-        [self setNumberOfRows:1];
-        [activityIndicator setCenter:CGPointMake(160.0f, 50.0f)];
-        [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [activityIndicator startAnimating];
-        [self addSubview:activityIndicator];
-        [activityIndicator release];
-        [self showInView:view];
+    if (self = [super initWithFrame:view.frame]) {
+        [view.window addSubview:self];
+        self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) dismiss {
-    [self dismissWithClickedButtonIndex:0 animated:YES]; 
+    [self removeFromSuperview];
 }
 
 //===================================================================================================================================

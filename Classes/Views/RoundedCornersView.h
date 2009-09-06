@@ -1,8 +1,8 @@
 //
-//  ActivityView.h
+//  RoundedCornersView.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 2/16/09.
+//  Created by Troy Stribling on 8/29/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -10,13 +10,12 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ActivityView : UIView {
+@interface RoundedCornersView : UIView {
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithTitle:(NSString*)title inView:(UIView*)view;
-- (void) dismiss;
 
 @end
