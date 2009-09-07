@@ -122,6 +122,7 @@
     [self openActivatedAccounts];
     [self createTabBarController];
 	[window addSubview:self.tabBarController.view];	
+    [AlertViewManager onStartshowConnectingIndicatorInView:window];
     NSInteger count = [AccountModel count];
     if (count == 0) {
         [self.accountManagerViewController addAsSubview:window];	

@@ -79,7 +79,7 @@
         self.account.port = 5222;
         self.account.displayed = YES;
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [AlertViewManager showConnectingIndicatorInView:self.managerView.view];
+        [AlertViewManager showConnectingIndicatorInView:self.managerView.view.window];
         [self.account insert];
         [self.account load];
         [[[XMPPClientManager instance] multicastDelegate] didAddAccount];

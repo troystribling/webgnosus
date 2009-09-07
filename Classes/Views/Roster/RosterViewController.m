@@ -57,7 +57,7 @@
 @synthesize editAccountsButton;
 @synthesize accountManagerViewController;
 @synthesize roster;
-@synthesize accounts;
+@synthesize account;
 @synthesize selectedRoster;
 
 //===================================================================================================================================
@@ -98,17 +98,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadRoster {
-    self.roster = [[NSMutableArray alloc] init];
-    for (int i =0; i < [self.accounts count]; i++) {
-        AccountModel* account = [self.accounts objectAtIndex:i];
-        NSMutableArray* rosterForAccount;
-        if (self.selectedRoster == kCONTACTS_MODE) {
-            rosterForAccount = [ContactModel findAllByAccount:account];
-        } else {
-            rosterForAccount = [RosterItemModel findAllResourcesByAccount:account];
-        }
-        [self.roster addObject:rosterForAccount];
-        [rosterForAccount release];
+    if (self.selectedRoster == kCONTACTS_MODE) {
+        self.roster = [ContactModel findAllByAccount:self.account];
+    } else {
+        self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
     }
     [self.tableView reloadData];
 }
@@ -119,7 +112,7 @@
     if (self.selectedRoster == kCONTACTS_MODE) {
         count = [ContactModel count];
     } else {
-       count =  [RosterItemModel count];
+        count =  [RosterItemModel count];
     }
     return count;
 }
@@ -144,7 +137,7 @@
     } else {
         chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
     }
-    [chatViewController setAccount:[self.accounts objectAtIndex:indexPath.section]];
+    [chatViewController setAccount:[self.account]];
     [chatViewController setPartner:user];
     return chatViewController;
 }
@@ -165,29 +158,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIImage*)getImageForCellStatusAtSection:(NSInteger)section andRow:(NSInteger)row {
-    NSMutableArray* rosterForAccount = [self.roster objectAtIndex:section];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        return [RosterCell contactImage:(ContactModel*)[rosterForAccount objectAtIndex:row]];
+        return [RosterCell contactImage:(ContactModel*)[self.roster objectAtIndex:row]];
     }
-    return [RosterCell rosterItemImage:(RosterItemModel*)[rosterForAccount objectAtIndex:row]];
+    return [RosterCell rosterItemImage:(RosterItemModel*)[self.roster objectAtIndex:row]];
 }
             
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
-	NSMutableArray* activatedAccounts = [AccountModel findAllActivated]; 
-    for (int i = 0; i < [activatedAccounts count]; i++) {
-        AccountModel* account = [activatedAccounts objectAtIndex:i];
-        [[XMPPClientManager instance] xmppClientForAccount:account andDelegateTo:self];
-    }
+    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeXMPPClientDelgate {
-	NSMutableArray* activatedAccounts = [AccountModel findAllActivated]; 
-    for (int i = 0; i < [activatedAccounts count]; i++) {
-        AccountModel* account = [activatedAccounts objectAtIndex:i];
-        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:account];
-    }
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -201,7 +185,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadRoster {
-    self.accounts = [AccountModel findAllReady];
+    self.account = [AccountModel findFirstDisplayed];
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
     [self loadRoster];
@@ -233,7 +217,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
-    self.accounts = [AccountModel findAllReady];
+    self.account = [AccountModel findFirstDisplayed];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadRoster];
 }
@@ -294,16 +278,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.accounts = [AccountModel findAllReady];
     [self rosterAddContactButton];
     [self createSegementedController];
-    [AlertViewManager onStartshowConnectingIndicatorInView:self.view];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.accounts = [AccountModel findAllReady];
+    self.account = [AccountModel findFirstDisplayed];
     [self addXMPPClientDelgate];
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
     [self loadRoster];
@@ -336,9 +318,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
-    if ([self.accounts count] > 0) {
+    if (self.account) {
         RosterSectionViewController* rosterHeader = 
-            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[[self.accounts objectAtIndex:section] nickname]]; 
+            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
         rosterHeaderView = rosterHeader.view;
     }
 	return rosterHeaderView; 
@@ -359,11 +341,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count = [self.accounts count];
-    if (count < 1) {
-        count = 1;
-    }
-    return count;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -386,7 +364,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
 	if (editingStyle == UITableViewCellEditingStyleDelete) { 
-        AccountModel* account = [self.accounts objectAtIndex:indexPath.section];
         NSMutableArray* accountRoster = [self.roster objectAtIndex:indexPath.section];
         ContactModel* contact = [accountRoster objectAtIndex:indexPath.row]; 
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:account];

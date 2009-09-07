@@ -262,6 +262,10 @@
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F0441E10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
+		05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
+		05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
+		05F24C071054164F000C886E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F24C061054164F000C886E /* MBProgressHUD.m */; };
+		05F24C081054164F000C886E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F24C061054164F000C886E /* MBProgressHUD.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -488,6 +492,9 @@
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
+		05F24BD31054077F000C886E /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
+		05F24C051054164F000C886E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		05F24C061054164F000C886E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -690,6 +697,7 @@
 		05DC8C910FBB15EB0018AEEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				05F24BD31054077F000C886E /* AddContactViewController.xib */,
 				05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */,
 				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
 				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
@@ -866,6 +874,7 @@
 		05E207AC0FB9046500FCFC94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				05F24C041054164F000C886E /* ActivityView */,
 				05E207AD0FB9046500FCFC94 /* Accounts */,
 				05E207BA0FB9046500FCFC94 /* Chat */,
 				05E207C70FB9046500FCFC94 /* Grid */,
@@ -958,6 +967,15 @@
 				05E207EB0FB9046500FCFC94 /* RosterViewController.m */,
 			);
 			path = Roster;
+			sourceTree = "<group>";
+		};
+		05F24C041054164F000C886E /* ActivityView */ = {
+			isa = PBXGroup;
+			children = (
+				05F24C051054164F000C886E /* MBProgressHUD.h */,
+				05F24C061054164F000C886E /* MBProgressHUD.m */,
+			);
+			path = ActivityView;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -1128,6 +1146,7 @@
 				05D83D80104EDCBF00078131 /* grey-button.png in Resources */,
 				05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */,
 				05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */,
+				05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1190,7 @@
 				05D83D7E104EDCBF00078131 /* grey-button.png in Resources */,
 				05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */,
 				05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */,
+				05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,6 +1287,7 @@
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
 				05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 				05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */,
+				05F24C081054164F000C886E /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1360,6 +1381,7 @@
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
 				05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 				05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */,
+				05F24C071054164F000C886E /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
