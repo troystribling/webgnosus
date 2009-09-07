@@ -37,6 +37,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByAccount:(AccountModel*)account {
+	NSString* countStatement = 
+    [[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM roster WHERE accountPk = %d", account.pk];
+	return [[WebgnosusDbi instance]  selectIntExpression:countStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)account {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT COUNT(pk)  FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, account.pk];
     NSInteger count = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];;

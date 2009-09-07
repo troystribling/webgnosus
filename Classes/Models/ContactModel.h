@@ -34,6 +34,7 @@ typedef enum {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
++ (NSInteger)countByAccount:(AccountModel*)account;
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;

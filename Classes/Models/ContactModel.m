@@ -35,6 +35,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByAccount:(AccountModel*)account {
+	NSString* countStatement = 
+        [[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM contacts WHERE accountPk = %d", account.pk];
+	return [[WebgnosusDbi instance]  selectIntExpression:countStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE contacts"];
 }

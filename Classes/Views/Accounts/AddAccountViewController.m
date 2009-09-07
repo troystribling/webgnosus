@@ -82,7 +82,7 @@
         [AlertViewManager showConnectingIndicatorInView:self.managerView.view.window];
         [self.account insert];
         [self.account load];
-        [[[XMPPClientManager instance] multicastDelegate] didAddAccount];
+        [[[XMPPClientManager instance] accountUpdateDelegate] didAddAccount];
 	} else {
         if (oldAccount) {
             [AlertViewManager showAlert:@"Account Exists"];
@@ -195,7 +195,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
     [super dealloc];
-    [self.account release];
 }
 
 @end

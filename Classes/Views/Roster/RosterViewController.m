@@ -39,12 +39,14 @@
 - (void)loadRoster;
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
-- (NSInteger)rosterCount;
 - (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
-- (UIImage*)getImageForCellStatusAtSection:(NSInteger)section andRow:(NSInteger)row;
-- (NSString*)getCellTextAtSection:(NSInteger)section andRow:(NSInteger)row;
+- (UIImage*)getImageForCellStatusAtRow:(NSInteger)row;
+- (NSString*)getCellTextAtRow:(NSInteger)row;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
+- (void)loadAccount;
+- (void)addXMPPAccountUpdateDelgate;
+- (void)removeXMPPAccountUpdateDelgate;
 - (void)onXmppClientConnectionError:(XMPPClient*)sender;
 
 @end
@@ -107,17 +109,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)rosterCount {
-    NSInteger count;
-    if (self.selectedRoster == kCONTACTS_MODE) {
-        count = [ContactModel count];
-    } else {
-        count =  [RosterItemModel count];
-    }
-    return count;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rosterAddContactButton {
     if (self.selectedRoster == kCONTACTS_MODE) {
         self.navigationItem.rightBarButtonItem = self.addContactButton;
@@ -131,33 +122,32 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath  {
     ChatViewController* chatViewController;
-    UserModel* user = [[self.roster objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
         chatViewController = [[ContactChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     } else {
         chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
     }
-    [chatViewController setAccount:[self.account]];
-    [chatViewController setPartner:user];
+    chatViewController.account = self.account;
+    chatViewController.partner = user;
     return chatViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)getCellTextAtSection:(NSInteger)section andRow:(NSInteger)row {
+- (NSString*)getCellTextAtRow:(NSInteger)row {
     NSString* cellTitle;
-    NSMutableArray* rosterForAccount = [self.roster objectAtIndex:section];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        ContactModel*  cellItem = [rosterForAccount objectAtIndex:row]; 
-        cellTitle = cellItem.nickname;
+        ContactModel*  cellItem = [self.roster objectAtIndex:row]; 
+        cellTitle = cellItem.jid;
     } else {
-        RosterItemModel*  cellItem = [rosterForAccount objectAtIndex:row]; 
+        RosterItemModel*  cellItem = [self.roster objectAtIndex:row]; 
          cellTitle = cellItem.resource;
     }
     return cellTitle;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UIImage*)getImageForCellStatusAtSection:(NSInteger)section andRow:(NSInteger)row {
+- (UIImage*)getImageForCellStatusAtRow:(NSInteger)row {
     if (self.selectedRoster == kCONTACTS_MODE) {
         return [RosterCell contactImage:(ContactModel*)[self.roster objectAtIndex:row]];
     }
@@ -175,20 +165,36 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onXmppClientConnectionError:(XMPPClient*)sender {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:sender];
-    self.accounts = [AccountModel findAllReady];
-    [[XMPPClientManager instance] removeXMPPClientForAccount:account];
+    AccountModel* errAccount = [XMPPMessageDelegate accountForXMPPClient:sender];
+    [self loadAccount];
+    [[XMPPClientManager instance] removeXMPPClientForAccount:errAccount];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadRoster];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadRoster {
-    self.account = [AccountModel findFirstDisplayed];
+    [self loadAccount];
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
     [self loadRoster];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
 }
 
 //===================================================================================================================================
@@ -201,6 +207,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didRemoveAccount {
+    [self reloadRoster];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didUpdateAccount {
     [self reloadRoster];
 }
 
@@ -217,7 +228,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
-    self.account = [AccountModel findFirstDisplayed];
+    [self loadAccount];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadRoster];
 }
@@ -285,9 +296,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.account = [AccountModel findFirstDisplayed];
+    [self loadAccount];
     [self addXMPPClientDelgate];
-    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
+    [self addXMPPAccountUpdateDelgate];
     [self loadRoster];
 	[super viewWillAppear:animated];
 }
@@ -295,7 +306,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
-    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
+    [self removeXMPPAccountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -346,18 +357,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	NSInteger count = 0;
-    if ([self.roster count] > section) {
-        count = [[self.roster objectAtIndex:section] count];
-    }
-    return count;
+    return [self.roster count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
-    cell.jidLabel.text = [self getCellTextAtSection:[indexPath section] andRow:[indexPath row]];
-    cell.activeImage.image = [self getImageForCellStatusAtSection:[indexPath section] andRow:[indexPath row]];
+    cell.jidLabel.text = [self getCellTextAtRow:indexPath.row];
+    cell.activeImage.image = [self getImageForCellStatusAtRow:indexPath.row];
     return cell;
 }
 

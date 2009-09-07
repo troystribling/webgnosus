@@ -32,6 +32,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
++ (NSInteger)countByAccount:(AccountModel*)account;
 + (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)account;
 + (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)account;
 + (NSMutableArray*)findAll;

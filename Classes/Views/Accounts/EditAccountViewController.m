@@ -50,6 +50,7 @@
     [AccountModel setAllNotDisplayed];
     acct.displayed = YES;
     [acct update];
+    [[[XMPPClientManager instance] accountUpdateDelegate] didUpdateAccount];
     [self.managerView dismiss];
 }
 
@@ -65,7 +66,7 @@
     [[XMPPClientManager instance] removeXMPPClientForAccount:acct];
     [acct destroy];
     [self.activeAccounts removeItem:[acct jid]];
-    [[[XMPPClientManager instance] multicastDelegate] didRemoveAccount];
+    [[[XMPPClientManager instance] accountUpdateDelegate] didRemoveAccount];
     [self.view removeFromSuperview];
     [self.managerView showView];
 }

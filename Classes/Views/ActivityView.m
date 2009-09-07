@@ -58,7 +58,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (RoundedCornersView*)createContentView:(UIView*)view withWidth:(CGFloat)width  {
-    RoundedCornersView* contentView = [[RoundedCornersView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width+10.0f , 80.0f)];
+    RoundedCornersView* contentView = [[RoundedCornersView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, width+20.0f , 80.0f)];
     CGFloat xcenter = view.frame.origin.x + view.frame.size.width/2.0f;
     CGFloat ycenter = view.frame.origin.y + view.frame.size.height/2.0f;
     [contentView setCenter:CGPointMake(xcenter, ycenter)];
@@ -69,7 +69,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIActivityIndicatorView*)createActivityIndicator:(UIView*)view withWidth:(CGFloat)width {
     UIActivityIndicatorView* activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
-    [activityIndicator setCenter:CGPointMake((width+10.0f)/2.0f, 30.0f)];
+    [activityIndicator setCenter:CGPointMake((width+20.0f)/2.0f, 30.0f)];
     [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [activityIndicator startAnimating];
     [view addSubview:activityIndicator];
@@ -78,7 +78,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UILabel*)createTitle:(NSString*)title inView:(UIView*)view withWidth:(CGFloat)width {
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 50.0f, width, 20.0f)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 50.0f, width, 20.0f)];
     titleLabel.text = title;
     titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     [view addSubview:titleLabel];

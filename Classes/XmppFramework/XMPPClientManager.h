@@ -16,13 +16,13 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClientManager : NSObject {
-    MulticastDelegate* multicastDelegate;
+    MulticastDelegate* accountUpdateDelegate;
 	NSMutableDictionary* xmppClientDictionary;
     NSMutableArray* delegates;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (retain) MulticastDelegate* multicastDelegate;
+@property (retain) MulticastDelegate* accountUpdateDelegate;
 @property (retain) NSMutableDictionary* xmppClientDictionary;
 @property (retain) NSMutableArray* delegates;
 
