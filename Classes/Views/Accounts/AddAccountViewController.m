@@ -183,9 +183,8 @@
     BOOL shouldReturn = YES;
     if (self.isFirstAccount) {
         shouldReturn = [self saveAccount];
-    } else {
-        [textField resignFirstResponder];
-    }
+    } 
+    [textField resignFirstResponder];
     return shouldReturn;
 }
 

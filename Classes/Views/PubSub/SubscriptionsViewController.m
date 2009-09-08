@@ -1,97 +1,60 @@
 //
-//  HistoryViewController.m
+//  SubscriptionsViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/11/09.
+//  Created by Troy Stribling on 9/7/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-#import "HistoryViewController.h"
-#import "MessageModel.h"
-#import "AccountModel.h"
-#import "MessageCellFactory.h"
-
-#import "XMPPClientManager.h"
-#import "XMPPClient.h"
-#import "XMPPMessage.h"
+#import "SubscriptionsViewController.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface HistoryViewController (PrivateAPI)
-
-- (void)loadMessages;
-- (void)addXMPPClientDelgate;
-- (void)removeXMPPClientDelgate;
+@interface SubscriptionsViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation HistoryViewController
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize messages;
-@synthesize accounts;
+@implementation SubscriptionsViewController
 
 //===================================================================================================================================
-#pragma mark HistoryViewController
+#pragma mark SubscriptionsViewController
 
 //===================================================================================================================================
-#pragma mark HistoryViewController PrivateAPI
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMessages {
-	self.messages = [MessageModel findAllWithLimit:kMESSAGE_CACHE_SIZE];
-    [self.tableView reloadData];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addXMPPClientDelgate {
-	NSEnumerator *accountsEnumerator = [self.accounts objectEnumerator]; 
-	AccountModel* account = nil; 
-	while ((account = [accountsEnumerator nextObject]) != nil) { 
-        [[XMPPClientManager instance] xmppClientForAccount:account andDelegateTo:self];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeXMPPClientDelgate {
-	NSEnumerator *accountsEnumerator = [self.accounts objectEnumerator]; 
-	AccountModel* account = nil; 
-	while ((account = [accountsEnumerator nextObject]) != nil) { 
-        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:account];
-    }
-}
-
-//===================================================================================================================================
-#pragma mark XMPPClientDelegate
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
-    if ([message hasBody]) {
-        [self loadMessages];
-    }
-}
+#pragma mark SubscriptionsViewController PrivateAPI
 
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidLoad {    
+- (id)initWithStyle:(UITableViewStyle)style {
+    if (self = [super initWithStyle:style]) {
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.accounts = [AccountModel findAllActivated];
-    [self addXMPPClientDelgate];
-    [self loadMessages];
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [self removeXMPPClientDelgate];
 	[super viewWillDisappear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidDisappear:(BOOL)animated {
+	[super viewDidDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -111,23 +74,25 @@
 #pragma mark UITableViewDeligate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [MessageModel countWithLimit:kMESSAGE_CACHE_SIZE];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 0;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.messages objectAtIndex:indexPath.row]];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

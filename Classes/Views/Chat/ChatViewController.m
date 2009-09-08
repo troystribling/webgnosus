@@ -24,6 +24,9 @@
 
 - (void)loadItems;
 - (UIViewController*)getMessageViewControllerForAccount;
+- (void)loadAccount;
+- (void)addXMPPClientDelgate;
+- (void)removeXMPPClientDelgate;
 
 @end
 
@@ -67,6 +70,21 @@
 - (void)loadItems {
 	self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     [self.tableView reloadData];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPClientDelgate {
+    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPClientDelgate {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 }
 
 //===================================================================================================================================
@@ -113,14 +131,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    [self addXMPPClientDelgate];
+    [self loadAccount];
     [self loadItems];
 	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    [self removeXMPPClientDelgate];
 	[super viewWillDisappear:animated];
 }
 

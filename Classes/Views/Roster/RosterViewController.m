@@ -100,10 +100,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadRoster {
-    if (self.selectedRoster == kCONTACTS_MODE) {
-        self.roster = [ContactModel findAllByAccount:self.account];
+    if (self.account) {
+        if (self.selectedRoster == kCONTACTS_MODE) {
+            self.roster = [ContactModel findAllByAccount:self.account];
+        } else {
+            self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
+        }
     } else {
-        self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
+        self.roster = [[NSMutableArray alloc] initWithCapacity:0];
     }
     [self.tableView reloadData];
 }
@@ -112,11 +116,10 @@
 - (void)rosterAddContactButton {
     if (self.selectedRoster == kCONTACTS_MODE) {
         self.navigationItem.rightBarButtonItem = self.addContactButton;
-        self.navigationItem.leftBarButtonItem = self.editAccountsButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
-        self.navigationItem.leftBarButtonItem = nil;
     }
+    self.navigationItem.leftBarButtonItem = self.editAccountsButton;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -156,12 +159,16 @@
             
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
-    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    if (self.account) {
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeXMPPClientDelgate {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    if (self.account) {
+        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -178,9 +185,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)onXmppClientConnectionError:(XMPPClient*)sender {
     AccountModel* errAccount = [XMPPMessageDelegate accountForXMPPClient:sender];
-    [self loadAccount];
     [[XMPPClientManager instance] removeXMPPClientForAccount:errAccount];
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
+    [self loadAccount];
     [self loadRoster];
 }
 
@@ -229,7 +236,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
     [self loadAccount];
-    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadRoster];
 }
 
@@ -291,7 +297,6 @@
     [super viewDidLoad];
     [self rosterAddContactButton];
     [self createSegementedController];
-    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -352,7 +357,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (self.account) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -385,6 +394,15 @@
     ChatViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
     [self.navigationController pushViewController:chatViewController animated:YES];
     [chatViewController release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL canEdit = NO;
+    if (self.selectedRoster == kCONTACTS_MODE) {
+        canEdit = YES;
+    }
+    return canEdit;
 }
 
 //===================================================================================================================================

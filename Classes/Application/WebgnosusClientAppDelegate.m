@@ -100,7 +100,7 @@
     self.navRosterViewController = [self createNavigationController:self.rosterViewController];
     self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
     self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
-    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-streams.png"] tag:0];
+    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
     self.navEditAccountViewController = [self createNavigationController:self.editAccountViewController];	
     self.navEditAccountViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Configure" image:[UIImage imageNamed:@"tabbar-accounts.png"] tag:2];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navHistoryViewController, self.navEditAccountViewController, nil];	
@@ -165,6 +165,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
     AccountModel* account = [AccountModel findFirstDisplayed];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     if (!account) {
         [self.accountManagerViewController addAsSubview:window];	
     }
