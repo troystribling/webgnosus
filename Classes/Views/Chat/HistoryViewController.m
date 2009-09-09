@@ -22,6 +22,7 @@
 - (void)loadMessages;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
+- (void)loadAccount;
 
 @end
 
@@ -30,7 +31,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messages;
-@synthesize accounts;
+@synthesize account;
 
 //===================================================================================================================================
 #pragma mark HistoryViewController
@@ -46,27 +47,28 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
-	NSEnumerator *accountsEnumerator = [self.accounts objectEnumerator]; 
-	AccountModel* account = nil; 
-	while ((account = [accountsEnumerator nextObject]) != nil) { 
-        [[XMPPClientManager instance] xmppClientForAccount:account andDelegateTo:self];
+    if (self.account) {
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeXMPPClientDelgate {
-	NSEnumerator *accountsEnumerator = [self.accounts objectEnumerator]; 
-	AccountModel* account = nil; 
-	while ((account = [accountsEnumerator nextObject]) != nil) { 
-        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:account];
+    if (self.account) {
+        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
 }
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
+- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage*)message {
     if ([message hasBody]) {
         [self loadMessages];
     }
@@ -82,7 +84,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.accounts = [AccountModel findAllActivated];
+    [self loadAccount];
     [self addXMPPClientDelgate];
     [self loadMessages];
 	[super viewWillAppear:animated];

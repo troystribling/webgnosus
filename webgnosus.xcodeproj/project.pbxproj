@@ -268,12 +268,18 @@
 		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
+		05EF00001057351F0068AA06 /* PubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* PubCell.xib */; };
+		05EF0002105735690068AA06 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* SubCell.xib */; };
+		05EF0003105735690068AA06 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* SubCell.xib */; };
+		05EF0020105738840068AA06 /* PubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* PubCell.m */; };
+		05EF0021105738840068AA06 /* PubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* PubCell.m */; };
+		05EFFFF410572B490068AA06 /* SubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* SubCell.m */; };
+		05EFFFF510572B490068AA06 /* SubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* SubCell.m */; };
+		05EFFFFF1057351F0068AA06 /* PubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* PubCell.xib */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F0441E10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
 		05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
-		05F24C071054164F000C886E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F24C061054164F000C886E /* MBProgressHUD.m */; };
-		05F24C081054164F000C886E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F24C061054164F000C886E /* MBProgressHUD.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -505,11 +511,15 @@
 		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
 		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		05EF0001105735690068AA06 /* SubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCell.xib; sourceTree = "<group>"; };
+		05EF001E105738840068AA06 /* PubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubCell.h; sourceTree = "<group>"; };
+		05EF001F105738840068AA06 /* PubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PubCell.m; sourceTree = "<group>"; };
+		05EFFFF210572B490068AA06 /* SubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCell.h; sourceTree = "<group>"; };
+		05EFFFF310572B490068AA06 /* SubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCell.m; sourceTree = "<group>"; };
+		05EFFFFE1057351F0068AA06 /* PubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubCell.xib; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
 		05F24BD31054077F000C886E /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
-		05F24C051054164F000C886E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		05F24C061054164F000C886E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -702,7 +712,9 @@
 				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
 				05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */,
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
+				05EFFFFE1057351F0068AA06 /* PubCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
+				05EF0001105735690068AA06 /* SubCell.xib */,
 				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
 				05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */,
 			);
@@ -891,7 +903,6 @@
 			isa = PBXGroup;
 			children = (
 				05E7EB841055CA9A00C5F3FD /* PubSub */,
-				05F24C041054164F000C886E /* ActivityView */,
 				05E207AD0FB9046500FCFC94 /* Accounts */,
 				05E207BA0FB9046500FCFC94 /* Chat */,
 				05E207C70FB9046500FCFC94 /* Grid */,
@@ -989,23 +1000,18 @@
 		05E7EB841055CA9A00C5F3FD /* PubSub */ = {
 			isa = PBXGroup;
 			children = (
+				05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */,
+				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PublicationsViewController.h */,
 				05E7EB861055CCE700C5F3FD /* PublicationsViewController.m */,
 				05E7EB891055CD1A00C5F3FD /* SubscriptionsViewController.h */,
 				05E7EB8A1055CD1A00C5F3FD /* SubscriptionsViewController.m */,
-				05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */,
-				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
+				05EF001E105738840068AA06 /* PubCell.h */,
+				05EF001F105738840068AA06 /* PubCell.m */,
+				05EFFFF210572B490068AA06 /* SubCell.h */,
+				05EFFFF310572B490068AA06 /* SubCell.m */,
 			);
 			path = PubSub;
-			sourceTree = "<group>";
-		};
-		05F24C041054164F000C886E /* ActivityView */ = {
-			isa = PBXGroup;
-			children = (
-				05F24C051054164F000C886E /* MBProgressHUD.h */,
-				05F24C061054164F000C886E /* MBProgressHUD.m */,
-			);
-			path = ActivityView;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -1178,6 +1184,8 @@
 				05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */,
 				05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */,
 				05E7EBAD1055D97600C5F3FD /* tabbar-history.png in Resources */,
+				05EFFFFF1057351F0068AA06 /* PubCell.xib in Resources */,
+				05EF0002105735690068AA06 /* SubCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,6 +1231,8 @@
 				05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */,
 				05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */,
 				05E7EBAE1055D97600C5F3FD /* tabbar-history.png in Resources */,
+				05EF00001057351F0068AA06 /* PubCell.xib in Resources */,
+				05EF0003105735690068AA06 /* SubCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,10 +1329,11 @@
 				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
 				05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 				05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */,
-				05F24C081054164F000C886E /* MBProgressHUD.m in Sources */,
 				05E7EB871055CCE700C5F3FD /* PublicationsViewController.m in Sources */,
 				05E7EB8B1055CD1A00C5F3FD /* SubscriptionsViewController.m in Sources */,
 				05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */,
+				05EFFFF410572B490068AA06 /* SubCell.m in Sources */,
+				05EF0020105738840068AA06 /* PubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,10 +1427,11 @@
 				05CF60B51048A413003E012F /* ActivityView.m in Sources */,
 				05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */,
 				05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */,
-				05F24C071054164F000C886E /* MBProgressHUD.m in Sources */,
 				05E7EB881055CCE700C5F3FD /* PublicationsViewController.m in Sources */,
 				05E7EB8C1055CD1A00C5F3FD /* SubscriptionsViewController.m in Sources */,
 				05E7EB901055CD4B00C5F3FD /* EventsViewController.m in Sources */,
+				05EFFFF510572B490068AA06 /* SubCell.m in Sources */,
+				05EF0021105738840068AA06 /* PubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

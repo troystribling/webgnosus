@@ -6,16 +6,63 @@
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 #import "EventsViewController.h"
+#import "MessageModel.h"
+#import "AccountModel.h"
+#import "MessageCellFactory.h"
 
+#import "XMPPClientManager.h"
+#import "XMPPClient.h"
+#import "XMPPMessage.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface EventsViewController (PrivateAPI)
+
+- (void)addXMPPClientDelgate;
+- (void)removeXMPPClientDelgate;
+- (void)loadAccount;
+- (void)loadMessages;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation EventsViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize messages;
+@synthesize account;
 
 //===================================================================================================================================
 #pragma mark EventsViewController
 
 //===================================================================================================================================
 #pragma mark EventsViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPClientDelgate {
+    if (self.account) {
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPClientDelgate {
+    if (self.account) {
+        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadMessages {
+	self.messages = [MessageModel findAllWithLimit:kMESSAGE_CACHE_SIZE];
+    [self.tableView reloadData];
+}
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -34,6 +81,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [self loadAccount];
+    [self addXMPPClientDelgate];
     [super viewWillAppear:animated];
 }
 
@@ -44,6 +93,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
+    [self removeXMPPClientDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -69,25 +119,23 @@
 #pragma mark UITableViewDeligate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    return [MessageModel countWithLimit:kMESSAGE_CACHE_SIZE];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    return cell;
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
+    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.messages objectAtIndex:indexPath.row]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

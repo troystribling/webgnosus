@@ -277,15 +277,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-	[multicastDelegate release];	
-	[domain release];
-	[myJID release];
-	[password release];	
-	[xmppStream setDelegate:nil];
-	[xmppStream disconnect];
-	[xmppStream release];
-	[streamError release];	
-	[scNotificationManager release];	
 	[super dealloc];
 }
 

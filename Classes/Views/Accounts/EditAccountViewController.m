@@ -150,6 +150,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidDisappear:(BOOL)animated {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+	[super viewDidDisappear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning]; 
 }
@@ -184,7 +190,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [super dealloc];
 }
 

@@ -1,57 +1,44 @@
 //
-//  RosterSectionViewController.m
+//  PubCell.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 2/10/09.
+//  Created by Troy Stribling on 9/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "RosterSectionViewController.h"
+#import "PubCell.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RosterSectionViewController (PrivateAPI)
+@interface PubCell (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation RosterSectionViewController
+@implementation PubCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize nicknameLable;
-@synthesize nickname;
+@synthesize pubSubLabel;
 
 //===================================================================================================================================
-#pragma mark RosterSectionViewController
+#pragma mark PubCell
 
 //===================================================================================================================================
-#pragma mark RosterSectionViewController PrivateAPI
+#pragma mark SubCell PrivateAPI
 
 //===================================================================================================================================
-#pragma mark UIViewController
+#pragma mark UITableViewCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLable:(NSString*)lable {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        self.nickname = lable;
+- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidLoad {
-    self.nicknameLable.text = self.nickname;
-    [super viewDidLoad];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 }
 
 //===================================================================================================================================
