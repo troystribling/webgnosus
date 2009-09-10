@@ -102,8 +102,8 @@
     self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
     self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
     self.navEditAccountViewController = [self createNavigationController:self.editAccountViewController];	
-    self.navEditAccountViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Configure" image:[UIImage imageNamed:@"tabbar-accounts.png"] tag:2];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navHistoryViewController, self.navEditAccountViewController, nil];	
+    self.navEditAccountViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navEditAccountViewController, self.navHistoryViewController, nil];	
 }
 
 //===================================================================================================================================

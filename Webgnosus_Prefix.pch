@@ -56,6 +56,11 @@
 #define kRESOURCE_MODE                          1
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// display mode setting used in PubSubViewController
+#define kPUB_MODE                               0
+#define kSUB_MODE                               1
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // adjust message size for edit mode when cell has status indicator
 #define kLARGE_MESSAGE_WITH_STATUS_WIDTH        235.0
 #define kSMALL_MESSAGE_WITH_STATUS_WIDTH        180.0

@@ -1,5 +1,5 @@
 //
-//  PublicationsViewController.m
+//  PubSubViewController.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 9/7/09.
@@ -7,21 +7,113 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "PublicationsViewController.h"
+#import "PubSubViewController.h"
+#import "EventsViewController.h"
+#import "AccountModel.h"
+#import "AccountManagerViewController.h"
+#import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface PublicationsViewController (PrivateAPI)
+@interface PubSubViewController (PrivateAPI)
+
+- (void)addPubSubItemWasPressed; 
+- (void)editAccountButtonWasPressed; 
+- (void)segmentControlSelectionChanged:(id)sender;
+- (void)loadPubSubItems;
+- (EventsViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (void)addXMPPClientDelgate;
+- (void)removeXMPPClientDelgate;
+- (void)loadAccount;
+- (void)addXMPPAccountUpdateDelgate;
+- (void)removeXMPPAccountUpdateDelgate;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation PublicationsViewController
+@implementation PubSubViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize addPubSubItemButton;
+@synthesize editAccountsButton;
+@synthesize accountManagerViewController;
+@synthesize pubSubItems;
+@synthesize account;
+@synthesize selectedItem;
 
 //===================================================================================================================================
-#pragma mark PublicationsViewController
+#pragma mark PubSubViewController
 
 //===================================================================================================================================
-#pragma mark PublicationsViewController PrivateAPI
+#pragma mark PubSubViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addPubSubItemWasPressed { 
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)editAccountButtonWasPressed { 
+    [self.accountManagerViewController addAsSubview:self.view.window];	
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createSegementedController {
+    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:@"Subscriptions", @"Publications", nil]];
+    segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
+    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+    [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
+    segmentControl.selectedSegmentIndex = kSUB_MODE;
+    self.selectedItem = kSUB_MODE;
+    self.navigationItem.titleView = segmentControl;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void) segmentControlSelectionChanged:(id)sender {
+    self.selectedItem = [(UISegmentedControl*)sender selectedSegmentIndex];
+    [self loadPubSubItems];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadPubSubItems {
+    if (self.account) {
+        if (self.selectedItem == kSUB_MODE) {
+            self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
+        } else {
+            self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
+        }
+    } else {
+        self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
+    }
+    [self.tableView reloadData];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPClientDelgate {
+    if (self.account) {
+        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPClientDelgate {
+    if (self.account) {
+        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -86,14 +178,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
