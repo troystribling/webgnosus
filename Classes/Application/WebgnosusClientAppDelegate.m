@@ -19,7 +19,7 @@
 #import "WebgnosusDbi.h"
 #import "RosterViewController.h"
 #import "AccountManagerViewController.h"
-#import "EditAccountViewController.h"
+#import "PubSubViewController.h"
 #import "HistoryViewController.h"
 #import "AcceptBuddyRequestView.h"
 #import "AccountModel.h"
@@ -49,12 +49,11 @@
 @synthesize window;
 @synthesize rosterViewController;
 @synthesize historyViewController;
-@synthesize editAccountViewController;
+@synthesize pubSubViewController;
 @synthesize accountManagerViewController;
 
 @synthesize tabBarController;
-@synthesize navAccountsViewController;
-@synthesize navEditAccountViewController;
+@synthesize navPubSubViewController;
 @synthesize navRosterViewController;
 @synthesize navHistoryViewController;
 
@@ -101,9 +100,9 @@
     self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
     self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
     self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
-    self.navEditAccountViewController = [self createNavigationController:self.editAccountViewController];	
-    self.navEditAccountViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navEditAccountViewController, self.navHistoryViewController, nil];	
+    self.navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
+    self.navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, self.navHistoryViewController, nil];	
 }
 
 //===================================================================================================================================
@@ -150,10 +149,10 @@
 - (void)dealloc {
 	[self.historyViewController release]; 
 	[self.rosterViewController release];
-	[self.accountManagerViewController release]; 
+	[self.pubSubViewController release]; 
 	[self.navHistoryViewController release];
 	[self.navRosterViewController release];
-	[self.navAccountsViewController release];
+	[self.navPubSubViewController release];
 	[self.tabBarController release];
     [self.window release]; 
 	[super dealloc];

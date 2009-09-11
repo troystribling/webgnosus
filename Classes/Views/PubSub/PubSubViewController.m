@@ -10,6 +10,12 @@
 #import "PubSubViewController.h"
 #import "EventsViewController.h"
 #import "AccountModel.h"
+#import "SubscriptionModel.h"
+#import "ServiceItemModel.h"
+#import "PubCell.h"
+#import "SubCell.h"
+#import "CellUtils.h"
+#import "RosterSectionViewController.h"
 #import "AccountManagerViewController.h"
 #import "XMPPClientManager.h"
 
@@ -20,12 +26,14 @@
 - (void)editAccountButtonWasPressed; 
 - (void)segmentControlSelectionChanged:(id)sender;
 - (void)loadPubSubItems;
-- (EventsViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (void)reloadPubSubItems;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)loadAccount;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
+- (EventsViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -111,43 +119,90 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadPubSubItems {
+    [self loadAccount];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadPubSubItems];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAccount {
     self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectedItem == kSUB_MODE) {
+        SubCell* cell = (SubCell*)[CellUtils createCell:[SubCell class] forTableView:tableView];
+        SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+        cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
+        return cell;
+    } else {
+        PubCell* cell = (PubCell*)[CellUtils createCell:[PubCell class] forTableView:tableView];
+        ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+        cell.itemLabel.text = item.itemName;
+        return cell;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didAddAccount {
+    [self reloadPubSubItems];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didRemoveAccount {
+    [self reloadPubSubItems];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didUpdateAccount {
+    [self reloadPubSubItems];
 }
 
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithStyle:(UITableViewStyle)style {
-    if (self = [super initWithStyle:style]) {
+- (id)initWithCoder:(NSCoder *)coder { 
+	if (self = [super initWithCoder:coder]) { 
+        self.addPubSubItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactButtonWasPressed)];
+        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    [self createSegementedController];
+    self.navigationItem.rightBarButtonItem = self.addPubSubItemButton;
+    self.navigationItem.leftBarButtonItem = self.editAccountsButton;
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+    [self loadAccount];
+    [self addXMPPClientDelgate];
+    [self addXMPPAccountUpdateDelgate];
+    [self loadPubSubItems];
+	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
+    [self removeXMPPClientDelgate];
+    [self removeXMPPAccountUpdateDelgate];
 	[super viewWillDisappear:animated];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -167,21 +222,53 @@
 #pragma mark UITableViewDeligate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* rosterHeaderView = nil;
+    if (self.account) {
+        RosterSectionViewController* rosterHeader = 
+            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
+        rosterHeaderView = rosterHeader.view;
+    }
+	return rosterHeaderView; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
+    return kCELL_SECTION_TITLE_HEIGHT;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
+}
+
+//===================================================================================================================================
+#pragma mark UITableViewDataSource
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (self.account) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [self.pubSubItems count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return [self tableView:tableView createCellForRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIViewController* viewController = [self getEventsViewControllerForRowAtIndexPath:indexPath];
+    [self.navigationController pushViewController:viewController animated:YES];
+    [viewController release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
