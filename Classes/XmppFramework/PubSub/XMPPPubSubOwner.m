@@ -1,5 +1,5 @@
 //
-//  XMPPPubSupOwner.m
+//  XMPPPubSubOwner.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 8/8/09.
@@ -7,32 +7,49 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSupOwner.h"
+#import "XMPPPubSubOwner.h"
+#import "XMPPClient.h"
+#import "XMPPJID.h"
+#import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSupOwner
+@implementation XMPPPubSubOwner
 
 //===================================================================================================================================
-#pragma mark XMPPPubSupOwner
+#pragma mark XMPPPubSubOwner
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark XMPPPubSupOwner
+#pragma mark XMPPPubSubOwner
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSupOwner*)createFromElement:(NSXMLElement*)element {
-    XMPPPubSupOwner* result = (XMPPPubSupOwner*)element;
-    result->isa = [XMPPPubSupOwner class];
++ (XMPPPubSubOwner*)createFromElement:(NSXMLElement*)element {
+    XMPPPubSubOwner* result = (XMPPPubSubOwner*)element;
+    result->isa = [XMPPPubSubOwner class];
     return result;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSupOwner*)init {
+- (XMPPPubSubOwner*)init {
 	if(self = [super initWithName:@"pubsub"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#owner"]];
 	}
 	return self;
+}
+
+//===================================================================================================================================
+#pragma mark XMPPPubSubOwner Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)delete:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPPubSubOwner* pubsub = [[XMPPPubSubOwner alloc] init];
+    NSXMLElement* deleteElement = [NSXMLElement elementWithName:@"delete"];
+    [deleteElement addAttributeWithName:@"node" stringValue:node];
+    [pubsub addChild:deleteElement];	
+    [iq addPubSubOwner:pubsub];    
+    [client sendElement:iq];
 }
 
 //===================================================================================================================================

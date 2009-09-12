@@ -17,6 +17,7 @@
 @class XMPPCommand;
 @class XMPPError;
 @class XMPPPubSub;
+@class XMPPPubSubOwner;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPIQ : XMPPStanza
@@ -46,5 +47,6 @@
 
 - (XMPPPubSub*)pubsub;
 - (void)addPubSub:(XMPPPubSub*)child;
-    
+- (void)addPubSubOwner:(XMPPPubSubOwner*)child;
+
 @end

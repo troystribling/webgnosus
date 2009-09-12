@@ -79,7 +79,7 @@
 		05D1ED7D1037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED721037BEF200DB3B3F /* XMPPPubSubPublish.m */; };
 		05D1ED7E1037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */; };
 		05D1ED7F1037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */; };
-		05D1ED801037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */; };
+		05D1ED801037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */; };
 		05D1ED811037BEF200DB3B3F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */; };
 		05D1ED821037BEF200DB3B3F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */; };
 		05D1ED831037BEF200DB3B3F /* XMPPPubSubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6E1037BEF200DB3B3F /* XMPPPubSubItem.m */; };
@@ -87,7 +87,7 @@
 		05D1ED851037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED721037BEF200DB3B3F /* XMPPPubSubPublish.m */; };
 		05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */; };
 		05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */; };
-		05D1ED881037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */; };
+		05D1ED881037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */; };
 		05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
 		05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
@@ -114,7 +114,6 @@
 		05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */; };
-		05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
 		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
@@ -124,7 +123,6 @@
 		05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
 		05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
 		05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
-		05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */; };
 		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
@@ -254,6 +252,14 @@
 		05E6F16A104A07FC00EF924B /* message_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F156104A07FC00EF924B /* message_background.jpg */; };
 		05E6F16B104A07FC00EF924B /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F157104A07FC00EF924B /* roster-section.jpg */; };
 		05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
+		05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
+		05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
+		05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
+		05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
+		05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */; };
+		05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */; };
+		05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */; };
+		05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */; };
 		05E7EB871055CCE700C5F3FD /* PubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB861055CCE700C5F3FD /* PubSubViewController.m */; };
 		05E7EB881055CCE700C5F3FD /* PubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB861055CCE700C5F3FD /* PubSubViewController.m */; };
 		05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */; };
@@ -354,8 +360,8 @@
 		05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscription.m; sourceTree = "<group>"; };
 		05D1ED751037BEF200DB3B3F /* XMPPPubSubSubscriptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscriptions.h; sourceTree = "<group>"; };
 		05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptions.m; sourceTree = "<group>"; };
-		05D1ED771037BEF200DB3B3F /* XMPPPubSupOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSupOwner.h; sourceTree = "<group>"; };
-		05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSupOwner.m; sourceTree = "<group>"; };
+		05D1ED771037BEF200DB3B3F /* XMPPPubSubOwner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubOwner.h; sourceTree = "<group>"; };
+		05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubOwner.m; sourceTree = "<group>"; };
 		05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceFeatureModel.h; sourceTree = "<group>"; };
 		05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceFeatureModel.m; sourceTree = "<group>"; };
 		05D1ED8E1037BFBB00DB3B3F /* ServiceItemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceItemModel.h; sourceTree = "<group>"; };
@@ -373,7 +379,6 @@
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
 		05DC8C850FBB15C60018AEEF /* RosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterCell.xib; sourceTree = "<group>"; };
 		05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataMessageLabelCell.xib; sourceTree = "<group>"; };
-		05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountOptionsController.xib; sourceTree = "<group>"; };
 		05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
 		05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppViewController.xib; sourceTree = "<group>"; };
@@ -499,6 +504,12 @@
 		05E6F156104A07FC00EF924B /* message_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = message_background.jpg; sourceTree = "<group>"; };
 		05E6F157104A07FC00EF924B /* roster-section.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "roster-section.jpg"; sourceTree = "<group>"; };
 		05E6F159104A07FC00EF924B /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-roster.png"; sourceTree = "<group>"; };
+		05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPublicationViewController.xib; sourceTree = "<group>"; };
+		05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSubscriptionViewController.xib; sourceTree = "<group>"; };
+		05E6FB7B105B1C510067CF95 /* AddSubscriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSubscriptionViewController.h; sourceTree = "<group>"; };
+		05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSubscriptionViewController.m; sourceTree = "<group>"; };
+		05E6FB82105B1C700067CF95 /* AddPublicationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPublicationViewController.h; sourceTree = "<group>"; };
+		05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPublicationViewController.m; sourceTree = "<group>"; };
 		05E7EB851055CCE700C5F3FD /* PubSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubSubViewController.h; sourceTree = "<group>"; };
 		05E7EB861055CCE700C5F3FD /* PubSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PubSubViewController.m; sourceTree = "<group>"; };
 		05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
@@ -699,8 +710,8 @@
 				05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */,
 				05D1ED751037BEF200DB3B3F /* XMPPPubSubSubscriptions.h */,
 				05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */,
-				05D1ED771037BEF200DB3B3F /* XMPPPubSupOwner.h */,
-				05D1ED781037BEF200DB3B3F /* XMPPPubSupOwner.m */,
+				05D1ED771037BEF200DB3B3F /* XMPPPubSubOwner.h */,
+				05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */,
 			);
 			path = PubSub;
 			sourceTree = "<group>";
@@ -725,7 +736,8 @@
 			isa = PBXGroup;
 			children = (
 				05F24BD31054077F000C886E /* AddContactViewController.xib */,
-				05DC8C920FBB15EB0018AEEF /* AccountOptionsController.xib */,
+				05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */,
+				05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */,
 				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
 				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
@@ -1000,6 +1012,10 @@
 		05E7EB841055CA9A00C5F3FD /* PubSub */ = {
 			isa = PBXGroup;
 			children = (
+				05E6FB82105B1C700067CF95 /* AddPublicationViewController.h */,
+				05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */,
+				05E6FB7B105B1C510067CF95 /* AddSubscriptionViewController.h */,
+				05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */,
 				05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */,
 				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PubSubViewController.h */,
@@ -1151,7 +1167,6 @@
 				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */,
 				05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
-				05DC8CAA0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
 				05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
 				05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
@@ -1185,6 +1200,8 @@
 				057BB16210587547006389D9 /* tabbar-events.png in Resources */,
 				057BB16310587547006389D9 /* tabbar-services.png in Resources */,
 				057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */,
+				05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
+				05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,7 +1216,6 @@
 				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */,
 				05DC8C8B0FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
-				05DC8C9E0FBB15EB0018AEEF /* AccountOptionsController.xib in Resources */,
 				05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
 				05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
@@ -1233,6 +1249,8 @@
 				057BB16410587547006389D9 /* tabbar-events.png in Resources */,
 				057BB16510587547006389D9 /* tabbar-services.png in Resources */,
 				057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */,
+				05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
+				05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,7 +1337,7 @@
 				05D1ED851037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */,
 				05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */,
 				05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */,
-				05D1ED881037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */,
+				05D1ED881037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */,
 				05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
 				05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
@@ -1333,6 +1351,8 @@
 				05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */,
 				05EFFFF410572B490068AA06 /* SubCell.m in Sources */,
 				05EF0020105738840068AA06 /* PubCell.m in Sources */,
+				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
+				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1416,7 +1436,7 @@
 				05D1ED7D1037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */,
 				05D1ED7E1037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */,
 				05D1ED7F1037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */,
-				05D1ED801037BEF200DB3B3F /* XMPPPubSupOwner.m in Sources */,
+				05D1ED801037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */,
 				05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
 				05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
 				05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
@@ -1430,6 +1450,8 @@
 				05E7EB901055CD4B00C5F3FD /* EventsViewController.m in Sources */,
 				05EFFFF510572B490068AA06 /* SubCell.m in Sources */,
 				05EF0021105738840068AA06 /* PubCell.m in Sources */,
+				05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
+				05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,33 +1,32 @@
 //
-//  XMPPPubSubSubscriptions.h
+//  AddSubscriptionViewController.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/8/09.
+//  Created by Troy Stribling on 9/11/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPPubSubSubscription;
-@class XMPPClient;
-@class XMPPJID;
+@class AccountModel;
+@class ActivityView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubSubscriptions : NSXMLElement 
+@interface AddSubscriptionViewController : UIViewController {
+	IBOutlet UITextField* jidTextField;
+	IBOutlet UITextField* nodeTextField;
+    AccountModel* account;
+    ActivityView* addSubscriptionIndicatorView;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubSubscriptions*)createFromElement:(NSXMLElement*)element;
+@property (nonatomic, retain) UITextField* jidTextField;
+@property (nonatomic, retain) UITextField* nodeTextField;
+@property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) ActivityView* addSubscriptionIndicatorView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)subscriptions;
-- (void)addSubscription:(XMPPPubSubSubscription*)val;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid;
-+ (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
-+ (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
 
 @end

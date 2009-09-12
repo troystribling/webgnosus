@@ -8,6 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSub.h"
+#import "XMPPIQ.h"
+#import "XMPPJID.h"
+#import "XMPPClient.h"
 #import "XMPPPubSubSubscription.h"
 #import "XMPPPubSubSubscriptions.h"
 #import "NSXMLElementAdditions.h"
@@ -52,6 +55,22 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addSubscription:(XMPPPubSubSubscriptions*)val {
     [self addChild:val];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPPubSub Messages
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    NSXMLElement* createElement = [NSXMLElement elementWithName:@"create"];
+    [createElement addAttributeWithName:@"node" stringValue:node];
+    NSXMLElement* configElement = [NSXMLElement elementWithName:@"configure"];
+    [pubsub addChild:createElement];	
+    [pubsub addChild:configElement];	
+    [iq addPubSub:pubsub];    
+    [client sendElement:iq];
 }
 
 //===================================================================================================================================

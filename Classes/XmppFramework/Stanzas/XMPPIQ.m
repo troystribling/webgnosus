@@ -18,6 +18,7 @@
 #import "XMPPCommand.h"
 #import "XMPPError.h"
 #import "XMPPPubSub.h"
+#import "XMPPPubSubOwner.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoInfoQuery.h"
 #import "NSXMLElementAdditions.h"
@@ -94,6 +95,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addPubSub:(XMPPPubSub*)child {
+    [self addChild:child];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addPubSubOwner:(XMPPPubSubOwner*)child {
     [self addChild:child];
 }
 
