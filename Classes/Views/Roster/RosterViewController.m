@@ -383,7 +383,7 @@
         NSMutableArray* accountRoster = [self.roster objectAtIndex:indexPath.section];
         ContactModel* contact = [accountRoster objectAtIndex:indexPath.row]; 
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:account];
-		XMPPJID* contactJID = [XMPPJID jidWithString:contact.jid];
+		XMPPJID* contactJID = [XMPPJID jidWithString:[contact bareJID]];
         [XMPPRosterQuery remove:xmppClient JID:contactJID];
         [AlertViewManager showConnectingIndicatorInView:self.view];
 	} 

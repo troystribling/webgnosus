@@ -75,7 +75,7 @@
         self.account.connectionState = AccountNotConnected;
         self.account.host = [splitJid objectAtIndex:1];
         self.account.resource = @"iPhone";
-        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account jid]];
+        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account bareJID]];
         self.account.port = 5222;
         self.account.displayed = YES;
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];

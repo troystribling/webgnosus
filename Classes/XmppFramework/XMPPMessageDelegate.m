@@ -36,6 +36,8 @@
 #import "XMPPPubSubSubscriptions.h"
 #import "XMPPxData.h"
 
+#import "NSObjectiPhoneAdditions.h"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPMessageDelegate (PrivateAPI)
 
@@ -257,9 +259,9 @@
             rosterItem.status = @"";
         }
         rosterItem.priority = [presence priority];
-        rosterItem.type = [presence type];
+        rosterItem.presenceType = [presence type];
         [rosterItem update];
-        if ([rosterItem.type isEqualToString:@"available"]) {
+        if ([rosterItem.presenceType isEqualToString:@"available"]) {
             [XMPPClientVersionQuery get:client JID:[presence fromJID]];
             [XMPPDiscoItemsQuery get:client JID:[presence fromJID] andNode:@"http://jabber.org/protocol/commands"];
         } 
@@ -411,13 +413,8 @@
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
         if ([[serviceJID full] isEqualToString:[[client myJID] domain]]) { 
-            NSString* node = [item node];
-            if (node) {
-                [XMPPDiscoInfoQuery get:client JID:[item JID] andNode:node];
-                [self save:client serviceItem:item forService:serviceJID andParentNode:nil];
-            } else {
-                [XMPPDiscoInfoQuery get:client JID:[item JID]];
-            }
+            [XMPPDiscoInfoQuery get:client JID:[item JID] andNode:[item node]];
+            [self save:client serviceItem:item forService:serviceJID andParentNode:nil];
         } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item];
             [self save:client serviceItem:item forService:serviceJID andParentNode:node];
@@ -516,47 +513,35 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client service:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        ServiceModel* service = [[ServiceModel alloc] init];
-        service.accountPk = account.pk;
-        service.jid = [serviceJID full];
-        service.serviceName = [ident iname];
-        service.serviceCategory = [ident category];
-        service.serviceType = [ident type];
-        [service insert];
-        [service release];
-    }
+    ServiceModel* service = [[ServiceModel alloc] init];
+    service.jid = [serviceJID full];
+    service.serviceName = [ident iname];
+    service.serviceCategory = [ident category];
+    service.serviceType = [ident type];
+    [service insert];
+    [service release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
-        serviceItem.accountPk = account.pk;
-        serviceItem.parentNode = parent;
-        serviceItem.itemName = [item iname];
-        serviceItem.jid = [[item JID] full];
-        serviceItem.service = [serviceJID full];
-        serviceItem.node = [item node];
-        [serviceItem insert];
-        [serviceItem release];
-    }
+    ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
+    serviceItem.parentNode = parent;
+    serviceItem.itemName = [item iname];
+    serviceItem.jid = [[item JID] full];
+    serviceItem.service = [serviceJID full];
+    serviceItem.node = [item node];
+    [serviceItem insert];
+    [serviceItem release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
-        serviceFeature.accountPk = account.pk;
-        serviceFeature.parentNode = parent;
-        serviceFeature.var = [feature var];
-        serviceFeature.service = [serviceJID full];
-        [serviceFeature insert];
-        [serviceFeature release];
-    }
+    ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
+    serviceFeature.parentNode = parent;
+    serviceFeature.var = [feature var];
+    serviceFeature.service = [serviceJID full];
+    [serviceFeature insert];
+    [serviceFeature release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

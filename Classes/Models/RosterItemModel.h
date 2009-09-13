@@ -18,7 +18,7 @@
 @interface RosterItemModel : UserModel {
 	NSString* status;
     NSString* show;
-    NSString* type;
+    NSString* presenceType;
     NSInteger priority;
 	NSInteger accountPk;
 }
@@ -26,7 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSString* status;
 @property (nonatomic, retain) NSString* show;
-@property (nonatomic, retain) NSString* type;
+@property (nonatomic, retain) NSString* presenceType;
 @property (nonatomic, assign) NSInteger priority;
 @property (nonatomic, assign) NSInteger accountPk;
 

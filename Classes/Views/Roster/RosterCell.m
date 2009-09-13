@@ -38,7 +38,7 @@
 + (UIImage*)contactImage:(ContactModel*)contact {
     if ([contact hasError]) {
         return [UIImage imageNamed:@"account-error-led.jpg"];
-    } else if ([RosterItemModel isJidAvailable:contact.jid]) {
+    } else if ([RosterItemModel isJidAvailable:[contact bareJID]]) {
         return [UIImage imageNamed:@"account-on-led.jpg"];
     } 
     return [UIImage imageNamed:@"account-off-led.jpg"];

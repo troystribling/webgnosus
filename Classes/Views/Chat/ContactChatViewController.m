@@ -61,14 +61,14 @@
     if (self.selectedMode == kMESSAGE_MODE) {
         count = [MessageModel countByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];;
     } else {
-        count = [RosterItemModel countByJid:[self.partner jid] andAccount:self.account];
+        count = [RosterItemModel countByJid:[self.partner bareJID] andAccount:self.account];
     }
     return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMessageButton {
-    if (self.selectedMode == kMESSAGE_MODE && [RosterItemModel isJidAvailable:self.partner.jid]) { 
+    if (self.selectedMode == kMESSAGE_MODE && [RosterItemModel isJidAvailable:[self.partner bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;

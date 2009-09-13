@@ -226,7 +226,7 @@
     UIView* rosterHeaderView = nil;
     if (self.account) {
         RosterSectionViewController* rosterHeader = 
-            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
+            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account bareJID]]; 
         rosterHeaderView = rosterHeader.view;
     }
 	return rosterHeaderView; 

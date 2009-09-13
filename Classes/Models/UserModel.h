@@ -31,6 +31,7 @@
 @property (nonatomic, retain) NSString* clientVersion;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)bareJID;
 - (NSString*)fullJID;
 - (void)load;
 

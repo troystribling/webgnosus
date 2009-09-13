@@ -10,6 +10,7 @@
 #import "ServiceModel.h"
 #import "AccountModel.h"
 #import "WebgnosusDbi.h"
+#import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceModel (PrivateAPI)
@@ -21,7 +22,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
-@synthesize accountPk;
 @synthesize jid;
 @synthesize serviceName;
 @synthesize serviceCategory;
@@ -42,7 +42,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, serviceName text, serviceCategory text, serviceType text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, serviceName text, serviceCategory text, serviceType text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -53,11 +53,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByAccount:(AccountModel*)account {
-	NSString* deleteStatement = 
-    [[NSString alloc] initWithFormat:@"DELETE FROM services WHERE accountPk = %d", account.pk];
-	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,11 +62,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.serviceName) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
-                           self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType) values ('%@', '%@', '%@', '%@')", self.jid, self.serviceName, self.serviceCategory, self.serviceType];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceCategory, serviceType, accountPk) values ('%@', '%@', '%@', %d)", 
-                           self.jid, self.serviceCategory, self.serviceType, self.accountPk];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceCategory, serviceType) values ('%@', '%@', '%@')", self.jid, self.serviceCategory, self.serviceType];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
@@ -84,8 +79,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND accountPk = %d", 
-                                 self.jid, self.accountPk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@'", self.jid];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
@@ -93,8 +87,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-    [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', serviceName = '%@', serviceCategory = '%@', serviceType = '%@', accountPk = %d WHERE pk = %d", 
-     self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', serviceName = '%@', serviceCategory = '%@', serviceType = '%@' WHERE pk = %d", 
+         self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
@@ -124,7 +118,6 @@
 	if (typeVal != nil) {		
 		self.serviceType = [[NSString alloc] initWithUTF8String:typeVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 5);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

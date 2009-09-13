@@ -65,7 +65,7 @@
     AccountModel* acct = [self account];
     [[XMPPClientManager instance] removeXMPPClientForAccount:acct];
     [acct destroy];
-    [self.activeAccounts removeItem:[acct jid]];
+    [self.activeAccounts removeItem:[acct bareJID]];
     [[[XMPPClientManager instance] accountUpdateDelegate] didRemoveAccount];
     [self.view removeFromSuperview];
     [self.managerView showView];
@@ -100,7 +100,7 @@
     NSArray* acctList = [AccountModel findAllActivated];
     for (int i = 0; i < [acctList count]; i++) {
         AccountModel* acct = [acctList objectAtIndex:i];
-        [accountJIDs addObject:[acct jid]];
+        [accountJIDs addObject:[acct bareJID]];
         if (acct.displayed) {
             selectedAccountIndex = i;
         }

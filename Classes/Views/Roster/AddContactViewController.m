@@ -70,7 +70,7 @@
     [super viewDidLoad];
 	self.title = @"Add Contact";
 	self.account = [AccountModel findFirst];
-	self.accountLabel.text = self.account.jid;
+	self.accountLabel.text = [self.account bareJID];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;

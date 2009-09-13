@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize status;
 @synthesize show;
-@synthesize type;
+@synthesize presenceType;
 @synthesize priority;
 @synthesize accountPk;
 
@@ -53,7 +53,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)account {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d AND type = 'available'", bareJid, account.pk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available'", bareJid, account.pk];
     NSInteger maxVal = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
     [selectStatement release];
 	return maxVal;
@@ -66,7 +66,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE roster (pk integer primary key, jid text, resource text, host text, status text, show text, type text, priority integer, clientName text, clientVersion text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE roster (pk integer primary key, jid text, resource text, host text, status text, show text, presenceType text, priority integer, clientName text, clientVersion text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -146,13 +146,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findWithMaxPriorityByJid:(NSString*)bareJid andAccount:(AccountModel*)account {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND type = 'available' AND clientName = 'AgnetXMPP' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, account.pk, bareJid, account.pk];
+	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND clientName = 'AgnetXMPP' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, account.pk, bareJid, account.pk];
 	RosterItemModel* agentXMppModel = [[RosterItemModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:agentXMppModel];
     if (agentXMppModel.pk == 0) {
         agentXMppModel = nil;
     }
-	selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND type = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, account.pk, bareJid, account.pk];
+	selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, account.pk, bareJid, account.pk];
 	RosterItemModel* model = [[RosterItemModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
@@ -181,7 +181,7 @@
     BOOL isAvailable = NO;
    	NSMutableArray* rosterItems = [[NSMutableArray alloc] initWithCapacity:10];	
 	NSString *selectStatement = 
-        [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND type = 'available'", bareJid];
+        [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND presenceType = 'available'", bareJid];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:rosterItems];    
     [selectStatement release];
     if ([rosterItems count] > 0) {
@@ -205,11 +205,11 @@
 	NSString* insertStatement;
     if (self.resource) {
         insertStatement = 
-            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, type, priority, clientName, clientVersion, accountPk) values ('%@', '%@', '%@', null, null, null, null, null, null, %d)", 
+            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', '%@', '%@', null, null, null, null, null, null, %d)", 
                  self.jid, self.resource, self.host, self.accountPk];	
     } else {
         insertStatement = 
-            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, type, priority, clientName, clientVersion, accountPk) values ('%@', null, '%@', null, null, null, null, null, null, %d)", 
+            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', null, '%@', null, null, null, null, null, null, %d)", 
                  self.jid, self.host, self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
@@ -221,12 +221,12 @@
     NSString *updateStatement;
     if (self.resource) {
         updateStatement = 
-            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', resource = '%@', host = '%@', status = '%@', show = '%@', type = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
-                 self.jid, self.resource, self.host, self.status, self.show, self.type, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
+            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', resource = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
+                 self.jid, self.resource, self.host, self.status, self.show, self.presenceType, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
     } else {
         updateStatement = 
-            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', host = '%@', status = '%@', show = '%@', type = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
-                 self.jid, self.host, self.status, self.show, self.type, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
+            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
+                 self.jid, self.host, self.status, self.show, self.presenceType, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
@@ -255,7 +255,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isAvailable {
     BOOL rosterItemIsAvailable = NO;
-    if ([self.type isEqual:@"available"]) {
+    if ([self.presenceType isEqual:@"available"]) {
         rosterItemIsAvailable = YES;
     }
     return rosterItemIsAvailable;
@@ -289,7 +289,7 @@
     }
     char* typeVal = (char*)sqlite3_column_text(statement, 6);
     if (typeVal != nil) {
-        self.type = [[NSString alloc] initWithUTF8String:typeVal];
+        self.presenceType = [[NSString alloc] initWithUTF8String:typeVal];
     }
     self.priority = (int)sqlite3_column_int(statement, 7);
     char* clientNameVal = (char*)sqlite3_column_text(statement, 8);

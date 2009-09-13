@@ -11,12 +11,10 @@
 #import <sqlite3.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceFeatureModel : NSObject {
     NSInteger pk;
-	NSInteger accountPk;
     NSString* parentNode;
     NSString* service;
     NSString* var;
@@ -24,7 +22,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
-@property (nonatomic, assign) NSInteger accountPk;
 @property (nonatomic, retain) NSString* parentNode;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* var;
@@ -34,7 +31,7 @@
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
-+ (void)destroyAllByAccount:(AccountModel*)account;
++ (void)destroyAll;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

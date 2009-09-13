@@ -8,8 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceFeatureModel.h"
-#import "AccountModel.h"
+#import "UserModel.h"
 #import "WebgnosusDbi.h"
+#import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceFeatureModel (PrivateAPI)
@@ -21,7 +22,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
-@synthesize accountPk;
 @synthesize parentNode;
 @synthesize service;
 @synthesize var;
@@ -41,7 +41,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -52,11 +52,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByAccount:(AccountModel*)account {
-	NSString* deleteStatement = 
-    [[NSString alloc] initWithFormat:@"DELETE FROM serviceFeatures WHERE accountPk = %d", account.pk];
-	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,11 +61,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, accountPk) values ('%@', '%@', '%@', %d)", 
-                           self.parentNode, self.service, self.var, self.accountPk];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var) values ('%@', '%@', '%@')", self.parentNode, self.service, self.var];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (service, var, accountPk) values ('%@', '%@', %d)", 
-                           self.service, self.var, self.accountPk];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (service, var) values ('%@', '%@')", self.service, self.var];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
@@ -83,8 +78,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@' AND accountPk = %d", 
-                                 self.parentNode, self.service, self.var, self.accountPk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@'", self.parentNode, self.service, self.var];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
@@ -92,8 +86,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', accountPk = %d WHERE pk = %d", 
-         self.parentNode, self.service, self.var, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@' WHERE pk = %d", self.parentNode, self.service, self.var, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
@@ -119,7 +112,6 @@
 	if (varVal != nil) {		
 		self.var = [[NSString alloc] initWithUTF8String:varVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 4);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

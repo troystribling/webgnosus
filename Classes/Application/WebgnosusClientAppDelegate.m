@@ -78,9 +78,9 @@
         [account update];
         [RosterItemModel destroyAllByAccount:account];
         [ContactModel destroyAllByAccount:account];
-        [ServiceFeatureModel destroyAllByAccount:account];
-        [ServiceItemModel destroyAllByAccount:account];
-        [ServiceModel destroyAllByAccount:account];
+        [ServiceModel destroyAll];
+        [ServiceItemModel destroyAll];
+        [ServiceFeatureModel destroyAll];
         [SubscriptionModel destroyAllByAccount:account];
         [[XMPPClientManager instance] openConnectionForAccount:account];
     }

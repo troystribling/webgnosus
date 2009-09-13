@@ -39,7 +39,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoInfoQuery*)initWithNode:(NSString*)itemsNode {
 	if(self = [self init]) {
-        [self addNode:itemsNode];
+        if (itemsNode) {
+            [self addNode:itemsNode];
+        }
 	}
 	return self;
 }

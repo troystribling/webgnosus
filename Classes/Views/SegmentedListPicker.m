@@ -107,7 +107,7 @@
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
 	CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
-	[[self selectedItem]  drawInRect:CGRectMake(2.0f, yoffset, width, height) withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
+	[[self selectedItem]  drawInRect:CGRectMake(0.0f, yoffset, width, height) withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
 	UIImage* textImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
     return textImage;

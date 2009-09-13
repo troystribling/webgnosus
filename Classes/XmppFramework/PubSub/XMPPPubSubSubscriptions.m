@@ -63,7 +63,7 @@
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* subElement = [NSXMLElement elementWithName:@"subscribe"];
     [subElement addAttributeWithName:@"node" stringValue:node];
-    [subElement addAttributeWithName:@"jid" stringValue:[account jid]];
+    [subElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:subElement];	
     [iq addPubSub:pubsub];    
     [client sendElement:iq];
@@ -76,7 +76,7 @@
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* unsubElement = [NSXMLElement elementWithName:@"unsubscribe"];
     [unsubElement addAttributeWithName:@"node" stringValue:node];
-    [unsubElement addAttributeWithName:@"jid" stringValue:[account jid]];
+    [unsubElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
     [client sendElement:iq];

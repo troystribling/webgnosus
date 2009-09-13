@@ -8,8 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceItemModel.h"
-#import "AccountModel.h"
+#import "UserModel.h"
 #import "WebgnosusDbi.h"
+#import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceItemModel (PrivateAPI)
@@ -21,7 +22,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
-@synthesize accountPk;
 @synthesize parentNode;
 @synthesize service;
 @synthesize node;
@@ -43,7 +43,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceItems (pk integer primary key, parentNode text, service text, node text, jid text, itemName text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceItems (pk integer primary key, parentNode text, service text, node text, jid text, itemName text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -54,23 +54,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByAccount:(AccountModel*)account {
-	NSString* deleteStatement = 
-    [[NSString alloc] initWithFormat:@"DELETE FROM serviceItems WHERE accountPk = %d", account.pk];
-	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceItems"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    if (self.parentNode) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d)", 
-                            self.parentNode, self.service, self.node, self.jid, self.itemName, self.accountPk];	
+    if (self.parentNode &&  self.node && self.itemName) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName) values ('%@', '%@', '%@', '%@', '%@')", 
+                            self.parentNode, self.service, self.node, self.jid, self.itemName];	
+    } else if (self.node && self.itemName) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName) values ('%@', '%@', '%@', '%@')", 
+                           self.service, self.node, self.jid, self.itemName];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName, accountPk) values ('%@', '%@', '%@', '%@', %d)", 
-                           self.service, self.node, self.jid, self.itemName, self.accountPk];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid) values ('%@', '%@')", self.service, self.jid];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
@@ -85,8 +84,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@' AND node = '%@' AND jid = '%@' AND accountPk = %d", 
-                                  self.parentNode, self.service, self.node, self.jid, self.accountPk];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@' AND node = '%@' AND jid = '%@'", 
+                                  self.parentNode, self.service, self.node, self.jid];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:self];
     [selectStatement release];
 }
@@ -94,8 +93,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@', accountPk = %d WHERE pk = %d", 
-         self.parentNode, self.service, self.node, self.jid, self.itemName, self.accountPk, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@' WHERE pk = %d", self.parentNode, self.service, self.node, self.jid, self.itemName, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
@@ -129,7 +127,6 @@
 	if (inameVal != nil) {		
 		self.itemName = [[NSString alloc] initWithUTF8String:inameVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 7);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
