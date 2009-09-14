@@ -36,7 +36,7 @@
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
-+ (void)destroyAllByAccount:(AccountModel*)account;
++ (void)destroyAllByAccount:(AccountModel*)requestAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

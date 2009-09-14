@@ -59,10 +59,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)account {
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = 
-    [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE accountPk = %d", account.pk];
+	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[ContactModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
@@ -80,9 +79,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)account {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", 
-                                    requestJid, account.pk];
++ (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", requestJid, requestAccount.pk];
 	ContactModel* model = [[ContactModel alloc] init];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
@@ -93,9 +91,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByAccount:(AccountModel*)account {
-	NSString* deleteStatement = 
-        [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE accountPk = %d", account.pk];
++ (void)destroyAllByAccount:(AccountModel*)requestAccount {
+	NSString* deleteStatement = [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
     [deleteStatement release];
 }

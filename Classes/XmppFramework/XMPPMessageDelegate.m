@@ -412,12 +412,11 @@
 	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-        if ([[serviceJID full] isEqualToString:[[client myJID] domain]]) { 
+        if ([item node] == nil) { 
             [XMPPDiscoInfoQuery get:client JID:[item JID] andNode:[item node]];
             [self save:client serviceItem:item forService:serviceJID andParentNode:nil];
         } else if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]]) {
-            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item];
-            [self save:client serviceItem:item forService:serviceJID andParentNode:node];
+            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
         } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
             [self save:client serviceItem:item forService:serviceJID andParentNode:node];
         }
@@ -434,8 +433,7 @@
         if ([node isEqualToString:[XMPPMessageDelegate userPubSubRoot:client]] && [[error condition] isEqualToString:@"item-not-found"]) {
             [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
         }
-    }
-    
+    }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -469,6 +467,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
+    NSString* jid = [[iq fromJID] full];
+    ServiceItemModel* item = [ServiceItemModel findByJID:[[iq fromJID] full]];
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:[XMPPMessageDelegate userPubSubRoot:client]];
     [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
 }
@@ -479,8 +479,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item {
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
 	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
+    [self save:client serviceItem:item forService:serviceJID andParentNode:node];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -513,35 +514,41 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client service:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID {
-    ServiceModel* service = [[ServiceModel alloc] init];
-    service.jid = [serviceJID full];
-    service.serviceName = [ident iname];
-    service.serviceCategory = [ident category];
-    service.serviceType = [ident type];
-    [service insert];
-    [service release];
+    if (![ServiceModel findByJID:[serviceJID full] type:[ident type] andCategory:[ident category]]) {
+        ServiceModel* service = [[ServiceModel alloc] init];
+        service.jid = [serviceJID full];
+        service.name = [ident iname];
+        service.category = [ident category];
+        service.type = [ident type];
+        [service insert];
+        [service release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client serviceItem:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
-    serviceItem.parentNode = parent;
-    serviceItem.itemName = [item iname];
-    serviceItem.jid = [[item JID] full];
-    serviceItem.service = [serviceJID full];
-    serviceItem.node = [item node];
-    [serviceItem insert];
-    [serviceItem release];
+    if (![ServiceItemModel findByJID:[[item JID] full] andNode:[item node]]) {
+        ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
+        serviceItem.parentNode = parent;
+        serviceItem.itemName = [item iname];
+        serviceItem.jid = [[item JID] full];
+        serviceItem.service = [serviceJID full];
+        serviceItem.node = [item node];
+        [serviceItem insert];
+        [serviceItem release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)save:(XMPPClient*)client serviceFeature:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
-    serviceFeature.parentNode = parent;
-    serviceFeature.var = [feature var];
-    serviceFeature.service = [serviceJID full];
-    [serviceFeature insert];
-    [serviceFeature release];
+    if (![ServiceFeatureModel findByService:[serviceJID full] andVar:[feature var]]) {
+        ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
+        serviceFeature.parentNode = parent;
+        serviceFeature.var = [feature var];
+        serviceFeature.service = [serviceJID full];
+        [serviceFeature insert];
+        [serviceFeature release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

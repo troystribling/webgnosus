@@ -32,20 +32,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
-+ (NSInteger)countByAccount:(AccountModel*)account;
-+ (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)account;
-+ (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)account;
++ (NSInteger)countByAccount:(AccountModel*)requestAccount;
++ (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;
++ (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAll;
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)account;
-+ (NSMutableArray*)findAllByJid:(NSString*)bareJid andAccount:(AccountModel*)account;
-+ (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)account;
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)requestAccount;
 + (RosterItemModel*)findByPk:(NSInteger)requestPk;
-+ (RosterItemModel*)findByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)account;
-+ (RosterItemModel*)findWithMaxPriorityByJid:(NSString*)bareJid andAccount:(AccountModel*)account;
++ (RosterItemModel*)findByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount;
++ (RosterItemModel*)findWithMaxPriorityByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;
 + (BOOL)isJidAvailable:(NSString*)bareJid;
 + (void)drop;
 + (void)create;
-+ (void)destroyAllByAccount:(AccountModel*)account;
++ (void)destroyAllByAccount:(AccountModel*)requestAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

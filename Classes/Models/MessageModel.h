@@ -45,18 +45,18 @@ typedef enum tagMessageTextType {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
-+ (NSInteger)countWithLimit:(NSInteger)limit;
-+ (NSInteger)countByJid:(NSString*)jid andAccount:(AccountModel*)account;
-+ (NSInteger)countByJid:(NSString*)jid andAccount:(AccountModel*)account withLimit:(NSInteger)limit;
++ (NSInteger)countWithLimit:(NSInteger)requestLimit;
++ (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
-+ (NSMutableArray*)findAllWithLimit:(NSInteger)limit;
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)account;
-+ (NSMutableArray*)findAllByJid:(NSString*)jid andAccount:(AccountModel*)account;
-+ (NSMutableArray*)findAllByJid:(NSString*)jid andAccount:(AccountModel*)account withLimit:(NSInteger)limit;
++ (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
-+ (void)destroyAllByAccount:(AccountModel*)account;
++ (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (XMPPxData*)parseXDataMessage:(MessageModel*)message;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

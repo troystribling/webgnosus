@@ -17,24 +17,26 @@
 @interface ServiceModel : NSObject {
     NSInteger pk;
     NSString* jid;
-    NSString* serviceName;
-    NSString* serviceCategory;
-    NSString* serviceType;
+    NSString* name;
+    NSString* category;
+    NSString* type;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, retain) NSString* jid;
-@property (nonatomic, retain) NSString* serviceName;
-@property (nonatomic, retain) NSString* serviceCategory;
-@property (nonatomic, retain) NSString* serviceType;
+@property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSString* category;
+@property (nonatomic, retain) NSString* type;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
 + (void)drop;
 + (void)create;
-+ (NSMutableArray*)findAll;
 + (void)destroyAll;
++ (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
++ (NSMutableArray*)findAll;
++ (NSArray*)findAllByServiceType:(NSString*)requestType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceModel.h"
-#import "AccountModel.h"
 #import "WebgnosusDbi.h"
 #import "NSObjectiPhoneAdditions.h"
 
@@ -23,9 +22,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
 @synthesize jid;
-@synthesize serviceName;
-@synthesize serviceCategory;
-@synthesize serviceType;
+@synthesize name;
+@synthesize category;
+@synthesize type;
 
 //===================================================================================================================================
 #pragma mark ServiceModel
@@ -42,7 +41,24 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, serviceName text, serviceCategory text, serviceType text)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, name text, category text, type text)"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@'", requestJID, requestType, requestCategory];
+	ServiceModel* model = [[ServiceModel alloc] init];
+	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -53,18 +69,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
++ (NSMutableArray*)findAllByServiceType:(NSString*)requestType {
+	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
+    return output;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    if (self.serviceName) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceName, serviceCategory, serviceType) values ('%@', '%@', '%@', '%@')", self.jid, self.serviceName, self.serviceCategory, self.serviceType];	
+    if (self.name) {
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, name, category, type) values ('%@', '%@', '%@', '%@')", self.jid, self.name, self.category, self.type];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, serviceCategory, serviceType) values ('%@', '%@', '%@')", self.jid, self.serviceCategory, self.serviceType];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, category, type) values ('%@', '%@', '%@')", self.jid, self.category, self.type];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
     [insertStatement release];
@@ -87,8 +106,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', serviceName = '%@', serviceCategory = '%@', serviceType = '%@' WHERE pk = %d", 
-         self.jid, self.serviceName, self.serviceCategory, self.serviceType, self.pk];	
+        [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@' WHERE pk = %d", 
+         self.jid, self.name, self.category, self.type, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
 }
@@ -106,17 +125,17 @@
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
 	}
-	char* inameVal = (char*)sqlite3_column_text(statement, 2);
-	if (inameVal != nil) {		
-		self.serviceName = [[NSString alloc] initWithUTF8String:inameVal];
+	char* nameVal = (char*)sqlite3_column_text(statement, 2);
+	if (nameVal != nil) {		
+		self.name = [[NSString alloc] initWithUTF8String:nameVal];
 	}
 	char* categoryVal = (char*)sqlite3_column_text(statement, 3);
 	if (categoryVal != nil) {		
-		self.serviceCategory = [[NSString alloc] initWithUTF8String:categoryVal];
+		self.category = [[NSString alloc] initWithUTF8String:categoryVal];
 	}
 	char* typeVal = (char*)sqlite3_column_text(statement, 3);
 	if (typeVal != nil) {		
-		self.serviceType = [[NSString alloc] initWithUTF8String:typeVal];
+		self.type = [[NSString alloc] initWithUTF8String:typeVal];
 	}
 }
 

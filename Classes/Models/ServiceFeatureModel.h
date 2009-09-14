@@ -30,8 +30,9 @@
 + (NSInteger)count;
 + (void)drop;
 + (void)create;
-+ (NSMutableArray*)findAll;
 + (void)destroyAll;
++ (NSMutableArray*)findAll;
++ (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

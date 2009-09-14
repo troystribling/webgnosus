@@ -53,9 +53,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByAccount:(AccountModel*)account {
++ (void)destroyAllByAccount:(AccountModel*)requestAccount {
 	NSString* deleteStatement = 
-    [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", account.pk];
+    [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
     [deleteStatement release];
 }

@@ -34,8 +34,10 @@
 + (NSInteger)count;
 + (void)drop;
 + (void)create;
-+ (NSMutableArray*)findAll;
 + (void)destroyAll;
++ (ServiceItemModel*)findByJID:(NSString*)requestService;
++ (ServiceItemModel*)findByJID:(NSString*)requestService andNode:(NSString*)requestNode;
++ (NSMutableArray*)findAll;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

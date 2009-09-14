@@ -38,10 +38,10 @@ typedef enum {
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)account;
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (ContactModel*)findByPk:(NSInteger)requestPk;
-+ (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)account;
-+ (void)destroyAllByAccount:(AccountModel*)account;
++ (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)requestAccount;
++ (void)destroyAllByAccount:(AccountModel*)requestAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

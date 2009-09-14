@@ -56,6 +56,18 @@
 	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar {
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
+	ServiceFeatureModel* model = [[ServiceFeatureModel alloc] init];
+	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
