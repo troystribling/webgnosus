@@ -47,7 +47,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (XMPPClientManagerDelegate)
+@interface NSObject (XMPPClientManagerAccountUpdateDelegate)
 
 - (void)didAddAccount;
 - (void)didRemoveAccount;

@@ -104,6 +104,8 @@
 		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
 		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
+		05DB5EA4105F058800A9BFA8 /* DiscoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */; };
+		05DB5EA5105F058800A9BFA8 /* DiscoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */; };
 		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
 		05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
@@ -374,6 +376,8 @@
 		05D83D78104ED94F00078131 /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
 		05D83D7B104EDCBF00078131 /* green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-button.png"; sourceTree = "<group>"; };
 		05D83D7C104EDCBF00078131 /* grey-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-button.png"; sourceTree = "<group>"; };
+		05DB5EA2105F058800A9BFA8 /* DiscoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoDelegate.h; sourceTree = "<group>"; };
+		05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoDelegate.m; sourceTree = "<group>"; };
 		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
 		05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppCommandCell.xib; sourceTree = "<group>"; };
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
@@ -577,6 +581,8 @@
 		0534810010292C94002E6E2D /* Disco */ = {
 			isa = PBXGroup;
 			children = (
+				05DB5EA2105F058800A9BFA8 /* DiscoDelegate.h */,
+				05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */,
 				0534811510292E5B002E6E2D /* XMPPDiscoItem.h */,
 				0534811610292E5B002E6E2D /* XMPPDiscoItem.m */,
 				0534811110292E4B002E6E2D /* XMPPDiscoIdentity.h */,
@@ -1353,6 +1359,7 @@
 				05EF0020105738840068AA06 /* PubCell.m in Sources */,
 				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
+				05DB5EA4105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1452,6 +1459,7 @@
 				05EF0021105738840068AA06 /* PubCell.m in Sources */,
 				05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
+				05DB5EA5105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
