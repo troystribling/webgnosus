@@ -186,6 +186,8 @@
         [multicastDelegate  xmppClient:self didReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
         [multicastDelegate  xmppClient:self didReceiveClientVersionRequest:iq];
+	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"error"]) {
+        [multicastDelegate  xmppClient:self didReceiveClientVersionError:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"error"]) {

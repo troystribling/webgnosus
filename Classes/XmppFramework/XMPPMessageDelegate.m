@@ -176,8 +176,6 @@
     [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticated forClient:client];
     [XMPPRosterQuery get:client];
     [XMPPPresence goOnline:client withPriority:(NSInteger)1];
-    [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]]];
-    [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -312,38 +310,43 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveClientVersionResult:(XMPPIQ*)iq {
-    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
-    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        XMPPJID* fromJid = [iq fromJID];
-        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
-        if (rosterItem) {
-            rosterItem.clientName = version.clientName; 
-            rosterItem.clientVersion = version.clientVersion;
-            [rosterItem update];
-            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
-            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
-            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
-                contact.clientName = version.clientName; 
-                contact.clientVersion = version.clientVersion;
-                [contact update];
-            }
-        }
-    }
+//    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
+//    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
+//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+//    if (account) {
+//        XMPPJID* fromJid = [iq fromJID];
+//        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
+//        if (rosterItem) {
+//            rosterItem.clientName = version.clientName; 
+//            rosterItem.clientVersion = version.clientVersion;
+//            [rosterItem update];
+//            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
+//            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
+//            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
+//                contact.clientName = version.clientName; 
+//                contact.clientVersion = version.clientVersion;
+//                [contact update];
+//            }
+//        }
+//    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveClientVersionRequest:(XMPPIQ*)iq {
+    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionRequest"];
     NSString* fromJID = [[iq fromJID] full];
     if (![[client.myJID full] isEqualToString:fromJID]) {
         AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
         RosterItemModel* rosterItem = [RosterItemModel findByFullJid:fromJID andAccount:account];  
         if (rosterItem) {
             [XMPPClientVersionQuery result:client forIQ:iq];
-            [self writeToLog:client message:@"xmppClient:didReceiveClientVersionRequest"];
         }
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveClientVersionError:(XMPPIQ*)iq {
+    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionError"];
 }
 
 //===================================================================================================================================
@@ -465,32 +468,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
-    [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
+//- (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
+//	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
+//    [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
 //    NSString* jid = [[iq fromJID] full];
 //    ServiceItemModel* item = [ServiceItemModel findByJID:[[iq fromJID] full]];
 //    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] andNode:[XMPPMessageDelegate userPubSubRoot:client]];
-}
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubRoot:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubRoot"];
-}
+//- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubRoot:(XMPPIQ*)iq {
+//	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubRoot"];
+//}
+//
+//-----------------------------------------------------------------------------------------------------------------------------------
+//- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
+//	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
+//    [self save:client serviceItem:item forService:serviceJID andParentNode:node];
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
-	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
-    [self save:client serviceItem:item forService:serviceJID andParentNode:node];
-}
+//- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
+//	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
+//}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoSubscriptionsResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
     XMPPPubSub* pubsub = [iq pubsub];
     NSArray* subscriptions = [pubsub subscriptions];	

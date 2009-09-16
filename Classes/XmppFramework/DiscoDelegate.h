@@ -16,17 +16,22 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface DiscoDelegate : NSObject {
     XMPPJID* targetJID;
-    XMPPClient* accountClient;
-    NSInteger pendingMsgID;
+    XMPPClient* delegateClient;
+    BOOL pubSubDiscoDone;
+    BOOL versionDiscoDone;
+    BOOL commandDiscoDone;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) XMPPJID* targetJID;
-@property (nonatomic, retain) XMPPClient* accountClient;
-@property (nonatomic, assign) NSInteger pendingMsgID;
+@property (nonatomic, retain) XMPPClient* delegateClient;
+@property (nonatomic, assign) BOOL pubSubDiscoDone;
+@property (nonatomic, assign) BOOL versionDiscoDone;
+@property (nonatomic, assign) BOOL commandDiscoDone;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(XMPPClient*)accountClient withDomain:(XMPPJID*)initJID;
+- (id)initForAccount:(XMPPClient*)accountClient withJID:(XMPPJID*)initJID;
+- (id)initForContact:(XMPPClient*)initClient withJID:(XMPPJID*)initJID;
 - (NSString*)targetJIDPubSubRoot;
 
 @end
