@@ -134,6 +134,8 @@
         if ([node isEqualToString:[self targetJIDPubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
 // TODO deal with creation of user pubsub root
             [self didFailToDiscoverUserPubSubNode:iq];        
+        } else if ([node isEqualToString:[self targetJIDPubSubRoot]]) {
+            self.pubSubDiscoDone = YES;
         } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"] && [[[iq fromJID] full] isEqualToString:[self.targetJID full]]) {
             self.commandDiscoDone = YES;
         }
