@@ -35,6 +35,7 @@
 + (void)create;
 + (void)destroyAll;
 + (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
++ (ServiceModel*)findByServer:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
 + (NSMutableArray*)findAll;
 + (NSArray*)findAllByServiceType:(NSString*)requestType;
 

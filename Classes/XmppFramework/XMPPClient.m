@@ -198,10 +198,18 @@
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoError:iq];
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
-	} else if (pubsub && [[iq type] isEqualToString:@"result"]) {
-        [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
-    } else {
-        [multicastDelegate xmppClient:self didReceiveIQ:iq];
+	} else if (pubsub) {
+        NSXMLElement* createElement = [pubsub elementForName:@"create"];
+        NSXMLElement* subscriptionsElement = [pubsub elementForName:@"subscriptions"];
+        if ([[iq type] isEqualToString:@"error"] && createElement) {
+            [multicastDelegate xmppClient:self didReceiveCreateSubscriptionError:iq];
+        } else if ([[iq type] isEqualToString:@"result"] && subscriptionsElement) {
+            [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
+        }
+	} else if ([[iq type] isEqualToString:@"result"]) {
+        [multicastDelegate xmppClient:self didReceiveIQResult:iq];
+    } else if ([[iq type] isEqualToString:@"error"]) {
+        [multicastDelegate xmppClient:self didReceiveIQError:iq];
 	}
 }
 

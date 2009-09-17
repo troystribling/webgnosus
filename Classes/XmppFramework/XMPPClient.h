@@ -127,6 +127,14 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didReceiveDiscoSubscriptionsResult:(XMPPIQ*)iq;
+
+// pubsub
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsError:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
+
+// iq
+- (void)xmppClient:(XMPPClient*)client didReceiveIQResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveIQError:(XMPPIQ*)iq;
+
 
 @end

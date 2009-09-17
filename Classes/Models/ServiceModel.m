@@ -62,6 +62,19 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceModel*)findByServer:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.serviceCategory='%@' AND s.serviceType='%@'", 
+                                 serverJID, requestType, requestCategory];
+	ServiceModel* model = [[ServiceModel alloc] init];
+	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:@"SELECT * FROM services" andOutputTo:output];

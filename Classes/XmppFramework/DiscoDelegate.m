@@ -112,7 +112,6 @@
             [self saveServiceItem:item forService:serviceJID andParentNode:node];
         }
         self.commandDiscoDone = YES;
-        [self deleteIfDone];
     } else {
         for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
@@ -122,6 +121,7 @@
             }
         }
     }
+    [self deleteIfDone];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -132,7 +132,6 @@
     XMPPError* error = [iq error];	
     if (error) {
         if ([node isEqualToString:[self targetJIDPubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
-// TODO deal with creation of user pubsub root
             [self didFailToDiscoverUserPubSubNode:iq];        
         } else if ([node isEqualToString:[self targetJIDPubSubRoot]]) {
             self.pubSubDiscoDone = YES;
@@ -140,6 +139,7 @@
             self.commandDiscoDone = YES;
         }
     }    
+    [self deleteIfDone];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -168,6 +168,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq {
 	[self writeToLogMessage:@"xmppClient:didReceiveDiscoInfoError"];
+    self.pubSubDiscoDone = YES;
+    [self deleteIfDone];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -204,6 +206,21 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveIQResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveIQResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveCreateSubscriptionsResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveCreateSubscriptionsError"];
+}
+
 //===================================================================================================================================
 #pragma mark DiscoDelegate PrivateApi
 
@@ -231,6 +248,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
 	[self writeToLogMessage:@"didFailToDiscoverUserPubSubNode"];
+    [XMPPPubSub create:self.delegateClient JID:[iq fromJID] node:[self targetJIDPubSubRoot]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

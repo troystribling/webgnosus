@@ -185,6 +185,19 @@
 }
 
 //===================================================================================================================================
+#pragma mark IQ
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveIQResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveIQResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveIQError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveIQError"];
+}
+
+//===================================================================================================================================
 #pragma mark Roster
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -492,8 +505,11 @@
 //	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
 //}
 
+//===================================================================================================================================
+#pragma mark PubSub
+
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveDiscoSubscriptionsResult:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
     XMPPPubSub* pubsub = [iq pubsub];
     NSArray* subscriptions = [pubsub subscriptions];	
@@ -501,6 +517,16 @@
         XMPPPubSubSubscription* subscription = [XMPPPubSubSubscription createFromElement:(NSXMLElement *)[subscriptions objectAtIndex:i]];
         [self save:client subscription:subscription];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveCreateSubscriptionsResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveCreateSubscriptionsError"];
 }
 
 //===================================================================================================================================
