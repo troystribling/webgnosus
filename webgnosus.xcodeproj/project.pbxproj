@@ -136,6 +136,8 @@
 		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
 		05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
+		05DE50F11062FC0400500F63 /* XMPPIQRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPIQRequest.m */; };
+		05DE50F21062FC0400500F63 /* XMPPIQRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPIQRequest.m */; };
 		05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
 		05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
 		05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
@@ -393,6 +395,8 @@
 		05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterViewController.xib; sourceTree = "<group>"; };
 		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
+		05DE50EF1062FC0400500F63 /* XMPPIQRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPIQRequest.h; sourceTree = "<group>"; };
+		05DE50F01062FC0400500F63 /* XMPPIQRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPIQRequest.m; sourceTree = "<group>"; };
 		05E206A30FB9004100FCFC94 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		05E206A40FB9004100FCFC94 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		05E206A50FB9004100FCFC94 /* NSXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLElementAdditions.h; sourceTree = "<group>"; };
@@ -785,6 +789,8 @@
 				05E206E60FB9004100FCFC94 /* XMPPJID.m */,
 				05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */,
 				05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */,
+				05DE50EF1062FC0400500F63 /* XMPPIQRequest.h */,
+				05DE50F01062FC0400500F63 /* XMPPIQRequest.m */,
 			);
 			path = XmppFramework;
 			sourceTree = "<group>";
@@ -1360,6 +1366,7 @@
 				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 				05DB5EA4105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
+				05DE50F21062FC0400500F63 /* XMPPIQRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1460,6 +1467,7 @@
 				05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 				05DB5EA5105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
+				05DE50F11062FC0400500F63 /* XMPPIQRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

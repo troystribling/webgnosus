@@ -18,6 +18,7 @@
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
 #import "XMPPPubSub.h"
+#import "XMPPRequest.h"
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
@@ -28,6 +29,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient (PrivateAPI)
 
+- (void)addRequest:(XMPPRequest*)request;
+- (XMPPRequest*)getRequestWithID:(NSInteger)requestID;
+- (NSInteger)getRequestID;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +40,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize multicastDelegate;
+@synthesize xmppRequests;
 @synthesize domain;
 @synthesize myJID;
 @synthesize password;
@@ -137,7 +143,17 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendElement:(NSXMLElement *)element {
+- (void)sendXMPPIQRequest:(XMPPRequest*)request {
+    NSInteger reqID = [self getRequestID];
+    request.requestID = reqID;
+    [self addRequest:request];
+    XMPPIQ* iq = request.request;
+    [iq addStanzaID:reqID];
+    [self sendElement:iq];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sendElement:(NSXMLElement*)element {
 	[xmppStream sendElement:element];
 }
 
@@ -177,6 +193,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceiveIQ:(XMPPIQ*)iq {
+    reqID = [iq stanzaID];
+    XMPPIQRequest* req = [self getRequestWithID:reqID];
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
     XMPPPubSub* pubsub = [iq pubsub];
@@ -268,7 +286,25 @@
 }
 
 //===================================================================================================================================
-#pragma mark PrivateAPI:
+#pragma mark XMPPClient PrivateAPI:
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addRequest:(XMPPRequest*)request {
+    [self.xmppRequests setValue:request forKey:request.requestID];
+}    
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPRequest*)getRequestWithID:(NSInteger)requestID {
+    XMPPRequest* request = [self.xmppRequests objectForKey:requestID];
+    [self.xmppRequests removeObjectForKey:requestID];
+    return request;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)getRequestID {
+    NSTimeInterval reqID = 1000.0f*[NSDate timeIntervalSince1970];
+    return (NSInteger)reqID;
+}
 
 //===================================================================================================================================
 #pragma mark NSObject

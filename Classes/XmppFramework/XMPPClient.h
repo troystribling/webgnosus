@@ -27,6 +27,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient : NSObject {
 	MulticastDelegate* multicastDelegate;	
+	NSMutableDictionary* xmppRequests;
 	NSString* domain;
 	XMPPJID* myJID;
 	NSString *password;
@@ -39,6 +40,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) MulticastDelegate* multicastDelegate;
+@property (nonatomic, retain) NSMutableDictionary* xmppRequests;
 @property (nonatomic, retain) NSString* domain;
 @property (nonatomic, retain) XMPPJID* myJID;
 @property (nonatomic, retain) NSString* password;
@@ -73,8 +75,9 @@
 - (NSError*)streamError;
 
 // send elements
-- (void)sendElement:(NSXMLElement *)element;
-- (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag;
+- (void)sendXMPPIQRequest:(XMPPRequest*)request;
+- (void)sendElement:(NSXMLElement*)element;
+- (void)sendElement:(NSXMLElement*)element andNotifyMe:(long)tag;
 
 @end
 
