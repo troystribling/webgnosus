@@ -15,24 +15,24 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPIQRequest : NSObject {
-    NSInteger requestID;
+    NSString* requestID;
     XMPPIQ* request;
     id delegate;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) requestID;
-@property (nonatomic, retain) request;
-@property (nonatomic, retain) delegate;
+@property (nonatomic, assign) NSString* requestID;
+@property (nonatomic, retain) XMPPIQ* request;
+@property (nonatomic, retain) id delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithRequest:(XMPPIQ*)accountClient andDelegate:(id)initJID;
+- (id)initWithRequest:(XMPPIQ*)accountClient andDelegate:(id)initDelegate;
 - (void)handleRequest:(XMPPClient*)client forIQ:(XMPPIQ*)iq;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (XMPPRequest)
+@interface NSObject (XMPPIQRequest)
 
 - (void)handleError:(XMPPClient*)client forIQ:(XMPPIQ*)iq;
 - (void)handleResult:(XMPPClient*)client forIQ:(XMPPIQ*)iq;

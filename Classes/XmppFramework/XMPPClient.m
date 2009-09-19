@@ -18,7 +18,7 @@
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
 #import "XMPPPubSub.h"
-#import "XMPPRequest.h"
+#import "XMPPIQRequest.h"
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
@@ -29,9 +29,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient (PrivateAPI)
 
-- (void)addRequest:(XMPPRequest*)request;
-- (XMPPRequest*)getRequestWithID:(NSInteger)requestID;
-- (NSInteger)getRequestID;
+- (void)addRequest:(XMPPIQRequest*)request;
+- (XMPPIQRequest*)getRequestWithID:(NSString*)requestID;
+- (NSString*)getRequestID;
 
 @end
 
@@ -143,8 +143,8 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendXMPPIQRequest:(XMPPRequest*)request {
-    NSInteger reqID = [self getRequestID];
+- (void)sendXMPPIQRequest:(XMPPIQRequest*)request {
+    NSString* reqID = [self getRequestID];
     request.requestID = reqID;
     [self addRequest:request];
     XMPPIQ* iq = request.request;
@@ -193,8 +193,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceiveIQ:(XMPPIQ*)iq {
-    reqID = [iq stanzaID];
+    NSString* reqID = [iq stanzaID];
     XMPPIQRequest* req = [self getRequestWithID:reqID];
+    if (req) {
+        [req handleRequest:self forIQ:iq];
+        [req release];
+        return;
+    }
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
     XMPPPubSub* pubsub = [iq pubsub];
@@ -289,21 +294,21 @@
 #pragma mark XMPPClient PrivateAPI:
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addRequest:(XMPPRequest*)request {
+- (void)addRequest:(XMPPIQRequest*)request {
     [self.xmppRequests setValue:request forKey:request.requestID];
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPRequest*)getRequestWithID:(NSInteger)requestID {
-    XMPPRequest* request = [self.xmppRequests objectForKey:requestID];
+- (XMPPIQRequest*)getRequestWithID:(NSString*)requestID {
+    XMPPIQRequest* request = [self.xmppRequests objectForKey:requestID];
     [self.xmppRequests removeObjectForKey:requestID];
     return request;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)getRequestID {
-    NSTimeInterval reqID = 1000.0f*[NSDate timeIntervalSince1970];
-    return (NSInteger)reqID;
+- (NSString*)getRequestID {
+    NSTimeInterval reqID = 1000.0f*[NSDate timeIntervalSinceReferenceDate];
+    return [NSString stringWithFormat:@"%d", reqID];
 }
 
 //===================================================================================================================================

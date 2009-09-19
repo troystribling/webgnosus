@@ -323,25 +323,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveClientVersionResult:(XMPPIQ*)iq {
-//    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
-//    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
-//    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-//    if (account) {
-//        XMPPJID* fromJid = [iq fromJID];
-//        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
-//        if (rosterItem) {
-//            rosterItem.clientName = version.clientName; 
-//            rosterItem.clientVersion = version.clientVersion;
-//            [rosterItem update];
-//            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
-//            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
-//            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
-//                contact.clientName = version.clientName; 
-//                contact.clientVersion = version.clientVersion;
-//                [contact update];
-//            }
-//        }
-//    }
+    [self writeToLog:client message:@"xmppClient:didReceiveClientVersionResult"];
+    XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        XMPPJID* fromJid = [iq fromJID];
+        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJid full] andAccount:account];    
+        if (rosterItem) {
+            rosterItem.clientName = version.clientName; 
+            rosterItem.clientVersion = version.clientVersion;
+            [rosterItem update];
+            NSInteger maxPriority = [RosterItemModel maxPriorityForJid:[fromJid bare] andAccount:account];
+            ContactModel* contact = [ContactModel findByJid:[fromJid bare] andAccount:account]; 
+            if ((maxPriority <= rosterItem.priority && [version.clientName isEqualToString:@"AgentXMPP"]) || [contact.clientName isEqualToString:@"Unknown"]) {
+                contact.clientName = version.clientName; 
+                contact.clientVersion = version.clientVersion;
+                [contact update];
+            }
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

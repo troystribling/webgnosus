@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceModel.h"
 #import "WebgnosusDbi.h"
+#import "XMPPDiscoIdentity.h"
 #import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +88,19 @@
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
     return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID {
+    if (![ServiceModel findByJID:[serviceJID full] type:[ident type] andCategory:[ident category]]) {
+        ServiceModel* service = [[ServiceModel alloc] init];
+        service.jid = [serviceJID full];
+        service.name = [ident iname];
+        service.category = [ident category];
+        service.type = [ident type];
+        [service insert];
+        [service release];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -86,6 +86,20 @@
 	return output;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
+    if (![ServiceItemModel findByJID:[[item JID] full] andNode:[item node]]) {
+        ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
+        serviceItem.parentNode = parent;
+        serviceItem.itemName = [item iname];
+        serviceItem.jid = [[item JID] full];
+        serviceItem.service = [serviceJID full];
+        serviceItem.node = [item node];
+        [serviceItem insert];
+        [serviceItem release];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {

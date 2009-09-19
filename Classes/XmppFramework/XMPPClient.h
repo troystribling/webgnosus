@@ -17,6 +17,7 @@
 @class XMPPMessage;
 @class XMPPPresence;
 @class XMPPRosterItem;
+@class XMPPIQRequest;
 @class XMPPDiscoIdentity;
 @class XMPPDiscoItem;
 @class XMPPClientVersionQuery;
@@ -75,7 +76,7 @@
 - (NSError*)streamError;
 
 // send elements
-- (void)sendXMPPIQRequest:(XMPPRequest*)request;
+- (void)sendXMPPIQRequest:(XMPPIQRequest*)request;
 - (void)sendElement:(NSXMLElement*)element;
 - (void)sendElement:(NSXMLElement*)element andNotifyMe:(long)tag;
 
@@ -132,7 +133,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
 
 // pubsub
-- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionsError:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
 
 // iq

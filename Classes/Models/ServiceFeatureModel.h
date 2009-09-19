@@ -33,6 +33,7 @@
 + (void)destroyAll;
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
++ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

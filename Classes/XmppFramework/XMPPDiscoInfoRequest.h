@@ -1,26 +1,26 @@
+//
+//  XMPPDiscoInfoRequest.h
+//  webgnosus
+//
+//  Created by Troy Stribling on 9/18/09.
+//  Copyright 2009 Plan-B Research. All rights reserved.
+//
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPJID : NSObject {
-	NSString* user;
-	NSString* domain;
-	NSString* resource;
+@interface XMPPDiscoInfoRequest : NSObject {
+    XMPPJID* targetJID;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-
+@property (nonatomic, retain_ targetJID;
+           
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPJID*)jidWithString:(NSString*)jidStr;
-+ (XMPPJID*)jidWithString:(NSString*)jidStr resource:(NSString*)resource;
-+ (XMPPJID*)jidWithUser:(NSString*)user domain:(NSString*)domain resource:(NSString*)resource;
-- (NSString*)user;
-- (NSString*)domain;
-- (NSString*)resource;
-- (XMPPJID*)bareJID;
-- (NSString*)bare;
-- (NSString*)full;
-
+- (id)init:(XMPPJID*)initJID;
+           
 @end

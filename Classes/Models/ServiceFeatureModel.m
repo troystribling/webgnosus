@@ -68,6 +68,18 @@
 	return model;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
+    if (![ServiceFeatureModel findByService:[serviceJID full] andVar:[feature var]]) {
+        ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
+        serviceFeature.parentNode = parent;
+        serviceFeature.var = [feature var];
+        serviceFeature.service = [serviceJID full];
+        [serviceFeature insert];
+        [serviceFeature release];
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
