@@ -1,37 +1,38 @@
 //
-//  XMPPDiscoItemsQuery.h
+//  XMPPResponse.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/4/09.
+//  Created by Troy Stribling on 9/17/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "XMPPQuery.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPDiscoItem;
-@class XMPPJID;
+@class XMPPStanza;
 @class XMPPClient;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPDiscoItemsQuery : XMPPQuery
+@interface XMPPResponse : NSObject {
+    NSString* stanzaID;
+    id delegate;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPDiscoItemsQuery*)createFromElement:(NSXMLElement*)element;
-- (XMPPDiscoItemsQuery*)initWithNode:(NSString*)itemsNode;
+@property (nonatomic, assign) NSString* stanzaID;
+@property (nonatomic, retain) id delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node;
-- (void)addNode:(NSString*)val;
+- (id)initWithDelegate:(id)initDelegate;
+- (void)handleResponse:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
 
-- (NSArray*)items;
-- (void)addItem:(XMPPDiscoItem*)val;
+@end
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID;
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID;
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid andNode:(NSString*)node;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface NSObject (XMPPResponse)
+
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
 
 @end

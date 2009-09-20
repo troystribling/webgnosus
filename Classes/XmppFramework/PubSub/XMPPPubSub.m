@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSub.h"
+#import "XMPPPubSubCeateDelegate.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
@@ -70,7 +71,7 @@
     [pubsub addChild:createElement];	
     [pubsub addChild:configElement];	
     [iq addPubSub:pubsub];    
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init:[client myJID]]];
 }
 
 //===================================================================================================================================

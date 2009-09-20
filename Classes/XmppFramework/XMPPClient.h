@@ -13,11 +13,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPStream;
 @class XMPPJID;
+@class XMPPStanza;
 @class XMPPIQ;
 @class XMPPMessage;
 @class XMPPPresence;
 @class XMPPRosterItem;
-@class XMPPIQRequest;
+@class XMPPResponse;
 @class XMPPDiscoIdentity;
 @class XMPPDiscoItem;
 @class XMPPClientVersionQuery;
@@ -28,26 +29,28 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient : NSObject {
 	MulticastDelegate* multicastDelegate;	
-	NSMutableDictionary* xmppRequests;
+	NSMutableDictionary* xmppResponseList;
 	NSString* domain;
 	XMPPJID* myJID;
 	NSString *password;
 	XMPPStream* xmppStream;
 	SCNotificationManager *scNotificationManager;    
 	UInt16 port;	
+    NSInteger stanzaID;
 	int priority;    
    	NSError* streamError;	 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) MulticastDelegate* multicastDelegate;
-@property (nonatomic, retain) NSMutableDictionary* xmppRequests;
+@property (nonatomic, retain) NSMutableDictionary* xmppResponseList;
 @property (nonatomic, retain) NSString* domain;
 @property (nonatomic, retain) XMPPJID* myJID;
 @property (nonatomic, retain) NSString* password;
 @property (nonatomic, retain) XMPPStream* xmppStream;
 @property (nonatomic, retain) SCNotificationManager* scNotificationManager;
 @property (nonatomic, assign) UInt16 port;
+@property (nonatomic, assign) NSInteger stanzaID;
 @property (nonatomic, assign) int priority;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -75,10 +78,9 @@
 - (void)disconnect;
 - (NSError*)streamError;
 
-// send elements
-- (void)sendXMPPIQRequest:(XMPPIQRequest*)request;
+// send requests
+- (void)send:(XMPPStanza*)stanza andDelegateResponse:(id)reqDelegate;
 - (void)sendElement:(NSXMLElement*)element;
-- (void)sendElement:(NSXMLElement*)element andNotifyMe:(long)tag;
 
 @end
 

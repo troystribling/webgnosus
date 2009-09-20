@@ -35,7 +35,7 @@
 - (void)addIdentity:(XMPPDiscoIdentity*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid;
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid andNode:(NSString*)node;
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID;
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID;
 
 @end

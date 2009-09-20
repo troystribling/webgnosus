@@ -18,7 +18,7 @@
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
 #import "XMPPPubSub.h"
-#import "XMPPIQRequest.h"
+#import "XMPPResponse.h"
 #import "XMPPxData.h"
 
 #import "NSObjectiPhoneAdditions.h"
@@ -29,9 +29,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient (PrivateAPI)
 
-- (void)addRequest:(XMPPIQRequest*)request;
-- (XMPPIQRequest*)getRequestWithID:(NSString*)requestID;
-- (NSString*)getRequestID;
+- (void)addResponseDelegate:(XMPPResponse*)request;
+- (XMPPResponse*)getResponseDelegateWithID:(NSString*)requestID;
+- (NSString*)getStanzaID;
+- (void)removeResponseDelegateWithID:(NSString*)reqID;
 
 @end
 
@@ -40,13 +41,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize multicastDelegate;
-@synthesize xmppRequests;
+@synthesize xmppResponseList;
 @synthesize domain;
 @synthesize myJID;
 @synthesize password;
 @synthesize xmppStream;
 @synthesize scNotificationManager;
 @synthesize port;
+@synthesize stanzaID;
 @synthesize priority;
 
 //===================================================================================================================================
@@ -143,23 +145,18 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendXMPPIQRequest:(XMPPIQRequest*)request {
-    NSString* reqID = [self getRequestID];
-    request.requestID = reqID;
-    [self addRequest:request];
-    XMPPIQ* iq = request.request;
-    [iq addStanzaID:reqID];
-    [self sendElement:iq];
+- (void)send:(XMPPStanza*)stanza andDelegateResponse:(id)reqDelegate {
+    XMPPResponse* xmppResp = [[[XMPPResponse alloc] initWithDelegate:reqDelegate] autorelease];
+    NSString* stanID = [self getStanzaID];
+    xmppResp.stanzaID = stanID;
+    [self addResponseDelegate:xmppResp];
+    [stanza addStanzaID:stanID];
+    [self sendElement:stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendElement:(NSXMLElement*)element {
 	[xmppStream sendElement:element];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag {
-	[xmppStream sendElement:element andNotifyMe:tag];
 }
 
 //===================================================================================================================================
@@ -193,11 +190,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceiveIQ:(XMPPIQ*)iq {
-    NSString* reqID = [iq stanzaID];
-    XMPPIQRequest* req = [self getRequestWithID:reqID];
-    if (req) {
-        [req handleRequest:self forIQ:iq];
-        [req release];
+    NSString* stanID = [iq stanzaID];
+    XMPPResponse* resp = (XMPPResponse*)[self getResponseDelegateWithID:stanID];
+    if (resp) {
+        [resp handleResponse:self forStanza:iq];
+        [self removeResponseDelegateWithID:stanID];
         return;
     }
     XMPPQuery* query = [iq query];
@@ -294,21 +291,30 @@
 #pragma mark XMPPClient PrivateAPI:
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addRequest:(XMPPIQRequest*)request {
-    [self.xmppRequests setValue:request forKey:request.requestID];
+- (void)addResponseDelegate:(XMPPResponse*)response {
+    [self.xmppResponseList setValue:response forKey:response.stanzaID];
 }    
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPIQRequest*)getRequestWithID:(NSString*)requestID {
-    XMPPIQRequest* request = [self.xmppRequests objectForKey:requestID];
-    [self.xmppRequests removeObjectForKey:requestID];
-    return request;
+- (XMPPResponse*)getResponseDelegateWithID:(NSString*)stanID {
+    XMPPResponse* resp = nil;
+    if (stanID) {
+        resp = [self.xmppResponseList valueForKey:stanID];
+    }
+    return resp;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)getRequestID {
-    NSTimeInterval reqID = 1000.0f*[NSDate timeIntervalSinceReferenceDate];
-    return [NSString stringWithFormat:@"%d", reqID];
+- (void)removeResponseDelegateWithID:(NSString*)stanID {
+    if (stanID) {
+        [self.xmppResponseList removeObjectForKey:stanID];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)getStanzaID {
+    self.stanzaID++;
+    return [NSString stringWithFormat:@"%d", self.stanzaID];
 }
 
 //===================================================================================================================================
@@ -317,9 +323,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if(self = [super init]) {
-		self.multicastDelegate = [[MulticastDelegate alloc] init];		
+		self.multicastDelegate = [[MulticastDelegate alloc] init];	
+        self.stanzaID = 0;
 		self.priority = 1;
 		self.xmppStream = [[XMPPStream alloc] initWithDelegate:self];				
+        self.xmppResponseList = [NSMutableDictionary dictionaryWithCapacity:10];
 		self.scNotificationManager = [[SCNotificationManager alloc] init];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStatusDidChange:) name:@"State:/Network/Global/IPv4" object:scNotificationManager];
 	}

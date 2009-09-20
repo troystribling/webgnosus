@@ -96,6 +96,8 @@
 		05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
 		05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
 		05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
+		05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */; };
+		05D7651F1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */; };
 		05D83D5C104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
 		05D83D5D104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
 		05D83D79104ED94F00078131 /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D78104ED94F00078131 /* red-button.png */; };
@@ -104,8 +106,6 @@
 		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
 		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
-		05DB5EA4105F058800A9BFA8 /* DiscoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */; };
-		05DB5EA5105F058800A9BFA8 /* DiscoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */; };
 		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
 		05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
@@ -136,8 +136,8 @@
 		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
 		05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
-		05DE50F11062FC0400500F63 /* XMPPIQRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPIQRequest.m */; };
-		05DE50F21062FC0400500F63 /* XMPPIQRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPIQRequest.m */; };
+		05DE50F11062FC0400500F63 /* XMPPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPResponse.m */; };
+		05DE50F21062FC0400500F63 /* XMPPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPResponse.m */; };
 		05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
 		05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
 		05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
@@ -290,10 +290,10 @@
 		05F0441E10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
 		05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
-		05F2F7961064754200B681ED /* XMPPDiscoItemsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsRequest.m */; };
-		05F2F7971064754200B681ED /* XMPPDiscoItemsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsRequest.m */; };
-		05F2F79A10647DB100B681ED /* XMPPDiscoInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoRequest.m */; };
-		05F2F79B10647DB100B681ED /* XMPPDiscoInfoRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoRequest.m */; };
+		05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
+		05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
+		05F2F79A10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
+		05F2F79B10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -378,12 +378,12 @@
 		05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscriptionModel.m; sourceTree = "<group>"; };
 		05D1ED9B1037C07D00DB3B3F /* CellUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellUtils.h; sourceTree = "<group>"; };
 		05D1ED9C1037C07D00DB3B3F /* CellUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellUtils.m; sourceTree = "<group>"; };
+		05D7651C1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubCeateDelegate.h; sourceTree = "<group>"; };
+		05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubCeateDelegate.m; sourceTree = "<group>"; };
 		05D83D5B104EBF0A00078131 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		05D83D78104ED94F00078131 /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
 		05D83D7B104EDCBF00078131 /* green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-button.png"; sourceTree = "<group>"; };
 		05D83D7C104EDCBF00078131 /* grey-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-button.png"; sourceTree = "<group>"; };
-		05DB5EA2105F058800A9BFA8 /* DiscoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoDelegate.h; sourceTree = "<group>"; };
-		05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoDelegate.m; sourceTree = "<group>"; };
 		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
 		05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppCommandCell.xib; sourceTree = "<group>"; };
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
@@ -399,8 +399,8 @@
 		05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterViewController.xib; sourceTree = "<group>"; };
 		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
-		05DE50EF1062FC0400500F63 /* XMPPIQRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPIQRequest.h; sourceTree = "<group>"; };
-		05DE50F01062FC0400500F63 /* XMPPIQRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPIQRequest.m; sourceTree = "<group>"; };
+		05DE50EF1062FC0400500F63 /* XMPPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPResponse.h; sourceTree = "<group>"; };
+		05DE50F01062FC0400500F63 /* XMPPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPResponse.m; sourceTree = "<group>"; };
 		05E206A30FB9004100FCFC94 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		05E206A40FB9004100FCFC94 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		05E206A50FB9004100FCFC94 /* NSXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLElementAdditions.h; sourceTree = "<group>"; };
@@ -542,10 +542,10 @@
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
 		05F24BD31054077F000C886E /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
-		05F2F7941064754200B681ED /* XMPPDiscoItemsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItemsRequest.h; path = Disco/XMPPDiscoItemsRequest.h; sourceTree = "<group>"; };
-		05F2F7951064754200B681ED /* XMPPDiscoItemsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItemsRequest.m; path = Disco/XMPPDiscoItemsRequest.m; sourceTree = "<group>"; };
-		05F2F79810647DB100B681ED /* XMPPDiscoInfoRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoRequest.h; sourceTree = "<group>"; };
-		05F2F79910647DB100B681ED /* XMPPDiscoInfoRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoInfoRequest.m; sourceTree = "<group>"; };
+		05F2F7941064754200B681ED /* XMPPDiscoItemsResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItemsResponseDelegate.h; path = Disco/XMPPDiscoItemsResponseDelegate.h; sourceTree = "<group>"; };
+		05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItemsResponseDelegate.m; path = Disco/XMPPDiscoItemsResponseDelegate.m; sourceTree = "<group>"; };
+		05F2F79810647DB100B681ED /* XMPPDiscoInfoResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoResponseDelegate.h; sourceTree = "<group>"; };
+		05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoInfoResponseDelegate.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -593,20 +593,18 @@
 		0534810010292C94002E6E2D /* Disco */ = {
 			isa = PBXGroup;
 			children = (
-				05DB5EA2105F058800A9BFA8 /* DiscoDelegate.h */,
-				05DB5EA3105F058800A9BFA8 /* DiscoDelegate.m */,
 				0534811510292E5B002E6E2D /* XMPPDiscoItem.h */,
 				0534811610292E5B002E6E2D /* XMPPDiscoItem.m */,
 				0534811110292E4B002E6E2D /* XMPPDiscoIdentity.h */,
 				0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */,
 				053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */,
-				05F2F79810647DB100B681ED /* XMPPDiscoInfoRequest.h */,
-				05F2F79910647DB100B681ED /* XMPPDiscoInfoRequest.m */,
 				053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */,
+				05F2F79810647DB100B681ED /* XMPPDiscoInfoResponseDelegate.h */,
+				05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */,
 				0534810110292CBC002E6E2D /* XMPPDiscoItemsQuery.h */,
 				0534810210292CBC002E6E2D /* XMPPDiscoItemsQuery.m */,
-				05F2F7941064754200B681ED /* XMPPDiscoItemsRequest.h */,
-				05F2F7951064754200B681ED /* XMPPDiscoItemsRequest.m */,
+				05F2F7941064754200B681ED /* XMPPDiscoItemsResponseDelegate.h */,
+				05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */,
 				0534810910292D41002E6E2D /* XMPPDiscoFeature.h */,
 				0534810A10292D41002E6E2D /* XMPPDiscoFeature.m */,
 			);
@@ -720,6 +718,8 @@
 			children = (
 				05D1ED691037BEF200DB3B3F /* XMPPPubSub.h */,
 				05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */,
+				05D7651C1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.h */,
+				05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */,
 				05D1ED6B1037BEF200DB3B3F /* XMPPPubSubEvent.h */,
 				05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */,
 				05D1ED6D1037BEF200DB3B3F /* XMPPPubSubItem.h */,
@@ -801,8 +801,8 @@
 				05E206E60FB9004100FCFC94 /* XMPPJID.m */,
 				05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */,
 				05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */,
-				05DE50EF1062FC0400500F63 /* XMPPIQRequest.h */,
-				05DE50F01062FC0400500F63 /* XMPPIQRequest.m */,
+				05DE50EF1062FC0400500F63 /* XMPPResponse.h */,
+				05DE50F01062FC0400500F63 /* XMPPResponse.m */,
 			);
 			path = XmppFramework;
 			sourceTree = "<group>";
@@ -1377,10 +1377,10 @@
 				05EF0020105738840068AA06 /* PubCell.m in Sources */,
 				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
-				05DB5EA4105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
-				05DE50F21062FC0400500F63 /* XMPPIQRequest.m in Sources */,
-				05F2F7961064754200B681ED /* XMPPDiscoItemsRequest.m in Sources */,
-				05F2F79A10647DB100B681ED /* XMPPDiscoInfoRequest.m in Sources */,
+				05DE50F21062FC0400500F63 /* XMPPResponse.m in Sources */,
+				05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */,
+				05F2F79A10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */,
+				05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,10 +1480,10 @@
 				05EF0021105738840068AA06 /* PubCell.m in Sources */,
 				05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
-				05DB5EA5105F058800A9BFA8 /* DiscoDelegate.m in Sources */,
-				05DE50F11062FC0400500F63 /* XMPPIQRequest.m in Sources */,
-				05F2F7971064754200B681ED /* XMPPDiscoItemsRequest.m in Sources */,
-				05F2F79B10647DB100B681ED /* XMPPDiscoInfoRequest.m in Sources */,
+				05DE50F11062FC0400500F63 /* XMPPResponse.m in Sources */,
+				05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */,
+				05F2F79B10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */,
+				05D7651F1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

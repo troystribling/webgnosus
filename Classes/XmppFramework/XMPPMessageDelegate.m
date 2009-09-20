@@ -175,7 +175,9 @@
 	[self writeToLog:client message:@"xmppClientDidAuthenticate"];
     [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticated forClient:client];
     [XMPPRosterQuery get:client];
-    [XMPPPresence goOnline:client withPriority:(NSInteger)1];
+    [XMPPPresence goOnline:client withPriority:1];
+    [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]] forTarget:[client myJID]];
+    [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]] forTarget:[client myJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

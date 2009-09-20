@@ -172,7 +172,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
+- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ*)iq {
 }
 
 //===================================================================================================================================

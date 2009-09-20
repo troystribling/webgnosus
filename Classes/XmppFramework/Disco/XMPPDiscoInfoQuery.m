@@ -10,6 +10,8 @@
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoIdentity.h"
 #import "XMPPDiscoFeature.h"
+#import "XMPPResponse.h"
+#import "XMPPDiscoInfoResponseDelegate.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
@@ -80,17 +82,17 @@
 #pragma mark XMPPDiscoInfoQuery Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] init]];
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid andNode:(NSString*)node {
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] initWithNode:node]];
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
 }
 
 //===================================================================================================================================

@@ -13,6 +13,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class UserModel;
 @class XMPPDiscoIdentity;
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceModel : NSObject {
@@ -38,7 +39,7 @@
 + (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
 + (ServiceModel*)findByServer:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
 + (NSMutableArray*)findAll;
-+ (NSArray*)findAllByServiceType:(NSString*)requestType;
++ (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
