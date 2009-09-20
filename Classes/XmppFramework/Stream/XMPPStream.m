@@ -271,19 +271,6 @@
 	}
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag {
-	if(self.state == STATE_CONNECTED)
-	{
-		NSString *elementStr = [element XMLString];
-		
-		if(DEBUG) {
-			NSLog(@"SEND: %@", elementStr);
-		}
-		[self.asyncSocket writeData:[elementStr dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:tag];
-	}
-}
-
 //===================================================================================================================================
 #pragma mark Stream Negotiation
 

@@ -12,6 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class XMPPPubSubSubscription;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SubscriptionModel : NSObject {
@@ -37,6 +38,7 @@
 + (void)create;
 + (NSMutableArray*)findAll;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
++ (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

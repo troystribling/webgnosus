@@ -10,6 +10,8 @@
 #import "SubscriptionModel.h"
 #import "AccountModel.h"
 #import "WebgnosusDbi.h"
+#import "XMPPPubSubSubscription.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SubscriptionModel (PrivateAPI)
@@ -58,6 +60,20 @@
     [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
     [deleteStatement release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account {
+    if (account) {
+        SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
+        subModel.accountPk = account.pk;
+        subModel.node = [sub node];
+        subModel.subId = [sub subId];
+        subModel.jid = [[sub JID] full];
+        subModel.subscription = [sub subscription];
+        [subModel insert];
+        [subModel release];
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -106,7 +106,8 @@
 - (void)xmppClient:(XMPPClient*)client didNotAuthenticate:(NSXMLElement*)error;
 
 // roster
-- (void)xmppClient:(XMPPClient*)client didReceiveRosterItems:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveRosterResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveRosterError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didAddToRoster:(XMPPRosterItem*)item;
 - (void)xmppClient:(XMPPClient*)client didRemoveFromRoster:(XMPPRosterItem*)item;
 - (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq;
@@ -135,7 +136,6 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
 
 // pubsub
-- (void)xmppClient:(XMPPClient*)client didReceiveCreateSubscriptionError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
 
 // iq

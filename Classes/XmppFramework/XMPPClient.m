@@ -200,32 +200,38 @@
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
     XMPPPubSub* pubsub = [iq pubsub];
-	if([[query className] isEqualToString:@"XMPPRosterQuery"]) {
-        [multicastDelegate  xmppClient:self didReceiveRosterItems:iq];
+    // Roster
+	if([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"result"]) {
+        [multicastDelegate  xmppClient:self didReceiveRosterResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"error"]) {
+        [multicastDelegate  xmppClient:self didReceiveRosterError:iq];
+    // Client Version
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveClientVersionResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"get"]) {
         [multicastDelegate  xmppClient:self didReceiveClientVersionRequest:iq];
 	} else if ([[query className] isEqualToString:@"XMPPClientVersionQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveClientVersionError:iq];
+    // Disco Items
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsError:iq];
+    // Diso Info
 	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoError:iq];
+    // Command    
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
+    // PubSub
 	} else if (pubsub) {
-        NSXMLElement* createElement = [pubsub elementForName:@"create"];
         NSXMLElement* subscriptionsElement = [pubsub elementForName:@"subscriptions"];
-        if ([[iq type] isEqualToString:@"error"] && createElement) {
-            [multicastDelegate xmppClient:self didReceiveCreateSubscriptionError:iq];
-        } else if ([[iq type] isEqualToString:@"result"] && subscriptionsElement) {
+        if ([[iq type] isEqualToString:@"result"] && subscriptionsElement) {
             [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
         }
+    // IQ
 	} else if ([[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveIQResult:iq];
     } else if ([[iq type] isEqualToString:@"error"]) {

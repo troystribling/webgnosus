@@ -69,7 +69,6 @@
 - (float)serverXmppStreamVersionNumber;
 
 - (void)sendElement:(NSXMLElement *)element;
-- (void)sendElement:(NSXMLElement *)element andNotifyMe:(long)tag;
 
 @end
 

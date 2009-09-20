@@ -53,7 +53,6 @@
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
     [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self targetJIDPubSubRoot] forTarget:self.targetJID];
-    [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
