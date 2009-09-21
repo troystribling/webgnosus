@@ -64,7 +64,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ServiceModel*)findByServer:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
++ (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.serviceCategory='%@' AND s.serviceType='%@'", 
                                  serverJID, requestType, requestCategory];
 	ServiceModel* model = [[ServiceModel alloc] init];

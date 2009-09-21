@@ -23,7 +23,6 @@
 
 - (void)didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node;
 - (void)didFailToDiscoverUserPubSubNode:(XMPPClient*)client forIQ:(XMPPIQ*)iq;
-- (NSString*)targetJIDPubSubRoot;
 
 @end
 
@@ -48,11 +47,6 @@
 #pragma mark XMPPDiscoItemsResponseDelegate PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)targetJIDPubSubRoot {
-    return [[[NSString alloc] initWithFormat:@"/home/%@/%@", [self.targetJID domain], [self.targetJID user]] autorelease];	
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
     [ServiceItemModel insert:item forService:serviceJID andParentNode:node];
 }
@@ -60,7 +54,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didFailToDiscoverUserPubSubNode:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
     if ([[[client myJID] full] isEqualToString:[self.targetJID full]]) {
-        [XMPPPubSub create:client JID:[iq fromJID] node:[self targetJIDPubSubRoot]];
+        [XMPPPubSub create:client JID:[iq fromJID] node:[self.targetJID pubSubRoot]];
     }
 }
 
@@ -74,7 +68,7 @@
 	NSString* node = [query node];
     XMPPError* error = [iq error];	
     if (error) {
-        if ([node isEqualToString:[self targetJIDPubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
+        if ([node isEqualToString:[self.targetJID pubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
             [self didFailToDiscoverUserPubSubNode:client forIQ:iq];        
         } 
     }    
@@ -86,7 +80,7 @@
 	NSString* node = [query node];
     NSArray* items = [query items];	
 	XMPPJID* serviceJID = [stanza fromJID];
-    if ([node isEqualToString:[self targetJIDPubSubRoot]]) {
+    if ([node isEqualToString:[self.targetJID pubSubRoot]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
@@ -100,7 +94,7 @@
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             if ([item node] == nil) { 
-                [XMPPDiscoInfoQuery get:client JID:[item JID] node:[item node] forTarget:self.targetJID];
+                [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
                 [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
             }
         }

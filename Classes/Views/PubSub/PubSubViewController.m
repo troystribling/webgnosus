@@ -17,6 +17,7 @@
 #import "CellUtils.h"
 #import "RosterSectionViewController.h"
 #import "AccountManagerViewController.h"
+#import "XMPPJID.h"
 #import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -84,12 +85,10 @@
 - (void)loadPubSubItems {
     if (self.account) {
         if (self.selectedItem == kSUB_MODE) {
-            self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
+            self.pubSubItems = [SubscriptionModel findAllByAccount:self.account];
         } else {
-            self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
+            self.pubSubItems = [ServiceItemModel findAllByParentNode:[[self.account toJID] pubSubRoot]];
         }
-    } else {
-        self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
     }
     [self.tableView reloadData];
 }
@@ -177,6 +176,7 @@
 	if (self = [super initWithCoder:coder]) { 
         self.addPubSubItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactButtonWasPressed)];
         self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.pubSubItems = [[NSMutableArray alloc] initWithCapacity:0];
     }
     return self;
 }

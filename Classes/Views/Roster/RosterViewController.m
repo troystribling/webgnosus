@@ -40,8 +40,6 @@
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
 - (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
-- (UIImage*)getImageForCellStatusAtRow:(NSInteger)row;
-- (NSString*)getCellTextAtRow:(NSInteger)row;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)loadAccount;
@@ -94,6 +92,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) segmentControlSelectionChanged:(id)sender {
     self.selectedRoster = [(UISegmentedControl*)sender selectedSegmentIndex];
+    [self loadAccount];
     [self loadRoster];
     [self rosterAddContactButton];
 }
@@ -106,9 +105,7 @@
         } else {
             self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
         }
-    } else {
-        self.roster = [[NSMutableArray alloc] initWithCapacity:0];
-    }
+    } 
     [self.tableView reloadData];
 }
 
@@ -136,27 +133,6 @@
     return chatViewController;
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)getCellTextAtRow:(NSInteger)row {
-    NSString* cellTitle;
-    if (self.selectedRoster == kCONTACTS_MODE) {
-        ContactModel*  cellItem = [self.roster objectAtIndex:row]; 
-        cellTitle = cellItem.jid;
-    } else {
-        RosterItemModel*  cellItem = [self.roster objectAtIndex:row]; 
-         cellTitle = cellItem.resource;
-    }
-    return cellTitle;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIImage*)getImageForCellStatusAtRow:(NSInteger)row {
-    if (self.selectedRoster == kCONTACTS_MODE) {
-        return [RosterCell contactImage:(ContactModel*)[self.roster objectAtIndex:row]];
-    }
-    return [RosterCell rosterItemImage:(RosterItemModel*)[self.roster objectAtIndex:row]];
-}
-            
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
     if (self.account) {
@@ -295,6 +271,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadAccount];
     [self rosterAddContactButton];
     [self createSegementedController];
 }
@@ -372,8 +349,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
     RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
-    cell.jidLabel.text = [self getCellTextAtRow:indexPath.row];
-    cell.activeImage.image = [self getImageForCellStatusAtRow:indexPath.row];
+    if (self.selectedRoster == kCONTACTS_MODE) {
+        ContactModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
+        cell.jidLabel.text = cellItem.jid;
+        cell.activeImage.image = [RosterCell contactImage:(ContactModel*)[self.roster objectAtIndex:indexPath.row]];
+    } else {
+        RosterItemModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
+        cell.jidLabel.text = cellItem.resource;
+        cell.activeImage.image = [RosterCell rosterItemImage:(RosterItemModel*)[self.roster objectAtIndex:indexPath.row]];
+    }
     return cell;
 }
 

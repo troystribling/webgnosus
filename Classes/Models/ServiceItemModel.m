@@ -64,6 +64,7 @@
     }
 	return model;
 }
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID andNode:(NSString*)requestNode {
     NSString* selectStatement;
@@ -85,6 +86,14 @@
 + (NSMutableArray*)findAll {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:@"SELECT * FROM serviceItems" andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByParentNode:(NSString*)requestNode {
+    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@'",  requestNode];
+	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
 

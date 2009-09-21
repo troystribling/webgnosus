@@ -55,6 +55,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
+	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
+	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
 	NSString* deleteStatement = 
     [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
@@ -112,6 +120,12 @@
             self.subId, self.node, self.subscription, self.jid, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
     [updateStatement release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPJID*)nodeToJID {
+    NSArray* comp = [self.node componentsSeparatedByString:@"/"];
+    return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:2], [comp objectAtIndex:1]]];
 }
 
 //===================================================================================================================================

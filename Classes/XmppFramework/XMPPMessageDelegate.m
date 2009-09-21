@@ -275,7 +275,7 @@
         rosterItem.priority = [presence priority];
         rosterItem.presenceType = [presence type];
         [rosterItem update];
-        if ([rosterItem.presenceType isEqualToString:@"available"]) {
+        if ([rosterItem.presenceType isEqualToString:@"available"] && ![[[client myJID] full] isEqualToString:[fromJID full]]) {
             [XMPPClientVersionQuery get:client JID:fromJID];
             [XMPPDiscoItemsQuery get:client JID:fromJID andNode:@"http://jabber.org/protocol/commands"];
             [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[fromJID domain]] forTarget:fromJID];

@@ -17,8 +17,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubCeateDelegate (PrivateAPI)
 
-- (NSString*)targetJIDPubSubRoot;
-
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,11 +39,6 @@
 //===================================================================================================================================
 #pragma mark XMPPPubSubCeateDelegate PrivateAPI
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)targetJIDPubSubRoot {
-    return [[[NSString alloc] initWithFormat:@"/home/%@/%@", [self.targetJID domain], [self.targetJID user]] autorelease];	
-}
-
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
 
@@ -55,7 +48,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[self targetJIDPubSubRoot] forTarget:self.targetJID];
+    [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
 }
 
 //===================================================================================================================================

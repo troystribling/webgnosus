@@ -25,7 +25,6 @@
 @interface XMPPDiscoInfoResponseDelegate (PrivateAPI)
 
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq;
-- (NSString*)targetJIDPubSubRoot;
 
 @end
 
@@ -51,13 +50,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
-    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self targetJIDPubSubRoot] forTarget:self.targetJID];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)targetJIDPubSubRoot {
-    return [[[NSString alloc] initWithFormat:@"/home/%@/%@", [self.targetJID domain], [self.targetJID user]] autorelease];	
+    if ([[[client myJID] full] isEqualToString:[self.targetJID full]]) {
+        [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
+    }
+    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
 }
 
 //===================================================================================================================================

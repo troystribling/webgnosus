@@ -13,6 +13,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class XMPPPubSubSubscription;
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface SubscriptionModel : NSObject {
@@ -37,6 +38,7 @@
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account;
 
@@ -45,5 +47,6 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
+- (XMPPJID*)nodeToJID;
 
 @end
