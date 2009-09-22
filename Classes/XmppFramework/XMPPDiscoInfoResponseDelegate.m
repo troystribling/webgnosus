@@ -50,7 +50,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    if ([[[client myJID] full] isEqualToString:[self.targetJID full]]) {
+    if ([client isAccountJID:[self.targetJID full]]) {
         [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
     }
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];

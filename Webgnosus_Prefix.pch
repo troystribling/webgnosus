@@ -56,9 +56,10 @@
 #define kRESOURCE_MODE                          1
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// display mode setting used in PubSubViewController
+// display mode setting used in PubSubViewController and cell height
 #define kSUB_MODE                               0
 #define kPUB_MODE                               1
+#define kPUBSUB_CELL_HEIGHT                     55.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // adjust message size for edit mode when cell has status indicator

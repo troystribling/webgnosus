@@ -55,7 +55,6 @@
 - (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
     if ([self.newContactJidString isEqualToString:[[item jid] bare]] && self.addContactIndicatorView) {
         [self.addContactIndicatorView dismiss];
-        [self.addContactIndicatorView release];
         [self.jidTextField resignFirstResponder]; 
         [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
         [self.navigationController popViewControllerAnimated:YES];
@@ -69,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.title = @"Add Contact";
-	self.account = [AccountModel findFirst];
+	self.account = [AccountModel findFirstDisplayed];
 	self.accountLabel.text = [self.account bareJID];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;

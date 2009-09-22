@@ -52,6 +52,14 @@
 @synthesize priority;
 
 //===================================================================================================================================
+#pragma mark XMPPClient
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)isAccountJID:(NSString*)requestJID {
+    return [[self.myJID full] isEqualToString:requestJID];
+}
+
+//===================================================================================================================================
 #pragma mark Delegation
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -199,7 +207,6 @@
     }
     XMPPQuery* query = [iq query];
     XMPPCommand* command = [iq command];
-    XMPPPubSub* pubsub = [iq pubsub];
     // Roster
 	if([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterResult:iq];
@@ -225,12 +232,6 @@
     // Command    
 	} else if (command && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveCommandResult:iq];
-    // PubSub
-	} else if (pubsub) {
-        NSXMLElement* subscriptionsElement = [pubsub elementForName:@"subscriptions"];
-        if ([[iq type] isEqualToString:@"result"] && subscriptionsElement) {
-            [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
-        }
     // IQ
 	} else if ([[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveIQResult:iq];

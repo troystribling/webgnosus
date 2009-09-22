@@ -17,6 +17,8 @@
 #import "CellUtils.h"
 #import "RosterSectionViewController.h"
 #import "AccountManagerViewController.h"
+#import "AddSubscriptionViewController.h"
+#import "AddPublicationViewController.h"
 #import "XMPPJID.h"
 #import "XMPPClientManager.h"
 
@@ -57,6 +59,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addPubSubItemWasPressed { 
+    if (self.account) {
+        UIViewController* addItemController;
+        if (self.selectedItem == kSUB_MODE) {
+            addItemController = [[AddSubscriptionViewController alloc] initWithNibName:@"AddSubscriptionViewController" bundle:nil]; 
+        } else {
+            addItemController = [[AddPublicationViewController alloc] initWithNibName:@"AddPublicationViewController" bundle:nil]; 
+        }
+        [self.navigationController pushViewController:addItemController animated:YES]; 
+        [addItemController release];     
+    }
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -136,6 +148,7 @@
         SubCell* cell = (SubCell*)[CellUtils createCell:[SubCell class] forTableView:tableView];
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
+        cell.jidLabel.text = [[item nodeToJID] full];
         return cell;
     } else {
         PubCell* cell = (PubCell*)[CellUtils createCell:[PubCell class] forTableView:tableView];
@@ -143,11 +156,6 @@
         cell.itemLabel.text = item.itemName;
         return cell;
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
 }
 
 //===================================================================================================================================
@@ -222,6 +230,11 @@
 #pragma mark UITableViewDeligate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return kPUBSUB_CELL_HEIGHT;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
     if (self.account) {
@@ -266,7 +279,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController* viewController = [self getEventsViewControllerForRowAtIndexPath:indexPath];
+    UIViewController* viewController = [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }

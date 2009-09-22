@@ -53,7 +53,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didFailToDiscoverUserPubSubNode:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    if ([[[client myJID] full] isEqualToString:[self.targetJID full]]) {
+    if ([client isAccountJID:[self.targetJID full]]) {
         [XMPPPubSub create:client JID:[iq fromJID] node:[self.targetJID pubSubRoot]];
     }
 }

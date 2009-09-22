@@ -55,6 +55,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init;
+- (BOOL)isAccountJID:(NSString*)requestJID;
 
 // delegation
 - (void)addDelegate:(id)delegate;
@@ -136,6 +137,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
 
 // pubsub
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
 
 // iq

@@ -13,6 +13,7 @@
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
+#import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubCeateDelegate (PrivateAPI)
@@ -44,10 +45,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceiveSubscriptionsError:(XMPPIQ*)stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceiveSubscriptionsResult:(XMPPIQ*)stanza];
     [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
 }
 

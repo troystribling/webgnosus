@@ -6,52 +6,114 @@
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddPublicationViewController.h"
+#import "ActivityView.h"
+#import "AccountModel.h"
+#import "XMPPPubSub.h"
+#import "XMPPJID.h"
+#import "XMPPClient.h"
+#import "XMPPClientManager.h"
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface AddPublicationViewController (PrivateAPI)
 
+- (void)failureAlert:(NSString*)message;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation AddPublicationViewController
 
-/*
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize nodeTextField;
+@synthesize account;
+@synthesize addPublicationIndicatorView;
+
+//===================================================================================================================================
+#pragma mark AddPublicationViewController
+
+//===================================================================================================================================
+#pragma mark AddPublicationViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)failureAlert:(NSString*)message { 
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Creating Node" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	[alert show];	
+	[alert release];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq {
+    [self.addPublicationIndicatorView dismiss];
+    [self failureAlert:@"Invalid Node Specification"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
+    [self.addPublicationIndicatorView dismiss];
+    [self.nodeTextField resignFirstResponder]; 
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+//===================================================================================================================================
+#pragma mark UIViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
     }
     return self;
 }
-*/
 
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"Add Publication Node";
+	self.account = [AccountModel findFirstDisplayed];
+	self.nodeTextField.returnKeyType = UIReturnKeyDone;
+    self.nodeTextField.delegate = self;
+	self.nodeTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self.nodeTextField becomeFirstResponder]; 
 }
-*/
 
-/*
-// Override to allow orientations other than the default portrait orientation.
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-*/
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+//===================================================================================================================================
+#pragma mark UITextFieldDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (![self.nodeTextField.text isEqualToString:@""]) {
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        NSString* newNode = [[NSString alloc] initWithFormat:@"%@/%@", [[self.account toJID] pubSubRoot], self.nodeTextField.text];
+//        [XMPPPubSub create:client JID:[iq fromJID] node:newNode];
+        self.addPublicationIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Node" inView:self.view];
+        [newNode release];
+    } else {
+        [self failureAlert:@"Node must not be empty"];
+    }
+	return NO; 
 }
 
+//===================================================================================================================================
+#pragma mark NSObject
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
     [super dealloc];
 }
-
 
 @end

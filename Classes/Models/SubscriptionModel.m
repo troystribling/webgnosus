@@ -125,7 +125,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPJID*)nodeToJID {
     NSArray* comp = [self.node componentsSeparatedByString:@"/"];
-    return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:2], [comp objectAtIndex:1]]];
+    return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:3], [comp objectAtIndex:2]]];
 }
 
 //===================================================================================================================================
