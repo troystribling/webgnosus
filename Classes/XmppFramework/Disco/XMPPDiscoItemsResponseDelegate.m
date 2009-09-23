@@ -70,13 +70,15 @@
     if (error) {
         if ([node isEqualToString:[self.targetJID pubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
             [self didFailToDiscoverUserPubSubNode:client forIQ:iq];        
+            [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
         } 
     }    
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[(XMPPIQ*)stanza query];
+    XMPPIQ* iq = (XMPPIQ*)stanza;
+    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
 	NSString* node = [query node];
     NSArray* items = [query items];	
 	XMPPJID* serviceJID = [stanza fromJID];
@@ -84,7 +86,9 @@
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
+            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];        
         }
+        [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:iq];        
     } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"] && [[[stanza fromJID] full] isEqualToString:[self.targetJID full]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];

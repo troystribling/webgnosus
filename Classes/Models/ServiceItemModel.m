@@ -66,6 +66,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceItemModel*)findByNode:(NSString*)requestNode {
+    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@'",  requestNode];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID andNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {

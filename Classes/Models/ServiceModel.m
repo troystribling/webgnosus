@@ -65,9 +65,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.serviceCategory='%@' AND s.serviceType='%@'", 
-                                 serverJID, requestType, requestCategory];
-	ServiceModel* model = [[ServiceModel alloc] init];
+	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.category='%@' AND s.type='%@'", 
+                                 serverJID, requestCategory, requestType];
+	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
@@ -161,7 +161,7 @@
 	if (categoryVal != nil) {		
 		self.category = [[NSString alloc] initWithUTF8String:categoryVal];
 	}
-	char* typeVal = (char*)sqlite3_column_text(statement, 3);
+	char* typeVal = (char*)sqlite3_column_text(statement, 4);
 	if (typeVal != nil) {		
 		self.type = [[NSString alloc] initWithUTF8String:typeVal];
 	}

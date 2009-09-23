@@ -10,6 +10,7 @@
 #import "AddPublicationViewController.h"
 #import "ActivityView.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 #import "XMPPPubSub.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
@@ -29,6 +30,7 @@
 @synthesize nodeTextField;
 @synthesize account;
 @synthesize addPublicationIndicatorView;
+@synthesize nodeFullPath;
 
 //===================================================================================================================================
 #pragma mark AddPublicationViewController
@@ -49,13 +51,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq {
     [self.addPublicationIndicatorView dismiss];
+    [self.nodeTextField becomeFirstResponder]; 
     [self failureAlert:@"Invalid Node Specification"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq {
     [self.addPublicationIndicatorView dismiss];
-    [self.nodeTextField resignFirstResponder]; 
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -98,10 +104,14 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (![self.nodeTextField.text isEqualToString:@""]) {
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        NSString* newNode = [[NSString alloc] initWithFormat:@"%@/%@", [[self.account toJID] pubSubRoot], self.nodeTextField.text];
-//        [XMPPPubSub create:client JID:[iq fromJID] node:newNode];
-        self.addPublicationIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Node" inView:self.view];
-        [newNode release];
+        self.nodeFullPath = [[NSString alloc] initWithFormat:@"%@/%@", [[self.account toJID] pubSubRoot], self.nodeTextField.text];
+        if (![ServiceItemModel findByNode:self.nodeFullPath]) {
+            [XMPPPubSub create:client JID:[self.account pubSubService] node:self.nodeFullPath];
+            [self.nodeTextField resignFirstResponder]; 
+            self.addPublicationIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Node" inView:self.view];
+        } else {
+            [self failureAlert:@"Node exists"];
+        }
     } else {
         [self failureAlert:@"Node must not be empty"];
     }

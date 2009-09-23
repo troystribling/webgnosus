@@ -458,6 +458,21 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
+	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didDiscoverAllUserPubSubNodes"];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPMessageDelegate PrivateApi
 

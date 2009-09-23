@@ -37,6 +37,7 @@
 - (NSString*)bareJID;
 - (NSString*)fullJID;
 - (XMPPJID*)toJID;
+- (XMPPJID*)pubSubService;
 - (void)load;
 
 @end

@@ -32,7 +32,7 @@
 - (id)initWithTitle:(NSString*)title inView:(UIView*)view {
     if (self = [super initWithFrame:view.frame]) {
         [view addSubview:self];
-        self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];  
+        self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];  
         CGFloat width = [self titleWidth:title];
         UIColor* contentColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
         RoundedCornersView* contentView = [self createContentView:self withWidth:width];
