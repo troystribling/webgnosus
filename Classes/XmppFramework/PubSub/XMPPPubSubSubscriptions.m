@@ -14,6 +14,7 @@
 #import "XMPPClient.h"
 #import "XMPPJID.h"
 #import "XMPPMessageDelegate.h"
+#import "XMPPPubSubUnsubscribeDelegate.h"
 #import "NSXMLElementAdditions.h"
 #import "AccountModel.h"
 
@@ -79,7 +80,7 @@
     [unsubElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init]];
 }
 
 //===================================================================================================================================

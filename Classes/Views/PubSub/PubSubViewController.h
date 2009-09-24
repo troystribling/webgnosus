@@ -21,6 +21,7 @@
 	NSMutableArray* pubSubItems;
     AccountModel* account;
     NSInteger selectedItem;
+    NSInteger itemToDelete;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSMutableArray* pubSubItems;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, assign) NSInteger selectedItem;
+@property (nonatomic, assign) NSInteger itemToDelete;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

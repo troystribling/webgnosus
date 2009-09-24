@@ -71,7 +71,7 @@
     [pubsub addChild:createElement];	
     [pubsub addChild:configElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init:[client myJID]]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
 }
 
 //===================================================================================================================================

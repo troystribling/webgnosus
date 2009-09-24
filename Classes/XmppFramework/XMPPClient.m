@@ -236,12 +236,17 @@
     // PubSub    
     } else if (pubsub) {
         NSXMLElement* subscriptionsElement = [pubsub elementForName:@"subscriptions"];
+        NSXMLElement* subscriptionElement = [pubsub elementForName:@"subscription"];
         if ([[iq type] isEqualToString:@"error"] && subscriptionsElement) {
             [multicastDelegate xmppClient:self didReceiveSubscriptionsError:iq];
         } else if ([[iq type] isEqualToString:@"result"] && subscriptionsElement) {
             [multicastDelegate xmppClient:self didReceiveSubscriptionsResult:iq];
+        } else if ([[iq type] isEqualToString:@"error"] && subscriptionElement) {
+            [multicastDelegate xmppClient:self didReceiveSubscribeResult:iq];
+        } else if ([[iq type] isEqualToString:@"result"] && subscriptionElement) {
+            [multicastDelegate xmppClient:self didReceiveSubscribeResult:iq];
         }
-    // IQ
+        // IQ
 	} else if ([[iq type] isEqualToString:@"result"]) {
         [multicastDelegate xmppClient:self didReceiveIQResult:iq];
     } else if ([[iq type] isEqualToString:@"error"]) {

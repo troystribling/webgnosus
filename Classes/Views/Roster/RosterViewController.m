@@ -20,6 +20,7 @@
 #import "RosterItemModel.h"
 #import "AgentXmppViewController.h"
 #import "CellUtils.h"
+#import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 #import "XMPPMessage.h"
@@ -27,7 +28,6 @@
 #import "XMPPRosterQuery.h"
 #import "XMPPJID.h"
 #import "XMPPMessageDelegate.h"
-#import "AlertViewManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterViewController (PrivateAPI)

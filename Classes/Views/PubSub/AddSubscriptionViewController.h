@@ -14,7 +14,7 @@
 @class ActivityView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AddSubscriptionViewController : UIViewController {
+@interface AddSubscriptionViewController : UIViewController  <UITextFieldDelegate> {
 	IBOutlet UITextField* jidTextField;
 	IBOutlet UITextField* nodeTextField;
     AccountModel* account;

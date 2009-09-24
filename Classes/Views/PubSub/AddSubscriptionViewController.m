@@ -8,11 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddSubscriptionViewController.h"
+#import "XMPPClient.h"
+#import "XMPPIQ.h"
+#import "AccountModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddSubscriptionViewController (PrivateAPI)
-
-- (void)failureAlert:(NSString*)title message:(NSString*)message;
 
 @end
 
@@ -34,6 +35,14 @@
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
+}
+
 //===================================================================================================================================
 #pragma mark UIViewController
 
@@ -47,6 +56,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.title = @"Add Subscription";
+	self.account = [AccountModel findFirstDisplayed];
+	self.nodeTextField.returnKeyType = UIReturnKeyDone;
+    self.nodeTextField.delegate = self;
+	self.nodeTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+	self.jidTextField.returnKeyType = UIReturnKeyDone;
+    self.jidTextField.delegate = self;
+	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self.jidTextField becomeFirstResponder]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

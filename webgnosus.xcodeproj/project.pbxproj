@@ -270,6 +270,10 @@
 		05E7EB901055CD4B00C5F3FD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */; };
 		05E7EBAD1055D97600C5F3FD /* tabbar-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E7EBAC1055D97600C5F3FD /* tabbar-history.png */; };
 		05E7EBAE1055D97600C5F3FD /* tabbar-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E7EBAC1055D97600C5F3FD /* tabbar-history.png */; };
+		05E83AF2106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */; };
+		05E83AF3106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */; };
+		05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
+		05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
 		05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
 		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
 		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
@@ -527,6 +531,10 @@
 		05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		05E7EBAC1055D97600C5F3FD /* tabbar-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-history.png"; sourceTree = "<group>"; };
+		05E83AF0106AF53100266E1F /* XMPPPubSubDeleteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubDeleteDelegate.h; sourceTree = "<group>"; };
+		05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubDeleteDelegate.m; sourceTree = "<group>"; };
+		05E83AF6106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubUnsubscribeDelegate.h; sourceTree = "<group>"; };
+		05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubUnsubscribeDelegate.m; sourceTree = "<group>"; };
 		05EAB2F610509A9700AF71A2 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
 		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		05ED45E8105163D300DB3396 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -720,20 +728,24 @@
 				05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */,
 				05D7651C1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.h */,
 				05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */,
+				05E83AF0106AF53100266E1F /* XMPPPubSubDeleteDelegate.h */,
+				05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */,
 				05D1ED6B1037BEF200DB3B3F /* XMPPPubSubEvent.h */,
 				05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */,
 				05D1ED6D1037BEF200DB3B3F /* XMPPPubSubItem.h */,
 				05D1ED6E1037BEF200DB3B3F /* XMPPPubSubItem.m */,
 				05D1ED6F1037BEF200DB3B3F /* XMPPPubSubItems.h */,
 				05D1ED701037BEF200DB3B3F /* XMPPPubSubItems.m */,
+				05D1ED771037BEF200DB3B3F /* XMPPPubSubOwner.h */,
+				05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */,
 				05D1ED711037BEF200DB3B3F /* XMPPPubSubPublish.h */,
 				05D1ED721037BEF200DB3B3F /* XMPPPubSubPublish.m */,
 				05D1ED731037BEF200DB3B3F /* XMPPPubSubSubscription.h */,
 				05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */,
 				05D1ED751037BEF200DB3B3F /* XMPPPubSubSubscriptions.h */,
 				05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */,
-				05D1ED771037BEF200DB3B3F /* XMPPPubSubOwner.h */,
-				05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */,
+				05E83AF6106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.h */,
+				05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */,
 			);
 			path = PubSub;
 			sourceTree = "<group>";
@@ -1381,6 +1393,8 @@
 				05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */,
 				05F2F79A10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
+				05E83AF2106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */,
+				05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1484,6 +1498,8 @@
 				05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */,
 				05F2F79B10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				05D7651F1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
+				05E83AF3106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */,
+				05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

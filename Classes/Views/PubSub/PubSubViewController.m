@@ -19,12 +19,17 @@
 #import "AccountManagerViewController.h"
 #import "AddSubscriptionViewController.h"
 #import "AddPublicationViewController.h"
+#import "AlertViewManager.h"
 #import "XMPPJID.h"
 #import "XMPPClientManager.h"
+#import "XMPPPubSubOwner.h"
+#import "XMPPPubSubSubscriptions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface PubSubViewController (PrivateAPI)
 
+- (void)failureAlert:(NSString*)message;
+- (void)deleteItem:(id)item;
 - (void)addPubSubItemWasPressed; 
 - (void)editAccountButtonWasPressed; 
 - (void)segmentControlSelectionChanged:(id)sender;
@@ -50,6 +55,7 @@
 @synthesize pubSubItems;
 @synthesize account;
 @synthesize selectedItem;
+@synthesize itemToDelete;
 
 //===================================================================================================================================
 #pragma mark PubSubViewController
@@ -143,19 +149,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.selectedItem == kSUB_MODE) {
-        SubCell* cell = (SubCell*)[CellUtils createCell:[SubCell class] forTableView:tableView];
-        SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
-        cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
-        cell.jidLabel.text = [[item nodeToJID] full];
-        return cell;
-    } else {
-        PubCell* cell = (PubCell*)[CellUtils createCell:[PubCell class] forTableView:tableView];
-        ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
-        cell.itemLabel.text = item.itemName;
-        return cell;
-    }
+- (void)deleteItem:(id)item{
+    [item destroy];
+    [self loadPubSubItems];
+    [AlertViewManager dismissConnectionIndicator];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)failureAlert:(NSString*)message { 
+    [AlertViewManager dismissConnectionIndicator];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];	
+    [alert release];
 }
 
 //===================================================================================================================================
@@ -174,6 +179,31 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didUpdateAccount {
     [self reloadPubSubItems];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
+    [self failureAlert:@"Publish Node Delete Failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
+    ServiceItemModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
+    [self deleteItem:item];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
+    [self failureAlert:@"Node Unsubscribe Failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
+    SubscriptionModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
+    [self deleteItem:item];
 }
 
 //===================================================================================================================================
@@ -231,7 +261,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return kPUBSUB_CELL_HEIGHT;
+    if (self.selectedItem == kSUB_MODE) {
+        return kSUB_CELL_HEIGHT;
+    } else {
+        return kPUB_CELL_HEIGHT;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -268,6 +302,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectedItem == kSUB_MODE) {
+        SubCell* cell = (SubCell*)[CellUtils createCell:[SubCell class] forTableView:tableView];
+        SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+        cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
+        cell.jidLabel.text = [[item nodeToJID] full];
+        return cell;
+    } else {
+        PubCell* cell = (PubCell*)[CellUtils createCell:[PubCell class] forTableView:tableView];
+        ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+        cell.itemLabel.text = item.itemName;
+        return cell;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.pubSubItems count];
 }
@@ -275,6 +325,22 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     return [self tableView:tableView createCellForRowAtIndexPath:indexPath];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
+	if (editingStyle == UITableViewCellEditingStyleDelete) { 
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+        self.itemToDelete = indexPath.row;
+        if (self.selectedItem == kSUB_MODE) {
+            SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+            [XMPPPubSubSubscriptions unsubscribe:client JID:[self.account pubSubService] node:item.node];
+        } else {
+            ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
+            [XMPPPubSubOwner delete:client JID:[XMPPJID jidWithString:item.service] node:item.node];
+        }
+        [AlertViewManager showConnectingIndicatorInView:self.view];
+	} 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -286,7 +352,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
+    return YES;
 }
 
 //===================================================================================================================================

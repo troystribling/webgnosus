@@ -11,6 +11,7 @@
 #import "XMPPClient.h"
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
+#import "XMPPPubSubDeleteDelegate.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubOwner
@@ -49,7 +50,7 @@
     [deleteElement addAttributeWithName:@"node" stringValue:node];
     [pubsub addChild:deleteElement];	
     [iq addPubSubOwner:pubsub];    
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPPubSubDeleteDelegate alloc] init]];
 }
 
 //===================================================================================================================================
