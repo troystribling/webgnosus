@@ -137,17 +137,19 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq;
 
 // pubsub
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node;
-- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsError:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq;
+
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node;
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq;
 
 // iq
 - (void)xmppClient:(XMPPClient*)client didReceiveIQResult:(XMPPIQ*)iq;

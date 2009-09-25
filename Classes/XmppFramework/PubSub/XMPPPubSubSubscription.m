@@ -49,13 +49,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)subId {
-    return [[[self attributeForName:@"subid"] stringValue] integerValue];
+- (NSString*)subId {
+    return [[self attributeForName:@"subid"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addSubId:(NSInteger)val {
-    [self addAttributeWithName:@"subid" stringValue:[NSString stringWithFormat:@"%d'", val]];
+- (void)addSubId:(NSString*)val {
+    [self addAttributeWithName:@"subid" stringValue:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

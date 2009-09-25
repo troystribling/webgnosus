@@ -15,6 +15,9 @@
 #import "XMPPJID.h"
 #import "XMPPMessageDelegate.h"
 #import "XMPPPubSubUnsubscribeDelegate.h"
+#import "XMPPPubSubSubscribeDelegate.h"
+#import "XMPPPubSubSubscriptionsDelegate.h"
+#import "XMPPPubSubSubscriptions.h"
 #import "NSXMLElementAdditions.h"
 #import "AccountModel.h"
 
@@ -54,7 +57,7 @@
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     [pubsub addChild:[NSXMLElement elementWithName:@"subscriptions"]];	
     [iq addPubSub:pubsub];    
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPPubSubSubscriptionsDelegate alloc] init]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -67,7 +70,7 @@
     [subElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:subElement];	
     [iq addPubSub:pubsub];    
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPPubSubSubscribeDelegate alloc] init]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

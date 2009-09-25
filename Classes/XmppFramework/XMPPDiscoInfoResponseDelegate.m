@@ -77,6 +77,7 @@
         }
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
             [self didDiscoverPubSubService:client forIQ:iq];
+            [[client multicastDelegate] xmppClient:client didDiscoverPubSubService:iq];        
         }
     }
     NSArray* features = [query features];		

@@ -158,9 +158,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert:(NSString*)message { 
     [AlertViewManager dismissConnectionIndicator];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [alert show];	
-    [alert release];
+    [AlertViewManager showAlert:@"Error" withMessage:message];
 }
 
 //===================================================================================================================================

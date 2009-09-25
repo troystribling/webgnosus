@@ -44,7 +44,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId integer, node text, subscription text, jid text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId text, node text, subscription text, jid text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -60,6 +60,18 @@
 	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode {
+    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d",  requestNode, requestAccount.pk];
+	SubscriptionModel* model = [[[SubscriptionModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:model];
+    [selectStatement release];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +149,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	self.subId = (int)sqlite3_column_int(statement, 1);
+	char* subIdVal = (char*)sqlite3_column_text(statement, 1);
+	if (subIdVal != nil) {		
+		self.subId = [[NSString alloc] initWithUTF8String:subIdVal];
+	}
 	char* nodeVal = (char*)sqlite3_column_text(statement, 2);
 	if (nodeVal != nil) {		
 		self.node = [[NSString alloc] initWithUTF8String:nodeVal];

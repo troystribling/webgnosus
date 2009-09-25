@@ -448,24 +448,13 @@
 #pragma mark PubSub
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didReceiveSubscriptionsResult"];
-    XMPPPubSub* pubsub = [iq pubsub];
-    NSArray* subscriptions = [pubsub subscriptions];	
-    for(int i = 0; i < [subscriptions count]; i++) {
-        XMPPPubSubSubscription* subscription = [XMPPPubSubSubscription createFromElement:(NSXMLElement *)[subscriptions objectAtIndex:i]];
-        [SubscriptionModel insert:subscription forAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
-    }
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscriptionsResult"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
-	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscriptionsError"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -484,6 +473,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscribeError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscribeResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubUnsubscribeError"];
 }
@@ -494,13 +493,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscribeError"];
+- (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
+	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscribeResult"];
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didFailToDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
 }
 
 //===================================================================================================================================

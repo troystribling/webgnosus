@@ -54,6 +54,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPPubSubSubscription*)subscription {
+    XMPPPubSubSubscription* sub = nil;
+    NSXMLElement* subElement = [self elementForName:@"subscription"];
+    if (subElement) {
+        sub = [XMPPPubSubSubscription createFromElement:subElement];
+    }
+    return sub;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addSubscription:(XMPPPubSubSubscriptions*)val {
     [self addChild:val];
 }

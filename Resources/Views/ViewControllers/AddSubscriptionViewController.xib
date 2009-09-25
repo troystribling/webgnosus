@@ -61,7 +61,9 @@
 						<bool key="IBUIClearsOnBeginEditing">YES</bool>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">1.700000e+01</float>
-						<object class="IBUITextInputTraits" key="IBUITextInputTraits"/>
+						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIAutocorrectionType">1</int>
+						</object>
 					</object>
 					<object class="IBUILabel" id="116433353">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -99,7 +101,9 @@
 						<bool key="IBUIClearsOnBeginEditing">YES</bool>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">1.700000e+01</float>
-						<object class="IBUITextInputTraits" key="IBUITextInputTraits"/>
+						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
+							<int key="IBUIAutocorrectionType">1</int>
+						</object>
 					</object>
 					<object class="IBUILabel" id="714476669">
 						<reference key="NSNextResponder" ref="191373211"/>

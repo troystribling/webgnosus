@@ -1,46 +1,52 @@
 //
-//  XMPPPubSubCeateDelegate.m
+//  XMPPPubSubSubscribeDelegate.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 9/19/09.
+//  Created by Troy Stribling on 9/24/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubCeateDelegate.h"
-#import "XMPPDiscoItemsQuery.h"
+#import "XMPPPubSubSubscribeDelegate.h"
+#import "XMPPPubSubSubscription.h"
 #import "XMPPResponse.h"
-#import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
 #import "XMPPIQ.h"
+#import "XMPPPubSub.h"
+#import "XMPPPubSubSubscription.h"
+#import "XMPPMessageDelegate.h"
+#import "SubscriptionModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubCeateDelegate (PrivateAPI)
+@interface XMPPPubSubSubscribeDelegate (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubCeateDelegate
+@implementation XMPPPubSubSubscribeDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubCeateDelegate
+#pragma mark XMPPPubSubSubscribeDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubCeateDelegate PrivateAPI
+#pragma mark XMPPPubSubSubscribeDelegate PrivateAPI
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeError:(XMPPIQ*)stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
-    [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[[client myJID] pubSubRoot] forTarget:[client myJID]];
+    XMPPIQ* iq = (XMPPIQ*)stanza;
+    XMPPPubSub* pubsub = [iq pubsub];
+    XMPPPubSubSubscription* subscription = [pubsub subscription];	
+    [SubscriptionModel insert:subscription forAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeResult:(XMPPIQ*)stanza];
 }
 
 //===================================================================================================================================

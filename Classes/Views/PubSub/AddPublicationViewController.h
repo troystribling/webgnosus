@@ -18,14 +18,12 @@
 	IBOutlet UITextField* nodeTextField;
     AccountModel* account;
     ActivityView* addPublicationIndicatorView;
-    NSString* nodeFullPath;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* nodeTextField;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ActivityView* addPublicationIndicatorView;
-@property (nonatomic, retain) NSString* nodeFullPath;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

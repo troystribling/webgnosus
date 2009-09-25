@@ -12,6 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPPubSubSubscriptions;
+@class XMPPPubSubSubscription;
 @class XMPPClient;
 @class XMPPJID;
 
@@ -25,6 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSArray*)subscriptions;
 - (void)addSubscription:(XMPPPubSubSubscriptions*)val;
+- (XMPPPubSubSubscription*)subscription;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;

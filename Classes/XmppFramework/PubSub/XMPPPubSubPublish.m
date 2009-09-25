@@ -48,7 +48,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItem*)item {
-    return [self elementForName:@"item"];
+    XMPPPubSubItem* pubItem = nil;
+    NSXMLElement* pubItemElement = [self elementForName:@"item"];
+    if (pubItemElement) {
+        pubItem = [XMPPPubSubItem createFromElement:pubItemElement];
+    }
+    return pubItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

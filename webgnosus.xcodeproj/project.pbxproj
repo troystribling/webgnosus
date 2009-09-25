@@ -238,6 +238,10 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
+		05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
+		05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
+		05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
 		05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
 		05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
 		05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
@@ -510,6 +514,10 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E586C5106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscribeDelegate.h; sourceTree = "<group>"; };
+		05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscribeDelegate.m; sourceTree = "<group>"; };
+		05E586D5106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscriptionsDelegate.h; sourceTree = "<group>"; };
+		05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptionsDelegate.m; sourceTree = "<group>"; };
 		05E5A22E10533DE300D960B7 /* RoundedCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornersView.h; sourceTree = "<group>"; };
 		05E5A22F10533DE300D960B7 /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornersView.m; sourceTree = "<group>"; };
 		05E6F151104A07FC00EF924B /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-error-led.jpg"; sourceTree = "<group>"; };
@@ -742,8 +750,12 @@
 				05D1ED721037BEF200DB3B3F /* XMPPPubSubPublish.m */,
 				05D1ED731037BEF200DB3B3F /* XMPPPubSubSubscription.h */,
 				05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */,
+				05E586C5106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.h */,
+				05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */,
 				05D1ED751037BEF200DB3B3F /* XMPPPubSubSubscriptions.h */,
 				05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */,
+				05E586D5106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.h */,
+				05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */,
 				05E83AF6106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.h */,
 				05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */,
 			);
@@ -1395,6 +1407,8 @@
 				05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
 				05E83AF2106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */,
 				05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
+				05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
+				05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1500,6 +1514,8 @@
 				05D7651F1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
 				05E83AF3106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */,
 				05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
+				05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
+				05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

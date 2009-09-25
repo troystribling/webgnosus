@@ -195,7 +195,6 @@
     return [[[NSString alloc] initWithFormat:@"/home/%@/%@", [self domain], [self user]] autorelease];	
 }
 
-
 //===================================================================================================================================
 #pragma mark NSObject
 

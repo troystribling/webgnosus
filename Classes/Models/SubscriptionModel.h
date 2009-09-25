@@ -39,6 +39,7 @@
 + (void)create;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
++ (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account;
 
