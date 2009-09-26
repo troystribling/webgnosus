@@ -19,8 +19,13 @@ typedef enum {
     AccountConnected,
     AccountAuthenticated,
     AccountRosterUpdated,
+    AccountDiscoCompleted,
+    AccountSubscriptionsUpdated,
     AccountConnectionError,
-    AccountAuthenticationError
+    AccountAuthenticationError,
+    AccountRosterUpdateError,
+    AccountDiscoError,
+    AccountSubscriptionsUpdateError,
 } AccountConnectionState;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

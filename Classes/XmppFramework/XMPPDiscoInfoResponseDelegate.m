@@ -8,16 +8,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPDiscoInfoResponseDelegate.h"
+#import "XMPPMessageDelegate.h"
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
-#import "XMPPPubSubSubscriptions.h"
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoIdentity.h"
 #import "XMPPDiscoFeature.h"
+#import "AccountModel.h"
 #import "ServiceModel.h"
 #import "ServiceFeatureModel.h"
 
@@ -50,9 +51,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    if ([client isAccountJID:[self.targetJID full]]) {
-        [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
-    }
     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
 }
 
@@ -61,6 +59,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    if ([client isAccountJID:[self.targetJID full]]) {
+        [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
+    }
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:(XMPPIQ*)stanza];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -85,6 +87,7 @@
         XMPPDiscoFeature* feature = [XMPPDiscoFeature createFromElement:(NSXMLElement *)[features objectAtIndex:i]];
         [ServiceFeatureModel insert:feature forService:serviceJID andParentNode:node];
     }
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:iq];        
 }
 
 //===================================================================================================================================

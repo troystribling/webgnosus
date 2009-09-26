@@ -65,8 +65,10 @@
     AccountModel* acct = [self account];
     [[XMPPClientManager instance] removeXMPPClientForAccount:acct];
     [acct destroy];
-    [self.activeAccounts removeItem:[acct bareJID]];
-    [[[XMPPClientManager instance] accountUpdateDelegate] didRemoveAccount];
+    if ([AccountModel count] > 0) {    
+        [self.activeAccounts removeItem:[acct bareJID]];
+        [[[XMPPClientManager instance] accountUpdateDelegate] didRemoveAccount];
+    }
     [self.view removeFromSuperview];
     [self.managerView showView];
 }
@@ -115,7 +117,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateStatus {
     AccountModel* acct = [self account];
-    if (acct.connectionState == AccountConnected || acct.connectionState == AccountAuthenticated || acct.connectionState == AccountRosterUpdated) {
+    if (acct.connectionState == AccountConnected || acct.connectionState == AccountAuthenticated || acct.connectionState == AccountRosterUpdated ||
+        acct.connectionState == AccountDiscoCompleted || acct.connectionState == AccountSubscriptionsUpdated || acct.connectionState ==  AccountRosterUpdateError ||
+        acct.connectionState ==  AccountDiscoError || acct.connectionState == AccountSubscriptionsUpdateError) {
         self.statusLable.text = @"Connected";
         self.statusLable.textColor = [UIColor colorWithRed:0.0f green:0.5f blue:0.0f alpha:1.0f];
     } else if (acct.connectionState == AccountNotConnected) {

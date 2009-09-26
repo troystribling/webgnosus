@@ -16,6 +16,9 @@
 #import "XMPPPubSub.h"
 #import "XMPPIQ.h"
 #import "XMPPError.h"
+#import "XMPPPubSubSubscriptions.h"
+#import "XMPPMessageDelegate.h"
+#import "AccountModel.h"
 #import "ServiceItemModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,8 +74,13 @@
         if ([node isEqualToString:[self.targetJID pubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
             [self didFailToDiscoverUserPubSubNode:client forIQ:iq];        
             [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
-        } 
+        }else {
+            if ([client isAccountJID:[self.targetJID full]]) {
+                [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
+            }
+        }
     }    
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsError:iq];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -88,7 +96,11 @@
             [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];        
         }
-        [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:iq];        
+        [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];        
+        if ([client isAccountJID:[self.targetJID full]]) {
+            [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoCompleted forClient:client];
+            [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
+        }
     } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"] && [[[stanza fromJID] full] isEqualToString:[self.targetJID full]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
@@ -103,6 +115,7 @@
             }
         }
     }
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsResult:iq];        
 }
 
 //===================================================================================================================================

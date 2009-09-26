@@ -162,9 +162,8 @@
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsResult:(XMPPIQ *)iq {
     AccountModel* account = [AccountModel findFirstDisplayed];
-    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     if (!account) {
         [self.accountManagerViewController addAsSubview:window];	
     }

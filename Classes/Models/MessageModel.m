@@ -127,7 +127,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (MessageModel*)findByPk:(NSInteger)requestPk {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE pk = %d", requestPk];
-	MessageModel* model = [[MessageModel alloc] init];
+	MessageModel* model = [[[MessageModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[MessageModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {

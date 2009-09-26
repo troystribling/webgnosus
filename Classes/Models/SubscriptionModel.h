@@ -19,7 +19,7 @@
 @interface SubscriptionModel : NSObject {
     NSInteger pk;
 	NSInteger accountPk;
-	NSInteger subId;
+	NSString* subId;
     NSString* node;
     NSString* subscription;
     NSString* jid;
@@ -28,7 +28,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger accountPk;
-@property (nonatomic, assign) NSInteger subId;
+@property (nonatomic, assign) NSString* subId;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* subscription;
 @property (nonatomic, retain) NSString* jid;

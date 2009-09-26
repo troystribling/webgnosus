@@ -27,8 +27,8 @@
 - (NSString*)subscription;
 - (void)addsubScription:(NSString*)val;
 
-- (NSInteger)subId;
-- (void)addSubId:(NSInteger)val;
+- (NSString*)subId;
+- (void)addSubId:(NSString*)val;
 
 - (XMPPJID*)JID;
 - (void)addJID:(NSString*)val;

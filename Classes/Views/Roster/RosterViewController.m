@@ -210,7 +210,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ *)iq {
+- (void)xmppClient:(XMPPClient*)sender didReceiveAllRosterItems:(XMPPIQ *)iq {
     [self loadAccount];
     [self loadRoster];
 }

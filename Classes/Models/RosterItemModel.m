@@ -105,7 +105,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findByPk:(NSInteger)requestPk {
 	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE pk = %d", requestPk];
-	RosterItemModel* model = [[RosterItemModel alloc] init];
+	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
         model = nil;
@@ -130,7 +130,7 @@
 		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
                                [splitJid objectAtIndex:0], requestAccount.pk];
 	}
-	RosterItemModel* model = [[RosterItemModel alloc] init];
+	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
@@ -142,21 +142,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findWithMaxPriorityByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
 	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND clientName = 'AgnetXMPP' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, requestAccount.pk, bareJid, requestAccount.pk];
-	RosterItemModel* agentXMppModel = [[RosterItemModel alloc] init];
+	RosterItemModel* agentXMppModel = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:agentXMppModel];
     if (agentXMppModel.pk == 0) {
         agentXMppModel = nil;
     }
 	selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, requestAccount.pk, bareJid, requestAccount.pk];
-	RosterItemModel* model = [[RosterItemModel alloc] init];
+	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
     if (agentXMppModel && model) {
-        if (model.priority == agentXMppModel.priority)
-        {
+        if (model.priority == agentXMppModel.priority) {
             model = agentXMppModel;
         }
     }

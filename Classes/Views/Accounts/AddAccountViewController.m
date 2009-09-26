@@ -117,9 +117,6 @@
 	self.passwordTextField.returnKeyType = UIReturnKeyDone;
     self.passwordTextField.delegate = self;
 	self.passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    if (self.isFirstAccount) {
-        [self.jidTextField becomeFirstResponder]; 
-    }
     [super viewDidLoad];
 }
 
@@ -127,6 +124,9 @@
 - (void)viewWillAppear:(BOOL)animated {
 	self.jidTextField.text = @"";
 	self.passwordTextField.text = @"";
+    if (self.isFirstAccount) {
+        [self.jidTextField becomeFirstResponder]; 
+    }
 	[super viewWillAppear:animated];
 }
 
@@ -160,6 +160,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClientDidAuthenticate:(XMPPClient *)sender {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveAllRosterItems:(XMPPIQ*)iq {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager dismissConnectionIndicator]; 
     [self.view removeFromSuperview];
@@ -169,10 +173,6 @@
         [self.view removeFromSuperview];
         [self.managerView showEditAccountView];
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didFinishReceivingRosterItems:(XMPPIQ*)iq {
 }
 
 //===================================================================================================================================

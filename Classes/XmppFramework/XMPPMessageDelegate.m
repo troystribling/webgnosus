@@ -36,6 +36,7 @@
 #import "XMPPPubSubSubscriptions.h"
 #import "XMPPxData.h"
 
+#import "AlertViewManager.h"
 #import "NSObjectiPhoneAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +99,7 @@
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     account.connectionState = state;
     [account update];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
 }
 
 //===================================================================================================================================
@@ -212,7 +214,7 @@
             [[client multicastDelegate]  xmppClient:client didAddToRoster:item];;
         }
     }
-    [[client multicastDelegate]  xmppClient:client didFinishReceivingRosterItems:iq];;
+    [[client multicastDelegate]  xmppClient:client didReceiveAllRosterItems:iq];;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -233,8 +235,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq {
-	[self writeToLog:client message:@"didFinishReceivingRosterItems"];
+- (void)xmppClient:(XMPPClient*)client didReceiveAllRosterItems:(XMPPIQ *)iq {
+	[self writeToLog:client message:@"didReceiveAllRosterItems"];
     [XMPPMessageDelegate updateAccountConnectionState:AccountRosterUpdated forClient:client];
 }
 
@@ -458,11 +460,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didDiscoverAllUserPubSubNodes"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubDeleteError"];
 }
@@ -495,6 +492,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node {
 	[self writeToLog:client message:@"xmppClient:didDiscoverUserPubSubNode"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID {
+	[self writeToLog:client message:@"xmppClient:didDiscoverAllUserPubSubNodes"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

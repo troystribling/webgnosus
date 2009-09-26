@@ -62,17 +62,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findFirst {
-	AccountModel* model = [[AccountModel alloc] init];
+	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts LIMIT 1" andOutputTo:model];
     if (model.pk == 0) {
-        [model release];
         model = nil;
     }
 	return model;
@@ -80,10 +79,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findFirstDisplayed {
-	AccountModel* model = [[AccountModel alloc] init];
+	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts WHERE displayed = 1 LIMIT 1" andOutputTo:model];
     if (model.pk == 0) {
-        [model release];
         model = nil;
     }
 	return model;
@@ -92,7 +90,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findByJID:(NSString*)requestJID {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@'", requestJID];
-	AccountModel* model = [[AccountModel alloc] init];
+	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
@@ -105,7 +103,7 @@
 + (AccountModel*)findByPk:(NSInteger)requestPk {
 	NSString *selectStatement = 
 		[[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE pk = %d", requestPk];
-	AccountModel* model = [[AccountModel alloc] init];
+	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {

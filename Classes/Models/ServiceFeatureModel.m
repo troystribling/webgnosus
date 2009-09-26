@@ -61,7 +61,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
-	ServiceFeatureModel* model = [[ServiceFeatureModel alloc] init];
+	ServiceFeatureModel* model = [[[ServiceFeatureModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {

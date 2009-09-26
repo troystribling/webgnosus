@@ -69,7 +69,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByPk:(NSInteger)requestPk {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE pk = %d", requestPk];
-	ContactModel* model = [[ContactModel alloc] init];
+	ContactModel* model = [[[ContactModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
@@ -81,7 +81,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)requestAccount {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", requestJid, requestAccount.pk];
-	ContactModel* model = [[ContactModel alloc] init];
+	ContactModel* model = [[[ContactModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {

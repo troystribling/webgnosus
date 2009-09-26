@@ -65,6 +65,9 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
             [self dismissConnectionIndicator]; 
             [self showAlertsForConnectionState:AccountConnectionError titled:@"Connection Failed"];
             [self showAlertsForConnectionState:AccountAuthenticationError titled:@"Authentication Failed"];
+            [self showAlertsForConnectionState:AccountRosterUpdateError titled:@"Roster Update Failed"];
+            [self showAlertsForConnectionState:AccountDiscoError titled:@"Disco Failed"];
+            [self showAlertsForConnectionState:AccountSubscriptionsUpdateError titled:@"Subscriptions Update Failed"];
             DismissConnectionIndicatorOnStart = NO;
         }
     } 

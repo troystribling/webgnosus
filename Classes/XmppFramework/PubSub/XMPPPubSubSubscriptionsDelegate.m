@@ -36,6 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdateError forClient:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:(XMPPIQ*)stanza];
 }
 
@@ -48,6 +49,7 @@
         XMPPPubSubSubscription* subscription = [XMPPPubSubSubscription createFromElement:(NSXMLElement *)[subscriptions objectAtIndex:i]];
         [SubscriptionModel insert:subscription forAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     }
+    [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdated forClient:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
 }
 

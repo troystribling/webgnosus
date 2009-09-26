@@ -56,7 +56,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID {
     NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
-	ServiceItemModel* model = [[ServiceItemModel alloc] init];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
@@ -85,7 +85,7 @@
     } else {
         selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
     }
-	ServiceItemModel* model = [[ServiceItemModel alloc] init];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {

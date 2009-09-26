@@ -58,7 +58,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)jid {
     [self.addPublicationIndicatorView dismiss];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self.navigationController popViewControllerAnimated:YES];

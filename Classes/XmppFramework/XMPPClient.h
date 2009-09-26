@@ -111,7 +111,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveRosterError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didAddToRoster:(XMPPRosterItem*)item;
 - (void)xmppClient:(XMPPClient*)client didRemoveFromRoster:(XMPPRosterItem*)item;
-- (void)xmppClient:(XMPPClient*)client didFinishReceivingRosterItems:(XMPPIQ *)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveAllRosterItems:(XMPPIQ *)iq;
 
 // presence
 - (void)xmppClient:(XMPPClient*)client didReceivePresence:(XMPPPresence*)sender;
@@ -148,7 +148,7 @@
 
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node;
 - (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;
-- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID;
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq;
 
 // iq

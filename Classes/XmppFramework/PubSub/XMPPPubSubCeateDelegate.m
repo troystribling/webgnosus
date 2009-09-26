@@ -8,12 +8,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubCeateDelegate.h"
+#import "XMPPMessageDelegate.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
 #import "XMPPIQ.h"
+#import "AccountModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubCeateDelegate (PrivateAPI)
@@ -34,6 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:(XMPPIQ*)stanza];
 }
 

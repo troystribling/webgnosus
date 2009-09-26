@@ -101,7 +101,7 @@ static NSString* dbFileName = @"webgnosus.db";
     NSString* result = nil;
     char* textVal = (char*)sqlite3_column_text(statementPrepared, 0);
     if (textVal != nil) {		
-        result = [[NSString alloc] initWithUTF8String:textVal];
+        result = [[[NSString alloc] initWithUTF8String:textVal] autorelease];
     }
 	if (sqlite3_finalize(statementPrepared)) {
 		[self logError:statement];

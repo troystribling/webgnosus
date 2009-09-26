@@ -54,7 +54,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
 	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@'", requestJID, requestType, requestCategory];
-	ServiceModel* model = [[ServiceModel alloc] init];
+	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
     [selectStatement release];
     if (model.pk == 0) {
