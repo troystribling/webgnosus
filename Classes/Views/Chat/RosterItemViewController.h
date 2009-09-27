@@ -1,5 +1,5 @@
 //
-//  ChatViewController.h
+//  RosterItemViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/28/09.
@@ -10,22 +10,26 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class AccountModel;
+@class UserModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ChatViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface RosterItemViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSInteger selectedMode;
+	UIBarButtonItem* sendMessageButton;
+    NSMutableArray* items;
+    AccountModel* account;
+    UserModel* rosterItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@property (nonatomic, assign) NSInteger selectedMode;
+@property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
+@property (nonatomic, retain) NSMutableArray* items;
+@property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) UserModel* rosterItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle;
 
 @end
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (ChatViewController)
-
-- (void)setAccount:(AccountModel*)model;
-- (void)setPartner:(UserModel*)model;
-
-@end
-

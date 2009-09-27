@@ -48,14 +48,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceFeatureModel class] withStatement:@"SELECT * FROM serviceFeatures" andOutputTo:output];
 	return output;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -67,6 +62,11 @@
         model = nil;
     }
 	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

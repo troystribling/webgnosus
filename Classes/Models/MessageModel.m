@@ -79,14 +79,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
     [[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:@"SELECT * FROM messages ORDER BY createdAt DESC" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages ORDER BY createdAt DESC LIMIT %d", requestLimit];
     [[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -94,7 +94,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -102,7 +102,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC", 
                                      requestJID, requestJID, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
@@ -111,7 +111,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
                                  requestJID, requestJID, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];

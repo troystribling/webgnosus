@@ -12,8 +12,7 @@
 #import "AccountManagerViewController.h"
 #import "RosterCell.h"
 #import "AddContactViewController.h"
-#import "ChatViewController.h"
-#import "ContactChatViewController.h"
+#import "RosterItemViewController.h"
 #import "ActivityView.h"
 #import "ContactModel.h"
 #import "AccountModel.h"
@@ -39,7 +38,7 @@
 - (void)loadRoster;
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
-- (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)loadAccount;
@@ -121,16 +120,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (ChatViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath  {
-    ChatViewController* chatViewController;
+- (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath  {
+    RosterItemViewController* chatViewController;
     UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        chatViewController = [[ContactChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
     } else {
-        chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
+        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
     }
     chatViewController.account = self.account;
-    chatViewController.partner = user;
+    chatViewController.rosterItem = user;
     return chatViewController;
 }
 
@@ -376,7 +375,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    ChatViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
+    RosterItemViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
     [self.navigationController pushViewController:chatViewController animated:YES];
     [chatViewController release];
 }

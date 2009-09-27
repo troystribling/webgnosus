@@ -47,8 +47,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
++ (NSMutableArray*)findAll {
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:@"SELECT * FROM services" andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByServiceType:(NSString*)requestType {
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
+    return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -75,18 +85,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAll {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:@"SELECT * FROM services" andOutputTo:output];
-	return output;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByServiceType:(NSString*)requestType {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
-	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
-    return output;
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

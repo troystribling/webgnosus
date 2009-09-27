@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts" andOutputTo:output];
 	return output;
 }

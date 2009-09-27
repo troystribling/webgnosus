@@ -215,8 +215,7 @@
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
 		05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
-		05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
-		05E207F50FB9046500FCFC94 /* ContactChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* ContactChatViewController.m */; };
+		05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* RosterItemViewController.m */; };
 		05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
 		05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
 		05E207FA0FB9046500FCFC94 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CD0FB9046500FCFC94 /* GridView.m */; };
@@ -235,8 +234,7 @@
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
 		05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
 		05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
-		05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C00FB9046500FCFC94 /* ChatViewController.m */; };
-		05E208120FB9046500FCFC94 /* ContactChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* ContactChatViewController.m */; };
+		05E208120FB9046500FCFC94 /* RosterItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* RosterItemViewController.m */; };
 		05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
 		05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
 		05E208170FB9046500FCFC94 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CD0FB9046500FCFC94 /* GridView.m */; };
@@ -502,10 +500,8 @@
 		05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppCommandCell.m; sourceTree = "<group>"; };
 		05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppViewController.h; sourceTree = "<group>"; };
 		05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppViewController.m; sourceTree = "<group>"; };
-		05E207BF0FB9046500FCFC94 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
-		05E207C00FB9046500FCFC94 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		05E207C10FB9046500FCFC94 /* ContactChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactChatViewController.h; sourceTree = "<group>"; };
-		05E207C20FB9046500FCFC94 /* ContactChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactChatViewController.m; sourceTree = "<group>"; };
+		05E207C10FB9046500FCFC94 /* RosterItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemViewController.h; sourceTree = "<group>"; };
+		05E207C20FB9046500FCFC94 /* RosterItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemViewController.m; sourceTree = "<group>"; };
 		05E207C30FB9046500FCFC94 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		05E207C40FB9046500FCFC94 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		05E207C50FB9046500FCFC94 /* HistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryViewController.h; sourceTree = "<group>"; };
@@ -1026,10 +1022,8 @@
 				05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */,
 				05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */,
 				05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */,
-				05E207BF0FB9046500FCFC94 /* ChatViewController.h */,
-				05E207C00FB9046500FCFC94 /* ChatViewController.m */,
-				05E207C10FB9046500FCFC94 /* ContactChatViewController.h */,
-				05E207C20FB9046500FCFC94 /* ContactChatViewController.m */,
+				05E207C10FB9046500FCFC94 /* RosterItemViewController.h */,
+				05E207C20FB9046500FCFC94 /* RosterItemViewController.m */,
 				05E207C30FB9046500FCFC94 /* MessageViewController.h */,
 				05E207C40FB9046500FCFC94 /* MessageViewController.m */,
 				05E207C50FB9046500FCFC94 /* HistoryViewController.h */,
@@ -1381,8 +1375,7 @@
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
 				05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
-				05E207F40FB9046500FCFC94 /* ChatViewController.m in Sources */,
-				05E207F50FB9046500FCFC94 /* ContactChatViewController.m in Sources */,
+				05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */,
 				05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */,
 				05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */,
 				05E207FA0FB9046500FCFC94 /* GridView.m in Sources */,
@@ -1488,8 +1481,7 @@
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
 				05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
 				05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
-				05E208110FB9046500FCFC94 /* ChatViewController.m in Sources */,
-				05E208120FB9046500FCFC94 /* ContactChatViewController.m in Sources */,
+				05E208120FB9046500FCFC94 /* RosterItemViewController.m in Sources */,
 				05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */,
 				05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */,
 				05E208170FB9046500FCFC94 /* GridView.m in Sources */,

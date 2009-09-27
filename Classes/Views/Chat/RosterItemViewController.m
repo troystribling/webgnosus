@@ -1,5 +1,5 @@
 //
-//  ContactChatViewController.m
+//  RosterItemViewController.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/28/09.
@@ -7,7 +7,7 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "ContactChatViewController.h"
+#import "RosterItemViewController.h"
 #import "MessageViewController.h"
 #import "MessageModel.h"
 #import "UserModel.h"
@@ -22,7 +22,7 @@
 #import "XMPPMessage.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ContactChatViewController (PrivateAPI)
+@interface RosterItemViewController (PrivateAPI)
 
 - (void)loadItems;
 - (void)segmentControlSelectionChanged:(id)sender;
@@ -38,20 +38,20 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ContactChatViewController
+@implementation RosterItemViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize selectedMode;
 @synthesize sendMessageButton;
 @synthesize items;
 @synthesize account;
-@synthesize partner;
+@synthesize rosterItem;
 
 //===================================================================================================================================
-#pragma mark ContactChatViewController
+#pragma mark RosterItemViewController
 
 //===================================================================================================================================
-#pragma mark ContactChatViewController PrivateAPI
+#pragma mark RosterItemViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendMessageButtonWasPressed:(id)sender {
@@ -62,9 +62,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
     if (self.selectedMode == kCHAT_MODE) {
-        self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
-    } else {
-        self.items = [RosterItemModel findAllByJid:[self.partner fullJID] andAccount:self.account];
+        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if (self.selectedMode == kRESOURCE_MODE) {
+        self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
     }
     [self.tableView reloadData];
 }
@@ -73,17 +75,20 @@
 - (NSInteger)itemCount {
     NSInteger count;
     if (self.selectedMode == kCHAT_MODE) {
-        count = [MessageModel countByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];;
-    } else {
-        count = [RosterItemModel countByJid:[self.partner bareJID] andAccount:self.account];
+        count = [MessageModel countByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];;
+    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if (self.selectedMode == kRESOURCE_MODE) {
+        count = [RosterItemModel countByJid:[self.rosterItem bareJID] andAccount:self.account];
     }
     return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMessageButton {
-    if (self.selectedMode == kCHAT_MODE && [RosterItemModel isJidAvailable:[self.partner bareJID]]) { 
+    if (self.selectedMode == kCHAT_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
+    } else if (self.selectedMode == kCOMMAND_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
@@ -91,7 +96,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:@"Messages", @"Resources", nil]];
+    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"chat.png"],
+                                                                                    [UIImage imageNamed:@"command.png"],
+                                                                                    [UIImage imageNamed:@"publish.png"],
+                                                                                    [UIImage imageNamed:@"resources.png"], nil]];
     segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
@@ -117,22 +125,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIViewController*)getMessageViewControllerForAccount {
-    [self.partner load];
-    UIViewController* viewController;
-    if ([self.partner.clientName isEqualToString:@"AgentXMPP"]) {
-        viewController = [[AgentXmppViewController alloc] initWithNibName:@"AgentXmppViewController" bundle:nil];
-    } else {
-        viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-    }
+    [self.rosterItem load];
+    MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
     [viewController setAccount:self.account];
-    [viewController setPartner:self.partner];
+    [viewController setPartner:self.rosterItem];
     return [viewController autorelease];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadItems {
-	self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
-    [self.tableView reloadData];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -156,7 +153,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
     if (self.selectedMode == kCHAT_MODE) {
-        [self.partner load];
+        [self.rosterItem load];
         [self addMessageButton];
         [self.tableView reloadData];
     }
@@ -237,7 +234,11 @@
     CGFloat cellHeight;
     if (self.selectedMode == kCHAT_MODE) {
         cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
-    } else {
+    } else if (self.selectedMode == kCOMMAND_MODE) {
+        cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
+    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+        cellHeight = kPUB_CELL_HEIGHT;
+    } else if (self.selectedMode == kRESOURCE_MODE) {
         cellHeight = kROSTER_CELL_HEIGHT;
     }
     return cellHeight;
@@ -247,7 +248,7 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
     RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.partner fullJID]]; 
+        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
     rosterHeaderView = rosterHeader.view;
 	return rosterHeaderView; 
 }
@@ -276,9 +277,11 @@
     UITableViewCell* cell;
     if (self.selectedMode == kCHAT_MODE) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
-    } else {
-        RosterItemModel* resource = [self.items objectAtIndex:indexPath.row]; 
-        cell = [ContactChatViewController tableView:tableView cellForResource:resource];
+    } else if (self.selectedMode == kCOMMAND_MODE) {
+        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
+    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if (self.selectedMode == kRESOURCE_MODE) {
+        cell = [RosterItemViewController tableView:tableView cellForResource:[self.items objectAtIndex:indexPath.row]];
     }
     return cell;
 }
@@ -287,9 +290,9 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     if (self.selectedMode == kRESOURCE_MODE) {
         UserModel* user = [self.items objectAtIndex:indexPath.row];
-        ChatViewController* chatViewController = [[ChatViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
+        RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
         [chatViewController setAccount:self.account];
-        [chatViewController setPartner:user];
+        chatViewController.rosterItem = user;
         [self.navigationController pushViewController:chatViewController animated:YES];
         [chatViewController release];
     }

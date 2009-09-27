@@ -37,7 +37,7 @@
         UIColor* contentColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
         RoundedCornersView* contentView = [self createContentView:self withWidth:width];
         contentView.color = contentColor;
-        UIActivityIndicatorView* activityIndicator = [self createActivityIndicator:contentView withWidth:width];
+        [self createActivityIndicator:contentView withWidth:width];
         UILabel* titleLable = [self createTitle:title inView:contentView withWidth:width];
         titleLable.backgroundColor = contentColor;
         titleLable.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
