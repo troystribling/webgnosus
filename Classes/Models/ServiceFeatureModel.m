@@ -60,10 +60,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
 	ServiceFeatureModel* model = [[[ServiceFeatureModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -87,34 +86,30 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var) values ('%@', '%@', '%@')", self.parentNode, self.service, self.var];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var) values ('%@', '%@', '%@')", self.parentNode, self.service, self.var];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceFeatures (service, var) values ('%@', '%@')", self.service, self.var];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var) values ('%@', '%@')", self.service, self.var];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceFeatures WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
-    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@'", self.parentNode, self.service, self.var];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@'", self.parentNode, self.service, self.var];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@' WHERE pk = %d", self.parentNode, self.service, self.var, self.pk];	
+        [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@' WHERE pk = %d", self.parentNode, self.service, self.var, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //===================================================================================================================================

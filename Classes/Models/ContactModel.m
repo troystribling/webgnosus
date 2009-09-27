@@ -36,8 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByAccount:(AccountModel*)account {
-	NSString* countStatement = 
-        [[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM contacts WHERE accountPk = %d", account.pk];
+	NSString* countStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM contacts WHERE accountPk = %d", account.pk];
 	return [[WebgnosusDbi instance]  selectIntExpression:countStatement];
 }
 
@@ -61,17 +60,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE accountPk = %d", requestAccount.pk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM contacts WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[ContactModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByPk:(NSInteger)requestPk {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE pk = %d", requestPk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM contacts WHERE pk = %d", requestPk];
 	ContactModel* model = [[[ContactModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -80,10 +78,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ContactModel*)findByJid:(NSString*)requestJid andAccount:(AccountModel*)requestAccount {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", requestJid, requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", requestJid, requestAccount.pk];
 	ContactModel* model = [[[ContactModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ContactModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -92,9 +89,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
-	NSString* deleteStatement = [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE accountPk = %d", requestAccount.pk];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM contacts WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,32 +105,28 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO contacts (jid, host, nickname, clientName, clientVersion, contactState, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d, %d)", 
+	NSString* insertStatement = [NSString stringWithFormat:@"INSERT INTO contacts (jid, host, nickname, clientName, clientVersion, contactState, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d, %d)", 
                                      self.jid, self.host, self.nickname, self.clientName, self.clientVersion, self.contactState, self.accountPk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [[NSString alloc] initWithFormat:@"UPDATE contacts SET jid = '%@', host = '%@', nickname = '%@', clientName = '%@', clientVersion = '%@', contactState = %d, accountPk = %d WHERE pk = %d", 
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE contacts SET jid = '%@', host = '%@', nickname = '%@', clientName = '%@', clientVersion = '%@', contactState = %d, accountPk = %d WHERE pk = %d", 
          self.jid, self.host, self.nickname, self.clientName, self.clientVersion, self.contactState, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM contacts WHERE pk = %d", self.pk];	
+	NSString *insertStatement = [NSString stringWithFormat:@"DELETE FROM contacts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM contacts WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

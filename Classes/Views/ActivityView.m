@@ -41,9 +41,6 @@
         UILabel* titleLable = [self createTitle:title inView:contentView withWidth:width];
         titleLable.backgroundColor = contentColor;
         titleLable.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
-        [activityIndicator release];
-        [contentView release];
-        [titleLable release];
     }
     return self;
 }
@@ -63,7 +60,7 @@
     CGFloat ycenter = view.frame.origin.y + view.frame.size.height/2.0f;
     [contentView setCenter:CGPointMake(xcenter, ycenter)];
     [self addSubview:contentView];
-    return contentView;
+    return [contentView autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +70,7 @@
     [activityIndicator setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhiteLarge];
     [activityIndicator startAnimating];
     [view addSubview:activityIndicator];
-    return activityIndicator;
+    return [activityIndicator autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -82,7 +79,7 @@
     titleLabel.text = title;
     titleLabel.lineBreakMode = UILineBreakModeTailTruncation;
     [view addSubview:titleLabel];
-    return titleLabel;
+    return [titleLabel autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -55,10 +55,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID {
-    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -67,10 +66,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByNode:(NSString*)requestNode {
-    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@'",  requestNode];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@'",  requestNode];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -81,13 +79,12 @@
 + (ServiceItemModel*)findByJID:(NSString*)requestJID andNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {
-        selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@' AND node ='%@'",  requestJID, requestNode];
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@' AND node ='%@'",  requestJID, requestNode];
     } else {
-        selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
     }
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -103,7 +100,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode {
-    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@'",  requestNode];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@'",  requestNode];
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -128,39 +125,35 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode &&  self.node && self.itemName) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName) values ('%@', '%@', '%@', '%@', '%@')", 
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName) values ('%@', '%@', '%@', '%@', '%@')", 
                             self.parentNode, self.service, self.node, self.jid, self.itemName];	
     } else if (self.node && self.itemName) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName) values ('%@', '%@', '%@', '%@')", 
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName) values ('%@', '%@', '%@', '%@')", 
                            self.service, self.node, self.jid, self.itemName];	
     } else {
         insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid) values ('%@', '%@')", self.service, self.jid];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM serviceItems WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
-    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@' AND node = '%@' AND jid = '%@'", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@' AND node = '%@' AND jid = '%@'", 
                                   self.parentNode, self.service, self.node, self.jid];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@' WHERE pk = %d", self.parentNode, self.service, self.node, self.jid, self.itemName, self.pk];	
+        [NSString stringWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@' WHERE pk = %d", self.parentNode, self.service, self.node, self.jid, self.itemName, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //===================================================================================================================================

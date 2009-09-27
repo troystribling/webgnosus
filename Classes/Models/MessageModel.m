@@ -53,19 +53,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount {
 	NSString *selectStatement = 
-        [[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d", requestJID, requestJID, requestAccount.pk];
+        [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d", requestJID, requestJID, requestAccount.pk];
     NSInteger count = [[WebgnosusDbi instance] selectIntExpression:selectStatement];
-    [selectStatement release];
 	return  count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
 	NSString *selectStatement = 
-    	[[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+    	[NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
             requestJID, requestJID, requestAccount.pk, requestLimit];
     NSInteger count = MIN([[WebgnosusDbi instance]  selectIntExpression:selectStatement], requestLimit);
-    [selectStatement release];
 	return count;
 }
 
@@ -89,47 +87,42 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages ORDER BY createdAt DESC LIMIT %d", requestLimit];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages ORDER BY createdAt DESC LIMIT %d", requestLimit];
     [[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC", requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC", 
                                      requestJID, requestJID, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
                                  requestJID, requestJID, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (MessageModel*)findByPk:(NSInteger)requestPk {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM messages WHERE pk = %d", requestPk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE pk = %d", requestPk];
 	MessageModel* model = [[[MessageModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[MessageModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -138,9 +131,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
-	NSString* deleteStatement = [[NSString alloc] initWithFormat:@"DELETE FROM messages WHERE accountPk = %d", requestAccount.pk];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM messages WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -167,25 +159,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
+	NSString* insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
                                      self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [[NSString alloc] initWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', accountPk = %d WHERE pk = %d", 
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', accountPk = %d WHERE pk = %d", 
                                      self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM messages WHERE pk = %d", self.pk];	
+	NSString* insertStatement = [NSString stringWithFormat:@"DELETE FROM messages WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //===================================================================================================================================

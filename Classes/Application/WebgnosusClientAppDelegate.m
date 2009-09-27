@@ -71,7 +71,6 @@
         account.connectionState = AccountNotConnected;
         [account update];
     }
-    [accounts release];
     accounts = [AccountModel findAllActivated];
 	for (int i = 0; i < [accounts count]; i++) {
         AccountModel* account = [accounts objectAtIndex:i];
@@ -147,14 +146,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-	[self.historyViewController release]; 
-	[self.rosterViewController release];
-	[self.pubSubViewController release]; 
-	[self.navHistoryViewController release];
-	[self.navRosterViewController release];
-	[self.navPubSubViewController release];
-	[self.tabBarController release];
-    [self.window release]; 
 	[super dealloc];
 }
 

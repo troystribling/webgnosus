@@ -52,8 +52,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // display mode setting used in ContactChatViewController and RosterViewController
 #define kCONTACTS_MODE                          0
-#define kMESSAGE_MODE                           0
+#define kCHAT_MODE                              0
 #define kRESOURCE_MODE                          1
+#define kCOMMAND_MODE                           2
+#define kPUBLICATIONS_MODE                      3
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // display mode setting used in PubSubViewController and cell height

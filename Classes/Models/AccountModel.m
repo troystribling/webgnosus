@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts" andOutputTo:output];
 	return output;
 }
@@ -89,10 +89,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findByJID:(NSString*)requestJID {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@'", requestJID];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@'", requestJID];
 	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -101,11 +100,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findByPk:(NSInteger)requestPk {
-	NSString *selectStatement = 
-		[[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE pk = %d", requestPk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE pk = %d", requestPk];
 	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
        model = nil;
     }
@@ -122,7 +119,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllActivatedByConnectionState:(AccountConnectionState)state {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE activated = 1 AND connectionState = %d", state];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE activated = 1 AND connectionState = %d", state];
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:selectStatement andOutputTo:output];
     return output;
 }
@@ -151,15 +148,14 @@
 	NSString* insertStatement;
 	if (self.resource) {
 		insertStatement = 
-			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d, %d)",
+			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d, %d)",
                 self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	} else {
 		insertStatement = 
-			[[NSString alloc] initWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d, %d)", 
+			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d, %d)", 
                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -167,15 +163,14 @@
 	NSString* updateStatement;
 	if (self.resource) {
 		updateStatement = 
-			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
                  self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	} else {
 		updateStatement = 
-			[[NSString alloc] initWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
                  self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -212,21 +207,19 @@
     [RosterItemModel destroyAllByAccount:self];
     [MessageModel destroyAllByAccount:self];
     [SubscriptionModel destroyAllByAccount:self];
-	NSString *insertStatement = [[NSString alloc] initWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
+	NSString *insertStatement = [NSString stringWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement;
 	if (self.resource) {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@' AND resource = '%@'", self.jid, self.host, self.resource];
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@' AND resource = '%@'", self.jid, self.host, self.resource];
 	} else {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
 	}
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -288,8 +288,6 @@
         contact.clientName = maxPriorityRosteritem.clientName;
         contact.clientVersion = maxPriorityRosteritem.clientVersion;
         [contact update];
-        [contact release];
-        [rosterItem release];
     }
 }
 
@@ -515,9 +513,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message {
     if(DEBUG) {
-        NSString* msg = [[NSString alloc] initWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
+        NSString* msg = [NSString stringWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
         NSLog(msg);
-        [msg release];
     }
 }
 

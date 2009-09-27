@@ -16,7 +16,6 @@
 #import "RosterCell.h"
 #import "AccountModel.h"
 #import "CellUtils.h"
-#import "AgentXmppViewController.h"
 #import "RosterSectionViewController.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -25,10 +24,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ContactChatViewController (PrivateAPI)
 
-- (UIViewController*)getMessageViewControllerForAccount;
-- (void)createSegementedController;
+- (void)loadItems;
 - (void)segmentControlSelectionChanged:(id)sender;
+- (void)createSegementedController;
 - (void)addMessageButton;
+- (void)loadAccount;
+- (void)addXMPPClientDelgate;
+- (void)removeXMPPClientDelgate;
+- (UIViewController*)getMessageViewControllerForAccount;
+- (void)sendMessageButtonWasPressed:(id)sender;
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 
 @end
@@ -38,6 +42,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize selectedMode;
+@synthesize sendMessageButton;
+@synthesize items;
+@synthesize account;
+@synthesize partner;
 
 //===================================================================================================================================
 #pragma mark ContactChatViewController
@@ -46,8 +54,14 @@
 #pragma mark ContactChatViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sendMessageButtonWasPressed:(id)sender {
+	UIViewController* viewController = [self getMessageViewControllerForAccount]; 
+	[self.navigationController pushViewController:viewController animated:YES]; 
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     } else {
         self.items = [RosterItemModel findAllByJid:[self.partner fullJID] andAccount:self.account];
@@ -58,7 +72,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)itemCount {
     NSInteger count;
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         count = [MessageModel countByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];;
     } else {
         count = [RosterItemModel countByJid:[self.partner bareJID] andAccount:self.account];
@@ -68,7 +82,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMessageButton {
-    if (self.selectedMode == kMESSAGE_MODE && [RosterItemModel isJidAvailable:[self.partner bareJID]]) { 
+    if (self.selectedMode == kCHAT_MODE && [RosterItemModel isJidAvailable:[self.partner bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -81,8 +95,8 @@
     segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    segmentControl.selectedSegmentIndex = kMESSAGE_MODE;
-    self.selectedMode = kMESSAGE_MODE;
+    segmentControl.selectedSegmentIndex = kCHAT_MODE;
+    self.selectedMode = kCHAT_MODE;
     self.navigationItem.titleView = segmentControl;
 }
 
@@ -101,12 +115,47 @@
     return cell;
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIViewController*)getMessageViewControllerForAccount {
+    [self.partner load];
+    UIViewController* viewController;
+    if ([self.partner.clientName isEqualToString:@"AgentXMPP"]) {
+        viewController = [[AgentXmppViewController alloc] initWithNibName:@"AgentXmppViewController" bundle:nil];
+    } else {
+        viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+    }
+    [viewController setAccount:self.account];
+    [viewController setPartner:self.partner];
+    return [viewController autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadItems {
+	self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+    [self.tableView reloadData];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPClientDelgate {
+    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPClientDelgate {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         [self.partner load];
         [self addMessageButton];
         [self.tableView reloadData];
@@ -115,14 +164,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
-    if ([message hasBody] && self.selectedMode == kMESSAGE_MODE) {
+    if ([message hasBody] && self.selectedMode == kCHAT_MODE) {
         [self loadItems];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         [self loadItems];
     }
 }
@@ -140,9 +189,41 @@
 } 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle { 
+	if (self = [self initWithNibName:nibName bundle:nibBundle]) { 
+        self.title = viewTitle;
+	} 
+	return self; 
+} 
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [self addMessageButton];
     [self createSegementedController];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+    [self addXMPPClientDelgate];
+    [self loadAccount];
+    [self loadItems];
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+    [self removeXMPPClientDelgate];
+	[super viewWillDisappear:animated];
 }
 
 //===================================================================================================================================
@@ -154,7 +235,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     CGFloat cellHeight;
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
     } else {
         cellHeight = kROSTER_CELL_HEIGHT;
@@ -193,7 +274,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     UITableViewCell* cell;
-    if (self.selectedMode == kMESSAGE_MODE) {
+    if (self.selectedMode == kCHAT_MODE) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
     } else {
         RosterItemModel* resource = [self.items objectAtIndex:indexPath.row]; 

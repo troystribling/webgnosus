@@ -57,17 +57,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode {
-    NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d",  requestNode, requestAccount.pk];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d",  requestNode, requestAccount.pk];
 	SubscriptionModel* model = [[[SubscriptionModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -77,9 +76,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
 	NSString* deleteStatement = 
-    [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
+    [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,37 +99,33 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.jid) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
                             self.subId, self.node, self.subscription, self.jid, self.accountPk];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, accountPk) values (%d, '%@', '%@', %d)", 
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, accountPk) values (%d, '%@', '%@', %d)", 
                            self.subId, self.node, self.subscription, self.accountPk];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM subscriptions WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
-    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM subscriptions WHERE node = '%@'", self.node];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node = '%@'", self.node];
 	[[WebgnosusDbi instance] selectForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
+        [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
             self.subId, self.node, self.subscription, self.jid, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

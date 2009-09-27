@@ -80,13 +80,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:@"Contacts", @"Resources", nil]];
+    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"contacts.png"], [UIImage imageNamed:@"resources.png"], nil]];
     segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
     segmentControl.selectedSegmentIndex = kCONTACTS_MODE;
     self.selectedRoster = kCONTACTS_MODE;
     self.navigationItem.titleView = segmentControl;
+    [segmentControl release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

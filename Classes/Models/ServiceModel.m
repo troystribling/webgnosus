@@ -53,10 +53,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@'", requestJID, requestType, requestCategory];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@'", requestJID, requestType, requestCategory];
 	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -65,11 +64,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.category='%@' AND s.type='%@'", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.category='%@' AND s.type='%@'", 
                                  serverJID, requestCategory, requestType];
 	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -86,7 +84,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
     return output;
 }
@@ -109,35 +107,30 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.name) {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, name, category, type) values ('%@', '%@', '%@', '%@')", self.jid, self.name, self.category, self.type];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type) values ('%@', '%@', '%@', '%@')", self.jid, self.name, self.category, self.type];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO services (jid, category, type) values ('%@', '%@', '%@')", self.jid, self.category, self.type];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type) values ('%@', '%@', '%@')", self.jid, self.category, self.type];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString* destroyStatement = [[NSString alloc] initWithFormat:@"DELETE FROM services WHERE pk = %d", self.pk];	
+	NSString* destroyStatement = [NSString stringWithFormat:@"DELETE FROM services WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:destroyStatement];
-    [destroyStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM services WHERE jid = '%@'", self.jid];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@'", self.jid];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-	NSString* updateStatement = 
-        [[NSString alloc] initWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@' WHERE pk = %d", 
+	NSString* updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@' WHERE pk = %d", 
          self.jid, self.name, self.category, self.type, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //===================================================================================================================================

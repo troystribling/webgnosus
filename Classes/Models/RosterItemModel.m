@@ -38,23 +38,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByAccount:(AccountModel*)requestAccount {
-	NSString* countStatement = [[NSString alloc] initWithFormat:@"SELECT COUNT(pk) FROM roster WHERE accountPk = %d", requestAccount.pk];
+	NSString* countStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM roster WHERE accountPk = %d", requestAccount.pk];
 	return [[WebgnosusDbi instance]  selectIntExpression:countStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT COUNT(pk)  FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk)  FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, requestAccount.pk];
     NSInteger count = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];;
-    [selectStatement release];
 	return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)maxPriorityForJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
-	NSString* selectStatement = [[NSString alloc] initWithFormat:@"SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available'", bareJid, requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available'", bareJid, requestAccount.pk];
     NSInteger maxVal = [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
-    [selectStatement release];
 	return maxVal;
 }
 
@@ -78,39 +76,35 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE accountPk = %d", requestAccount.pk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", requestAccount.jid, requestAccount.pk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", requestAccount.jid, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, requestAccount.pk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
-    [selectStatement release];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findByPk:(NSInteger)requestPk {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE pk = %d", requestPk];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE pk = %d", requestPk];
 	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
         model = nil;
     }
-    [selectStatement release];
 	return model;
 }
 
@@ -124,15 +118,14 @@
         [splitJid getObjects:resourceList range:NSMakeRange(1, resourceCount)];
         NSArray* resourceArray = [NSArray arrayWithObjects:resourceList count:resourceCount];
         NSString* resourceString = [resourceArray componentsJoinedByString:@"/"];
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", 
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", 
                            [splitJid objectAtIndex:0], resourceString, requestAccount.pk];
 	} else {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
                                [splitJid objectAtIndex:0], requestAccount.pk];
 	}
 	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
     }
@@ -141,42 +134,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findWithMaxPriorityByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
-	NSString *selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND clientName = 'AgnetXMPP' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, requestAccount.pk, bareJid, requestAccount.pk];
-	RosterItemModel* agentXMppModel = [[[RosterItemModel alloc] init] autorelease];
-	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:agentXMppModel];
-    if (agentXMppModel.pk == 0) {
-        agentXMppModel = nil;
-    }
-	selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) ORDER BY clientName ASC LIMIT 1", bareJid, requestAccount.pk, bareJid, requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d AND presenceType = 'available' AND priority = (SELECT MAX(priority) FROM roster WHERE jid = '%@' AND accountPk = %d) LIMIT 1", bareJid, requestAccount.pk, bareJid, requestAccount.pk];
 	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:model];
-    [selectStatement release];
     if (model.pk == 0) {
         model = nil;
-    }
-    if (agentXMppModel && model) {
-        if (model.priority == agentXMppModel.priority) {
-            model = agentXMppModel;
-        }
     }
 	return model;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
-	NSString* deleteStatement = [[NSString alloc] initWithFormat:@"DELETE FROM roster WHERE accountPk = %d", requestAccount.pk];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM roster WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
-    [deleteStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)isJidAvailable:(NSString*)bareJid {
     BOOL isAvailable = NO;
    	NSMutableArray* rosterItems = [[NSMutableArray alloc] initWithCapacity:10];	
-	NSString *selectStatement = 
-        [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND presenceType = 'available'", bareJid];
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND presenceType = 'available'", bareJid];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:rosterItems];    
-    [selectStatement release];
     if ([rosterItems count] > 0) {
         isAvailable = YES;
     }
@@ -198,15 +176,14 @@
 	NSString* insertStatement;
     if (self.resource) {
         insertStatement = 
-            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', '%@', '%@', null, null, null, null, null, null, %d)", 
+            [NSString stringWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', '%@', '%@', null, null, null, null, null, null, %d)", 
                  self.jid, self.resource, self.host, self.accountPk];	
     } else {
         insertStatement = 
-            [[NSString alloc] initWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', null, '%@', null, null, null, null, null, null, %d)", 
+            [NSString stringWithFormat:@"INSERT INTO roster (jid, resource, host, status, show, presenceType, priority, clientName, clientVersion, accountPk) values ('%@', null, '%@', null, null, null, null, null, null, %d)", 
                  self.jid, self.host, self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -214,35 +191,31 @@
     NSString *updateStatement;
     if (self.resource) {
         updateStatement = 
-            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', resource = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
+            [NSString stringWithFormat:@"UPDATE roster SET jid = '%@', resource = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
                  self.jid, self.resource, self.host, self.status, self.show, self.presenceType, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
     } else {
         updateStatement = 
-            [[NSString alloc] initWithFormat:@"UPDATE roster SET jid = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
+            [NSString stringWithFormat:@"UPDATE roster SET jid = '%@', host = '%@', status = '%@', show = '%@', presenceType = '%@', priority = %d, clientName = '%@', clientVersion = '%@', accountPk = %d WHERE pk = %d", 
                  self.jid, self.host, self.status, self.show, self.presenceType, self.priority, self.clientName, self.clientVersion, self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-    [updateStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
-	NSString *insertStatement = 
-		[[NSString alloc] initWithFormat:@"DELETE FROM roster WHERE pk = %d", self.pk];	
+	NSString *insertStatement = [NSString stringWithFormat:@"DELETE FROM roster WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-    [insertStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
 	NSString* selectStatement;
     if (self.resource) {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", self.jid, self.resource, self.accountPk];
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", self.jid, self.resource, self.accountPk];
     } else {
-		selectStatement = [[NSString alloc] initWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", self.jid, self.accountPk];
     }
 	[[WebgnosusDbi instance] selectForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:self];
-    [selectStatement release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

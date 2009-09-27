@@ -22,11 +22,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ChatViewController (PrivateAPI)
 
-- (void)loadItems;
-- (UIViewController*)getMessageViewControllerForAccount;
-- (void)loadAccount;
-- (void)addXMPPClientDelgate;
-- (void)removeXMPPClientDelgate;
 
 @end
 
@@ -34,58 +29,12 @@
 @implementation ChatViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize sendMessageButton;
-@synthesize items;
-@synthesize account;
-@synthesize partner;
 
 //===================================================================================================================================
 #pragma mark ChatViewController
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendMessageButtonWasPressed:(id)sender {
-	UIViewController* viewController = [self getMessageViewControllerForAccount]; 
-	[self.navigationController pushViewController:viewController animated:YES]; 
-	[viewController release]; 
-}	
-
 //===================================================================================================================================
 #pragma mark ChatViewController PrivateAPI
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIViewController*)getMessageViewControllerForAccount {
-    [self.partner load];
-    UIViewController* viewController;
-    if ([self.partner.clientName isEqualToString:@"AgentXMPP"]) {
-        viewController = [[AgentXmppViewController alloc] initWithNibName:@"AgentXmppViewController" bundle:nil];
-    } else {
-        viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-    }
-    [viewController setAccount:self.account];
-    [viewController setPartner:self.partner];
-    return viewController;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadItems {
-	self.items = [MessageModel findAllByJid:[self.partner fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
-    [self.tableView reloadData];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadAccount {
-    self.account = [AccountModel findFirstDisplayed];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addXMPPClientDelgate {
-    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeXMPPClientDelgate {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-}
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
@@ -111,14 +60,6 @@
         self.sendMessageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
                                    action:@selector(sendMessageButtonWasPressed:)];
         self.title = [self.partner fullJID];
-	} 
-	return self; 
-} 
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle { 
-	if (self = [self initWithNibName:nibName bundle:nibBundle]) { 
-        self.title = viewTitle;
 	} 
 	return self; 
 } 
