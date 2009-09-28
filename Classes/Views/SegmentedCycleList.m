@@ -1,16 +1,16 @@
 //
-//  SegmentedListPicker.m
+//  SegmentedCycleList.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/29/09.
+//  Created by Troy Stribling on 9/27/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "SegmentedListPicker.h"
+#import "SegmentedCycleList.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface SegmentedListPicker (PrivateAPI)
+@interface SegmentedCycleList (PrivateAPI)
 
 - (void)segmentControlSelectionChanged:(id)sender;
 - (UIImage*)renderTextAsImage:(CGRect)rect;
@@ -20,31 +20,34 @@
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation SegmentedListPicker
+@implementation SegmentedCycleList
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize items;
 @synthesize selectedItemIndex;
 @synthesize font;
+@synthesize fontColor;
 @synthesize delegate;
 
-//===================================================================================================================================
-#pragma mark SegmentedListPicker
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init:(NSMutableArray*)initList withValueAtIndex:(NSInteger)initIndex andRect:(CGRect)initRect {
+    if (self = [self init:initList withValueAtIndex:initIndex rect:initRect andColor:[UIColor blackColor]]) {
+    }
+    return self;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
+- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index rect:(CGRect)rect andColor:(UIColor*)initFontColor {
     self.items = list;
     self.selectedItemIndex = index;
     self.font = [UIFont boldSystemFontOfSize:16];
-    if (self = [super initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"left-arrow.png"], [self renderTextAsImage:rect], 
-                                     [UIImage imageNamed:@"right-arrow.png"], nil]]) {
+    self.fontColor = initFontColor;
+    if (self = [super initWithItems:[[NSMutableArray alloc] initWithObjects:[self renderTextAsImage:rect], nil]]) {
         [self addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
         self.frame = rect;
         self.momentary = YES;
         self.segmentedControlStyle = UISegmentedControlStyleBar;
         self.tintColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
-        [self setWidth:30.f forSegmentAtIndex:0];
-        [self setWidth:30.f forSegmentAtIndex:2];
     }
     return self;
 }
@@ -68,22 +71,11 @@
 }
 
 //===================================================================================================================================
-#pragma mark SegmentedListPicker PrivateAPI
+#pragma mark SegmentedCycleList PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)segmentControlSelectionChanged:(id)sender {
-    NSInteger selectedSegment = [(UISegmentedControl*)sender selectedSegmentIndex];
-    switch (selectedSegment) {
-        case 0:
-            [self shiftSelectedItem:-1];
-            break;
-        case 1:
-            [self shiftSelectedItem:1];
-            break;
-        case 2:
-            [self shiftSelectedItem:1];
-            break;
-    }
+    [self shiftSelectedItem:1];
     [self delegateSelectedItemChanged];
 }
 
@@ -95,33 +87,33 @@
         newIndex = listLength - 1;
     }
     self.selectedItemIndex = newIndex % listLength;
-    [self setImage:[self renderTextAsImage:self.frame] forSegmentAtIndex:1];
+    [self setImage:[self renderTextAsImage:self.frame] forSegmentAtIndex:0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIImage*)renderTextAsImage:(CGRect)rect {
-    CGFloat width = rect.size.width-60.0f-4.0f;
+    CGFloat width = rect.size.width-4.0f;
     CGFloat height = rect.size.height;
     CGSize textSize = [[self selectedItem] sizeWithFont:self.font constrainedToSize:CGSizeMake(width, height) lineBreakMode:UILineBreakModeTailTruncation];
     CGFloat yoffset = (height-textSize.height)/2.0f;
 	UIGraphicsBeginImageContext(CGSizeMake(width, height));
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetFillColorWithColor(context, [[UIColor blackColor] CGColor]);
-	CGContextSetStrokeColorWithColor(context, [[UIColor blackColor] CGColor]);
+	CGContextSetFillColorWithColor(context, [self.fontColor CGColor]);
+	CGContextSetStrokeColorWithColor(context, [self.fontColor CGColor]);
 	[[self selectedItem]  drawInRect:CGRectMake(0.0f, yoffset, width, height) withFont:self.font lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
 	UIImage* textImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
     return textImage;
 }
- 
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)delegateSelectedItemChanged {
     if ([self.delegate respondsToSelector:@selector(selectedItemChanged:)]) {
-        [self.delegate selectedItemChanged:[self selectedItem]];
+        [self.delegate selectedItemChanged:self];
     }
 } 
-    
-    
+
+
 //===================================================================================================================================
 #pragma mark NSObject
 

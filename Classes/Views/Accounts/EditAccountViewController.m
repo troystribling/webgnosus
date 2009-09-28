@@ -110,7 +110,7 @@
     self.activeAccounts = [[SegmentedListPicker alloc] init:accountJIDs withValueAtIndex:selectedAccountIndex  andRect:CGRectMake(15.0f, 45.0f, 240.0f, 30.0f)];
     self.activeAccounts.delegate = self;
     [self updateStatus];
-    [self.view addSubview:(UIView*)self.activeAccounts];
+    [self.view addSubview:self.activeAccounts];
     [accountJIDs release];
 }
 

@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
 		<int key="IBDocument.SystemTarget">528</int>
-		<string key="IBDocument.SystemVersion">9G55</string>
-		<string key="IBDocument.InterfaceBuilderVersion">677</string>
-		<string key="IBDocument.AppKitVersion">949.43</string>
+		<string key="IBDocument.SystemVersion">9L30</string>
+		<string key="IBDocument.InterfaceBuilderVersion">680</string>
+		<string key="IBDocument.AppKitVersion">949.54</string>
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -79,7 +79,7 @@
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<int key="IBUISelectionStyle">2</int>
 				<reference key="IBUIContentView" ref="452922626"/>
-				<string key="IBUIReuseIdentifier">AgentXmppCommandCell</string>
+				<string key="IBUIReuseIdentifier">CommandCell</string>
 			</object>
 		</object>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -145,7 +145,7 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
-					<string>AgentXmppCommandCell</string>
+					<string>CommandCell</string>
 					<string>{{790, 180}, {320, 44}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -177,114 +177,50 @@
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBPartialClassDescription">
-					<string key="className">AgentXmppCommandCell</string>
-					<string key="superclassName">BaseCell</string>
+					<string key="className">CommandCell</string>
+					<string key="superclassName">UITableViewCell</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">commandLabel</string>
 						<string key="NS.object.0">UILabel</string>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/AgentXmppCommandCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">BaseCell</string>
-					<string key="superclassName">UITableViewCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/BaseCell.h</string>
+						<string key="minorKey">Classes/Views/Chat/CommandCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">AsyncSocket/AsyncSocket.h</string>
+						<string key="minorKey">Classes/AsyncSocket/AsyncSocket.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">AsyncSocket/AsyncUdpSocket.h</string>
+						<string key="minorKey">Classes/AsyncSocket/AsyncUdpSocket.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/ChatViewController.h</string>
+						<string key="minorKey">Classes/Models/WebgnosusDbi.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/NSObjectiPhoneAdditions.h</string>
+						<string key="minorKey">Classes/Utilities/NSObjectiPhoneAdditions.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Models/WebgnosusDbi.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSMutableArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>xmppClient:didAcceptBuddyRequest:</string>
-							<string>xmppClient:didAddToRoster:</string>
-							<string>xmppClient:didNotAuthenticate:</string>
-							<string>xmppClient:didNotRegister:</string>
-							<string>xmppClient:didReceiveBuddyRequest:</string>
-							<string>xmppClient:didReceiveClientVersionRequest:</string>
-							<string>xmppClient:didReceiveClientVersionResult:</string>
-							<string>xmppClient:didReceiveCommandResult:</string>
-							<string>xmppClient:didReceiveErrorPresence:</string>
-							<string>xmppClient:didReceiveIQ:</string>
-							<string>xmppClient:didReceiveMessage:</string>
-							<string>xmppClient:didReceivePresence:</string>
-							<string>xmppClient:didRejectBuddyRequest:</string>
-							<string>xmppClient:didRemoveFromRoster:</string>
-							<string>xmppClientConnecting:</string>
-							<string>xmppClientDidAuthenticate:</string>
-							<string>xmppClientDidConnect:</string>
-							<string>xmppClientDidDisconnect:</string>
-							<string>xmppClientDidNotConnect:</string>
-							<string>xmppClientDidRegister:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-							<string>XMPPClient</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="957048638">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">XmppFramework/XMPPClient.h</string>
+						<string key="minorKey">Classes/Views/SegmentedListPicker.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -320,15 +256,31 @@
 							<string>XMPPStream</string>
 						</object>
 					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="321157882">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="862702357">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">XmppFramework/XMPPStream.h</string>
+						<string key="minorKey">Classes/XmppFramework/Stream/XMPPStream.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">XMPPClient</string>
-					<string key="superclassName">NSObject</string>
-					<reference key="sourceIdentifier" ref="957048638"/>
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/XmppFramework/XMPPClient.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/XmppFramework/XMPPClientManager.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">Classes/XmppFramework/XMPPResponse.h</string>
+					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">XMPPStream</string>
@@ -337,12 +289,13 @@
 						<string key="NS.key.0">delegate</string>
 						<string key="NS.object.0">id</string>
 					</object>
-					<reference key="sourceIdentifier" ref="321157882"/>
+					<reference key="sourceIdentifier" ref="862702357"/>
 				</object>
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">webgnosus_client.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../../../webgnosus.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<string key="IBCocoaTouchPluginVersion">3.1</string>
 	</data>
 </archive>

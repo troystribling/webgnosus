@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "RosterItemViewController.h"
 #import "MessageViewController.h"
+#import "CommandViewController.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "RosterItemModel.h"
@@ -17,6 +18,7 @@
 #import "AccountModel.h"
 #import "CellUtils.h"
 #import "RosterSectionViewController.h"
+#import "SegmentedCycleList.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
@@ -25,7 +27,6 @@
 @interface RosterItemViewController (PrivateAPI)
 
 - (void)loadItems;
-- (void)segmentControlSelectionChanged:(id)sender;
 - (void)createSegementedController;
 - (void)addMessageButton;
 - (void)loadAccount;
@@ -62,8 +63,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
     if (self.selectedMode == kCHAT_MODE) {
-        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
     } else if (self.selectedMode == kCOMMAND_MODE) {
+        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommandResponse withLimit:kMESSAGE_CACHE_SIZE];
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
     } else if (self.selectedMode == kRESOURCE_MODE) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
@@ -75,8 +77,9 @@
 - (NSInteger)itemCount {
     NSInteger count;
     if (self.selectedMode == kCHAT_MODE) {
-        count = [MessageModel countByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];;
+        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];;
     } else if (self.selectedMode == kCOMMAND_MODE) {
+        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommandResponse withLimit:kMESSAGE_CACHE_SIZE];;
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
     } else if (self.selectedMode == kRESOURCE_MODE) {
         count = [RosterItemModel countByJid:[self.rosterItem bareJID] andAccount:self.account];
@@ -96,23 +99,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"chat.png"],
-                                                                                    [UIImage imageNamed:@"command.png"],
-                                                                                    [UIImage imageNamed:@"publish.png"],
-                                                                                    [UIImage imageNamed:@"resources.png"], nil]];
-    segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    segmentControl.selectedSegmentIndex = kCHAT_MODE;
+    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
     self.selectedMode = kCHAT_MODE;
+    SegmentedCycleList* segmentControl = 
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Publications", @"Resources", nil] withValueAtIndex:kCHAT_MODE rect:rect andColor:[UIColor whiteColor]];
+    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+    segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)segmentControlSelectionChanged:(id)sender {
-    self.selectedMode = [(UISegmentedControl*)sender selectedSegmentIndex];
-    [self addMessageButton];
-    [self loadItems];
+    [segmentControl release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -126,10 +120,18 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIViewController*)getMessageViewControllerForAccount {
     [self.rosterItem load];
-    MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-    [viewController setAccount:self.account];
-    [viewController setPartner:self.rosterItem];
-    return [viewController autorelease];
+    if (self.selectedMode == kCHAT_MODE) {
+        MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+        [viewController setAccount:self.account];
+        [viewController setPartner:self.rosterItem];
+        return [viewController autorelease];
+    } else if (self.selectedMode == kCOMMAND_MODE) {
+        CommandViewController* viewController = [[CommandViewController alloc] initWithNibName:@"CommandViewController" bundle:nil];
+        viewController.account = self.account;
+        viewController.rosterItem =  self.rosterItem;
+        return [viewController autorelease];
+    } 
+    return nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -171,6 +173,16 @@
     if (self.selectedMode == kCHAT_MODE) {
         [self loadItems];
     }
+}
+
+//===================================================================================================================================
+#pragma mark SegmentedCycleList Delegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)selectedItemChanged:(SegmentedCycleList*)sender {
+    self.selectedMode = sender.selectedItemIndex;
+    [self addMessageButton];
+    [self loadItems];
 }
 
 //===================================================================================================================================
@@ -290,7 +302,7 @@
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     if (self.selectedMode == kRESOURCE_MODE) {
         UserModel* user = [self.items objectAtIndex:indexPath.row];
-        RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
+        RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
         [chatViewController setAccount:self.account];
         chatViewController.rosterItem = user;
         [self.navigationController pushViewController:chatViewController animated:YES];

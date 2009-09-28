@@ -18,7 +18,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddAccountViewController (PrivateAPI)
 
-- (void)failureAlert:(NSString*)title message:(NSString*)message;
 - (void)accountConnectionFailed;
 - (BOOL)saveAccount;
 

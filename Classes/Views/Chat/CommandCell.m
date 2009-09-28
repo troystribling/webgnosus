@@ -1,5 +1,5 @@
 //
-//  AgentXmppCommandCell.m
+//  CommandCell.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 4/20/09.
@@ -7,37 +7,30 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AgentXmppCommandCell.h"
+#import "CommandCell.h"
 #import "CellUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AgentXmppCommandCell (PrivateAPI)
+@interface CommandCell (PrivateAPI)
 
-+ (AgentXmppCommandCell*)createRosterCellFromNib;
++ (CommandCell*)createRosterCellFromNib;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AgentXmppCommandCell
+@implementation CommandCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize commandLabel;
 
 //===================================================================================================================================
-#pragma mark AgentXmppCommandCell
+#pragma mark CommandCell
 
 //===================================================================================================================================
-#pragma mark AgentXmppCommandCell PrivateAPI
+#pragma mark CommandCell PrivateAPI
 
 //===================================================================================================================================
 #pragma mark UITableViewCell
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellWithText:(NSString*)cellText {        
-    AgentXmppCommandCell* cell = (AgentXmppCommandCell*)[CellUtils createCell:[AgentXmppCommandCell class] forTableView:tableView];
-    cell.commandLabel.text = cellText;
-    return cell;
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {

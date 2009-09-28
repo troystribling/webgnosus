@@ -11,6 +11,7 @@
 #import "ContactModel.h"
 #import "AccountModel.h"
 #import "ActivityView.h"
+#import "AlertViewManager.h"
 
 #import "XMPPJID.h"
 #import "XMPPRosterItem.h"
@@ -43,9 +44,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert:(NSString*)title message:(NSString*)message { 
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
-	[alert show];	
-	[alert release];
+    [AlertViewManager showAlert:title withMessage:message];
 }
 
 //===================================================================================================================================

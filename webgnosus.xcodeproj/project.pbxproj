@@ -66,12 +66,16 @@
 		05CF60B61048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
 		05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
+		05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC37107054830013734A /* SegmentedCycleList.m */; };
+		05D1EC39107054830013734A /* SegmentedCycleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC37107054830013734A /* SegmentedCycleList.m */; };
 		05D1EC481037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC491037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC4D1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
 		05D1EC4E1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
 		05D1ECA61037B58400DB3B3F /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */; };
 		05D1ECA71037B58400DB3B3F /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */; };
+		05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D1ECE6107070EB0013734A /* CommandViewController.xib */; };
+		05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D1ECE6107070EB0013734A /* CommandViewController.xib */; };
 		05D1ED791037BEF200DB3B3F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */; };
 		05D1ED7A1037BEF200DB3B3F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */; };
 		05D1ED7B1037BEF200DB3B3F /* XMPPPubSubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6E1037BEF200DB3B3F /* XMPPPubSubItem.m */; };
@@ -106,32 +110,20 @@
 		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
 		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
-		05D9BDD3106EBF3D00887368 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDCE106EBF3D00887368 /* chat.png */; };
-		05D9BDD4106EBF3D00887368 /* command.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDCF106EBF3D00887368 /* command.png */; };
-		05D9BDD5106EBF3D00887368 /* publish.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD0106EBF3D00887368 /* publish.png */; };
-		05D9BDD6106EBF3D00887368 /* resources.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD1106EBF3D00887368 /* resources.png */; };
-		05D9BDD7106EBF3D00887368 /* subscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD2106EBF3D00887368 /* subscribe.png */; };
-		05D9BDD8106EBF3D00887368 /* chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDCE106EBF3D00887368 /* chat.png */; };
-		05D9BDD9106EBF3D00887368 /* command.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDCF106EBF3D00887368 /* command.png */; };
-		05D9BDDA106EBF3D00887368 /* publish.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD0106EBF3D00887368 /* publish.png */; };
-		05D9BDDB106EBF3D00887368 /* resources.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD1106EBF3D00887368 /* resources.png */; };
-		05D9BDDC106EBF3D00887368 /* subscribe.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDD2106EBF3D00887368 /* subscribe.png */; };
-		05D9BDDF106ECA0000887368 /* contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDDE106ECA0000887368 /* contacts.png */; };
-		05D9BDE0106ECA0000887368 /* contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D9BDDE106ECA0000887368 /* contacts.png */; };
 		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
-		05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
+		05DC8C880FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C8B0FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */; };
 		05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
-		05DC8C8D0FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */; };
+		05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
 		05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */; };
 		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
-		05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
+		05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
 		05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
 		05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
 		05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
@@ -140,7 +132,7 @@
 		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
-		05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */; };
+		05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
 		05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
 		05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
 		05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
@@ -213,8 +205,8 @@
 		05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
-		05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
-		05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
+		05E207F20FB9046500FCFC94 /* CommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* CommandCell.m */; };
+		05E207F30FB9046500FCFC94 /* CommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* CommandViewController.m */; };
 		05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* RosterItemViewController.m */; };
 		05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
 		05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
@@ -232,8 +224,8 @@
 		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
-		05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */; };
-		05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */; };
+		05E2080F0FB9046500FCFC94 /* CommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* CommandCell.m */; };
+		05E208100FB9046500FCFC94 /* CommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* CommandViewController.m */; };
 		05E208120FB9046500FCFC94 /* RosterItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* RosterItemViewController.m */; };
 		05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
 		05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
@@ -366,12 +358,15 @@
 		05CF60B31048A413003E012F /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
 		05CF60B41048A413003E012F /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
 		05CF616D1048B141003E012F /* AccountManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountManagerViewController.xib; sourceTree = "<group>"; };
+		05D1EC36107054820013734A /* SegmentedCycleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedCycleList.h; sourceTree = "<group>"; };
+		05D1EC37107054830013734A /* SegmentedCycleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedCycleList.m; sourceTree = "<group>"; };
 		05D1EC461037A46100DB3B3F /* XMPPMessageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageDelegate.h; sourceTree = "<group>"; };
 		05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageDelegate.m; sourceTree = "<group>"; };
 		05D1EC4B1037A8C200DB3B3F /* AlertViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewManager.h; sourceTree = "<group>"; };
 		05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewManager.m; sourceTree = "<group>"; };
 		05D1ECA41037B58400DB3B3F /* XMPPClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientManager.h; sourceTree = "<group>"; };
 		05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientManager.m; sourceTree = "<group>"; };
+		05D1ECE6107070EB0013734A /* CommandViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandViewController.xib; sourceTree = "<group>"; };
 		05D1ED691037BEF200DB3B3F /* XMPPPubSub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSub.h; sourceTree = "<group>"; };
 		05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSub.m; sourceTree = "<group>"; };
 		05D1ED6B1037BEF200DB3B3F /* XMPPPubSubEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEvent.h; sourceTree = "<group>"; };
@@ -402,21 +397,15 @@
 		05D83D78104ED94F00078131 /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
 		05D83D7B104EDCBF00078131 /* green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-button.png"; sourceTree = "<group>"; };
 		05D83D7C104EDCBF00078131 /* grey-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-button.png"; sourceTree = "<group>"; };
-		05D9BDCE106EBF3D00887368 /* chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat.png; sourceTree = "<group>"; };
-		05D9BDCF106EBF3D00887368 /* command.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = command.png; sourceTree = "<group>"; };
-		05D9BDD0106EBF3D00887368 /* publish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = publish.png; sourceTree = "<group>"; };
-		05D9BDD1106EBF3D00887368 /* resources.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resources.png; sourceTree = "<group>"; };
-		05D9BDD2106EBF3D00887368 /* subscribe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = subscribe.png; sourceTree = "<group>"; };
-		05D9BDDE106ECA0000887368 /* contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts.png; sourceTree = "<group>"; };
 		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
-		05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppCommandCell.xib; sourceTree = "<group>"; };
+		05DC8C830FBB15C60018AEEF /* CommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandCell.xib; sourceTree = "<group>"; };
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
 		05DC8C850FBB15C60018AEEF /* RosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterCell.xib; sourceTree = "<group>"; };
 		05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataMessageLabelCell.xib; sourceTree = "<group>"; };
 		05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
 		05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppViewController.xib; sourceTree = "<group>"; };
-		05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterItemViewController.xib; sourceTree = "<group>"; };
 		05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
 		05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterSectionViewController.xib; sourceTree = "<group>"; };
@@ -496,10 +485,10 @@
 		05E207B50FB9046500FCFC94 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
 		05E207B60FB9046500FCFC94 /* EditAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountViewController.h; sourceTree = "<group>"; };
 		05E207B70FB9046500FCFC94 /* EditAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountViewController.m; sourceTree = "<group>"; };
-		05E207BB0FB9046500FCFC94 /* AgentXmppCommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppCommandCell.h; sourceTree = "<group>"; };
-		05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppCommandCell.m; sourceTree = "<group>"; };
-		05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgentXmppViewController.h; sourceTree = "<group>"; };
-		05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgentXmppViewController.m; sourceTree = "<group>"; };
+		05E207BB0FB9046500FCFC94 /* CommandCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandCell.h; sourceTree = "<group>"; };
+		05E207BC0FB9046500FCFC94 /* CommandCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandCell.m; sourceTree = "<group>"; };
+		05E207BD0FB9046500FCFC94 /* CommandViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandViewController.h; sourceTree = "<group>"; };
+		05E207BE0FB9046500FCFC94 /* CommandViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandViewController.m; sourceTree = "<group>"; };
 		05E207C10FB9046500FCFC94 /* RosterItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterItemViewController.h; sourceTree = "<group>"; };
 		05E207C20FB9046500FCFC94 /* RosterItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterItemViewController.m; sourceTree = "<group>"; };
 		05E207C30FB9046500FCFC94 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
@@ -647,22 +636,16 @@
 				05E6F151104A07FC00EF924B /* account-error-led.jpg */,
 				05E6F152104A07FC00EF924B /* account-off-led.jpg */,
 				05E6F153104A07FC00EF924B /* account-on-led.jpg */,
-				05D9BDCE106EBF3D00887368 /* chat.png */,
-				05D9BDDE106ECA0000887368 /* contacts.png */,
-				05D9BDCF106EBF3D00887368 /* command.png */,
 				05E6F154104A07FC00EF924B /* dotted_tile.png */,
 				05D83D7B104EDCBF00078131 /* green-button.png */,
 				05D83D7C104EDCBF00078131 /* grey-button.png */,
 				05EAB2F610509A9700AF71A2 /* left-arrow.png */,
 				05E6F155104A07FC00EF924B /* main_icon.png */,
 				05E6F156104A07FC00EF924B /* message_background.jpg */,
-				05D9BDD0106EBF3D00887368 /* publish.png */,
 				05D83D78104ED94F00078131 /* red-button.png */,
-				05D9BDD1106EBF3D00887368 /* resources.png */,
 				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
 				05E6F157104A07FC00EF924B /* roster-section.jpg */,
 				05D83D5B104EBF0A00078131 /* settings.png */,
-				05D9BDD2106EBF3D00887368 /* subscribe.png */,
 				057BB16010587547006389D9 /* tabbar-events.png */,
 				05E7EBAC1055D97600C5F3FD /* tabbar-history.png */,
 				05E6F159104A07FC00EF924B /* tabbar-roster.png */,
@@ -786,7 +769,7 @@
 			isa = PBXGroup;
 			children = (
 				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
-				05DC8C830FBB15C60018AEEF /* AgentXmppCommandCell.xib */,
+				05DC8C830FBB15C60018AEEF /* CommandCell.xib */,
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
 				05EFFFFE1057351F0068AA06 /* PubCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
@@ -808,7 +791,8 @@
 				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
-				05DC8C970FBB15EB0018AEEF /* ChatViewController.xib */,
+				05D1ECE6107070EB0013734A /* CommandViewController.xib */,
+				05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */,
 				05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */,
 				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
 				05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */,
@@ -996,6 +980,8 @@
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
 				05E5A22E10533DE300D960B7 /* RoundedCornersView.h */,
 				05E5A22F10533DE300D960B7 /* RoundedCornersView.m */,
+				05D1EC36107054820013734A /* SegmentedCycleList.h */,
+				05D1EC37107054830013734A /* SegmentedCycleList.m */,
 				05ED464D1051932B00DB3396 /* SegmentedListPicker.h */,
 				05ED464E1051932B00DB3396 /* SegmentedListPicker.m */,
 			);
@@ -1018,10 +1004,10 @@
 		05E207BA0FB9046500FCFC94 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				05E207BB0FB9046500FCFC94 /* AgentXmppCommandCell.h */,
-				05E207BC0FB9046500FCFC94 /* AgentXmppCommandCell.m */,
-				05E207BD0FB9046500FCFC94 /* AgentXmppViewController.h */,
-				05E207BE0FB9046500FCFC94 /* AgentXmppViewController.m */,
+				05E207BB0FB9046500FCFC94 /* CommandCell.h */,
+				05E207BC0FB9046500FCFC94 /* CommandCell.m */,
+				05E207BD0FB9046500FCFC94 /* CommandViewController.h */,
+				05E207BE0FB9046500FCFC94 /* CommandViewController.m */,
 				05E207C10FB9046500FCFC94 /* RosterItemViewController.h */,
 				05E207C20FB9046500FCFC94 /* RosterItemViewController.m */,
 				05E207C30FB9046500FCFC94 /* MessageViewController.h */,
@@ -1229,14 +1215,14 @@
 				05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */,
 				051AB4830F1068C500DD01DC /* webgnosus.db in Resources */,
 				05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */,
-				05DC8C8D0FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
+				05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */,
 				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */,
 				05DC8C900FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
 				05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
 				05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
-				05DC8CAF0FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
+				05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
 				05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
 				05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
 				05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
@@ -1268,12 +1254,7 @@
 				057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */,
 				05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
 				05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
-				05D9BDD3106EBF3D00887368 /* chat.png in Resources */,
-				05D9BDD4106EBF3D00887368 /* command.png in Resources */,
-				05D9BDD5106EBF3D00887368 /* publish.png in Resources */,
-				05D9BDD6106EBF3D00887368 /* resources.png in Resources */,
-				05D9BDD7106EBF3D00887368 /* subscribe.png in Resources */,
-				05D9BDDF106ECA0000887368 /* contacts.png in Resources */,
+				05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,14 +1265,14 @@
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				051AB4820F1068C500DD01DC /* webgnosus.db in Resources */,
 				05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */,
-				05DC8C880FBB15C60018AEEF /* AgentXmppCommandCell.xib in Resources */,
+				05DC8C880FBB15C60018AEEF /* CommandCell.xib in Resources */,
 				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */,
 				05DC8C8B0FBB15C60018AEEF /* XDataMessageLabelCell.xib in Resources */,
 				05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
 				05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
-				05DC8CA30FBB15EB0018AEEF /* ChatViewController.xib in Resources */,
+				05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
 				05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
 				05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
 				05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
@@ -1323,12 +1304,7 @@
 				057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */,
 				05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
 				05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
-				05D9BDD8106EBF3D00887368 /* chat.png in Resources */,
-				05D9BDD9106EBF3D00887368 /* command.png in Resources */,
-				05D9BDDA106EBF3D00887368 /* publish.png in Resources */,
-				05D9BDDB106EBF3D00887368 /* resources.png in Resources */,
-				05D9BDDC106EBF3D00887368 /* subscribe.png in Resources */,
-				05D9BDE0106ECA0000887368 /* contacts.png in Resources */,
+				05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,8 +1349,8 @@
 				05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
-				05E207F20FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
-				05E207F30FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
+				05E207F20FB9046500FCFC94 /* CommandCell.m in Sources */,
+				05E207F30FB9046500FCFC94 /* CommandViewController.m in Sources */,
 				05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */,
 				05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */,
 				05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */,
@@ -1438,6 +1414,7 @@
 				05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 				05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
 				05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
+				05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1479,8 +1456,8 @@
 				05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
 				05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
 				05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
-				05E2080F0FB9046500FCFC94 /* AgentXmppCommandCell.m in Sources */,
-				05E208100FB9046500FCFC94 /* AgentXmppViewController.m in Sources */,
+				05E2080F0FB9046500FCFC94 /* CommandCell.m in Sources */,
+				05E208100FB9046500FCFC94 /* CommandViewController.m in Sources */,
 				05E208120FB9046500FCFC94 /* RosterItemViewController.m in Sources */,
 				05E208130FB9046500FCFC94 /* MessageViewController.m in Sources */,
 				05E208140FB9046500FCFC94 /* HistoryViewController.m in Sources */,
@@ -1544,6 +1521,7 @@
 				05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 				05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
 				05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
+				05D1EC39107054830013734A /* SegmentedCycleList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

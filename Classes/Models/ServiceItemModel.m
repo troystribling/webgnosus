@@ -64,6 +64,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@'",  requestNode, requestService];
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID {
     NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];

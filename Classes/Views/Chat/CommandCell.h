@@ -1,5 +1,5 @@
 //
-//  AgentXmppCommandCell.h
+//  CommandCell.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 4/20/09.
@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AgentXmppCommandCell : UITableViewCell {
+@interface CommandCell : UITableViewCell {
     IBOutlet UILabel* commandLabel;
 }
 
@@ -18,6 +18,5 @@
 @property (nonatomic, retain) UILabel* commandLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellWithText:(NSString*)cellText;
 
 @end

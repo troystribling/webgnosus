@@ -60,9 +60,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
-	NSString *selectStatement = 
-    	[NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
             requestJID, requestJID, requestAccount.pk, requestLimit];
+    NSInteger count = MIN([[WebgnosusDbi instance]  selectIntExpression:selectStatement], requestLimit);
+	return count;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit {
+	NSString *selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND textType = %d AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+         requestJID, requestJID, requestType, requestAccount.pk, requestLimit];
     NSInteger count = MIN([[WebgnosusDbi instance]  selectIntExpression:selectStatement], requestLimit);
 	return count;
 }
@@ -105,6 +112,15 @@
 	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC", 
                                      requestJID, requestJID, requestAccount.pk];
+	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit {
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND textType = %d AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+                                 requestJID, requestJID, requestType, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
@@ -159,8 +175,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
-	NSString* insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
-                                     self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk];	
+    NSString* insertStatement;
+    if (self.node) {
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
+                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk];	
+    } else {
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, accountPk) values ('%@', '%@', '%@', '%@', %d, %d)", 
+                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.accountPk];	
+    }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
 

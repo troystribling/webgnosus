@@ -1,5 +1,5 @@
 //
-//  AgentXmppViewController.m
+//  CommandViewController.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/23/09.
@@ -7,13 +7,15 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AgentXmppViewController.h"
-#import "AgentXmppCommandCell.h"
+#import "CommandViewController.h"
+#import "CommandCell.h"
 #import "RosterSectionViewController.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 #import "RosterItemModel.h"
+#import "CellUtils.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -21,88 +23,63 @@
 #import "XMPPCommand.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AgentXmppViewController (PrivateAPI)
+@interface CommandViewController (PrivateAPI)
 
-- (NSInteger)sectionCount:(NSInteger)section;
-- (NSMutableArray*)sectionCommands:(NSInteger)section;
-- (NSDictionary*)commandAtIndexPath:(NSIndexPath*)indexPath;
-- (NSString*)sectionLable:(NSInteger)section;
+- (void)loadCommands;
 - (void)handleCommand:(NSIndexPath*)indexPath;
-- (void)sendDeviceCommand:(NSIndexPath*)indexPath toJID:(XMPPJID*)toJID;
+- (void)sendDeviceCommand:(ServiceItemModel*)commandInfo toJID:(XMPPJID*)toJID;
 - (void)saveMessage:(NSString*)msg;
 
 @end
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AgentXmppViewController
+@implementation CommandViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize account;
-@synthesize partner;
+@synthesize rosterItem;
+@synthesize commands;
 
 //===================================================================================================================================
-#pragma mark AgentXmppViewController
+#pragma mark CommandViewController
 
 //===================================================================================================================================
-#pragma mark AgentXmppViewController PrivateAPI
+#pragma mark CommandViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)sectionCount:(NSInteger)section {
-    NSInteger count = [[self sectionCommands:section] count];
-    return count;
-}
-     
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)sectionCommands:(NSInteger)section {
-    return nil;
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSDictionary*)commandAtIndexPath:(NSIndexPath*)indexPath {
-    return [[self sectionCommands:indexPath.section] objectAtIndex:indexPath.row];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)sectionLable:(NSInteger)section {
-    NSString* sectionLable;
-    if (section == 0) {
-        sectionLable = @"Current Status"; 
-    } else if (section == 1) {
-        sectionLable = @"CPU Performance History"; 
-    } else if (section == 2) {
-        sectionLable = @"Memory Performance History"; 
-    } else if (section == 3) {
-        sectionLable = @"Storage Performance History"; 
-    } else if (section == 4) {
-        sectionLable = @"Network Performance History"; 
-    }
-    return sectionLable;
+- (void)loadCommands {
+    self.commands = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" andService:[self.account fullJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleCommand:(NSIndexPath*)indexPath {
-    XMPPJID* partnerJID = [XMPPJID jidWithString:[self.partner fullJID]];
-    if ([[partnerJID bare] isEqualToString:[partnerJID full]]) {
-        NSMutableArray* resourceList = [RosterItemModel findAllByJid:[partnerJID bare] andAccount:self.account];
+    ServiceItemModel* commandInfo = [self.commands objectAtIndex:indexPath.row];
+    XMPPJID* toJID = [self.rosterItem toJID];
+    if ([[self.rosterItem bareJID] isEqualToString:[toJID full]]) {
+        NSMutableArray* resourceList = [RosterItemModel findAllByJid:[self.rosterItem bareJID] andAccount:self.account];
         for(int i = 0; i < [resourceList count]; i++) {
             RosterItemModel* resourceModel =[resourceList objectAtIndex:i];
             if ([resourceModel isAvailable]) {
-                [self sendDeviceCommand:indexPath toJID:[XMPPJID jidWithString:[resourceModel fullJID]]];
+                [self sendDeviceCommand:commandInfo toJID:[XMPPJID jidWithString:[resourceModel fullJID]]];
             }
         }
     } else {
-        [self sendDeviceCommand:indexPath toJID:partnerJID];
+        [self sendDeviceCommand:commandInfo toJID:toJID];
     }
-    [self saveMessage:[[self commandAtIndexPath:indexPath] objectForKey:@"description"]];
+    [self saveMessage:commandInfo.itemName];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendDeviceCommand:(NSIndexPath*)indexPath toJID:(XMPPJID*)toJID {
-    NSDictionary* commandInfo = [self commandAtIndexPath:indexPath];
+- (void)sendDeviceCommand:(ServiceItemModel*)commandInfo toJID:(XMPPJID*)toJID {
     XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [XMPPCommand set:xmppClient commandNode:[commandInfo objectForKey:@"method"] JID:toJID];
+    [XMPPCommand set:xmppClient commandNode:commandInfo.node JID:toJID];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +87,7 @@
     MessageModel* model = [[MessageModel alloc] init];
     model.messageText = msg;
     model.accountPk = self.account.pk;
-    model.toJid = [self.partner fullJID];
+    model.toJid = [self.rosterItem fullJID];
     model.fromJid = [self.account fullJID];
     model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     [model insert];
@@ -134,6 +111,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [self loadAccount];
+    [self loadCommands];
     [super viewWillAppear:animated];
 }
 
@@ -167,7 +146,7 @@
  //-----------------------------------------------------------------------------------------------------------------------------------
  - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {    
     RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self sectionLable:section]]; 
+        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
     return rosterHeader.view; 
 }
 
@@ -186,18 +165,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    return 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self sectionCount:section];
+    return [self.commands count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {  
-    NSDictionary* commandInfo = [self commandAtIndexPath:indexPath];
-    return [AgentXmppCommandCell tableView:tableView cellWithText:[commandInfo objectForKey:@"description"]];
+    ServiceItemModel* commandInfo = [self.commands objectAtIndex:indexPath.row];
+    CommandCell* cell = (CommandCell*)[CellUtils createCell:[CommandCell class] forTableView:tableView];
+    cell.commandLabel.text = commandInfo.itemName;
+    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

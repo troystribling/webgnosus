@@ -18,7 +18,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagMessageTextType {
     MessageTextTypeBody,
-    MessageTextTypeCommandResponse
+    MessageTextTypeCommandResponse,
+    MessageTextTypeEvent
 } MessageTextType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +48,7 @@ typedef enum tagMessageTextType {
 + (NSInteger)count;
 + (NSInteger)countWithLimit:(NSInteger)requestLimit;
 + (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
 + (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (void)drop;
 + (void)create;
@@ -54,6 +56,7 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;

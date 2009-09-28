@@ -19,7 +19,10 @@
 #import "AccountManagerViewController.h"
 #import "AddSubscriptionViewController.h"
 #import "AddPublicationViewController.h"
+
 #import "AlertViewManager.h"
+#import "SegmentedCycleList.h"
+
 #import "XMPPJID.h"
 #import "XMPPClientManager.h"
 #import "XMPPPubSubOwner.h"
@@ -32,7 +35,6 @@
 - (void)deleteItem:(id)item;
 - (void)addPubSubItemWasPressed; 
 - (void)editAccountButtonWasPressed; 
-- (void)segmentControlSelectionChanged:(id)sender;
 - (void)loadPubSubItems;
 - (void)reloadPubSubItems;
 - (void)addXMPPClientDelgate;
@@ -84,19 +86,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"subscribe.png"], [UIImage imageNamed:@"publish.png"], nil]];
-    segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    segmentControl.selectedSegmentIndex = kSUB_MODE;
+    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
     self.selectedItem = kSUB_MODE;
+    SegmentedCycleList* segmentControl = 
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Subscriptions", @"Publications", nil] withValueAtIndex:kSUB_MODE rect:rect andColor:[UIColor whiteColor]];
+    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+    segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void) segmentControlSelectionChanged:(id)sender {
-    self.selectedItem = [(UISegmentedControl*)sender selectedSegmentIndex];
-    [self loadPubSubItems];
+    [segmentControl release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -202,6 +199,15 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
     SubscriptionModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
     [self deleteItem:item];
+}
+
+//===================================================================================================================================
+#pragma mark SegmentedCycleList Delegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)selectedItemChanged:(SegmentedCycleList*)sender {
+    self.selectedItem = sender.selectedItemIndex;
+    [self loadPubSubItems];
 }
 
 //===================================================================================================================================

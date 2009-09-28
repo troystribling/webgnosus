@@ -1,5 +1,5 @@
 //
-//  AgentXmppViewController.h
+//  CommandViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/23/09.
@@ -14,14 +14,16 @@
 @class UserModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AgentXmppViewController : UITableViewController {
+@interface CommandViewController : UITableViewController {
     AccountModel* account;
-    UserModel* partner;
+    UserModel* rosterItem;
+    NSMutableArray* commands;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) UserModel* partner;
+@property (nonatomic, retain) UserModel* rosterItem;
+@property (nonatomic, retain) NSMutableArray* commands;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

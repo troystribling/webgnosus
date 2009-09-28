@@ -17,9 +17,11 @@
 #import "ContactModel.h"
 #import "AccountModel.h"
 #import "RosterItemModel.h"
-#import "AgentXmppViewController.h"
+
 #import "CellUtils.h"
 #import "AlertViewManager.h"
+#import "SegmentedCycleList.h"
+
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 #import "XMPPMessage.h"
@@ -34,7 +36,6 @@
 - (void)addContactButtonWasPressed; 
 - (void)editAccountButtonWasPressed; 
 - (void)createSegementedController;
-- (void)segmentControlSelectionChanged:(id)sender;
 - (void)loadRoster;
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
@@ -79,22 +80,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    UISegmentedControl* segmentControl = [[UISegmentedControl alloc] initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"contacts.png"], [UIImage imageNamed:@"resources.png"], nil]];
-    segmentControl.segmentedControlStyle = UISegmentedControlStyleBar;
-    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    [segmentControl addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
-    segmentControl.selectedSegmentIndex = kCONTACTS_MODE;
+    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
     self.selectedRoster = kCONTACTS_MODE;
+    SegmentedCycleList* segmentControl = 
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Contacts", @"Resources", nil] withValueAtIndex:kCONTACTS_MODE rect:rect andColor:[UIColor whiteColor]];
+    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+    segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
     [segmentControl release];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void) segmentControlSelectionChanged:(id)sender {
-    self.selectedRoster = [(UISegmentedControl*)sender selectedSegmentIndex];
-    [self loadAccount];
-    [self loadRoster];
-    [self rosterAddContactButton];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -124,9 +117,9 @@
     RosterItemViewController* chatViewController;
     UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil];
+        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil];
     } else {
-        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"ChatViewController" bundle:nil andTitle:[user resource]];
+        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
     }
     chatViewController.account = self.account;
     chatViewController.rosterItem = user;
@@ -257,6 +250,17 @@
 }
 
 //===================================================================================================================================
+#pragma mark SegmentedCycleList Delegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)selectedItemChanged:(SegmentedCycleList*)sender {
+    self.selectedRoster = sender.selectedItemIndex;
+    [self loadAccount];
+    [self loadRoster];
+    [self rosterAddContactButton];
+}
+
+//===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -352,11 +356,11 @@
     if (self.selectedRoster == kCONTACTS_MODE) {
         ContactModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.jid;
-        cell.activeImage.image = [RosterCell contactImage:(ContactModel*)[self.roster objectAtIndex:indexPath.row]];
+        cell.activeImage.image = [RosterCell contactImage:[self.roster objectAtIndex:indexPath.row]];
     } else {
         RosterItemModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.resource;
-        cell.activeImage.image = [RosterCell rosterItemImage:(RosterItemModel*)[self.roster objectAtIndex:indexPath.row]];
+        cell.activeImage.image = [RosterCell rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
     }
     return cell;
 }
