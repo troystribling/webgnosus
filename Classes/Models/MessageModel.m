@@ -151,13 +151,6 @@
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPxData*)parseXDataMessage:(MessageModel*)message {
-    NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:message.messageText options:0 error:nil] autorelease];
-	NSXMLElement* dataElement = [xmlDoc rootElement];
-    return [XMPPxData createFromElement:dataElement];
-}
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (AccountModel*)account {
@@ -197,6 +190,17 @@
 - (void)destroy {	
 	NSString* insertStatement = [NSString stringWithFormat:@"DELETE FROM messages WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPxData*)parseXDataMessage {
+    XMPPxData* data = nil;
+    NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:self.messageText options:0 error:nil] autorelease];
+	NSXMLElement* dataElement = [xmlDoc rootElement];
+    if ([[dataElement xmlns] isEqualToString:@"jabber:x:data"]) {
+        data = [XMPPxData createFromElement:dataElement];
+    }
+    return data;
 }
 
 //===================================================================================================================================

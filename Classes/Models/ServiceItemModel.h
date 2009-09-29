@@ -40,6 +40,7 @@
 + (ServiceItemModel*)findByJID:(NSString*)requestService;
 + (ServiceItemModel*)findByNode:(NSString*)requestNode;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService;
++ (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;

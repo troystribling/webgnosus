@@ -63,11 +63,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addField:(NSString*)fieldVal withValue:(NSString*)val {
-    [self addAttributeWithName:@"type" stringValue:val];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)reported {
     NSArray* reportedElements = [[self elementForName:@"reported"]  elementsForName:@"field"];
     NSMutableArray* reportedArray = [[NSMutableArray alloc] initWithCapacity:[reportedElements count]];

@@ -65,7 +65,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE parentNode = '%@' AND service = '%@'",  requestNode, requestService];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode = '%@' AND node = '%@' AND service LIKE '%@%%'",  
+                                    requestParentNode, requestNode, requestService];
 	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;

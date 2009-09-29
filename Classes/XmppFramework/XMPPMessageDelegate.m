@@ -412,7 +412,7 @@
                 messageModel.messageText = [cmdData XMLString];
                 messageModel.toJid = [account fullJID];
                 messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-                messageModel.textType = MessageTextTypeCommandResponse;
+                messageModel.textType = MessageTextTypeCommand;
                 messageModel.node = [command node];
                 [messageModel insert];
                 [messageModel release];

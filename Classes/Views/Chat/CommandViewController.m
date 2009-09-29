@@ -27,7 +27,6 @@
 
 - (void)loadCommands;
 - (void)handleCommand:(NSIndexPath*)indexPath;
-- (void)sendDeviceCommand:(ServiceItemModel*)commandInfo toJID:(XMPPJID*)toJID;
 - (void)saveMessage:(NSString*)msg;
 
 @end
@@ -54,32 +53,24 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadCommands {
-    self.commands = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" andService:[self.account fullJID]];
+    self.commands = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" andService:[self.rosterItem fullJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleCommand:(NSIndexPath*)indexPath {
     ServiceItemModel* commandInfo = [self.commands objectAtIndex:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
-    if ([[self.rosterItem bareJID] isEqualToString:[toJID full]]) {
-        NSMutableArray* resourceList = [RosterItemModel findAllByJid:[self.rosterItem bareJID] andAccount:self.account];
-        for(int i = 0; i < [resourceList count]; i++) {
-            RosterItemModel* resourceModel =[resourceList objectAtIndex:i];
-            if ([resourceModel isAvailable]) {
-                [self sendDeviceCommand:commandInfo toJID:[XMPPJID jidWithString:[resourceModel fullJID]]];
-            }
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    NSMutableArray* serviceItems = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" node:commandInfo.node andService:[toJID full]];
+    for(int i = 0; i < [serviceItems count]; i++) {
+        ServiceItemModel* serviceItem = [serviceItems objectAtIndex:i];
+        RosterItemModel* resourceModel = [RosterItemModel findByFullJid:serviceItem.service andAccount:self.account];
+        if ([resourceModel isAvailable]) {
+            [XMPPCommand set:client commandNode:commandInfo.node JID:[resourceModel toJID]];
         }
-    } else {
-        [self sendDeviceCommand:commandInfo toJID:toJID];
     }
     [self saveMessage:commandInfo.itemName];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sendDeviceCommand:(ServiceItemModel*)commandInfo toJID:(XMPPJID*)toJID {
-    XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [XMPPCommand set:xmppClient commandNode:commandInfo.node JID:toJID];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -90,6 +81,7 @@
     model.toJid = [self.rosterItem fullJID];
     model.fromJid = [self.account fullJID];
     model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    model.textType = MessageTextTypeCommand;
     [model insert];
     [model release];
 }
@@ -100,6 +92,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
+        self.navigationItem.title = @"Select Command";
 	} 
 	return self; 
 } 

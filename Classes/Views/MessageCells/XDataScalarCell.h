@@ -1,31 +1,23 @@
 //
-//  XMPPxData.m
+//  XDataScalarCell.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 9/28/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import <UIKit/UIKit.h>
+#import "XDataMessageLabelCell.h"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPxData : NSXMLElement 
+@interface XDataScalarCell : XDataMessageLabelCell <XDataMessageLabelGridView> {
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPxData*)createFromElement:(NSXMLElement*)element;
-- (XMPPxData*)init;
-- (XMPPxData*)initWithDataType:(NSString*)dataType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)dataType;
-- (void)addDataType:(NSString*)val;
-
-- (NSMutableDictionary*)fields;
-
-- (NSMutableArray*)reported;
-
-- (NSMutableArray*)items;
 
 @end

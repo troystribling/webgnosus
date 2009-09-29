@@ -65,7 +65,7 @@
     if (self.selectedMode == kCHAT_MODE) {
         self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
     } else if (self.selectedMode == kCOMMAND_MODE) {
-        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommandResponse withLimit:kMESSAGE_CACHE_SIZE];
+        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
     } else if (self.selectedMode == kRESOURCE_MODE) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
@@ -79,7 +79,7 @@
     if (self.selectedMode == kCHAT_MODE) {
         count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];;
     } else if (self.selectedMode == kCOMMAND_MODE) {
-        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommandResponse withLimit:kMESSAGE_CACHE_SIZE];;
+        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];;
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
     } else if (self.selectedMode == kRESOURCE_MODE) {
         count = [RosterItemModel countByJid:[self.rosterItem bareJID] andAccount:self.account];
@@ -92,6 +92,7 @@
     if (self.selectedMode == kCHAT_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else if (self.selectedMode == kCOMMAND_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
+        self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
@@ -102,7 +103,7 @@
     CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
     self.selectedMode = kCHAT_MODE;
     SegmentedCycleList* segmentControl = 
-        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Publications", @"Resources", nil] withValueAtIndex:kCHAT_MODE rect:rect andColor:[UIColor whiteColor]];
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Chat", @"Resources", @"Commands", @"Publications", nil] withValueAtIndex:kCHAT_MODE rect:rect andColor:[UIColor whiteColor]];
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;

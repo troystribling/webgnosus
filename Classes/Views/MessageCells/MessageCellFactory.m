@@ -11,12 +11,24 @@
 #import "BodyMessageCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
+#import "XMPPxData.h"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+typedef enum tagCommandDataType {
+    CommandDataText,
+    CommandDataScalar,
+    CommandDataArray,
+    CommandDataHash,
+    CommandDataHashArray,
+    CommandDataArrayHash,
+} CommandDataType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageCellFactory (PrivateAPI)
 
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForCommandResponseAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
 + (CGFloat)tableView:(UITableView*)tableView heightForCommandResponseWithMessage:(MessageModel*)message;
++ (CommandDataType)identifyCommandDataType:(XMPPxData*)data;
 
 @end
 
@@ -33,7 +45,7 @@
 	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
     if (message.textType == MessageTextTypeBody) {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
-    } else if (message.textType ==  MessageTextTypeCommandResponse) {
+    } else if (message.textType ==  MessageTextTypeCommand) {
         cellHeight = [self tableView:tableView heightForCommandResponseWithMessage:message];
     } else {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
@@ -46,7 +58,7 @@
 	UITableViewCell* cell = nil;
     if (message.textType == MessageTextTypeBody) {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
-    } else if (message.textType ==  MessageTextTypeCommandResponse) {
+    } else if (message.textType ==  MessageTextTypeCommand) {
         cell = [self tableView:tableView cellForCommandResponseAtIndexPath:indexPath forMessage:message];
     } else {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
@@ -60,13 +72,57 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView*)tableView heightForCommandResponseWithMessage:(MessageModel*)message {
 	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
+    XMPPxData* data = [message parseXDataMessage];
+    CommandDataType dataType = [self identifyCommandDataType:data];
+    switch (dataType) {
+        case CommandDataText:
+            cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
+            break;
+        case CommandDataScalar:
+            break;
+        case CommandDataArray:
+            break;
+        case CommandDataHash:
+            break;
+        case CommandDataHashArray:
+            break;
+        case CommandDataArrayHash:
+            break;
+    }
     return cellHeight;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForCommandResponseAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {
 	UITableViewCell* cell = nil;
+    XMPPxData* data = [message parseXDataMessage];
+    CommandDataType dataType = [self identifyCommandDataType:data];
+    switch (dataType) {
+        case CommandDataText:
+            cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+            break;
+        case CommandDataScalar:
+            break;
+        case CommandDataArray:
+            break;
+        case CommandDataHash:
+            break;
+        case CommandDataHashArray:
+            break;
+        case CommandDataArrayHash:
+            break;
+    }
     return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (CommandDataType)identifyCommandDataType:(XMPPxData*)data {
+    CommandDataType dataType = CommandDataText;
+    if (data) {
+        NSMutableDictionary* fields = [data fields];
+        NSMutableDictionary* items = [data items];
+    }    
+    return dataType;
 }
 
 //===================================================================================================================================

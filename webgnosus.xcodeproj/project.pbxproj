@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
+		050A686F10719FBB002FE125 /* XDataHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A686E10719FBB002FE125 /* XDataHashCell.m */; };
+		050A687010719FBB002FE125 /* XDataHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A686E10719FBB002FE125 /* XDataHashCell.m */; };
+		050A688E1071AB72002FE125 /* XDataScalarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A688D1071AB72002FE125 /* XDataScalarCell.m */; };
+		050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A688D1071AB72002FE125 /* XDataScalarCell.m */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
@@ -314,6 +318,10 @@
 /* Begin PBXFileReference section */
 		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
+		050A686D10719FBB002FE125 /* XDataHashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataHashCell.h; sourceTree = "<group>"; };
+		050A686E10719FBB002FE125 /* XDataHashCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataHashCell.m; sourceTree = "<group>"; };
+		050A688C1071AB72002FE125 /* XDataScalarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataScalarCell.h; sourceTree = "<group>"; };
+		050A688D1071AB72002FE125 /* XDataScalarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarCell.m; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
@@ -1038,8 +1046,12 @@
 				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
 				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
 				05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */,
+				050A686D10719FBB002FE125 /* XDataHashCell.h */,
+				050A686E10719FBB002FE125 /* XDataHashCell.m */,
 				05E207DF0FB9046500FCFC94 /* XDataMessageLabelCell.h */,
 				05E207E00FB9046500FCFC94 /* XDataMessageLabelCell.m */,
+				050A688C1071AB72002FE125 /* XDataScalarCell.h */,
+				050A688D1071AB72002FE125 /* XDataScalarCell.m */,
 			);
 			path = MessageCells;
 			sourceTree = "<group>";
@@ -1415,6 +1427,8 @@
 				05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
 				05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
 				05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */,
+				050A686F10719FBB002FE125 /* XDataHashCell.m in Sources */,
+				050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1522,6 +1536,8 @@
 				05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
 				05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
 				05D1EC39107054830013734A /* SegmentedCycleList.m in Sources */,
+				050A687010719FBB002FE125 /* XDataHashCell.m in Sources */,
+				050A688E1071AB72002FE125 /* XDataScalarCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

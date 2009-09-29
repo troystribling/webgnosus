@@ -18,7 +18,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagMessageTextType {
     MessageTextTypeBody,
-    MessageTextTypeCommandResponse,
+    MessageTextTypeCommand,
     MessageTextTypeEvent
 } MessageTextType;
 
@@ -60,12 +60,12 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
-+ (XMPPxData*)parseXDataMessage:(MessageModel*)message;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
 - (void)update;
 - (NSString*)createdAtAsString;
+- (XMPPxData*)parseXDataMessage;
 
 @end
