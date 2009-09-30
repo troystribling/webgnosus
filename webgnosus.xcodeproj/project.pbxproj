@@ -308,6 +308,12 @@
 		05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
 		05F2F79A10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
 		05F2F79B10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
+		05F973E21072E9870046344A /* XDataArrayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E11072E9870046344A /* XDataArrayCell.m */; };
+		05F973E31072E9870046344A /* XDataArrayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E11072E9870046344A /* XDataArrayCell.m */; };
+		05F973E61072E9F10046344A /* XDataArrayHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E51072E9F10046344A /* XDataArrayHashCell.m */; };
+		05F973E71072E9F10046344A /* XDataArrayHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E51072E9F10046344A /* XDataArrayHashCell.m */; };
+		05F9742A1072F8560046344A /* XDataScalarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F974291072F8560046344A /* XDataScalarCell.xib */; };
+		05F9742B1072F8560046344A /* XDataScalarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F974291072F8560046344A /* XDataScalarCell.xib */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -573,6 +579,11 @@
 		05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItemsResponseDelegate.m; path = Disco/XMPPDiscoItemsResponseDelegate.m; sourceTree = "<group>"; };
 		05F2F79810647DB100B681ED /* XMPPDiscoInfoResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoResponseDelegate.h; sourceTree = "<group>"; };
 		05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoInfoResponseDelegate.m; sourceTree = "<group>"; };
+		05F973E01072E9870046344A /* XDataArrayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayCell.h; sourceTree = "<group>"; };
+		05F973E11072E9870046344A /* XDataArrayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataArrayCell.m; sourceTree = "<group>"; };
+		05F973E41072E9F10046344A /* XDataArrayHashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayHashCell.h; sourceTree = "<group>"; };
+		05F973E51072E9F10046344A /* XDataArrayHashCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataArrayHashCell.m; sourceTree = "<group>"; };
+		05F974291072F8560046344A /* XDataScalarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataScalarCell.xib; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -784,6 +795,7 @@
 				05EF0001105735690068AA06 /* SubCell.xib */,
 				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
 				05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */,
+				05F974291072F8560046344A /* XDataScalarCell.xib */,
 			);
 			name = TableCells;
 			path = Resources/Views/TableCells;
@@ -1046,6 +1058,10 @@
 				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
 				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
 				05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */,
+				05F973E01072E9870046344A /* XDataArrayCell.h */,
+				05F973E11072E9870046344A /* XDataArrayCell.m */,
+				05F973E41072E9F10046344A /* XDataArrayHashCell.h */,
+				05F973E51072E9F10046344A /* XDataArrayHashCell.m */,
 				050A686D10719FBB002FE125 /* XDataHashCell.h */,
 				050A686E10719FBB002FE125 /* XDataHashCell.m */,
 				05E207DF0FB9046500FCFC94 /* XDataMessageLabelCell.h */,
@@ -1267,6 +1283,7 @@
 				05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
 				05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 				05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */,
+				05F9742A1072F8560046344A /* XDataScalarCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1317,6 +1334,7 @@
 				05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
 				05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 				05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */,
+				05F9742B1072F8560046344A /* XDataScalarCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1429,6 +1447,8 @@
 				05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */,
 				050A686F10719FBB002FE125 /* XDataHashCell.m in Sources */,
 				050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */,
+				05F973E31072E9870046344A /* XDataArrayCell.m in Sources */,
+				05F973E71072E9F10046344A /* XDataArrayHashCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1538,6 +1558,8 @@
 				05D1EC39107054830013734A /* SegmentedCycleList.m in Sources */,
 				050A687010719FBB002FE125 /* XDataHashCell.m in Sources */,
 				050A688E1071AB72002FE125 /* XDataScalarCell.m in Sources */,
+				05F973E21072E9870046344A /* XDataArrayCell.m in Sources */,
+				05F973E61072E9F10046344A /* XDataArrayHashCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

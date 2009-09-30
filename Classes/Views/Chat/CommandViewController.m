@@ -16,6 +16,8 @@
 #import "ServiceItemModel.h"
 #import "RosterItemModel.h"
 #import "CellUtils.h"
+#import "AlertViewManager.h"
+#import "ActivityView.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -25,6 +27,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandViewController (PrivateAPI)
 
+- (void)failureAlert;
+- (void)loadAccount;
 - (void)loadCommands;
 - (void)handleCommand:(NSIndexPath*)indexPath;
 - (void)saveMessage:(NSString*)msg;
@@ -39,12 +43,19 @@
 @synthesize account;
 @synthesize rosterItem;
 @synthesize commands;
+@synthesize commandRequest;
+@synthesize commandRequestIndicatorView;
 
 //===================================================================================================================================
 #pragma mark CommandViewController
 
 //===================================================================================================================================
 #pragma mark CommandViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)failureAlert { 
+    [AlertViewManager showAlert:@"Command Request Failed"];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAccount {
@@ -58,19 +69,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleCommand:(NSIndexPath*)indexPath {
-    ServiceItemModel* commandInfo = [self.commands objectAtIndex:indexPath.row];
+    self.commandRequest = [self.commands objectAtIndex:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
-    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    NSMutableArray* serviceItems = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" node:commandInfo.node andService:[toJID full]];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    NSMutableArray* serviceItems = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" node:self.commandRequest.node andService:[toJID full]];
     for(int i = 0; i < [serviceItems count]; i++) {
         ServiceItemModel* serviceItem = [serviceItems objectAtIndex:i];
         RosterItemModel* resourceModel = [RosterItemModel findByFullJid:serviceItem.service andAccount:self.account];
         if ([resourceModel isAvailable]) {
-            [XMPPCommand set:client commandNode:commandInfo.node JID:[resourceModel toJID]];
+            [XMPPCommand set:client commandNode:self.commandRequest.node JID:[resourceModel toJID]];
         }
+        self.commandRequestIndicatorView = [[ActivityView alloc] initWithTitle:@"Pending" inView:self.view.window];
     }
-    [self saveMessage:commandInfo.itemName];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -84,6 +94,23 @@
     model.textType = MessageTextTypeCommand;
     [model insert];
     [model release];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
+    [self failureAlert];
+    [self.commandRequestIndicatorView dismiss];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
+    [self.commandRequestIndicatorView dismiss];
+    [self saveMessage:self.commandRequest.itemName];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //===================================================================================================================================
@@ -116,6 +143,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 	[super viewWillDisappear:animated];
 }
 

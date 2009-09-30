@@ -54,8 +54,7 @@
     CGFloat width =  kDISPLAY_WIDTH;
     if (message.messageText) {
         CGSize textSize = {width, 20000.0f};
-        CGSize size = [message.messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize 
-                       lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [message.messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
         cellHeight = MAX(size.height, cellHeight);
     }    
 	return cellHeight;

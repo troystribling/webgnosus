@@ -12,18 +12,24 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class UserModel;
+@class ActivityView;
+@class ServiceItemModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandViewController : UITableViewController {
     AccountModel* account;
     UserModel* rosterItem;
     NSMutableArray* commands;
+    ServiceItemModel* commandRequest;
+    ActivityView* commandRequestIndicatorView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) UserModel* rosterItem;
 @property (nonatomic, retain) NSMutableArray* commands;
+@property (nonatomic, retain) ServiceItemModel* commandRequest;
+@property (nonatomic, retain) ActivityView* commandRequestIndicatorView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

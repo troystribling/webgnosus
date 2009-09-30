@@ -170,8 +170,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
+    if (self.selectedMode == kCOMMAND_MODE) {
+        [self loadItems];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-    if (self.selectedMode == kCHAT_MODE) {
+    if (self.selectedMode == kCOMMAND_MODE) {
         [self loadItems];
     }
 }

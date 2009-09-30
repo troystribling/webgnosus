@@ -9,9 +9,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MessageCellFactory.h"
 #import "BodyMessageCell.h"
+#import "XMPPxData.h"
+#import "XDataScalarCell.h"
+#import "XDataArrayCell.h"
+#import "XDataHashCell.h"
+#import "XDataArrayHashCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
-#import "XMPPxData.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagCommandDataType {
@@ -19,7 +23,6 @@ typedef enum tagCommandDataType {
     CommandDataScalar,
     CommandDataArray,
     CommandDataHash,
-    CommandDataHashArray,
     CommandDataArrayHash,
 } CommandDataType;
 
@@ -79,12 +82,11 @@ typedef enum tagCommandDataType {
             cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
             break;
         case CommandDataScalar:
+            cellHeight = [XDataScalarCell tableView:tableView heightForRowWithMessage:message andData:data];
             break;
         case CommandDataArray:
             break;
         case CommandDataHash:
-            break;
-        case CommandDataHashArray:
             break;
         case CommandDataArrayHash:
             break;
@@ -102,12 +104,11 @@ typedef enum tagCommandDataType {
             cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
             break;
         case CommandDataScalar:
+            cell = [XDataScalarCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
         case CommandDataArray:
             break;
         case CommandDataHash:
-            break;
-        case CommandDataHashArray:
             break;
         case CommandDataArrayHash:
             break;
@@ -119,8 +120,20 @@ typedef enum tagCommandDataType {
 + (CommandDataType)identifyCommandDataType:(XMPPxData*)data {
     CommandDataType dataType = CommandDataText;
     if (data) {
-        NSMutableDictionary* fields = [data fields];
-        NSMutableDictionary* items = [data items];
+        NSInteger fields = [[data fields] count];
+        NSInteger items = [[data items] count];
+        if (fields == 1) {
+            NSInteger vals = [[[data fields] allValues] count];
+            if (vals > 1) {
+                dataType = CommandDataArray;
+            } else {
+                dataType = CommandDataScalar;
+            }
+        } else if (fields > 1) {
+            dataType = CommandDataHash;
+        } else if (items > 0) {
+            dataType = CommandDataArrayHash;
+        }
     }    
     return dataType;
 }

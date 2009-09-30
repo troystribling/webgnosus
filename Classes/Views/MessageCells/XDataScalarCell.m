@@ -8,10 +8,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XDataScalarCell.h"
-#import "LabelGridView.h"
+#import "XMPPxData.h"
+#import "MessageCell.h"
+#import "MessageModel.h"
+#import "CellUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataScalarCell (PrivateAPI)
+
++ (CGFloat)getMessageHeight:(XMPPxData*)data;
++ (NSString*)getLabel:(XMPPxData*)data;
 
 @end
 
@@ -19,28 +25,50 @@
 @implementation XDataScalarCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize messageLabel;
+@synthesize titleLabel;
 
 //===================================================================================================================================
 #pragma mark XDataScalarCell
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message andData:(XMPPxData*)data {
+	CGFloat cellHeight = [self getMessageHeight:data] + kXDATA_MESSAGE_CELL_HEIGHT_PAD;
+	return cellHeight;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data {        
+    XDataScalarCell* cell = (XDataScalarCell*)[CellUtils createCell:[XDataScalarCell class] forTableView:tableView];
+    [cell setJidAndTime:message];
+    cell.titleLabel.text = message.node;
+    cell.messageLabel.text = [self getLabel:data];
+    CGRect messageLabelRect = cell.messageLabel.frame;
+    messageLabelRect.size.height = [self getMessageHeight:data];
+    cell.messageLabel.frame = messageLabelRect;
+    return cell;
+}
+
 //===================================================================================================================================
 #pragma mark XDataScalarCell PrivateAPI
 
-//===================================================================================================================================
-#pragma mark XDataMessageLabelGridView Protocol
-
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)messageAttributes {
-    return [NSMutableArray arrayWithObjects:@"booted_on", @"up_time", @"busy", @"idle", nil];
++ (CGFloat)getMessageHeight:(XMPPxData*)data {
+	CGFloat cellHeight = 20.0f;
+    CGFloat width =  kDISPLAY_WIDTH;
+    NSString* label = [self getLabel:data];
+    if (label) {
+        CGSize textSize = {width, 20000.0f};
+        CGSize size = [label sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+        cellHeight = MAX(size.height, cellHeight);
+    }    
+	return cellHeight;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)initLabelGridView:(LabelGridView*)labelGridView {
-    [labelGridView setCellColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f] forColumn:0];
++ (NSString*)getLabel:(XMPPxData*)data {
+    return [[[[data fields] allValues] lastObject] lastObject];
 }
-
-//===================================================================================================================================
-#pragma mark XDataMessageLabelGridView
 
 //===================================================================================================================================
 #pragma mark UITableViewCell

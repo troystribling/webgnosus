@@ -59,7 +59,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
     [self.addSubscriptionIndicatorView dismiss];
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -85,6 +84,12 @@
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.jidTextField becomeFirstResponder]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+	[super viewWillDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +122,7 @@
             [self failureAlert:@"Subscription exists"];
         }
     } else {
-        [self failureAlert:@"Node and JID must be specified"];
+        [self failureAlert:@"Node and JID Must be Specified"];
     }
 	return NO; 
 }

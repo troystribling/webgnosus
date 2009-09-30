@@ -60,7 +60,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)jid {
     [self.addPublicationIndicatorView dismiss];
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -83,6 +82,17 @@
     self.nodeTextField.delegate = self;
 	self.nodeTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     [self.nodeTextField becomeFirstResponder]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+	[super viewWillDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

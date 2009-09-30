@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class UserModel;
+@class ActivityView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {

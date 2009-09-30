@@ -78,7 +78,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (LabelGridView*)buildGridView:(MessageModel*)message withHeader:(BOOL)withHeader {
-    XMPPxData* data = [MessageModel parseXDataMessage:message];
+    XMPPxData* data = [message parseXDataMessage];
     LabelGridView* gridView = nil;
     NSMutableArray* gridArray = nil;
 	if (withHeader) {
