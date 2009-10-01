@@ -68,14 +68,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
     [[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:@"SELECT * FROM roster" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -83,7 +83,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", requestAccount.jid, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -91,7 +91,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", bareJid, requestAccount.pk];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -152,7 +152,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)isJidAvailable:(NSString*)bareJid {
     BOOL isAvailable = NO;
-   	NSMutableArray* rosterItems = [[NSMutableArray alloc] initWithCapacity:10];	
+   	NSMutableArray* rosterItems = [NSMutableArray arrayWithCapacity:10];	
 	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND presenceType = 'available'", bareJid];
 	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:rosterItems];    
     if ([rosterItems count] > 0) {

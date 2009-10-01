@@ -74,8 +74,6 @@
             rowOriginY += rowRect.size.height - initBorderWidth;
         }
     }
-    [viewWidthArray release];
-    [viewHeightArray release];
     return self;
 }
 
@@ -183,7 +181,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)maxViewHeightByRow:(NSMutableArray*)viewArray usingNumberOfCells:(NSInteger)nCells {
-    NSMutableArray* viewHeightArray = [[NSMutableArray alloc] initWithCapacity:[viewArray count]];
+    NSMutableArray* viewHeightArray = [NSMutableArray arrayWithCapacity:[viewArray count]];
     for(int i = 0; i < [viewArray count]; i++) {
         CGFloat viewHeight = 0.0f;
         NSMutableArray* rowViews = [viewArray objectAtIndex:i];
@@ -198,7 +196,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)maxViewWidthtByColumn:(NSMutableArray*)viewArray usingNumberOfCells:(NSInteger)nCells {
-    NSMutableArray* viewWidthArray = [[NSMutableArray alloc] initWithCapacity:nCells];
+    NSMutableArray* viewWidthArray = [NSMutableArray arrayWithCapacity:nCells];
     for(int j = 0; j < nCells; j++) {
         CGFloat viewWidth = 0.0f;
         for(int i = 0; i < [viewArray count]; i++) {   
@@ -283,7 +281,7 @@
                 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)selectArrayElements:(NSMutableArray*)array lessThanValue:(CGFloat)value {
-    NSMutableArray* selectedElements = [[NSMutableArray alloc] initWithCapacity:[array count]];
+    NSMutableArray* selectedElements = [NSMutableArray arrayWithCapacity:[array count]];
     for (int i = 0; i < [array count]; i++) {
         CGFloat testValue = [[array objectAtIndex:i] floatValue];
         if (value > testValue) {
@@ -295,7 +293,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableDictionary*)selectArrayElements:(NSMutableArray*)array equalToValue:(CGFloat)value {
-    NSMutableDictionary* selectedElements = [[NSMutableDictionary alloc] initWithCapacity:[array count]];
+    NSMutableDictionary* selectedElements = [NSMutableDictionary dictionaryWithCapacity:[array count]];
     for (int i = 0; i < [array count]; i++) {
         if (value == [[array objectAtIndex:i] floatValue]) {
             [selectedElements setObject:[NSNumber numberWithFloat:value] forKey:[NSNumber numberWithInt:i]];

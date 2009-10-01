@@ -36,7 +36,7 @@
     self.items = list;
     self.selectedItemIndex = index;
     self.font = [UIFont boldSystemFontOfSize:16];
-    if (self = [super initWithItems:[[NSArray alloc] initWithObjects:[UIImage imageNamed:@"left-arrow.png"], [self renderTextAsImage:rect], 
+    if (self = [super initWithItems:[NSArray arrayWithObjects:[UIImage imageNamed:@"left-arrow.png"], [self renderTextAsImage:rect], 
                                      [UIImage imageNamed:@"right-arrow.png"], nil]]) {
         [self addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
         self.frame = rect;

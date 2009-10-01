@@ -21,11 +21,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)dataType;
 - (void)addDataType:(NSString*)val;
-
 - (NSMutableDictionary*)fields;
-
 - (NSMutableArray*)reported;
-
 - (NSMutableArray*)items;
 
 @end

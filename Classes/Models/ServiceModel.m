@@ -48,14 +48,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:@"SELECT * FROM services" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE serviceType = '%@'",  requestType];
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:output];
     return output;

@@ -27,7 +27,7 @@
 #pragma mark XDataArrayCell PrivateAPI
 
 //===================================================================================================================================
-#pragma mark XDataMessageLabelGridView Protocol
+#pragma mark XDataMessageLabelCell
 
 //===================================================================================================================================
 #pragma mark XDataMessageLabelGridView

@@ -138,7 +138,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
     self = [super init];
     thisXMPPClientManager = self;
 	self.xmppClientDictionary = [NSMutableDictionary dictionaryWithCapacity:10];
-    self.delegates = [[NSMutableArray alloc] initWithCapacity:10];
+    self.delegates = [NSMutableArray arrayWithCapacity:10];
     self.accountUpdateDelegate = [[MulticastDelegate alloc] init];		
     return self;
 }

@@ -48,7 +48,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceFeatureModel class] withStatement:@"SELECT * FROM serviceFeatures" andOutputTo:output];
 	return output;
 }

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XDataHashCell.h"
 #import "LabelGridView.h"
+#import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataHashCell (PrivateAPI)
@@ -27,16 +28,24 @@
 #pragma mark XDataHashCell PrivateAPI
 
 //===================================================================================================================================
-#pragma mark XDataMessageLabelGridView Protocol
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)messageAttributes {
-    return [NSMutableArray arrayWithObjects:@"booted_on", @"up_time", @"busy", @"idle", nil];
-}
+#pragma mark XDataMessageLabelCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)initLabelGridView:(LabelGridView*)labelGridView {
     [labelGridView setCellColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f] forColumn:0];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)buildGridArray:(XMPPxData*)data {
+    NSMutableDictionary* fieldHash = [data fields];
+    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldHash count]];
+    NSMutableArray* attrs = [self removeUnderscores:[fieldHash allKeys]];
+    for(int j = 0; j < [attrs count]; j++) {
+        NSString* attr = [attrs objectAtIndex:j];
+        NSString* val = [self formatMessageAttribute:attr value:[[fieldHash objectForKey:attr] lastObject]];
+        [gridArray addObject:[NSMutableArray arrayWithObjects:attr, val, nil]];
+    }
+    return gridArray;
 }
 
 //===================================================================================================================================

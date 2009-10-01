@@ -42,7 +42,7 @@
     self.selectedItemIndex = index;
     self.font = [UIFont boldSystemFontOfSize:16];
     self.fontColor = initFontColor;
-    if (self = [super initWithItems:[[NSMutableArray alloc] initWithObjects:[self renderTextAsImage:rect], nil]]) {
+    if (self = [super initWithItems:[NSMutableArray arrayWithObjects:[self renderTextAsImage:rect], nil]]) {
         [self addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
         self.frame = rect;
         self.momentary = YES;

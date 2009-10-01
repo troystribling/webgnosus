@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAll {
-	NSMutableArray* output = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts" andOutputTo:output];
 	return output;
 }
@@ -111,14 +111,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllActivated {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts WHERE activated = 1" andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllActivatedByConnectionState:(AccountConnectionState)state {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE activated = 1 AND connectionState = %d", state];
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:selectStatement andOutputTo:output];
     return output;
@@ -132,7 +132,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllReady {
-	NSMutableArray* output = [[NSMutableArray alloc] initWithCapacity:10];	
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[AccountModel class] withStatement:@"SELECT * FROM accounts WHERE activated = 1 AND connectionState  = 3" andOutputTo:output];
     return output;
 }

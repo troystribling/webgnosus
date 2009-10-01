@@ -59,17 +59,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)font {
-    NSMutableArray* labelViewArray = [[NSMutableArray alloc] initWithCapacity:[data count]];
++ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)labelFont {
+    NSMutableArray* labelViewArray = [NSMutableArray arrayWithCapacity:[data count]];
     for (int i = 0; i < [data count]; i++) {
         NSMutableArray* dataRow = [data objectAtIndex:i];
-        NSMutableArray* labelViewRow = [[NSMutableArray alloc] initWithCapacity:[dataRow count]];
+        NSMutableArray* labelViewRow = [NSMutableArray arrayWithCapacity:[dataRow count]];
         for (int j = 0; j < [dataRow count]; j++) {
             CGSize constraintSize = {2000.0f, labelHeight};
-            CGSize labelSize = [[dataRow objectAtIndex:j] sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+            CGSize labelSize = [[dataRow objectAtIndex:j] sizeWithFont:labelFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
             UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(labelOffSet, labelOffSet, labelSize.width + labelOffSet, labelHeight + labelOffSet)];
             labelView.text = [dataRow objectAtIndex:j];
-            labelView.font = font;
+            labelView.font = labelFont;
             [labelViewRow addObject:labelView];
         }
         [labelViewArray addObject:labelViewRow];

@@ -119,7 +119,7 @@
     XMPPxData* cmdData = [[XMPPxData alloc] initWithDataType:@"submit"];
     while ((field = (NSString*)[enumerator nextObject])) {
         NSString* fieldVal = (NSString*)[parameters objectForKey:field];
-        [cmdData addField:field withValue:fieldVal]; 
+//        [cmdData addField:field withValue:fieldVal]; 
     }  
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData];

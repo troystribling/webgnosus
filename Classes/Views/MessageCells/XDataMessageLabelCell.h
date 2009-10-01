@@ -15,20 +15,7 @@
 @class XMPPxData;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@protocol XDataMessageLabelGridView
-
-@required
-
-+ (NSMutableArray*)messageAttributes;
-
-@optional
-
-+ (void)initLabelGridView:(LabelGridView*)labelGridView;
-
-@end
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XDataMessageLabelCell : MessageCell <XDataMessageLabelGridView> {
+@interface XDataMessageLabelCell : MessageCell {
     IBOutlet UILabel* titleLabel;
 }
 
@@ -36,10 +23,19 @@
 @property (nonatomic, retain) UILabel* titleLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)messageAttributesToHeader;
++ (NSMutableArray*)removeUnderscores:(NSArray*)withUnderscores;
 + (NSString*)formatMessageAttribute:(NSString*)attr value:(NSString*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message withHeader:(BOOL)withHeader;
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message withHeader:(BOOL)withHeader;
++ (CGFloat)tableView:(UITableView *)tableView heightForData:(XMPPxData*)data;
++ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data;
 @end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface NSObject (XDataMessageLabelCell)
+
++ (NSMutableArray*)buildGridArray:(XMPPxData*)data;
++ (void)initLabelGridView:(LabelGridView*)labelGridView;
+
+@end
+

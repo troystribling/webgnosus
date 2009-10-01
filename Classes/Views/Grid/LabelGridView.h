@@ -23,6 +23,6 @@
 - (void)setLineBreakMode:(UILineBreakMode)lineBreakMode forColumn:(NSUInteger)column;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)font;
++ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)labelFont;
 
 @end

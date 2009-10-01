@@ -65,7 +65,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)reported {
     NSArray* reportedElements = [[self elementForName:@"reported"]  elementsForName:@"field"];
-    NSMutableArray* reportedArray = [[NSMutableArray alloc] initWithCapacity:[reportedElements count]];
+    NSMutableArray* reportedArray = [NSMutableArray arrayWithCapacity:[reportedElements count]];
     if (reportedElements) {
         for(int i = 0; i < [reportedElements count]; i++) {
             NSXMLElement* reportedElement = [reportedElements objectAtIndex:i];
@@ -78,7 +78,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)items {
     NSArray* itemElementArray = [self elementsForName:@"item"];
-    NSMutableArray* itemArray = [[NSMutableArray alloc] initWithCapacity:[itemElementArray count]];
+    NSMutableArray* itemArray = [NSMutableArray arrayWithCapacity:[itemElementArray count]];
     if (itemElementArray) {
         for(int i = 0; i < [itemElementArray count]; i++) {
             [itemArray addObject:[self hashifyFields:[itemElementArray objectAtIndex:i]]];
@@ -93,17 +93,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableDictionary*)hashifyFields:(NSXMLElement*)fieldsElement {
     NSArray* fieldArray = [fieldsElement elementsForName:@"field"];
-    NSMutableDictionary* fieldHash = [[NSMutableDictionary alloc] initWithCapacity:[fieldArray count]];
+    NSMutableDictionary* fieldHash = [NSMutableDictionary dictionaryWithCapacity:[fieldArray count]];
     if (fieldArray) {
         for(int i = 0; i < [fieldArray count]; i++) {
             NSXMLElement* fieldElement = [fieldArray objectAtIndex:i];
             NSString* field = [[fieldElement attributeForName:@"var"] stringValue];
             if (!field) {
-                field = [[NSString alloc] initWithString:@"field"];
+                field = [NSString stringWithString:@"field"];
             }
             NSArray* valElements = [fieldElement elementsForName:@"value"];
             if (valElements) {
-                NSMutableArray* vals = [[NSMutableArray alloc] initWithCapacity:[valElements count]];
+                NSMutableArray* vals = [NSMutableArray arrayWithCapacity:[valElements count]];
                 for(int i = 0; i < [valElements count]; i++) {
                     [vals addObject:[[valElements objectAtIndex:i] stringValue]];
                 }

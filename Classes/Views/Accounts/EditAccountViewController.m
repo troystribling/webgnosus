@@ -97,7 +97,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void) initAccountList {
-    NSMutableArray* accountJIDs = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray* accountJIDs = [NSMutableArray arrayWithCapacity:10];
     NSInteger selectedAccountIndex = 0;
     NSArray* acctList = [AccountModel findAllActivated];
     for (int i = 0; i < [acctList count]; i++) {
@@ -111,7 +111,6 @@
     self.activeAccounts.delegate = self;
     [self updateStatus];
     [self.view addSubview:self.activeAccounts];
-    [accountJIDs release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

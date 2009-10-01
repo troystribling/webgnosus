@@ -87,6 +87,7 @@ typedef enum tagCommandDataType {
         case CommandDataArray:
             break;
         case CommandDataHash:
+            cellHeight = [XDataHashCell tableView:tableView heightForData:data];
             break;
         case CommandDataArrayHash:
             break;
@@ -109,6 +110,7 @@ typedef enum tagCommandDataType {
         case CommandDataArray:
             break;
         case CommandDataHash:
+            cell = [XDataHashCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
         case CommandDataArrayHash:
             break;
