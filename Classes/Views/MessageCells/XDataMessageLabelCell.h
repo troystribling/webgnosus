@@ -23,7 +23,8 @@
 @property (nonatomic, retain) UILabel* titleLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)removeUnderscores:(NSArray*)withUnderscores;
++ (NSString*)humanizeString:(NSString*)nonHuman;
++ (NSString*)stringifyArray:(NSArray*)stringArray;
 + (NSString*)formatMessageAttribute:(NSString*)attr value:(NSString*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -12,8 +12,8 @@
 #import "AccountModel.h"
 #import "SubscriptionModel.h"
 #import "ServiceItemModel.h"
-#import "PubCell.h"
-#import "SubCell.h"
+#import "AccountPubCell.h"
+#import "AccountSubCell.h"
 #import "CellUtils.h"
 #import "RosterSectionViewController.h"
 #import "AccountManagerViewController.h"
@@ -308,13 +308,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectedItem == kSUB_MODE) {
-        SubCell* cell = (SubCell*)[CellUtils createCell:[SubCell class] forTableView:tableView];
+        AccountSubCell* cell = (AccountSubCell*)[CellUtils createCell:[AccountSubCell class] forTableView:tableView];
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
         cell.jidLabel.text = [[item nodeToJID] full];
         return cell;
     } else {
-        PubCell* cell = (PubCell*)[CellUtils createCell:[PubCell class] forTableView:tableView];
+        AccountPubCell* cell = (AccountPubCell*)[CellUtils createCell:[AccountPubCell class] forTableView:tableView];
         ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = item.itemName;
         return cell;

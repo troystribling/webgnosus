@@ -30,11 +30,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setHeaderColor:(UIColor*)color {
-    [self setCellColor:color forRow:0];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setTextAlignment:(UITextAlignment)textAlignment forColumn:(NSUInteger)column {
     NSArray* rowViews = [self subviews];
     for(int i = 0; i < [rowViews count]; i++) {

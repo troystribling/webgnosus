@@ -79,7 +79,7 @@
         if ([resourceModel isAvailable]) {
             [XMPPCommand set:client commandNode:self.commandRequest.node JID:[resourceModel toJID]];
         }
-        self.commandRequestIndicatorView = [[ActivityView alloc] initWithTitle:@"Pending" inView:self.view.window];
+        self.commandRequestIndicatorView = [[ActivityView alloc] initWithTitle:@"Waiting" inView:self.view.window];
     }
 }
 

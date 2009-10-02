@@ -36,12 +36,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)removeUnderscores:(NSMutableArray*)withUnderscores {
-    NSMutableArray* withoutUnderscores = [NSMutableArray arrayWithCapacity:[withUnderscores count]];
-    for(int j = 0; j < [withUnderscores count]; j++) {
-        [withoutUnderscores addObject:[[withUnderscores objectAtIndex:j] stringByReplacingOccurrencesOfString:@"_" withString:@" "]];
-    }
-    return withoutUnderscores;
++ (NSString*)humanizeString:(NSString*)nonHuman {
+    return [nonHuman stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)stringifyArray:(NSArray*)stringArray {
+    NSString* stringified;
+    stringified = [stringArray componentsJoinedByString:@","];
+    return stringified;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

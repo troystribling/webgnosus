@@ -1,28 +1,25 @@
 //
-//  XMPPxData.m
+//  ContactPubCell.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 3/29/09.
+//  Created by Troy Stribling on 10/1/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import <UIKit/UIKit.h>
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPxData : NSXMLElement 
+@interface ContactPubCell : UITableViewCell {
+	IBOutlet UILabel* itemLabel;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPxData*)createFromElement:(NSXMLElement*)element;
-- (XMPPxData*)init;
-- (XMPPxData*)initWithDataType:(NSString*)dataType;
+@property (nonatomic, retain) UILabel* itemLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)dataType;
-- (void)addDataType:(NSString*)val;
-- (NSMutableArray*)fields;
-- (NSMutableArray*)reported;
-- (NSMutableArray*)items;
 
 @end

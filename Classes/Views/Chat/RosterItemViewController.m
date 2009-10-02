@@ -10,22 +10,31 @@
 #import "RosterItemViewController.h"
 #import "MessageViewController.h"
 #import "CommandViewController.h"
+#import "RosterSectionViewController.h"
+
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "RosterItemModel.h"
+#import "ServiceItemModel.h"
+#import "AccountModel.h"
+
 #import "MessageCellFactory.h"
 #import "RosterCell.h"
-#import "AccountModel.h"
-#import "CellUtils.h"
-#import "RosterSectionViewController.h"
-#import "SegmentedCycleList.h"
+#import "ContactPubCell.h"
+
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
+#import "XMPPJID.h"
+
+#import "CellUtils.h"
+#import "SegmentedCycleList.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController (PrivateAPI)
 
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
 - (void)loadItems;
 - (void)createSegementedController;
 - (void)addMessageButton;
@@ -34,7 +43,6 @@
 - (void)removeXMPPClientDelgate;
 - (UIViewController*)getMessageViewControllerForAccount;
 - (void)sendMessageButtonWasPressed:(id)sender;
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 
 @end
 
@@ -55,6 +63,21 @@
 #pragma mark RosterItemViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource {
+    RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
+    cell.jidLabel.text = resource.resource;
+    cell.activeImage.image = [RosterCell rosterItemImage:resource];
+    return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item {
+    ContactPubCell* cell = (ContactPubCell*)[CellUtils createCell:[ContactPubCell class] forTableView:tableView];
+    cell.itemLabel.text = item.itemName;
+    return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendMessageButtonWasPressed:(id)sender {
 	UIViewController* viewController = [self getMessageViewControllerForAccount]; 
 	[self.navigationController pushViewController:viewController animated:YES]; 
@@ -67,24 +90,11 @@
     } else if (self.selectedMode == kCOMMAND_MODE) {
         self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+        self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
     } else if (self.selectedMode == kRESOURCE_MODE) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
     }
     [self.tableView reloadData];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)itemCount {
-    NSInteger count;
-    if (self.selectedMode == kCHAT_MODE) {
-        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];;
-    } else if (self.selectedMode == kCOMMAND_MODE) {
-        count = [MessageModel countByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];;
-    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
-    } else if (self.selectedMode == kRESOURCE_MODE) {
-        count = [RosterItemModel countByJid:[self.rosterItem bareJID] andAccount:self.account];
-    }
-    return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -108,14 +118,6 @@
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
     [segmentControl release];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource {
-    RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
-    cell.jidLabel.text = resource.resource;
-    cell.activeImage.image = [RosterCell rosterItemImage:resource];
-    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -288,8 +290,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger count = [self itemCount];
-    return count;
+    return [self.items count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -300,6 +301,7 @@
     } else if (self.selectedMode == kCOMMAND_MODE) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
     } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+        cell = [RosterItemViewController tableView:tableView cellForContactPub:[self.items objectAtIndex:indexPath.row]];
     } else if (self.selectedMode == kRESOURCE_MODE) {
         cell = [RosterItemViewController tableView:tableView cellForResource:[self.items objectAtIndex:indexPath.row]];
     }

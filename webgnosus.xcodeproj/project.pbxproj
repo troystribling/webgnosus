@@ -292,14 +292,14 @@
 		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
-		05EF00001057351F0068AA06 /* PubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* PubCell.xib */; };
-		05EF0002105735690068AA06 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* SubCell.xib */; };
-		05EF0003105735690068AA06 /* SubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* SubCell.xib */; };
-		05EF0020105738840068AA06 /* PubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* PubCell.m */; };
-		05EF0021105738840068AA06 /* PubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* PubCell.m */; };
-		05EFFFF410572B490068AA06 /* SubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* SubCell.m */; };
-		05EFFFF510572B490068AA06 /* SubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* SubCell.m */; };
-		05EFFFFF1057351F0068AA06 /* PubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* PubCell.xib */; };
+		05EF00001057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
+		05EF0002105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
+		05EF0003105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
+		05EF0020105738840068AA06 /* AccountPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* AccountPubCell.m */; };
+		05EF0021105738840068AA06 /* AccountPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* AccountPubCell.m */; };
+		05EFFFF410572B490068AA06 /* AccountSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* AccountSubCell.m */; };
+		05EFFFF510572B490068AA06 /* AccountSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* AccountSubCell.m */; };
+		05EFFFFF1057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F0441E10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
@@ -308,6 +308,10 @@
 		05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
 		05F2F79A10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
 		05F2F79B10647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */; };
+		05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
+		05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
+		05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F79C461075AA8200B75735 /* ContactPubCell.m */; };
+		05F79C481075AA8200B75735 /* ContactPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F79C461075AA8200B75735 /* ContactPubCell.m */; };
 		05F973E21072E9870046344A /* XDataArrayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E11072E9870046344A /* XDataArrayCell.m */; };
 		05F973E31072E9870046344A /* XDataArrayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E11072E9870046344A /* XDataArrayCell.m */; };
 		05F973E61072E9F10046344A /* XDataArrayHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F973E51072E9F10046344A /* XDataArrayHashCell.m */; };
@@ -566,12 +570,12 @@
 		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
 		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		05EF0001105735690068AA06 /* SubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubCell.xib; sourceTree = "<group>"; };
-		05EF001E105738840068AA06 /* PubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PubCell.h; sourceTree = "<group>"; };
-		05EF001F105738840068AA06 /* PubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PubCell.m; sourceTree = "<group>"; };
-		05EFFFF210572B490068AA06 /* SubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubCell.h; sourceTree = "<group>"; };
-		05EFFFF310572B490068AA06 /* SubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubCell.m; sourceTree = "<group>"; };
-		05EFFFFE1057351F0068AA06 /* PubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubCell.xib; sourceTree = "<group>"; };
+		05EF0001105735690068AA06 /* AccountSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSubCell.xib; sourceTree = "<group>"; };
+		05EF001E105738840068AA06 /* AccountPubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPubCell.h; sourceTree = "<group>"; };
+		05EF001F105738840068AA06 /* AccountPubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPubCell.m; sourceTree = "<group>"; };
+		05EFFFF210572B490068AA06 /* AccountSubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSubCell.h; sourceTree = "<group>"; };
+		05EFFFF310572B490068AA06 /* AccountSubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSubCell.m; sourceTree = "<group>"; };
+		05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountPubCell.xib; sourceTree = "<group>"; };
 		05F0441B10405872001223C4 /* XMPPError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPError.h; sourceTree = "<group>"; };
 		05F0441C10405872001223C4 /* XMPPError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPError.m; sourceTree = "<group>"; };
 		05F24BD31054077F000C886E /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
@@ -579,6 +583,9 @@
 		05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItemsResponseDelegate.m; path = Disco/XMPPDiscoItemsResponseDelegate.m; sourceTree = "<group>"; };
 		05F2F79810647DB100B681ED /* XMPPDiscoInfoResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoResponseDelegate.h; sourceTree = "<group>"; };
 		05F2F79910647DB100B681ED /* XMPPDiscoInfoResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoInfoResponseDelegate.m; sourceTree = "<group>"; };
+		05F79C2C1075A7D500B75735 /* ContactPubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactPubCell.xib; sourceTree = "<group>"; };
+		05F79C451075AA8200B75735 /* ContactPubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactPubCell.h; sourceTree = "<group>"; };
+		05F79C461075AA8200B75735 /* ContactPubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactPubCell.m; sourceTree = "<group>"; };
 		05F973E01072E9870046344A /* XDataArrayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayCell.h; sourceTree = "<group>"; };
 		05F973E11072E9870046344A /* XDataArrayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataArrayCell.m; sourceTree = "<group>"; };
 		05F973E41072E9F10046344A /* XDataArrayHashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayHashCell.h; sourceTree = "<group>"; };
@@ -788,11 +795,12 @@
 			isa = PBXGroup;
 			children = (
 				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
+				05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */,
+				05EF0001105735690068AA06 /* AccountSubCell.xib */,
 				05DC8C830FBB15C60018AEEF /* CommandCell.xib */,
+				05F79C2C1075A7D500B75735 /* ContactPubCell.xib */,
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
-				05EFFFFE1057351F0068AA06 /* PubCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
-				05EF0001105735690068AA06 /* SubCell.xib */,
 				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
 				05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */,
 				05F974291072F8560046344A /* XDataScalarCell.xib */,
@@ -1028,6 +1036,8 @@
 				05E207BC0FB9046500FCFC94 /* CommandCell.m */,
 				05E207BD0FB9046500FCFC94 /* CommandViewController.h */,
 				05E207BE0FB9046500FCFC94 /* CommandViewController.m */,
+				05F79C451075AA8200B75735 /* ContactPubCell.h */,
+				05F79C461075AA8200B75735 /* ContactPubCell.m */,
 				05E207C10FB9046500FCFC94 /* RosterItemViewController.h */,
 				05E207C20FB9046500FCFC94 /* RosterItemViewController.m */,
 				05E207C30FB9046500FCFC94 /* MessageViewController.h */,
@@ -1096,14 +1106,14 @@
 				05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */,
 				05E6FB7B105B1C510067CF95 /* AddSubscriptionViewController.h */,
 				05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */,
+				05EF001E105738840068AA06 /* AccountPubCell.h */,
+				05EF001F105738840068AA06 /* AccountPubCell.m */,
+				05EFFFF210572B490068AA06 /* AccountSubCell.h */,
+				05EFFFF310572B490068AA06 /* AccountSubCell.m */,
 				05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */,
 				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PubSubViewController.h */,
 				05E7EB861055CCE700C5F3FD /* PubSubViewController.m */,
-				05EF001E105738840068AA06 /* PubCell.h */,
-				05EF001F105738840068AA06 /* PubCell.m */,
-				05EFFFF210572B490068AA06 /* SubCell.h */,
-				05EFFFF310572B490068AA06 /* SubCell.m */,
 			);
 			path = PubSub;
 			sourceTree = "<group>";
@@ -1275,8 +1285,8 @@
 				05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */,
 				05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */,
 				05E7EBAD1055D97600C5F3FD /* tabbar-history.png in Resources */,
-				05EFFFFF1057351F0068AA06 /* PubCell.xib in Resources */,
-				05EF0002105735690068AA06 /* SubCell.xib in Resources */,
+				05EFFFFF1057351F0068AA06 /* AccountPubCell.xib in Resources */,
+				05EF0002105735690068AA06 /* AccountSubCell.xib in Resources */,
 				057BB16210587547006389D9 /* tabbar-events.png in Resources */,
 				057BB16310587547006389D9 /* tabbar-services.png in Resources */,
 				057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */,
@@ -1284,6 +1294,7 @@
 				05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 				05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */,
 				05F9742A1072F8560046344A /* XDataScalarCell.xib in Resources */,
+				05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,8 +1337,8 @@
 				05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */,
 				05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */,
 				05E7EBAE1055D97600C5F3FD /* tabbar-history.png in Resources */,
-				05EF00001057351F0068AA06 /* PubCell.xib in Resources */,
-				05EF0003105735690068AA06 /* SubCell.xib in Resources */,
+				05EF00001057351F0068AA06 /* AccountPubCell.xib in Resources */,
+				05EF0003105735690068AA06 /* AccountSubCell.xib in Resources */,
 				057BB16410587547006389D9 /* tabbar-events.png in Resources */,
 				057BB16510587547006389D9 /* tabbar-services.png in Resources */,
 				057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */,
@@ -1335,6 +1346,7 @@
 				05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
 				05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */,
 				05F9742B1072F8560046344A /* XDataScalarCell.xib in Resources */,
+				05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1432,8 +1444,8 @@
 				05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */,
 				05E7EB871055CCE700C5F3FD /* PubSubViewController.m in Sources */,
 				05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */,
-				05EFFFF410572B490068AA06 /* SubCell.m in Sources */,
-				05EF0020105738840068AA06 /* PubCell.m in Sources */,
+				05EFFFF410572B490068AA06 /* AccountSubCell.m in Sources */,
+				05EF0020105738840068AA06 /* AccountPubCell.m in Sources */,
 				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 				05DE50F21062FC0400500F63 /* XMPPResponse.m in Sources */,
@@ -1449,6 +1461,7 @@
 				050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */,
 				05F973E31072E9870046344A /* XDataArrayCell.m in Sources */,
 				05F973E71072E9F10046344A /* XDataArrayHashCell.m in Sources */,
+				05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,8 +1556,8 @@
 				05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */,
 				05E7EB881055CCE700C5F3FD /* PubSubViewController.m in Sources */,
 				05E7EB901055CD4B00C5F3FD /* EventsViewController.m in Sources */,
-				05EFFFF510572B490068AA06 /* SubCell.m in Sources */,
-				05EF0021105738840068AA06 /* PubCell.m in Sources */,
+				05EFFFF510572B490068AA06 /* AccountSubCell.m in Sources */,
+				05EF0021105738840068AA06 /* AccountPubCell.m in Sources */,
 				05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
 				05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
 				05DE50F11062FC0400500F63 /* XMPPResponse.m in Sources */,
@@ -1560,6 +1573,7 @@
 				050A688E1071AB72002FE125 /* XDataScalarCell.m in Sources */,
 				05F973E21072E9870046344A /* XDataArrayCell.m in Sources */,
 				05F973E61072E9F10046344A /* XDataArrayHashCell.m in Sources */,
+				05F79C481075AA8200B75735 /* ContactPubCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

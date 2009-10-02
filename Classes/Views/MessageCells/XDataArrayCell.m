@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XDataArrayCell.h"
 #import "LabelGridView.h"
+#import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataArrayCell (PrivateAPI)
@@ -29,8 +30,20 @@
 //===================================================================================================================================
 #pragma mark XDataMessageLabelCell
 
-//===================================================================================================================================
-#pragma mark XDataMessageLabelGridView
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)initLabelGridView:(LabelGridView*)labelGridView {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)buildGridArray:(XMPPxData*)data {
+    NSMutableArray* valArray = [[[data fields] lastObject] lastObject];
+    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:1];
+    for(int j = 0; j < [valArray count]; j++) {
+        NSMutableArray* val = [valArray objectAtIndex:j];
+        [gridArray addObject:[NSMutableArray arrayWithObjects:val, nil]];
+    }
+    return gridArray;
+}
 
 //===================================================================================================================================
 #pragma mark UITableViewCell

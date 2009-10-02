@@ -18,7 +18,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth gridXOffset:(CGFloat)initXOffset andGridYOffset:(CGFloat)initYOffset;
-- (void)setHeaderColor:(UIColor*)color;
 - (void)setTextAlignment:(UITextAlignment)textAlignment forColumn:(NSUInteger)column;
 - (void)setLineBreakMode:(UILineBreakMode)lineBreakMode forColumn:(NSUInteger)column;
 

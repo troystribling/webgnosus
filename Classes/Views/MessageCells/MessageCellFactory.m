@@ -85,11 +85,13 @@ typedef enum tagCommandDataType {
             cellHeight = [XDataScalarCell tableView:tableView heightForRowWithMessage:message andData:data];
             break;
         case CommandDataArray:
+            cellHeight = [XDataArrayCell tableView:tableView heightForData:data];
             break;
         case CommandDataHash:
             cellHeight = [XDataHashCell tableView:tableView heightForData:data];
             break;
         case CommandDataArrayHash:
+            cellHeight = [XDataArrayHashCell tableView:tableView heightForData:data];
             break;
     }
     return cellHeight;
@@ -108,11 +110,13 @@ typedef enum tagCommandDataType {
             cell = [XDataScalarCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
         case CommandDataArray:
+            cell = [XDataArrayCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
         case CommandDataHash:
             cell = [XDataHashCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
         case CommandDataArrayHash:
+            cell = [XDataArrayHashCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data];
             break;
     }
     return cell;
@@ -125,7 +129,7 @@ typedef enum tagCommandDataType {
         NSInteger fields = [[data fields] count];
         NSInteger items = [[data items] count];
         if (fields == 1) {
-            NSInteger vals = [[[data fields] allValues] count];
+            NSInteger vals = [[[[data fields] objectAtIndex:0] lastObject] count];
             if (vals > 1) {
                 dataType = CommandDataArray;
             } else {

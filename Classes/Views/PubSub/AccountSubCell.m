@@ -1,55 +1,46 @@
 //
-//  XDataHashCell.m
-//  webgnosus_client
+//  AccountSubCell.m
+//  webgnosus
 //
-//  Created by Troy Stribling on 4/16/09.
+//  Created by Troy Stribling on 9/8/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XDataHashCell.h"
-#import "LabelGridView.h"
-#import "XMPPxData.h"
+#import "AccountSubCell.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XDataHashCell (PrivateAPI)
+@interface AccountSubCell (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XDataHashCell
+@implementation AccountSubCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize itemLabel;
+@synthesize jidLabel;
 
 //===================================================================================================================================
-#pragma mark XDataHashCell
+#pragma mark AccountSubCell
 
 //===================================================================================================================================
-#pragma mark XDataHashCell PrivateAPI
-
-//===================================================================================================================================
-#pragma mark XDataMessageLabelCell
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)initLabelGridView:(LabelGridView*)labelGridView {
-    [labelGridView setCellColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f] forColumn:0];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)buildGridArray:(XMPPxData*)data {
-    NSMutableArray* fieldHash = [data fields];
-    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldHash count]];
-    for(int j = 0; j < [fieldHash count]; j++) {
-        NSMutableArray* attrs = [fieldHash objectAtIndex:j];
-        NSString* attr = [self humanizeString:[attrs objectAtIndex:0]];
-        NSString* val = [self formatMessageAttribute:attr value:[self stringifyArray:[attrs lastObject]]];
-        [gridArray addObject:[NSMutableArray arrayWithObjects:attr, val, nil]];
-    }
-    return gridArray;
-}
+#pragma mark AccountSubCell PrivateAPI
 
 //===================================================================================================================================
 #pragma mark UITableViewCell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+}
 
 //===================================================================================================================================
 #pragma mark NSObject

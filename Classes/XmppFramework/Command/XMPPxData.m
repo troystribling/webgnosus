@@ -12,7 +12,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPxData (PrivateAPI)
 
-- (NSMutableDictionary*)hashifyFields:(NSXMLElement*)structElement;
+- (NSMutableArray*)hashifyFields:(NSXMLElement*)structElement;
 
 @end
 
@@ -58,7 +58,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableDictionary*)fields {
+- (NSMutableArray*)fields {
     return [self hashifyFields:self];
 }
 
@@ -91,23 +91,24 @@
 #pragma mark XMPPxData PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableDictionary*)hashifyFields:(NSXMLElement*)fieldsElement {
+- (NSMutableArray*)hashifyFields:(NSXMLElement*)fieldsElement {
     NSArray* fieldArray = [fieldsElement elementsForName:@"field"];
-    NSMutableDictionary* fieldHash = [NSMutableDictionary dictionaryWithCapacity:[fieldArray count]];
+    NSMutableArray* fieldHash = [NSMutableArray arrayWithCapacity:[fieldArray count]];
     if (fieldArray) {
         for(int i = 0; i < [fieldArray count]; i++) {
             NSXMLElement* fieldElement = [fieldArray objectAtIndex:i];
             NSString* field = [[fieldElement attributeForName:@"var"] stringValue];
-            if (!field) {
-                field = [NSString stringWithString:@"field"];
-            }
             NSArray* valElements = [fieldElement elementsForName:@"value"];
             if (valElements) {
                 NSMutableArray* vals = [NSMutableArray arrayWithCapacity:[valElements count]];
                 for(int i = 0; i < [valElements count]; i++) {
                     [vals addObject:[[valElements objectAtIndex:i] stringValue]];
                 }
-                [fieldHash setObject:vals forKey:field];
+                if (field) {
+                    [fieldHash addObject:[NSMutableArray arrayWithObjects:field, vals, nil]];
+                } else {
+                    [fieldHash addObject:[NSMutableArray arrayWithObjects:vals, nil]];
+                }
             }
         }
     }
