@@ -32,6 +32,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messages;
 @synthesize account;
+@synthesize eventType;
 
 //===================================================================================================================================
 #pragma mark EventsViewController
@@ -83,6 +84,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
     [self addXMPPClientDelgate];
+    self.navigationItem.title = @"Events";
     [super viewWillAppear:animated];
 }
 

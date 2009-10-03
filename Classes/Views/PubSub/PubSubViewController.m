@@ -349,7 +349,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController* viewController = [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
+    EventsViewController* viewController = [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
+    viewController.eventType = self.selectedItem;
+	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    if (self.selectedItem == kSUB_MODE) {
+        temporaryBarButtonItem.title = @"Subscriptions";
+    } else {
+        temporaryBarButtonItem.title = @"Publications";
+    }
+	self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+	[temporaryBarButtonItem release];    
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }

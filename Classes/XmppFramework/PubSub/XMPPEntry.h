@@ -1,29 +1,27 @@
 //
-//  EventsViewController.h
+//  XMPPEntry.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 9/7/09.
+//  Created by Troy Stribling on 10/2/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface EventsViewController : UITableViewController {
-    NSMutableArray* messages;
-    AccountModel* account;
-    NSInteger eventType;
-}
+@interface XMPPEntry : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) NSMutableArray* messages;
-@property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, assign) NSInteger eventType;
++ (XMPPEntry*)createFromElement:(NSXMLElement*)element;
+- (XMPPEntry*)init;
+- (XMPPEntry*)initWithSummary:(NSString*)msgBody;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)summary;
+- (void)addSummary:(NSString*)val;
 
 @end

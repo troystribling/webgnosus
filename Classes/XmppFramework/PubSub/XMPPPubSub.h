@@ -7,6 +7,7 @@
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
 #import "NSXMLElementAdditions.h"
 
@@ -30,5 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
++ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withSummary:(NSString*)summary;
 
 @end
