@@ -20,7 +20,7 @@
 	UIBarButtonItem* editAccountsButton;
 	NSMutableArray* pubSubItems;
     AccountModel* account;
-    NSInteger selectedItem;
+    NSInteger selectedItemType;
     NSInteger itemToDelete;
 }
 
@@ -30,7 +30,7 @@
 @property (nonatomic, retain) AccountManagerViewController* accountManagerViewController;
 @property (nonatomic, retain) NSMutableArray* pubSubItems;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, assign) NSInteger selectedItem;
+@property (nonatomic, assign) NSInteger selectedItemType;
 @property (nonatomic, assign) NSInteger itemToDelete;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

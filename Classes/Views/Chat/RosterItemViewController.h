@@ -16,7 +16,9 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
-    NSInteger selectedMode;
+    NSInteger rosterMode;
+    NSString* selectedMode;
+    NSMutableArray* modes;
 	UIBarButtonItem* sendMessageButton;
     NSMutableArray* items;
     AccountModel* account;
@@ -24,7 +26,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, assign) NSInteger selectedMode;
+@property (nonatomic, assign) NSInteger rosterMode;
+@property (nonatomic, retain) NSString* selectedMode;
+@property (nonatomic, retain) NSMutableArray* modes;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
 @property (nonatomic, retain) NSMutableArray* items;
 @property (nonatomic, retain) AccountModel* account;

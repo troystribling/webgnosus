@@ -36,6 +36,9 @@
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
 - (void)loadItems;
+- (void)setModes;
+- (NSInteger)selectedIndexFromMode;
+- (void)selectedModeFromIndex:(NSInteger)index;
 - (void)createSegementedController;
 - (void)addMessageButton;
 - (void)loadAccount;
@@ -50,7 +53,9 @@
 @implementation RosterItemViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize rosterMode;
 @synthesize selectedMode;
+@synthesize modes;
 @synthesize sendMessageButton;
 @synthesize items;
 @synthesize account;
@@ -85,13 +90,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
-    if (self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
-    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];
-    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
-    } else if (self.selectedMode == kRESOURCE_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
     }
     [self.tableView reloadData];
@@ -99,9 +104,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMessageButton {
-    if (self.selectedMode == kCHAT_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
+    if ([self.selectedMode isEqualToString:@"Chat"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
-    } else if (self.selectedMode == kCOMMAND_MODE && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
+    } else if ([self.selectedMode isEqualToString:@"Commands"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -109,11 +114,29 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setModes {
+    if (self.rosterMode == kCONTACTS_MODE) {
+        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Resources", @"Commands", @"Publications", nil];
+    } else {
+        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Publications", nil];
+    } 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)selectedIndexFromMode {
+    return [self.modes indexOfObject:self.selectedMode];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)selectedModeFromIndex:(NSInteger)index {
+    self.selectedMode = [self.modes objectAtIndex:index];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
     CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
-    self.selectedMode = kCHAT_MODE;
-    SegmentedCycleList* segmentControl = 
-        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Chat", @"Resources", @"Commands", @"Publications", nil] withValueAtIndex:kCHAT_MODE rect:rect andColor:[UIColor whiteColor]];
+    self.selectedMode = @"Chat";
+    SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] rect:rect andColor:[UIColor whiteColor]];
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
@@ -123,12 +146,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIViewController*)getMessageViewControllerForAccount {
     [self.rosterItem load];
-    if (self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
         [viewController setAccount:self.account];
         [viewController setPartner:self.rosterItem];
         return [viewController autorelease];
-    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         CommandViewController* viewController = [[CommandViewController alloc] initWithNibName:@"CommandViewController" bundle:nil];
         viewController.account = self.account;
         viewController.rosterItem =  self.rosterItem;
@@ -157,7 +180,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
-    if (self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         [self.rosterItem load];
         [self addMessageButton];
         [self.tableView reloadData];
@@ -166,21 +189,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
-    if ([message hasBody] && self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         [self loadItems];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
-    if (self.selectedMode == kCOMMAND_MODE) {
+    if ([self.selectedMode isEqualToString:@"Commands"]) {
         [self loadItems];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-    if (self.selectedMode == kCOMMAND_MODE) {
+    if ([self.selectedMode isEqualToString:@"Commands"]) {
         [self loadItems];
     }
 }
@@ -190,7 +213,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)selectedItemChanged:(SegmentedCycleList*)sender {
-    self.selectedMode = sender.selectedItemIndex;
+    [self selectedModeFromIndex:sender.selectedItemIndex];
     [self addMessageButton];
     [self loadItems];
 }
@@ -217,6 +240,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    [self setModes];
     [self addMessageButton];
     [self createSegementedController];
 }
@@ -254,13 +278,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     CGFloat cellHeight;
-    if (self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         cellHeight = kPUB_CELL_HEIGHT;
-    } else if (self.selectedMode == kRESOURCE_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
         cellHeight = kROSTER_CELL_HEIGHT;
     }
     return cellHeight;
@@ -296,13 +320,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     UITableViewCell* cell;
-    if (self.selectedMode == kCHAT_MODE) {
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if (self.selectedMode == kCOMMAND_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if (self.selectedMode == kPUBLICATIONS_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         cell = [RosterItemViewController tableView:tableView cellForContactPub:[self.items objectAtIndex:indexPath.row]];
-    } else if (self.selectedMode == kRESOURCE_MODE) {
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
         cell = [RosterItemViewController tableView:tableView cellForResource:[self.items objectAtIndex:indexPath.row]];
     }
     return cell;
@@ -310,13 +334,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (self.selectedMode == kRESOURCE_MODE) {
+    if ([self.selectedMode isEqualToString:@"Resources"]) {
         UserModel* user = [self.items objectAtIndex:indexPath.row];
         RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
         [chatViewController setAccount:self.account];
         chatViewController.rosterItem = user;
         [self.navigationController pushViewController:chatViewController animated:YES];
         [chatViewController release];
+    }  else if ([self.selectedMode isEqualToString:@"Publications"]) {
     }
 }
 

@@ -36,6 +36,7 @@
 - (void)addContactButtonWasPressed; 
 - (void)editAccountButtonWasPressed; 
 - (void)createSegementedController;
+- (void)createBackButton;
 - (void)loadRoster;
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
@@ -91,6 +92,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createBackButton {
+    UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    if (self.selectedRoster == kCONTACTS_MODE) {
+        temporaryBarButtonItem.title = @"Contacts";
+    } else {
+        temporaryBarButtonItem.title = @"Resources";
+    } 
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    [temporaryBarButtonItem release];  
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadRoster {
     if (self.account) {
         if (self.selectedRoster == kCONTACTS_MODE) {
@@ -121,6 +134,7 @@
     } else {
         chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
     }
+    chatViewController.rosterMode = self.selectedRoster;
     chatViewController.account = self.account;
     chatViewController.rosterItem = user;
     return chatViewController;
@@ -380,6 +394,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     RosterItemViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
+    [self createBackButton];
     [self.navigationController pushViewController:chatViewController animated:YES];
     [chatViewController release];
 }

@@ -117,7 +117,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)delegateSelectedItemChanged {
     if ([self.delegate respondsToSelector:@selector(selectedItemChanged:)]) {
-        [self.delegate selectedItemChanged:[self selectedItem]];
+        [self.delegate selectedItemChanged:self];
     }
 } 
     

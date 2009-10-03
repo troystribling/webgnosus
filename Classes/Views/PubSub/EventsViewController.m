@@ -10,7 +10,9 @@
 #import "EventsViewController.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 #import "MessageCellFactory.h"
+#import "RosterSectionViewController.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -31,6 +33,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messages;
+@synthesize item;
 @synthesize account;
 @synthesize eventType;
 
@@ -126,8 +129,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* rosterHeaderView = nil;
+    if (self.item) {
+        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.item itemName]]; 
+        rosterHeaderView = rosterHeader.view;
+    }
+	return rosterHeaderView; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
+    return kCELL_SECTION_TITLE_HEIGHT;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    if (self.item) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

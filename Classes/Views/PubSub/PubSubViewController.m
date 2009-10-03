@@ -35,6 +35,7 @@
 - (void)deleteItem:(id)item;
 - (void)addPubSubItemWasPressed; 
 - (void)editAccountButtonWasPressed; 
+- (void)createBackButton;
 - (void)loadPubSubItems;
 - (void)reloadPubSubItems;
 - (void)addXMPPClientDelgate;
@@ -56,7 +57,7 @@
 @synthesize accountManagerViewController;
 @synthesize pubSubItems;
 @synthesize account;
-@synthesize selectedItem;
+@synthesize selectedItemType;
 @synthesize itemToDelete;
 
 //===================================================================================================================================
@@ -69,7 +70,7 @@
 - (void)addPubSubItemWasPressed { 
     if (self.account) {
         UIViewController* addItemController;
-        if (self.selectedItem == kSUB_MODE) {
+        if (self.selectedItemType == kSUB_MODE) {
             addItemController = [[AddSubscriptionViewController alloc] initWithNibName:@"AddSubscriptionViewController" bundle:nil]; 
         } else {
             addItemController = [[AddPublicationViewController alloc] initWithNibName:@"AddPublicationViewController" bundle:nil]; 
@@ -87,7 +88,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
     CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
-    self.selectedItem = kSUB_MODE;
+    self.selectedItemType = kSUB_MODE;
     SegmentedCycleList* segmentControl = 
         [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Subscriptions", @"Publications", nil] withValueAtIndex:kSUB_MODE rect:rect andColor:[UIColor whiteColor]];
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
@@ -97,9 +98,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createBackButton {
+    UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    if (self.selectedItemType == kSUB_MODE) {
+        temporaryBarButtonItem.title = @"Subscriptions";
+    } else {
+        temporaryBarButtonItem.title = @"Publications";
+    }
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    [temporaryBarButtonItem release];  
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadPubSubItems {
     if (self.account) {
-        if (self.selectedItem == kSUB_MODE) {
+        if (self.selectedItemType == kSUB_MODE) {
             self.pubSubItems = [SubscriptionModel findAllByAccount:self.account];
         } else {
             self.pubSubItems = [ServiceItemModel findAllByParentNode:[[self.account toJID] pubSubRoot]];
@@ -206,7 +219,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)selectedItemChanged:(SegmentedCycleList*)sender {
-    self.selectedItem = sender.selectedItemIndex;
+    self.selectedItemType = sender.selectedItemIndex;
     [self loadPubSubItems];
 }
 
@@ -265,7 +278,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (self.selectedItem == kSUB_MODE) {
+    if (self.selectedItemType == kSUB_MODE) {
         return kSUB_CELL_HEIGHT;
     } else {
         return kPUB_CELL_HEIGHT;
@@ -307,7 +320,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.selectedItem == kSUB_MODE) {
+    if (self.selectedItemType == kSUB_MODE) {
         AccountSubCell* cell = (AccountSubCell*)[CellUtils createCell:[AccountSubCell class] forTableView:tableView];
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
@@ -336,7 +349,7 @@
 	if (editingStyle == UITableViewCellEditingStyleDelete) { 
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         self.itemToDelete = indexPath.row;
-        if (self.selectedItem == kSUB_MODE) {
+        if (self.selectedItemType == kSUB_MODE) {
             SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
             [XMPPPubSubSubscriptions unsubscribe:client JID:[self.account pubSubService] node:item.node];
         } else {
@@ -350,15 +363,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EventsViewController* viewController = [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
-    viewController.eventType = self.selectedItem;
-	UIBarButtonItem *temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
-    if (self.selectedItem == kSUB_MODE) {
-        temporaryBarButtonItem.title = @"Subscriptions";
-    } else {
-        temporaryBarButtonItem.title = @"Publications";
-    }
-	self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
-	[temporaryBarButtonItem release];    
+    viewController.item = [self.pubSubItems objectAtIndex:indexPath.row];
+    viewController.eventType = self.selectedItemType;
+    [self createBackButton];
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }

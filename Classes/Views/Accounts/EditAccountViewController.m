@@ -175,7 +175,7 @@
 #pragma mark SegmentedListPicker
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)selectedItemChanged:(NSString*)item {
+- (void)selectedItemChanged:(SegmentedListPicker*)picker {
     [self updateStatus];
 }
 
