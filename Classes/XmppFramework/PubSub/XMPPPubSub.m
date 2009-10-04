@@ -86,10 +86,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withSummary:(NSString*)summary {
++ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
     XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
     XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
-    XMPPEntry* entry = [[[XMPPEntry alloc] initWithSummary:summary] autorelease];
+    XMPPEntry* entry = [[[XMPPEntry alloc] initWithTitle:title] autorelease];
     NSXMLElement* publishElement = [NSXMLElement elementWithName:@"publish"];
     [publishElement addAttributeWithName:@"node" stringValue:node];
     NSXMLElement* itemsElement = [NSXMLElement elementWithName:@"item"];

@@ -19,7 +19,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagCommandDataType {
-    CommandDataText,
+    CommandDataUnknown,
     CommandDataScalar,
     CommandDataArray,
     CommandDataHash,
@@ -46,9 +46,7 @@ typedef enum tagCommandDataType {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
 	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
-    if (message.textType == MessageTextTypeBody) {
-        cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
-    } else if (message.textType ==  MessageTextTypeCommand) {
+    if (message.textType ==  MessageTextTypeCommandXData) {
         cellHeight = [self tableView:tableView heightForCommandResponseWithMessage:message];
     } else {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
@@ -59,9 +57,7 @@ typedef enum tagCommandDataType {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {        
 	UITableViewCell* cell = nil;
-    if (message.textType == MessageTextTypeBody) {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
-    } else if (message.textType ==  MessageTextTypeCommand) {
+    if (message.textType ==  MessageTextTypeCommandXData) {
         cell = [self tableView:tableView cellForCommandResponseAtIndexPath:indexPath forMessage:message];
     } else {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
@@ -78,7 +74,7 @@ typedef enum tagCommandDataType {
     XMPPxData* data = [message parseXDataMessage];
     CommandDataType dataType = [self identifyCommandDataType:data];
     switch (dataType) {
-        case CommandDataText:
+        case CommandDataUnknown:
             cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
             break;
         case CommandDataScalar:
@@ -103,7 +99,7 @@ typedef enum tagCommandDataType {
     XMPPxData* data = [message parseXDataMessage];
     CommandDataType dataType = [self identifyCommandDataType:data];
     switch (dataType) {
-        case CommandDataText:
+        case CommandDataUnknown:
             cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
             break;
         case CommandDataScalar:
@@ -124,7 +120,7 @@ typedef enum tagCommandDataType {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CommandDataType)identifyCommandDataType:(XMPPxData*)data {
-    CommandDataType dataType = CommandDataText;
+    CommandDataType dataType = CommandDataUnknown;
     if (data) {
         NSInteger fields = [[data fields] count];
         NSInteger items = [[data items] count];

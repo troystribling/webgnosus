@@ -13,6 +13,7 @@
 #import "ServiceItemModel.h"
 #import "MessageCellFactory.h"
 #import "RosterSectionViewController.h"
+#import "EventMessageViewController.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -21,6 +22,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EventsViewController (PrivateAPI)
 
+- (void)addEventButton;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)loadAccount;
@@ -32,16 +34,33 @@
 @implementation EventsViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize messages;
-@synthesize item;
+@synthesize events;
+@synthesize serviceItem;
 @synthesize account;
 @synthesize eventType;
+@synthesize rosterItem;
+@synthesize addEventButton;
 
 //===================================================================================================================================
 #pragma mark EventsViewController
 
 //===================================================================================================================================
 #pragma mark EventsViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createAddEventButton {
+    if (self.eventType == kPUB_MODE) { 
+        self.navigationItem.rightBarButtonItem = self.addEventButton;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sendEventButtonWasPressed:(id)sender {
+    EventMessageViewController* viewController = [[EventMessageViewController alloc] initWithNibName:@"EventMessageViewController" bundle:nil];
+    viewController.serviceItem = self.serviceItem;
+    viewController.rosterItem = self.rosterItem;
+	[self.navigationController pushViewController:viewController animated:YES]; 
+}	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
@@ -64,7 +83,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadMessages {
-	self.messages = [MessageModel findAllWithLimit:kMESSAGE_CACHE_SIZE];
     [self.tableView reloadData];
 }
 
@@ -72,14 +90,16 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithStyle:(UITableViewStyle)style {
-    if (self = [super initWithStyle:style]) {
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle  {
+    if (self = [super initWithNibName:nibName bundle:nibBundle]) {
+        self.addEventButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendEventButtonWasPressed:)];
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+    [self createAddEventButton];
     [super viewDidLoad];
 }
 
@@ -88,6 +108,7 @@
     [self loadAccount];
     [self addXMPPClientDelgate];
     self.navigationItem.title = @"Events";
+
     [super viewWillAppear:animated];
 }
 
@@ -125,14 +146,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
+    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.events objectAtIndex:indexPath.row]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
-    if (self.item) {
-        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.item itemName]]; 
+    if (self.serviceItem) {
+        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.serviceItem itemName]]; 
         rosterHeaderView = rosterHeader.view;
     }
 	return rosterHeaderView; 
@@ -150,7 +171,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.item) {
+    if (self.serviceItem) {
         return 1;
     } else {
         return 0;
@@ -164,7 +185,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.messages objectAtIndex:indexPath.row]];
+    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.events objectAtIndex:indexPath.row]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -18,14 +18,14 @@
     IBOutlet UITextView* messageView;
 	IBOutlet UIBarButtonItem* sendMessageButton;
     AccountModel* account;
-    UserModel* partner;
+    UserModel* rosterItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextView* messageView;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) UserModel* partner;
+@property (nonatomic, retain) UserModel* rosterItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)sendMessageButtonWasPressed:(id)sender;

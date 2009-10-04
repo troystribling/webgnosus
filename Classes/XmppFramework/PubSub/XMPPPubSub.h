@@ -31,6 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
-+ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withSummary:(NSString*)summary;
++ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title;
 
 @end

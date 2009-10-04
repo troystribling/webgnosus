@@ -11,6 +11,7 @@
 #import "MessageModel.h"
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
+#import "RosterSectionViewController.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -113,9 +114,33 @@
 #pragma mark UITableViewDeligate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* rosterHeaderView = nil;
+    if (self.account) {
+        RosterSectionViewController* rosterHeader = 
+        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
+        rosterHeaderView = rosterHeader.view;
+    }
+	return rosterHeaderView; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
+    return kCELL_SECTION_TITLE_HEIGHT;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.0;
+}
+    
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
 }
+
+//===================================================================================================================================
+#pragma mark UITableViewDataSource
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

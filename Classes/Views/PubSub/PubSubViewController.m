@@ -35,7 +35,7 @@
 - (void)deleteItem:(id)item;
 - (void)addPubSubItemWasPressed; 
 - (void)editAccountButtonWasPressed; 
-- (void)createBackButton;
+- (void)labelBackButton;
 - (void)loadPubSubItems;
 - (void)reloadPubSubItems;
 - (void)addXMPPClientDelgate;
@@ -98,7 +98,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createBackButton {
+- (void)labelBackButton {
     UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
     if (self.selectedItemType == kSUB_MODE) {
         temporaryBarButtonItem.title = @"Subscriptions";
@@ -221,6 +221,7 @@
 - (void)selectedItemChanged:(SegmentedCycleList*)sender {
     self.selectedItemType = sender.selectedItemIndex;
     [self loadPubSubItems];
+    [self labelBackButton];
 }
 
 //===================================================================================================================================
@@ -241,6 +242,7 @@
     [self createSegementedController];
     self.navigationItem.rightBarButtonItem = self.addPubSubItemButton;
     self.navigationItem.leftBarButtonItem = self.editAccountsButton;
+    [self labelBackButton];
     [super viewDidLoad];
 }
 
@@ -363,9 +365,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     EventsViewController* viewController = [[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil];
-    viewController.item = [self.pubSubItems objectAtIndex:indexPath.row];
+    viewController.serviceItem = [self.pubSubItems objectAtIndex:indexPath.row];
     viewController.eventType = self.selectedItemType;
-    [self createBackButton];
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }

@@ -1,42 +1,44 @@
 //
-//  MessageViewController.m
+//  EventMessageViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 2/25/09.
+//  Created by Troy Stribling on 10/3/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "MessageViewController.h"
+#import "EventMessageViewController.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 
-#import "XMPPMessage.h"
+#import "XMPPPubSub.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MessageViewController (PrivateAPI)
+@interface EventMessageViewController (PrivateAPI)
 
 - (void)loadAccount;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation MessageViewController
+@implementation EventMessageViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messageView;
 @synthesize sendMessageButton;
+@synthesize serviceItem;
 @synthesize account;
 @synthesize rosterItem;
 
 //===================================================================================================================================
-#pragma mark MessageViewController
+#pragma mark EventMessageViewController
 
 //===================================================================================================================================
-#pragma mark MessageViewController PrivateAPI
+#pragma mark EventMessageViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAccount {
@@ -52,12 +54,12 @@
         model.accountPk = self.account.pk;
         model.toJid = [self.rosterItem fullJID];
         model.fromJid = [self.account fullJID];
-        model.textType = MessageTextTypeBody;
         model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        model.textType = MessageTextTypeEventText;
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        [XMPPMessage chat:xmppClient JID:[self.rosterItem toJID] messageBody:enteredMessageText];
+        [XMPPPubSub entry:xmppClient  JID:[self.rosterItem toJID] node:self.serviceItem.node withTitle:enteredMessageText];
     }    
     [self.messageView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
@@ -115,4 +117,3 @@
 }
 
 @end
-

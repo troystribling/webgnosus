@@ -79,7 +79,7 @@
 #pragma mark XMPPMessage
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)chat:(XMPPClient*)client messageBody:(NSString*)body JID:(XMPPJID*)jid {
++ (void)chat:(XMPPClient*)client JID:(XMPPJID*)jid messageBody:(NSString*)body {
     XMPPMessage* msg = [[self alloc] initWithType:@"chat" toJID:[jid full] andBody:body];
 	[client sendElement:msg];
 }

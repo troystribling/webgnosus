@@ -12,20 +12,25 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class ServiceItemModel;
 @class AccountModel;
+@class UserModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EventsViewController : UITableViewController {
-    NSMutableArray* messages;
+    NSMutableArray* events;
     AccountModel* account;
-    ServiceItemModel* item;
+    ServiceItemModel* serviceItem;
+    UserModel* rosterItem;
     NSInteger eventType;
+	UIBarButtonItem* addEventButton;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) NSMutableArray* messages;
+@property (nonatomic, retain) NSMutableArray* events;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) ServiceItemModel* item;
+@property (nonatomic, retain) ServiceItemModel* serviceItem;
+@property (nonatomic, retain) UserModel* rosterItem;
 @property (nonatomic, assign) NSInteger eventType;
+@property (nonatomic, retain) UIBarButtonItem* addEventButton;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

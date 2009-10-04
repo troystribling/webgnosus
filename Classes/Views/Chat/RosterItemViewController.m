@@ -40,7 +40,8 @@
 - (NSInteger)selectedIndexFromMode;
 - (void)selectedModeFromIndex:(NSInteger)index;
 - (void)createSegementedController;
-- (void)addMessageButton;
+- (void)createAddItemButton;
+- (void)labelBackButton;
 - (void)loadAccount;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
@@ -93,7 +94,7 @@
     if ([self.selectedMode isEqualToString:@"Chat"]) {
         self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeCommand withLimit:kMESSAGE_CACHE_SIZE];
+        self.items = [MessageModel findAllCommandsByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
@@ -103,7 +104,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addMessageButton {
+- (void)createAddItemButton {
     if ([self.selectedMode isEqualToString:@"Chat"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else if ([self.selectedMode isEqualToString:@"Commands"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
@@ -114,7 +115,24 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)labelBackButton {
+    UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
+        temporaryBarButtonItem.title = @"Chat";
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
+        temporaryBarButtonItem.title = @"Commands";
+    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
+        temporaryBarButtonItem.title = @"Publications";
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
+        temporaryBarButtonItem.title = @"Resources";
+    }
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    [temporaryBarButtonItem release];  
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setModes {
+    self.selectedMode = @"Chat";
     if (self.rosterMode == kCONTACTS_MODE) {
         self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Resources", @"Commands", @"Publications", nil];
     } else {
@@ -135,7 +153,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
     CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
-    self.selectedMode = @"Chat";
     SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] rect:rect andColor:[UIColor whiteColor]];
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     segmentControl.delegate = self;
@@ -148,12 +165,10 @@
     [self.rosterItem load];
     if ([self.selectedMode isEqualToString:@"Chat"]) {
         MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-        [viewController setAccount:self.account];
-        [viewController setPartner:self.rosterItem];
+        viewController.rosterItem = self.rosterItem;
         return [viewController autorelease];
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         CommandViewController* viewController = [[CommandViewController alloc] initWithNibName:@"CommandViewController" bundle:nil];
-        viewController.account = self.account;
         viewController.rosterItem =  self.rosterItem;
         return [viewController autorelease];
     } 
@@ -182,7 +197,7 @@
 - (void)xmppClient:(XMPPClient*)sender didReceivePresence:(XMPPPresence*)presence {
     if ([self.selectedMode isEqualToString:@"Chat"]) {
         [self.rosterItem load];
-        [self addMessageButton];
+        [self createAddItemButton];
         [self.tableView reloadData];
     }
 }
@@ -214,7 +229,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)selectedItemChanged:(SegmentedCycleList*)sender {
     [self selectedModeFromIndex:sender.selectedItemIndex];
-    [self addMessageButton];
+    [self createAddItemButton];
+    [self labelBackButton];
     [self loadItems];
 }
 
@@ -241,7 +257,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [self setModes];
-    [self addMessageButton];
+    [self createAddItemButton];
+    [self labelBackButton];
     [self createSegementedController];
 }
 

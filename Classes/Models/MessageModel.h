@@ -18,8 +18,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagMessageTextType {
     MessageTextTypeBody,
-    MessageTextTypeCommand,
-    MessageTextTypeEvent
+    MessageTextTypeCommandText,
+    MessageTextTypeCommandXData,
+    MessageTextTypeEventText,
+    MessageTextTypeEventEntry,
+    MessageTextTypeEventXData
 } MessageTextType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +59,8 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllEventsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findByPk:(NSInteger)requestPk;

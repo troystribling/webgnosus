@@ -36,7 +36,7 @@
 - (void)addContactButtonWasPressed; 
 - (void)editAccountButtonWasPressed; 
 - (void)createSegementedController;
-- (void)createBackButton;
+- (void)labelBackButton;
 - (void)loadRoster;
 - (void)rosterAddContactButton;
 - (void)reloadRoster;
@@ -92,7 +92,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createBackButton {
+- (void)labelBackButton {
     UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
     if (self.selectedRoster == kCONTACTS_MODE) {
         temporaryBarButtonItem.title = @"Contacts";
@@ -394,7 +394,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     RosterItemViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
-    [self createBackButton];
+    [self labelBackButton];
     [self.navigationController pushViewController:chatViewController animated:YES];
     [chatViewController release];
 }

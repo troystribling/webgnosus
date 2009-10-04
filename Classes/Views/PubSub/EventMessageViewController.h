@@ -1,27 +1,35 @@
 //
-//  XMPPEntry.h
+//  EventMessageViewController.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/2/09.
+//  Created by Troy Stribling on 10/3/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
-
+#import <UIKit/UIKit.h>
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class AccountModel;
+@class UserModel;
+@class ServiceItemModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPEntry : NSXMLElement 
+@interface EventMessageViewController : UIViewController {
+    IBOutlet UITextView* messageView;
+	IBOutlet UIBarButtonItem* sendMessageButton;
+    ServiceItemModel* serviceItem;
+    AccountModel* account;
+    UserModel* rosterItem;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPEntry*)createFromElement:(NSXMLElement*)element;
-- (XMPPEntry*)init;
-- (XMPPEntry*)initWithTitle:(NSString*)msgTitle;
+@property (nonatomic, retain) UITextView* messageView;
+@property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
+@property (nonatomic, retain) ServiceItemModel* serviceItem;
+@property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) UserModel* rosterItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)title;
-- (void)addTitle:(NSString*)val;
+- (IBAction)sendMessageButtonWasPressed:(id)sender;
 
 @end

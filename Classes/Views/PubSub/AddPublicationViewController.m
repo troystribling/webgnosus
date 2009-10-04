@@ -76,7 +76,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.title = @"Add Publication Node";
+	self.title = @"Publication";
 	self.account = [AccountModel findFirstDisplayed];
 	self.nodeTextField.returnKeyType = UIReturnKeyDone;
     self.nodeTextField.delegate = self;

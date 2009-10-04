@@ -33,6 +33,10 @@
 		0534811410292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */; };
 		0534811710292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
 		0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
+		056324081078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
+		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
+		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
+		0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
 		057BB16210587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16310587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
@@ -351,6 +355,9 @@
 		0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoIdentity.m; path = Disco/XMPPDiscoIdentity.m; sourceTree = "<group>"; };
 		0534811510292E5B002E6E2D /* XMPPDiscoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItem.h; path = Disco/XMPPDiscoItem.h; sourceTree = "<group>"; };
 		0534811610292E5B002E6E2D /* XMPPDiscoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItem.m; path = Disco/XMPPDiscoItem.m; sourceTree = "<group>"; };
+		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
+		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
+		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
@@ -825,6 +832,7 @@
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
 				05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */,
 				05D1ECE6107070EB0013734A /* CommandViewController.xib */,
+				0563240C1078290A00563274 /* EventMessageViewController.xib */,
 				050263CF1076FA7E000B81C6 /* EventsViewController.xib */,
 				05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */,
 				05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */,
@@ -1116,6 +1124,8 @@
 				05EF001F105738840068AA06 /* AccountPubCell.m */,
 				05EFFFF210572B490068AA06 /* AccountSubCell.h */,
 				05EFFFF310572B490068AA06 /* AccountSubCell.m */,
+				056324051078287800563274 /* EventMessageViewController.h */,
+				056324061078287800563274 /* EventMessageViewController.m */,
 				05E7EB8D1055CD4B00C5F3FD /* EventsViewController.h */,
 				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PubSubViewController.h */,
@@ -1301,6 +1311,7 @@
 				05F9742A1072F8560046344A /* XDataScalarCell.xib in Resources */,
 				05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 				050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */,
+				0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1353,6 +1364,7 @@
 				05F9742B1072F8560046344A /* XDataScalarCell.xib in Resources */,
 				05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 				050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */,
+				0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1481,7 @@
 				05F973E71072E9F10046344A /* XDataArrayHashCell.m in Sources */,
 				05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */,
 				050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */,
+				0563240A1078287800563274 /* EventMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1582,6 +1595,7 @@
 				05F973E61072E9F10046344A /* XDataArrayHashCell.m in Sources */,
 				05F79C481075AA8200B75735 /* ContactPubCell.m in Sources */,
 				050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */,
+				056324081078287800563274 /* EventMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -91,7 +91,7 @@
     model.toJid = [self.rosterItem fullJID];
     model.fromJid = [self.account fullJID];
     model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-    model.textType = MessageTextTypeCommand;
+    model.textType = MessageTextTypeCommandText;
     [model insert];
     [model release];
 }

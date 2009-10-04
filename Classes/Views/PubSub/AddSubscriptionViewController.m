@@ -75,7 +75,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.title = @"Add Subscription";
+	self.title = @"Subscription";
 	self.account = [AccountModel findFirstDisplayed];
 	self.nodeTextField.returnKeyType = UIReturnKeyDone;
     self.nodeTextField.delegate = self;

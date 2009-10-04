@@ -36,21 +36,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPEntry*)initWithSummary:(NSString*)msgSummary {
+- (XMPPEntry*)initWithTitle:(NSString*)msgTitle {
 	if(self = [self init]) {
-        [self addSummary:msgSummary];
+        [self addTitle:msgTitle];
 	}
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)summary {
-	return [[self elementForName:@"summary"] stringValue];
+- (NSString*)title {
+	return [[self elementForName:@"title"] stringValue];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addSummary:(NSString*)val {
-	[self addChild:[NSXMLElement elementWithName:@"summary" stringValue:val]];	
+- (void)addTitle:(NSString*)val {
+	[self addChild:[NSXMLElement elementWithName:@"title" stringValue:val]];	
 }
 
 @end
