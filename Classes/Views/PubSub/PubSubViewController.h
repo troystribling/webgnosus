@@ -10,12 +10,10 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class AccountManagerViewController;
 @class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface PubSubViewController : UITableViewController {
-    IBOutlet AccountManagerViewController* accountManagerViewController;
 	UIBarButtonItem* addPubSubItemButton;
 	UIBarButtonItem* editAccountsButton;
 	NSMutableArray* pubSubItems;
@@ -27,7 +25,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* addPubSubItemButton;
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
-@property (nonatomic, retain) AccountManagerViewController* accountManagerViewController;
 @property (nonatomic, retain) NSMutableArray* pubSubItems;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, assign) NSInteger selectedItemType;

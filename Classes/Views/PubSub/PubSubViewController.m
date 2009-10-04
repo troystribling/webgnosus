@@ -54,7 +54,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addPubSubItemButton;
 @synthesize editAccountsButton;
-@synthesize accountManagerViewController;
 @synthesize pubSubItems;
 @synthesize account;
 @synthesize selectedItemType;
@@ -82,7 +81,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
-    [self.accountManagerViewController addAsSubview:self.view.window];	
+    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil];
+    [acctMgr addAsSubview:self.view.window];
+	[acctMgr release];
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------

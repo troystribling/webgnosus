@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "HistoryViewController.h"
+#import "AccountManagerViewController.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
@@ -20,10 +21,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface HistoryViewController (PrivateAPI)
 
+- (void)editAccountButtonWasPressed; 
 - (void)loadMessages;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)loadAccount;
+- (void)addXMPPAccountUpdateDelgate;
+- (void)removeXMPPAccountUpdateDelgate;
+- (void)reloadMessages;
 
 @end
 
@@ -31,6 +36,7 @@
 @implementation HistoryViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize editAccountsButton;
 @synthesize messages;
 @synthesize account;
 
@@ -41,8 +47,15 @@
 #pragma mark HistoryViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)editAccountButtonWasPressed { 
+    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil];
+    [acctMgr addAsSubview:self.view.window];
+	[acctMgr release];
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadMessages {
-	self.messages = [MessageModel findAllWithLimit:kMESSAGE_CACHE_SIZE];
+	self.messages = [MessageModel findAllByAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     [self.tableView reloadData];
 }
 
@@ -65,21 +78,64 @@
     self.account = [AccountModel findFirstDisplayed];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeXMPPAccountUpdateDelgate {
+    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadMessages {
+    [self loadAccount];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadMessages];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientManagerAccountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didAddAccount {
+    [self reloadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didRemoveAccount {
+    [self reloadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didUpdateAccount {
+    [self reloadMessages];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage*)message {
-    if ([message hasBody]) {
-        [self loadMessages];
-    }
+    [self loadMessages];
 }
 
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithCoder:(NSCoder *)coder { 
+	if (self = [super initWithCoder:coder]) { 
+        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+	} 
+	return self; 
+} 
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {    
+    self.navigationItem.leftBarButtonItem = self.editAccountsButton;
     [super viewDidLoad];
 }
 
@@ -87,6 +143,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
     [self addXMPPClientDelgate];
+    [self addXMPPAccountUpdateDelgate];
     [self loadMessages];
 	[super viewWillAppear:animated];
 }
@@ -94,6 +151,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
+    [self addXMPPAccountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -149,7 +207,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [MessageModel countWithLimit:kMESSAGE_CACHE_SIZE];
+    return [self.messages count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

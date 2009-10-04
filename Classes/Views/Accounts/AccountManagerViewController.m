@@ -92,8 +92,8 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithCoder:(NSCoder *)coder { 
-	if (self = [super initWithCoder:coder]) { 
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
+	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         [self createContentView];
 	} 
 	return self; 

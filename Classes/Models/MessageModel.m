@@ -108,6 +108,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC LIMIT %d", requestAccount.pk, requestLimit];
+	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND accountPk = %d ORDER BY createdAt DESC", 

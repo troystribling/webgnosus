@@ -11,12 +11,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class RosterCell;
-@class AccountManagerViewController;
 @class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
-    IBOutlet AccountManagerViewController* accountManagerViewController;
 	UIBarButtonItem* addContactButton;
 	UIBarButtonItem* editAccountsButton;
 	NSMutableArray* roster;
@@ -27,7 +25,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* addContactButton;
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
-@property (nonatomic, retain) AccountManagerViewController* accountManagerViewController;
 @property (nonatomic, retain) NSMutableArray* roster;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, assign) NSInteger selectedRoster;

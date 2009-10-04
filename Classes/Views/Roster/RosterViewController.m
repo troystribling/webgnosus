@@ -56,7 +56,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addContactButton;
 @synthesize editAccountsButton;
-@synthesize accountManagerViewController;
 @synthesize roster;
 @synthesize account;
 @synthesize selectedRoster;
@@ -76,7 +75,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
-    [self.accountManagerViewController addAsSubview:self.view.window];	
+    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil];
+    [acctMgr addAsSubview:self.view.window];
+	[acctMgr release];
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
