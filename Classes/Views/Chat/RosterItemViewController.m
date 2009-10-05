@@ -152,7 +152,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
     SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] rect:rect andColor:[UIColor whiteColor]];
     segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     segmentControl.delegate = self;

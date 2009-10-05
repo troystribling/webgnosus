@@ -56,6 +56,7 @@
         model.fromJid = [self.account fullJID];
         model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
         model.textType = MessageTextTypeEventText;
+        model.itemId = -1;
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];

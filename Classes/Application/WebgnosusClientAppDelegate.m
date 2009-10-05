@@ -39,6 +39,7 @@
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController;
 - (void)accountConnectionFailedForClient:(XMPPClient*)sender;
 - (void)createTabBarController;
+- (void)createAccountManager;
 
 @end
 
@@ -50,8 +51,6 @@
 @synthesize rosterViewController;
 @synthesize historyViewController;
 @synthesize pubSubViewController;
-@synthesize accountManagerViewController;
-
 @synthesize tabBarController;
 @synthesize navPubSubViewController;
 @synthesize navRosterViewController;
@@ -104,6 +103,13 @@
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, self.navHistoryViewController, nil];	
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createAccountManager {
+    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil];
+    [acctMgr addAsSubview:window];
+    [acctMgr release];
+}
+
 //===================================================================================================================================
 #pragma mark UIApplicationDelegate
 
@@ -123,7 +129,7 @@
     [AlertViewManager onStartshowConnectingIndicatorInView:window];
     NSInteger count = [AccountModel count];
     if (count == 0) {
-        [self.accountManagerViewController addAsSubview:window];	
+        [self createAccountManager];
     }
     [window makeKeyAndVisible];
 }
@@ -156,7 +162,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscriptionsResult:(XMPPIQ *)iq {
     AccountModel* account = [AccountModel findFirstDisplayed];
     if (!account) {
-        [self.accountManagerViewController addAsSubview:window];	
+        [self createAccountManager];
     }
 }
 

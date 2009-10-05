@@ -34,7 +34,10 @@
 #import "XMPPError.h"
 #import "XMPPPubSubSubscription.h"
 #import "XMPPPubSubSubscriptions.h"
+#import "XMPPPubSubEvent.h"
+#import "XMPPPubSubItem.h"
 #import "XMPPxData.h"
+#import "XMPPEntry.h"
 
 #import "AlertViewManager.h"
 #import "NSObjectiPhoneAdditions.h"
@@ -389,7 +392,43 @@
             messageModel.toJid = [account fullJID];
             messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
             messageModel.textType = MessageTextTypeBody;
-            messageModel.node = @"nonode";
+            messageModel.node = @"";
+            messageModel.itemId = -1;
+            [messageModel insert];
+            [messageModel release];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
+	[self writeToLog:client message:@"xmppClient:didReceiveEvent"];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        XMPPPubSubEvent* event = [message event];
+        NSArray* items = [event items];
+        for (int i = 0; i < [items count]; i++) {
+            XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[items objectAtIndex:i]];
+            XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
+            MessageModel* messageModel = [[MessageModel alloc] init];
+            messageModel.fromJid = [fromJid full];
+            messageModel.accountPk = account.pk;
+            messageModel.toJid = [account fullJID];
+            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.node = [event node];
+            messageModel.itemId = [item itemId];
+            XMPPxData* data = [item data];
+            XMPPEntry* entry = [item entry];
+            if (data) {
+                messageModel.textType = MessageTextTypeEventxData;
+                messageModel.messageText = [data XMLString];
+            } else if (entry) {
+                messageModel.textType = MessageTextTypeEventEntry;
+                messageModel.messageText = [entry XMLString];
+            } else {
+                messageModel.textType = MessageTextTypeEventText;
+                messageModel.messageText = [item XMLString];
+            }
             [messageModel insert];
             [messageModel release];
         }
@@ -414,6 +453,7 @@
                 messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
                 messageModel.textType = MessageTextTypeCommandXData;
                 messageModel.node = [command node];
+                messageModel.itemId = -1;
                 [messageModel insert];
                 [messageModel release];
             }

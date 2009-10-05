@@ -11,7 +11,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class RosterViewController;
-@class AccountManagerViewController;
 @class HistoryViewController;
 @class PubSubViewController;
 
@@ -19,7 +18,6 @@
 @interface WebgnosusClientAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
     IBOutlet UIWindow* window;
     IBOutlet RosterViewController* rosterViewController;
-    IBOutlet AccountManagerViewController* accountManagerViewController;
     IBOutlet PubSubViewController* pubSubViewController;
 	IBOutlet HistoryViewController* historyViewController;
 
@@ -31,7 +29,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIWindow* window;
-@property (nonatomic, retain) AccountManagerViewController* accountManagerViewController;
 @property (nonatomic, retain) PubSubViewController* pubSubViewController;
 @property (nonatomic, retain) RosterViewController* rosterViewController;
 @property (nonatomic, retain) HistoryViewController* historyViewController;

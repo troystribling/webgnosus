@@ -128,6 +128,7 @@
 // applications
 - (void)xmppClient:(XMPPClient*)client didReceiveIQ:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveMessage:(XMPPMessage*)message;
+- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message;
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq;
 

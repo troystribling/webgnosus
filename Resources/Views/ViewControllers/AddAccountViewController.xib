@@ -39,7 +39,7 @@
 					<object class="IBUILabel" id="699153618">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{60, 86}, {27, 21}}</string>
+						<string key="NSFrame">{{60, 76}, {27, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -61,7 +61,7 @@
 					<object class="IBUILabel" id="150098780">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{13, 125}, {74, 21}}</string>
+						<string key="NSFrame">{{13, 115}, {74, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -76,7 +76,7 @@
 					<object class="IBUITextField" id="1025766312">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{95, 76}, {163, 31}}</string>
+						<string key="NSFrame">{{95, 66}, {163, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -103,7 +103,7 @@
 					<object class="IBUITextField" id="117139819">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{95, 115}, {163, 31}}</string>
+						<string key="NSFrame">{{95, 105}, {163, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -398,7 +398,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AddAccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{1093, 393}, {270, 300}}</string>
+					<string>{{526, 384}, {270, 300}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

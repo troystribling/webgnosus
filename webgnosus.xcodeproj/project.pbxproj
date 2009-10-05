@@ -252,6 +252,8 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
+		05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
 		05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
 		05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
 		05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
@@ -547,6 +549,8 @@
 		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEntryDelegate.h; sourceTree = "<group>"; };
+		05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubEntryDelegate.m; sourceTree = "<group>"; };
 		05E586C5106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscribeDelegate.h; sourceTree = "<group>"; };
 		05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscribeDelegate.m; sourceTree = "<group>"; };
 		05E586D5106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscriptionsDelegate.h; sourceTree = "<group>"; };
@@ -779,6 +783,8 @@
 				05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */,
 				05E83AF0106AF53100266E1F /* XMPPPubSubDeleteDelegate.h */,
 				05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */,
+				05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */,
+				05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */,
 				05D1ED6B1037BEF200DB3B3F /* XMPPPubSubEvent.h */,
 				05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */,
 				05D1ED6D1037BEF200DB3B3F /* XMPPPubSubItem.h */,
@@ -1482,6 +1488,7 @@
 				05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */,
 				050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */,
 				0563240A1078287800563274 /* EventMessageViewController.m in Sources */,
+				05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1603,7 @@
 				05F79C481075AA8200B75735 /* ContactPubCell.m in Sources */,
 				050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */,
 				056324081078287800563274 /* EventMessageViewController.m in Sources */,
+				05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

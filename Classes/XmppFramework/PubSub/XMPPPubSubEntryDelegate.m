@@ -1,58 +1,44 @@
 //
-//  XMPPPubSubEvent.m
+//  XMPPPubSubEntryDelegate.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/8/09.
+//  Created by Troy Stribling on 10/5/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubEvent.h"
-#import "XMPPPubSubItems.h"
-#import "NSXMLElementAdditions.h"
+#import "XMPPPubSubEntryDelegate.h"
+#import "XMPPMessageDelegate.h"
+#import "XMPPDiscoItemsQuery.h"
+#import "XMPPResponse.h"
+#import "XMPPJID.h"
+#import "XMPPClient.h"
+#import "XMPPStanza.h"
+#import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubEvent (PrivateAPI)
+@interface XMPPPubSubEntryDelegate (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubEvent
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSXMLElement*)itemsElement {
-    return [self elementForName:@"items"];
-}
+@implementation XMPPPubSubEntryDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubEvent PrivateAPI
+#pragma mark XMPPPubSubEntryDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubEvent
+#pragma mark XMPPPubSubEntryDelegate PrivateAPI
+
+//===================================================================================================================================
+#pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubEvent*)createFromElement:(NSXMLElement*)element {
-	XMPPPubSubEvent* result = (XMPPPubSubEvent*)element;
-	result->isa = [XMPPPubSubEvent class];
-	return result;
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubEvent*)init {
-	if(self = [super initWithName:@"event"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node {
-    return [[[self itemsElement] attributeForName:@"node"] stringValue];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSArray*)items {
-    return [[self itemsElement] elementsForName:@"item"];
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
 }
 
 //===================================================================================================================================

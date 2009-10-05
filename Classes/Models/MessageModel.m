@@ -35,6 +35,7 @@
 @synthesize fromJid;
 @synthesize textType;
 @synthesize node;
+@synthesize itemId;
 
 //===================================================================================================================================
 #pragma mark MessageModel
@@ -81,7 +82,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE messages (pk integer primary key, messageText text, createdAt date, toJid text, fromJid text, textType integer, node text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE messages (pk integer primary key, messageText text, createdAt date, toJid text, fromJid text, textType integer, node text, itemId integer, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -146,7 +147,7 @@
 + (NSMutableArray*)findAllEventsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND (textType = %d OR textType = %d OR textType = %d)  AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
-                                 requestJID, requestJID, MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventXData, requestAccount.pk, requestLimit];
+                                 requestJID, requestJID, MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventxData, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
@@ -196,19 +197,19 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.node) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
-                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, itemId, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d, %d)", 
+                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, self.accountPk];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, accountPk) values ('%@', '%@', '%@', '%@', %d, %d)", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, itemId, accountPk) values ('%@', '%@', '%@', '%@', %d, %d, %d)", 
+                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', accountPk = %d WHERE pk = %d", 
-                                     self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.accountPk, self.pk];	
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', itemId = %d , accountPk = %d WHERE pk = %d", 
+                                     self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -256,7 +257,8 @@
     if (nodeVal != nil) {		
         self.node = [[NSString alloc] initWithUTF8String:nodeVal];
     }
-    self.accountPk = (int)sqlite3_column_int(statement, 7);
+    self.itemId = (int)sqlite3_column_int(statement, 7);
+    self.accountPk = (int)sqlite3_column_int(statement, 8);
 }
 
 //===================================================================================================================================

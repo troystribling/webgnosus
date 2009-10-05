@@ -22,7 +22,7 @@ typedef enum tagMessageTextType {
     MessageTextTypeCommandXData,
     MessageTextTypeEventText,
     MessageTextTypeEventEntry,
-    MessageTextTypeEventXData
+    MessageTextTypeEventxData
 } MessageTextType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +35,7 @@ typedef enum tagMessageTextType {
 	NSString* fromJid;
     MessageTextType textType;
     NSString* node;
+    NSInteger itemId;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -46,6 +47,7 @@ typedef enum tagMessageTextType {
 @property (nonatomic, assign) NSString* fromJid;
 @property (nonatomic, assign) MessageTextType textType;
 @property (nonatomic, assign) NSString* node;
+@property (nonatomic, assign) NSInteger itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;

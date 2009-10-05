@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSub.h"
 #import "XMPPPubSubCeateDelegate.h"
+#import "XMPPPubSubEntryDelegate.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
@@ -97,7 +98,7 @@
     [publishElement addChild:itemsElement];	
     [pubsub addChild:publishElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
 }
 
 //===================================================================================================================================

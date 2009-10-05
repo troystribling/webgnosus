@@ -12,20 +12,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPxData;
+@class XMPPEntry;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubItem : NSXMLElement 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element;
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData;
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData andItemId:(NSInteger)itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)itemId;
-- (void)addItemId:(NSInteger)val;
-
 - (XMPPxData*)data;
-- (void)addData:(XMPPxData*)child;
+- (XMPPEntry*)entry;
 
 @end

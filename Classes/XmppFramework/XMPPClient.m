@@ -18,6 +18,7 @@
 #import "XMPPRosterItem.h"
 #import "XMPPCommand.h"
 #import "XMPPPubSub.h"
+#import "XMPPPubSubEvent.h"
 #import "XMPPResponse.h"
 #import "XMPPxData.h"
 
@@ -249,7 +250,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppStream:(XMPPStream*)sender didReceiveMessage:(XMPPMessage*)message {
-    [multicastDelegate xmppClient:self didReceiveMessage:message];
+    XMPPPubSubEvent* event = [message event];
+    if (event) {
+        [multicastDelegate xmppClient:self didReceiveEvent:message];
+    } else {
+        [multicastDelegate xmppClient:self didReceiveMessage:message];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

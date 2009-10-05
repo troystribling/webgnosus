@@ -9,8 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubItem.h"
 #import "XMPPxData.h"
-
-//-----------------------------------------------------------------------------------------------------------------------------------
+#import "XMPPEntry.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubItem
@@ -28,30 +27,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData {
-	if(self = [super initWithName:@"item"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
-        [self addData:itemData];
-	}
-    return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItem*)initWithData:(XMPPxData*)itemData andItemId:(NSInteger)itemId {
-	if(self = [self initWithData:itemData]) {
-        [self addItemId:itemId];
-	}
-    return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)itemId {
     return [[[self attributeForName:@"id"] stringValue] integerValue];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addItemId:(NSInteger)val {
-    [self addAttributeWithName:@"id" stringValue:[NSString stringWithFormat:@"%d", val]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -65,8 +42,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addData:(XMPPxData*)child {
-    [self addChild:child];
+- (XMPPEntry*)entry {
+    XMPPEntry* entryData = nil;
+    NSXMLElement* entryElement = [self elementForName:@"entry"];
+    if (entryElement) {
+        entryData = [XMPPEntry createFromElement:entryElement];
+    }
+    return entryData;
 }
 
 //===================================================================================================================================

@@ -31,7 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidTextField;
-@synthesize accountLabel;
 @synthesize account;
 @synthesize addContactIndicatorView;
 @synthesize newContactJidString;
@@ -68,7 +67,6 @@
     [super viewDidLoad];
 	self.title = @"Add Contact";
 	self.account = [AccountModel findFirstDisplayed];
-	self.accountLabel.text = [self.account bareJID];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;

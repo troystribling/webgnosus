@@ -82,7 +82,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
     self.selectedRoster = kCONTACTS_MODE;
     SegmentedCycleList* segmentControl = 
         [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Contacts", @"Resources", nil] withValueAtIndex:kCONTACTS_MODE rect:rect andColor:[UIColor whiteColor]];

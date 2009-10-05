@@ -88,7 +88,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 150.0f, 30.0f);
+    CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
     self.selectedItemType = kSUB_MODE;
     SegmentedCycleList* segmentControl = 
         [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Subscriptions", @"Publications", nil] withValueAtIndex:kSUB_MODE rect:rect andColor:[UIColor whiteColor]];
@@ -322,7 +322,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.pubSubItems count];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     if (self.selectedItemType == kSUB_MODE) {
         AccountSubCell* cell = (AccountSubCell*)[CellUtils createCell:[AccountSubCell class] forTableView:tableView];
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
@@ -335,16 +340,6 @@
         cell.itemLabel.text = item.itemName;
         return cell;
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.pubSubItems count];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [self tableView:tableView createCellForRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

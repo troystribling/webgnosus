@@ -10,13 +10,12 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class AccountModel;
 @class ActivityView;
+@class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddContactViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* jidTextField;
-	IBOutlet UILabel* accountLabel;
     AccountModel* account;
     ActivityView* addContactIndicatorView;
     NSString* newContactJidString;
@@ -24,7 +23,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* jidTextField;
-@property (nonatomic, retain) UILabel* accountLabel;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ActivityView* addContactIndicatorView;
 @property (nonatomic, retain) NSString* newContactJidString;
