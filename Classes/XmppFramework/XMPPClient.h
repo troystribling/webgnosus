@@ -147,6 +147,8 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryError:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryResult:(XMPPIQ*)iq;
 
 - (void)xmppClient:(XMPPClient*)client didDiscoverUserPubSubNode:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)node;
 - (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq;

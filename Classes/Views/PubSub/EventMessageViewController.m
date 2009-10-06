@@ -10,7 +10,6 @@
 #import "EventMessageViewController.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
-#import "ServiceItemModel.h"
 
 #import "XMPPPubSub.h"
 #import "XMPPClientManager.h"
@@ -30,9 +29,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messageView;
 @synthesize sendMessageButton;
-@synthesize serviceItem;
+@synthesize service;
+@synthesize node;
 @synthesize account;
-@synthesize rosterItem;
 
 //===================================================================================================================================
 #pragma mark EventMessageViewController
@@ -52,15 +51,15 @@
         MessageModel* model = [[MessageModel alloc] init];
         model.messageText = enteredMessageText;
         model.accountPk = self.account.pk;
-        model.toJid = [self.rosterItem fullJID];
+        model.toJid = self.service;
         model.fromJid = [self.account fullJID];
         model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
         model.textType = MessageTextTypeEventText;
-        model.itemId = -1;
+        model.itemId = @"-1";
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        [XMPPPubSub entry:xmppClient  JID:[self.rosterItem toJID] node:self.serviceItem.node withTitle:enteredMessageText];
+        [XMPPPubSub entry:xmppClient  JID:[XMPPJID jidWithString:self.service] node:self.node withTitle:enteredMessageText];
     }    
     [self.messageView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];

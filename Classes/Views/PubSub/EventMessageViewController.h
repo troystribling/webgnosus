@@ -17,17 +17,17 @@
 @interface EventMessageViewController : UIViewController {
     IBOutlet UITextView* messageView;
 	IBOutlet UIBarButtonItem* sendMessageButton;
-    ServiceItemModel* serviceItem;
+    NSString* service;
+    NSString* node;
     AccountModel* account;
-    UserModel* rosterItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextView* messageView;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
-@property (nonatomic, retain) ServiceItemModel* serviceItem;
+@property (nonatomic, retain) NSString* service;
+@property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) UserModel* rosterItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)sendMessageButtonWasPressed:(id)sender;

@@ -35,10 +35,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize events;
-@synthesize serviceItem;
+@synthesize service;
+@synthesize node;
+@synthesize name;
 @synthesize account;
 @synthesize eventType;
-@synthesize rosterItem;
 @synthesize addEventButton;
 
 //===================================================================================================================================
@@ -57,8 +58,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendEventButtonWasPressed:(id)sender {
     EventMessageViewController* viewController = [[EventMessageViewController alloc] initWithNibName:@"EventMessageViewController" bundle:nil];
-    viewController.serviceItem = self.serviceItem;
-    viewController.rosterItem = self.rosterItem;
+    viewController.service = self.service;
+    viewController.node = self.node;
 	[self.navigationController pushViewController:viewController animated:YES]; 
 }	
 
@@ -82,8 +83,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMessages {
+- (void)loadEvents {
+    self.events = [MessageModel findAllEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
     [self.tableView reloadData];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
+    [self loadEvents];
 }
 
 //===================================================================================================================================
@@ -108,7 +118,7 @@
     [self loadAccount];
     [self addXMPPClientDelgate];
     self.navigationItem.title = @"Events";
-
+    [self loadEvents];
     [super viewWillAppear:animated];
 }
 
@@ -152,10 +162,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
-    if (self.serviceItem) {
-        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.serviceItem itemName]]; 
-        rosterHeaderView = rosterHeader.view;
-    }
+    RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:self.name]; 
+    rosterHeaderView = rosterHeader.view;
 	return rosterHeaderView; 
 }
 
@@ -171,16 +179,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.serviceItem) {
-        return 1;
-    } else {
-        return 0;
-    }
+    return 1;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [MessageModel countWithLimit:kMESSAGE_CACHE_SIZE];
+    return [self.events count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

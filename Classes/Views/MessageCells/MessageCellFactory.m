@@ -29,8 +29,8 @@ typedef enum tagCommandDataType {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageCellFactory (PrivateAPI)
 
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForCommandResponseAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
-+ (CGFloat)tableView:(UITableView*)tableView heightForCommandResponseWithMessage:(MessageModel*)message;
++ (CGFloat)tableView:(UITableView*)tableView heightForXDataWithMessage:(MessageModel*)message;
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForXDataAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
 + (CommandDataType)identifyCommandDataType:(XMPPxData*)data;
 
 @end
@@ -47,7 +47,11 @@ typedef enum tagCommandDataType {
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
 	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
     if (message.textType ==  MessageTextTypeCommandXData) {
-        cellHeight = [self tableView:tableView heightForCommandResponseWithMessage:message];
+        cellHeight = [self tableView:tableView heightForXDataWithMessage:message];
+    } else if (message.textType ==  MessageTextTypeEventxData) {
+        cellHeight = [self tableView:tableView heightForXDataWithMessage:message];
+    } else if (message.textType ==  MessageTextTypeEventEntry) {
+        cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     } else {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     }
@@ -58,7 +62,11 @@ typedef enum tagCommandDataType {
 + (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {        
 	UITableViewCell* cell = nil;
     if (message.textType ==  MessageTextTypeCommandXData) {
-        cell = [self tableView:tableView cellForCommandResponseAtIndexPath:indexPath forMessage:message];
+        cell = [self tableView:tableView cellForXDataAtIndexPath:indexPath forMessage:message];
+    } else if (message.textType ==  MessageTextTypeEventxData) {
+        cell = [self tableView:tableView cellForXDataAtIndexPath:indexPath forMessage:message];
+    } else if (message.textType ==  MessageTextTypeEventEntry) {
+        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
     } else {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
     }
@@ -69,7 +77,7 @@ typedef enum tagCommandDataType {
 #pragma mark MessageCellFactory PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGFloat)tableView:(UITableView*)tableView heightForCommandResponseWithMessage:(MessageModel*)message {
++ (CGFloat)tableView:(UITableView*)tableView heightForXDataWithMessage:(MessageModel*)message {
 	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
     XMPPxData* data = [message parseXDataMessage];
     CommandDataType dataType = [self identifyCommandDataType:data];
@@ -94,7 +102,7 @@ typedef enum tagCommandDataType {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForCommandResponseAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForXDataAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {
 	UITableViewCell* cell = nil;
     XMPPxData* data = [message parseXDataMessage];
     CommandDataType dataType = [self identifyCommandDataType:data];

@@ -393,7 +393,7 @@
             messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
             messageModel.textType = MessageTextTypeBody;
             messageModel.node = @"";
-            messageModel.itemId = -1;
+            messageModel.itemId = @"-1";
             [messageModel insert];
             [messageModel release];
         }
@@ -410,27 +410,29 @@
         for (int i = 0; i < [items count]; i++) {
             XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[items objectAtIndex:i]];
             XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
-            MessageModel* messageModel = [[MessageModel alloc] init];
-            messageModel.fromJid = [fromJid full];
-            messageModel.accountPk = account.pk;
-            messageModel.toJid = [account fullJID];
-            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-            messageModel.node = [event node];
-            messageModel.itemId = [item itemId];
-            XMPPxData* data = [item data];
-            XMPPEntry* entry = [item entry];
-            if (data) {
-                messageModel.textType = MessageTextTypeEventxData;
-                messageModel.messageText = [data XMLString];
-            } else if (entry) {
-                messageModel.textType = MessageTextTypeEventEntry;
-                messageModel.messageText = [entry XMLString];
-            } else {
-                messageModel.textType = MessageTextTypeEventText;
-                messageModel.messageText = [item XMLString];
+            if (![MessageModel findEventByNode:[event node] andItemId:[item itemId]]) {
+                MessageModel* messageModel = [[MessageModel alloc] init];
+                messageModel.fromJid = [fromJid full];
+                messageModel.accountPk = account.pk;
+                messageModel.toJid = [account fullJID];
+                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+                messageModel.node = [event node];
+                messageModel.itemId = [item itemId];
+                XMPPxData* data = [item data];
+                XMPPEntry* entry = [item entry];
+                if (data) {
+                    messageModel.textType = MessageTextTypeEventxData;
+                    messageModel.messageText = [data XMLString];
+                } else if (entry) {
+                    messageModel.textType = MessageTextTypeEventEntry;
+                    messageModel.messageText = [entry XMLString];
+                } else {
+                    messageModel.textType = MessageTextTypeEventText;
+                    messageModel.messageText = [item XMLString];
+                }
+                [messageModel insert];
+                [messageModel release];
             }
-            [messageModel insert];
-            [messageModel release];
         }
     }
 }
@@ -453,7 +455,7 @@
                 messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
                 messageModel.textType = MessageTextTypeCommandXData;
                 messageModel.node = [command node];
-                messageModel.itemId = -1;
+                messageModel.itemId = @"-1";
                 [messageModel insert];
                 [messageModel release];
             }
@@ -510,6 +512,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubDeleteError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryResult"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

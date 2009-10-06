@@ -21,7 +21,7 @@
 + (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)itemId;
+- (NSString*)itemId;
 - (XMPPxData*)data;
 - (XMPPEntry*)entry;
 

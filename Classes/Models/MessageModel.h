@@ -35,7 +35,7 @@ typedef enum tagMessageTextType {
 	NSString* fromJid;
     MessageTextType textType;
     NSString* node;
-    NSInteger itemId;
+    NSString* itemId;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -47,7 +47,7 @@ typedef enum tagMessageTextType {
 @property (nonatomic, assign) NSString* fromJid;
 @property (nonatomic, assign) MessageTextType textType;
 @property (nonatomic, assign) NSString* node;
-@property (nonatomic, assign) NSInteger itemId;
+@property (nonatomic, assign) NSString* itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -63,9 +63,10 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllEventsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllEventsByNode:(NSString*)requestNode withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
++ (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 

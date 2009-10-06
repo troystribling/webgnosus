@@ -29,7 +29,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPEntry*)init {
-	if(self = [super initWithName:@"event"]) {
+	if(self = [super initWithName:@"entry"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://www.w3.org/2005/Atom"]];
 	}
 	return self;

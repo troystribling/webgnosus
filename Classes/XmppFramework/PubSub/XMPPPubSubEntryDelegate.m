@@ -35,10 +35,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryError:(XMPPIQ*)stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryResult:(XMPPIQ*)stanza];
 }
 
 //===================================================================================================================================
