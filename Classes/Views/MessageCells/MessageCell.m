@@ -27,10 +27,14 @@
 #pragma mark MessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setJidAndTime:(MessageModel*)message {
-    self.jidLabel.text = [message fromJid];
++ (void)setTime:(MessageCell*)cell forMessage:(MessageModel*)message {
     NSRange dateAndTime = {0, 19};
-    self.dateLabel.text = [[message.createdAt description] substringWithRange:dateAndTime];
+    cell.dateLabel.text = [[message.createdAt description] substringWithRange:dateAndTime];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(MessageCell*)cell Jid:(NSString*)jid {
+    cell.jidLabel.text = jid;
 }
 
 //===================================================================================================================================

@@ -1,32 +1,24 @@
 //
-//  BodyMessageCell.h
+//  EntryCell.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 2/27/09.
+//  Created by Troy Stribling on 10/6/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
-#import "MessageCell.h"
+#import "BodyMessageCell.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class MessageModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface BodyMessageCell : MessageCell {
-    IBOutlet UILabel* messageLabel;
-}
+@interface EntryCell : BodyMessageCell 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* messageLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)getMessageText:(MessageModel*)message;
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message;
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message fromJid:(NSString*)jid;
-+ (CGFloat)getMessageHeight:(NSString*)messageText;
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 
 @end

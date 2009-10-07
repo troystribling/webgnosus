@@ -14,6 +14,7 @@
 @class AccountModel;
 @class UserModel;
 @class XMPPxData;
+@class XMPPEntry;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagMessageTextType {
@@ -76,5 +77,6 @@ typedef enum tagMessageTextType {
 - (void)update;
 - (NSString*)createdAtAsString;
 - (XMPPxData*)parseXDataMessage;
+- (XMPPEntry*)parseEntryMessage;
 
 @end

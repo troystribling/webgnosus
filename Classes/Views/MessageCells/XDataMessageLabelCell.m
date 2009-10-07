@@ -55,9 +55,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data {        
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data fromJid:(NSString*)jid {        
     XDataMessageLabelCell* cell = (XDataMessageLabelCell*)[CellUtils createCell:[XDataMessageLabelCell class] forTableView:tableView];
-    [cell setJidAndTime:message];
+    [self set:cell Jid:jid];
+    [self setTime:cell forMessage:message];
     cell.titleLabel.text = [message.node stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     LabelGridView* labelGridView = [self buildGridView:data];
     [cell addSubview:labelGridView];

@@ -14,6 +14,7 @@
 #import "UserModel.h"
 #import "WebgnosusDbi.h"
 #import "XMPPxData.h"
+#import "XMPPEntry.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageModel (PrivateAPI)
@@ -239,6 +240,17 @@
         data = [XMPPxData createFromElement:dataElement];
     }
     return data;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPEntry*)parseEntryMessage {
+    XMPPEntry* entry = nil;
+    NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:self.messageText options:0 error:nil] autorelease];
+	NSXMLElement* entryElement = [xmlDoc rootElement];
+    if ([[entryElement xmlns] isEqualToString:@"http://www.w3.org/2005/Atom"]) {
+        entry = [XMPPEntry createFromElement:entryElement];
+    }
+    return entry;
 }
 
 //===================================================================================================================================

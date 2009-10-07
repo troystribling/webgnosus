@@ -15,8 +15,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BodyMessageCell (PrivateAPI)
 
-+ (CGFloat)getMessageHeight:(MessageModel*)message;
-
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,32 +27,40 @@
 #pragma mark BodyMessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)getMessageText:(MessageModel*)message {
+    return message.messageText;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
-	CGFloat cellHeight = [self getMessageHeight:message] + kMESSAGE_HEIGHT_PAD;
+	CGFloat cellHeight = [self getMessageHeight:[self getMessageText:message]] + kMESSAGE_HEIGHT_PAD;
 	return cellHeight;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {        
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message { 
+    return [self tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[message fromJid]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message fromJid:(NSString*)jid {        
     BodyMessageCell* cell = (BodyMessageCell*)[CellUtils createCell:[BodyMessageCell class] forTableView:tableView];
-    [cell setJidAndTime:message];
-    cell.messageLabel.text = message.messageText;
+    [self set:cell Jid:jid];
+    [self setTime:cell forMessage:message];
+    cell.messageLabel.text = [self getMessageText:message];
     CGRect messageLabelRect = cell.messageLabel.frame;
-    messageLabelRect.size.height = [self getMessageHeight:message];
+    messageLabelRect.size.height = [self getMessageHeight:[self getMessageText:message]];
     cell.messageLabel.frame = messageLabelRect;
     return cell;
 }
 
-//===================================================================================================================================
-#pragma mark BodyMessageCell PrivateAPI
-
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGFloat)getMessageHeight:(MessageModel*)message {
++ (CGFloat)getMessageHeight:(NSString*)messageText {
 	CGFloat cellHeight = 20.0f;
     CGFloat width =  kDISPLAY_WIDTH;
-    if (message.messageText) {
+    if (messageText) {
         CGSize textSize = {width, 20000.0f};
-        CGSize size = [message.messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
         cellHeight = MAX(size.height, cellHeight);
     }    
 	return cellHeight;

@@ -428,7 +428,7 @@
                     messageModel.messageText = [entry XMLString];
                 } else {
                     messageModel.textType = MessageTextTypeEventText;
-                    messageModel.messageText = [item XMLString];
+                    messageModel.messageText = [[[item children] objectAtIndex:0] XMLString];
                 }
                 [messageModel insert];
                 [messageModel release];

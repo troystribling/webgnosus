@@ -38,9 +38,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data {        
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message andData:(XMPPxData*)data fromJid:(NSString*)jid {        
     XDataScalarCell* cell = (XDataScalarCell*)[CellUtils createCell:[XDataScalarCell class] forTableView:tableView];
-    [cell setJidAndTime:message];
+    [self set:cell Jid:jid];
+    [self setTime:cell forMessage:message];
     cell.titleLabel.text = message.node;
     cell.messageLabel.text = [self getLabel:data];
     CGRect messageLabelRect = cell.messageLabel.frame;
