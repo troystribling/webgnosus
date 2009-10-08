@@ -27,6 +27,7 @@
 @synthesize parentNode;
 @synthesize service;
 @synthesize var;
+@synthesize synched;
 
 //===================================================================================================================================
 #pragma mark ServiceFeatureModel
@@ -43,7 +44,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text, synched integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -86,9 +87,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var) values ('%@', '%@', '%@')", self.parentNode, self.service, self.var];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, self.synched];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var) values ('%@', '%@')", self.service, self.var];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, self.synched];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -108,8 +109,22 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@' WHERE pk = %d", self.parentNode, self.service, self.var, self.pk];	
+        [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", self.parentNode, self.service, self.var, self.synched, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)synchedAsInteger {
+	return self.synched == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setSynchedAsInteger:(NSInteger)value {
+	if (value == 1) {
+		self.synched = YES; 
+	} else {
+		self.synched = NO;
+	};
 }
 
 //===================================================================================================================================
@@ -133,6 +148,7 @@
 	if (varVal != nil) {		
 		self.var = [[NSString alloc] initWithUTF8String:varVal];
 	}
+	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 4)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

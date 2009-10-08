@@ -29,6 +29,7 @@
 @synthesize node;
 @synthesize jid;
 @synthesize itemName;
+@synthesize synched;
 
 //===================================================================================================================================
 #pragma mark ServiceItemModel
@@ -45,7 +46,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceItems (pk integer primary key, parentNode text, service text, node text, jid text, itemName text)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceItems (pk integer primary key, parentNode text, service text, node text, jid text, itemName text, synched integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -142,13 +143,13 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode &&  self.node && self.itemName) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName) values ('%@', '%@', '%@', '%@', '%@')", 
-                            self.parentNode, self.service, self.node, self.jid, self.itemName];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName, synched) values ('%@', '%@', '%@', '%@', '%@', %d)", 
+                            self.parentNode, self.service, self.node, self.jid, self.itemName, self.synched];	
     } else if (self.node && self.itemName) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName) values ('%@', '%@', '%@', '%@')", 
-                           self.service, self.node, self.jid, self.itemName];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName, synched) values ('%@', '%@', '%@', '%@', %d)", 
+                           self.service, self.node, self.jid, self.itemName, self.synched];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid) values ('%@', '%@')", self.service, self.jid];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid, synched) values ('%@', '%@', %d)", self.service, self.jid, self.synched];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -169,8 +170,22 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [NSString stringWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@' WHERE pk = %d", self.parentNode, self.service, self.node, self.jid, self.itemName, self.pk];	
+        [NSString stringWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@', synched = %d WHERE pk = %d", self.parentNode, self.service, self.node, self.jid, self.itemName, self.synched, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)synchedAsInteger {
+	return self.synched == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setSynchedAsInteger:(NSInteger)value {
+	if (value == 1) {
+		self.synched = YES; 
+	} else {
+		self.synched = NO;
+	};
 }
 
 //===================================================================================================================================
@@ -202,6 +217,7 @@
 	if (inameVal != nil) {		
 		self.itemName = [[NSString alloc] initWithUTF8String:inameVal];
 	}
+	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 6)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

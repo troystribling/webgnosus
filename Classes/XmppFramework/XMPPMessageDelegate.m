@@ -407,16 +407,20 @@
     if (account) {
         XMPPPubSubEvent* event = [message event];
         NSArray* items = [event items];
+        NSString* node = [event node];
         for (int i = 0; i < [items count]; i++) {
             XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[items objectAtIndex:i]];
             XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
-            if (![MessageModel findEventByNode:[event node] andItemId:[item itemId]]) {
+            if (![SubscriptionModel findByAccount:account andNode:node]) {
+                [XMPPPubSubSubscriptions get:client JID:fromJid];
+            }
+            if (![MessageModel findEventByNode:node andItemId:[item itemId]]) {
                 MessageModel* messageModel = [[MessageModel alloc] init];
                 messageModel.fromJid = [fromJid full];
                 messageModel.accountPk = account.pk;
                 messageModel.toJid = [account fullJID];
                 messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-                messageModel.node = [event node];
+                messageModel.node = node;
                 messageModel.itemId = [item itemId];
                 XMPPxData* data = [item data];
                 XMPPEntry* entry = [item entry];

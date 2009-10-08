@@ -28,6 +28,7 @@
 @synthesize node;
 @synthesize subscription;
 @synthesize jid;
+@synthesize synched;
 
 //===================================================================================================================================
 #pragma mark ServiceItemModel
@@ -44,7 +45,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId text, node text, subscription text, jid text, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId text, node text, subscription text, jid text, synched integer, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -81,14 +82,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account {
-    if (account) {
++ (void)insert:(XMPPPubSubSubscription*)insertSub forAccount:(AccountModel*)insertAccount {
+    if (insertAccount) {
         SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
-        subModel.accountPk = account.pk;
-        subModel.node = [sub node];
-        subModel.subId = [sub subId];
-        subModel.jid = [[sub JID] full];
-        subModel.subscription = [sub subscription];
+        subModel.accountPk = insertAccount.pk;
+        subModel.node = [insertSub node];
+        subModel.subId = [insertSub subId];
+        subModel.jid = [[insertSub JID] full];
+        subModel.subscription = [insertSub subscription];
         [subModel insert];
         [subModel release];
     }
@@ -99,11 +100,11 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.jid) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, accountPk) values (%d, '%@', '%@', '%@', %d)", 
-                            self.subId, self.node, self.subscription, self.jid, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, synched, accountPk) values (%d, '%@', '%@', '%@', %d, %d)", 
+                            self.subId, self.node, self.subscription, self.jid, self.synched, self.accountPk];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, accountPk) values (%d, '%@', '%@', %d)", 
-                           self.subId, self.node, self.subscription, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, synched, accountPk) values (%d, '%@', '%@', %d, %d)", 
+                           self.subId, self.node, self.subscription, self.synched, self.accountPk];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -123,8 +124,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement = 
-        [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', accountPk = %d WHERE pk = %d", 
-            self.subId, self.node, self.subscription, self.jid, self.accountPk, self.pk];	
+        [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
+            self.subId, self.node, self.subscription, self.jid, self.synched, self.accountPk, self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -132,6 +133,20 @@
 - (XMPPJID*)nodeToJID {
     NSArray* comp = [self.node componentsSeparatedByString:@"/"];
     return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:3], [comp objectAtIndex:2]]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)synchedAsInteger {
+	return self.synched == YES ? 1 : 0;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setSynchedAsInteger:(NSInteger)value {
+	if (value == 1) {
+		self.synched = YES; 
+	} else {
+		self.synched = NO;
+	};
 }
 
 //===================================================================================================================================
@@ -159,7 +174,8 @@
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 5);
+	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 5)];
+	self.accountPk = (int)sqlite3_column_int(statement, 6);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

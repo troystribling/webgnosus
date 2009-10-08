@@ -105,8 +105,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createAccountManager {
-    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil];
-    [acctMgr addAsSubview:window];
+    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:self.window];
     [acctMgr release];
 }
 

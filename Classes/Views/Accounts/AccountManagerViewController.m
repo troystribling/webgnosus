@@ -92,9 +92,11 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)containerView { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         [self createContentView];
+        self.view.frame = containerView.frame;
+        [self addAsSubview:containerView];
 	} 
 	return self; 
 } 

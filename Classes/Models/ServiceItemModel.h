@@ -22,6 +22,7 @@
     NSString* node;
     NSString* jid;
     NSString* itemName;
+    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* jid;
 @property (nonatomic, retain) NSString* itemName;
+@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -50,5 +52,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
+- (NSInteger)synchedAsInteger;
+- (void)setSynchedAsInteger:(NSInteger)value;
 
 @end

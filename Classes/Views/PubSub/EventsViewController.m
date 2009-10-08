@@ -84,17 +84,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadEvents {
-    self.events = [MessageModel findAllEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
+    if (self.eventType == kPUB_MODE) { 
+        self.events = [MessageModel findAllPublishedEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
+    } else {
+        self.events = [MessageModel findAllSubscribedEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
+    }
     [self.tableView reloadData];
 }
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
-    [self loadEvents];
-}
 
 //===================================================================================================================================
 #pragma mark UIViewController

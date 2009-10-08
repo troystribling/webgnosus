@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSString* currentView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)containerView;
 - (void)addAsSubview:(UIView*)parent;
 - (void)dismiss;
 - (void)showView;

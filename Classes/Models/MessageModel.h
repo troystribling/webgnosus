@@ -64,7 +64,8 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllEventsByNode:(NSString*)requestNode withLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllSubscribedEventsByNode:(NSString*)requestNode withLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;

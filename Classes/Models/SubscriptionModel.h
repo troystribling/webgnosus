@@ -23,6 +23,7 @@
     NSString* node;
     NSString* subscription;
     NSString* jid;
+    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,6 +33,7 @@
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* subscription;
 @property (nonatomic, retain) NSString* jid;
+@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -41,7 +43,7 @@
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
-+ (void)insert:(XMPPPubSubSubscription*)sub forAccount:(AccountModel*)account;
++ (void)insert:(XMPPPubSubSubscription*)insertSub forAccount:(AccountModel*)insertAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -49,5 +51,7 @@
 - (void)load;
 - (void)update;
 - (XMPPJID*)nodeToJID;
+- (NSInteger)synchedAsInteger;
+- (void)setSynchedAsInteger:(NSInteger)value;
 
 @end

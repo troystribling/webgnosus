@@ -20,6 +20,7 @@
     NSString* parentNode;
     NSString* service;
     NSString* var;
+    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) NSString* parentNode;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* var;
+@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -42,5 +44,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
-
+- (NSInteger)synchedAsInteger;
+- (void)setSynchedAsInteger:(NSInteger)value;
+    
 @end

@@ -22,6 +22,7 @@
     NSString* name;
     NSString* category;
     NSString* type;
+    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -30,6 +31,7 @@
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* category;
 @property (nonatomic, retain) NSString* type;
+@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -47,5 +49,7 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
+- (NSInteger)synchedAsInteger;
+- (void)setSynchedAsInteger:(NSInteger)value;
 
 @end
