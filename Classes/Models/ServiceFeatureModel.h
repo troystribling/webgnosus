@@ -38,6 +38,7 @@
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
++ (void)resetSyncFlag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -46,5 +47,6 @@
 - (void)update;
 - (NSInteger)synchedAsInteger;
 - (void)setSynchedAsInteger:(NSInteger)value;
+- (void)sync;
     
 @end

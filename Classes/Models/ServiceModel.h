@@ -43,6 +43,7 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID;
++ (void)resetSyncFlag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -51,5 +52,6 @@
 - (void)update;
 - (NSInteger)synchedAsInteger;
 - (void)setSynchedAsInteger:(NSInteger)value;
+- (void)sync;
 
 @end

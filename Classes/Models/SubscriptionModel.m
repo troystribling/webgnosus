@@ -83,16 +83,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPPubSubSubscription*)insertSub forAccount:(AccountModel*)insertAccount {
-    if (insertAccount) {
+    SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount andNode:[insertSub node]];
+    if (!model) {
         SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
+        if ([insertSub JID]) {
+            subModel.jid = [[insertSub JID] full];
+        }
         subModel.accountPk = insertAccount.pk;
         subModel.node = [insertSub node];
         subModel.subId = [insertSub subId];
-        subModel.jid = [[insertSub JID] full];
         subModel.subscription = [insertSub subscription];
+        subModel.synched = YES;
         [subModel insert];
         [subModel release];
+    } else {
+        [model sync];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)resetSyncFlag {
+	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE subscriptions SET synched = 0"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -101,10 +112,10 @@
     NSString* insertStatement;
     if (self.jid) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, synched, accountPk) values (%d, '%@', '%@', '%@', %d, %d)", 
-                            self.subId, self.node, self.subscription, self.jid, self.synched, self.accountPk];	
+                            self.subId, self.node, self.subscription, self.jid, self.synchedAsInteger, self.accountPk];	
     } else {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, synched, accountPk) values (%d, '%@', '%@', %d, %d)", 
-                           self.subId, self.node, self.subscription, self.synched, self.accountPk];	
+                           self.subId, self.node, self.subscription, self.synchedAsInteger, self.accountPk];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -123,9 +134,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-	NSString* updateStatement = 
-        [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
-            self.subId, self.node, self.subscription, self.jid, self.synched, self.accountPk, self.pk];	
+    NSString* updateStatement;
+    if (self.jid) {
+        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
+            self.subId, self.node, self.subscription, self.jid, self.synchedAsInteger, self.accountPk, self.pk];	
+    } else {
+        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
+                           self.subId, self.node, self.subscription, self.synchedAsInteger, self.accountPk, self.pk];	
+    }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -147,6 +163,12 @@
 	} else {
 		self.synched = NO;
 	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sync {
+    self.synched = YES;
+    [self update];
 }
 
 //===================================================================================================================================

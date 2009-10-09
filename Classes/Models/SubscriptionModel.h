@@ -44,6 +44,7 @@
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPPubSubSubscription*)insertSub forAccount:(AccountModel*)insertAccount;
++ (void)resetSyncFlag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -53,5 +54,6 @@
 - (XMPPJID*)nodeToJID;
 - (NSInteger)synchedAsInteger;
 - (void)setSynchedAsInteger:(NSInteger)value;
+- (void)sync;
 
 @end

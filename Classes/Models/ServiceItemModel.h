@@ -46,6 +46,7 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
++ (void)resetSyncFlag;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
@@ -54,5 +55,6 @@
 - (void)update;
 - (NSInteger)synchedAsInteger;
 - (void)setSynchedAsInteger:(NSInteger)value;
+- (void)sync;
 
 @end

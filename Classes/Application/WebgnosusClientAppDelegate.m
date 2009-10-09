@@ -71,15 +71,15 @@
         [account update];
     }
     accounts = [AccountModel findAllActivated];
+    [ServiceModel resetSyncFlag];
+    [ServiceItemModel resetSyncFlag];
+    [ServiceFeatureModel resetSyncFlag];
+    [SubscriptionModel resetSyncFlag];
 	for (int i = 0; i < [accounts count]; i++) {
         AccountModel* account = [accounts objectAtIndex:i];
         [account update];
         [RosterItemModel destroyAllByAccount:account];
         [ContactModel destroyAllByAccount:account];
-        [ServiceModel destroyAll];
-        [ServiceItemModel destroyAll];
-        [ServiceFeatureModel destroyAll];
-        [SubscriptionModel destroyAllByAccount:account];
         [[XMPPClientManager instance] openConnectionForAccount:account];
     }
 }

@@ -92,15 +92,26 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID {
-    if (![ServiceModel findByJID:[serviceJID full] type:[ident type] andCategory:[ident category]]) {
+    ServiceModel* model = [ServiceModel findByJID:[serviceJID full] type:[ident type] andCategory:[ident category]];
+    if (!model) {
         ServiceModel* service = [[ServiceModel alloc] init];
+        if ([ident iname]) {
+            service.name = [ident iname];
+        }
         service.jid = [serviceJID full];
-        service.name = [ident iname];
         service.category = [ident category];
         service.type = [ident type];
+        service.synched = YES;
         [service insert];
         [service release];
+    } else {
+        [model sync];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)resetSyncFlag {
+	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE services SET synched = 0"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,9 +119,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.name) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type, synched) values ('%@', '%@', '%@', '%@', %d)", self.jid, self.name, self.category, self.type, self.synched];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type, synched) values ('%@', '%@', '%@', '%@', %d)", self.jid, self.name, self.category, self.type, self.synchedAsInteger];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type, synched) values ('%@', '%@', '%@', %d)", self.jid, self.category, self.type, self.synched];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type, synched) values ('%@', '%@', '%@', %d)", self.jid, self.category, self.type, self.synchedAsInteger];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -129,8 +140,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-	NSString* updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@', synched = %d WHERE pk = %d", 
-         self.jid, self.name, self.category, self.type, self.synched, self.pk];	
+    NSString* updateStatement;
+    if (self.name) {
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@', synched = %d WHERE pk = %d", 
+                            self.jid, self.name, self.category, self.type, self.synchedAsInteger, self.pk];
+    } else {
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', category = '%@', type = '%@', synched = %d WHERE pk = %d", 
+                           self.jid, self.category, self.type, self.synchedAsInteger, self.pk];
+    }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -146,6 +163,12 @@
 	} else {
 		self.synched = NO;
 	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sync {
+    self.synched = YES;
+    [self update];
 }
 
 //===================================================================================================================================

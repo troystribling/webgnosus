@@ -72,14 +72,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    if (![ServiceFeatureModel findByService:[serviceJID full] andVar:[feature var]]) {
+    ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] andVar:[feature var]];
+    if (!model) {
         ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
-        serviceFeature.parentNode = parent;
+        if (parent) {
+            serviceFeature.parentNode = parent;
+        }
         serviceFeature.var = [feature var];
         serviceFeature.service = [serviceJID full];
+        serviceFeature.synched = YES;
         [serviceFeature insert];
         [serviceFeature release];
+    } else {
+        [model sync];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)resetSyncFlag {
+	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE serviceFeatures SET synched = 0"];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -87,9 +98,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, self.synched];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, self.synchedAsInteger];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, self.synched];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, self.synchedAsInteger];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -108,8 +119,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
-	NSString* updateStatement = 
-        [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", self.parentNode, self.service, self.var, self.synched, self.pk];	
+    NSString* updateStatement;
+    if (self.parentNode) {
+        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", 
+                            self.parentNode, self.service, self.var, self.synchedAsInteger, self.pk];	
+    } else {
+        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET service = '%@', var = '%@', synched = %d WHERE pk = %d", 
+                            self.service, self.var, self.synchedAsInteger, self.pk];	
+    }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
@@ -125,6 +142,12 @@
 	} else {
 		self.synched = NO;
 	};
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)sync {
+    self.synched = YES;
+    [self update];
 }
 
 //===================================================================================================================================
