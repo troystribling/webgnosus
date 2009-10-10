@@ -40,7 +40,7 @@
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)resetSyncFlag;
 + (void)destroyAllUnsyched;
-+ (void)destroyAllUnsychedByDomain:(NSString*)requestDomain;
++ (void)destroyAllUnsychedByService:(NSString*)requestService;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

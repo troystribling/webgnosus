@@ -30,6 +30,7 @@
 - (void)updateWithStatement:(NSString*)statement;
 - (NSInteger)selectIntExpression:(NSString*)statement;
 - (NSString*)selectTextColumn:(NSString*)statement;
+- (NSArray*)selectAllTextColumn:(NSString*)statement;
 - (void)selectForModel:(id)model withStatement:(NSString*)statement andOutputTo:(id)result;
 - (void)selectAllForModel:(id)model withStatement:(NSString*)statement andOutputTo:(NSMutableArray*)results;
 - (void)logError:(NSString*)statement;

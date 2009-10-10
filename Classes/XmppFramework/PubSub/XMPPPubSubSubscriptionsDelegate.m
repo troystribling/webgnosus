@@ -52,6 +52,8 @@
         [SubscriptionModel insert:subscription forService:fromJID andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     }
     [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdated forClient:client];
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    [SubscriptionModel destroyAllUnsychedByService:fromJID andAccount:account];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
 }
 

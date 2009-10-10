@@ -22,6 +22,7 @@
 #import "ServiceItemModel.h"
 #import "ServiceModel.h"
 #import "ServiceFeatureModel.h"
+#import "SubscriptionModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPDiscoItemsResponseDelegate (PrivateAPI)
@@ -89,37 +90,44 @@
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
     XMPPIQ* iq = (XMPPIQ*)stanza;
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
-	NSString* node = [query node];
+	NSString* parentNode = [query node];
     NSArray* items = [query items];	
 	XMPPJID* serviceJID = [stanza fromJID];
-    if ([node isEqualToString:[self.targetJID pubSubRoot]]) {
+    if ([parentNode isEqualToString:[self.targetJID pubSubRoot]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-            [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
-            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];        
+            [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:parentNode];
+            [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:parentNode];        
         }
         [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];  
-        ServiceItemModel* pubSubItem = [ServiceItemModel findByJID:[serviceJID full]];
-        [ServiceModel destroyAllUnsychedByDomain:pubSubItem.service];
-        [ServiceItemModel destroyAllUnsychedByDomain:pubSubItem.service];
-        [ServiceFeatureModel destroyAllUnsychedByDomain:pubSubItem.service];
+        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
+        ServiceItemModel* pubSubServiceItem = [ServiceItemModel findByJID:[serviceJID full]];
+        [ServiceModel destroyAllUnsychedByDomain:pubSubServiceItem.service];
         if ([client isAccountJID:[self.targetJID full]]) {
             [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoCompleted forClient:client];
-            [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];
-        }
-    } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"] && [[[stanza fromJID] full] isEqualToString:[self.targetJID full]]) {
-        for(int i = 0; i < [items count]; i++) {
-            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-            [ServiceItemModel insert:item forService:serviceJID andParentNode:node];
-        }
-    } else {
-        for(int i = 0; i < [items count]; i++) {
-            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-            if ([item node] == nil) { 
-                [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
-                [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+            [XMPPPubSubSubscriptions get:client JID:serviceJID];
+            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+            NSArray* subServices = [SubscriptionModel findAllServicesByAccount:account];
+            for(int i = 0; i < [subServices count]; i++) {
+                NSString* subService = [subServices objectAtIndex:i];
+                if (![subService isEqualToString:[serviceJID full]]) {
+                    [XMPPPubSubSubscriptions get:client JID:[XMPPJID jidWithString:subService]];
+                }
             }
         }
+    } else if ([parentNode isEqualToString:@"http://jabber.org/protocol/commands"] && [[[stanza fromJID] full] isEqualToString:[self.targetJID full]]) {
+        for(int i = 0; i < [items count]; i++) {
+            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
+            [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];
+        }
+        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
+    } else if (parentNode == nil) {
+        for(int i = 0; i < [items count]; i++) {
+            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
+            [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
+            [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+        }
+        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
     }
     [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsResult:iq];        
 }

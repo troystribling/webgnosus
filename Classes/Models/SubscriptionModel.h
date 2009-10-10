@@ -44,6 +44,7 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
++ (NSArray*)findAllServicesByAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount;
 + (void)resetSyncFlag;

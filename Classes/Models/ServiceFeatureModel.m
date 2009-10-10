@@ -99,8 +99,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsychedByDomain:(NSString*)requestDomain {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service LIKE '%%%@'", requestDomain];
++ (void)destroyAllUnsychedByService:(NSString*)requestService {
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@' AND synched = 0", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 

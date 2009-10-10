@@ -110,6 +110,21 @@ static NSString* dbFileName = @"webgnosus.db";
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSArray*)selectAllTextColumn:(NSString*)statement {
+    NSMutableArray* result = [NSMutableArray arrayWithCapacity:10];
+	sqlite3_stmt* statementPrepared;
+	sqlite3_prepare_v2 (sqlDb, [statement UTF8String], -1, &statementPrepared, NULL);
+    while (sqlite3_step(statementPrepared) == SQLITE_ROW) {
+        char* textVal = (char*)sqlite3_column_text(statementPrepared, 0);
+        [result addObject:[NSString stringWithCString:textVal]];
+    }
+	if (sqlite3_finalize(statementPrepared)) {
+		[self logError:statement];
+	}
+    return result;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)selectForModel:(id)model withStatement:(NSString*)statement andOutputTo:(id)result {
 	sqlite3_stmt* statementPrepared;
 	sqlite3_prepare_v2 (sqlDb, [statement UTF8String], -1, &statementPrepared, NULL);

@@ -88,6 +88,7 @@
         [ServiceFeatureModel insert:feature forService:serviceJID andParentNode:node];
     }
     [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:iq];        
+    [ServiceFeatureModel destroyAllUnsychedByService:serviceJID];
 }
 
 //===================================================================================================================================

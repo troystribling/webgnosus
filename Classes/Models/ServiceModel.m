@@ -121,7 +121,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllUnsychedByDomain:(NSString*)requestService {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM services WHERE service LIKE '%%%@'", requestService];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM services WHERE jid LIKE '%%%@' AND synched = 0", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 

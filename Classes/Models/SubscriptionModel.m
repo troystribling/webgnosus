@@ -76,6 +76,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSArray*)findAllServicesByAccount:(AccountModel*)requestAccount {
+	NSString* seleteStatement = [NSString stringWithFormat:@"SELECT DISTINCT service FROM subscriptions WHERE  accountPk = %d", requestAccount.pk];
+	return [[WebgnosusDbi instance]  selectAllTextColumn:seleteStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
 	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
@@ -118,7 +124,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllUnsychedByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE service = '%@' AND  accountPk = %d", requestService, requestAccount.pk];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE service = '%@' AND  accountPk = %d AND synched = 0", requestService, requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
