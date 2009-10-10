@@ -20,6 +20,8 @@
 #import "XMPPMessageDelegate.h"
 #import "AccountModel.h"
 #import "ServiceItemModel.h"
+#import "ServiceModel.h"
+#import "ServiceFeatureModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPDiscoItemsResponseDelegate (PrivateAPI)
@@ -96,7 +98,11 @@
             [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:node];        
         }
-        [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];        
+        [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];  
+        ServiceItemModel* pubSubItem = [ServiceItemModel findByJID:[serviceJID full]];
+        [ServiceModel destroyAllUnsychedByDomain:pubSubItem.service];
+        [ServiceItemModel destroyAllUnsychedByDomain:pubSubItem.service];
+        [ServiceFeatureModel destroyAllUnsychedByDomain:pubSubItem.service];
         if ([client isAccountJID:[self.targetJID full]]) {
             [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoCompleted forClient:client];
             [XMPPPubSubSubscriptions get:client JID:[iq fromJID]];

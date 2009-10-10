@@ -14,6 +14,7 @@
 #import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPPubSub.h"
+#import "XMPPJID.h"
 #import "XMPPPubSubSubscription.h"
 #import "XMPPMessageDelegate.h"
 #import "SubscriptionModel.h"
@@ -45,7 +46,7 @@
     XMPPIQ* iq = (XMPPIQ*)stanza;
     XMPPPubSub* pubsub = [iq pubsub];
     XMPPPubSubSubscription* subscription = [pubsub subscription];	
-    [SubscriptionModel insert:subscription forAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
+    [SubscriptionModel insert:subscription forService:[[iq fromJID] full] andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeResult:(XMPPIQ*)stanza];
 }
 

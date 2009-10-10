@@ -39,6 +39,8 @@
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)resetSyncFlag;
++ (void)destroyAllUnsyched;
++ (void)destroyAllUnsychedByDomain:(NSString*)requestDomain;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

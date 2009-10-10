@@ -83,7 +83,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByJID:(NSString*)requestJID {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@'",  requestJID];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE jid = '%@' LIMIT 1",  requestJID];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -151,6 +151,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)resetSyncFlag {
 	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE serviceItems SET synched = 0"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllUnsyched {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceItems WHERE synched = 0"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllUnsychedByDomain:(NSString*)requestDomain {
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service LIKE '%%%@'", requestDomain];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

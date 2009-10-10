@@ -39,7 +39,7 @@
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
-+ (ServiceItemModel*)findByJID:(NSString*)requestService;
++ (ServiceItemModel*)findByJID:(NSString*)requestJID;
 + (ServiceItemModel*)findByNode:(NSString*)requestNode;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService;
@@ -47,7 +47,9 @@
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)resetSyncFlag;
-
++ (void)destroyAllUnsyched;
++ (void)destroyAllUnsychedByDomain:(NSString*)requestDomain;
+    
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;

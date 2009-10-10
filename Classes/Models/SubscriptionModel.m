@@ -26,6 +26,7 @@
 @synthesize accountPk;
 @synthesize subId;
 @synthesize node;
+@synthesize service;
 @synthesize subscription;
 @synthesize jid;
 @synthesize synched;
@@ -45,7 +46,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId text, node text, subscription text, jid text, synched integer, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE subscriptions (pk integer primary key, subId text, node text, service text, subscription text, jid text, synched integer, accountPk integer, FOREIGN KEY (accountPk) REFERENCES accounts(pk))"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -76,22 +77,26 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByAccount:(AccountModel*)requestAccount {
-	NSString* deleteStatement = 
-    [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE accountPk = %d", requestAccount.pk];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insert:(XMPPPubSubSubscription*)insertSub forAccount:(AccountModel*)insertAccount {
++ (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount {
     SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount andNode:[insertSub node]];
     if (!model) {
         SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
         if ([insertSub JID]) {
             subModel.jid = [[insertSub JID] full];
         }
+        if ([insertSub subId]) {
+            subModel.subId = [insertSub subId];
+        } else {
+            subModel.subId =@"-1";
+        }
         subModel.accountPk = insertAccount.pk;
         subModel.node = [insertSub node];
-        subModel.subId = [insertSub subId];
+        subModel.service = serviceJID;
         subModel.subscription = [insertSub subscription];
         subModel.synched = YES;
         [subModel insert];
@@ -106,16 +111,27 @@
 	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE subscriptions SET synched = 0"];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllUnsyched {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM subscriptions WHERE synched = 0"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAllUnsychedByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount {
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM subscriptions WHERE service = '%@' AND  accountPk = %d", requestService, requestAccount.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
     if (self.jid) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, jid, synched, accountPk) values (%d, '%@', '%@', '%@', %d, %d)", 
-                            self.subId, self.node, self.subscription, self.jid, self.synchedAsInteger, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, service, subscription, jid, synched, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d, %d)", 
+                            self.subId, self.node, self.service, self.subscription, self.jid, self.synchedAsInteger, self.accountPk];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, subscription, synched, accountPk) values (%d, '%@', '%@', %d, %d)", 
-                           self.subId, self.node, self.subscription, self.synchedAsInteger, self.accountPk];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, service, subscription, synched, accountPk) values ('%@', '%@', '%@', '%@', %d, %d)", 
+                           self.subId, self.node, self.service, self.subscription, self.synchedAsInteger, self.accountPk];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -136,11 +152,11 @@
 - (void)update {
     NSString* updateStatement;
     if (self.jid) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
-            self.subId, self.node, self.subscription, self.jid, self.synchedAsInteger, self.accountPk, self.pk];	
+        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = '%@', node = '%@', service='%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
+            self.subId, self.node, self.service, self.subscription, self.jid, self.synchedAsInteger, self.accountPk, self.pk];	
     } else {
-        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = %d, node = '%@', subscription = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
-                           self.subId, self.node, self.subscription, self.synchedAsInteger, self.accountPk, self.pk];	
+        updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = '%@', node = '%@', service='%@', subscription = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
+                           self.subId, self.node, self.service, self.subscription, self.synchedAsInteger, self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
@@ -188,16 +204,20 @@
 	if (nodeVal != nil) {		
 		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
 	}
-	char* subVal = (char*)sqlite3_column_text(statement, 3);
+	char* serviceVal = (char*)sqlite3_column_text(statement, 3);
+	if (serviceVal != nil) {		
+		self.service = [[NSString alloc] initWithUTF8String:serviceVal];
+	}
+	char* subVal = (char*)sqlite3_column_text(statement, 4);
 	if (subVal != nil) {		
 		self.subscription = [[NSString alloc] initWithUTF8String:subVal];
 	}
-	char* jidVal = (char*)sqlite3_column_text(statement, 4);
+	char* jidVal = (char*)sqlite3_column_text(statement, 5);
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
 	}
-	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 5)];
-	self.accountPk = (int)sqlite3_column_int(statement, 6);
+	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 6)];
+	self.accountPk = (int)sqlite3_column_int(statement, 7);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

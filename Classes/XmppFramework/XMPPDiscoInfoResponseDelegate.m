@@ -75,7 +75,7 @@
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
         if (node == nil) {
-            [ServiceModel insert:identity forService:[iq fromJID]];
+            [ServiceModel insert:identity forService:serviceJID];
         }
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
             [self didDiscoverPubSubService:client forIQ:iq];

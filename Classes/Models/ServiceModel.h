@@ -44,7 +44,9 @@
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID;
 + (void)resetSyncFlag;
-
++ (void)destroyAllUnsyched;
++ (void)destroyAllUnsychedByDomain:(NSString*)requestService;
+    
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
