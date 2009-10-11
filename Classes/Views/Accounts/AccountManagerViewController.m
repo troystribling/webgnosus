@@ -35,6 +35,11 @@
 #pragma mark AccountManagerViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)inView:(UIView*)containedView {
+    [[[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:containedView] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAsSubview:(UIView*)parent {
     self.parentView = parent;
     [parent addSubview:self.view];

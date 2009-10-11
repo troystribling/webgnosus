@@ -74,8 +74,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
-    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:self.view.window];
-	[acctMgr release];
+    [AccountManagerViewController inView:self.view.window];
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------

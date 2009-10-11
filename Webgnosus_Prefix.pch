@@ -60,6 +60,7 @@
 #define kPUB_MODE                               1
 #define kSUB_CELL_HEIGHT                        55.0
 #define kPUB_CELL_HEIGHT                        45.0
+#define kSERVICE_CELL_HEIGHT                    45.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // adjust message size for edit mode when cell has status indicator

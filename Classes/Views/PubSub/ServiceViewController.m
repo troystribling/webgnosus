@@ -1,50 +1,43 @@
 //
-//  HistoryViewController.m
+//  ServiceViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/11/09.
+//  Created by Troy Stribling on 10/11/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "HistoryViewController.h"
+#import "ServiceViewController.h"
+#import "ServiceCell.h"
 #import "AccountManagerViewController.h"
-#import "MessageModel.h"
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
 #import "RosterSectionViewController.h"
+#import "CellUtils.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface HistoryViewController (PrivateAPI)
 
-- (void)editAccountButtonWasPressed; 
-- (void)loadMessages;
-- (void)addXMPPClientDelgate;
-- (void)removeXMPPClientDelgate;
-- (void)loadAccount;
-- (void)addXMPPAccountUpdateDelgate;
-- (void)removeXMPPAccountUpdateDelgate;
-- (void)reloadMessages;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface ServiceViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation HistoryViewController
+@implementation ServiceViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize editAccountsButton;
-@synthesize messages;
+@synthesize services;
 @synthesize account;
 
 //===================================================================================================================================
-#pragma mark HistoryViewController
+#pragma mark ServiceViewController
 
 //===================================================================================================================================
-#pragma mark HistoryViewController PrivateAPI
+#pragma mark ServiceViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
@@ -52,8 +45,7 @@
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadMessages {
-	self.messages = [MessageModel findAllByAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+- (void)loadServices {
     [self.tableView reloadData];
 }
 
@@ -91,7 +83,7 @@
     [self loadAccount];
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
-    [self loadMessages];
+    [self loadServices];
 }
 
 //===================================================================================================================================
@@ -115,11 +107,6 @@
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage*)message {
-    [self loadMessages];
-}
-
 //===================================================================================================================================
 #pragma mark UIViewController
 
@@ -142,7 +129,7 @@
     [self loadAccount];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
-    [self loadMessages];
+    [self loadServices];
 	[super viewWillAppear:animated];
 }
 
@@ -173,8 +160,7 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
     if (self.account) {
-        RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
+        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
         rosterHeaderView = rosterHeader.view;
     }
 	return rosterHeaderView; 
@@ -189,10 +175,10 @@
 - (CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section {
     return 0.0;
 }
-    
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
+    return kSERVICE_CELL_HEIGHT;
 }
 
 //===================================================================================================================================
@@ -205,12 +191,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.messages count];
+    return [self.services count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.messages objectAtIndex:indexPath.row]];
+    ServiceCell* cell = (ServiceCell*)[CellUtils createCell:[ServiceCell class] forTableView:tableView];
+    return cell;        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

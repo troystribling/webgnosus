@@ -11,6 +11,14 @@
 		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
 		050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
+		0502D7C51082478F00218EC9 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7C31082478F00218EC9 /* ServiceViewController.m */; };
+		0502D7C71082478F00218EC9 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7C31082478F00218EC9 /* ServiceViewController.m */; };
+		0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
+		0502D7CB1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
+		0502D7E31082611800218EC9 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7E21082611800218EC9 /* ServiceCell.m */; };
+		0502D7E41082611800218EC9 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7E21082611800218EC9 /* ServiceCell.m */; };
+		0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
+		0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050A686F10719FBB002FE125 /* XDataHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A686E10719FBB002FE125 /* XDataHashCell.m */; };
@@ -339,6 +347,12 @@
 		050263C01076E78C000B81C6 /* XMPPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPEntry.h; sourceTree = "<group>"; };
 		050263C11076E78C000B81C6 /* XMPPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPEntry.m; sourceTree = "<group>"; };
 		050263CF1076FA7E000B81C6 /* EventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
+		0502D7C21082478F00218EC9 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		0502D7C31082478F00218EC9 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		0502D7C91082488200218EC9 /* ServiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
+		0502D7E11082611800218EC9 /* ServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCell.h; sourceTree = "<group>"; };
+		0502D7E21082611800218EC9 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
+		0502D7EB108261E500218EC9 /* ServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
 		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
 		050A686D10719FBB002FE125 /* XDataHashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataHashCell.h; sourceTree = "<group>"; };
@@ -823,6 +837,7 @@
 				05F79C2C1075A7D500B75735 /* ContactPubCell.xib */,
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
+				0502D7EB108261E500218EC9 /* ServiceCell.xib */,
 				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
 				05DC8C860FBB15C60018AEEF /* XDataMessageLabelCell.xib */,
 				05F974291072F8560046344A /* XDataScalarCell.xib */,
@@ -851,6 +866,7 @@
 				05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */,
 				05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */,
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
+				0502D7C91082488200218EC9 /* ServiceViewController.xib */,
 			);
 			name = ViewControllers;
 			path = Resources/Views/ViewControllers;
@@ -1142,6 +1158,10 @@
 				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PubSubViewController.h */,
 				05E7EB861055CCE700C5F3FD /* PubSubViewController.m */,
+				0502D7E11082611800218EC9 /* ServiceCell.h */,
+				0502D7E21082611800218EC9 /* ServiceCell.m */,
+				0502D7C21082478F00218EC9 /* ServiceViewController.h */,
+				0502D7C31082478F00218EC9 /* ServiceViewController.m */,
 			);
 			path = PubSub;
 			sourceTree = "<group>";
@@ -1324,6 +1344,8 @@
 				05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 				050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */,
 				0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */,
+				0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */,
+				0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1377,6 +1399,8 @@
 				05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */,
 				050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */,
 				0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */,
+				0502D7CB1082488200218EC9 /* ServiceViewController.xib in Resources */,
+				0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1520,8 @@
 				05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 				05FC8C8C107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
+				0502D7C51082478F00218EC9 /* ServiceViewController.m in Sources */,
+				0502D7E31082611800218EC9 /* ServiceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1612,6 +1638,8 @@
 				05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 				05FC8C8B107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
+				0502D7C71082478F00218EC9 /* ServiceViewController.m in Sources */,
+				0502D7E41082611800218EC9 /* ServiceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
