@@ -134,7 +134,7 @@
 - (void)setModes {
     self.selectedMode = @"Chat";
     if (self.rosterMode == kCONTACTS_MODE) {
-        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Resources", @"Commands", @"Publications", nil];
+        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Resources", @"Publications", nil];
     } else {
         self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Publications", nil];
     } 

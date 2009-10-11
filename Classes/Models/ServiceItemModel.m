@@ -160,13 +160,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllUnsychedByService:(NSString*)requestService {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%%%@' AND AND node IS NULL AND synched = 0", requestService];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%@' AND parentNode IS NULL AND synched = 0", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllUnsychedByService:(NSString*)requestService andNode:(NSString*)requestNode {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%%%@' AND AND node = '%@' AND synched = 0", requestService, requestNode];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%@' AND parentNode = '%@' AND synched = 0", requestService, requestNode];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
