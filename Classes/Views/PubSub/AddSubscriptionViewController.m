@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddSubscriptionViewController.h"
-#import "ActivityView.h"
 #import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
@@ -33,7 +32,6 @@
 @synthesize jidTextField;
 @synthesize nodeTextField;
 @synthesize account;
-@synthesize addSubscriptionIndicatorView;
 
 //===================================================================================================================================
 #pragma mark AddSubscriptionViewController
@@ -51,14 +49,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
-    [self.addSubscriptionIndicatorView dismiss];
+    [AlertViewManager dismissActivityIndicator];
     [self.jidTextField becomeFirstResponder]; 
     [self failureAlert:@"Invalid Node or JID"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
-    [self.addSubscriptionIndicatorView dismiss];
+    [AlertViewManager dismissActivityIndicator];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -117,7 +115,7 @@
         if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
             [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
             [self.nodeTextField resignFirstResponder]; 
-            self.addSubscriptionIndicatorView = [[ActivityView alloc] initWithTitle:@"Subscribing" inView:self.view];
+            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Subscribing"];
         } else {
             [self failureAlert:@"Subscription exists"];
         }

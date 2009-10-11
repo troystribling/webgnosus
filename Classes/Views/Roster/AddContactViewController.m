@@ -10,7 +10,6 @@
 #import "AddContactViewController.h"
 #import "ContactModel.h"
 #import "AccountModel.h"
-#import "ActivityView.h"
 #import "AlertViewManager.h"
 
 #import "XMPPJID.h"
@@ -32,7 +31,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidTextField;
 @synthesize account;
-@synthesize addContactIndicatorView;
 @synthesize newContactJidString;
 
 //===================================================================================================================================
@@ -51,12 +49,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
-    if ([self.newContactJidString isEqualToString:[[item jid] bare]] && self.addContactIndicatorView) {
-        [self.addContactIndicatorView dismiss];
-        [self.jidTextField resignFirstResponder]; 
-        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    [AlertViewManager dismissActivityIndicator];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //===================================================================================================================================
@@ -99,7 +94,8 @@
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         XMPPJID* contactJID = [XMPPJID jidWithString:self.newContactJidString];
         [XMPPMessageDelegate addBuddy:xmppClient JID:contactJID];
-        self.addContactIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Contact" inView:self.view];
+        [self.jidTextField resignFirstResponder]; 
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding"];
 	} else {
 		[self failureAlert:@"JID is Invalid" message:@""];
 	}

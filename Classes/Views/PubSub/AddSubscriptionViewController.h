@@ -11,21 +11,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
-@class ActivityView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddSubscriptionViewController : UIViewController  <UITextFieldDelegate> {
 	IBOutlet UITextField* jidTextField;
 	IBOutlet UITextField* nodeTextField;
     AccountModel* account;
-    ActivityView* addSubscriptionIndicatorView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* jidTextField;
 @property (nonatomic, retain) UITextField* nodeTextField;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) ActivityView* addSubscriptionIndicatorView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

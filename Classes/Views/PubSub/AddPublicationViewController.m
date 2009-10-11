@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AddPublicationViewController.h"
-#import "ActivityView.h"
 #import "AlertViewManager.h"
 #import "AccountModel.h"
 #import "ServiceItemModel.h"
@@ -30,7 +29,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize nodeTextField;
 @synthesize account;
-@synthesize addPublicationIndicatorView;
 
 //===================================================================================================================================
 #pragma mark AddPublicationViewController
@@ -48,7 +46,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq {
-    [self.addPublicationIndicatorView dismiss];
+    [AlertViewManager dismissActivityIndicator];
     [self.nodeTextField becomeFirstResponder]; 
     [self failureAlert:@"Invalid Node"];
 }
@@ -59,7 +57,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)jid {
-    [self.addPublicationIndicatorView dismiss];
+    [AlertViewManager dismissActivityIndicator];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -116,7 +114,7 @@
         if (![ServiceItemModel findByNode:nodeFullPath]) {
             [XMPPPubSub create:client JID:[self.account pubSubService] node:nodeFullPath];
             [self.nodeTextField resignFirstResponder]; 
-            self.addPublicationIndicatorView = [[ActivityView alloc] initWithTitle:@"Adding Node" inView:self.view.window];
+            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding Node"];
         } else {
             [self failureAlert:@"Node exists"];
         }

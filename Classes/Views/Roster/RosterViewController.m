@@ -13,7 +13,6 @@
 #import "RosterCell.h"
 #import "AddContactViewController.h"
 #import "RosterItemViewController.h"
-#import "ActivityView.h"
 #import "ContactModel.h"
 #import "AccountModel.h"
 #import "RosterItemModel.h"
@@ -244,7 +243,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didRemoveFromRoster:(XMPPRosterItem*)item {
-    [AlertViewManager dismissConnectionIndicator];
+    [AlertViewManager dismissActivityIndicator];
     [self loadRoster];
 }
 
@@ -382,12 +381,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
 	if (editingStyle == UITableViewCellEditingStyleDelete) { 
-        NSMutableArray* accountRoster = [self.roster objectAtIndex:indexPath.section];
-        ContactModel* contact = [accountRoster objectAtIndex:indexPath.row]; 
+        ContactModel* contact = [self.roster objectAtIndex:indexPath.row]; 
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:account];
 		XMPPJID* contactJID = [XMPPJID jidWithString:[contact bareJID]];
         [XMPPRosterQuery remove:xmppClient JID:contactJID];
-        [AlertViewManager showConnectingIndicatorInView:self.view];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Deleting"];
 	} 
 }
 

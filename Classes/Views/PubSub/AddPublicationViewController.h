@@ -11,19 +11,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
-@class ActivityView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AddPublicationViewController : UIViewController  <UITextFieldDelegate> {
 	IBOutlet UITextField* nodeTextField;
     AccountModel* account;
-    ActivityView* addPublicationIndicatorView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* nodeTextField;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) ActivityView* addPublicationIndicatorView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

@@ -55,7 +55,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)accountConnectionFailed:(NSString*)title {
     [self.account destroy];
-    [AlertViewManager dismissConnectionIndicator]; 
+    [AlertViewManager dismissActivityIndicator]; 
     [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
 }
@@ -78,7 +78,7 @@
         self.account.port = 5222;
         self.account.displayed = YES;
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        [AlertViewManager showConnectingIndicatorInView:self.managerView.view.window];
+        [AlertViewManager showActivityIndicatorInView:self.managerView.view.window withTitle:@"Connecting"];
         [self.account insert];
         [self.account load];
         [[[XMPPClientManager instance] accountUpdateDelegate] didAddAccount];
@@ -164,7 +164,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveAllRosterItems:(XMPPIQ*)iq {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    [AlertViewManager dismissConnectionIndicator]; 
+    [AlertViewManager dismissActivityIndicator]; 
     [self.view removeFromSuperview];
     if ([AccountModel count] == 1) {
         [self.managerView dismiss];

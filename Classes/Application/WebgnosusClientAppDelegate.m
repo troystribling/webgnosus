@@ -23,7 +23,6 @@
 #import "HistoryViewController.h"
 #import "AcceptBuddyRequestView.h"
 #import "AccountModel.h"
-#import "ActivityView.h"
 #import "ContactModel.h"
 #import "RosterItemModel.h"
 #import "SubscriptionModel.h"

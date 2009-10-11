@@ -11,7 +11,7 @@
 #import "ActivityView.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-static ActivityView* ConnectingIndicatorView = nil;
+static ActivityView* ActivityIndicatorView = nil;
 static BOOL DismissConnectionIndicatorOnStart = YES;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,23 +28,23 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 #pragma mark AlertViewManager
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)dismissConnectionIndicator { 
-    if (ConnectingIndicatorView) {
-        [ConnectingIndicatorView dismiss]; 
-        [ConnectingIndicatorView release];
-        ConnectingIndicatorView = nil;
++ (void)dismissActivityIndicator { 
+    if (ActivityIndicatorView) {
+        [ActivityIndicatorView dismiss]; 
+        [ActivityIndicatorView release];
+        ActivityIndicatorView = nil;
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ActivityView*)connectingIndicator { 
-    return ConnectingIndicatorView;
++ (ActivityView*)activityIndicatorIndicator { 
+    return ActivityIndicatorView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)showConnectingIndicatorInView:(UIView*)view {
-    if (!ConnectingIndicatorView) {
-        ConnectingIndicatorView = [[ActivityView alloc] initWithTitle:@"Connecting" inView:view];
++ (void)showActivityIndicatorInView:(UIView*)view withTitle:(NSString*)title {
+    if (!ActivityIndicatorView) {
+        ActivityIndicatorView = [[ActivityView alloc] initWithTitle:title inView:view];
     }
 }
 
@@ -54,7 +54,7 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
         DismissConnectionIndicatorOnStart = NO;
     }
     if (DismissConnectionIndicatorOnStart) {
-        [self showConnectingIndicatorInView:view];
+        [self showActivityIndicatorInView:view withTitle:@"Connecting"];
     }
 }
 
@@ -62,7 +62,7 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 + (void)onStartDismissConnectionIndicatorAndShowErrors {
     if (DismissConnectionIndicatorOnStart) {
         if ([AccountModel triedToConnectAll]) {
-            [self dismissConnectionIndicator]; 
+            [self dismissActivityIndicator]; 
             [self showAlertsForConnectionState:AccountConnectionError titled:@"Connection Failed"];
             [self showAlertsForConnectionState:AccountAuthenticationError titled:@"Authentication Failed"];
             [self showAlertsForConnectionState:AccountRosterUpdateError titled:@"Roster Update Failed"];
@@ -89,7 +89,7 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)showAlert:(NSString*)title withMessage:(NSString*)message {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
     [alert show];	
     [alert release];
 }

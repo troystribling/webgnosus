@@ -17,7 +17,6 @@
 #import "RosterItemModel.h"
 #import "CellUtils.h"
 #import "AlertViewManager.h"
-#import "ActivityView.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -44,7 +43,6 @@
 @synthesize rosterItem;
 @synthesize commands;
 @synthesize commandRequest;
-@synthesize commandRequestIndicatorView;
 
 //===================================================================================================================================
 #pragma mark CommandViewController
@@ -79,7 +77,7 @@
         if ([resourceModel isAvailable]) {
             [XMPPCommand set:client commandNode:self.commandRequest.node JID:[resourceModel toJID]];
         }
-        self.commandRequestIndicatorView = [[ActivityView alloc] initWithTitle:@"Waiting" inView:self.view.window];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting"];
     }
 }
 
@@ -101,14 +99,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
     [self failureAlert];
-    [self.commandRequestIndicatorView dismiss];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-    [self.commandRequestIndicatorView dismiss];
+    [AlertViewManager dismissActivityIndicator];
     [self saveMessage:self.commandRequest.itemName];
     [self.navigationController popViewControllerAnimated:YES];
 }

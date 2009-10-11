@@ -162,12 +162,12 @@
 - (void)deleteItem:(id)item{
     [item destroy];
     [self loadPubSubItems];
-    [AlertViewManager dismissConnectionIndicator];
+    [AlertViewManager dismissActivityIndicator];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert:(NSString*)message { 
-    [AlertViewManager dismissConnectionIndicator];
+    [AlertViewManager dismissActivityIndicator];
     [AlertViewManager showAlert:@"Error" withMessage:message];
 }
 
@@ -194,6 +194,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
+    [self loadPubSubItems];
     [self failureAlert:@"Publish Node Delete Failed"];
 }
 
@@ -201,10 +202,12 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
     ServiceItemModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
     [self deleteItem:item];
+    [self loadPubSubItems];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
+    [self loadPubSubItems];
     [self failureAlert:@"Node Unsubscribe Failed"];
 }
 
@@ -212,6 +215,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
     SubscriptionModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
     [self deleteItem:item];
+    [self loadPubSubItems];
 }
 
 //===================================================================================================================================
@@ -348,12 +352,12 @@
         self.itemToDelete = indexPath.row;
         if (self.eventType == kSUB_MODE) {
             SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
-            [XMPPPubSubSubscriptions unsubscribe:client JID:[self.account pubSubService] node:item.node];
+            [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:item.service] node:item.node];
         } else {
             ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
             [XMPPPubSubOwner delete:client JID:[XMPPJID jidWithString:item.service] node:item.node];
         }
-        [AlertViewManager showConnectingIndicatorInView:self.view];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Deleting"];
 	} 
 }
 

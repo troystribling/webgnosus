@@ -12,7 +12,6 @@
 #import "AccountModel.h"
 #import "AlertViewManager.h"
 #import "AccountManagerViewController.h"
-#import "ActivityView.h"
 #import "SegmentedListPicker.h"
 #import "AccountModel.h"
 #import "XMPPClient.h"

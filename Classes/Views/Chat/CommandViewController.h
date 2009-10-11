@@ -12,7 +12,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class UserModel;
-@class ActivityView;
 @class ServiceItemModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +20,6 @@
     UserModel* rosterItem;
     NSMutableArray* commands;
     ServiceItemModel* commandRequest;
-    ActivityView* commandRequestIndicatorView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +27,6 @@
 @property (nonatomic, retain) UserModel* rosterItem;
 @property (nonatomic, retain) NSMutableArray* commands;
 @property (nonatomic, retain) ServiceItemModel* commandRequest;
-@property (nonatomic, retain) ActivityView* commandRequestIndicatorView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

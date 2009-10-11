@@ -212,6 +212,8 @@
     // Roster
 	if([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterResult:iq];
+    } else if([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"set"]) {
+        [multicastDelegate  xmppClient:self didReceiveRosterResult:iq];
 	} else if ([[query className] isEqualToString:@"XMPPRosterQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveRosterError:iq];
     // Client Version

@@ -18,9 +18,9 @@
 @interface AlertViewManager : NSObject 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)dismissConnectionIndicator;
-+ (ActivityView*)connectingIndicator;
-+ (void)showConnectingIndicatorInView:(UIView*)view;
++ (void)dismissActivityIndicator;
++ (ActivityView*)activityIndicatorIndicator;
++ (void)showActivityIndicatorInView:(UIView*)view withTitle:(NSString*)title;
 + (void)onStartDismissConnectionIndicatorAndShowErrors;
 + (void)onStartshowConnectingIndicatorInView:(UIView*)view;
 + (void)showAlertsForConnectionState:(AccountConnectionState)state titled:(NSString*)title;
