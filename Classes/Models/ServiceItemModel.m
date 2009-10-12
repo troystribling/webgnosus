@@ -94,7 +94,29 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByNode:(NSString*)requestNode {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@'",  requestNode];
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@' LIMIT 1",  requestNode];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceItemModel*)findByService:(NSString*)requestService andNode:(NSString*)requestNode {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@' AND service = '%@' LIMIT 1", requestNode,  requestService];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceItemModel*)findByService:(NSString*)requestService {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node IS NULL AND service = '%@' LIMIT 1",  requestService];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {

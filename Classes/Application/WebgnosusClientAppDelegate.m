@@ -21,6 +21,7 @@
 #import "AccountManagerViewController.h"
 #import "PubSubViewController.h"
 #import "HistoryViewController.h"
+#import "ServiceViewController.h"
 #import "AcceptBuddyRequestView.h"
 #import "AccountModel.h"
 #import "ContactModel.h"
@@ -37,7 +38,7 @@
 - (void)openActivatedAccounts;
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController;
 - (void)accountConnectionFailedForClient:(XMPPClient*)sender;
-- (void)createTabBarController;
+- (UITabBarController*)createTabBarController;
 - (void)createAccountManager;
 
 @end
@@ -50,10 +51,7 @@
 @synthesize rosterViewController;
 @synthesize historyViewController;
 @synthesize pubSubViewController;
-@synthesize tabBarController;
-@synthesize navPubSubViewController;
-@synthesize navRosterViewController;
-@synthesize navHistoryViewController;
+@synthesize serviceViewController;
 
 //===================================================================================================================================
 #pragma mark WebgnosusClientAppDelegate
@@ -89,27 +87,29 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController {
-    UINavigationController* navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    UINavigationController* navController = [[[UINavigationController alloc] initWithRootViewController:viewController] autorelease];
     navController.navigationBar.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
     return navController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createTabBarController {
-    self.tabBarController = [[UITabBarController alloc] init];	
-    self.navRosterViewController = [self createNavigationController:self.rosterViewController];
-    self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
-    self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
-    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
-    self.navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
-    self.navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, self.navHistoryViewController, nil];	
+- (UITabBarController*)createTabBarController {
+    UITabBarController* tabBarController = [[UITabBarController alloc] init];	
+    UINavigationController* navRosterViewController = [self createNavigationController:self.rosterViewController];
+    navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
+    UINavigationController* navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
+    navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
+    UINavigationController* navServiceViewController = [self createNavigationController:self.serviceViewController];	
+    navServiceViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2];
+    UINavigationController* navHistoryViewController = [self createNavigationController:self.historyViewController];	
+    navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:navRosterViewController, navPubSubViewController, navServiceViewController, navHistoryViewController, nil];	
+    return tabBarController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createAccountManager {
-    AccountManagerViewController* acctMgr = [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:self.window];
-    [acctMgr release];
+    [AccountManagerViewController inView:window];
 }
 
 //===================================================================================================================================
@@ -126,8 +126,7 @@
 	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
 	[[XMPPClientManager instance] addDelegate:self];
     [self openActivatedAccounts];
-    [self createTabBarController];
-	[window addSubview:self.tabBarController.view];	
+	[window addSubview:[self createTabBarController].view];	
     [AlertViewManager onStartshowConnectingIndicatorInView:window];
     NSInteger count = [AccountModel count];
     if (count == 0) {

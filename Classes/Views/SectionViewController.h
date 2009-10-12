@@ -1,5 +1,5 @@
 //
-//  RosterSectionViewController.h
+//  SectionViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/10/09.
@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RosterSectionViewController : UIViewController {
+@interface SectionViewController : UIViewController {
     IBOutlet UILabel* nicknameLable;
     NSString* nickname;
 }
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString* nickname;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (UIView*)viewWithLabel:(NSString*)viewLable;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLable:(NSString*)lable;
 
 @end

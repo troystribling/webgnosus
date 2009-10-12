@@ -120,7 +120,7 @@
         }
         [nodeFullPath release];
     } else {
-        [self failureAlert:@"Node must not be empty"];
+        [self failureAlert:@"Node Required"];
     }
 	return NO; 
 }

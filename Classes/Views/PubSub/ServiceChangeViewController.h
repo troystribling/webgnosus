@@ -1,5 +1,5 @@
 //
-//  ServiceViewController.h
+//  ServiceChangeViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 10/11/09.
@@ -11,23 +11,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class ServiceViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ServiceViewController : UITableViewController {
-	UIBarButtonItem* editAccountsButton;
-	UIBarButtonItem* changeServiceButton;
-    NSMutableArray* services;
-    NSString* parentNode;
+@interface ServiceChangeViewController : UIViewController <UITextFieldDelegate> {
+	IBOutlet UITextField* addressTextField;
+	IBOutlet UITextField* nodeTextField;
+    ServiceViewController* serviceController;
     AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
-@property (nonatomic, retain) UIBarButtonItem* changeServiceButton;
-@property (nonatomic, retain) NSMutableArray* services;
-@property (nonatomic, retain) NSString* parentNode;
+@property (nonatomic, retain) UITextField* addressTextField;
+@property (nonatomic, retain) UITextField* nodeTextField;
+@property (nonatomic, retain) ServiceViewController* serviceController;
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+
 
 @end

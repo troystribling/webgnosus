@@ -13,6 +13,7 @@
 @class RosterViewController;
 @class HistoryViewController;
 @class PubSubViewController;
+@class ServiceViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface WebgnosusClientAppDelegate : NSObject <UIApplicationDelegate, UIAlertViewDelegate> {
@@ -20,11 +21,7 @@
     IBOutlet RosterViewController* rosterViewController;
     IBOutlet PubSubViewController* pubSubViewController;
 	IBOutlet HistoryViewController* historyViewController;
-
-    UITabBarController* tabBarController;
-    UINavigationController* navPubSubViewController;
-    UINavigationController* navRosterViewController;	
-    UINavigationController* navHistoryViewController;	
+    IBOutlet ServiceViewController* serviceViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,11 +29,7 @@
 @property (nonatomic, retain) PubSubViewController* pubSubViewController;
 @property (nonatomic, retain) RosterViewController* rosterViewController;
 @property (nonatomic, retain) HistoryViewController* historyViewController;
-
-@property (nonatomic, retain) UITabBarController* tabBarController;
-@property (nonatomic, retain) UINavigationController* navPubSubViewController;
-@property (nonatomic, retain) UINavigationController* navRosterViewController;
-@property (nonatomic, retain) UINavigationController* navHistoryViewController;
+@property (nonatomic, retain) ServiceViewController* serviceViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

@@ -12,7 +12,7 @@
 #import "MessageModel.h"
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -171,13 +171,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* rosterHeaderView = nil;
+    UIView* sectionView = nil;
     if (self.account) {
-        RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
-        rosterHeaderView = rosterHeader.view;
+        sectionView = [SectionViewController viewWithLabel:[self.account jid]]; 
     }
-	return rosterHeaderView; 
+	return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

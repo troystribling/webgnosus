@@ -10,7 +10,7 @@
 #import "RosterItemViewController.h"
 #import "MessageViewController.h"
 #import "CommandViewController.h"
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 
 #import "MessageModel.h"
 #import "UserModel.h"
@@ -310,8 +310,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
-    RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
+    SectionViewController* rosterHeader = 
+        [[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
     rosterHeaderView = rosterHeader.view;
 	return rosterHeaderView; 
 }

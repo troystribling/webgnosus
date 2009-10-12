@@ -19,6 +19,14 @@
 		0502D7E41082611800218EC9 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7E21082611800218EC9 /* ServiceCell.m */; };
 		0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
 		0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
+		0502D8411082A6F800218EC9 /* ServiceChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8401082A6F800218EC9 /* ServiceChangeViewController.m */; };
+		0502D8421082A6F800218EC9 /* ServiceChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8401082A6F800218EC9 /* ServiceChangeViewController.m */; };
+		0502D8501082AE1A00218EC9 /* ServiceChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceChangeViewController.xib */; };
+		0502D8511082AE1A00218EC9 /* ServiceChangeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceChangeViewController.xib */; };
+		0502D8A11082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
+		0502D8A21082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
+		0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
+		0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050A686F10719FBB002FE125 /* XDataHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A686E10719FBB002FE125 /* XDataHashCell.m */; };
@@ -146,7 +154,7 @@
 		05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
 		05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
 		05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
-		05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
+		05DC8CA60FBB15EB0018AEEF /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */; };
 		05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
 		05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
@@ -155,7 +163,7 @@
 		05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
 		05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
 		05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
-		05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */; };
+		05DC8CB20FBB15EB0018AEEF /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */; };
 		05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
 		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */; };
@@ -239,7 +247,6 @@
 		05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */; };
 		05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
 		05E208060FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
-		05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
@@ -258,7 +265,6 @@
 		05E208210FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */; };
 		05E208220FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
-		05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
 		05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
@@ -353,6 +359,12 @@
 		0502D7E11082611800218EC9 /* ServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCell.h; sourceTree = "<group>"; };
 		0502D7E21082611800218EC9 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
 		0502D7EB108261E500218EC9 /* ServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
+		0502D83F1082A6F800218EC9 /* ServiceChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceChangeViewController.h; sourceTree = "<group>"; };
+		0502D8401082A6F800218EC9 /* ServiceChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceChangeViewController.m; sourceTree = "<group>"; };
+		0502D84F1082AE1A00218EC9 /* ServiceChangeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceChangeViewController.xib; sourceTree = "<group>"; };
+		0502D8A01082CAB500218EC9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		0502D8B21082D4E800218EC9 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
+		0502D8B31082D4E800218EC9 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
 		050A686D10719FBB002FE125 /* XDataHashCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataHashCell.h; sourceTree = "<group>"; };
@@ -456,7 +468,7 @@
 		05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterItemViewController.xib; sourceTree = "<group>"; };
 		05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageViewController.xib; sourceTree = "<group>"; };
-		05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterSectionViewController.xib; sourceTree = "<group>"; };
+		05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionViewController.xib; sourceTree = "<group>"; };
 		05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterViewController.xib; sourceTree = "<group>"; };
 		05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 		05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeSeriesCell.xib; sourceTree = "<group>"; };
@@ -561,8 +573,6 @@
 		05E207E50FB9046500FCFC94 /* AddContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContactViewController.m; sourceTree = "<group>"; };
 		05E207E60FB9046500FCFC94 /* RosterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterCell.h; sourceTree = "<group>"; };
 		05E207E70FB9046500FCFC94 /* RosterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterCell.m; sourceTree = "<group>"; };
-		05E207E80FB9046500FCFC94 /* RosterSectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterSectionViewController.h; sourceTree = "<group>"; };
-		05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterSectionViewController.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
 		05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEntryDelegate.h; sourceTree = "<group>"; };
@@ -703,6 +713,7 @@
 				05D83D78104ED94F00078131 /* red-button.png */,
 				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
 				05E6F157104A07FC00EF924B /* roster-section.jpg */,
+				0502D8A01082CAB500218EC9 /* search.png */,
 				05D83D5B104EBF0A00078131 /* settings.png */,
 				057BB16010587547006389D9 /* tabbar-events.png */,
 				05E7EBAC1055D97600C5F3FD /* tabbar-history.png */,
@@ -864,8 +875,9 @@
 				05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */,
 				057BB1B610588788006389D9 /* PubSubViewController.xib */,
 				05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */,
-				05DC8C9A0FBB15EB0018AEEF /* RosterSectionViewController.xib */,
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
+				05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */,
+				0502D84F1082AE1A00218EC9 /* ServiceChangeViewController.xib */,
 				0502D7C91082488200218EC9 /* ServiceViewController.xib */,
 			);
 			name = ViewControllers;
@@ -1048,6 +1060,8 @@
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
 				05E5A22E10533DE300D960B7 /* RoundedCornersView.h */,
 				05E5A22F10533DE300D960B7 /* RoundedCornersView.m */,
+				0502D8B21082D4E800218EC9 /* SectionViewController.h */,
+				0502D8B31082D4E800218EC9 /* SectionViewController.m */,
 				05D1EC36107054820013734A /* SegmentedCycleList.h */,
 				05D1EC37107054830013734A /* SegmentedCycleList.m */,
 				05ED464D1051932B00DB3396 /* SegmentedListPicker.h */,
@@ -1133,8 +1147,6 @@
 				05E207E50FB9046500FCFC94 /* AddContactViewController.m */,
 				05E207E60FB9046500FCFC94 /* RosterCell.h */,
 				05E207E70FB9046500FCFC94 /* RosterCell.m */,
-				05E207E80FB9046500FCFC94 /* RosterSectionViewController.h */,
-				05E207E90FB9046500FCFC94 /* RosterSectionViewController.m */,
 				05E207EA0FB9046500FCFC94 /* RosterViewController.h */,
 				05E207EB0FB9046500FCFC94 /* RosterViewController.m */,
 			);
@@ -1160,6 +1172,8 @@
 				05E7EB861055CCE700C5F3FD /* PubSubViewController.m */,
 				0502D7E11082611800218EC9 /* ServiceCell.h */,
 				0502D7E21082611800218EC9 /* ServiceCell.m */,
+				0502D83F1082A6F800218EC9 /* ServiceChangeViewController.h */,
+				0502D8401082A6F800218EC9 /* ServiceChangeViewController.m */,
 				0502D7C21082478F00218EC9 /* ServiceViewController.h */,
 				0502D7C31082478F00218EC9 /* ServiceViewController.m */,
 			);
@@ -1311,7 +1325,7 @@
 				05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
 				05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
 				05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
-				05DC8CB20FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
+				05DC8CB20FBB15EB0018AEEF /* SectionViewController.xib in Resources */,
 				05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
 				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
@@ -1346,6 +1360,8 @@
 				0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */,
 				0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */,
 				0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */,
+				0502D8501082AE1A00218EC9 /* ServiceChangeViewController.xib in Resources */,
+				0502D8A11082CAB500218EC9 /* search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1366,7 +1382,7 @@
 				05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
 				05DC8CA40FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
 				05DC8CA50FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
-				05DC8CA60FBB15EB0018AEEF /* RosterSectionViewController.xib in Resources */,
+				05DC8CA60FBB15EB0018AEEF /* SectionViewController.xib in Resources */,
 				05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
 				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
@@ -1401,6 +1417,8 @@
 				0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */,
 				0502D7CB1082488200218EC9 /* ServiceViewController.xib in Resources */,
 				0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */,
+				0502D8511082AE1A00218EC9 /* ServiceChangeViewController.xib in Resources */,
+				0502D8A21082CAB500218EC9 /* search.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1459,7 +1477,6 @@
 				05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */,
 				05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */,
 				05E208060FB9046500FCFC94 /* RosterCell.m in Sources */,
-				05E208070FB9046500FCFC94 /* RosterSectionViewController.m in Sources */,
 				05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */,
 				05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */,
 				05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */,
@@ -1522,6 +1539,8 @@
 				05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				0502D7C51082478F00218EC9 /* ServiceViewController.m in Sources */,
 				0502D7E31082611800218EC9 /* ServiceCell.m in Sources */,
+				0502D8411082A6F800218EC9 /* ServiceChangeViewController.m in Sources */,
+				0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1577,7 +1596,6 @@
 				05E208210FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */,
 				05E208220FB9046500FCFC94 /* AddContactViewController.m in Sources */,
 				05E208230FB9046500FCFC94 /* RosterCell.m in Sources */,
-				05E208240FB9046500FCFC94 /* RosterSectionViewController.m in Sources */,
 				05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */,
 				05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */,
 				05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */,
@@ -1640,6 +1658,8 @@
 				05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				0502D7C71082478F00218EC9 /* ServiceViewController.m in Sources */,
 				0502D7E41082611800218EC9 /* ServiceCell.m in Sources */,
+				0502D8421082A6F800218EC9 /* ServiceChangeViewController.m in Sources */,
+				0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 #import "AccountPubCell.h"
 #import "AccountSubCell.h"
 #import "CellUtils.h"
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 #import "AccountManagerViewController.h"
 #import "AddSubscriptionViewController.h"
 #import "AddPublicationViewController.h"
@@ -37,10 +37,10 @@
 - (void)editAccountButtonWasPressed; 
 - (void)labelBackButton;
 - (void)loadPubSubItems;
+- (void)loadAccount;
 - (void)reloadPubSubItems;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
-- (void)loadAccount;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
 - (EventsViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
@@ -292,13 +292,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* rosterHeaderView = nil;
+    UIView* sectionView = nil;
     if (self.account) {
-        RosterSectionViewController* rosterHeader = 
-            [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account bareJID]]; 
-        rosterHeaderView = rosterHeader.view;
+        sectionView = [SectionViewController viewWithLabel:[self.account bareJID]]; 
     }
-	return rosterHeaderView; 
+    return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

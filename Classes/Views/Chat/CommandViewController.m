@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandViewController.h"
 #import "CommandCell.h"
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "AccountModel.h"
@@ -164,9 +164,11 @@
 
  //-----------------------------------------------------------------------------------------------------------------------------------
  - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {    
-    RosterSectionViewController* rosterHeader = 
-        [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
-    return rosterHeader.view; 
+     UIView* sectionView = nil;
+     if (self.account) {
+         sectionView = [SectionViewController viewWithLabel:[self.rosterItem fullJID]]; 
+     }
+     return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

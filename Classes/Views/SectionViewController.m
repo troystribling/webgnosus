@@ -1,5 +1,5 @@
 //
-//  RosterSectionViewController.m
+//  SectionViewController.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/10/09.
@@ -7,28 +7,34 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RosterSectionViewController (PrivateAPI)
+@interface SectionViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation RosterSectionViewController
+@implementation SectionViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize nicknameLable;
 @synthesize nickname;
 
 //===================================================================================================================================
-#pragma mark RosterSectionViewController
+#pragma mark SectionViewController
 
 //===================================================================================================================================
-#pragma mark RosterSectionViewController PrivateAPI
+#pragma mark SectionViewController PrivateAPI
 
 //===================================================================================================================================
 #pragma mark UIViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UIView*)viewWithLabel:(NSString*)viewLable {
+    SectionViewController* viewController = [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLable:viewLable] autorelease]; 
+    return viewController.view;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLable:(NSString*)lable {

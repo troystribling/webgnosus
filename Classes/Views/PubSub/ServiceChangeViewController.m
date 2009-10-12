@@ -1,64 +1,51 @@
 //
-//  AddSubscriptionViewController.m
+//  ServiceChangeViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 9/11/09.
+//  Created by Troy Stribling on 10/11/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AddSubscriptionViewController.h"
+#import "ServiceChangeViewController.h"
+#import "ServiceViewController.h"
 #import "AlertViewManager.h"
-#import "XMPPClient.h"
-#import "XMPPIQ.h"
-#import "XMPPPubSubSubscriptions.h"
-#import "XMPPClientManager.h"
-#import "XMPPJID.h"
-#import "SubscriptionModel.h"
 #import "AccountModel.h"
-#import "ServiceModel.h"
+#import "ServiceItemModel.h"
+#import "XMPPPubSub.h"
+#import "XMPPJID.h"
+#import "XMPPClient.h"
+#import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AddSubscriptionViewController (PrivateAPI)
+@interface ServiceChangeViewController (PrivateAPI)
 
 - (void)failureAlert:(NSString*)message;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AddSubscriptionViewController
+@implementation ServiceChangeViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize jidTextField;
+@synthesize addressTextField;
 @synthesize nodeTextField;
+@synthesize serviceController;
 @synthesize account;
 
 //===================================================================================================================================
-#pragma mark AddSubscriptionViewController
+#pragma mark AddPublicationViewController
 
 //===================================================================================================================================
-#pragma mark AddSubscriptionViewController PrivateAPI
+#pragma mark AddPublicationViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert:(NSString*)message { 
-    [AlertViewManager showAlert:@"Error Subscribing" withMessage:message];
+    [AlertViewManager showAlert:@"Disco Error" withMessage:message];
 }
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
-    [AlertViewManager dismissActivityIndicator];
-    [self.jidTextField becomeFirstResponder]; 
-    [self failureAlert:@"Invalid Node or JID"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
-    [AlertViewManager dismissActivityIndicator];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -73,15 +60,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     [super viewDidLoad];
-	self.title = @"Subscription";
+	self.title = @"Change Service";
 	self.account = [AccountModel findFirstDisplayed];
+	self.addressTextField.returnKeyType = UIReturnKeyDone;
+    self.addressTextField.delegate = self;
+	self.addressTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 	self.nodeTextField.returnKeyType = UIReturnKeyDone;
     self.nodeTextField.delegate = self;
 	self.nodeTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-	self.jidTextField.returnKeyType = UIReturnKeyDone;
-    self.jidTextField.delegate = self;
-	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [self.jidTextField becomeFirstResponder]; 
+    [self.addressTextField becomeFirstResponder]; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -105,22 +97,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (![self.nodeTextField.text isEqualToString:@""] || ![self.jidTextField.text isEqualToString:@""]) {
+    NSString* addr = self.addressTextField.text;
+    NSString* node = self.nodeTextField.text;
+    if (![self.addressTextField.text isEqualToString:@""]) {
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-        XMPPJID* userJID = [XMPPJID jidWithString:self.jidTextField.text];
-        NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
-        NSString* userPubSubService = [NSString stringWithFormat:@"pubsub.%@", [userJID domain]];
-        ServiceModel* service = [ServiceModel findByService:[userJID domain] type:@"service" andCategory:@"pubsub"];
-        if (service)
-        if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
-            [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
-            [self.nodeTextField resignFirstResponder]; 
-            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Subscribing"];
+        ServiceItemModel* item;
+        if (![self.nodeTextField.text isEqualToString:@""]) {
+            item = [ServiceItemModel findByService:addr];
         } else {
-            [self failureAlert:@"Subscription exists"];
+            item = [ServiceItemModel findByService:addr andNode:node];
         }
+        [self.nodeTextField resignFirstResponder]; 
     } else {
-        [self failureAlert:@"Node and JID Required"];
+        [self failureAlert:@"Address Required"];
     }
 	return NO; 
 }
@@ -132,6 +121,5 @@
 - (void)dealloc {
     [super dealloc];
 }
-
 
 @end

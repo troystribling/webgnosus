@@ -41,6 +41,8 @@
 + (void)destroyAll;
 + (ServiceItemModel*)findByJID:(NSString*)requestJID;
 + (ServiceItemModel*)findByNode:(NSString*)requestNode;
++ (ServiceItemModel*)findByService:(NSString*)requestService andNode:(NSString*)requestNode;
++ (ServiceItemModel*)findByService:(NSString*)requestService;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService;
 + (NSMutableArray*)findAll;

@@ -9,10 +9,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceViewController.h"
 #import "ServiceCell.h"
+#import "ServiceChangeViewController.h"
 #import "AccountManagerViewController.h"
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
-#import "RosterSectionViewController.h"
+#import "SectionViewController.h"
 #import "CellUtils.h"
 
 #import "XMPPClientManager.h"
@@ -23,6 +24,16 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceViewController (PrivateAPI)
 
+- (void)changeServiceButtonWasPressed; 
+- (NSString*)initParentNode;
+- (void)loadServices;
+- (void)loadAccount;
+- (void)reloadPubSubItems;
+- (void)addXMPPClientDelgate;
+- (void)removeXMPPClientDelgate;
+- (void)addXMPPAccountUpdateDelgate;
+- (void)removeXMPPAccountUpdateDelgate;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +41,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize editAccountsButton;
+@synthesize changeServiceButton;
 @synthesize services;
+@synthesize parentNode;
 @synthesize account;
 
 //===================================================================================================================================
@@ -40,8 +53,25 @@
 #pragma mark ServiceViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)initParentNode{
+    if (!self.parentNode) {
+        self.parentNode = [[self.account toJID] domain];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
     [AccountManagerViewController inView:self.view.window];
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)changeServiceButtonWasPressed { 
+    if (self.account) {
+        ServiceChangeViewController* changeController = [[ServiceChangeViewController alloc] initWithNibName:@"ServiceChangeViewController" bundle:nil]; 
+        changeController.serviceController = self;
+        [self.navigationController pushViewController:changeController animated:YES]; 
+        [changeController release];     
+    }
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -114,6 +144,7 @@
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
         self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.changeServiceButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(changeServiceButtonWasPressed)];
 	} 
 	return self; 
 } 
@@ -121,12 +152,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {    
     self.navigationItem.leftBarButtonItem = self.editAccountsButton;
+    self.navigationItem.rightBarButtonItem = self.changeServiceButton;
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
+    [self initParentNode];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
     [self loadServices];
@@ -158,12 +191,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* rosterHeaderView = nil;
+    UIView* sectionView = nil;
     if (self.account) {
-        RosterSectionViewController* rosterHeader = [[RosterSectionViewController alloc] initWithNibName:@"RosterSectionViewController" bundle:nil andLable:[self.account jid]]; 
-        rosterHeaderView = rosterHeader.view;
+        sectionView = [SectionViewController viewWithLabel:self.parentNode]; 
     }
-	return rosterHeaderView; 
+    return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
