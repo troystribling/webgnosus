@@ -62,7 +62,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadCommands {
-    self.commands = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" andService:[self.rosterItem fullJID]];
+    self.commands = [ServiceItemModel findAllByService:[self.rosterItem fullJID] andParentNode:@"http://jabber.org/protocol/commands"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@
     self.commandRequest = [self.commands objectAtIndex:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
-    NSMutableArray* serviceItems = [ServiceItemModel findAllByParentNode:@"http://jabber.org/protocol/commands" node:self.commandRequest.node andService:[toJID full]];
+    NSMutableArray* serviceItems = [ServiceItemModel findAllByService:[toJID full] parentNode:@"http://jabber.org/protocol/commands" andNode:self.commandRequest.node];
     for(int i = 0; i < [serviceItems count]; i++) {
         ServiceItemModel* serviceItem = [serviceItems objectAtIndex:i];
         RosterItemModel* resourceModel = [RosterItemModel findByFullJid:serviceItem.service andAccount:self.account];

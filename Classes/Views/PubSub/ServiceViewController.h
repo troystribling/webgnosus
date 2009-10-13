@@ -11,22 +11,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class ServiceItemModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceViewController : UITableViewController {
 	UIBarButtonItem* editAccountsButton;
 	UIBarButtonItem* changeServiceButton;
-    NSMutableArray* services;
-    NSString* parentNode;
+    NSMutableArray* serviceItems;
+    NSString* node;
+    NSString* service;
     AccountModel* account;
+    ServiceItemModel* selectedItem;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
 @property (nonatomic, retain) UIBarButtonItem* changeServiceButton;
-@property (nonatomic, retain) NSMutableArray* services;
-@property (nonatomic, retain) NSString* parentNode;
+@property (nonatomic, retain) NSMutableArray* serviceItems;
+@property (nonatomic, retain) NSString* node;
+@property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) ServiceItemModel* selectedItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

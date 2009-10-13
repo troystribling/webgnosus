@@ -36,6 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
++ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
@@ -43,8 +44,8 @@
 + (ServiceItemModel*)findByNode:(NSString*)requestNode;
 + (ServiceItemModel*)findByService:(NSString*)requestService andNode:(NSString*)requestNode;
 + (ServiceItemModel*)findByService:(NSString*)requestService;
-+ (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService;
-+ (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService;
++ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode ;
++ (NSMutableArray*)findAllByService:(NSString*)requestService parentNode:(NSString*)requestParentNode andNode:(NSString*)requestNode;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;

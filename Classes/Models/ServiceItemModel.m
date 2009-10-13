@@ -40,6 +40,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
+    NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceItems WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceItems WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+    }
+	return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE serviceItems"];
 }
@@ -65,15 +76,20 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByParentNode:(NSString*)requestNode andService:(NSString*)requestService {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
++ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
+    NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+    }
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByParentNode:(NSString*)requestParentNode node:(NSString*)requestNode andService:(NSString*)requestService {
++ (NSMutableArray*)findAllByService:(NSString*)requestService parentNode:(NSString*)requestParentNode andNode:(NSString*)requestNode {
     NSString* selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceItems WHERE parentNode = '%@' AND node = '%@' AND service LIKE '%@%%'",  
                                     requestParentNode, requestNode, requestService];
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	

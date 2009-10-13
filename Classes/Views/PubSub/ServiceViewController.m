@@ -11,24 +11,31 @@
 #import "ServiceCell.h"
 #import "ServiceChangeViewController.h"
 #import "AccountManagerViewController.h"
+#import "AlertViewManager.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 #import "MessageCellFactory.h"
-#import "SectionViewController.h"
 #import "CellUtils.h"
-
+#import "SectionViewController.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
+#import "XMPPJID.h"
 #import "XMPPMessage.h"
+#import "XMPPDiscoItemsQuery.h"
+#import "XMPPDiscoItemsServiceResponseDelegate.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceViewController (PrivateAPI)
 
+- (void)failureAlert;
 - (void)changeServiceButtonWasPressed; 
-- (NSString*)initParentNode;
-- (void)loadServices;
+- (void)editAccountButtonWasPressed;
+- (void)initParentNode;
+- (void)loadNextViewController;
+- (void)loadServiceItems;
 - (void)loadAccount;
-- (void)reloadPubSubItems;
+- (void)reloadServiceItems;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
@@ -42,9 +49,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize editAccountsButton;
 @synthesize changeServiceButton;
-@synthesize services;
-@synthesize parentNode;
+@synthesize serviceItems;
+@synthesize node;
+@synthesize service;
 @synthesize account;
+@synthesize selectedItem;
 
 //===================================================================================================================================
 #pragma mark ServiceViewController
@@ -53,16 +62,9 @@
 #pragma mark ServiceViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)initParentNode{
-    if (!self.parentNode) {
-        self.parentNode = [[self.account toJID] domain];
-    }
+- (void)failureAlert { 
+    [AlertViewManager showAlert:@"Disco Error"];
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)editAccountButtonWasPressed { 
-    [AccountManagerViewController inView:self.view.window];
-}	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)changeServiceButtonWasPressed { 
@@ -75,8 +77,44 @@
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadServices {
+- (void)initParentNode{
+    if (!self.service) {
+        self.service = [[self.account toJID] domain];
+        self.node = nil;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)editAccountButtonWasPressed { 
+    [AccountManagerViewController inView:self.view.window];
+}	
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadNextViewController {
+    ServiceViewController* viewController = [[ServiceViewController alloc] initWithNibName:@"ServiceViewController" bundle:nil];
+    viewController.service = self.selectedItem.jid;
+    viewController.node = self.selectedItem.node;
+    [self.navigationController pushViewController:viewController animated:YES];
+    [viewController release];
+}
+    
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadServiceItems {
+    self.serviceItems = [ServiceItemModel findAllByService:self.service andParentNode:self.node];
     [self.tableView reloadData];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadServiceItems {
+    [self loadAccount];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadServiceItems];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -94,11 +132,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadAccount {
-    self.account = [AccountModel findFirstDisplayed];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPAccountUpdateDelgate {
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
 }
@@ -108,34 +141,38 @@
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)reloadMessages {
-    [self loadAccount];
-    [self removeXMPPClientDelgate];
-    [self addXMPPClientDelgate];
-    [self loadServices];
-}
-
 //===================================================================================================================================
 #pragma mark XMPPClientManagerAccountUpdateDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didAddAccount {
-    [self reloadMessages];
+    [self reloadServiceItems];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didRemoveAccount {
-    [self reloadMessages];
+    [self reloadServiceItems];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didUpdateAccount {
-    [self reloadMessages];
+    [self reloadServiceItems];
 }
 
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsServiceResult:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [self loadNextViewController];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsServiceError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [self failureAlert];
+}
 
 //===================================================================================================================================
 #pragma mark UIViewController
@@ -162,7 +199,7 @@
     [self initParentNode];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
-    [self loadServices];
+    [self loadServiceItems];
 	[super viewWillAppear:animated];
 }
 
@@ -193,7 +230,13 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:self.parentNode]; 
+        NSString* parentNode;
+        if (self.node) {
+            parentNode = [NSString stringWithFormat:@"%@/%@", self.service, self.node];
+        } else {
+            parentNode = self.service; 
+        }
+        sectionView = [SectionViewController viewWithLabel:parentNode]; 
     }
     return sectionView; 
 }
@@ -223,17 +266,37 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.services count];
+    return [self.serviceItems count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
     ServiceCell* cell = (ServiceCell*)[CellUtils createCell:[ServiceCell class] forTableView:tableView];
+    ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
+    NSString* name;
+    if (item.itemName) {
+        name = item.itemName;
+    } else if (item.node) {
+        name = item.node;
+    } else {
+        name = item.jid;
+    }
+    cell.itemLabel.text = name;
     return cell;        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
+    NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
+    self.selectedItem = item;
+    if (count == 0) {
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
+    } else {
+        [self loadNextViewController];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

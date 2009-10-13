@@ -35,18 +35,18 @@
 
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
-- (void)loadItems;
+- (void)sendMessageButtonWasPressed:(id)sender;
+- (void)createAddItemButton;
+- (void)createSegementedController;
+- (UIViewController*)getMessageViewControllerForAccount;
+- (void)labelBackButton;
 - (void)setModes;
 - (NSInteger)selectedIndexFromMode;
 - (void)selectedModeFromIndex:(NSInteger)index;
-- (void)createSegementedController;
-- (void)createAddItemButton;
-- (void)labelBackButton;
+- (void)loadItems;
 - (void)loadAccount;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
-- (UIViewController*)getMessageViewControllerForAccount;
-- (void)sendMessageButtonWasPressed:(id)sender;
 
 @end
 
@@ -90,20 +90,6 @@
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadItems {
-    if ([self.selectedMode isEqualToString:@"Chat"]) {
-        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
-    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        self.items = [MessageModel findAllCommandsByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
-    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
-        self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
-    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
-        self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
-    }
-    [self.tableView reloadData];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createAddItemButton {
     if ([self.selectedMode isEqualToString:@"Chat"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
@@ -112,6 +98,31 @@
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createSegementedController {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
+    SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] rect:rect andColor:[UIColor whiteColor]];
+    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+    segmentControl.delegate = self;
+    self.navigationItem.titleView = segmentControl;
+    [segmentControl release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIViewController*)getMessageViewControllerForAccount {
+    [self.rosterItem load];
+    if ([self.selectedMode isEqualToString:@"Chat"]) {
+        MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
+        viewController.rosterItem = self.rosterItem;
+        return [viewController autorelease];
+    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
+        CommandViewController* viewController = [[CommandViewController alloc] initWithNibName:@"CommandViewController" bundle:nil];
+        viewController.rosterItem =  self.rosterItem;
+        return [viewController autorelease];
+    } 
+    return nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -151,28 +162,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createSegementedController {
-    CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
-    SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] rect:rect andColor:[UIColor whiteColor]];
-    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
-    segmentControl.delegate = self;
-    self.navigationItem.titleView = segmentControl;
-    [segmentControl release];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIViewController*)getMessageViewControllerForAccount {
-    [self.rosterItem load];
+- (void)loadItems {
     if ([self.selectedMode isEqualToString:@"Chat"]) {
-        MessageViewController* viewController = [[MessageViewController alloc] initWithNibName:@"MessageViewController" bundle:nil];
-        viewController.rosterItem = self.rosterItem;
-        return [viewController autorelease];
+        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        CommandViewController* viewController = [[CommandViewController alloc] initWithNibName:@"CommandViewController" bundle:nil];
-        viewController.rosterItem =  self.rosterItem;
-        return [viewController autorelease];
-    } 
-    return nil;
+        self.items = [MessageModel findAllCommandsByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+    } else if ([self.selectedMode isEqualToString:@"Publications"]) {
+        self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
+        self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
+    }
+    [self.tableView reloadData];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -33,6 +33,8 @@
 		050A687010719FBB002FE125 /* XDataHashCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A686E10719FBB002FE125 /* XDataHashCell.m */; };
 		050A688E1071AB72002FE125 /* XDataScalarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A688D1071AB72002FE125 /* XDataScalarCell.m */; };
 		050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A688D1071AB72002FE125 /* XDataScalarCell.m */; };
+		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
+		0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
@@ -371,6 +373,8 @@
 		050A686E10719FBB002FE125 /* XDataHashCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataHashCell.m; sourceTree = "<group>"; };
 		050A688C1071AB72002FE125 /* XDataScalarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataScalarCell.h; sourceTree = "<group>"; };
 		050A688D1071AB72002FE125 /* XDataScalarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarCell.m; sourceTree = "<group>"; };
+		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
+		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
@@ -681,6 +685,8 @@
 		0534810010292C94002E6E2D /* Disco */ = {
 			isa = PBXGroup;
 			children = (
+				0534810910292D41002E6E2D /* XMPPDiscoFeature.h */,
+				0534810A10292D41002E6E2D /* XMPPDiscoFeature.m */,
 				0534811110292E4B002E6E2D /* XMPPDiscoIdentity.h */,
 				0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */,
 				053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */,
@@ -693,8 +699,8 @@
 				0534810210292CBC002E6E2D /* XMPPDiscoItemsQuery.m */,
 				05F2F7941064754200B681ED /* XMPPDiscoItemsResponseDelegate.h */,
 				05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */,
-				0534810910292D41002E6E2D /* XMPPDiscoFeature.h */,
-				0534810A10292D41002E6E2D /* XMPPDiscoFeature.m */,
+				0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */,
+				0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */,
 			);
 			name = Disco;
 			sourceTree = "<group>";
@@ -1541,6 +1547,7 @@
 				0502D7E31082611800218EC9 /* ServiceCell.m in Sources */,
 				0502D8411082A6F800218EC9 /* ServiceChangeViewController.m in Sources */,
 				0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */,
+				0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1660,6 +1667,7 @@
 				0502D7E41082611800218EC9 /* ServiceCell.m in Sources */,
 				0502D8421082A6F800218EC9 /* ServiceChangeViewController.m in Sources */,
 				0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */,
+				0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

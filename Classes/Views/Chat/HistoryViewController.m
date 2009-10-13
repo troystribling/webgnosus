@@ -23,12 +23,12 @@
 
 - (void)editAccountButtonWasPressed; 
 - (void)loadMessages;
+- (void)loadAccount;
+- (void)reloadMessages;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
-- (void)loadAccount;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
-- (void)reloadMessages;
 
 @end
 
@@ -58,6 +58,19 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadMessages {
+    [self loadAccount];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
     if (self.account) {
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
@@ -72,11 +85,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadAccount {
-    self.account = [AccountModel findFirstDisplayed];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPAccountUpdateDelgate {
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
 }
@@ -84,14 +92,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeXMPPAccountUpdateDelgate {
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)reloadMessages {
-    [self loadAccount];
-    [self removeXMPPClientDelgate];
-    [self addXMPPClientDelgate];
-    [self loadMessages];
 }
 
 //===================================================================================================================================

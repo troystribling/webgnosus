@@ -36,16 +36,16 @@
 - (void)editAccountButtonWasPressed; 
 - (void)createSegementedController;
 - (void)labelBackButton;
+- (void)rosterAddContactButton;
+- (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (void)onXmppClientConnectionError:(XMPPClient*)sender;
 - (void)loadRoster;
 - (void)loadAccount;
-- (void)rosterAddContactButton;
 - (void)reloadRoster;
-- (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
-- (void)onXmppClientConnectionError:(XMPPClient*)sender;
 
 @end
 
@@ -102,18 +102,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadRoster {
-    if (self.account) {
-        if (self.selectedRoster == kCONTACTS_MODE) {
-            self.roster = [ContactModel findAllByAccount:self.account];
-        } else {
-            self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
-        }
-    } 
-    [self.tableView reloadData];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)rosterAddContactButton {
     if (self.selectedRoster == kCONTACTS_MODE) {
         self.navigationItem.rightBarButtonItem = self.addContactButton;
@@ -139,6 +127,41 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)onXmppClientConnectionError:(XMPPClient*)sender {
+    AccountModel* errAccount = [XMPPMessageDelegate accountForXMPPClient:sender];
+    [[XMPPClientManager instance] removeXMPPClientForAccount:errAccount];
+    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
+    [self loadAccount];
+    [self loadRoster];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadRoster {
+    if (self.account) {
+        if (self.selectedRoster == kCONTACTS_MODE) {
+            self.roster = [ContactModel findAllByAccount:self.account];
+        } else {
+            self.roster = [RosterItemModel findAllResourcesByAccount:self.account];
+        }
+    } 
+    [self.tableView reloadData];
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadAccount {
+    self.account = [AccountModel findFirstDisplayed];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)reloadRoster {
+    [self loadAccount];
+    [self removeXMPPClientDelgate];
+    [self addXMPPClientDelgate];
+    [self loadRoster];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
     if (self.account) {
         [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
@@ -160,29 +183,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeXMPPAccountUpdateDelgate {
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
-}
-
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)onXmppClientConnectionError:(XMPPClient*)sender {
-    AccountModel* errAccount = [XMPPMessageDelegate accountForXMPPClient:sender];
-    [[XMPPClientManager instance] removeXMPPClientForAccount:errAccount];
-    [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
-    [self loadAccount];
-    [self loadRoster];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)reloadRoster {
-    [self loadAccount];
-    [self removeXMPPClientDelgate];
-    [self addXMPPClientDelgate];
-    [self loadRoster];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)loadAccount {
-    self.account = [AccountModel findFirstDisplayed];
 }
 
 //===================================================================================================================================
