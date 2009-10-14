@@ -16,7 +16,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceViewController : UITableViewController {
 	UIBarButtonItem* editAccountsButton;
-	UIBarButtonItem* changeServiceButton;
+	UIBarButtonItem* searchServiceButton;
     NSMutableArray* serviceItems;
     NSString* node;
     NSString* service;
@@ -26,7 +26,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
-@property (nonatomic, retain) UIBarButtonItem* changeServiceButton;
+@property (nonatomic, retain) UIBarButtonItem* searchServiceButton;
 @property (nonatomic, retain) NSMutableArray* serviceItems;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* service;

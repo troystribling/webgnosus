@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceViewController.h"
 #import "ServiceCell.h"
-#import "ServiceChangeViewController.h"
+#import "ServiceSearchViewController.h"
 #import "AccountManagerViewController.h"
 #import "AlertViewManager.h"
 #import "AccountModel.h"
@@ -48,7 +48,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize editAccountsButton;
-@synthesize changeServiceButton;
+@synthesize searchServiceButton;
 @synthesize serviceItems;
 @synthesize node;
 @synthesize service;
@@ -67,12 +67,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)changeServiceButtonWasPressed { 
+- (void)serachServiceButtonWasPressed { 
     if (self.account) {
-        ServiceChangeViewController* changeController = [[ServiceChangeViewController alloc] initWithNibName:@"ServiceChangeViewController" bundle:nil]; 
-        changeController.serviceController = self;
-        [self.navigationController pushViewController:changeController animated:YES]; 
-        [changeController release];     
+        ServiceSearchViewController* searchController = [[ServiceSearchViewController alloc] initWithNibName:@"ServiceSearchViewController" bundle:nil]; 
+        searchController.serviceController = self;
+        [self.navigationController pushViewController:searchController animated:YES]; 
+        [searchController release];     
     }
 }	
 
@@ -180,16 +180,21 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
-        self.changeServiceButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(changeServiceButtonWasPressed)];
 	} 
 	return self; 
 } 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {    
+    self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+    self.searchServiceButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(serachServiceButtonWasPressed)];
     self.navigationItem.leftBarButtonItem = self.editAccountsButton;
-    self.navigationItem.rightBarButtonItem = self.changeServiceButton;
+    self.navigationItem.rightBarButtonItem = self.searchServiceButton;
+	self.title = @"Services";
+    UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
+    temporaryBarButtonItem.title = @"Back";
+    self.navigationItem.backBarButtonItem = temporaryBarButtonItem;
+    [temporaryBarButtonItem release];      
     [super viewDidLoad];
 }
 
@@ -206,7 +211,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
-    [self addXMPPAccountUpdateDelgate];
+    [self removeXMPPAccountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -232,7 +237,7 @@
     if (self.account) {
         NSString* parentNode;
         if (self.node) {
-            parentNode = [NSString stringWithFormat:@"%@/%@", self.service, self.node];
+            parentNode = [NSString stringWithFormat:@"%@%@", self.service, self.node];
         } else {
             parentNode = self.service; 
         }
@@ -291,6 +296,8 @@
     NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
     self.selectedItem = item;
     if (count == 0) {
+        [self removeXMPPClientDelgate];
+        [self removeXMPPAccountUpdateDelgate];
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];

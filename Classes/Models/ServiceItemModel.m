@@ -168,7 +168,9 @@
     if (!model) {
         ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
         if (parent) {
-            serviceItem.parentNode = parent;
+            if (![parent isEqualToString:@""]) {
+                serviceItem.parentNode = parent;
+            }
         }
         if ([item iname]) {
             serviceItem.itemName = [item iname];

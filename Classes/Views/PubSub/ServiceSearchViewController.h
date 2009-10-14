@@ -1,5 +1,5 @@
 //
-//  ServiceChangeViewController.h
+//  ServiceSearchViewController.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 10/11/09.
@@ -14,7 +14,7 @@
 @class ServiceViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ServiceChangeViewController : UIViewController <UITextFieldDelegate> {
+@interface ServiceSearchViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* addressTextField;
 	IBOutlet UITextField* nodeTextField;
     ServiceViewController* serviceController;

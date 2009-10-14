@@ -226,7 +226,7 @@
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>ServiceChangeViewController</string>
+					<string>ServiceSearchViewController</string>
 					<string>UIResponder</string>
 					<string>{{923, 303}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -370,7 +370,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">ServiceChangeViewController</string>
+					<string key="className">ServiceSearchViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -387,7 +387,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/PubSub/ServiceChangeViewController.h</string>
+						<string key="minorKey">Classes/Views/PubSub/ServiceSearchViewController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

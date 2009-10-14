@@ -54,6 +54,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveRosterError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [self failureAlert:@"JID is Invalid" message:@""];
+}
+
 //===================================================================================================================================
 #pragma mark UIViewController
 
@@ -90,11 +96,11 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	self.newContactJidString = self.jidTextField.text;
 	NSArray* splitJid = [self.newContactJidString componentsSeparatedByString:@"@"];
+    [self.jidTextField resignFirstResponder]; 
 	if ([splitJid count] == 2) {
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         XMPPJID* contactJID = [XMPPJID jidWithString:self.newContactJidString];
         [XMPPMessageDelegate addBuddy:xmppClient JID:contactJID];
-        [self.jidTextField resignFirstResponder]; 
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding"];
 	} else {
 		[self failureAlert:@"JID is Invalid" message:@""];

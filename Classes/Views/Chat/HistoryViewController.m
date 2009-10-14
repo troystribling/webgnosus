@@ -149,7 +149,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
-    [self addXMPPAccountUpdateDelgate];
+    [self removeXMPPAccountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 

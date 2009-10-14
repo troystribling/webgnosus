@@ -111,13 +111,16 @@
         NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
         NSString* userPubSubService = [NSString stringWithFormat:@"pubsub.%@", [userJID domain]];
         ServiceModel* service = [ServiceModel findByService:[userJID domain] type:@"service" andCategory:@"pubsub"];
-        if (service)
-        if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
-            [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
-            [self.nodeTextField resignFirstResponder]; 
-            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Subscribing"];
-        } else {
-            [self failureAlert:@"Subscription exists"];
+        [self.nodeTextField resignFirstResponder]; 
+        [self.jidTextField resignFirstResponder]; 
+        if (service) {
+            if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
+                [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
+                [self.nodeTextField resignFirstResponder]; 
+                [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Subscribing"];
+            } else {
+                [self failureAlert:@"Subscription exists"];
+            }
         }
     } else {
         [self failureAlert:@"Node and JID Required"];

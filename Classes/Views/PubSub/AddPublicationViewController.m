@@ -111,9 +111,9 @@
     if (![self.nodeTextField.text isEqualToString:@""]) {
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         NSString* nodeFullPath = [[NSString alloc] initWithFormat:@"%@/%@", [[self.account toJID] pubSubRoot], self.nodeTextField.text];
+        [self.nodeTextField resignFirstResponder]; 
         if (![ServiceItemModel findByNode:nodeFullPath]) {
             [XMPPPubSub create:client JID:[self.account pubSubService] node:nodeFullPath];
-            [self.nodeTextField resignFirstResponder]; 
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding Node"];
         } else {
             [self failureAlert:@"Node exists"];
