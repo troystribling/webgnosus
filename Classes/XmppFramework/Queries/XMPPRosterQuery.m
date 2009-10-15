@@ -50,7 +50,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get"];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get"] autorelease];
     [iq addQuery:[[self alloc] init]];
     [client sendElement:iq];
 }
@@ -58,7 +58,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)update:(XMPPClient*)client JID:(XMPPJID*)jid {
 	if (jid) {
-        XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+        XMPPRosterQuery* query = [[[XMPPRosterQuery alloc] init] autorelease];
         [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
         XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
         [iq addQuery:query];
@@ -69,7 +69,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)remove:(XMPPClient*)client JID:(XMPPJID*)jid {
 	if(jid) {	
-        XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+        XMPPRosterQuery* query = [[[XMPPRosterQuery alloc] init] autorelease];
         [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
         XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
         [iq addQuery:query];

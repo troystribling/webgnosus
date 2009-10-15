@@ -53,7 +53,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     [pubsub addChild:[NSXMLElement elementWithName:@"subscriptions"]];	
     [iq addPubSub:pubsub];    
@@ -63,7 +63,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* subElement = [NSXMLElement elementWithName:@"subscribe"];
     [subElement addAttributeWithName:@"node" stringValue:node];
@@ -76,7 +76,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* unsubElement = [NSXMLElement elementWithName:@"unsubscribe"];
     [unsubElement addAttributeWithName:@"node" stringValue:node];

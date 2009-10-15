@@ -116,20 +116,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]];
-    [client sendElement:pres];
+    [client sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid{
-    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]];
-    [client sendElement:pres];
+    [client sendElement:[[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPPresence* pres = [[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]];
-    [client sendElement:pres];
+    [client sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
 }
 
 

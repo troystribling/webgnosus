@@ -32,7 +32,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addressTextField;
 @synthesize nodeTextField;
-@synthesize serviceController;
+@synthesize rootServiceController;
 @synthesize account;
 
 //===================================================================================================================================
@@ -55,15 +55,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsServiceResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    self.serviceController.service = self.addressTextField.text;
-    self.serviceController.node = self.nodeTextField.text;
-    [self.navigationController popViewControllerAnimated:YES];
+    self.rootServiceController.service = self.addressTextField.text;
+    if ([self.nodeTextField.text isEqualToString:@""]) {
+        self.rootServiceController.node = nil;
+    } else {
+        self.rootServiceController.node = self.nodeTextField.text;
+    }
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsServiceError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [self failureAlert:@"Disco Error"];
+    [self failureAlert:@"Disco Failed"];
 }
 
 //===================================================================================================================================

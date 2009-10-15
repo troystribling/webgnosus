@@ -12,8 +12,6 @@
 #import "ServiceSearchViewController.h"
 #import "AccountManagerViewController.h"
 #import "AlertViewManager.h"
-#import "AccountModel.h"
-#import "ServiceItemModel.h"
 #import "MessageCellFactory.h"
 #import "CellUtils.h"
 #import "SectionViewController.h"
@@ -22,7 +20,12 @@
 #import "XMPPJID.h"
 #import "XMPPMessage.h"
 #import "XMPPDiscoItemsQuery.h"
+#import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
+#import "XMPPDiscoInfoServiceResponseDelegate.h"
+#import "AccountModel.h"
+#import "ServiceItemModel.h"
+#import "ServiceFeatureModel.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +35,8 @@
 - (void)changeServiceButtonWasPressed; 
 - (void)editAccountButtonWasPressed;
 - (void)initParentNode;
+- (void)initRootServiceViewController;
+- (void)discoInfo;
 - (void)loadNextViewController;
 - (void)loadServiceItems;
 - (void)loadAccount;
@@ -49,6 +54,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize editAccountsButton;
 @synthesize searchServiceButton;
+@synthesize rootServiceViewController;
 @synthesize serviceItems;
 @synthesize node;
 @synthesize service;
@@ -70,17 +76,36 @@
 - (void)serachServiceButtonWasPressed { 
     if (self.account) {
         ServiceSearchViewController* searchController = [[ServiceSearchViewController alloc] initWithNibName:@"ServiceSearchViewController" bundle:nil]; 
-        searchController.serviceController = self;
+        searchController.rootServiceController = self.rootServiceViewController;
         [self.navigationController pushViewController:searchController animated:YES]; 
         [searchController release];     
     }
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)initParentNode{
+- (void)initParentNode {
     if (!self.service) {
         self.service = [[self.account toJID] domain];
         self.node = nil;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initRootServiceViewController {
+    if (!self.rootServiceViewController) {
+        self.rootServiceViewController = self;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)discoInfo {
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    for (int i = 0; i < [self.serviceItems count]; i++) {
+        ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
+        NSInteger count = [ServiceFeatureModel countByService:item.jid andParentNode:item.node];
+        if (count == 0) {
+            [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoInfoServiceResponseDelegate alloc] init]];
+        }
     }
 }
 
@@ -94,6 +119,7 @@
     ServiceViewController* viewController = [[ServiceViewController alloc] initWithNibName:@"ServiceViewController" bundle:nil];
     viewController.service = self.selectedItem.jid;
     viewController.node = self.selectedItem.node;
+    viewController.rootServiceViewController = self.rootServiceViewController;
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }
@@ -174,21 +200,30 @@
     [self failureAlert];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoServiceResult:(XMPPIQ*)iq {
+//    [self loadServiceItems];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoServiceError:(XMPPIQ*)iq {
+}
+
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
+        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.navigationItem.leftBarButtonItem = self.editAccountsButton;
 	} 
 	return self; 
 } 
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {    
-    self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
     self.searchServiceButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(serachServiceButtonWasPressed)];
-    self.navigationItem.leftBarButtonItem = self.editAccountsButton;
     self.navigationItem.rightBarButtonItem = self.searchServiceButton;
 	self.title = @"Services";
     UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
@@ -202,9 +237,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
     [self initParentNode];
+    [self initRootServiceViewController];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
     [self loadServiceItems];
+    [self discoInfo];
 	[super viewWillAppear:animated];
 }
 

@@ -32,11 +32,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
++ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
++ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)resetSyncFlag;
 + (void)destroyAllUnsyched;

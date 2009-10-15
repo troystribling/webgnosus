@@ -89,7 +89,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
     [iq addQuery:[[self alloc] init]];
 	[client sendElement:iq];
 }
@@ -97,8 +97,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)result:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
     XMPPClientVersionQuery* version = 
-        [[self alloc] initWithName:[NSString stringWithUTF8String:kAPP_NAME] version:[NSString stringWithUTF8String:kAPP_VERSION] andOs:[NSString stringWithUTF8String:kOS_VERSION]];
-    XMPPIQ* responseIQ = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full]];
+        [[[self alloc] initWithName:[NSString stringWithUTF8String:kAPP_NAME] version:[NSString stringWithUTF8String:kAPP_VERSION] andOs:[NSString stringWithUTF8String:kOS_VERSION]] autorelease];
+    XMPPIQ* responseIQ = [[[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full]] autorelease];
     [responseIQ addStanzaID:[iq stanzaID]];
     [responseIQ addQuery:version];
 	[client sendElement:responseIQ];

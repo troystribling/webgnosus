@@ -55,6 +55,7 @@
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
 							</object>
 						</object>
@@ -294,7 +295,7 @@
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/PubSub/ServiceCell.h</string>
+						<string key="minorKey">Classes/Views/Services/ServiceCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

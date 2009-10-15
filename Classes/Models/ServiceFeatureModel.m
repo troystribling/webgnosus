@@ -38,6 +38,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
+    NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+    }
+	return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE serviceFeatures"];
 }
@@ -64,6 +75,20 @@
     }
 	return model;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
+    NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+    }
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+	[[WebgnosusDbi instance] selectAllForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAll {

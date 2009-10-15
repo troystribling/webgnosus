@@ -78,8 +78,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client user:(NSString *)username withPassword:(NSString *)password {
-    XMPPIQ* reg = [[XMPPIQ alloc] initWithType:@"set"];
-    XMPPRegisterQuery* regQuery = [[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password];
+    XMPPIQ* reg = [[[XMPPIQ alloc] initWithType:@"set"] autorelease];
+    XMPPRegisterQuery* regQuery = [[[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password] autorelease];
     [reg addQuery:regQuery];			    
 	[client sendElement:reg];
 }

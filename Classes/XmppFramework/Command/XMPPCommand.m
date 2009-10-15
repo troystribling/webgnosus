@@ -105,8 +105,8 @@
 #pragma mark XMPPCommand Messages
 
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPCommand* cmd = [[[XMPPCommand alloc] initWithNode:node andAction:@"execute"] autorelease];
     [iq addCommand:cmd];
     [client sendElement:iq];
     [iq release]; 
@@ -116,13 +116,13 @@
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid {
     NSEnumerator* enumerator = [parameters keyEnumerator];
     NSString* field;  
-    XMPPxData* cmdData = [[XMPPxData alloc] initWithDataType:@"submit"];
+    XMPPxData* cmdData = [[[XMPPxData alloc] initWithDataType:@"submit"] autorelease];
     while ((field = (NSString*)[enumerator nextObject])) {
 //        NSString* fieldVal = (NSString*)[parameters objectForKey:field];
 //        [cmdData addField:field withValue:fieldVal]; 
     }  
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPCommand* cmd = [[[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData] autorelease];
     [iq addCommand:cmd];
     [client sendElement:iq];
     [iq release]; 

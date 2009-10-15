@@ -1,55 +1,63 @@
 //
-//  XMPPDiscoItemsServiceResponseDelegate.m
+//  XMPPDiscoInfoServiceResponseDelegate.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/12/09.
+//  Created by Troy Stribling on 10/14/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPDiscoItemsServiceResponseDelegate.h"
+#import "XMPPDiscoInfoServiceResponseDelegate.h"
 #import "XMPPDiscoItem.h"
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
-#import "ServiceItemModel.h"
-
+#import "XMPPDiscoInfoQuery.h"
+#import "XMPPDiscoIdentity.h"
+#import "XMPPDiscoFeature.h"
+#import "ServiceModel.h"
+#import "ServiceFeatureModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPDiscoItemsServiceResponseDelegate (PrivateAPI)
+@interface XMPPDiscoInfoServiceResponseDelegate (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPDiscoItemsServiceResponseDelegate
+@implementation XMPPDiscoInfoServiceResponseDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPDiscoItemsServiceResponseDelegate
+#pragma mark XMPPDiscoInfoServiceResponseDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPDiscoItemsServiceResponseDelegate PrivateAPI
+#pragma mark XMPPDiscoInfoServiceResponseDelegate PrivateAPI
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsServiceError:(XMPPIQ*)stanza];        
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoServiceError:(XMPPIQ*)stanza];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
     XMPPIQ* iq = (XMPPIQ*)stanza;
-    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
-	NSString* parentNode = [query node];
-    NSArray* items = [query items];	
-	XMPPJID* serviceJID = [stanza fromJID];
-    for(int i = 0; i < [items count]; i++) {
-        XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-        [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];
+    XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
+    NSArray* identities = [query identities];	
+	NSString* node = [query node];
+	XMPPJID* serviceJID = [iq fromJID];
+    for(int i = 0; i < [identities count]; i++) {
+        XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
+        [ServiceModel insert:identity forService:serviceJID];
     }
-    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsServiceResult:iq];        
+    NSArray* features = [query features];		
+    for(int i = 0; i < [features count]; i++) {
+        XMPPDiscoFeature* feature = [XMPPDiscoFeature createFromElement:(NSXMLElement *)[features objectAtIndex:i]];
+        [ServiceFeatureModel insert:feature forService:serviceJID andParentNode:node];
+    }
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoServiceResult:iq];        
 }
 
 //===================================================================================================================================

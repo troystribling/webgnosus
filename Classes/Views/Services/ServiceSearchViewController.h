@@ -17,14 +17,14 @@
 @interface ServiceSearchViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* addressTextField;
 	IBOutlet UITextField* nodeTextField;
-    ServiceViewController* serviceController;
+    ServiceViewController* rootServiceController;
     AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UITextField* addressTextField;
 @property (nonatomic, retain) UITextField* nodeTextField;
-@property (nonatomic, retain) ServiceViewController* serviceController;
+@property (nonatomic, retain) ServiceViewController* rootServiceController;
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

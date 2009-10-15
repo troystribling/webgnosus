@@ -11,16 +11,10 @@
 		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
 		050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
-		0502D7C51082478F00218EC9 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7C31082478F00218EC9 /* ServiceViewController.m */; };
-		0502D7C71082478F00218EC9 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7C31082478F00218EC9 /* ServiceViewController.m */; };
 		0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
 		0502D7CB1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
-		0502D7E31082611800218EC9 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7E21082611800218EC9 /* ServiceCell.m */; };
-		0502D7E41082611800218EC9 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D7E21082611800218EC9 /* ServiceCell.m */; };
 		0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
 		0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
-		0502D8411082A6F800218EC9 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8401082A6F800218EC9 /* ServiceSearchViewController.m */; };
-		0502D8421082A6F800218EC9 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8401082A6F800218EC9 /* ServiceSearchViewController.m */; };
 		0502D8501082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */; };
 		0502D8511082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */; };
 		0502D8A11082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
@@ -39,6 +33,14 @@
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
 		051AB4830F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
+		051CA4ED1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */; };
+		051CA4EE1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */; };
+		051CA5201086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
+		051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
+		051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
+		051CA5231086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
+		051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
+		051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
 		052800D30FA54D4A007337FD /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D20FA54D4A007337FD /* libidn.a */; };
 		052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D40FA54D63007337FD /* libidn-simulator.a */; };
 		053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
@@ -355,14 +357,8 @@
 		050263C01076E78C000B81C6 /* XMPPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPEntry.h; sourceTree = "<group>"; };
 		050263C11076E78C000B81C6 /* XMPPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPEntry.m; sourceTree = "<group>"; };
 		050263CF1076FA7E000B81C6 /* EventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
-		0502D7C21082478F00218EC9 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
-		0502D7C31082478F00218EC9 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		0502D7C91082488200218EC9 /* ServiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceViewController.xib; sourceTree = "<group>"; };
-		0502D7E11082611800218EC9 /* ServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCell.h; sourceTree = "<group>"; };
-		0502D7E21082611800218EC9 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
 		0502D7EB108261E500218EC9 /* ServiceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceCell.xib; sourceTree = "<group>"; };
-		0502D83F1082A6F800218EC9 /* ServiceSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSearchViewController.h; sourceTree = "<group>"; };
-		0502D8401082A6F800218EC9 /* ServiceSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSearchViewController.m; sourceTree = "<group>"; };
 		0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceSearchViewController.xib; sourceTree = "<group>"; };
 		0502D8A01082CAB500218EC9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		0502D8B21082D4E800218EC9 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
@@ -377,6 +373,14 @@
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
+		051CA4EB1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoServiceResponseDelegate.h; sourceTree = "<group>"; };
+		051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoInfoServiceResponseDelegate.m; sourceTree = "<group>"; };
+		051CA51A1086D0090007DA81 /* ServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCell.h; sourceTree = "<group>"; };
+		051CA51B1086D0090007DA81 /* ServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCell.m; sourceTree = "<group>"; };
+		051CA51C1086D0090007DA81 /* ServiceSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceSearchViewController.h; sourceTree = "<group>"; };
+		051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSearchViewController.m; sourceTree = "<group>"; };
+		051CA51E1086D0090007DA81 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
+		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		052800D40FA54D63007337FD /* libidn-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-simulator.a"; sourceTree = "<group>"; };
 		053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoQuery.h; path = Disco/XMPPDiscoInfoQuery.h; sourceTree = "<group>"; };
@@ -682,6 +686,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		051CA5191086D0090007DA81 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				051CA51A1086D0090007DA81 /* ServiceCell.h */,
+				051CA51B1086D0090007DA81 /* ServiceCell.m */,
+				051CA51C1086D0090007DA81 /* ServiceSearchViewController.h */,
+				051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */,
+				051CA51E1086D0090007DA81 /* ServiceViewController.h */,
+				051CA51F1086D0090007DA81 /* ServiceViewController.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		0534810010292C94002E6E2D /* Disco */ = {
 			isa = PBXGroup;
 			children = (
@@ -693,6 +710,8 @@
 				053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */,
 				05FABADE10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.h */,
 				05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */,
+				051CA4EB1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.h */,
+				051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */,
 				0534811510292E5B002E6E2D /* XMPPDiscoItem.h */,
 				0534811610292E5B002E6E2D /* XMPPDiscoItem.m */,
 				0534810110292CBC002E6E2D /* XMPPDiscoItemsQuery.h */,
@@ -1052,6 +1071,7 @@
 		05E207AC0FB9046500FCFC94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				051CA5191086D0090007DA81 /* Services */,
 				05E7EB841055CA9A00C5F3FD /* PubSub */,
 				05E207AD0FB9046500FCFC94 /* Accounts */,
 				05E207BA0FB9046500FCFC94 /* Chat */,
@@ -1176,12 +1196,6 @@
 				05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */,
 				05E7EB851055CCE700C5F3FD /* PubSubViewController.h */,
 				05E7EB861055CCE700C5F3FD /* PubSubViewController.m */,
-				0502D7E11082611800218EC9 /* ServiceCell.h */,
-				0502D7E21082611800218EC9 /* ServiceCell.m */,
-				0502D83F1082A6F800218EC9 /* ServiceSearchViewController.h */,
-				0502D8401082A6F800218EC9 /* ServiceSearchViewController.m */,
-				0502D7C21082478F00218EC9 /* ServiceViewController.h */,
-				0502D7C31082478F00218EC9 /* ServiceViewController.m */,
 			);
 			path = PubSub;
 			sourceTree = "<group>";
@@ -1543,11 +1557,12 @@
 				05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 				05FC8C8C107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
-				0502D7C51082478F00218EC9 /* ServiceViewController.m in Sources */,
-				0502D7E31082611800218EC9 /* ServiceCell.m in Sources */,
-				0502D8411082A6F800218EC9 /* ServiceSearchViewController.m in Sources */,
 				0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */,
 				0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
+				051CA4EE1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */,
+				051CA5231086D0090007DA81 /* ServiceCell.m in Sources */,
+				051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
+				051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1663,11 +1678,12 @@
 				05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
 				05FC8C8B107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
-				0502D7C71082478F00218EC9 /* ServiceViewController.m in Sources */,
-				0502D7E41082611800218EC9 /* ServiceCell.m in Sources */,
-				0502D8421082A6F800218EC9 /* ServiceSearchViewController.m in Sources */,
 				0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */,
 				0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
+				051CA4ED1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */,
+				051CA5201086D0090007DA81 /* ServiceCell.m in Sources */,
+				051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
+				051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
