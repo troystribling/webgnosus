@@ -77,7 +77,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
++ (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode andVar:(NSString*)requestVar {
+	NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@' AND node ='%@'",  requestService, requestVar, requestNode];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
+    }
+	ServiceFeatureModel* model = [[[ServiceFeatureModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByService:(NSString*)requestService parentNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {
         selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
@@ -97,7 +113,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] andVar:[feature var]];
+    ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] parentNode:parent andVar:[feature var]];
     if (!model) {
         ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
         if (parent) {
@@ -134,9 +150,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.parentNode) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, self.synchedAsInteger];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, [self synchedAsInteger]];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, self.synchedAsInteger];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, [self synchedAsInteger]];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -158,10 +174,10 @@
     NSString* updateStatement;
     if (self.parentNode) {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", 
-                            self.parentNode, self.service, self.var, self.synchedAsInteger, self.pk];	
+                            self.parentNode, self.service, self.var, [self synchedAsInteger], self.pk];	
     } else {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET service = '%@', var = '%@', synched = %d WHERE pk = %d", 
-                            self.service, self.var, self.synchedAsInteger, self.pk];	
+                            self.service, self.var, [self synchedAsInteger], self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }

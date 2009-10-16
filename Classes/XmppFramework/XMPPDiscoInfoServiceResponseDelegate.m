@@ -50,7 +50,7 @@
 	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
-        [ServiceModel insert:identity forService:serviceJID];
+        [ServiceModel insert:identity forService:serviceJID andNode:node];
     }
     NSArray* features = [query features];		
     for(int i = 0; i < [features count]; i++) {

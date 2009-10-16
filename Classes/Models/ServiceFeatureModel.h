@@ -38,6 +38,7 @@
 + (void)destroyAll;
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
++ (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode  andVar:(NSString*)requestVar;
 + (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)resetSyncFlag;

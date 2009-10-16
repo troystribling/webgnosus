@@ -134,10 +134,10 @@
     NSString* insertStatement;
     if (self.jid) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, service, subscription, jid, synched, accountPk) values ('%@', '%@', '%@', '%@', '%@', %d, %d)", 
-                            self.subId, self.node, self.service, self.subscription, self.jid, self.synchedAsInteger, self.accountPk];	
+                            self.subId, self.node, self.service, self.subscription, self.jid, [self synchedAsInteger], self.accountPk];	
     } else {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO subscriptions (subId, node, service, subscription, synched, accountPk) values ('%@', '%@', '%@', '%@', %d, %d)", 
-                           self.subId, self.node, self.service, self.subscription, self.synchedAsInteger, self.accountPk];	
+                           self.subId, self.node, self.service, self.subscription, [self synchedAsInteger], self.accountPk];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -159,10 +159,10 @@
     NSString* updateStatement;
     if (self.jid) {
         updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = '%@', node = '%@', service='%@', subscription = '%@', jid = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
-            self.subId, self.node, self.service, self.subscription, self.jid, self.synchedAsInteger, self.accountPk, self.pk];	
+            self.subId, self.node, self.service, self.subscription, self.jid, [self synchedAsInteger], self.accountPk, self.pk];	
     } else {
         updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET subId = '%@', node = '%@', service='%@', subscription = '%@', synched = %d, accountPk = %d WHERE pk = %d", 
-                           self.subId, self.node, self.service, self.subscription, self.synchedAsInteger, self.accountPk, self.pk];	
+                           self.subId, self.node, self.service, self.subscription, [self synchedAsInteger], self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }

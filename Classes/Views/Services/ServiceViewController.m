@@ -120,6 +120,8 @@
     viewController.service = self.selectedItem.jid;
     viewController.node = self.selectedItem.node;
     viewController.rootServiceViewController = self.rootServiceViewController;
+    [self removeXMPPClientDelgate];
+    [self removeXMPPAccountUpdateDelgate];
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }
@@ -333,8 +335,6 @@
     NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
     self.selectedItem = item;
     if (count == 0) {
-        [self removeXMPPClientDelgate];
-        [self removeXMPPAccountUpdateDelgate];
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];

@@ -22,6 +22,7 @@
     NSString* name;
     NSString* category;
     NSString* type;
+    NSString* node;
     BOOL synched;
 }
 
@@ -31,6 +32,7 @@
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* category;
 @property (nonatomic, retain) NSString* type;
+@property (nonatomic, retain) NSString* node;
 @property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -38,11 +40,11 @@
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
-+ (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
++ (ServiceModel*)findByJID:(NSString*)requestJID type:(NSString*)requestType category:(NSString*)requestCategory andNode:(NSString*)requestNode;
 + (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
-+ (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID;
++ (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID andNode:(NSString*)serviceNode;
 + (void)resetSyncFlag;
 + (void)destroyAllUnsyched;
 + (void)destroyAllUnsychedByDomain:(NSString*)requestService;

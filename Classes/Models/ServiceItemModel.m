@@ -216,12 +216,12 @@
     NSString* insertStatement;
     if (self.parentNode &&  self.node && self.itemName) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (parentNode, service, node, jid, itemName, synched) values ('%@', '%@', '%@', '%@', '%@', %d)", 
-                            self.parentNode, self.service, self.node, self.jid, self.itemName, self.synchedAsInteger];	
+                            self.parentNode, self.service, self.node, self.jid, self.itemName, [self synchedAsInteger]];	
     } else if (self.node && self.itemName) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName, synched) values ('%@', '%@', '%@', '%@', %d)", 
-                           self.service, self.node, self.jid, self.itemName, self.synchedAsInteger];	
+                           self.service, self.node, self.jid, self.itemName, [self synchedAsInteger]];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid, synched) values ('%@', '%@', %d)", self.service, self.jid, self.synchedAsInteger];	
+        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid, synched) values ('%@', '%@', %d)", self.service, self.jid, [self synchedAsInteger]];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -244,13 +244,13 @@
     NSString* updateStatement;
     if (self.parentNode &&  self.node && self.itemName) {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceItems SET parentNode = '%@', service = '%@', node = '%@', jid = '%@', itemName = '%@', synched = %d WHERE pk = %d", 
-                           self.parentNode, self.service, self.node, self.jid, self.itemName, self.synchedAsInteger, self.pk];	
+                           self.parentNode, self.service, self.node, self.jid, self.itemName, [self synchedAsInteger], self.pk];	
     } else if (self.node && self.itemName) {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceItems SET service = '%@', node = '%@', jid = '%@', itemName = '%@', synched = %d WHERE pk = %d", 
-                          self.service, self.node, self.jid, self.itemName, self.synchedAsInteger, self.pk];	
+                          self.service, self.node, self.jid, self.itemName, [self synchedAsInteger], self.pk];	
     } else {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceItems SET service = '%@', jid = '%@', synched = %d WHERE pk = %d", 
-                           self.service, self.jid, self.synchedAsInteger, self.pk];	
+                           self.service, self.jid,[self synchedAsInteger], self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }

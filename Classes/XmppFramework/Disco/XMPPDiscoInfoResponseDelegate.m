@@ -74,9 +74,7 @@
 	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [identities count]; i++) {
         XMPPDiscoIdentity* identity = [XMPPDiscoIdentity createFromElement:(NSXMLElement *)[identities objectAtIndex:i]];
-        if (node == nil) {
-            [ServiceModel insert:identity forService:serviceJID];
-        }
+        [ServiceModel insert:identity forService:serviceJID andNode:node];
         if ([[identity category] isEqualToString:@"pubsub"] && [[identity type] isEqualToString:@"service"]) {
             [self didDiscoverPubSubService:client forIQ:iq];
             [[client multicastDelegate] xmppClient:client didDiscoverPubSubService:iq];        
