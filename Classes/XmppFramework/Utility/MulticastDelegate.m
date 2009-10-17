@@ -19,6 +19,7 @@
 {
 	MulticastDelegateListNode *node = [[MulticastDelegateListNode alloc] initWithDelegate:delegate];
 	
+    NSInteger listCount = [self count];
 	if(delegateList != nil)
 	{
 		[node setNext:delegateList];
@@ -26,6 +27,7 @@
 	}
 	
 	delegateList = node;
+    listCount = [self count];
 }
 
 - (void)removeDelegate:(id)delegate
@@ -33,6 +35,7 @@
 	MulticastDelegateListNode *node = delegateList;
 	NSUInteger index = 0;
 	
+    NSInteger listCount = [self count];
 	while(node != nil)
 	{
 		if(delegate == [node delegate])
@@ -61,6 +64,7 @@
 		index++;
 		node = [node next];
 	}
+    listCount = [self count];
 }
 
 - (void)removeAllDelegates

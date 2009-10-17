@@ -50,7 +50,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didAddToRoster:(XMPPRosterItem*)item {
     [AlertViewManager dismissActivityIndicator];
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -76,7 +75,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
 	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -98,7 +103,7 @@
 	NSArray* splitJid = [self.newContactJidString componentsSeparatedByString:@"@"];
     [self.jidTextField resignFirstResponder]; 
 	if ([splitJid count] == 2) {
-        XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         XMPPJID* contactJID = [XMPPJID jidWithString:self.newContactJidString];
         [XMPPMessageDelegate addBuddy:xmppClient JID:contactJID];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding"];

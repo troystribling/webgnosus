@@ -99,7 +99,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)discoInfo {
-    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     for (int i = 0; i < [self.serviceItems count]; i++) {
         ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
         NSInteger count = [ServiceFeatureModel countByService:item.jid andParentNode:item.node];
@@ -120,8 +120,6 @@
     viewController.service = self.selectedItem.jid;
     viewController.node = self.selectedItem.node;
     viewController.rootServiceViewController = self.rootServiceViewController;
-    [self removeXMPPClientDelgate];
-    [self removeXMPPAccountUpdateDelgate];
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
 }
@@ -204,7 +202,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoServiceResult:(XMPPIQ*)iq {
-//    [self loadServiceItems];
+//    [self.tableView reloadData];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -335,7 +333,7 @@
     NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
     self.selectedItem = item;
     if (count == 0) {
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
     } else {
