@@ -75,8 +75,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
-    XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* createElement = [NSXMLElement elementWithName:@"create"];
     [createElement addAttributeWithName:@"node" stringValue:node];
     NSXMLElement* configElement = [NSXMLElement elementWithName:@"configure"];
@@ -84,13 +84,14 @@
     [pubsub addChild:configElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
-    XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
-    XMPPEntry* entry = [[[XMPPEntry alloc] initWithTitle:title] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    XMPPEntry* entry = [[XMPPEntry alloc] initWithTitle:title];
     NSXMLElement* publishElement = [NSXMLElement elementWithName:@"publish"];
     [publishElement addAttributeWithName:@"node" stringValue:node];
     NSXMLElement* itemsElement = [NSXMLElement elementWithName:@"item"];
@@ -99,6 +100,8 @@
     [pubsub addChild:publishElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
+    [iq release];
+    [entry release];
 }
 
 //===================================================================================================================================

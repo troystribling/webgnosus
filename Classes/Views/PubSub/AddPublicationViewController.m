@@ -84,6 +84,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
 	[super viewWillAppear:animated];
 }
 
@@ -109,7 +110,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (![self.nodeTextField.text isEqualToString:@""]) {
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         NSString* nodeFullPath = [[NSString alloc] initWithFormat:@"%@/%@", [[self.account toJID] pubSubRoot], self.nodeTextField.text];
         [self.nodeTextField resignFirstResponder]; 
         if (![ServiceItemModel findByNode:nodeFullPath]) {

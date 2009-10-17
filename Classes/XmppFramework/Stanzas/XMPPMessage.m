@@ -80,8 +80,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)chat:(XMPPClient*)client JID:(XMPPJID*)jid messageBody:(NSString*)body {
-    XMPPMessage* msg = [[[self alloc] initWithType:@"chat" toJID:[jid full] andBody:body] autorelease];
+    XMPPMessage* msg = [[self alloc] initWithType:@"chat" toJID:[jid full] andBody:body];
 	[client sendElement:msg];
+    [msg release];
 }
 
 //===================================================================================================================================

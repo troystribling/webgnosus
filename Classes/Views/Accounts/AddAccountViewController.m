@@ -77,7 +77,8 @@
         self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account bareJID]];
         self.account.port = 5222;
         self.account.displayed = YES;
-        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        [[XMPPClientManager instance] connectXmppClientForAccount:self.account];
+        [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
         [AlertViewManager showActivityIndicatorInView:self.managerView.view.window withTitle:@"Connecting"];
         [self.account insert];
         [self.account load];
@@ -131,7 +132,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillAppear:animated];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+	[super viewWillDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -163,7 +165,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveAllRosterItems:(XMPPIQ*)iq {
-    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager dismissActivityIndicator]; 
     [self.view removeFromSuperview];
     if ([AccountModel count] == 1) {

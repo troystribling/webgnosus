@@ -34,8 +34,8 @@
 - (void)removeAccountUpdateDelegate:(id)mcastDelegate;
 - (void)addDelegate:(id)del;
 - (XMPPClient*)xmppClientForAccount:(AccountModel*)account;
-- (void)openConnectionForAccount:(AccountModel*)account;
-- (XMPPClient*)xmppClientForAccount:(AccountModel*)account andDelegateTo:(id)clientDelegate;
+- (XMPPClient*)connectXmppClientForAccount:(AccountModel*)account;
+- (void)delegateTo:(id)clientDelegate forAccount:(AccountModel*)account;
 - (XMPPClient*)createXMPPClientForAccount:(AccountModel*)account;
 - (void)removeXMPPClientForAccount:(AccountModel*)account;
 - (void)removeXMPPClientDelegate:(id)clientDelegate forAccount:(AccountModel*)account;

@@ -53,17 +53,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     [pubsub addChild:[NSXMLElement elementWithName:@"subscriptions"]];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubSubscriptionsDelegate alloc] init]];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* subElement = [NSXMLElement elementWithName:@"subscribe"];
     [subElement addAttributeWithName:@"node" stringValue:node];
@@ -71,12 +72,13 @@
     [pubsub addChild:subElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubSubscribeDelegate alloc] init]];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* unsubElement = [NSXMLElement elementWithName:@"unsubscribe"];
     [unsubElement addAttributeWithName:@"node" stringValue:node];
@@ -84,6 +86,7 @@
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init]];
+    [iq release];
 }
 
 //===================================================================================================================================

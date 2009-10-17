@@ -50,31 +50,30 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get"] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get"];
     [iq addQuery:[[self alloc] init]];
     [client sendElement:iq];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)update:(XMPPClient*)client JID:(XMPPJID*)jid {
-	if (jid) {
-        XMPPRosterQuery* query = [[[XMPPRosterQuery alloc] init] autorelease];
-        [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
-        XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-        [iq addQuery:query];
-        [client sendElement:iq];
-    }
+    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+    [iq addQuery:query];
+    [client sendElement:iq];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)remove:(XMPPClient*)client JID:(XMPPJID*)jid {
-	if(jid) {	
-        XMPPRosterQuery* query = [[[XMPPRosterQuery alloc] init] autorelease];
-        [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
-        XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-        [iq addQuery:query];
-        [client sendElement:iq];
-    }
+    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
+    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+    [iq addQuery:query];
+    [client sendElement:iq];
+    [iq release];
 }
 
 //===================================================================================================================================

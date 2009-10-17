@@ -85,6 +85,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 	[super viewWillDisappear:animated];
@@ -106,7 +112,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (![self.nodeTextField.text isEqualToString:@""] || ![self.jidTextField.text isEqualToString:@""]) {
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         XMPPJID* userJID = [XMPPJID jidWithString:self.jidTextField.text];
         NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
         NSString* userPubSubService = [NSString stringWithFormat:@"pubsub.%@", [userJID domain]];

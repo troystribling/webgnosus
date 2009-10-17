@@ -56,6 +56,11 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPClient*)xmppClientForAccount:(AccountModel*)account {
+	return [self connectXmppClientForAccount:account];;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPClient*)connectXmppClientForAccount:(AccountModel*)account {
 	XMPPClient* xmppClient = (XMPPClient*)[xmppClientDictionary valueForKey:[account fullJID]];
 	if (xmppClient == nil) {
 		xmppClient = [self createXMPPClientForAccount:account];
@@ -71,15 +76,9 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPClient*)xmppClientForAccount:(AccountModel*)account andDelegateTo:(id)clientDelegate {
+- (void)delegateTo:(id)clientDelegate forAccount:(AccountModel*)account {
 	XMPPClient* xmppClient = [self xmppClientForAccount:account];
     [xmppClient addDelegate:clientDelegate];
-	return xmppClient;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)openConnectionForAccount:(AccountModel*)account {
-    [self xmppClientForAccount:account];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

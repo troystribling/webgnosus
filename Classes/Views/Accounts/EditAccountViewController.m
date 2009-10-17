@@ -79,7 +79,7 @@
     if (![password isEqualToString:@""] && [password isEqualToString:reenterPassword]) {
         AccountModel* acct = [self account];
         acct.password = password;
-        [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+        [[XMPPClientManager instance] xmppClientForAccount:self.account];
     } else {
         [AlertViewManager showAlert:@"Password is Invalid"];
     }
@@ -148,13 +148,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self initAccountList];
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
 	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated {
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-	[super viewDidDisappear:animated];
+	[super viewWillDisappear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -44,13 +44,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)delete:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
-    XMPPPubSubOwner* pubsub = [[[XMPPPubSubOwner alloc] init] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPPubSubOwner* pubsub = [[XMPPPubSubOwner alloc] init];
     NSXMLElement* deleteElement = [NSXMLElement elementWithName:@"delete"];
     [deleteElement addAttributeWithName:@"node" stringValue:node];
     [pubsub addChild:deleteElement];	
     [iq addPubSubOwner:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubDeleteDelegate alloc] init]];
+    [iq release];
 }
 
 //===================================================================================================================================

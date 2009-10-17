@@ -83,7 +83,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
-    [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

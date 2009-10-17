@@ -83,9 +83,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] init]];
     [client send:iq andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
+    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -95,9 +96,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate {
-    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] initWithNode:node]];
     [client send:iq andDelegateResponse:responseDelegate];
+    [iq release];
 }
 
 //===================================================================================================================================

@@ -96,6 +96,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
 	[super viewWillAppear:animated];
 }
 
@@ -127,7 +128,7 @@
     if (![self.addressTextField.text isEqualToString:@""]) {
         NSInteger count = [ServiceItemModel countByService:addr andParentNode:node];
         if (count == 0) {
-            XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+            XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
             [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:addr] node:node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
         }

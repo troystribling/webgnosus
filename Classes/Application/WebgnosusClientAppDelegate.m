@@ -81,7 +81,7 @@
         [account update];
         [RosterItemModel destroyAllByAccount:account];
         [ContactModel destroyAllByAccount:account];
-        [[XMPPClientManager instance] openConnectionForAccount:account];
+        [[XMPPClientManager instance] connectXmppClientForAccount:account];
     }
 }
 

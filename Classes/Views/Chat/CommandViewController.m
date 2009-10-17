@@ -69,7 +69,7 @@
 - (void)handleCommand:(NSIndexPath*)indexPath {
     self.commandRequest = [self.commands objectAtIndex:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
-    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account andDelegateTo:self];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     NSMutableArray* serviceItems = [ServiceItemModel findAllByService:[toJID full] parentNode:@"http://jabber.org/protocol/commands" andNode:self.commandRequest.node];
     for(int i = 0; i < [serviceItems count]; i++) {
         ServiceItemModel* serviceItem = [serviceItems objectAtIndex:i];
@@ -131,6 +131,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
     [self loadCommands];
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
     [super viewWillAppear:animated];
 }
 

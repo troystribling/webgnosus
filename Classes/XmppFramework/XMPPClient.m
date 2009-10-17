@@ -155,12 +155,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)send:(XMPPStanza*)stanza andDelegateResponse:(id)reqDelegate {
-    XMPPResponse* xmppResp = [[[XMPPResponse alloc] initWithDelegate:reqDelegate] autorelease];
+    XMPPResponse* xmppResp = [[XMPPResponse alloc] initWithDelegate:reqDelegate];
     NSString* stanID = [self getStanzaID];
     xmppResp.stanzaID = stanID;
     [self addResponseDelegate:xmppResp];
     [stanza addStanzaID:stanID];
     [self sendElement:stanza];
+    [xmppResp release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
