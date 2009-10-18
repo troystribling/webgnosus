@@ -314,6 +314,22 @@
 		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
 		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
 		05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
+		05ED38E3108AAA4E0079A3B3 /* service-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DB108AAA4E0079A3B3 /* service-chat.png */; };
+		05ED38E4108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */; };
+		05ED38E5108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */; };
+		05ED38E6108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */; };
+		05ED38E7108AAA4E0079A3B3 /* service-pubsub.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */; };
+		05ED38E8108AAA4E0079A3B3 /* service-socket.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E0108AAA4E0079A3B3 /* service-socket.png */; };
+		05ED38E9108AAA4E0079A3B3 /* service-vcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E1108AAA4E0079A3B3 /* service-vcard.png */; };
+		05ED38EA108AAA4E0079A3B3 /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E2108AAA4E0079A3B3 /* service.png */; };
+		05ED38EB108AAA4E0079A3B3 /* service-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DB108AAA4E0079A3B3 /* service-chat.png */; };
+		05ED38EC108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */; };
+		05ED38ED108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */; };
+		05ED38EE108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */; };
+		05ED38EF108AAA4E0079A3B3 /* service-pubsub.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */; };
+		05ED38F0108AAA4E0079A3B3 /* service-socket.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E0108AAA4E0079A3B3 /* service-socket.png */; };
+		05ED38F1108AAA4E0079A3B3 /* service-vcard.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E1108AAA4E0079A3B3 /* service-vcard.png */; };
+		05ED38F2108AAA4E0079A3B3 /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E2108AAA4E0079A3B3 /* service.png */; };
 		05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
@@ -615,6 +631,14 @@
 		05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubUnsubscribeDelegate.m; sourceTree = "<group>"; };
 		05EAB2F610509A9700AF71A2 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
 		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
+		05ED38DB108AAA4E0079A3B3 /* service-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-chat.png"; sourceTree = "<group>"; };
+		05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-folder.png"; sourceTree = "<group>"; };
+		05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-node-green.png"; sourceTree = "<group>"; };
+		05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-node-grey.png"; sourceTree = "<group>"; };
+		05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub.png"; sourceTree = "<group>"; };
+		05ED38E0108AAA4E0079A3B3 /* service-socket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-socket.png"; sourceTree = "<group>"; };
+		05ED38E1108AAA4E0079A3B3 /* service-vcard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-vcard.png"; sourceTree = "<group>"; };
+		05ED38E2108AAA4E0079A3B3 /* service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service.png; sourceTree = "<group>"; };
 		05ED45E8105163D300DB3396 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
 		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
@@ -739,6 +763,14 @@
 				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
 				05E6F157104A07FC00EF924B /* roster-section.jpg */,
 				0502D8A01082CAB500218EC9 /* search.png */,
+				05ED38DB108AAA4E0079A3B3 /* service-chat.png */,
+				05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */,
+				05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */,
+				05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */,
+				05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */,
+				05ED38E0108AAA4E0079A3B3 /* service-socket.png */,
+				05ED38E1108AAA4E0079A3B3 /* service-vcard.png */,
+				05ED38E2108AAA4E0079A3B3 /* service.png */,
 				05D83D5B104EBF0A00078131 /* settings.png */,
 				057BB16010587547006389D9 /* tabbar-events.png */,
 				05E7EBAC1055D97600C5F3FD /* tabbar-history.png */,
@@ -1382,6 +1414,14 @@
 				0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */,
 				0502D8501082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */,
 				0502D8A11082CAB500218EC9 /* search.png in Resources */,
+				05ED38EB108AAA4E0079A3B3 /* service-chat.png in Resources */,
+				05ED38EC108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */,
+				05ED38ED108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */,
+				05ED38EE108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */,
+				05ED38EF108AAA4E0079A3B3 /* service-pubsub.png in Resources */,
+				05ED38F0108AAA4E0079A3B3 /* service-socket.png in Resources */,
+				05ED38F1108AAA4E0079A3B3 /* service-vcard.png in Resources */,
+				05ED38F2108AAA4E0079A3B3 /* service.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1439,6 +1479,14 @@
 				0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */,
 				0502D8511082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */,
 				0502D8A21082CAB500218EC9 /* search.png in Resources */,
+				05ED38E3108AAA4E0079A3B3 /* service-chat.png in Resources */,
+				05ED38E4108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */,
+				05ED38E5108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */,
+				05ED38E6108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */,
+				05ED38E7108AAA4E0079A3B3 /* service-pubsub.png in Resources */,
+				05ED38E8108AAA4E0079A3B3 /* service-socket.png in Resources */,
+				05ED38E9108AAA4E0079A3B3 /* service-vcard.png in Resources */,
+				05ED38EA108AAA4E0079A3B3 /* service.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

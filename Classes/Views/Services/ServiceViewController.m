@@ -24,6 +24,7 @@
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
 #import "XMPPDiscoInfoServiceResponseDelegate.h"
 #import "AccountModel.h"
+#import "ServiceModel.h"
 #import "ServiceItemModel.h"
 #import "ServiceFeatureModel.h"
 
@@ -41,6 +42,7 @@
 - (void)loadServiceItems;
 - (void)loadAccount;
 - (void)reloadServiceItems;
+- (UIImage*)serviceImage:(ServiceModel*)itemService;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
@@ -144,6 +146,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (UIImage*)serviceImage:(ServiceModel*)itemService {
+    UIImage* image;
+    if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"service"]) {
+        image = [UIImage imageNamed:@"service-pubsub.jpg"];
+    } else {
+        image = [UIImage imageNamed:@"service.jpg"];
+    }
+    return image;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addXMPPClientDelgate {
     if (self.account) {
         [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
@@ -202,7 +215,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoServiceResult:(XMPPIQ*)iq {
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -315,8 +328,11 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
     ServiceCell* cell = (ServiceCell*)[CellUtils createCell:[ServiceCell class] forTableView:tableView];
     ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
+    ServiceModel* itemService = [ServiceModel findByJID:item.jid andNode:item.node];
     NSString* name;
-    if (item.itemName) {
+    if (itemService.name) {
+        name = itemService.name;
+    } else if (item.itemName) {
         name = item.itemName;
     } else if (item.node) {
         name = item.node;
@@ -324,6 +340,7 @@
         name = item.jid;
     }
     cell.itemLabel.text = name;
+    cell.itemImage = [self serviceImage:itemService];
     return cell;        
 }
 

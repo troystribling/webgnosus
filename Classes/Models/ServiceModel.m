@@ -69,7 +69,23 @@
     if (requestNode) {
         selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@' AND node = '%@'", requestJID, requestType, requestCategory, requestNode];
     } else {
-        selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@'", requestJID, requestType, requestCategory];
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@' AND node IS NULL", requestJID, requestType, requestCategory];
+    }
+	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceModel*)findByJID:(NSString*)requestJID andNode:(NSString*)requestNode {
+	NSString* selectStatement;
+    if (requestNode) {
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND node = '%@' LIMIT 1", requestJID, requestNode];
+    } else {
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND node IS NULL LIMIT 1", requestJID];
     }
 	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
