@@ -244,7 +244,7 @@
 	}
 	char* nodeVal = (char*)sqlite3_column_text(statement, 5);
 	if (nodeVal != nil) {		
-		self.type = [[NSString alloc] initWithUTF8String:nodeVal];
+		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
 	}
 	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 6)];
 }

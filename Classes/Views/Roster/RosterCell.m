@@ -26,24 +26,6 @@
 //===================================================================================================================================
 #pragma mark RosterCell
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem {
-    if ([rosterItem isAvailable]) {
-        return [UIImage imageNamed:@"account-on-led.jpg"];
-    } 
-    return [UIImage imageNamed:@"account-off-led.jpg"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIImage*)contactImage:(ContactModel*)contact {
-    if ([contact hasError]) {
-        return [UIImage imageNamed:@"account-error-led.jpg"];
-    } else if ([RosterItemModel isJidAvailable:[contact bareJID]]) {
-        return [UIImage imageNamed:@"account-on-led.jpg"];
-    } 
-    return [UIImage imageNamed:@"account-off-led.jpg"];
-}
-
 //===================================================================================================================================
 #pragma mark RosterCell PrivateAPI
 

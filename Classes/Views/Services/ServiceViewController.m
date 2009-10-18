@@ -27,6 +27,7 @@
 #import "ServiceModel.h"
 #import "ServiceItemModel.h"
 #import "ServiceFeatureModel.h"
+#import "SubscriptionModel.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,11 +39,13 @@
 - (void)initParentNode;
 - (void)initRootServiceViewController;
 - (void)discoInfo;
+- (NSString*)serviceName:(ServiceModel*)itemService forItem:(ServiceItemModel*)item;
+- (UIImage*)serviceImage:(ServiceModel*)itemService;
+- (UIImage*)pubSubNodeImage:(ServiceModel*)itemService;
 - (void)loadNextViewController;
 - (void)loadServiceItems;
 - (void)loadAccount;
 - (void)reloadServiceItems;
-- (UIImage*)serviceImage:(ServiceModel*)itemService;
 - (void)addXMPPClientDelgate;
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
@@ -112,6 +115,58 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)serviceName:(ServiceModel*)itemService forItem:(ServiceItemModel*)item {
+    NSString* name;
+    if (itemService.name) {
+        name = itemService.name;
+    } else if (item.itemName) {
+        name = item.itemName;
+    } else if (item.node) {
+        name = item.node;
+    } else {
+        name = item.jid;
+    }
+    return name;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIImage*)serviceImage:(ServiceModel*)itemService {
+    UIImage* image;
+    if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"service"]) {
+        image = [UIImage imageNamed:@"service-pubsub.png"];
+    } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"collection"]) {
+        image = [UIImage imageNamed:@"service-pubsub-folder.png"];
+    } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"]) {
+        image = [self pubSubNodeImage:itemService];
+    } else if ([itemService.category isEqualToString:@"conference"] && [itemService.type isEqualToString:@"text"]) {
+        image = [UIImage imageNamed:@"service-chat.png"];
+    } else if ([itemService.category isEqualToString:@"conference"] && [itemService.type isEqualToString:@"irc"]) {
+        image = [UIImage imageNamed:@"service-chat.png"];
+    } else if ([itemService.category isEqualToString:@"directory"] && [itemService.type isEqualToString:@"user"]) {
+        image = [UIImage imageNamed:@"service-directory.png"];
+    } else if ([itemService.category isEqualToString:@"proxy"] && [itemService.type isEqualToString:@"bytestreams"]) {
+        image = [UIImage imageNamed:@"service-socket.png"];
+    } else {
+        image = [UIImage imageNamed:@"service.png"];
+    }
+    return image;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIImage*)pubSubNodeImage:(ServiceModel*)itemService {
+    UIImage* image;
+    SubscriptionModel* subscription = [SubscriptionModel findByAccount:self.account andNode:itemService.node];
+    if ([[self.account pubSubRoot] isEqualToString:self.node]){
+        image = [UIImage imageNamed:@"service-pubsub-node-blue.png"];
+    } else if (subscription) {
+        image = [UIImage imageNamed:@"service-pubsub-node-green.png"];
+    } else {
+        image = [UIImage imageNamed:@"service-pubsub-node-grey.png"];
+    }
+    return image;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)editAccountButtonWasPressed { 
     [AccountManagerViewController inView:self.view.window];
 }	
@@ -143,17 +198,6 @@
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
     [self loadServiceItems];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIImage*)serviceImage:(ServiceModel*)itemService {
-    UIImage* image;
-    if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"service"]) {
-        image = [UIImage imageNamed:@"service-pubsub.jpg"];
-    } else {
-        image = [UIImage imageNamed:@"service.jpg"];
-    }
-    return image;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -329,18 +373,8 @@
     ServiceCell* cell = (ServiceCell*)[CellUtils createCell:[ServiceCell class] forTableView:tableView];
     ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
     ServiceModel* itemService = [ServiceModel findByJID:item.jid andNode:item.node];
-    NSString* name;
-    if (itemService.name) {
-        name = itemService.name;
-    } else if (item.itemName) {
-        name = item.itemName;
-    } else if (item.node) {
-        name = item.node;
-    } else {
-        name = item.jid;
-    }
-    cell.itemLabel.text = name;
-    cell.itemImage = [self serviceImage:itemService];
+    cell.itemLabel.text = [self serviceName:itemService forItem:item];
+    cell.itemImage.image = [self serviceImage:itemService];
     return cell;        
 }
 

@@ -48,6 +48,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)pubSubRoot {
+    XMPPJID* myJid = [self toJID];
+	return [[NSString alloc] initWithFormat:@"/home/%@/%@", [myJid domain], [myJid user]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPJID*)toJID {
     return [XMPPJID jidWithString:[self fullJID]];
 }
