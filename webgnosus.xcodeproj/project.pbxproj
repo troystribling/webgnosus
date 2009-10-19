@@ -318,6 +318,10 @@
 		05ED2D92108B9140007F9413 /* service-directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D90108B9140007F9413 /* service-directory.png */; };
 		05ED2D9D108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */; };
 		05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */; };
+		05ED2E1B108BE96C007F9413 /* service-document.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2E1A108BE96C007F9413 /* service-document.png */; };
+		05ED2E1C108BE96C007F9413 /* service-document.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2E1A108BE96C007F9413 /* service-document.png */; };
+		05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED2ED2108C171C007F9413 /* TouchImageView.m */; };
+		05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED2ED2108C171C007F9413 /* TouchImageView.m */; };
 		05ED38E3108AAA4E0079A3B3 /* service-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DB108AAA4E0079A3B3 /* service-chat.png */; };
 		05ED38E4108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */; };
 		05ED38E5108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */; };
@@ -635,6 +639,9 @@
 		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		05ED2D90108B9140007F9413 /* service-directory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-directory.png"; sourceTree = "<group>"; };
 		05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-node-blue.png"; sourceTree = "<group>"; };
+		05ED2E1A108BE96C007F9413 /* service-document.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-document.png"; sourceTree = "<group>"; };
+		05ED2ED1108C171C007F9413 /* TouchImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchImageView.h; sourceTree = "<group>"; };
+		05ED2ED2108C171C007F9413 /* TouchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchImageView.m; sourceTree = "<group>"; };
 		05ED38DB108AAA4E0079A3B3 /* service-chat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-chat.png"; sourceTree = "<group>"; };
 		05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-folder.png"; sourceTree = "<group>"; };
 		05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub-node-green.png"; sourceTree = "<group>"; };
@@ -754,6 +761,7 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				05ED2E1A108BE96C007F9413 /* service-document.png */,
 				05E6F151104A07FC00EF924B /* account-error-led.jpg */,
 				05E6F152104A07FC00EF924B /* account-off-led.jpg */,
 				05E6F153104A07FC00EF924B /* account-on-led.jpg */,
@@ -1128,6 +1136,8 @@
 				05D1EC37107054830013734A /* SegmentedCycleList.m */,
 				05ED464D1051932B00DB3396 /* SegmentedListPicker.h */,
 				05ED464E1051932B00DB3396 /* SegmentedListPicker.m */,
+				05ED2ED1108C171C007F9413 /* TouchImageView.h */,
+				05ED2ED2108C171C007F9413 /* TouchImageView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1427,6 +1437,7 @@
 				05ED38F2108AAA4E0079A3B3 /* service.png in Resources */,
 				05ED2D92108B9140007F9413 /* service-directory.png in Resources */,
 				05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
+				05ED2E1C108BE96C007F9413 /* service-document.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1493,6 +1504,7 @@
 				05ED38EA108AAA4E0079A3B3 /* service.png in Resources */,
 				05ED2D91108B9140007F9413 /* service-directory.png in Resources */,
 				05ED2D9D108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
+				05ED2E1B108BE96C007F9413 /* service-document.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1617,6 +1629,7 @@
 				051CA5231086D0090007DA81 /* ServiceCell.m in Sources */,
 				051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
 				051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */,
+				05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1738,6 +1751,7 @@
 				051CA5201086D0090007DA81 /* ServiceCell.m in Sources */,
 				051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
 				051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */,
+				05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

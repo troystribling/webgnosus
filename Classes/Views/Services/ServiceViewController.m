@@ -65,12 +65,20 @@
 @synthesize service;
 @synthesize account;
 @synthesize selectedItem;
+@synthesize serviceModel;
 
 //===================================================================================================================================
 #pragma mark ServiceViewController
 
 //===================================================================================================================================
 #pragma mark ServiceViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setService:(NSString*)initService andNode:(NSString*)initNode {
+    self.service = initService;
+    self.node = initNode;
+    self.serviceModel = [ServiceModel findByJID:initService andNode:initNode];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert { 
@@ -92,6 +100,7 @@
     if (!self.service) {
         self.service = [[self.account toJID] domain];
         self.node = nil;
+        [self setService:self.service andNode:nil];
     }
 }
 
@@ -105,11 +114,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)discoInfo {
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    for (int i = 0; i < [self.serviceItems count]; i++) {
-        ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
-        NSInteger count = [ServiceFeatureModel countByService:item.jid andParentNode:item.node];
-        if (count == 0) {
-            [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoInfoServiceResponseDelegate alloc] init]];
+    NSString* serviceType = @"unknown";
+    if (self.serviceModel) {
+        serviceType = self.serviceModel.type;
+    }
+    if (![serviceType isEqualToString:@"leaf"]) {
+        for (int i = 0; i < [self.serviceItems count]; i++) {
+            ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
+            NSInteger count = [ServiceFeatureModel countByService:item.jid andParentNode:item.node];
+            if (count == 0) {
+                [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoInfoServiceResponseDelegate alloc] init]];
+            }
         }
     }
 }
@@ -132,6 +147,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIImage*)serviceImage:(ServiceModel*)itemService {
     UIImage* image;
+    NSString* serviceType = @"unknown";
+    if (self.serviceModel) {
+        serviceType = self.serviceModel.type;
+    }
     if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"service"]) {
         image = [UIImage imageNamed:@"service-pubsub.png"];
     } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"collection"]) {
@@ -146,6 +165,8 @@
         image = [UIImage imageNamed:@"service-directory.png"];
     } else if ([itemService.category isEqualToString:@"proxy"] && [itemService.type isEqualToString:@"bytestreams"]) {
         image = [UIImage imageNamed:@"service-socket.png"];
+    } else if ([serviceType isEqualToString:@"leaf"]) {
+        image = [UIImage imageNamed:@"service-document.png"];
     } else {
         image = [UIImage imageNamed:@"service.png"];
     }
@@ -174,8 +195,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadNextViewController {
     ServiceViewController* viewController = [[ServiceViewController alloc] initWithNibName:@"ServiceViewController" bundle:nil];
-    viewController.service = self.selectedItem.jid;
-    viewController.node = self.selectedItem.node;
+    [viewController setService:self.selectedItem.jid andNode:self.selectedItem.node];
     viewController.rootServiceViewController = self.rootServiceViewController;
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];

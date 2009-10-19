@@ -93,7 +93,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByService:(NSString*)requestService parentNode:(NSString*)requestNode {
++ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {
         selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];

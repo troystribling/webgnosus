@@ -39,8 +39,6 @@
 - (void)rosterAddContactButton;
 - (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (void)onXmppClientConnectionError:(XMPPClient*)sender;
-- (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem;
-- (UIImage*)contactImage:(ContactModel*)contact;
 - (void)loadRoster;
 - (void)loadAccount;
 - (void)reloadRoster;
@@ -135,24 +133,6 @@
     [AlertViewManager onStartDismissConnectionIndicatorAndShowErrors];
     [self loadAccount];
     [self loadRoster];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem {
-    if ([rosterItem isAvailable]) {
-        return [UIImage imageNamed:@"account-on-led.jpg"];
-    } 
-    return [UIImage imageNamed:@"account-off-led.jpg"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (UIImage*)contactImage:(ContactModel*)contact {
-    if ([contact hasError]) {
-        return [UIImage imageNamed:@"account-error-led.jpg"];
-    } else if ([RosterItemModel isJidAvailable:[contact bareJID]]) {
-        return [UIImage imageNamed:@"account-on-led.jpg"];
-    } 
-    return [UIImage imageNamed:@"account-off-led.jpg"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -386,11 +366,11 @@
     if (self.selectedRoster == kCONTACTS_MODE) {
         ContactModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.jid;
-        cell.activeImage.image = [self contactImage:[self.roster objectAtIndex:indexPath.row]];
+        cell.activeImage.image = [RosterCell contactImage:[self.roster objectAtIndex:indexPath.row]];
     } else {
         RosterItemModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.resource;
-        cell.activeImage.image = [self rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
+        cell.activeImage.image = [RosterCell rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
     }
     return cell;
 }

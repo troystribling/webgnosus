@@ -1,8 +1,8 @@
 //
-//  ContactCell.h
+//  PubSubIndicatorView.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/20/09.
+//  Created by Troy Stribling on 10/18/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -10,23 +10,23 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class RosterItemModel;
-@class ContactModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RosterCell : UITableViewCell {
-	IBOutlet UILabel* jidLabel;
-    IBOutlet UIImageView* activeImage;
+@interface TouchImageView : UIImageView {
+    id delegate;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* jidLabel;
-@property (nonatomic, retain) UIImageView* activeImage;
+@property (nonatomic, retain) id delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem;
-+ (UIImage*)contactImage:(ContactModel*)contact;
+- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate;
 
-//-----------------------------------------------------------------------------------------------------------------------------------
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface NSObject (TouchImageView)
+
+- (void)imageTouched:(TouchImageView*)pubSubImage;
 
 @end

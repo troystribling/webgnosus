@@ -1,37 +1,58 @@
 //
-//  AccountPubCell.m
+//  TouchImageView.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 9/8/09.
+//  Created by Troy Stribling on 10/18/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AccountPubCell.h"
+#import "TouchImageView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AccountPubCell (PrivateAPI)
+@interface TouchImageView (PrivateAPI)
+
+- (void)delegateImageTouched;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AccountPubCell
+@implementation TouchImageView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize itemLabel;
+@synthesize delegate;
 
 //===================================================================================================================================
-#pragma mark AccountPubCell
+#pragma mark TouchImageView
 
 //===================================================================================================================================
-#pragma mark AccountPubCell PrivateAPI
-
-//===================================================================================================================================
-#pragma mark UITableViewCell
+#pragma mark TouchImageView PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)delegateImageTouched {
+    if ([self.delegate respondsToSelector:@selector(imageTouched:)]) {
+        [self.delegate imageTouched:self];
+    }
+} 
+
+//===================================================================================================================================
+#pragma mark UIView
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate {
+    if (self = [super initWithFrame:frame]) {
+        self.delegate = initDelegate;
+        self.userInteractionEnabled = YES;
+    }
+    return self;
+}
+
+//===================================================================================================================================
+#pragma mark UIResponder
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
+    [self delegateImageTouched];
 }
 
 //===================================================================================================================================

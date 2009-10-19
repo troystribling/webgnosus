@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class ServiceItemModel;
+@class ServiceModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceViewController : UITableViewController {
@@ -23,6 +24,7 @@
     NSString* service;
     AccountModel* account;
     ServiceItemModel* selectedItem;
+    ServiceModel* serviceModel;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -34,7 +36,9 @@
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceItemModel* selectedItem;
+@property (nonatomic, retain) ServiceModel* serviceModel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setService:(NSString*)initService andNode:(NSString*)initNode;
 
 @end
