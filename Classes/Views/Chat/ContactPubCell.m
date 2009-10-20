@@ -73,6 +73,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
+    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager showAlert:@"Subscription Failed"];
 }
@@ -80,6 +81,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
+    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
     [self setPubImage];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 }
@@ -87,13 +89,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
+    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
     [AlertViewManager showAlert:@"Unsubscribe Failed"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
-    [self setPubImage];
     [AlertViewManager dismissActivityIndicator];
+    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
+    [self setPubImage];
 }
 
 //===================================================================================================================================
