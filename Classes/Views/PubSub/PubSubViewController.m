@@ -32,7 +32,6 @@
 @interface PubSubViewController (PrivateAPI)
 
 - (void)failureAlert:(NSString*)message;
-- (void)deleteItem:(id)item;
 - (void)addPubSubItemWasPressed; 
 - (void)editAccountButtonWasPressed; 
 - (void)labelBackButton;
@@ -158,13 +157,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)deleteItem:(id)item{
-    [item destroy];
-    [self loadPubSubItems];
-    [AlertViewManager dismissActivityIndicator];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)failureAlert:(NSString*)message { 
     [AlertViewManager dismissActivityIndicator];
     [AlertViewManager showAlert:@"Error" withMessage:message];
@@ -199,22 +191,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
-    ServiceItemModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
-    [self deleteItem:item];
     [self loadPubSubItems];
+    [AlertViewManager dismissActivityIndicator];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
     [self loadPubSubItems];
-    [self failureAlert:@"Node Unsubscribe Failed"];
+    [self failureAlert:@"Unsubscribe Failed"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
-    SubscriptionModel* item = [self.pubSubItems objectAtIndex:self.itemToDelete];
-    [self deleteItem:item];
     [self loadPubSubItems];
+    [AlertViewManager dismissActivityIndicator];
 }
 
 //===================================================================================================================================

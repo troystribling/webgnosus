@@ -11,9 +11,12 @@
 #import "TouchImageView.h"
 #import "AccountModel.h"
 #import "ServiceItemModel.h"
+#import "SubscriptionModel.h"
 #import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
+#import "XMPPJID.h"
+#import "XMPPPubSubSubscriptions.h"
 #import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +34,7 @@
 @synthesize itemImage;
 @synthesize serviceItem;
 @synthesize account;
+@synthesize subscription;
 
 //===================================================================================================================================
 #pragma mark ContactPubCell
@@ -40,7 +44,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setPubImage {
-    self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
+    if (self.subscription) {
+        self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
+    } else {
+        self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
+    }
 }
 
 //===================================================================================================================================
@@ -48,6 +56,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)imageTouched:(TouchImageView*)pubSubImage {
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    if (!self.subscription) {
+        [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
+        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Subscribing"];
+    } else {
+        [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
+        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
+    }
 }
 
 //===================================================================================================================================
@@ -63,7 +80,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
+    [self setPubImage];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"Unsubscribe Failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
+    [self setPubImage];
+    [AlertViewManager dismissActivityIndicator];
 }
 
 //===================================================================================================================================
@@ -80,7 +110,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 5.0f, 30.0f, 30.0f) andDelegate:self];
+        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f) andDelegate:self];
         self.itemImage.delegate = self;
 	} 
 	return self; 
@@ -88,6 +118,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)drawRect:(CGRect)rect {
+    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
     [self setPubImage];
     [self addSubview:self.itemImage];
 }

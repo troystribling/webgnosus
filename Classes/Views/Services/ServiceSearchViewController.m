@@ -131,6 +131,8 @@
             XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
             [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:addr] node:node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     } else {
         [self failureAlert:@"Address Required"];

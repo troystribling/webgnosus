@@ -33,8 +33,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController (PrivateAPI)
 
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
 - (void)sendMessageButtonWasPressed:(id)sender;
 - (void)createAddItemButton;
 - (void)createSegementedController;
@@ -69,7 +69,7 @@
 #pragma mark RosterItemViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource {
     RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
     cell.jidLabel.text = resource.resource;
     cell.activeImage.image = [RosterCell rosterItemImage:resource];
@@ -77,9 +77,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item {
     ContactPubCell* cell = (ContactPubCell*)[CellUtils createCell:[ContactPubCell class] forTableView:tableView];
     cell.itemLabel.text = item.itemName;
+    cell.serviceItem = item;
+    cell.account = self.account;
     return cell;
 }
 
@@ -342,9 +344,10 @@
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
-        cell = [RosterItemViewController tableView:tableView cellForContactPub:[self.items objectAtIndex:indexPath.row]];
+        ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];
+        cell = [self tableView:tableView cellForContactPub:item];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
-        cell = [RosterItemViewController tableView:tableView cellForResource:[self.items objectAtIndex:indexPath.row]];
+        cell = [self tableView:tableView cellForResource:[self.items objectAtIndex:indexPath.row]];
     }
     return cell;
 }

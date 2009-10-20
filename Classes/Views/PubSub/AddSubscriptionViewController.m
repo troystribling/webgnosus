@@ -112,7 +112,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (![self.nodeTextField.text isEqualToString:@""] || ![self.jidTextField.text isEqualToString:@""]) {
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         XMPPJID* userJID = [XMPPJID jidWithString:self.jidTextField.text];
         NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
         NSString* userPubSubService = [NSString stringWithFormat:@"pubsub.%@", [userJID domain]];
@@ -121,6 +120,7 @@
         [self.jidTextField resignFirstResponder]; 
         if (service) {
             if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
+                XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
                 [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
                 [self.nodeTextField resignFirstResponder]; 
                 [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Subscribing"];

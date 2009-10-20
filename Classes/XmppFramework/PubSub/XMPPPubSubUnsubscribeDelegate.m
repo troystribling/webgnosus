@@ -26,8 +26,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubUnsubscribeDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize node;
+
 //===================================================================================================================================
 #pragma mark XMPPPubSubUnsubscribeDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init:(NSString*)initNode {
+	if(self = [super init])  {
+        self.node = initNode;
+	}
+	return self;
+}
 
 //===================================================================================================================================
 #pragma mark XMPPPubSubUnsubscribeDelegate PrivateAPI
@@ -45,8 +56,7 @@
             NSXMLElement* unsub = [pubSub elementForName:@"unsubscribe"];
             if (unsub) {
                 AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-                NSString* node = [[unsub attributeForName:@"node"] stringValue];
-                SubscriptionModel* sub = [SubscriptionModel findByAccount:account andNode:node];
+                SubscriptionModel* sub = [SubscriptionModel findByAccount:account andNode:self.node];
                 [sub destroy];
             }
         }
@@ -56,6 +66,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    SubscriptionModel* sub = [SubscriptionModel findByAccount:account andNode:self.node];
+    [sub destroy];
     [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeResult:(XMPPIQ*)stanza];
 }
 

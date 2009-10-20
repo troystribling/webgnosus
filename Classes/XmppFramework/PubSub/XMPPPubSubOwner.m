@@ -50,7 +50,7 @@
     [deleteElement addAttributeWithName:@"node" stringValue:node];
     [pubsub addChild:deleteElement];	
     [iq addPubSubOwner:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubDeleteDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubDeleteDelegate alloc] init:node]];
     [iq release];
 }
 

@@ -13,6 +13,7 @@
 @class TouchImageView;
 @class ServiceItemModel;
 @class AccountModel;
+@class SubscriptionModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ContactPubCell : UITableViewCell {
@@ -20,6 +21,7 @@
     TouchImageView* itemImage;
     AccountModel* account;
     ServiceItemModel* serviceItem;
+    SubscriptionModel* subscription;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) TouchImageView* itemImage;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceItemModel* serviceItem;
+@property (nonatomic, retain) SubscriptionModel* subscription;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

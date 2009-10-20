@@ -85,7 +85,7 @@
     [unsubElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init:node]];
     [iq release];
 }
 

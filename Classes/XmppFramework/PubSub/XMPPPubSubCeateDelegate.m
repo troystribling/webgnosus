@@ -41,8 +41,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
     [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[[client myJID] pubSubRoot] forTarget:[client myJID]];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
 }
 
 //===================================================================================================================================

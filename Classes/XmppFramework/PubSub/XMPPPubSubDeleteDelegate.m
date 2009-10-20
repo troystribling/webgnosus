@@ -12,6 +12,8 @@
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
 #import "XMPPIQ.h"
+#import "XMPPError.h"
+#import "ServiceItemModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubDeleteDelegate (PrivateAPI)
@@ -21,8 +23,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubDeleteDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize node;
+
 //===================================================================================================================================
 #pragma mark XMPPPubSubDeleteDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init:(NSString*)initNode {
+	if(self = [super init])  {
+        self.node = initNode;
+	}
+	return self;
+}
 
 //===================================================================================================================================
 #pragma mark XMPPPubSubDeleteDelegate PrivateAPI
@@ -32,11 +45,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    XMPPIQ* iq = (XMPPIQ*)stanza;
+    XMPPError* error = [iq error];	
+    if (error) {
+        if ([[error condition] isEqualToString:@"item-not-found"]) {
+            ServiceItemModel* item = [ServiceItemModel findByNode:self.node];
+            [item destroy];
+        }
+    }    
     [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteError:(XMPPIQ*)stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+    ServiceItemModel* item = [ServiceItemModel findByNode:self.node];
+    [item destroy];
     [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteResult:(XMPPIQ*)stanza];
 }
 
