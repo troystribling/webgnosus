@@ -23,6 +23,7 @@
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
 #import "XMPPDiscoInfoServiceResponseDelegate.h"
+#import "TouchImageView.h"
 #import "AccountModel.h"
 #import "ServiceModel.h"
 #import "ServiceItemModel.h"
@@ -42,6 +43,7 @@
 - (NSString*)serviceName:(ServiceModel*)itemService forItem:(ServiceItemModel*)item;
 - (UIImage*)serviceImage:(ServiceModel*)itemService;
 - (UIImage*)pubSubNodeImage:(ServiceModel*)itemService;
+- (BOOL)enableImageTouch:(ServiceModel*)itemService;
 - (void)loadNextViewController;
 - (void)loadServiceItems;
 - (void)loadAccount;
@@ -185,6 +187,15 @@
         image = [UIImage imageNamed:@"service-pubsub-node-grey.png"];
     }
     return image;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)enableImageTouch:(ServiceModel*)itemService {
+    BOOL enable = NO;
+    if (![[self.account pubSubRoot] isEqualToString:self.node] && ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"])){
+        enable = YES;
+    } 
+    return enable;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -395,6 +406,7 @@
     ServiceModel* itemService = [ServiceModel findByJID:item.jid andNode:item.node];
     cell.itemLabel.text = [self serviceName:itemService forItem:item];
     cell.itemImage.image = [self serviceImage:itemService];
+    cell.enableImageTouch = [self enableImageTouch:itemService];
     return cell;        
 }
 

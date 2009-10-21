@@ -43,6 +43,17 @@
     if (self = [super initWithFrame:frame]) {
         self.delegate = initDelegate;
         self.userInteractionEnabled = YES;
+        self.contentMode = UIViewContentModeCenter;
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithImage:(UIImage*)image andDelegate:(id)initDelegate {
+    if (self = [super initWithImage:image]) {
+        self.delegate = initDelegate;
+        self.userInteractionEnabled = YES;
+        self.contentMode = UIViewContentModeCenter;
     }
     return self;
 }

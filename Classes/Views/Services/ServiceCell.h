@@ -10,17 +10,28 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class TouchImageView;
 @class ServiceModel;
+@class AccountModel;
+@class SubscriptionModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceCell : UITableViewCell {
 	IBOutlet UILabel* itemLabel;
-    IBOutlet UIImageView* itemImage;
+    TouchImageView* itemImage;
+    AccountModel* account;
+    ServiceModel* service;
+    SubscriptionModel* subscription;
+    BOOL enableImageTouch;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UILabel* itemLabel;
-@property (nonatomic, retain) UIImageView* itemImage;
+@property (nonatomic, retain) TouchImageView* itemImage;
+@property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) ServiceModel* service;
+@property (nonatomic, retain) SubscriptionModel* subscription;
+@property (nonatomic, assign) BOOL enableImageTouch;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

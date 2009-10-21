@@ -21,6 +21,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate;
+- (id)initWithImage:(UIImage*)image andDelegate:(id)initDelegate;
 
 @end
 

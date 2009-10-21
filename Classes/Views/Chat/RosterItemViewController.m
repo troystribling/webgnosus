@@ -11,22 +11,20 @@
 #import "MessageViewController.h"
 #import "CommandViewController.h"
 #import "SectionViewController.h"
-
+#import "EventsViewController.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "RosterItemModel.h"
 #import "ServiceItemModel.h"
+#import "SubscriptionModel.h"
 #import "AccountModel.h"
-
 #import "MessageCellFactory.h"
 #import "RosterCell.h"
 #import "ContactPubCell.h"
-
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
 #import "XMPPJID.h"
-
 #import "CellUtils.h"
 #import "SegmentedCycleList.h"
 
@@ -35,6 +33,8 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
+- (UIViewController*)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (UIViewController*)eventViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (void)sendMessageButtonWasPressed:(id)sender;
 - (void)createAddItemButton;
 - (void)createSegementedController;
@@ -83,6 +83,31 @@
     cell.serviceItem = item;
     cell.account = self.account;
     return cell;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIViewController*)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
+    UserModel* user = [self.items objectAtIndex:indexPath.row];
+    RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
+    [chatViewController setAccount:self.account];
+    chatViewController.rosterItem = user;
+    [self.navigationController pushViewController:chatViewController animated:YES];
+    return [chatViewController autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UIViewController*)eventViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
+    EventsViewController* viewController = nil;
+    ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];
+    SubscriptionModel* subscription = [SubscriptionModel findByAccount:self.account andNode:item.node];
+    if (subscription) {
+        viewController = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
+        viewController.service = item.service;
+        viewController.node = item.node;
+        viewController.name = item.itemName;
+        viewController.eventType = kPUB_MODE;
+    }
+    return viewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -354,14 +379,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
+    UIViewController* viewController = nil;
     if ([self.selectedMode isEqualToString:@"Resources"]) {
-        UserModel* user = [self.items objectAtIndex:indexPath.row];
-        RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
-        [chatViewController setAccount:self.account];
-        chatViewController.rosterItem = user;
-        [self.navigationController pushViewController:chatViewController animated:YES];
-        [chatViewController release];
+        viewController = [self resourceViewControllerForRowAtIndexPath:indexPath];
     }  else if ([self.selectedMode isEqualToString:@"Publications"]) {
+        viewController = [self eventViewControllerForRowAtIndexPath:indexPath];
+    }
+    if (viewController) {
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 
