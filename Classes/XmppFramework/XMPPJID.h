@@ -25,5 +25,6 @@
 - (NSString*)bare;
 - (NSString*)full;
 - (NSString*)pubSubRoot;
+- (NSString*)pubSubDomain;
 
 @end

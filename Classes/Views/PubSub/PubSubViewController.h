@@ -19,7 +19,6 @@
 	NSMutableArray* pubSubItems;
     AccountModel* account;
     NSInteger eventType;
-    NSInteger itemToDelete;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +27,6 @@
 @property (nonatomic, retain) NSMutableArray* pubSubItems;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, assign) NSInteger eventType;
-@property (nonatomic, assign) NSInteger itemToDelete;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

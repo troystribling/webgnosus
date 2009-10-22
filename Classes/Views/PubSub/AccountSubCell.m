@@ -8,6 +8,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "AccountSubCell.h"
+#import "TouchImageView.h"
+#import "AccountModel.h"
+#import "ServiceItemModel.h"
+#import "SubscriptionModel.h"
+#import "ServiceItemModel.h"
+#import "AlertViewManager.h"
+#import "XMPPClient.h"
+#import "XMPPIQ.h"
+#import "XMPPJID.h"
+#import "XMPPPubSubSubscriptions.h"
+#import "XMPPClientManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountSubCell (PrivateAPI)
@@ -20,6 +31,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize itemLabel;
 @synthesize jidLabel;
+@synthesize itemImage;
+@synthesize subscription;
+@synthesize account;
 
 //===================================================================================================================================
 #pragma mark AccountSubCell
@@ -28,11 +42,38 @@
 #pragma mark AccountSubCell PrivateAPI
 
 //===================================================================================================================================
+#pragma mark TouchImageView Delegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)imageTouched:(TouchImageView*)pubSubImage {
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.subscription.service] node:self.subscription.node];
+    [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
+}
+
+//===================================================================================================================================
 #pragma mark UITableViewCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
+
+//===================================================================================================================================
+#pragma mark UIView
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithCoder:(NSCoder *)coder { 
+	if (self = [super initWithCoder:coder]) { 
+        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 16.0f, 30.0f, 30.0f) andDelegate:self];
+        self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
+	} 
+	return self; 
+} 
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)drawRect:(CGRect)rect {
+    [self addSubview:self.itemImage];
 }
 
 //===================================================================================================================================

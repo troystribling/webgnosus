@@ -56,7 +56,6 @@
 @synthesize pubSubItems;
 @synthesize account;
 @synthesize eventType;
-@synthesize itemToDelete;
 
 //===================================================================================================================================
 #pragma mark PubSubViewController
@@ -323,29 +322,17 @@
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
         cell.jidLabel.text = [[item nodeToJID] full];
+        cell.account = self.account;
+        cell.subscription = item;
         return cell;
     } else {
         AccountPubCell* cell = (AccountPubCell*)[CellUtils createCell:[AccountPubCell class] forTableView:tableView];
         ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = item.itemName;
+        cell.account = self.account;
+        cell.serviceItem = item;
         return cell;
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {    
-	if (editingStyle == UITableViewCellEditingStyleDelete) { 
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        self.itemToDelete = indexPath.row;
-        if (self.eventType == kSUB_MODE) {
-            SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
-            [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:item.service] node:item.node];
-        } else {
-            ServiceItemModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
-            [XMPPPubSubOwner delete:client JID:[XMPPJID jidWithString:item.service] node:item.node];
-        }
-        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Deleting"];
-	} 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -368,7 +355,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return NO;
 }
 
 //===================================================================================================================================

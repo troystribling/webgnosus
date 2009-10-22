@@ -39,11 +39,18 @@
 #pragma mark UIView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate {
+- (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.delegate = initDelegate;
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeCenter;
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate {
+    if (self = [self initWithFrame:frame]) {
+        self.delegate = initDelegate;
     }
     return self;
 }

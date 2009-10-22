@@ -48,12 +48,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setPubImage {
-    if (self.enableImageTouch) {
-        if (self.subscription) {
-            self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
-        } else {
-            self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
-        }
+    if (self.subscription) {
+        self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
+    } else {
+        self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
     }
 }
 
@@ -67,16 +65,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)imageTouched:(TouchImageView*)pubSubImage {
-    if (self.enableImageTouch) {
-        [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        if (!self.subscription) {
-            [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:self.service.jid] node:self.service.node];
-            [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Subscribing"];
-        } else {
-            [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.service.jid] node:self.service.node];
-            [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
-        }
+    [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    if (!self.subscription) {
+        [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:self.service.jid] node:self.service.node];
+        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Subscribing"];
+    } else {
+        [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.service.jid] node:self.service.node];
+        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
     }
 }
 
@@ -103,6 +99,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager showAlert:@"Unsubscribe Failed"];
 }
 
@@ -110,6 +107,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self setPubImage];
 }
 
@@ -127,8 +125,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f) andDelegate:self];
-        self.itemImage.delegate = self;
+        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f)];
         self.enableImageTouch = NO;
 	} 
 	return self; 
@@ -136,8 +133,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)drawRect:(CGRect)rect {
-    [self loadSubscription];
-    [self setPubImage];
+    if (self.enableImageTouch) {
+        self.itemImage.delegate = self;
+        [self loadSubscription];
+        [self setPubImage];
+    }
     [self addSubview:self.itemImage];
 }
 

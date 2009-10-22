@@ -98,6 +98,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [AlertViewManager showAlert:@"Unsubscribe Failed"];
 }
 
@@ -105,6 +106,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
     [self setPubImage];
 }
 

@@ -157,7 +157,9 @@
         image = [UIImage imageNamed:@"service-pubsub.png"];
     } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"collection"]) {
         image = [UIImage imageNamed:@"service-pubsub-folder.png"];
-    } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"]) {
+    } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"] && [[itemService.node pathComponents] count] <= 4) {
+        image = [UIImage imageNamed:@"service-pubsub-folder.png"];
+    } else if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"] && [itemService.node hasPrefix:@"/home"] && [[itemService.node pathComponents] count] > 4) {
         image = [self pubSubNodeImage:itemService];
     } else if ([itemService.category isEqualToString:@"conference"] && [itemService.type isEqualToString:@"text"]) {
         image = [UIImage imageNamed:@"service-chat.png"];
@@ -192,7 +194,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)enableImageTouch:(ServiceModel*)itemService {
     BOOL enable = NO;
-    if (![[self.account pubSubRoot] isEqualToString:self.node] && ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"leaf"])){
+    if (![[self.account pubSubRoot] isEqualToString:self.node] && 
+        [itemService.category isEqualToString:@"pubsub"] && 
+        [itemService.type isEqualToString:@"leaf"] && 
+        [itemService.node hasPrefix:@"/home"] &&
+        [[itemService.node pathComponents] count] > 4){
         enable = YES;
     } 
     return enable;
@@ -406,6 +412,8 @@
     ServiceModel* itemService = [ServiceModel findByJID:item.jid andNode:item.node];
     cell.itemLabel.text = [self serviceName:itemService forItem:item];
     cell.itemImage.image = [self serviceImage:itemService];
+    cell.account = self.account;
+    cell.service = itemService;
     cell.enableImageTouch = [self enableImageTouch:itemService];
     return cell;        
 }
