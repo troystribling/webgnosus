@@ -354,6 +354,8 @@
 		05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
 		05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
 		05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
+		05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
+		05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
 		05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
 		05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
 		05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F79C461075AA8200B75735 /* ContactPubCell.m */; };
@@ -664,6 +666,8 @@
 		05F24BD31054077F000C886E /* AddContactViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddContactViewController.xib; sourceTree = "<group>"; };
 		05F2F7941064754200B681ED /* XMPPDiscoItemsResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItemsResponseDelegate.h; path = Disco/XMPPDiscoItemsResponseDelegate.h; sourceTree = "<group>"; };
 		05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItemsResponseDelegate.m; path = Disco/XMPPDiscoItemsResponseDelegate.m; sourceTree = "<group>"; };
+		05F75D8010915FE200FC080B /* XMPPPubSubItemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubItemDelegate.h; sourceTree = "<group>"; };
+		05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubItemDelegate.m; sourceTree = "<group>"; };
 		05F79C2C1075A7D500B75735 /* ContactPubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactPubCell.xib; sourceTree = "<group>"; };
 		05F79C451075AA8200B75735 /* ContactPubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactPubCell.h; sourceTree = "<group>"; };
 		05F79C461075AA8200B75735 /* ContactPubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactPubCell.m; sourceTree = "<group>"; };
@@ -887,6 +891,8 @@
 				05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */,
 				05D1ED6D1037BEF200DB3B3F /* XMPPPubSubItem.h */,
 				05D1ED6E1037BEF200DB3B3F /* XMPPPubSubItem.m */,
+				05F75D8010915FE200FC080B /* XMPPPubSubItemDelegate.h */,
+				05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */,
 				05D1ED6F1037BEF200DB3B3F /* XMPPPubSubItems.h */,
 				05D1ED701037BEF200DB3B3F /* XMPPPubSubItems.m */,
 				05D1ED771037BEF200DB3B3F /* XMPPPubSubOwner.h */,
@@ -1630,6 +1636,7 @@
 				051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
 				051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */,
 				05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */,
+				05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1752,6 +1759,7 @@
 				051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
 				051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */,
 				05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */,
+				05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

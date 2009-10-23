@@ -30,7 +30,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItems*)initWithNode:(NSString*)itemNode {
 	if(self = [super initWithName:@"items"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
         [self addNode:itemNode];
 	}
 	return self;

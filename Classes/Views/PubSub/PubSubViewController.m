@@ -185,7 +185,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
     [self loadPubSubItems];
-    [self failureAlert:@"Publish Node Delete Failed"];
+    [self failureAlert:@"Node Delete Failed"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

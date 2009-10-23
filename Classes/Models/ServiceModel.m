@@ -96,6 +96,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceModel*)findByNode:(NSString*)requestNode {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE node = '%@' LIMIT 1", requestNode];
+	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory {
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT s.* FROM services s, serviceItems i WHERE i.jid=s.jid AND i.service='%@' AND s.category='%@' AND s.type='%@'", 
                                  serverJID, requestCategory, requestType];

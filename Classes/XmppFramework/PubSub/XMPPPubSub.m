@@ -8,8 +8,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSub.h"
+#import "XMPPPubSubItems.h"
+#import "XMPPPubSubItem.h"
 #import "XMPPPubSubCeateDelegate.h"
 #import "XMPPPubSubEntryDelegate.h"
+#import "XMPPPubSubItemDelegate.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
@@ -85,6 +88,7 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
     [iq release];
+    [pubsub release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,7 +105,22 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
     [iq release];
+    [pubsub release];
     [entry release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withId:(NSString*)itemId {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    XMPPPubSubItems* items = [[XMPPPubSubItems alloc] initWithNode:node];
+    [items addItem:[[XMPPPubSubItem alloc] initWithId:itemId]];
+    [pubsub addChild:items];	
+    [iq addPubSub:pubsub];    
+    [client send:iq andDelegateResponse:[[XMPPPubSubItemDelegate alloc] init]];
+    [iq release];
+    [pubsub release];
+    [items release];
 }
 
 //===================================================================================================================================

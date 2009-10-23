@@ -43,6 +43,7 @@
 - (NSString*)serviceName:(ServiceModel*)itemService forItem:(ServiceItemModel*)item;
 - (UIImage*)serviceImage:(ServiceModel*)itemService;
 - (UIImage*)pubSubNodeImage:(ServiceModel*)itemService;
+- (UIImage*)pubSubNodeImage:(ServiceModel*)itemService;
 - (BOOL)enableImageTouch:(ServiceModel*)itemService;
 - (void)loadNextViewController;
 - (void)loadServiceItems;
@@ -194,8 +195,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)enableImageTouch:(ServiceModel*)itemService {
     BOOL enable = NO;
-    if (![[self.account pubSubRoot] isEqualToString:self.node] && 
-        [itemService.category isEqualToString:@"pubsub"] && 
+    if ([itemService.category isEqualToString:@"pubsub"] && 
         [itemService.type isEqualToString:@"leaf"] && 
         [itemService.node hasPrefix:@"/home"] &&
         [[itemService.node pathComponents] count] > 4){
@@ -301,6 +301,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoServiceError:(XMPPIQ*)iq {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
+    [self reloadServiceItems];
+    [AlertViewManager showAlert:@"Node Delete Failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
+    [self reloadServiceItems];
+    [AlertViewManager dismissActivityIndicator];
 }
 
 //===================================================================================================================================

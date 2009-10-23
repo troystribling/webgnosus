@@ -36,6 +36,7 @@
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
++ (void)destroyByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode  andVar:(NSString*)requestVar;

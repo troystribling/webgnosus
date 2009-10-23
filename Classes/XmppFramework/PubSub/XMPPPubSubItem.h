@@ -19,9 +19,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubItem*)createFromElement:(NSXMLElement*)element;
+- (XMPPPubSubItem*)initWithId:(NSString*)itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)itemId;
+- (void)addItemId:(NSString*)val;
 - (XMPPxData*)data;
 - (XMPPEntry*)entry;
 

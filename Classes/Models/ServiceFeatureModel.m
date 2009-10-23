@@ -80,7 +80,7 @@
 + (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode andVar:(NSString*)requestVar {
 	NSString* selectStatement;
     if (requestNode) {
-        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@' AND node ='%@'",  requestService, requestVar, requestNode];
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@' AND parentNode ='%@'",  requestService, requestVar, requestNode];
     } else {
         selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
     }
@@ -105,12 +105,6 @@
 	return output;
 }
 
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAll {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
-}
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
     ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] parentNode:parent andVar:[feature var]];
@@ -127,6 +121,22 @@
     } else {
         [model sync];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyAll {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
+	NSString* deleteStatement;
+    if (requestNode) {
+        deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@' AND parentNode ='%@'",  requestService, requestNode];
+    } else {
+        deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@'",  requestService];
+    }
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

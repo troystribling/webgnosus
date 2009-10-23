@@ -46,7 +46,7 @@
 - (void)imageTouched:(TouchImageView*)pubSubImage {
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPPubSubOwner delete:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
-    [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Deeletinf"];
+    [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Deleting"];
 }
 
 //===================================================================================================================================
