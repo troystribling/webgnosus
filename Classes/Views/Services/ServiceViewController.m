@@ -225,6 +225,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadTextViewController:(MessageModel*)message {
     ServiceMessageViewController* messageController = [[ServiceMessageViewController alloc] initWithNibName:@"ServiceMessageViewController" bundle:nil]; 
+    messageController.message = message;
     [self.navigationController pushViewController:messageController animated:YES]; 
     [messageController release];     
 }
@@ -468,9 +469,6 @@
         } else {
             [XMPPPubSub get:client JID:[XMPPJID jidWithString:item.jid] node:self.parentService.node withId:item.itemName];
         }
-        ServiceMessageViewController* messageController = [[ServiceMessageViewController alloc] initWithNibName:@"ServiceMessageViewController" bundle:nil]; 
-        [self.navigationController pushViewController:messageController animated:YES]; 
-        [messageController release];     
     } else if (count == 0) {
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];

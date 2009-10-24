@@ -10,13 +10,16 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class MessageModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceMessageViewController : UIViewController {
-	IBOutlet UITextView* messageTextView;
+	IBOutlet UILabel* messageTextView;
+    MessageModel* message;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UITextView* messageTextView;
+@property (nonatomic, retain) UILabel* messageTextView;
+@property (nonatomic, retain) MessageModel* message;
 
 @end

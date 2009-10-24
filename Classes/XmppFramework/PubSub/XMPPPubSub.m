@@ -100,7 +100,6 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
     [iq release];
-    [pubsub release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -129,8 +128,6 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubItemDelegate alloc] init]];
     [iq release];
-    [pubsub release];
-    [items release];
 }
 
 //===================================================================================================================================
