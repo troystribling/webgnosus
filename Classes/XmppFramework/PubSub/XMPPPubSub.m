@@ -19,6 +19,8 @@
 #import "XMPPEntry.h"
 #import "XMPPPubSubSubscription.h"
 #import "XMPPPubSubSubscriptions.h"
+#import "XMPPPubSubItems.h"
+#import "XMPPPubSubEvent.h"
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +75,16 @@
     [self addChild:val];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPPubSubItems*)items {
+    XMPPPubSubItems* pubItems = nil;
+    NSXMLElement* pubItemsElement = [self elementForName:@"items"];
+    if (pubItemsElement) {
+        pubItems = [XMPPPubSubItems createFromElement:pubItemsElement];
+    }
+    return pubItems;
+}
+    
 //===================================================================================================================================
 #pragma mark XMPPPubSub Messages
 
@@ -105,8 +117,6 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
     [iq release];
-    [pubsub release];
-    [entry release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

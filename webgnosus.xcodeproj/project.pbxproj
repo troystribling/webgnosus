@@ -29,6 +29,10 @@
 		050A688F1071AB72002FE125 /* XDataScalarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 050A688D1071AB72002FE125 /* XDataScalarCell.m */; };
 		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
+		051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
+		051A484A1092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
+		051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051A48511092975200263D26 /* ServiceMessageViewController.xib */; };
+		051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051A48511092975200263D26 /* ServiceMessageViewController.xib */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
@@ -395,6 +399,9 @@
 		050A688D1071AB72002FE125 /* XDataScalarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarCell.m; sourceTree = "<group>"; };
 		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
+		051A48471092965000263D26 /* ServiceMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMessageViewController.h; sourceTree = "<group>"; };
+		051A48481092965000263D26 /* ServiceMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceMessageViewController.m; sourceTree = "<group>"; };
+		051A48511092975200263D26 /* ServiceMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServiceMessageViewController.xib; sourceTree = "<group>"; };
 		051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		051AB4810F1068C500DD01DC /* webgnosus.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = webgnosus.db; sourceTree = "<group>"; };
 		051CA4EB1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoInfoServiceResponseDelegate.h; sourceTree = "<group>"; };
@@ -729,6 +736,8 @@
 			children = (
 				051CA51A1086D0090007DA81 /* ServiceCell.h */,
 				051CA51B1086D0090007DA81 /* ServiceCell.m */,
+				051A48471092965000263D26 /* ServiceMessageViewController.h */,
+				051A48481092965000263D26 /* ServiceMessageViewController.m */,
 				051CA51C1086D0090007DA81 /* ServiceSearchViewController.h */,
 				051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */,
 				051CA51E1086D0090007DA81 /* ServiceViewController.h */,
@@ -952,6 +961,7 @@
 				05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */,
 				05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */,
 				05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */,
+				051A48511092975200263D26 /* ServiceMessageViewController.xib */,
 				0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */,
 				0502D7C91082488200218EC9 /* ServiceViewController.xib */,
 			);
@@ -1444,6 +1454,7 @@
 				05ED2D92108B9140007F9413 /* service-directory.png in Resources */,
 				05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
 				05ED2E1C108BE96C007F9413 /* service-document.png in Resources */,
+				051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1511,6 +1522,7 @@
 				05ED2D91108B9140007F9413 /* service-directory.png in Resources */,
 				05ED2D9D108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
 				05ED2E1B108BE96C007F9413 /* service-document.png in Resources */,
+				051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1637,6 +1649,7 @@
 				051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */,
 				05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */,
 				05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
+				051A484A1092965000263D26 /* ServiceMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1760,6 +1773,7 @@
 				051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */,
 				05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */,
 				05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
+				051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

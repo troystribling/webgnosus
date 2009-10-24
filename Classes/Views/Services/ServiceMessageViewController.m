@@ -1,58 +1,66 @@
 //
-//  XMPPPubSubEvent.m
+//  ServiceMessageViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/8/09.
+//  Created by Troy Stribling on 10/23/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubEvent.h"
-#import "XMPPPubSubItems.h"
-#import "NSXMLElementAdditions.h"
+#import "ServiceMessageViewController.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubEvent (PrivateAPI)
+@interface ServiceMessageViewController (PrivateAPI)
+
+- (void)failureAlert:(NSString*)message;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubEvent
+@implementation ServiceMessageViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize messageTextView;
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubEvent PrivateAPI
+#pragma mark ServiceMessageViewController
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubEvent
+#pragma mark ServiceMessageViewController PrivateAPI
+
+//===================================================================================================================================
+#pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubEvent*)createFromElement:(NSXMLElement*)element {
-	XMPPPubSubEvent* result = (XMPPPubSubEvent*)element;
-	result->isa = [XMPPPubSubEvent class];
-	return result;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubEvent*)init {
-	if(self = [super initWithName:@"event"]) {
-        [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#event"]];
-	}
-	return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node {
-    return [[[self elementForName:@"items"] attributeForName:@"node"] stringValue];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPPubSubItems*)items {
-    XMPPPubSubItems* pubItems = nil;
-    NSXMLElement* pubItemsElement = [self elementForName:@"items"];
-    if (pubItemsElement) {
-        pubItems = [XMPPPubSubItems createFromElement:pubItemsElement];
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
     }
-    return pubItems;
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewDidLoad {
+    [super viewDidLoad];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 //===================================================================================================================================
@@ -64,3 +72,4 @@
 }
 
 @end
+

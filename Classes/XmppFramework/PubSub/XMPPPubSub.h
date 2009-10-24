@@ -16,6 +16,7 @@
 @class XMPPPubSubSubscription;
 @class XMPPClient;
 @class XMPPJID;
+@class XMPPPubSubItems;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSub : NSXMLElement 
@@ -28,9 +29,11 @@
 - (NSArray*)subscriptions;
 - (void)addSubscription:(XMPPPubSubSubscriptions*)val;
 - (XMPPPubSubSubscription*)subscription;
+- (XMPPPubSubItems*)items;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
 + (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title;
++ (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withId:(NSString*)itemId;
 
 @end

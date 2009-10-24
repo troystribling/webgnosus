@@ -32,7 +32,7 @@
 - (NSInteger)maxItems;
 - (void)addMaxItems:(NSInteger)val;
 
-- (NSArray*)items;
+- (NSArray*)toArray;
 - (void)addItem:(XMPPPubSubItem*)val;
 
 @end

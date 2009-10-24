@@ -10,15 +10,27 @@
 #import "MessageModel.h"
 #import "AccountModel.h"
 #import "ContactModel.h"
+#import "SubscriptionModel.h"
 #import "RosterItemModel.h"
 #import "UserModel.h"
 #import "WebgnosusDbi.h"
 #import "XMPPxData.h"
 #import "XMPPEntry.h"
+#import "XMPPClient.h"
+#import "XMPPMessage.h"
+#import "XMPPIQ.h"
+#import "XMPPJID.h"
+#import "XMPPPubSubEvent.h"
+#import "XMPPPubSubItem.h"
+#import "XMPPPubSubItems.h"
+#import "XMPPPubSub.h"
+#import "XMPPCommand.h"
+#import "XMPPMessageDelegate.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageModel (PrivateAPI)
 
++ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;
 - (UserModel*)findUserModel:(NSString*)jid;
 
@@ -199,6 +211,62 @@
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPClient*)client message:(XMPPMessage*)message {
+    if ([message hasBody]) {
+        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+        if (account) {
+            MessageModel* messageModel = [[MessageModel alloc] init];
+            messageModel.fromJid = [[message fromJID] full];
+            messageModel.accountPk = account.pk;
+            messageModel.messageText = [message body];
+            messageModel.toJid = [account fullJID];
+            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.textType = MessageTextTypeBody;
+            messageModel.node = @"";
+            messageModel.itemId = @"-1";
+            [messageModel insert];
+            [messageModel release];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insertEvent:(XMPPClient*)client forMessage:(XMPPMessage*)message {
+    XMPPPubSubEvent* event = [message event];
+    [self insert:client pubSubItems:[event items] fromJID:[message fromJID]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insertPubSubItems:(XMPPClient*)client forIq:(XMPPIQ*)iq {
+    XMPPPubSub* pubsub = [iq pubsub];
+    [self insert:client pubSubItems:[pubsub items] fromJID:[iq fromJID]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPClient*)client commandResult:(XMPPIQ*)iq {
+    XMPPCommand* command = [iq command];
+    if (command) {
+        XMPPxData* cmdData = [command data];
+        if (cmdData) {
+            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+            if (account) {
+                MessageModel* messageModel = [[MessageModel alloc] init];
+                messageModel.fromJid = [[iq fromJID] full];
+                messageModel.accountPk = account.pk;
+                messageModel.messageText = [cmdData XMLString];
+                messageModel.toJid = [account fullJID];
+                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+                messageModel.textType = MessageTextTypeCommandXData;
+                messageModel.node = [command node];
+                messageModel.itemId = @"-1";
+                [messageModel insert];
+                [messageModel release];
+            }
+        }
+    }
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (AccountModel*)account {
@@ -294,6 +362,41 @@
         self.itemId = [[NSString alloc] initWithUTF8String:itemIdVal];
     }
     self.accountPk = (int)sqlite3_column_int(statement, 8);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    if (account) {
+        NSArray* itemsArray = [items toArray];
+        NSString* itemsNode = [items node];
+        for (int i = 0; i < [itemsArray count]; i++) {
+            XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[itemsArray objectAtIndex:i]];
+            if (![MessageModel findEventByNode:itemsNode andItemId:[item itemId]]) {
+                MessageModel* messageModel = [[MessageModel alloc] init];
+                messageModel.fromJid = [fromJID full];
+                messageModel.accountPk = account.pk;
+                messageModel.toJid = [account fullJID];
+                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+                messageModel.node = itemsNode;
+                messageModel.itemId = [item itemId];
+                XMPPxData* data = [item data];
+                XMPPEntry* entry = [item entry];
+                if (data) {
+                    messageModel.textType = MessageTextTypeEventxData;
+                    messageModel.messageText = [data XMLString];
+                } else if (entry) {
+                    messageModel.textType = MessageTextTypeEventEntry;
+                    messageModel.messageText = [entry XMLString];
+                } else {
+                    messageModel.textType = MessageTextTypeEventText;
+                    messageModel.messageText = [[[item children] objectAtIndex:0] XMLString];
+                }
+                [messageModel insert];
+                [messageModel release];
+            }
+        }
+    }
 }
 
 //===================================================================================================================================

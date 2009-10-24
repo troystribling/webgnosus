@@ -10,6 +10,7 @@
 #import "ServiceViewController.h"
 #import "ServiceCell.h"
 #import "ServiceSearchViewController.h"
+#import "ServiceMessageViewController.h"
 #import "AccountManagerViewController.h"
 #import "AlertViewManager.h"
 #import "MessageCellFactory.h"
@@ -23,12 +24,14 @@
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
 #import "XMPPDiscoInfoServiceResponseDelegate.h"
+#import "XMPPPubSub.h"
 #import "TouchImageView.h"
 #import "AccountModel.h"
 #import "ServiceModel.h"
 #import "ServiceItemModel.h"
 #import "ServiceFeatureModel.h"
 #import "SubscriptionModel.h"
+#import "MessageModel.h"
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,6 +49,7 @@
 - (UIImage*)pubSubNodeImage:(ServiceModel*)itemService;
 - (BOOL)enableImageTouch:(ServiceModel*)itemService;
 - (void)loadNextViewController;
+- (void)loadTextViewController:(MessageModel*)message;
 - (void)loadServiceItems;
 - (void)loadAccount;
 - (void)reloadServiceItems;
@@ -68,7 +72,7 @@
 @synthesize service;
 @synthesize account;
 @synthesize selectedItem;
-@synthesize serviceModel;
+@synthesize parentService;
 
 //===================================================================================================================================
 #pragma mark ServiceViewController
@@ -80,7 +84,7 @@
 - (void)setService:(NSString*)initService andNode:(NSString*)initNode {
     self.service = initService;
     self.node = initNode;
-    self.serviceModel = [ServiceModel findByJID:initService andNode:initNode];
+    self.parentService = [ServiceModel findByJID:initService andNode:initNode];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -118,8 +122,8 @@
 - (void)discoInfo {
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     NSString* serviceType = @"unknown";
-    if (self.serviceModel) {
-        serviceType = self.serviceModel.type;
+    if (self.parentService) {
+        serviceType = self.parentService.type;
     }
     if (![serviceType isEqualToString:@"leaf"]) {
         for (int i = 0; i < [self.serviceItems count]; i++) {
@@ -151,8 +155,8 @@
 - (UIImage*)serviceImage:(ServiceModel*)itemService {
     UIImage* image;
     NSString* serviceType = @"unknown";
-    if (self.serviceModel) {
-        serviceType = self.serviceModel.type;
+    if (self.parentService) {
+        serviceType = self.parentService.type;
     }
     if ([itemService.category isEqualToString:@"pubsub"] && [itemService.type isEqualToString:@"service"]) {
         image = [UIImage imageNamed:@"service-pubsub.png"];
@@ -216,6 +220,13 @@
     viewController.rootServiceViewController = self.rootServiceViewController;
     [self.navigationController pushViewController:viewController animated:YES];
     [viewController release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)loadTextViewController:(MessageModel*)message {
+    ServiceMessageViewController* messageController = [[ServiceMessageViewController alloc] initWithNibName:@"ServiceMessageViewController" bundle:nil]; 
+    [self.navigationController pushViewController:messageController animated:YES]; 
+    [messageController release];     
 }
     
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -306,6 +317,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
     [self reloadServiceItems];
+    [AlertViewManager dismissActivityIndicator];
     [AlertViewManager showAlert:@"Node Delete Failed"];
 }
 
@@ -313,6 +325,19 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteResult:(XMPPIQ*)iq {
     [self reloadServiceItems];
     [AlertViewManager dismissActivityIndicator];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubItemError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"Item Retrieval Failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubItemResult:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:self.selectedItem.itemName];
+    [self loadTextViewController:message];
 }
 
 //===================================================================================================================================
@@ -435,8 +460,18 @@
     ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
     NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
     self.selectedItem = item;
-    if (count == 0) {
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    if ([self.parentService.category isEqualToString:@"pubsub"] && [self.parentService.type isEqualToString:@"leaf"]) {
+        MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:item.itemName];
+        if (message) {
+            [self loadTextViewController:message];
+        } else {
+            [XMPPPubSub get:client JID:[XMPPJID jidWithString:item.jid] node:self.parentService.node withId:item.itemName];
+        }
+        ServiceMessageViewController* messageController = [[ServiceMessageViewController alloc] initWithNibName:@"ServiceMessageViewController" bundle:nil]; 
+        [self.navigationController pushViewController:messageController animated:YES]; 
+        [messageController release];     
+    } else if (count == 0) {
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
     } else {

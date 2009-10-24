@@ -15,6 +15,9 @@
 @class UserModel;
 @class XMPPxData;
 @class XMPPEntry;
+@class XMPPClient;
+@class XMPPMessage;
+@class XMPPIQ;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 typedef enum tagMessageTextType {
@@ -71,6 +74,10 @@ typedef enum tagMessageTextType {
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
++ (void)insert:(XMPPClient*)client message:(XMPPMessage*)message;
++ (void)insertEvent:(XMPPClient*)client forMessage:(XMPPMessage*)message;
++ (void)insertPubSubItems:(XMPPClient*)client forIq:(XMPPIQ*)iq;
++ (void)insert:(XMPPClient*)client commandResult:(XMPPIQ*)iq;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

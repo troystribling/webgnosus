@@ -15,6 +15,7 @@
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
 #import "XMPPIQ.h"
+#import "MessageModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubItemDelegate (PrivateAPI)
@@ -40,7 +41,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubItemResult:(XMPPIQ*)stanza];
+    XMPPIQ* iq = (XMPPIQ*)stanza;
+    [MessageModel insertPubSubItems:client forIq:iq];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubItemResult:iq];
 }
 
 //===================================================================================================================================

@@ -380,91 +380,26 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveMessage:(XMPPMessage*)message {
+    [MessageModel insert:client message:message];
 	[self writeToLog:client message:@"xmppClient:didReceiveMessage"];
-    if ([message hasBody]) {
-        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-        if (account) {
-            XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
-            MessageModel* messageModel = [[MessageModel alloc] init];
-            messageModel.fromJid = [fromJid full];
-            messageModel.accountPk = account.pk;
-            messageModel.messageText = [message body];
-            messageModel.toJid = [account fullJID];
-            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-            messageModel.textType = MessageTextTypeBody;
-            messageModel.node = @"";
-            messageModel.itemId = @"-1";
-            [messageModel insert];
-            [messageModel release];
-        }
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
-	[self writeToLog:client message:@"xmppClient:didReceiveEvent"];
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    if (account) {
-        XMPPPubSubEvent* event = [message event];
-        NSArray* items = [event items];
-        NSString* node = [event node];
-        for (int i = 0; i < [items count]; i++) {
-            XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[items objectAtIndex:i]];
-            XMPPJID* fromJid = [XMPPJID jidWithString:[[message fromJID] full]];
-            if (![SubscriptionModel findByAccount:account andNode:node]) {
-                [XMPPPubSubSubscriptions get:client JID:fromJid];
-            }
-            if (![MessageModel findEventByNode:node andItemId:[item itemId]]) {
-                MessageModel* messageModel = [[MessageModel alloc] init];
-                messageModel.fromJid = [fromJid full];
-                messageModel.accountPk = account.pk;
-                messageModel.toJid = [account fullJID];
-                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-                messageModel.node = node;
-                messageModel.itemId = [item itemId];
-                XMPPxData* data = [item data];
-                XMPPEntry* entry = [item entry];
-                if (data) {
-                    messageModel.textType = MessageTextTypeEventxData;
-                    messageModel.messageText = [data XMLString];
-                } else if (entry) {
-                    messageModel.textType = MessageTextTypeEventEntry;
-                    messageModel.messageText = [entry XMLString];
-                } else {
-                    messageModel.textType = MessageTextTypeEventText;
-                    messageModel.messageText = [[[item children] objectAtIndex:0] XMLString];
-                }
-                [messageModel insert];
-                [messageModel release];
-            }
-        }
+    XMPPPubSubEvent* event = [message event];
+    NSString* node = [event node];
+    if (![SubscriptionModel findByAccount:account andNode:node]) {
+        [XMPPPubSubSubscriptions get:client JID:[message fromJID]];
     }
+    [MessageModel insertEvent:client forMessage:message];
+	[self writeToLog:client message:@"xmppClient:didReceiveEvent"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq {
+    [MessageModel insert:client commandResult:iq];
 	[self writeToLog:client message:@"xmppClient:didReceiveCommandResult"];
-    XMPPCommand* command = [iq command];
-    if (command) {
-        XMPPxData* cmdData = [command data];
-        if (cmdData) {
-            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-            if (account) {
-                XMPPJID* fromJid = [XMPPJID jidWithString:[[iq fromJID] full]];
-                MessageModel* messageModel = [[MessageModel alloc] init];
-                messageModel.fromJid = [fromJid full];
-                messageModel.accountPk = account.pk;
-                messageModel.messageText = [cmdData XMLString];
-                messageModel.toJid = [account fullJID];
-                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-                messageModel.textType = MessageTextTypeCommandXData;
-                messageModel.node = [command node];
-                messageModel.itemId = @"-1";
-                [messageModel insert];
-                [messageModel release];
-            }
-        }
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -546,6 +481,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubUnsubscribeResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubUnsubscribeResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubItemError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubItemError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubItemResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubItemResult"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

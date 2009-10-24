@@ -24,7 +24,7 @@
     NSString* service;
     AccountModel* account;
     ServiceItemModel* selectedItem;
-    ServiceModel* serviceModel;
+    ServiceModel* parentService;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceItemModel* selectedItem;
-@property (nonatomic, retain) ServiceModel* serviceModel;
+@property (nonatomic, retain) ServiceModel* parentService;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setService:(NSString*)initService andNode:(NSString*)initNode;

@@ -1,27 +1,22 @@
 //
-//  XMPPPubSubEvent.h
+//  ServiceMessageViewController.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 8/8/09.
+//  Created by Troy Stribling on 10/23/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import "NSXMLElementAdditions.h"
+#import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPPubSubItems;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubEvent : NSXMLElement
+@interface ServiceMessageViewController : UIViewController {
+	IBOutlet UITextView* messageTextView;
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPPubSubEvent*)createFromElement:(NSXMLElement*)element;
-- (XMPPPubSubEvent*)init;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)node;
-- (XMPPPubSubItems*)items;
+@property (nonatomic, retain) UITextView* messageTextView;
 
 @end
