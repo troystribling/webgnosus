@@ -23,7 +23,6 @@
 @implementation XDataMessageView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize titleLabel;
 
 //===================================================================================================================================
 #pragma mark XDataMessageView
@@ -41,11 +40,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIView*)viewForMessage:(MessageModel*)message {
++ (UIView*)viewForData:(XMPPxData*)data {
     NSMutableArray* gridArray = [self buildGridArray:data];
-    UIFont* labelFont = [UIFont fontWithName:[NSString stringWithUTF8String:kLABEL_GRID_FONT] size:kLABEL_GRID_FONT_SIZE];
-    NSMutableArray* labelArray = [LabelGridView buildViews:gridArray labelOffSet:kLABEL_OFFSET labelHeight:kLABEL_GRID_HEIGHT andFont:labelFont];
-    LabelGridView* labelGridView = [[LabelGridView alloc] initWithLabelViews:labelArray borderWidth:kGRID_BORDER_WIDTH  maxWidth:kDISPLAY_WIDTH gridXOffset:kGRID_X_OFFSET andGridYOffset:kGRID_Y_OFFSET];
+    NSMutableArray* labelArray = [LabelGridView buildViews:gridArray];
+    LabelGridView* labelGridView = [[LabelGridView alloc] initWithLabelViews:labelArray];
     [labelGridView setCellColor:[UIColor colorWithRed:0.94f green:0.94f blue:0.92f alpha:1.0f]];
     [labelGridView setBorderColor:[UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f]]; 
 	if ([self respondsToSelector:@selector(initLabelGridView:)] ) {

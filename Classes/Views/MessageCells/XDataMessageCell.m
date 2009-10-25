@@ -1,52 +1,57 @@
 //
-//  XDataHashCell.m
-//  webgnosus_client
+//  XDataMessageCell.m
+//  webgnosus
 //
 //  Created by Troy Stribling on 4/16/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XDataHashCell.h"
+#import "XDataMessageCell.h"
 #import "LabelGridView.h"
+#import "MessageCell.h"
+#import "MessageModel.h"
+#import "MessageViewFactory.h"
+#import "CellUtils.h"
 #import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XDataHashCell (PrivateAPI)
+@interface XDataMessageCell (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XDataHashCell
+@implementation XDataMessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize titleLabel;
 
 //===================================================================================================================================
-#pragma mark XDataHashCell
-
-//===================================================================================================================================
-#pragma mark XDataHashCell PrivateAPI
-
-//===================================================================================================================================
-#pragma mark XDataMessageLabelCell
+#pragma mark XDataMessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)initLabelGridView:(LabelGridView*)labelGridView {
-    [labelGridView setCellColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f] forColumn:0];
++ (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
+    UIView* dataView = [MessageViewFactory viewForMessage:message];
+    CGRect dataRect = [dataView frame];
+	return dataRect.size.height + kXDATA_MESSAGE_CELL_HEIGHT_PAD;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)buildGridArray:(XMPPxData*)data {
-    NSMutableArray* fieldHash = [data fields];
-    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldHash count]];
-    for(int j = 0; j < [fieldHash count]; j++) {
-        NSMutableArray* attrs = [fieldHash objectAtIndex:j];
-        NSString* attr = [self humanizeString:[attrs objectAtIndex:0]];
-        NSString* val = [self formatMessageAttribute:attr value:[self stringifyArray:[attrs lastObject]]];
-        [gridArray addObject:[NSMutableArray arrayWithObjects:attr, val, nil]];
-    }
-    return gridArray;
++ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message fromJid:(NSString*)jid {  
+    XDataMessageCell* cell = (XDataMessageCell*)[CellUtils createCell:[XDataMessageCell class] forTableView:tableView];
+    [self set:cell Jid:jid];
+    [self setTime:cell forMessage:message];
+    cell.titleLabel.text = [message.node stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    UIView* dataView = [MessageViewFactory viewForMessage:message];
+    CGRect dataRect = [dataView frame];
+    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_MESSAGE_CELL_X_OFFSET, kXDATA_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)];
+    [container addSubview:dataView];
+    [cell addSubview:container];
+    return cell;
 }
+
+//===================================================================================================================================
+#pragma mark XDataMessageCell PrivateAPI
 
 //===================================================================================================================================
 #pragma mark UITableViewCell

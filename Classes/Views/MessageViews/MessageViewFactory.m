@@ -1,5 +1,5 @@
 //
-//  MessageCellFactory.m
+//  MessageViewFactory.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/27/09.
@@ -7,14 +7,14 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "MessageCellFactory.h"
-#import "BodyMessageCell.h"
-#import "EntryCell.h"
+#import "MessageViewFactory.h"
+#import "BodyMessageView.h"
+#import "EntryMessageView.h"
+#import "XDataScalarMessageView.h"
+#import "XDataArrayMessageView.h"
+#import "XDataHashMessageView.h"
+#import "XDataArrayHashMessageView.h"
 #import "XMPPxData.h"
-#import "XDataScalarCell.h"
-#import "XDataArrayCell.h"
-#import "XDataHashCell.h"
-#import "XDataArrayHashCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 
@@ -28,61 +28,65 @@ typedef enum tagCommandDataType {
 } CommandDataType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MessageCellFactory (PrivateAPI)
+@interface MessageViewFactory (PrivateAPI)
 
++ (UIView*)viewForXDataMessage:(MessageModel*)message;
 + (CommandDataType)identifyXDataType:(XMPPxData*)data;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation MessageCellFactory
+@implementation MessageViewFactory
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //===================================================================================================================================
-#pragma mark MessageCellFactory
+#pragma mark MessageViewFactory
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UIView*)viewForMessage:(MessageModel*)message {        
-	UITableViewCell* cell = nil;
+	UIView* view = nil;
     if (message.textType ==  MessageTextTypeCommandXData) {
-        cell = [self tableView:tableView cellForXDataAtIndexPath:indexPath forMessage:message fromJid:message.fromJid];
+        view = [self viewForXDataMessage:message];
     } else if (message.textType ==  MessageTextTypeEventxData) {
-        cell = [self tableView:tableView cellForXDataAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        view = [self viewForXDataMessage:message];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
-        cell = [EntryCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        view = [EntryMessageView viewForMessage:message];
     } else if (message.textType ==  MessageTextTypeEventText) {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        view = [BodyMessageView  viewForMessage:message];
     } else {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+        view = [BodyMessageView  viewForMessage:message];
     }
-	return cell;
+	return view;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UIView*)viewForXDataMessage:(MessageModel*)message {
-	UITableViewCell* cell = nil;
+	UIView* view = nil;
     XMPPxData* data = [message parseXDataMessage];
     CommandDataType dataType = [self identifyXDataType:data];
     switch (dataType) {
         case CommandDataUnknown:
-            cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:jid];
+            view = [BodyMessageView  viewForMessage:message];
             break;
         case CommandDataScalar:
-            cell = [XDataScalarCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data fromJid:jid];
+            view = [XDataScalarMessageView viewForMessage:message];
             break;
         case CommandDataArray:
-            cell = [XDataArrayCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data fromJid:jid];
+            view = [XDataArrayMessageView viewForData:data];
             break;
         case CommandDataHash:
-            cell = [XDataHashCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data fromJid:jid];
+            view = [XDataHashMessageView viewForData:data];
             break;
         case CommandDataArrayHash:
-            cell = [XDataArrayHashCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message andData:data fromJid:jid];
+            view = [XDataArrayHashMessageView viewForData:data];
             break;
     }
-    return cell;
+    return view;
 }
+
+//===================================================================================================================================
+#pragma mark MessageViewFactory (PrivateAPI)
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CommandDataType)identifyXDataType:(XMPPxData*)data {

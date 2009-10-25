@@ -17,7 +17,7 @@
 + (NSMutableArray*)maxViewHeightByRow:(NSMutableArray*)viewArray usingNumberOfCells:(NSInteger)nCells;
 + (NSMutableArray*)maxViewWidthtByColumn:(NSMutableArray*)viewArray usingNumberOfCells:(NSInteger)nCells;
 
-+ (CGRect)makeTableRectWithViewWidths:(NSMutableArray*)viewWidthArray viewHeights:(NSMutableArray*)viewHeightArray borderWidth:(CGFloat)borderWidth xOffset:(CGFloat)xOffset andYOffset:(CGFloat)yOffset;
++ (CGRect)makeTableRectWithViewWidths:(NSMutableArray*)viewWidthArray viewHeights:(NSMutableArray*)viewHeightArray borderWidth:(CGFloat)borderWidth;
 + (CGRect)makeRowRectWithViewWidths:(NSMutableArray*)viewWidthArray viewHeight:(CGFloat)viewHeight andBorderWidth:(CGFloat)borderWidth;
 + (CGRect)makeCellRectWithViewWidth:(CGFloat)viewWidth rowHeight:(CGFloat)viewHeight andBorderWidth:(CGFloat)borderWidth;
 + (CGRect)makeBorderRectWithViewWidth:(CGFloat)viewWidth rowHeight:(CGFloat)viewHeight andBorderWidth:(CGFloat)borderWidth;
@@ -43,25 +43,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize gridBorderWidth;
-@synthesize xOffset;
-@synthesize yOffset;
 @synthesize gridMaxWidth;
 
 //===================================================================================================================================
 #pragma mark GridView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithViews:(NSMutableArray*)viewArray borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth xOffset:(CGFloat)initXOffset andYOffset:(CGFloat)initYOffset {
+- (id)initWithViews:(NSMutableArray*)viewArray borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth {
     NSInteger nCells = [GridView cellCountForRow:viewArray];
     NSMutableArray* viewWidthArray = [GridView maxViewWidthtByColumn:viewArray usingNumberOfCells:nCells];
     viewWidthArray = [GridView trimViewWidth:viewWidthArray toGridMaxWidth:initMaxWidth];
     viewArray = [GridView adjustViewRects:viewArray toWidths:viewWidthArray usingNumberOfCells:nCells];
     NSMutableArray* viewHeightArray = [GridView maxViewHeightByRow:viewArray usingNumberOfCells:nCells];
-    CGRect tableRect = [GridView makeTableRectWithViewWidths:viewWidthArray viewHeights:viewHeightArray borderWidth:initBorderWidth xOffset:initXOffset andYOffset:initYOffset];
+    CGRect tableRect = [GridView makeTableRectWithViewWidths:viewWidthArray viewHeights:viewHeightArray borderWidth:initBorderWidth];
     if (self = [super initWithFrame:tableRect]) {
         self.gridBorderWidth = initBorderWidth;
-        self.xOffset = initXOffset;
-        self.yOffset = initYOffset;
         self.gridMaxWidth = initMaxWidth;
         CGFloat rowOriginY = 0.0f;
         for(int i = 0; i < [viewArray count]; i++) {
@@ -209,7 +205,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGRect)makeTableRectWithViewWidths:(NSMutableArray*)viewWidthArray viewHeights:(NSMutableArray*)viewHeightArray borderWidth:(CGFloat)borderWidth xOffset:(CGFloat)xOffset andYOffset:(CGFloat)yOffset {
++ (CGRect)makeTableRectWithViewWidths:(NSMutableArray*)viewWidthArray viewHeights:(NSMutableArray*)viewHeightArray borderWidth:(CGFloat)borderWidth {
     CGFloat tableHeight = borderWidth;
     CGFloat tableWidth = borderWidth;
     for(int i = 0; i < [viewHeightArray count]; i++) {
@@ -218,7 +214,7 @@
     for(int i = 0; i < [viewWidthArray count]; i++) {   
         tableWidth += [[viewWidthArray objectAtIndex:i] floatValue] + borderWidth;
     }
-    return CGRectMake(xOffset, yOffset, tableWidth, tableHeight);
+    return CGRectMake(0.0f, 0.0f, tableWidth, tableHeight);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

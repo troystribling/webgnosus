@@ -17,11 +17,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth gridXOffset:(CGFloat)initXOffset andGridYOffset:(CGFloat)initYOffset;
+- (id)initWithLabelViews:(NSMutableArray*)lableViews;
+- (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth;
 - (void)setTextAlignment:(UITextAlignment)textAlignment forColumn:(NSUInteger)column;
 - (void)setLineBreakMode:(UILineBreakMode)lineBreakMode forColumn:(NSUInteger)column;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)buildViews:(NSMutableArray*)data;
 + (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)labelFont;
 
 @end

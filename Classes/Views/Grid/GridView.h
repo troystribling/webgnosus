@@ -12,19 +12,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface GridView : UIView {
     CGFloat gridBorderWidth;
-    CGFloat xOffset;
-    CGFloat yOffset;
     CGFloat gridMaxWidth;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) CGFloat gridBorderWidth;
-@property (nonatomic, assign) CGFloat xOffset;
-@property (nonatomic, assign) CGFloat yOffset;
 @property (nonatomic, assign) CGFloat gridMaxWidth;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithViews:(NSMutableArray*)views borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth xOffset:(CGFloat)initXOffset andYOffset:(CGFloat)initYOffset;
+- (id)initWithViews:(NSMutableArray*)views borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth;
 - (void)setBorderColor:(UIColor*)color;
 - (void)setCellColor:(UIColor*)color;
 - (void)setCellColor:(UIColor*)color forRow:(NSInteger)row;

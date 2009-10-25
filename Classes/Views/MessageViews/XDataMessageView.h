@@ -20,8 +20,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSString*)humanizeString:(NSString*)nonHuman;
 + (NSString*)stringifyArray:(NSArray*)stringArray;
-+ (NSString*)formatMessageAttribute:(NSString*)attr value:(NSString*)val;
-+ (UIView*)viewForMessage:(MessageModel*)message;
++ (UIView*)viewForData:(XMPPxData*)data;
 
 @end
 

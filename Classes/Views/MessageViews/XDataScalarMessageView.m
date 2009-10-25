@@ -8,6 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XDataScalarMessageView.h"
+#import "MessageModel.h"
+#import "XMPPxData.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataScalarMessageView (PrivateAPI)
@@ -24,7 +26,8 @@
 #pragma mark XDataScalarMessageView PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)getMessageText:(XMPPxData*)data {
++ (NSString*)getMessageText:(MessageModel*)message {
+    XMPPxData* data = [message parseXDataMessage];
     return [[[[data fields] lastObject] lastObject] lastObject];
 }
 

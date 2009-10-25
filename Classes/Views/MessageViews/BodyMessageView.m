@@ -45,6 +45,7 @@
     NSString* messageText = [self getMessageText:message];
     CGRect viewRect = [self getMessageRect:messageText];
     UILabel* messageView = [[UILabel alloc] initWithFrame:viewRect];
+    messageView.backgroundColor = [UIColor clearColor];
     messageView.text = messageText;
     return messageView;
 }

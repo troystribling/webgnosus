@@ -23,8 +23,40 @@
 #pragma mark LabelGridView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth gridXOffset:(CGFloat)initXOffset andGridYOffset:(CGFloat)initYOffset {
-    if (self = [super initWithViews:lableViews borderWidth:initBorderWidth  maxWidth:(CGFloat)initMaxWidth xOffset:initXOffset andYOffset:initYOffset]) {
++ (NSMutableArray*)buildViews:(NSMutableArray*)data {
+    UIFont* labelFont = [UIFont fontWithName:[NSString stringWithUTF8String:kLABEL_GRID_FONT] size:kLABEL_GRID_FONT_SIZE];
+    return [LabelGridView buildViews:data labelOffSet:kLABEL_OFFSET labelHeight:kLABEL_GRID_HEIGHT andFont:labelFont];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)labelFont {
+    NSMutableArray* labelViewArray = [NSMutableArray arrayWithCapacity:[data count]];
+    for (int i = 0; i < [data count]; i++) {
+        NSMutableArray* dataRow = [data objectAtIndex:i];
+        NSMutableArray* labelViewRow = [NSMutableArray arrayWithCapacity:[dataRow count]];
+        for (int j = 0; j < [dataRow count]; j++) {
+            CGSize constraintSize = {2000.0f, labelHeight};
+            CGSize labelSize = [[dataRow objectAtIndex:j] sizeWithFont:labelFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+            UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(labelOffSet, labelOffSet, labelSize.width + labelOffSet, labelHeight + labelOffSet)];
+            labelView.text = [dataRow objectAtIndex:j];
+            labelView.font = labelFont;
+            [labelViewRow addObject:labelView];
+        }
+        [labelViewArray addObject:labelViewRow];
+    }
+    return labelViewArray;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithLabelViews:(NSMutableArray*)lableViews {
+    if (self = [self initWithLabelViews:lableViews borderWidth:kGRID_BORDER_WIDTH  maxWidth:kDISPLAY_WIDTH]) {
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth {
+    if (self = [super initWithViews:lableViews borderWidth:initBorderWidth  maxWidth:(CGFloat)initMaxWidth]) {
     }
     return self;
 }
@@ -51,25 +83,6 @@
         UILabel* view = [[borderView subviews] lastObject];
         view.lineBreakMode = lineBreakMode;
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)buildViews:(NSMutableArray*)data labelOffSet:(CGFloat)labelOffSet labelHeight:(CGFloat)labelHeight andFont:(UIFont*)labelFont {
-    NSMutableArray* labelViewArray = [NSMutableArray arrayWithCapacity:[data count]];
-    for (int i = 0; i < [data count]; i++) {
-        NSMutableArray* dataRow = [data objectAtIndex:i];
-        NSMutableArray* labelViewRow = [NSMutableArray arrayWithCapacity:[dataRow count]];
-        for (int j = 0; j < [dataRow count]; j++) {
-            CGSize constraintSize = {2000.0f, labelHeight};
-            CGSize labelSize = [[dataRow objectAtIndex:j] sizeWithFont:labelFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
-            UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(labelOffSet, labelOffSet, labelSize.width + labelOffSet, labelHeight + labelOffSet)];
-            labelView.text = [dataRow objectAtIndex:j];
-            labelView.font = labelFont;
-            [labelViewRow addObject:labelView];
-        }
-        [labelViewArray addObject:labelViewRow];
-    }
-    return labelViewArray;
 }
 
 //===================================================================================================================================

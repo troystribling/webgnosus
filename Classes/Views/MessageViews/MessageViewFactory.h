@@ -1,5 +1,5 @@
 //
-//  MessageCellFactory.h
+//  MessageViewFactory.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 2/27/09.
@@ -11,16 +11,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class MessageModel;
-@class MessageCell;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface MessageCellFactory : NSObject {
+@interface MessageViewFactory : NSObject {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message;
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
++ (UIView*)viewForMessage:(MessageModel*)message;
 
 @end

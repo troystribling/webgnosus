@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+@class MessageModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface BodyMessageView : NSObject {
@@ -19,7 +20,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSString*)getMessageText:(MessageModel*)message;
-+ (CGSize)getMessageSize:(NSString*)messageText;
-
++ (CGRect)getMessageRect:(NSString*)messageText;
++ (UIView*)viewForMessage:(MessageModel*)message;
 
 @end
