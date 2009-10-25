@@ -34,7 +34,7 @@
     CGFloat width =  kDISPLAY_WIDTH;
     if (messageText) {
         CGSize textSize = {width, 20000.0f};
-        CGSize size = [messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+        CGSize size = [messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_CELL_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
         cellHeight = MAX(size.height, cellHeight);
     }    
 	return CGRectMake(0.0f, 0.0f, width, cellHeight);
@@ -46,6 +46,8 @@
     CGRect viewRect = [self getMessageRect:messageText];
     UILabel* messageView = [[UILabel alloc] initWithFrame:viewRect];
     messageView.backgroundColor = [UIColor clearColor];
+    messageView.lineBreakMode = UILineBreakModeWordWrap;
+    messageView.numberOfLines = 0;
     messageView.text = messageText;
     return messageView;
 }

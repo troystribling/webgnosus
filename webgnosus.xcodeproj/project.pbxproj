@@ -380,8 +380,6 @@
 		05F9742B1072F8560046344A /* XDataScalarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F974291072F8560046344A /* XDataScalarCell.xib */; };
 		05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */; };
 		05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */; };
-		05FC8C8B107C04E00023315E /* EntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FC8C8A107C04E00023315E /* EntryCell.m */; };
-		05FC8C8C107C04E00023315E /* EntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FC8C8A107C04E00023315E /* EntryCell.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -701,8 +699,6 @@
 		05F974291072F8560046344A /* XDataScalarCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataScalarCell.xib; sourceTree = "<group>"; };
 		05FABADE10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoResponseDelegate.h; path = Disco/XMPPDiscoInfoResponseDelegate.h; sourceTree = "<group>"; };
 		05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoInfoResponseDelegate.m; path = Disco/XMPPDiscoInfoResponseDelegate.m; sourceTree = "<group>"; };
-		05FC8C89107C04E00023315E /* EntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryCell.h; sourceTree = "<group>"; };
-		05FC8C8A107C04E00023315E /* EntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryCell.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -1246,8 +1242,6 @@
 			children = (
 				05E207D30FB9046500FCFC94 /* BodyMessageCell.h */,
 				05E207D40FB9046500FCFC94 /* BodyMessageCell.m */,
-				05FC8C89107C04E00023315E /* EntryCell.h */,
-				05FC8C8A107C04E00023315E /* EntryCell.m */,
 				05E207D90FB9046500FCFC94 /* MessageCell.h */,
 				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
 				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
@@ -1667,7 +1661,6 @@
 				050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */,
 				0563240A1078287800563274 /* EventMessageViewController.m in Sources */,
 				05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
-				05FC8C8C107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */,
 				0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
@@ -1795,7 +1788,6 @@
 				050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */,
 				056324081078287800563274 /* EventMessageViewController.m in Sources */,
 				05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
-				05FC8C8B107C04E00023315E /* EntryCell.m in Sources */,
 				05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
 				0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */,
 				0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,

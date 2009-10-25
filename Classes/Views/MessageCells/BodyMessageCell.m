@@ -10,6 +10,7 @@
 #import "BodyMessageCell.h"
 #import "MessageCell.h"
 #import "MessageModel.h"
+#import "MessageViewFactory.h"
 #import "CellUtils.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,19 +28,10 @@
 #pragma mark BodyMessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)getMessageText:(MessageModel*)message {
-    return message.messageText;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
-	CGFloat cellHeight = [self getMessageHeight:[self getMessageText:message]] + kMESSAGE_HEIGHT_PAD;
-	return cellHeight;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message { 
-    return [self tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[message fromJid]];
+    UIView* msgView = [MessageViewFactory viewForMessage:message];
+    CGRect msgRect = [msgView frame];
+	return msgRect.size.height + kMESSAGE_CELL_HEIGHT_PAD;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -47,23 +39,12 @@
     BodyMessageCell* cell = (BodyMessageCell*)[CellUtils createCell:[BodyMessageCell class] forTableView:tableView];
     [self set:cell Jid:jid];
     [self setTime:cell forMessage:message];
-    cell.messageLabel.text = [self getMessageText:message];
-    CGRect messageLabelRect = cell.messageLabel.frame;
-    messageLabelRect.size.height = [self getMessageHeight:[self getMessageText:message]];
-    cell.messageLabel.frame = messageLabelRect;
+    UIView* msgView = [MessageViewFactory viewForMessage:message];
+    CGRect msgRect = msgView.frame;
+    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kMESSAGE_CELL_X_OFFSET, kMESSAGE_CELL_Y_OFFSET, msgRect.size.width,  msgRect.size.width)];
+    [container addSubview:msgView];
+    [cell addSubview:container];
     return cell;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (CGFloat)getMessageHeight:(NSString*)messageText {
-	CGFloat cellHeight = 20.0f;
-    CGFloat width =  kDISPLAY_WIDTH;
-    if (messageText) {
-        CGSize textSize = {width, 20000.0f};
-        CGSize size = [messageText sizeWithFont:[UIFont systemFontOfSize:kMESSAGE_FONT_SIZE] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
-        cellHeight = MAX(size.height, cellHeight);
-    }    
-	return cellHeight;
 }
 
 //===================================================================================================================================

@@ -9,7 +9,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MessageCellFactory.h"
 #import "BodyMessageCell.h"
-#import "EntryCell.h"
 #import "XMPPxData.h"
 #import "XDataMessageCell.h"
 #import "MessageModel.h"
@@ -41,13 +40,13 @@ typedef enum tagCommandDataType {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message {
-	CGFloat cellHeight = kMESSAGE_HEIGHT_DEFAULT;
+	CGFloat cellHeight = kMESSAGE_CELL_HEIGHT_DEFAULT;
     if (message.textType ==  MessageTextTypeCommandXData) {
         cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventxData) {
         cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
-        cellHeight = [EntryCell tableView:tableView heightForRowWithMessage:message];
+        cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventText) {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     } else {
@@ -64,11 +63,11 @@ typedef enum tagCommandDataType {
     } else if (message.textType ==  MessageTextTypeEventxData) {
         cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
-        cell = [EntryCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventText) {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:message.fromJid];
     }
 	return cell;
 }

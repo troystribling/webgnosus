@@ -22,11 +22,8 @@
 @property (nonatomic, retain) UILabel* messageLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)getMessageText:(MessageModel*)message;
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message;
-+ (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message;
 + (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message fromJid:(NSString*)jid;
-+ (CGFloat)getMessageHeight:(NSString*)messageText;
 
 
 @end
