@@ -364,9 +364,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     UITableViewCell* cell;
-    if ([self.selectedMode isEqualToString:@"Chat"]) {
-        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
+    if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
         cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];

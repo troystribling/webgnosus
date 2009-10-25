@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050007321093EE390046D0BC /* EntryMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007251093EE390046D0BC /* EntryMessageView.m */; };
+		050007331093EE390046D0BC /* MessageViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007271093EE390046D0BC /* MessageViewFactory.m */; };
+		050007341093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007291093EE390046D0BC /* XDataArrayHashMessageView.m */; };
+		050007351093EE390046D0BC /* XDataArrayMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072B1093EE390046D0BC /* XDataArrayMessageView.m */; };
+		050007361093EE390046D0BC /* XDataHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072D1093EE390046D0BC /* XDataHashMessageView.m */; };
+		050007371093EE390046D0BC /* XDataMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072F1093EE390046D0BC /* XDataMessageView.m */; };
+		050007381093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
+		050007391093EE390046D0BC /* EntryMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007251093EE390046D0BC /* EntryMessageView.m */; };
+		0500073A1093EE390046D0BC /* MessageViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007271093EE390046D0BC /* MessageViewFactory.m */; };
+		0500073B1093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007291093EE390046D0BC /* XDataArrayHashMessageView.m */; };
+		0500073C1093EE390046D0BC /* XDataArrayMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072B1093EE390046D0BC /* XDataArrayMessageView.m */; };
+		0500073D1093EE390046D0BC /* XDataHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072D1093EE390046D0BC /* XDataHashMessageView.m */; };
+		0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072F1093EE390046D0BC /* XDataMessageView.m */; };
+		0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
+		050007421093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
+		050007431093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
 		050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
@@ -382,6 +398,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050007241093EE390046D0BC /* EntryMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryMessageView.h; sourceTree = "<group>"; };
+		050007251093EE390046D0BC /* EntryMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryMessageView.m; sourceTree = "<group>"; };
+		050007261093EE390046D0BC /* MessageViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewFactory.h; sourceTree = "<group>"; };
+		050007271093EE390046D0BC /* MessageViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewFactory.m; sourceTree = "<group>"; };
+		050007281093EE390046D0BC /* XDataArrayHashMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayHashMessageView.h; sourceTree = "<group>"; };
+		050007291093EE390046D0BC /* XDataArrayHashMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataArrayHashMessageView.m; sourceTree = "<group>"; };
+		0500072A1093EE390046D0BC /* XDataArrayMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataArrayMessageView.h; sourceTree = "<group>"; };
+		0500072B1093EE390046D0BC /* XDataArrayMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataArrayMessageView.m; sourceTree = "<group>"; };
+		0500072C1093EE390046D0BC /* XDataHashMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataHashMessageView.h; sourceTree = "<group>"; };
+		0500072D1093EE390046D0BC /* XDataHashMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataHashMessageView.m; sourceTree = "<group>"; };
+		0500072E1093EE390046D0BC /* XDataMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataMessageView.h; sourceTree = "<group>"; };
+		0500072F1093EE390046D0BC /* XDataMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataMessageView.m; sourceTree = "<group>"; };
+		050007301093EE390046D0BC /* XDataScalarMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDataScalarMessageView.h; sourceTree = "<group>"; };
+		050007311093EE390046D0BC /* XDataScalarMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarMessageView.m; sourceTree = "<group>"; };
+		050007401093F1260046D0BC /* BodyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyMessageView.h; sourceTree = "<group>"; };
+		050007411093F1260046D0BC /* BodyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyMessageView.m; sourceTree = "<group>"; };
 		050263C01076E78C000B81C6 /* XMPPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPEntry.h; sourceTree = "<group>"; };
 		050263C11076E78C000B81C6 /* XMPPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPEntry.m; sourceTree = "<group>"; };
 		050263CF1076FA7E000B81C6 /* EventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
@@ -731,6 +763,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050007231093EE390046D0BC /* MessageViews */ = {
+			isa = PBXGroup;
+			children = (
+				050007401093F1260046D0BC /* BodyMessageView.h */,
+				050007411093F1260046D0BC /* BodyMessageView.m */,
+				050007241093EE390046D0BC /* EntryMessageView.h */,
+				050007251093EE390046D0BC /* EntryMessageView.m */,
+				050007261093EE390046D0BC /* MessageViewFactory.h */,
+				050007271093EE390046D0BC /* MessageViewFactory.m */,
+				050007281093EE390046D0BC /* XDataArrayHashMessageView.h */,
+				050007291093EE390046D0BC /* XDataArrayHashMessageView.m */,
+				0500072A1093EE390046D0BC /* XDataArrayMessageView.h */,
+				0500072B1093EE390046D0BC /* XDataArrayMessageView.m */,
+				0500072C1093EE390046D0BC /* XDataHashMessageView.h */,
+				0500072D1093EE390046D0BC /* XDataHashMessageView.m */,
+				0500072E1093EE390046D0BC /* XDataMessageView.h */,
+				0500072F1093EE390046D0BC /* XDataMessageView.m */,
+				050007301093EE390046D0BC /* XDataScalarMessageView.h */,
+				050007311093EE390046D0BC /* XDataScalarMessageView.m */,
+			);
+			path = MessageViews;
+			sourceTree = "<group>";
+		};
 		051CA5191086D0090007DA81 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1135,6 +1190,7 @@
 				05E207BA0FB9046500FCFC94 /* Chat */,
 				05E207C70FB9046500FCFC94 /* Grid */,
 				05E207D00FB9046500FCFC94 /* MessageCells */,
+				050007231093EE390046D0BC /* MessageViews */,
 				05E7EB841055CA9A00C5F3FD /* PubSub */,
 				05E207E10FB9046500FCFC94 /* Roster */,
 				051CA5191086D0090007DA81 /* Services */,
@@ -1650,6 +1706,14 @@
 				05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */,
 				05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
 				051A484A1092965000263D26 /* ServiceMessageViewController.m in Sources */,
+				050007391093EE390046D0BC /* EntryMessageView.m in Sources */,
+				0500073A1093EE390046D0BC /* MessageViewFactory.m in Sources */,
+				0500073B1093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */,
+				0500073C1093EE390046D0BC /* XDataArrayMessageView.m in Sources */,
+				0500073D1093EE390046D0BC /* XDataHashMessageView.m in Sources */,
+				0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */,
+				0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
+				050007431093F1260046D0BC /* BodyMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1774,6 +1838,14 @@
 				05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */,
 				05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
 				051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */,
+				050007321093EE390046D0BC /* EntryMessageView.m in Sources */,
+				050007331093EE390046D0BC /* MessageViewFactory.m in Sources */,
+				050007341093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */,
+				050007351093EE390046D0BC /* XDataArrayMessageView.m in Sources */,
+				050007361093EE390046D0BC /* XDataHashMessageView.m in Sources */,
+				050007371093EE390046D0BC /* XDataMessageView.m in Sources */,
+				050007381093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
+				050007421093F1260046D0BC /* BodyMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
