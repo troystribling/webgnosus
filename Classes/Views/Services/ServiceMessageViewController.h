@@ -14,12 +14,14 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceMessageViewController : UIViewController {
-	IBOutlet UILabel* messageTextView;
+	IBOutlet UILabel* nodeLabel;
+    NSString* node;
     MessageModel* message;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* messageTextView;
+@property (nonatomic, retain) UILabel* nodeLabel;
+@property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) MessageModel* message;
 
 @end

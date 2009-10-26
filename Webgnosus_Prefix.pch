@@ -48,6 +48,11 @@
 #define kMESSAGE_CELL_Y_OFFSET                  20.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// ServiceMessageViewController configurations
+#define kXDATA_SERVICE_MESSAGE_X_OFFSET         20.0
+#define kXDATA_SERVICE_MESSAGE_Y_OFFSET         35.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // default configurations used by MessageCellFactory
 #define kMESSAGE_CELL_HEIGHT_DEFAULT            30.0    
 

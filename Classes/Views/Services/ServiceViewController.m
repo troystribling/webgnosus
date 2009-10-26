@@ -226,6 +226,7 @@
 - (void)loadTextViewController:(MessageModel*)message {
     ServiceMessageViewController* messageController = [[ServiceMessageViewController alloc] initWithNibName:@"ServiceMessageViewController" bundle:nil]; 
     messageController.message = message;
+    messageController.node = self.node;
     [self.navigationController pushViewController:messageController animated:YES]; 
     [messageController release];     
 }

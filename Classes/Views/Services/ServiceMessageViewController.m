@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "ServiceMessageViewController.h"
+#import "MessageViewFactory.h"
 #import "MessageModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +22,8 @@
 @implementation ServiceMessageViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize messageTextView;
+@synthesize nodeLabel;
+@synthesize node;
 @synthesize message;
 
 //===================================================================================================================================
@@ -42,12 +44,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
+	self.title = @"Services";
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.messageTextView.text = self.message.messageText;
+    self.nodeLabel.text = self.node;
+    UIView* msgView = [MessageViewFactory viewForMessage:self.message];
+    CGRect msgRect = [msgView frame];
+    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_SERVICE_MESSAGE_X_OFFSET, kXDATA_SERVICE_MESSAGE_Y_OFFSET, msgRect.size.width,  msgRect.size.width)];
+    [container addSubview:msgView];
+    [self.view addSubview:container];
 	[super viewWillAppear:animated];
 }
 
