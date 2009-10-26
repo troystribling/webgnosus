@@ -32,33 +32,32 @@ typedef enum tagMessageTextType {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageModel : NSObject {
 	NSInteger pk;
+	NSInteger accountPk;
+    MessageTextType textType;
+    BOOL messageRead;
     NSString* messageText;
     NSDate* createdAt;
-	NSInteger accountPk;
 	NSString* toJid;
 	NSString* fromJid;
-    MessageTextType textType;
     NSString* node;
     NSString* itemId;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
+@property (nonatomic, assign) NSInteger accountPk;
+@property (nonatomic, assign) MessageTextType textType;
+@property (nonatomic, assign) BOOL messageRead;
 @property (nonatomic, retain) NSString* messageText;
 @property (nonatomic, retain) NSDate* createdAt;
-@property (nonatomic, assign) NSInteger accountPk;
-@property (nonatomic, assign) NSString* toJid;
-@property (nonatomic, assign) NSString* fromJid;
-@property (nonatomic, assign) MessageTextType textType;
-@property (nonatomic, assign) NSString* node;
-@property (nonatomic, assign) NSString* itemId;
+@property (nonatomic, retain) NSString* toJid;
+@property (nonatomic, retain) NSString* fromJid;
+@property (nonatomic, retain) NSString* node;
+@property (nonatomic, retain) NSString* itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSInteger)count;
-+ (NSInteger)countWithLimit:(NSInteger)requestLimit;
-+ (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
-+ (NSInteger)countByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
-+ (NSInteger)countByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
+//+ (NSInteger)count;
++ (NSInteger)countUnreadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestTextType andAccount:(AccountModel*)requestAccount;
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;
@@ -73,6 +72,7 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
++ (void)markReadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestTextType andAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPClient*)client message:(XMPPMessage*)message;
 + (void)insertEvent:(XMPPClient*)client forMessage:(XMPPMessage*)message;
@@ -84,6 +84,8 @@ typedef enum tagMessageTextType {
 - (void)destroy;
 - (void)update;
 - (NSString*)createdAtAsString;
+- (NSInteger)messageReadAsInteger;
+- (void)setMessageReadAsInteger:(NSInteger)value;
 - (XMPPxData*)parseXDataMessage;
 - (XMPPEntry*)parseEntryMessage;
 

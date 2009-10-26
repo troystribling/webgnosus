@@ -44,6 +44,7 @@
 + (ServiceModel*)findByNode:(NSString*)requestNode;
 + (ServiceModel*)findByJID:(NSString*)requestJID andNode:(NSString*)requestNode;
 + (ServiceModel*)findByService:(NSString*)serverJID type:(NSString*)requestType andCategory:(NSString*)requestCategory;
++ (ServiceModel*)findSynchedIMService:(NSString*)requestJID;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID andNode:(NSString*)serviceNode;

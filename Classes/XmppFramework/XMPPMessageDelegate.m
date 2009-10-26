@@ -177,8 +177,12 @@
     [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticated forClient:client];
     [XMPPRosterQuery get:client];
     [XMPPPresence goOnline:client withPriority:1];
-    [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]] forTarget:[client myJID]];
-    [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:[[client myJID] domain]] forTarget:[client myJID]];
+    XMPPJID* serverJID = [XMPPJID jidWithString:[[client myJID] domain]];
+    ServiceModel* imServer = [ServiceModel findSynchedIMService:[serverJID full]];
+    if (!imServer) {
+        [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:[client myJID]];
+        [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:[client myJID]];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -283,8 +287,12 @@
         if ([rosterItem.presenceType isEqualToString:@"available"] && ![client isAccountJID:[fromJID full]]) {
             [XMPPClientVersionQuery get:client JID:fromJID];
             [XMPPDiscoItemsQuery get:client JID:fromJID andNode:@"http://jabber.org/protocol/commands"];
-            [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:[fromJID domain]] forTarget:fromJID];
-            [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:[fromJID domain]] forTarget:fromJID];
+            XMPPJID* serverJID = [XMPPJID jidWithString:[fromJID domain]];
+            ServiceModel* imServer = [ServiceModel findSynchedIMService:[serverJID full]];
+            if (!imServer) {
+                [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:fromJID];
+                [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:fromJID];
+            }
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];

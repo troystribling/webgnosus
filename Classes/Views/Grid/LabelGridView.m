@@ -41,6 +41,7 @@
             labelView.text = [dataRow objectAtIndex:j];
             labelView.font = labelFont;
             [labelViewRow addObject:labelView];
+            [labelView release];
         }
         [labelViewArray addObject:labelViewRow];
     }
