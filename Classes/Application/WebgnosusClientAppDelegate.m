@@ -30,6 +30,7 @@
 #import "ServiceModel.h"
 #import "ServiceFeatureModel.h"
 #import "ServiceItemModel.h"
+#import "MessageModel.h"
 #import "AlertViewManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -52,6 +53,8 @@
 @synthesize historyViewController;
 @synthesize pubSubViewController;
 @synthesize serviceViewController;
+@synthesize navRosterViewController;
+@synthesize navPubSubViewController;
 
 //===================================================================================================================================
 #pragma mark WebgnosusClientAppDelegate
@@ -95,10 +98,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITabBarController*)createTabBarController {
     UITabBarController* tabBarController = [[UITabBarController alloc] init];	
-    UINavigationController* navRosterViewController = [self createNavigationController:self.rosterViewController];
-    navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
-    UINavigationController* navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
-    navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
+    self.navRosterViewController = [self createNavigationController:self.rosterViewController];
+    self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
+    self.navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
+    self.navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
     UINavigationController* navServiceViewController = [self createNavigationController:self.serviceViewController];	
     navServiceViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2];
     UINavigationController* navHistoryViewController = [self createNavigationController:self.historyViewController];	
@@ -110,6 +113,23 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createAccountManager {
     [AccountManagerViewController inView:window];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setUnreadMessages {
+    AccountModel* activeAccount = [AccountModel findFirstDisplayed];
+    NSInteger msgCount = [MessageModel countUnreadMessagesByAccount:activeAccount];
+    if (msgCount > 0) {
+        self.navRosterViewController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", msgCount];
+    } else {
+        self.navRosterViewController.tabBarItem.badgeValue = nil;
+    }
+    NSInteger eventCount = [MessageModel countUnreadEventsByAccount:activeAccount];
+    if (eventCount > 0) {
+        self.navPubSubViewController.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", eventCount];
+    } else {
+        self.navPubSubViewController.tabBarItem.badgeValue = nil;
+    }
 }
 
 //===================================================================================================================================
@@ -125,6 +145,8 @@
 	[dbi open];
 	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
 	[[XMPPClientManager instance] addDelegate:self];
+    [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
+    [[XMPPClientManager instance] addAccountUpdateDelegate:self];
     [self openActivatedAccounts];
 	[window addSubview:[self createTabBarController].view];	
     [AlertViewManager onStartshowConnectingIndicatorInView:window];
@@ -132,6 +154,7 @@
     if (count == 0) {
         [self createAccountManager];
     }
+    [self setUnreadMessages];
     [window makeKeyAndVisible];
 }
 
@@ -165,6 +188,47 @@
     if (!account) {
         [self createAccountManager];
     }
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
+    [self setUnreadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
+    [self setUnreadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
+    [self setUnreadMessages];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientManagerMessageCountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)messageCountDidChange {
+    [self setUnreadMessages];
+}
+
+//===================================================================================================================================
+#pragma mark XMPPClientManagerAccountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didAddAccount {
+    [self setUnreadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didRemoveAccount {
+    [self setUnreadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didUpdateAccount {
+    [self setUnreadMessages];
 }
 
 //===================================================================================================================================

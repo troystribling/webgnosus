@@ -44,7 +44,7 @@
 							<object class="IBUILabel" id="989923002">
 								<reference key="NSNextResponder" ref="829312368"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{58, 23}, {222, 21}}</string>
+								<string key="NSFrame">{{58, 23}, {212, 21}}</string>
 								<reference key="NSSuperview" ref="829312368"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -57,6 +57,16 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">1.000000e+01</float>
+							</object>
+							<object class="IBUIImageView" id="890987834">
+								<reference key="NSNextResponder" ref="829312368"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{278, 16}, {20, 20}}</string>
+								<reference key="NSSuperview" ref="829312368"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+								<int key="IBUIContentMode">4</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
 							</object>
 							<object class="IBUILabel" id="500622071">
 								<reference key="NSNextResponder" ref="829312368"/>
@@ -157,6 +167,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="989923002"/>
 							<reference ref="500622071"/>
+							<reference ref="890987834"/>
 						</object>
 						<reference key="parent" ref="536505232"/>
 					</object>
@@ -168,6 +179,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="500622071"/>
+						<reference key="parent" ref="225164569"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">8</int>
+						<reference key="object" ref="890987834"/>
 						<reference key="parent" ref="225164569"/>
 					</object>
 				</object>
@@ -182,12 +198,14 @@
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
+					<string>8.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
 					<string>AccountSubCell</string>
 					<string>{{1064, 656}, {320, 55}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -213,7 +231,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">7</int>
+			<int key="maxID">8</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -271,7 +289,7 @@
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/Views/MessageCells/XDataMessageLabelCell.h</string>
+						<string key="minorKey">Classes/Views/MessageViews/XDataMessageView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

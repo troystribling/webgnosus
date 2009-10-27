@@ -16,6 +16,7 @@
 #import "ContactModel.h"
 #import "AccountModel.h"
 #import "RosterItemModel.h"
+#import "MessageModel.h"
 
 #import "CellUtils.h"
 #import "AlertViewManager.h"

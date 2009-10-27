@@ -61,7 +61,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countUnreadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestType andAccount:(AccountModel*)requestAccount {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE fromJid = '%@' AND textType = %d AND accountPk = %d", requestFromJid, requestType, requestAccount.pk];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE fromJid LIKE '%@%%' AND textType = %d AND messageRead = 0 AND accountPk = %d", requestFromJid, requestType, requestAccount.pk];
+    return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countUnreadMessagesByAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (textType = 0 OR textType = 1 OR textType = 2) AND messageRead = 0 AND accountPk = %d", requestAccount.pk];
+    return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countUnreadEventsByAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE (textType = 3 OR textType = 4 OR textType = 5) AND messageRead = 0 AND accountPk = %d", requestAccount.pk];
     return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
 }
 

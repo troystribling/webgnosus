@@ -28,6 +28,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize accountUpdateDelegate;
+@synthesize messageCountUpdateDelegate;
 @synthesize xmppClientDictionary;
 @synthesize delegates;
 
@@ -52,6 +53,16 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeAccountUpdateDelegate:(id)mcastDelegate  {
 	[self.accountUpdateDelegate removeDelegate:mcastDelegate];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addMessageCountUpdateDelegate:(id)mcastDelegate {
+	[self.messageCountUpdateDelegate addDelegate:mcastDelegate];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeMessageCountUpdateDelegate:(id)mcastDelegate  {
+	[self.messageCountUpdateDelegate removeDelegate:mcastDelegate];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -139,6 +150,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 	self.xmppClientDictionary = [NSMutableDictionary dictionaryWithCapacity:10];
     self.delegates = [NSMutableArray arrayWithCapacity:10];
     self.accountUpdateDelegate = [[MulticastDelegate alloc] init];		
+    self.messageCountUpdateDelegate = [[MulticastDelegate alloc] init];		
     return self;
 }
 

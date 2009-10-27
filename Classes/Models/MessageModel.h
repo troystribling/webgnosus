@@ -58,6 +58,8 @@ typedef enum tagMessageTextType {
 //-----------------------------------------------------------------------------------------------------------------------------------
 //+ (NSInteger)count;
 + (NSInteger)countUnreadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestTextType andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countUnreadMessagesByAccount:(AccountModel*)requestAccount;
++ (NSInteger)countUnreadEventsByAccount:(AccountModel*)requestAccount;
 + (void)drop;
 + (void)create;
 + (NSMutableArray*)findAll;

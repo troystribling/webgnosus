@@ -17,12 +17,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClientManager : NSObject {
     MulticastDelegate* accountUpdateDelegate;
+    MulticastDelegate* messageCountUpdateDelegate;
 	NSMutableDictionary* xmppClientDictionary;
     NSMutableArray* delegates;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (retain) MulticastDelegate* accountUpdateDelegate;
+@property (retain) MulticastDelegate* messageCountUpdateDelegate;
 @property (retain) NSMutableDictionary* xmppClientDictionary;
 @property (retain) NSMutableArray* delegates;
 
@@ -32,6 +34,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addAccountUpdateDelegate:(id)mcastDelegate;
 - (void)removeAccountUpdateDelegate:(id)mcastDelegate;
+- (void)addMessageCountUpdateDelegate:(id)mcastDelegate;
+- (void)removeMessageCountUpdateDelegate:(id)mcastDelegate;
 - (void)addDelegate:(id)del;
 - (XMPPClient*)xmppClientForAccount:(AccountModel*)account;
 - (XMPPClient*)connectXmppClientForAccount:(AccountModel*)account;
@@ -52,5 +56,12 @@
 - (void)didAddAccount;
 - (void)didRemoveAccount;
 - (void)didUpdateAccount;
+
+@end
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface NSObject (XMPPClientManagerMessageCountUpdateDelegate)
+
+- (void)messageCountDidChange;
 
 @end

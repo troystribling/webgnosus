@@ -188,8 +188,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.events objectAtIndex:indexPath.row]];
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {  
+    MessageModel* message =[self.events objectAtIndex:indexPath.row];
+    if (!message.messageRead) {
+        message.messageRead = YES;
+        [message update];
+        [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
+    }     
+    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

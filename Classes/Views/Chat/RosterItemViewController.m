@@ -229,7 +229,7 @@
     }
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
     if ([self.selectedMode isEqualToString:@"Chat"]) {
         [self loadItems];
@@ -365,7 +365,13 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     UITableViewCell* cell;
     if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
-        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:[self.items objectAtIndex:indexPath.row]];
+        MessageModel* message =[self.items objectAtIndex:indexPath.row];
+        if (!message.messageRead) {
+            message.messageRead = YES;
+            [message update];
+            [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
+        } 
+        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];
         cell = [self tableView:tableView cellForContactPub:item];

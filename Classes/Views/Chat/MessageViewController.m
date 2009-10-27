@@ -55,6 +55,7 @@
         model.textType = MessageTextTypeBody;
         model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
         model.itemId = @"-1";
+        model.messageRead = YES;
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];

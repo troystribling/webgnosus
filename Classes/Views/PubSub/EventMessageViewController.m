@@ -57,6 +57,7 @@
         model.textType = MessageTextTypeEventText;
         model.itemId = @"-1";
         model.node = self.node;
+        model.messageRead = YES;
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
