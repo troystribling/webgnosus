@@ -13,6 +13,7 @@
 #import "ServiceItemModel.h"
 #import "SubscriptionModel.h"
 #import "ServiceItemModel.h"
+#import "MessageModel.h"
 #import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
@@ -30,13 +31,28 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize itemLabel;
+@synthesize messageCountLabel;
 @synthesize jidLabel;
+@synthesize messageCountImage;
 @synthesize itemImage;
 @synthesize subscription;
 @synthesize account;
 
 //===================================================================================================================================
 #pragma mark AccountSubCell
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setUnreadMessageCount {
+    NSInteger msgCount = [MessageModel countUnreadEventsByNode:self.subscription.node andAccount:self.account];
+    if (msgCount == 0) {
+        self.messageCountImage.hidden = YES;
+        self.messageCountLabel.hidden = YES;
+    } else {
+        self.messageCountImage.hidden = NO;
+        self.messageCountLabel.hidden = NO;
+        self.messageCountLabel.text = [NSString stringWithFormat:@"%d", msgCount];
+    }
+}
 
 //===================================================================================================================================
 #pragma mark AccountSubCell PrivateAPI

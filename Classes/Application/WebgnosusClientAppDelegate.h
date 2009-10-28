@@ -24,6 +24,7 @@
     IBOutlet ServiceViewController* serviceViewController;
     UINavigationController* navRosterViewController;
     UINavigationController* navPubSubViewController;
+    UINavigationController* navHistoryViewController;
     
 }
 
@@ -35,6 +36,7 @@
 @property (nonatomic, retain) ServiceViewController* serviceViewController;
 @property (nonatomic, retain) UINavigationController* navRosterViewController;
 @property (nonatomic, retain) UINavigationController* navPubSubViewController;
+@property (nonatomic, retain) UINavigationController* navHistoryViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

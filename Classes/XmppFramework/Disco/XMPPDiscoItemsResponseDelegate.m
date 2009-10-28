@@ -99,13 +99,13 @@
             [self didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:parentNode];
             [[client multicastDelegate] xmppClient:client didDiscoverUserPubSubNode:item forService:serviceJID andParentNode:parentNode];        
         }
+        [XMPPPubSubSubscriptions get:client JID:serviceJID];
         [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];  
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
         ServiceItemModel* pubSubServiceItem = [ServiceItemModel findByJID:[serviceJID full]];
         [ServiceModel destroyAllUnsychedByDomain:pubSubServiceItem.service];
         if ([client isAccountJID:[self.targetJID full]]) {
             [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoCompleted forClient:client];
-            [XMPPPubSubSubscriptions get:client JID:serviceJID];
             AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
             NSArray* subServices = [SubscriptionModel findAllServicesByAccount:account];
             for(int i = 0; i < [subServices count]; i++) {

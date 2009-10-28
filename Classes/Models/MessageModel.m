@@ -30,7 +30,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageModel (PrivateAPI)
 
-+ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID;
++ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID withReadFlag:(BOOL)readFlag;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;
 - (UserModel*)findUserModel:(NSString*)jid;
 
@@ -60,8 +60,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSInteger)countUnreadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestType andAccount:(AccountModel*)requestAccount {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE fromJid LIKE '%@%%' AND textType = %d AND messageRead = 0 AND accountPk = %d", requestFromJid, requestType, requestAccount.pk];
++ (NSInteger)countUnreadMessagesByFromJid:(NSString*)requestFromJid andAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE fromJid LIKE '%@%%' AND (textType = 0 OR textType = 1 OR textType = 2) AND messageRead = 0 AND accountPk = %d", requestFromJid, requestAccount.pk];
+    return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countUnreadEventsByNode:(NSString*)requestNode andAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE node = '%@' AND (textType = 3 OR textType = 4 OR textType = 5) AND messageRead = 0 AND accountPk = %d", requestNode, requestAccount.pk];
     return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
 }
 
@@ -230,13 +236,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insertEvent:(XMPPClient*)client forMessage:(XMPPMessage*)message {
     XMPPPubSubEvent* event = [message event];
-    [self insert:client pubSubItems:[event items] fromJID:[message fromJID]];
+    [self insert:client pubSubItems:[event items] fromJID:[message fromJID] withReadFlag:NO];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insertPubSubItems:(XMPPClient*)client forIq:(XMPPIQ*)iq {
     XMPPPubSub* pubsub = [iq pubsub];
-    [self insert:client pubSubItems:[pubsub items] fromJID:[iq fromJID]];
+    [self insert:client pubSubItems:[pubsub items] fromJID:[iq fromJID] withReadFlag:YES];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -377,7 +383,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID {
++ (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID withReadFlag:(BOOL)readFlag {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     if (account) {
         NSArray* itemsArray = [items toArray];
@@ -392,7 +398,7 @@
                 messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
                 messageModel.node = itemsNode;
                 messageModel.itemId = [item itemId];
-                messageModel.messageRead = NO;
+                messageModel.messageRead = readFlag;
                 XMPPxData* data = [item data];
                 XMPPEntry* entry = [item entry];
                 if (data) {

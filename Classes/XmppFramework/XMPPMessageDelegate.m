@@ -18,6 +18,7 @@
 #import "SubscriptionModel.h"
 
 #import "XMPPClient.h"
+#import "XMPPClientManager.h"
 #import "XMPPJID.h"
 #import "XMPPPresence.h"
 #import "XMPPIQ.h"
@@ -292,7 +293,7 @@
             if (!imServer) {
                 [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:fromJID];
                 [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:fromJID];
-            }
+            }    
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];
@@ -389,6 +390,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveMessage:(XMPPMessage*)message {
     [MessageModel insert:client message:message];
+    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
 	[self writeToLog:client message:@"xmppClient:didReceiveMessage"];
 }
 
@@ -401,12 +403,14 @@
         [XMPPPubSubSubscriptions get:client JID:[message fromJID]];
     }
     [MessageModel insertEvent:client forMessage:message];
+    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
 	[self writeToLog:client message:@"xmppClient:didReceiveEvent"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq {
     [MessageModel insert:client commandResult:iq];
+    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
 	[self writeToLog:client message:@"xmppClient:didReceiveCommandResult"];
 }
 

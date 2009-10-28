@@ -42,6 +42,8 @@
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
+- (void)addMessageCountUpdateDelgate;
+- (void)removeMessageCountUpdateDelgate;
 - (EventsViewController*)getEventsViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (UITableViewCell*)tableView:(UITableView *)tableView createCellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
@@ -143,6 +145,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addMessageCountUpdateDelgate {
+    [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeMessageCountUpdateDelgate {
+    [[XMPPClientManager instance] removeMessageCountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadPubSubItems {
     [self loadAccount];
     [self removeXMPPClientDelgate];
@@ -207,6 +219,14 @@
 }
 
 //===================================================================================================================================
+#pragma mark XMPPClientManagerMessageCountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)messageCountDidChange {
+    [self.tableView reloadData];
+}
+
+//===================================================================================================================================
 #pragma mark SegmentedCycleList Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -243,6 +263,7 @@
     [self loadAccount];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
+    [self addMessageCountUpdateDelgate];
     [self loadPubSubItems];
 	[super viewWillAppear:animated];
 }
@@ -251,6 +272,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
     [self removeXMPPAccountUpdateDelgate];
+    [self removeMessageCountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -324,6 +346,7 @@
         cell.jidLabel.text = [[item nodeToJID] full];
         cell.account = self.account;
         cell.subscription = item;
+        [cell setUnreadMessageCount];
         return cell;
     } else {
         AccountPubCell* cell = (AccountPubCell*)[CellUtils createCell:[AccountPubCell class] forTableView:tableView];

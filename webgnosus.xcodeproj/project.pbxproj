@@ -39,6 +39,8 @@
 		0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
+		050AA0761097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
+		050AA0771097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
@@ -415,6 +417,7 @@
 		0502D8B31082D4E800218EC9 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
+		050AA0751097F78700C053C5 /* unread-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-messages.png"; sourceTree = "<group>"; };
 		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
 		051A48471092965000263D26 /* ServiceMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMessageViewController.h; sourceTree = "<group>"; };
@@ -836,6 +839,7 @@
 				05E7EBAC1055D97600C5F3FD /* tabbar-history.png */,
 				05E6F159104A07FC00EF924B /* tabbar-roster.png */,
 				057BB16110587547006389D9 /* tabbar-services.png */,
+				050AA0751097F78700C053C5 /* unread-messages.png */,
 			);
 			name = Images;
 			path = Resources/Images;
@@ -1481,6 +1485,7 @@
 				05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
 				05ED2E1C108BE96C007F9413 /* service-document.png in Resources */,
 				051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */,
+				050AA0771097F78700C053C5 /* unread-messages.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1549,6 +1554,7 @@
 				05ED2D9D108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
 				05ED2E1B108BE96C007F9413 /* service-document.png in Resources */,
 				051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */,
+				050AA0761097F78700C053C5 /* unread-messages.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

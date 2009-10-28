@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "RosterCell.h"
 #import "RosterItemModel.h"
+#import "MessageModel.h"
 #import "ContactModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +22,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jidLabel;
+@synthesize messageCountLabel;
 @synthesize activeImage;
+@synthesize messageCountImage;
 
 //===================================================================================================================================
 #pragma mark RosterCell
@@ -42,6 +45,19 @@
         return [UIImage imageNamed:@"account-on-led.jpg"];
     } 
     return [UIImage imageNamed:@"account-off-led.jpg"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)setUnreadMessageCount:(AccountModel*)account {
+    NSInteger msgCount = [MessageModel countUnreadMessagesByFromJid:self.jidLabel.text andAccount:account];
+    if (msgCount == 0) {
+        self.messageCountImage.hidden = YES;
+        self.messageCountLabel.hidden = YES;
+    } else {
+        self.messageCountImage.hidden = NO;
+        self.messageCountLabel.hidden = NO;
+        self.messageCountLabel.text = [NSString stringWithFormat:@"%d", msgCount];
+    }
 }
 
 //===================================================================================================================================

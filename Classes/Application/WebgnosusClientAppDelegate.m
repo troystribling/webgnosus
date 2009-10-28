@@ -55,6 +55,7 @@
 @synthesize serviceViewController;
 @synthesize navRosterViewController;
 @synthesize navPubSubViewController;
+@synthesize navHistoryViewController;
 
 //===================================================================================================================================
 #pragma mark WebgnosusClientAppDelegate
@@ -104,9 +105,9 @@
     self.navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
     UINavigationController* navServiceViewController = [self createNavigationController:self.serviceViewController];	
     navServiceViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2];
-    UINavigationController* navHistoryViewController = [self createNavigationController:self.historyViewController];	
-    navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
-    tabBarController.viewControllers = [NSArray arrayWithObjects:navRosterViewController, navPubSubViewController, navServiceViewController, navHistoryViewController, nil];	
+    self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
+    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
+    tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, navServiceViewController, self.navHistoryViewController, nil];	
     return tabBarController;
 }
 
@@ -188,21 +189,6 @@
     if (!account) {
         [self createAccountManager];
     }
-}
-
-//----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient *)sender didReceiveMessage:(XMPPMessage *)message {
-    [self setUnreadMessages];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
-    [self setUnreadMessages];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message {
-    [self setUnreadMessages];
 }
 
 //===================================================================================================================================

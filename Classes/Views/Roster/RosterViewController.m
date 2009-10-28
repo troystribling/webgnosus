@@ -47,6 +47,8 @@
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
+- (void)addMessageCountUpdateDelgate;
+- (void)removeMessageCountUpdateDelgate;
 
 @end
 
@@ -186,6 +188,16 @@
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addMessageCountUpdateDelgate {
+    [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeMessageCountUpdateDelgate {
+    [[XMPPClientManager instance] removeMessageCountUpdateDelegate:self];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPClientManagerAccountUpdateDelegate
 
@@ -263,6 +275,14 @@
 }
 
 //===================================================================================================================================
+#pragma mark XMPPClientManagerMessageCountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)messageCountDidChange {
+    [self.tableView reloadData];
+}
+
+//===================================================================================================================================
 #pragma mark SegmentedCycleList Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -298,6 +318,7 @@
     [self loadAccount];
     [self addXMPPClientDelgate];
     [self addXMPPAccountUpdateDelgate];
+    [self addMessageCountUpdateDelgate];
     [self loadRoster];
 	[super viewWillAppear:animated];
 }
@@ -306,6 +327,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [self removeXMPPClientDelgate];
     [self removeXMPPAccountUpdateDelgate];
+    [self removeMessageCountUpdateDelgate];
 	[super viewWillDisappear:animated];
 }
 
@@ -373,6 +395,7 @@
         cell.jidLabel.text = cellItem.resource;
         cell.activeImage.image = [RosterCell rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
     }
+    [cell setUnreadMessageCount:self.account];
     return cell;
 }
 
