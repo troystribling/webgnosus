@@ -75,6 +75,10 @@
 		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
 		0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
+		0579503710993DE200D0A0C8 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579503610993DE200D0A0C8 /* MessageCache.m */; };
+		0579503810993DE200D0A0C8 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579503610993DE200D0A0C8 /* MessageCache.m */; };
+		057950701099538F00D0A0C8 /* ChatMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579506F1099538F00D0A0C8 /* ChatMessageCache.m */; };
+		057950711099538F00D0A0C8 /* ChatMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579506F1099538F00D0A0C8 /* ChatMessageCache.m */; };
 		057BB16210587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16310587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
@@ -448,6 +452,10 @@
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
+		0579503510993DE200D0A0C8 /* MessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCache.h; sourceTree = "<group>"; };
+		0579503610993DE200D0A0C8 /* MessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCache.m; sourceTree = "<group>"; };
+		0579506E1099538F00D0A0C8 /* ChatMessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessageCache.h; sourceTree = "<group>"; };
+		0579506F1099538F00D0A0C8 /* ChatMessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageCache.m; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
@@ -878,10 +886,14 @@
 			children = (
 				05CE073C0FB909CA0036DF5E /* AccountModel.h */,
 				05CE073D0FB909CA0036DF5E /* AccountModel.m */,
+				0579506E1099538F00D0A0C8 /* ChatMessageCache.h */,
+				0579506F1099538F00D0A0C8 /* ChatMessageCache.m */,
 				05CE073E0FB909CA0036DF5E /* ContactModel.h */,
 				05CE073F0FB909CA0036DF5E /* ContactModel.m */,
 				05CE07400FB909CA0036DF5E /* MessageModel.h */,
 				05CE07410FB909CA0036DF5E /* MessageModel.m */,
+				0579503510993DE200D0A0C8 /* MessageCache.h */,
+				0579503610993DE200D0A0C8 /* MessageCache.m */,
 				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
 				05CE07450FB909CA0036DF5E /* RosterItemModel.m */,
 				05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */,
@@ -1685,6 +1697,8 @@
 				0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */,
 				0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
 				050007431093F1260046D0BC /* BodyMessageView.m in Sources */,
+				0579503810993DE200D0A0C8 /* MessageCache.m in Sources */,
+				057950711099538F00D0A0C8 /* ChatMessageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1812,6 +1826,8 @@
 				050007371093EE390046D0BC /* XDataMessageView.m in Sources */,
 				050007381093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
 				050007421093F1260046D0BC /* BodyMessageView.m in Sources */,
+				0579503710993DE200D0A0C8 /* MessageCache.m in Sources */,
+				057950701099538F00D0A0C8 /* ChatMessageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

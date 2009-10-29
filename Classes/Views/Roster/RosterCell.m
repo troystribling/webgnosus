@@ -11,6 +11,7 @@
 #import "RosterItemModel.h"
 #import "MessageModel.h"
 #import "ContactModel.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterCell (PrivateAPI)
@@ -25,6 +26,7 @@
 @synthesize messageCountLabel;
 @synthesize activeImage;
 @synthesize messageCountImage;
+@synthesize jid;
 
 //===================================================================================================================================
 #pragma mark RosterCell
@@ -49,7 +51,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setUnreadMessageCount:(AccountModel*)account {
-    NSInteger msgCount = [MessageModel countUnreadMessagesByFromJid:self.jidLabel.text andAccount:account];
+    NSInteger msgCount = [MessageModel countUnreadMessagesByFromJid:[self.jid full] andAccount:account];
     if (msgCount == 0) {
         self.messageCountImage.hidden = YES;
         self.messageCountLabel.hidden = YES;

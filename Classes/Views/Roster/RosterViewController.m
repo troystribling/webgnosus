@@ -390,10 +390,12 @@
         ContactModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.jid;
         cell.activeImage.image = [RosterCell contactImage:[self.roster objectAtIndex:indexPath.row]];
+        cell.jid = [cellItem toJID];
     } else {
         RosterItemModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
         cell.jidLabel.text = cellItem.resource;
         cell.activeImage.image = [RosterCell rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
+        cell.jid = [cellItem toJID];
     }
     [cell setUnreadMessageCount:self.account];
     return cell;

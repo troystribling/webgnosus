@@ -13,6 +13,7 @@
 @class RosterItemModel;
 @class ContactModel;
 @class AccountModel;
+@class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterCell : UITableViewCell {
@@ -20,6 +21,7 @@
 	IBOutlet UILabel* messageCountLabel;
     IBOutlet UIImageView* activeImage;
     IBOutlet UIImageView* messageCountImage;
+    XMPPJID* jid;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) UILabel* messageCountLabel;
 @property (nonatomic, retain) UIImageView* activeImage;
 @property (nonatomic, retain) UIImageView* messageCountImage;
+@property (nonatomic, retain) XMPPJID* jid;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem;

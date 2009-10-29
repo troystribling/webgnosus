@@ -33,8 +33,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize itemLabel;
-@synthesize messageCountLabel;
-@synthesize messageCountImage;
 @synthesize itemImage;
 @synthesize serviceItem;
 @synthesize account;
@@ -43,19 +41,6 @@
 //===================================================================================================================================
 #pragma mark ContactPubCell
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setUnreadMessageCount {
-    NSInteger msgCount = [MessageModel countUnreadEventsByNode:self.serviceItem.node andAccount:self.account];
-    if (msgCount == 0) {
-        self.messageCountImage.hidden = YES;
-        self.messageCountLabel.hidden = YES;
-    } else {
-        self.messageCountImage.hidden = NO;
-        self.messageCountLabel.hidden = NO;
-        self.messageCountLabel.text = [NSString stringWithFormat:@"%d", msgCount];
-    }
-}
-
 //===================================================================================================================================
 #pragma mark ContactPubCell PrivateAPI
 
@@ -63,10 +48,8 @@
 - (void)setPubImage {
     if (self.subscription) {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
-        self.accessoryType = UITableViewCellAccessoryNone;
     }
 }
 

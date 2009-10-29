@@ -85,9 +85,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadEvents {
     if (self.eventType == kPUB_MODE) { 
-        self.events = [MessageModel findAllPublishedEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
+        self.events = [MessageModel findAllPublishedEventsByNode:self.node forAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     } else {
-        self.events = [MessageModel findAllSubscribedEventsByNode:self. node withLimit:kMESSAGE_CACHE_SIZE];
+        self.events = [MessageModel findAllSubscribedEventsByNode:self.node forAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
     }
     [self.tableView reloadData];
 }

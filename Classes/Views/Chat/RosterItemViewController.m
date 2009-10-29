@@ -251,6 +251,16 @@
 }
 
 //===================================================================================================================================
+#pragma mark XMPPClientManagerMessageCountUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)messageCountDidChange {
+    if ([self.selectedMode isEqualToString:@"Publications"]) {
+        [self.tableView reloadData];
+    }
+}
+
+//===================================================================================================================================
 #pragma mark SegmentedCycleList Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -383,13 +393,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    UIViewController* viewController = nil;
     if ([self.selectedMode isEqualToString:@"Resources"]) {
+        UIViewController* viewController = nil;
         viewController = [self resourceViewControllerForRowAtIndexPath:indexPath];
-    }  else if ([self.selectedMode isEqualToString:@"Publications"]) {
-        viewController = [self eventViewControllerForRowAtIndexPath:indexPath];
-    }
-    if (viewController) {
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
