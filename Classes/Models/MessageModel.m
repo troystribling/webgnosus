@@ -84,6 +84,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)greatestPkForAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT MAX(pk) FROM messages WHERE accountPk = %d", requestAccount.pk];
+    return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)drop {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DROP TABLE messages"];
 }
@@ -101,25 +107,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllWithLimit:(NSInteger)requestLimit {
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages ORDER BY createdAt DESC LIMIT %d", requestLimit];
-    [[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-	return output;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount {
-	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC", requestAccount.pk];
-	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
-	return output;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit {
-	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d ORDER BY createdAt DESC LIMIT %d", requestAccount.pk, requestLimit];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE accountPk = %d AND pk < %d ORDER BY pk DESC LIMIT %d", requestAccount.pk, requestPk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }

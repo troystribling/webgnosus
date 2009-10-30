@@ -8,9 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MessageCache.h"
+#import "MessageModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageCache (PrivateAPI)
+
+- (void)load;
 
 @end
 
@@ -20,7 +23,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize messageList;
 @synthesize cacheIncrement;
-@synthesize lastIndex;
+@synthesize lastPk;
+@synthesize account;
 
 //===================================================================================================================================
 #pragma mark MessageCache
@@ -30,7 +34,7 @@
 	if(self = [super init]) {
         self.messageList = [NSMutableArray arrayWithCapacity:initCacheIncrement];
         self.cacheIncrement = initCacheIncrement;
-        self.lastIndex = -1;
+        self.lastPk = -1;
 	}
 	return self;
 }
@@ -41,12 +45,45 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)grow {
+- (id)objectAtIndex:(NSInteger)index {
+    return [self.messageList objectAtIndex:index];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)objectAtIndex:(NSInteger)index {
-    return [self.messageList objectAtIndex:index];
+- (void)flush {
+    return [self.messageList removeAllObjects];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)initForAccount:(AccountModel*)initAccount {
+    self.account = initAccount;
+    self.lastPk = [MessageModel greatestPkForAccount:self.account] + 1;
+    [self load];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)load {
+    NSArray* newMessages = [self addMessages];
+    self.lastPk = [[newMessages lastObject] pk];
+    [self.messageList addObjectsFromArray:newMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)grow:(NSInteger)messageIndex {
+    BOOL didGrow = NO;
+    if (messageIndex > ([self count] - 3)) {
+        didGrow = YES;
+        [self load];
+    }
+    return didGrow;
+}
+
+//===================================================================================================================================
+#pragma mark MessageCache Interface
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSArray*)addMessages {
+    return [NSMutableArray arrayWithCapacity:1];
 }
 
 //===================================================================================================================================

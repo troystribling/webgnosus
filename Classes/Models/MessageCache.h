@@ -10,22 +10,32 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@class AccountModel;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface MessageCache : NSObject {
     NSMutableArray* messageList;
     NSInteger cacheIncrement;
-    NSInteger lastIndex;
+    NSInteger lastPk;
+    AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSMutableArray* messageList;
 @property (nonatomic, assign) NSInteger cacheIncrement;
-@property (nonatomic, assign) NSInteger lastIndex;
+@property (nonatomic, assign) NSInteger lastPk;
+@property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCacheIncrement:(NSInteger)initCacheIncrement;
 - (id)objectAtIndex:(NSInteger)index;
+- (void)initForAccount:(AccountModel*)initAccount;
+- (BOOL)grow:(NSInteger)messageIndex;
 - (NSInteger)count;
-- (void)grow;
+- (void)flush;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSArray*)addMessages;
 
 @end

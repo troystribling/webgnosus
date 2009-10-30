@@ -11,16 +11,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class HistoryMessageCache;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface HistoryViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
+    HistoryMessageCache* messages;
 	UIBarButtonItem* editAccountsButton;
-    NSMutableArray* messages;
     AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) NSMutableArray* messages;
+@property (nonatomic, retain) HistoryMessageCache* messages;
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
 @property (nonatomic, retain) AccountModel* account;
 

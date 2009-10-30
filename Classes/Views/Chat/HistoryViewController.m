@@ -13,6 +13,7 @@
 #import "AccountModel.h"
 #import "MessageCellFactory.h"
 #import "SectionViewController.h"
+#import "HistoryMessageCache.h"
 
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
@@ -29,6 +30,7 @@
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
+- (void)markMessageRead:(MessageModel*)messageRow;
 
 @end
 
@@ -53,7 +55,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadMessages {
-	self.messages = [MessageModel findAllByAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+	[self.messages initForAccount:self.account];
     [self.tableView reloadData];
 }
 
@@ -64,10 +66,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadMessages {
+    [self.messages flush];
     [self loadAccount];
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
     [self loadMessages];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)markMessageRead:(MessageModel*)message {
+    if (!message.messageRead) {
+        message.messageRead = YES;
+        [message update];
+        [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
+    }     
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -94,6 +106,7 @@
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 }
 
+
 //===================================================================================================================================
 #pragma mark XMPPClientManagerAccountUpdateDelegate
 
@@ -101,7 +114,6 @@
 - (void)didAddAccount {
     [self reloadMessages];
 }
-
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didRemoveAccount {
     [self reloadMessages];
@@ -127,6 +139,7 @@
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
         self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.messages = [[HistoryMessageCache alloc] init];
 	} 
 	return self; 
 } 
@@ -207,13 +220,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {        
-    MessageModel* message =[self.messages objectAtIndex:indexPath.row];
-    if (!message.messageRead) {
-        message.messageRead = YES;
-        [message update];
-        [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-    }     
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
+    NSInteger messageRow = indexPath.row;
+    MessageModel* message =[self.messages objectAtIndex:messageRow];
+    [self markMessageRead:message];
+    if ([self.messages grow:messageRow]) {
+    }
     return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
 }
 
