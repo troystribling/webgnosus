@@ -11,7 +11,9 @@
 #import "AccountManagerViewController.h"
 #import "MessageModel.h"
 #import "AccountModel.h"
+#import "CellUtils.h"
 #import "MessageCellFactory.h"
+#import "LoadMessagesCell.h"
 #import "SectionViewController.h"
 #import "HistoryMessageCache.h"
 
@@ -203,7 +205,11 @@
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
+    CGFloat height = kLOAD_MESSAGE_CELL_HEIGHT;
+    if (indexPath.row < [self.messages count]) {
+        height = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
+    } 
+    return height;
 }
 
 //===================================================================================================================================
@@ -216,21 +222,32 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.messages count];
+    NSInteger count = [self.messages count];
+    if (count < [self.messages totalCount]) {
+        count += 1;
+    }
+    return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
-    NSInteger messageRow = indexPath.row;
-    MessageModel* message =[self.messages objectAtIndex:messageRow];
-    [self markMessageRead:message];
-    if ([self.messages grow:messageRow]) {
+    UITableViewCell* cell;
+    if (indexPath.row < [self.messages count]) {
+        NSInteger messageRow = indexPath.row;
+        MessageModel* message =[self.messages objectAtIndex:messageRow];
+        [self markMessageRead:message];
+        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+    } else {
+        cell = [CellUtils createCell:[LoadMessagesCell class] forTableView:tableView];
     }
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.messages count]) {
+        [self.messages grow:tableView];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

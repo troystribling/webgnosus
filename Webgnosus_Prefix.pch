@@ -44,6 +44,7 @@
 // MessageCell configuration
 #define kMESSAGE_CELL_FONT_SIZE                 17.0
 #define kMESSAGE_CELL_HEIGHT_PAD                30.0
+#define kLOAD_MESSAGE_CELL_HEIGHT               35.0
 #define kMESSAGE_CELL_X_OFFSET                  20.0
 #define kMESSAGE_CELL_Y_OFFSET                  20.0
 

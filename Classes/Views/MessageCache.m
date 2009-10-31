@@ -45,6 +45,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSInteger)totalCount {
+    return [MessageModel countByAccount:self.account];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)objectAtIndex:(NSInteger)index {
     return [self.messageList objectAtIndex:index];
 }
@@ -69,13 +74,20 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)grow:(NSInteger)messageIndex {
-    BOOL didGrow = NO;
-    if (messageIndex > ([self count] - 3)) {
-        didGrow = YES;
-        [self load];
+- (void)grow:(UITableView*)table {
+    NSInteger oldCount = [self count];
+    [self load];
+    NSInteger deltaCount = [self count] - oldCount;
+    NSMutableArray* newIndexPaths = [NSMutableArray arrayWithCapacity:deltaCount];
+    for (int i = 0; i < deltaCount; i++) {
+        [newIndexPaths addObject:[NSIndexPath indexPathForRow:(deltaCount+i) inSection:0]];
     }
-    return didGrow;
+    [table beginUpdates];
+        if ([self.messageList count] == [self totalCount]) {
+            [table deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:oldCount inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+        }
+        [table insertRowsAtIndexPaths:newIndexPaths withRowAnimation:UITableViewRowAnimationBottom];
+    [table endUpdates];
 }
 
 //===================================================================================================================================

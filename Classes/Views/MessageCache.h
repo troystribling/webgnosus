@@ -7,8 +7,7 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <Foundation/Foundation.h>
-#import <sqlite3.h>
+#import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
@@ -31,8 +30,9 @@
 - (id)initWithCacheIncrement:(NSInteger)initCacheIncrement;
 - (id)objectAtIndex:(NSInteger)index;
 - (void)initForAccount:(AccountModel*)initAccount;
-- (BOOL)grow:(NSInteger)messageIndex;
+- (void)grow:(UITableView*)table;
 - (NSInteger)count;
+- (NSInteger)totalCount;
 - (void)flush;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

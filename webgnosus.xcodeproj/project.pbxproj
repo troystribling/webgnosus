@@ -39,6 +39,12 @@
 		0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
+		05046B56109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */; };
+		05046B57109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */; };
+		05046B5D109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */; };
+		05046B5E109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */; };
+		05046BEB109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
+		05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
 		050AA0761097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		050AA0771097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
@@ -75,8 +81,6 @@
 		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
 		0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
-		0579503710993DE200D0A0C8 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579503610993DE200D0A0C8 /* MessageCache.m */; };
-		0579503810993DE200D0A0C8 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0579503610993DE200D0A0C8 /* MessageCache.m */; };
 		057BB16210587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16310587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
@@ -423,6 +427,11 @@
 		0502D8B31082D4E800218EC9 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
 		050410F91041C8C2004F7660 /* ServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceModel.h; sourceTree = "<group>"; };
 		050410FA1041C8C2004F7660 /* ServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceModel.m; sourceTree = "<group>"; };
+		05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMessagesCell.xib; sourceTree = "<group>"; };
+		05046B5B109BEBEC001CBEA1 /* LoadMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMessagesCell.h; sourceTree = "<group>"; };
+		05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMessagesCell.m; sourceTree = "<group>"; };
+		05046BE9109C0A1D001CBEA1 /* MessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCache.h; sourceTree = "<group>"; };
+		05046BEA109C0A1D001CBEA1 /* MessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCache.m; sourceTree = "<group>"; };
 		050AA0751097F78700C053C5 /* unread-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-messages.png"; sourceTree = "<group>"; };
 		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
@@ -454,8 +463,6 @@
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
-		0579503510993DE200D0A0C8 /* MessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCache.h; sourceTree = "<group>"; };
-		0579503610993DE200D0A0C8 /* MessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCache.m; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
@@ -894,8 +901,6 @@
 				05CE073F0FB909CA0036DF5E /* ContactModel.m */,
 				05CE07400FB909CA0036DF5E /* MessageModel.h */,
 				05CE07410FB909CA0036DF5E /* MessageModel.m */,
-				0579503510993DE200D0A0C8 /* MessageCache.h */,
-				0579503610993DE200D0A0C8 /* MessageCache.m */,
 				05CE07440FB909CA0036DF5E /* RosterItemModel.h */,
 				05CE07450FB909CA0036DF5E /* RosterItemModel.m */,
 				05D1ED8C1037BFBB00DB3B3F /* ServiceFeatureModel.h */,
@@ -981,9 +986,10 @@
 				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
 				05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */,
 				05EF0001105735690068AA06 /* AccountSubCell.xib */,
+				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
 				05DC8C830FBB15C60018AEEF /* CommandCell.xib */,
 				05F79C2C1075A7D500B75735 /* ContactPubCell.xib */,
-				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
+				05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
 				0502D7EB108261E500218EC9 /* ServiceCell.xib */,
 				05DC8CB70FBB16980018AEEF /* TimeSeriesCell.xib */,
@@ -1198,6 +1204,8 @@
 				05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */,
 				05D1ED9B1037C07D00DB3B3F /* CellUtils.h */,
 				05D1ED9C1037C07D00DB3B3F /* CellUtils.m */,
+				05046BE9109C0A1D001CBEA1 /* MessageCache.h */,
+				05046BEA109C0A1D001CBEA1 /* MessageCache.m */,
 				05E5A22E10533DE300D960B7 /* RoundedCornersView.h */,
 				05E5A22F10533DE300D960B7 /* RoundedCornersView.m */,
 				0502D8B21082D4E800218EC9 /* SectionViewController.h */,
@@ -1264,6 +1272,8 @@
 			children = (
 				05E207D30FB9046500FCFC94 /* BodyMessageCell.h */,
 				05E207D40FB9046500FCFC94 /* BodyMessageCell.m */,
+				05046B5B109BEBEC001CBEA1 /* LoadMessagesCell.h */,
+				05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */,
 				05E207D90FB9046500FCFC94 /* MessageCell.h */,
 				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
 				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
@@ -1504,6 +1514,7 @@
 				05ED2E1C108BE96C007F9413 /* service-document.png in Resources */,
 				051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 				050AA0771097F78700C053C5 /* unread-messages.png in Resources */,
+				05046B57109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1573,6 +1584,7 @@
 				05ED2E1B108BE96C007F9413 /* service-document.png in Resources */,
 				051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 				050AA0761097F78700C053C5 /* unread-messages.png in Resources */,
+				05046B56109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1703,9 +1715,10 @@
 				0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */,
 				0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
 				050007431093F1260046D0BC /* BodyMessageView.m in Sources */,
-				0579503810993DE200D0A0C8 /* MessageCache.m in Sources */,
 				05F5CD1A109A66220055B10E /* ChatMessageCache.m in Sources */,
 				05F5CD1E109A66A80055B10E /* HistoryMessageCache.m in Sources */,
+				05046B5E109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */,
+				05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1833,9 +1846,10 @@
 				050007371093EE390046D0BC /* XDataMessageView.m in Sources */,
 				050007381093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
 				050007421093F1260046D0BC /* BodyMessageView.m in Sources */,
-				0579503710993DE200D0A0C8 /* MessageCache.m in Sources */,
 				05F5CD19109A66220055B10E /* ChatMessageCache.m in Sources */,
 				05F5CD1D109A66A80055B10E /* HistoryMessageCache.m in Sources */,
+				05046B5D109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */,
+				05046BEB109C0A1D001CBEA1 /* MessageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

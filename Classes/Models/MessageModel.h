@@ -56,7 +56,8 @@ typedef enum tagMessageTextType {
 @property (nonatomic, retain) NSString* itemId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-//+ (NSInteger)count;
++ (NSInteger)count;
++ (NSInteger)countByAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadMessagesByFromJid:(NSString*)requestFromJid andAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadEventsByNode:(NSString*)requestNode andAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadMessagesByAccount:(AccountModel*)requestAccount;

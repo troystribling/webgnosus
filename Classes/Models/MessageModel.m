@@ -60,6 +60,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)countByAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE accountPk = %d", requestAccount.pk];
+    return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)countUnreadMessagesByFromJid:(NSString*)requestFromJid andAccount:(AccountModel*)requestAccount {
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM messages WHERE fromJid LIKE '%@%%' AND (textType = 0 OR textType = 1 OR textType = 2) AND messageRead = 0 AND accountPk = %d", requestFromJid, requestAccount.pk];
     return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
