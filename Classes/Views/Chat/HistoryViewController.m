@@ -32,7 +32,6 @@
 - (void)removeXMPPClientDelgate;
 - (void)addXMPPAccountUpdateDelgate;
 - (void)removeXMPPAccountUpdateDelgate;
-- (void)markMessageRead:(MessageModel*)messageRow;
 
 @end
 
@@ -57,7 +56,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadMessages {
-	[self.messages initForAccount:self.account];
+    self.messages = [[HistoryMessageCache alloc] initWithAccount:self.account];
     [self.tableView reloadData];
 }
 
@@ -68,20 +67,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadMessages {
-    [self.messages flush];
     [self loadAccount];
     [self removeXMPPClientDelgate];
     [self addXMPPClientDelgate];
     [self loadMessages];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)markMessageRead:(MessageModel*)message {
-    if (!message.messageRead) {
-        message.messageRead = YES;
-        [message update];
-        [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-    }     
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -141,7 +130,6 @@
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
         self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
-        self.messages = [[HistoryMessageCache alloc] init];
 	} 
 	return self; 
 } 
@@ -205,11 +193,7 @@
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    CGFloat height = kLOAD_MESSAGE_CELL_HEIGHT;
-    if (indexPath.row < [self.messages count]) {
-        height = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.messages objectAtIndex:indexPath.row]];
-    } 
-    return height;
+    return [self.messages tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 //===================================================================================================================================
@@ -222,32 +206,17 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger count = [self.messages count];
-    if (count < [self.messages totalCount]) {
-        count += 1;
-    }
-    return count;
+    return [self.messages count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
-    UITableViewCell* cell;
-    if (indexPath.row < [self.messages count]) {
-        NSInteger messageRow = indexPath.row;
-        MessageModel* message =[self.messages objectAtIndex:messageRow];
-        [self markMessageRead:message];
-        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
-    } else {
-        cell = [CellUtils createCell:[LoadMessagesCell class] forTableView:tableView];
-    }
-    return cell;
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    return [self.messages tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.messages count]) {
-        [self.messages grow:tableView];
-    }
+    [self.messages tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

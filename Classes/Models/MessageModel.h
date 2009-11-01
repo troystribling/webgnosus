@@ -58,6 +58,10 @@ typedef enum tagMessageTextType {
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
 + (NSInteger)countByAccount:(AccountModel*)requestAccount;
++ (NSInteger)countMessagesByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countCommandsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countSubscribedEventsByNode:(NSString*)requestNode andAccount:(AccountModel*)requestAccount;
++ (NSInteger)countPublishedEventsByNode:(NSString*)requestNode andAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadMessagesByFromJid:(NSString*)requestFromJid andAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadEventsByNode:(NSString*)requestNode andAccount:(AccountModel*)requestAccount;
 + (NSInteger)countUnreadMessagesByAccount:(AccountModel*)requestAccount;
@@ -67,11 +71,10 @@ typedef enum tagMessageTextType {
 + (void)create;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)maxPk andLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount;
-+ (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllSubscribedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (NSMutableArray*)findAllByJid:(NSString*)requestJID account:(AccountModel*)requestAccount andTextType:(MessageTextType)requestType withLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllMessagesByJid:(NSString*)requestJID forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllSubscribedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
++ (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;
 + (MessageModel*)findByPk:(NSInteger)requestPk;

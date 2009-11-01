@@ -1,28 +1,28 @@
 //
-//  ChatMessageCache.m
+//  SubMessageCache.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/29/09.
+//  Created by Troy Stribling on 10/31/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "ChatMessageCache.h"
+#import "SubMessageCache.h"
 #import "MessageModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ChatMessageCache
+@implementation SubMessageCache
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize jid;
+@synthesize node;
 
 //===================================================================================================================================
-#pragma mark ChatMessageCache
+#pragma mark SubMessageCache
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithJid:(NSString*)initJid andAccount:(AccountModel*)initAccount {
+- (id)initWithNode:(NSString*)initNode andAccount:(AccountModel*)initAccount {
 	if(self = [super initWithAccount:initAccount]) {
-        self.jid = initJid;
+        self.node = initNode;
         [self load];
 	}
 	return self;
@@ -30,12 +30,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSArray*)addMessages {
-    return [MessageModel findAllMessagesByJid:self.jid forAccount:self.account withPkGreaterThan:self.lastPk andLimit:self.cacheIncrement];
+    return [MessageModel findAllSubscribedEventsByNode:self.node forAccount:self.account withPkGreaterThan:self.lastPk andLimit:self.cacheIncrement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)totalCount {
-    return [MessageModel countMessagesByJid:self.jid andAccount:self.account];
+    return [MessageModel countSubscribedEventsByNode:self.node andAccount:self.account];
 }
 
 @end

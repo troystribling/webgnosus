@@ -1,23 +1,23 @@
 //
-//  ChatMessageCache.m
+//  CommandResponseMessageCache.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/29/09.
+//  Created by Troy Stribling on 10/31/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "ChatMessageCache.h"
+#import "CommandResponseMessageCache.h"
 #import "MessageModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation ChatMessageCache
+@implementation CommandResponseMessageCache
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize jid;
 
 //===================================================================================================================================
-#pragma mark ChatMessageCache
+#pragma mark CommandResponseMessageCache
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithJid:(NSString*)initJid andAccount:(AccountModel*)initAccount {
@@ -30,12 +30,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSArray*)addMessages {
-    return [MessageModel findAllMessagesByJid:self.jid forAccount:self.account withPkGreaterThan:self.lastPk andLimit:self.cacheIncrement];
+    return [MessageModel findAllCommandsByJid:self.jid forAccount:self.account withPkGreaterThan:self.lastPk andLimit:self.cacheIncrement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)totalCount {
-    return [MessageModel countMessagesByJid:self.jid andAccount:self.account];
+    return [MessageModel countCommandsByJid:self.jid andAccount:self.account];
 }
 
 @end

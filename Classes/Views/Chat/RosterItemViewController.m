@@ -18,6 +18,8 @@
 #import "ServiceItemModel.h"
 #import "SubscriptionModel.h"
 #import "AccountModel.h"
+#import "ChatMessageCache.h"
+#import "CommandResponseMessageCache.h"
 #import "MessageCellFactory.h"
 #import "RosterCell.h"
 #import "ContactPubCell.h"
@@ -33,7 +35,7 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForContactPub:(ServiceItemModel*)item;
-- (UIViewController*)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (void)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (UIViewController*)eventViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath;
 - (void)sendMessageButtonWasPressed:(id)sender;
 - (void)createAddItemButton;
@@ -86,13 +88,13 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UIViewController*)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
+- (void)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
     UserModel* user = [self.items objectAtIndex:indexPath.row];
     RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
     [chatViewController setAccount:self.account];
     chatViewController.rosterItem = user;
     [self.navigationController pushViewController:chatViewController animated:YES];
-    return [chatViewController autorelease];
+    [chatViewController release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -191,9 +193,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
     if ([self.selectedMode isEqualToString:@"Chat"]) {
-        self.items = [MessageModel findAllByJid:[self.rosterItem fullJID] account:self.account andTextType:MessageTextTypeBody withLimit:kMESSAGE_CACHE_SIZE];
+        self.items = [[ChatMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        self.items = [MessageModel findAllCommandsByJid:[self.rosterItem fullJID] andAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+        self.items = [[CommandResponseMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
@@ -332,10 +334,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
     CGFloat cellHeight;
-    if ([self.selectedMode isEqualToString:@"Chat"]) {
-        cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
-    } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        cellHeight = [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.items objectAtIndex:indexPath.row]];
+    if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
+        cellHeight = [self.items tableView:tableView heightForRowAtIndexPath:indexPath];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         cellHeight = kPUB_CELL_HEIGHT;
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
@@ -375,13 +375,7 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
     UITableViewCell* cell;
     if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
-        MessageModel* message =[self.items objectAtIndex:indexPath.row];
-        if (!message.messageRead) {
-            message.messageRead = YES;
-            [message update];
-            [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-        } 
-        cell = [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+        cell = [self.items tableView:tableView cellForRowAtIndexPath:indexPath];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];
         cell = [self tableView:tableView cellForContactPub:item];
@@ -393,10 +387,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    if ([self.selectedMode isEqualToString:@"Resources"]) {
-        UIViewController* viewController = nil;
-        viewController = [self resourceViewControllerForRowAtIndexPath:indexPath];
-        [self.navigationController pushViewController:viewController animated:YES];
+    if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
+        [self.items tableView:tableView didSelectRowAtIndexPath:indexPath];
+    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
+        [self resourceViewControllerForRowAtIndexPath:indexPath];
     }
 }
 

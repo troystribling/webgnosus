@@ -27,15 +27,16 @@
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithCacheIncrement:(NSInteger)initCacheIncrement;
-- (id)objectAtIndex:(NSInteger)index;
-- (void)initForAccount:(AccountModel*)initAccount;
-- (void)grow:(UITableView*)table;
+- (id)initWithCacheIncrement:(NSInteger)initCacheIncrement andAccount:(AccountModel*)initAccount;
+- (id)initWithAccount:(AccountModel*)initAccount;
 - (NSInteger)count;
-- (NSInteger)totalCount;
-- (void)flush;
+- (void)load;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSArray*)addMessages;
+- (NSInteger)totalCount;
 
 @end

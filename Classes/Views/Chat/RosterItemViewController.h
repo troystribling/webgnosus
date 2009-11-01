@@ -19,7 +19,7 @@
     NSString* selectedMode;
     NSMutableArray* modes;
 	UIBarButtonItem* sendMessageButton;
-    NSMutableArray* items;
+    id items;
     AccountModel* account;
     UserModel* rosterItem;
 }
@@ -29,7 +29,7 @@
 @property (nonatomic, retain) NSString* selectedMode;
 @property (nonatomic, retain) NSMutableArray* modes;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
-@property (nonatomic, retain) NSMutableArray* items;
+@property (nonatomic, retain) id items;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) UserModel* rosterItem;
 

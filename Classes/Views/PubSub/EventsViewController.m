@@ -14,7 +14,8 @@
 #import "MessageCellFactory.h"
 #import "SectionViewController.h"
 #import "EventMessageViewController.h"
-
+#import "PubMessageCache.h"
+#import "SubMessageCache.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
@@ -85,9 +86,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadEvents {
     if (self.eventType == kPUB_MODE) { 
-        self.events = [MessageModel findAllPublishedEventsByNode:self.node forAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+        self.events = [[PubMessageCache alloc] initWithNode:self.node andAccount:self.account];
     } else {
-        self.events = [MessageModel findAllSubscribedEventsByNode:self.node forAccount:self.account withLimit:kMESSAGE_CACHE_SIZE];
+        self.events = [[SubMessageCache alloc] initWithNode:self.node andAccount:self.account];
     }
     [self.tableView reloadData];
 }
@@ -155,7 +156,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    return [MessageCellFactory tableView:tableView heightForRowWithMessage:[self.events objectAtIndex:indexPath.row]];
+    return [self.events tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -189,17 +190,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {  
-    MessageModel* message =[self.events objectAtIndex:indexPath.row];
-    if (!message.messageRead) {
-        message.messageRead = YES;
-        [message update];
-        [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-    }     
-    return [MessageCellFactory tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message];
+    return [self.events tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.events tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
