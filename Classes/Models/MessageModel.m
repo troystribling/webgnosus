@@ -151,7 +151,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllMessagesByJid:(NSString*)requestJID forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit  {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND pk < %d AND textType = %d AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%') AND pk < %d AND textType = %d AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
                                  requestJID, requestJID, requestPk, MessageTextTypeBody, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -160,7 +160,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllCommandsByJid:(NSString*)requestJID forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit  {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%')  AND pk < %d AND (textType = %d OR textType = %d) AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (toJid LIKE '%@%%' OR fromJid LIKE '%@%%')  AND pk < %d AND (textType = %d OR textType = %d) AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
                                  requestJID, requestJID, requestPk, MessageTextTypeCommandText, MessageTextTypeCommandXData, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -169,7 +169,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllSubscribedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@' AND itemId <> '-1' AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@' AND itemId <> '-1' AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
                                  MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventxData, requestPk, requestNode, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
@@ -178,7 +178,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@'  AND itemId = '-1' AND accountPk = %d ORDER BY createdAt DESC LIMIT %d", 
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@'  AND itemId = '-1' AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
                                  MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventxData, requestPk, requestNode, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;

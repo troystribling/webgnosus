@@ -18,6 +18,7 @@
 #import "SubMessageCache.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
+#import "XMPPJID.h"
 #import "XMPPMessage.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +164,7 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:self.name]; 
+        sectionView = [SectionViewController viewWithLabel:[NSString stringWithFormat:@"%@/%@", [[UserModel nodeToJID:self.node] full], self.name]]; 
     }
     return sectionView; 
 }

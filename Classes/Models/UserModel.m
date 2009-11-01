@@ -32,6 +32,12 @@
 #pragma mark UserModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPJID*)nodeToJID:(NSString*)node {
+    NSArray* comp = [node componentsSeparatedByString:@"/"];
+    return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:3], [comp objectAtIndex:2]]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)bareJID {
     return self.jid;
 }

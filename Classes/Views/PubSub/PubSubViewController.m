@@ -343,7 +343,7 @@
         AccountSubCell* cell = (AccountSubCell*)[CellUtils createCell:[AccountSubCell class] forTableView:tableView];
         SubscriptionModel* item = [self.pubSubItems objectAtIndex:indexPath.row];
         cell.itemLabel.text = [[item.node componentsSeparatedByString:@"/"] lastObject];
-        cell.jidLabel.text = [[item nodeToJID] full];
+        cell.jidLabel.text = [[UserModel nodeToJID:item.node] full];
         cell.account = self.account;
         cell.subscription = item;
         [cell setUnreadMessageCount];

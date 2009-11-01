@@ -34,6 +34,7 @@
 @property (nonatomic, retain) NSString* clientVersion;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPJID*)nodeToJID:(NSString*)node;
 - (NSString*)bareJID;
 - (NSString*)fullJID;
 - (XMPPJID*)toJID;

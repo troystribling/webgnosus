@@ -56,7 +56,6 @@
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (XMPPJID*)nodeToJID;
 - (NSInteger)synchedAsInteger;
 - (void)setSynchedAsInteger:(NSInteger)value;
 - (void)sync;

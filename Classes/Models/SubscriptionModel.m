@@ -168,12 +168,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPJID*)nodeToJID {
-    NSArray* comp = [self.node componentsSeparatedByString:@"/"];
-    return [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [comp objectAtIndex:3], [comp objectAtIndex:2]]];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)synchedAsInteger {
 	return self.synched == YES ? 1 : 0;
 }
