@@ -47,6 +47,8 @@
 		05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
 		050AA0761097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		050AA0771097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
+		051532A6109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
+		051532A7109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
 		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
@@ -364,8 +366,6 @@
 		05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1529109E20B000FD4DD6 /* account-off-led.png */; };
 		05EE1546109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
 		05EE1547109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
-		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
-		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EF00001057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
 		05EF0002105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
 		05EF0003105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
@@ -441,6 +441,7 @@
 		05046BE9109C0A1D001CBEA1 /* MessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCache.h; sourceTree = "<group>"; };
 		05046BEA109C0A1D001CBEA1 /* MessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCache.m; sourceTree = "<group>"; };
 		050AA0751097F78700C053C5 /* unread-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-messages.png"; sourceTree = "<group>"; };
+		051532A5109E9FD600E83386 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
 		051A48471092965000263D26 /* ServiceMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceMessageViewController.h; sourceTree = "<group>"; };
@@ -706,7 +707,6 @@
 		05EE1528109E20B000FD4DD6 /* account-error-led.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account-error-led.png"; sourceTree = "<group>"; };
 		05EE1529109E20B000FD4DD6 /* account-off-led.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account-off-led.png"; sourceTree = "<group>"; };
 		05EE1545109E328300FD4DD6 /* roster-section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roster-section.png"; sourceTree = "<group>"; };
-		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05EF0001105735690068AA06 /* AccountSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSubCell.xib; sourceTree = "<group>"; };
 		05EF001E105738840068AA06 /* AccountPubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPubCell.h; sourceTree = "<group>"; };
 		05EF001F105738840068AA06 /* AccountPubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountPubCell.m; sourceTree = "<group>"; };
@@ -1393,7 +1393,7 @@
 				058868B60F0FC9190076891D /* Data */,
 				05509F6E0F34F38600C19E19 /* Images */,
 				058868B50F0FC6E80076891D /* Views */,
-				05EE59930FD21B110068BC5C /* Default.png */,
+				051532A5109E9FD600E83386 /* Default.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1490,7 +1490,6 @@
 				05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
 				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
-				05EE59950FD21B110068BC5C /* Default.png in Resources */,
 				05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */,
 				05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */,
 				05E6F169104A07FC00EF924B /* main_icon.png in Resources */,
@@ -1538,6 +1537,7 @@
 				05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */,
 				05EE1547109E328300FD4DD6 /* roster-section.png in Resources */,
 				05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */,
+				051532A7109E9FD600E83386 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1561,7 +1561,6 @@
 				05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
 				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
-				05EE59940FD21B110068BC5C /* Default.png in Resources */,
 				05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */,
 				05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */,
 				05E6F15F104A07FC00EF924B /* main_icon.png in Resources */,
@@ -1609,6 +1608,7 @@
 				05EE152B109E20B000FD4DD6 /* account-off-led.png in Resources */,
 				05EE1546109E328300FD4DD6 /* roster-section.png in Resources */,
 				05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */,
+				051532A6109E9FD600E83386 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1938,7 +1938,6 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4757AA5C-AAE5-41BD-A182-0CE08B04B2A5";
 			};
 			name = Debug;
 		};
@@ -1946,6 +1945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
