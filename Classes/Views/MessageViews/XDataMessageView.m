@@ -44,8 +44,8 @@
     NSMutableArray* gridArray = [self buildGridArray:data];
     NSMutableArray* labelArray = [LabelGridView buildViews:gridArray];
     LabelGridView* labelGridView = [[LabelGridView alloc] initWithLabelViews:labelArray];
-    [labelGridView setCellColor:[UIColor colorWithRed:0.94f green:0.94f blue:0.92f alpha:1.0f]];
-    [labelGridView setBorderColor:[UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f]]; 
+    [labelGridView setCellColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
+    [labelGridView setBorderColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]]; 
 	if ([self respondsToSelector:@selector(initLabelGridView:)] ) {
         [self initLabelGridView:labelGridView]; 
     }

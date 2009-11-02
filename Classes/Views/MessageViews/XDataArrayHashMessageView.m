@@ -26,7 +26,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)initLabelGridView:(LabelGridView*)labelGridView {
-    [labelGridView setCellColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f] forRow:0];
+    [labelGridView setCellColor:[UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f] forRow:0];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

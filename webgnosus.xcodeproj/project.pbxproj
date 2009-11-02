@@ -166,12 +166,10 @@
 		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
 		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
-		05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
 		05DC8C880FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C8B0FBB15C60018AEEF /* XDataMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */; };
-		05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C820FBB15C60018AEEF /* AccountCell.xib */; };
 		05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
 		05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
@@ -294,6 +292,8 @@
 		05E208220FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
+		05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E3E96B109E779A0040E5D9 /* load-messages.png */; };
+		05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E3E96B109E779A0040E5D9 /* load-messages.png */; };
 		05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
 		05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
 		05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
@@ -302,19 +302,11 @@
 		05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
 		05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
 		05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
-		05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
-		05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
-		05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
 		05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
 		05E6F15F104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
-		05E6F161104A07FC00EF924B /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F157104A07FC00EF924B /* roster-section.jpg */; };
 		05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
-		05E6F165104A07FC00EF924B /* account-error-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F151104A07FC00EF924B /* account-error-led.jpg */; };
-		05E6F166104A07FC00EF924B /* account-off-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F152104A07FC00EF924B /* account-off-led.jpg */; };
-		05E6F167104A07FC00EF924B /* account-on-led.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F153104A07FC00EF924B /* account-on-led.jpg */; };
 		05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
 		05E6F169104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
-		05E6F16B104A07FC00EF924B /* roster-section.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F157104A07FC00EF924B /* roster-section.jpg */; };
 		05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
 		05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
 		05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
@@ -362,6 +354,16 @@
 		05ED38F2108AAA4E0079A3B3 /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E2108AAA4E0079A3B3 /* service.png */; };
 		05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
+		05EE151A109E1BDC00FD4DD6 /* tablecell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */; };
+		05EE151B109E1BDC00FD4DD6 /* tablecell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */; };
+		05EE1525109E1E6600FD4DD6 /* account-on-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1524109E1E6600FD4DD6 /* account-on-led.png */; };
+		05EE1526109E1E6600FD4DD6 /* account-on-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1524109E1E6600FD4DD6 /* account-on-led.png */; };
+		05EE152A109E20B000FD4DD6 /* account-error-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1528109E20B000FD4DD6 /* account-error-led.png */; };
+		05EE152B109E20B000FD4DD6 /* account-off-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1529109E20B000FD4DD6 /* account-off-led.png */; };
+		05EE152C109E20B000FD4DD6 /* account-error-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1528109E20B000FD4DD6 /* account-error-led.png */; };
+		05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1529109E20B000FD4DD6 /* account-off-led.png */; };
+		05EE1546109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
+		05EE1547109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
 		05EE59940FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EE59950FD21B110068BC5C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE59930FD21B110068BC5C /* Default.png */; };
 		05EF00001057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
@@ -538,7 +540,6 @@
 		05D83D78104ED94F00078131 /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
 		05D83D7B104EDCBF00078131 /* green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-button.png"; sourceTree = "<group>"; };
 		05D83D7C104EDCBF00078131 /* grey-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grey-button.png"; sourceTree = "<group>"; };
-		05DC8C820FBB15C60018AEEF /* AccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountCell.xib; sourceTree = "<group>"; };
 		05DC8C830FBB15C60018AEEF /* CommandCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommandCell.xib; sourceTree = "<group>"; };
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
 		05DC8C850FBB15C60018AEEF /* RosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterCell.xib; sourceTree = "<group>"; };
@@ -656,6 +657,7 @@
 		05E207E70FB9046500FCFC94 /* RosterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterCell.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E3E96B109E779A0040E5D9 /* load-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "load-messages.png"; sourceTree = "<group>"; };
 		05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEntryDelegate.h; sourceTree = "<group>"; };
 		05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubEntryDelegate.m; sourceTree = "<group>"; };
 		05E586C5106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscribeDelegate.h; sourceTree = "<group>"; };
@@ -664,12 +666,8 @@
 		05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptionsDelegate.m; sourceTree = "<group>"; };
 		05E5A22E10533DE300D960B7 /* RoundedCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedCornersView.h; sourceTree = "<group>"; };
 		05E5A22F10533DE300D960B7 /* RoundedCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedCornersView.m; sourceTree = "<group>"; };
-		05E6F151104A07FC00EF924B /* account-error-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-error-led.jpg"; sourceTree = "<group>"; };
-		05E6F152104A07FC00EF924B /* account-off-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-off-led.jpg"; sourceTree = "<group>"; };
-		05E6F153104A07FC00EF924B /* account-on-led.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "account-on-led.jpg"; sourceTree = "<group>"; };
 		05E6F154104A07FC00EF924B /* dotted_tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotted_tile.png; sourceTree = "<group>"; };
 		05E6F155104A07FC00EF924B /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_icon.png; sourceTree = "<group>"; };
-		05E6F157104A07FC00EF924B /* roster-section.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "roster-section.jpg"; sourceTree = "<group>"; };
 		05E6F159104A07FC00EF924B /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-roster.png"; sourceTree = "<group>"; };
 		05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPublicationViewController.xib; sourceTree = "<group>"; };
 		05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSubscriptionViewController.xib; sourceTree = "<group>"; };
@@ -703,6 +701,11 @@
 		05ED45E8105163D300DB3396 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
 		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
+		05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablecell-background.png"; sourceTree = "<group>"; };
+		05EE1524109E1E6600FD4DD6 /* account-on-led.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account-on-led.png"; sourceTree = "<group>"; };
+		05EE1528109E20B000FD4DD6 /* account-error-led.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account-error-led.png"; sourceTree = "<group>"; };
+		05EE1529109E20B000FD4DD6 /* account-off-led.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account-off-led.png"; sourceTree = "<group>"; };
+		05EE1545109E328300FD4DD6 /* roster-section.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "roster-section.png"; sourceTree = "<group>"; };
 		05EE59930FD21B110068BC5C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		05EF0001105735690068AA06 /* AccountSubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSubCell.xib; sourceTree = "<group>"; };
 		05EF001E105738840068AA06 /* AccountPubCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountPubCell.h; sourceTree = "<group>"; };
@@ -843,20 +846,22 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				05ED2E1A108BE96C007F9413 /* service-document.png */,
-				05E6F151104A07FC00EF924B /* account-error-led.jpg */,
-				05E6F152104A07FC00EF924B /* account-off-led.jpg */,
-				05E6F153104A07FC00EF924B /* account-on-led.jpg */,
+				05EE1528109E20B000FD4DD6 /* account-error-led.png */,
+				05EE1529109E20B000FD4DD6 /* account-off-led.png */,
+				05EE1524109E1E6600FD4DD6 /* account-on-led.png */,
 				05E6F154104A07FC00EF924B /* dotted_tile.png */,
 				05D83D7B104EDCBF00078131 /* green-button.png */,
 				05D83D7C104EDCBF00078131 /* grey-button.png */,
 				05EAB2F610509A9700AF71A2 /* left-arrow.png */,
+				05E3E96B109E779A0040E5D9 /* load-messages.png */,
 				05E6F155104A07FC00EF924B /* main_icon.png */,
 				05D83D78104ED94F00078131 /* red-button.png */,
 				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
-				05E6F157104A07FC00EF924B /* roster-section.jpg */,
+				05EE1545109E328300FD4DD6 /* roster-section.png */,
 				0502D8A01082CAB500218EC9 /* search.png */,
+				05ED38E2108AAA4E0079A3B3 /* service.png */,
 				05ED38DB108AAA4E0079A3B3 /* service-chat.png */,
+				05ED2E1A108BE96C007F9413 /* service-document.png */,
 				05ED2D90108B9140007F9413 /* service-directory.png */,
 				05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */,
 				05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */,
@@ -864,12 +869,12 @@
 				05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */,
 				05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */,
 				05ED38E0108AAA4E0079A3B3 /* service-socket.png */,
-				05ED38E2108AAA4E0079A3B3 /* service.png */,
 				05D83D5B104EBF0A00078131 /* settings.png */,
 				057BB16010587547006389D9 /* tabbar-events.png */,
 				05E7EBAC1055D97600C5F3FD /* tabbar-history.png */,
 				05E6F159104A07FC00EF924B /* tabbar-roster.png */,
 				057BB16110587547006389D9 /* tabbar-services.png */,
+				05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */,
 				050AA0751097F78700C053C5 /* unread-messages.png */,
 			);
 			name = Images;
@@ -995,7 +1000,6 @@
 		05DC8C810FBB15C60018AEEF /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				05DC8C820FBB15C60018AEEF /* AccountCell.xib */,
 				05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */,
 				05EF0001105735690068AA06 /* AccountSubCell.xib */,
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
@@ -1472,7 +1476,6 @@
 			files = (
 				05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */,
 				051AB4830F1068C500DD01DC /* webgnosus.db in Resources */,
-				05DC8C8C0FBB15C60018AEEF /* AccountCell.xib in Resources */,
 				05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */,
 				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */,
@@ -1489,12 +1492,8 @@
 				05DC8CB80FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59950FD21B110068BC5C /* Default.png in Resources */,
 				05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */,
-				05E6F165104A07FC00EF924B /* account-error-led.jpg in Resources */,
-				05E6F166104A07FC00EF924B /* account-off-led.jpg in Resources */,
-				05E6F167104A07FC00EF924B /* account-on-led.jpg in Resources */,
 				05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */,
 				05E6F169104A07FC00EF924B /* main_icon.png in Resources */,
-				05E6F16B104A07FC00EF924B /* roster-section.jpg in Resources */,
 				05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */,
 				05D83D5D104EBF0A00078131 /* settings.png in Resources */,
 				05D83D7A104ED94F00078131 /* red-button.png in Resources */,
@@ -1533,6 +1532,12 @@
 				051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 				050AA0771097F78700C053C5 /* unread-messages.png in Resources */,
 				05046B57109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */,
+				05EE151B109E1BDC00FD4DD6 /* tablecell-background.png in Resources */,
+				05EE1526109E1E6600FD4DD6 /* account-on-led.png in Resources */,
+				05EE152C109E20B000FD4DD6 /* account-error-led.png in Resources */,
+				05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */,
+				05EE1547109E328300FD4DD6 /* roster-section.png in Resources */,
+				05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1542,7 +1547,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				051AB4820F1068C500DD01DC /* webgnosus.db in Resources */,
-				05DC8C870FBB15C60018AEEF /* AccountCell.xib in Resources */,
 				05DC8C880FBB15C60018AEEF /* CommandCell.xib in Resources */,
 				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */,
@@ -1559,12 +1563,8 @@
 				05DC8CB90FBB16980018AEEF /* TimeSeriesCell.xib in Resources */,
 				05EE59940FD21B110068BC5C /* Default.png in Resources */,
 				05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */,
-				05E6F15B104A07FC00EF924B /* account-error-led.jpg in Resources */,
-				05E6F15C104A07FC00EF924B /* account-off-led.jpg in Resources */,
-				05E6F15D104A07FC00EF924B /* account-on-led.jpg in Resources */,
 				05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */,
 				05E6F15F104A07FC00EF924B /* main_icon.png in Resources */,
-				05E6F161104A07FC00EF924B /* roster-section.jpg in Resources */,
 				05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */,
 				05D83D5C104EBF0A00078131 /* settings.png in Resources */,
 				05D83D79104ED94F00078131 /* red-button.png in Resources */,
@@ -1603,6 +1603,12 @@
 				051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */,
 				050AA0761097F78700C053C5 /* unread-messages.png in Resources */,
 				05046B56109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */,
+				05EE151A109E1BDC00FD4DD6 /* tablecell-background.png in Resources */,
+				05EE1525109E1E6600FD4DD6 /* account-on-led.png in Resources */,
+				05EE152A109E20B000FD4DD6 /* account-error-led.png in Resources */,
+				05EE152B109E20B000FD4DD6 /* account-off-led.png in Resources */,
+				05EE1546109E328300FD4DD6 /* roster-section.png in Resources */,
+				05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
