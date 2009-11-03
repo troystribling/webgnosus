@@ -93,7 +93,7 @@
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<int key="IBUISeparatorStyle">1</int>
-				<int key="IBUISelectionStyle">2</int>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="925666494"/>
 				<string key="IBUIReuseIdentifier">ContactPubCell</string>
 			</object>

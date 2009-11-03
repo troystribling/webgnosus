@@ -100,6 +100,7 @@
 	MulticastDelegateListNode *node;
 	for(node = delegateList; node != nil; node = [node next])
 	{
+        id nodeTest = [node delegate];
 		NSMethodSignature *result = [[node delegate] methodSignatureForSelector:aSelector];
 		
 		if(result != nil)

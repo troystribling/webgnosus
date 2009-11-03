@@ -81,7 +81,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
+    [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
