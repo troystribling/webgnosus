@@ -47,6 +47,8 @@
 		05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
 		050AA0761097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		050AA0771097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
+		0514556710A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */; };
+		0514556810A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */; };
 		051532A6109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
 		051532A7109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
 		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
@@ -441,6 +443,8 @@
 		05046BE9109C0A1D001CBEA1 /* MessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCache.h; sourceTree = "<group>"; };
 		05046BEA109C0A1D001CBEA1 /* MessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCache.m; sourceTree = "<group>"; };
 		050AA0751097F78700C053C5 /* unread-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unread-messages.png"; sourceTree = "<group>"; };
+		0514556510A11FA80082605E /* XMPPRegisterQueryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterQueryDelegate.h; sourceTree = "<group>"; };
+		0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPRegisterQueryDelegate.m; sourceTree = "<group>"; };
 		051532A5109E9FD600E83386 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		0517E5EF108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPDiscoItemsServiceResponseDelegate.h; sourceTree = "<group>"; };
 		0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPDiscoItemsServiceResponseDelegate.m; sourceTree = "<group>"; };
@@ -1119,6 +1123,8 @@
 				05E206BA0FB9004100FCFC94 /* XMPPQuery.m */,
 				05E206BB0FB9004100FCFC94 /* XMPPRegisterQuery.h */,
 				05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */,
+				0514556510A11FA80082605E /* XMPPRegisterQueryDelegate.h */,
+				0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */,
 				05E206BD0FB9004100FCFC94 /* XMPPRosterItem.h */,
 				05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */,
 				05E206BF0FB9004100FCFC94 /* XMPPRosterQuery.h */,
@@ -1746,6 +1752,7 @@
 				05F8D50E109D08A9005FE8A5 /* CommandResponseMessageCache.m in Sources */,
 				05F8D5A1109D2422005FE8A5 /* PubMessageCache.m in Sources */,
 				05F8D5A5109D2433005FE8A5 /* SubMessageCache.m in Sources */,
+				0514556810A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1880,6 +1887,7 @@
 				05F8D50D109D08A9005FE8A5 /* CommandResponseMessageCache.m in Sources */,
 				05F8D5A0109D2422005FE8A5 /* PubMessageCache.m in Sources */,
 				05F8D5A4109D2433005FE8A5 /* SubMessageCache.m in Sources */,
+				0514556710A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

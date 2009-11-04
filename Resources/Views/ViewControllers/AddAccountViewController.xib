@@ -173,9 +173,9 @@
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont" id="953731202">
+						<object class="NSFont" key="IBUIFont" id="361340768">
 							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">1.500000e+01</double>
+							<double key="NSSize">1.600000e+01</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<string key="IBUINormalTitle">Cancel</string>
@@ -205,7 +205,7 @@
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIFont" ref="953731202"/>
+						<reference key="IBUIFont" ref="361340768"/>
 						<string key="IBUINormalTitle">Save</string>
 						<reference key="IBUIHighlightedTitleColor" ref="174522360"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
@@ -398,7 +398,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>AddAccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{526, 384}, {270, 300}}</string>
+					<string>{{299, 419}, {270, 300}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

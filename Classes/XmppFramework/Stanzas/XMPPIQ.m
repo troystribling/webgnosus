@@ -21,6 +21,7 @@
 #import "XMPPPubSubOwner.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoInfoQuery.h"
+#import "XMPPRegisterQuery.h"
 #import "NSXMLElementAdditions.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -164,6 +165,8 @@
         iqQuery = [XMPPClientVersionQuery createFromElement:queryElement];
     } else if ([queryXMLNS isEqualToString:@"jabber:iq:roster"]) {
         iqQuery = [XMPPRosterQuery createFromElement:queryElement];
+    } else if ([queryXMLNS isEqualToString:@"jabber:iq:register"]) {
+        iqQuery = [XMPPRegisterQuery createFromElement:queryElement];
     } else if ([queryXMLNS isEqualToString:@"http://jabber.org/protocol/disco#info"]) {
         iqQuery = [XMPPDiscoInfoQuery createFromElement:queryElement];
     } else if ([queryXMLNS isEqualToString:@"http://jabber.org/protocol/disco#items"]) {

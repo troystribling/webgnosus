@@ -120,9 +120,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createAddItemButton {
-    if ([self.selectedMode isEqualToString:@"Chat"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) { 
-        self.navigationItem.rightBarButtonItem = self.sendMessageButton;
-    } else if ([self.selectedMode isEqualToString:@"Commands"] && [RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
+    if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) { 
         self.navigationItem.rightBarButtonItem = self.sendMessageButton;
     } else {
         self.navigationItem.rightBarButtonItem = nil;

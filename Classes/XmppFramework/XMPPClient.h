@@ -161,6 +161,10 @@
 - (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID;
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq;
 
+// register
+- (void)xmppClient:(XMPPClient*)client didReceiveRegisterError:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveRegisterResult:(XMPPIQ*)iq;
+
 // iq
 - (void)xmppClient:(XMPPClient*)client didReceiveIQResult:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveIQError:(XMPPIQ*)iq;

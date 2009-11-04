@@ -16,6 +16,7 @@
 #import "AccountModel.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
+#import "XMPPRegisterQuery.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController (PrivateAPI)
@@ -76,10 +77,12 @@
 - (IBAction)sendPasswordButtonPressed:(id)sender {
 	NSString* password = self.passwordTextField.text;
 	NSString* reenterPassword = self.reenterPasswordTextField.text;
+    [self.reenterPasswordTextField resignFirstResponder]; 
     if (![password isEqualToString:@""] && [password isEqualToString:reenterPassword]) {
-        AccountModel* acct = [self account];
-        acct.password = password;
-        [[XMPPClientManager instance] xmppClientForAccount:self.account];
+        NSString* username = [[[self account] toJID] user];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+        [XMPPRegisterQuery set:client user:username withPassword:password];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Changing Password"];
     } else {
         [AlertViewManager showAlert:@"Password is Invalid"];
     }
@@ -106,7 +109,7 @@
             selectedAccountIndex = i;
         }
     }
-    self.activeAccounts = [[SegmentedListPicker alloc] init:accountJIDs withValueAtIndex:selectedAccountIndex  andRect:CGRectMake(15.0f, 43.0f, 240.0f, 40.0f)];
+    self.activeAccounts = [[SegmentedListPicker alloc] init:accountJIDs withValueAtIndex:selectedAccountIndex  andRect:CGRectMake(15.0f, 45.0f, 240.0f, 35.0f)];
     self.activeAccounts.delegate = self;
     [self updateStatus];
     [self.view addSubview:self.activeAccounts];
@@ -130,6 +133,21 @@
 }
 
 //===================================================================================================================================
+#pragma mark XMPPClientDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveRegisterError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"Error Changing Password"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveRegisterResult:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"Password Changed"];
+}
+
+//===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -142,6 +160,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
     self.passwordTextField.delegate = self;
+    self.reenterPasswordTextField.delegate = self;
     [super viewDidLoad];
 }
 
@@ -167,9 +186,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-//===================================================================================================================================
-#pragma mark XMPPClientDelegate
 
 //===================================================================================================================================
 #pragma mark SegmentedListPicker

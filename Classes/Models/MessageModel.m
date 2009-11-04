@@ -307,7 +307,7 @@
         insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, itemId, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', '%@', %d, %d)", 
                             self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, [self messageReadAsInteger], self.accountPk];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, itemId, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d)", 
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, itemId, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d, %d)", 
                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, [self messageReadAsInteger], self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];

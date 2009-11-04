@@ -35,7 +35,7 @@
 - (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
     self.items = list;
     self.selectedItemIndex = index;
-    self.font = [UIFont boldSystemFontOfSize:18];
+    self.font = [UIFont boldSystemFontOfSize:17];
     if (self = [super initWithItems:[NSArray arrayWithObjects:[UIImage imageNamed:@"left-arrow.png"], [self renderTextAsImage:rect], 
                                      [UIImage imageNamed:@"right-arrow.png"], nil]]) {
         [self addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];

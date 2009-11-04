@@ -10,6 +10,7 @@
 #import "MessageCellFactory.h"
 #import "BodyMessageCell.h"
 #import "XMPPxData.h"
+#import "XMPPJID.h"
 #import "XDataMessageCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
@@ -59,7 +60,7 @@ typedef enum tagCommandDataType {
 + (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath forMessage:(MessageModel*)message {        
 	UITableViewCell* cell = nil;
     if (message.textType ==  MessageTextTypeCommandXData) {
-        cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:message.fromJid];
+        cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[[XMPPJID jidWithString:message.fromJid] bare]];
     } else if (message.textType ==  MessageTextTypeEventxData) {
         cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
@@ -67,7 +68,7 @@ typedef enum tagCommandDataType {
     } else if (message.textType ==  MessageTextTypeEventText) {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:message.fromJid];
+        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[[XMPPJID jidWithString:message.fromJid] bare]];
     }
 	return cell;
 }
