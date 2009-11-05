@@ -12,6 +12,7 @@
 #import "XMPPClient.h"
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
+#import "XMPPCommandDelegate.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -104,16 +105,27 @@
 //===================================================================================================================================
 #pragma mark XMPPCommand Messages
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
+    [self set:client commandNode:node JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
     [iq addCommand:cmd];
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid {
+    [self set:client commandNode:node withParameter:parameters JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
     NSEnumerator* enumerator = [parameters keyEnumerator];
     NSString* field;  
     XMPPxData* cmdData = [[XMPPxData alloc] initWithDataType:@"submit"];
@@ -124,7 +136,7 @@
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData];
     [iq addCommand:cmd];
-    [client sendElement:iq];
+    [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
 }
 

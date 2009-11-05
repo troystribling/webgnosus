@@ -409,8 +409,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq {
-    [MessageModel insert:client commandResult:iq];
-    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
 	[self writeToLog:client message:@"xmppClient:didReceiveCommandResult"];
 }
 
