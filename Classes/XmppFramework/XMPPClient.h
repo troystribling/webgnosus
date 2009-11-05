@@ -131,6 +131,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveEvent:(XMPPMessage*)message;
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandError:(XMPPIQ*)iq;
 - (void)xmppClient:(XMPPClient*)client didReceiveCommandResult:(XMPPIQ*)iq;
+- (void)xmppClient:(XMPPClient*)client didReceiveCommandForm:(XMPPIQ*)iq;
 
 // disco
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq;
