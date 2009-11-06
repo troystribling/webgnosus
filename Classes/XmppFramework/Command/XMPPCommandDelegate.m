@@ -13,6 +13,8 @@
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
+#import "XMPPCommand.h"
+#import "XMPPxData.h"
 #import "XMPPClient.h"
 #import "XMPPStanza.h"
 #import "AccountModel.h"
@@ -45,9 +47,20 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
     XMPPIQ* iq = (XMPPIQ*)stanza;
-    [MessageModel insert:client commandResult:iq];
-    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-    [[client multicastDelegate] xmppClient:client didReceiveCommandResult:iq];        
+    XMPPCommand* command = [iq command];
+    if (command) {
+        XMPPxData* cmdData = [command data];
+        if (cmdData) {
+            NSString* dataType = [cmdData dataType];
+            if ([dataType isEqualToString:@"form"]) {
+                [[client multicastDelegate] xmppClient:client didReceiveCommandForm:iq];        
+            } else if ([dataType isEqualToString:@"result"]) {
+                [MessageModel insert:client commandResult:iq];
+                [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
+                [[client multicastDelegate] xmppClient:client didReceiveCommandResult:iq];        
+            }
+        }     
+    }
 }
 
 //===================================================================================================================================

@@ -8,8 +8,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandViewController.h"
-#import "CommandCell.h"
 #import "SectionViewController.h"
+#import "CommandFormViewController.h"
+#import "CommandCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 #import "AccountModel.h"
@@ -77,7 +78,7 @@
         if ([resourceModel isAvailable]) {
             [XMPPCommand set:client commandNode:self.commandRequest.node JID:[resourceModel toJID]];
         }
-        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting"];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting for Response"];
     }
 }
 
@@ -109,6 +110,12 @@
     [AlertViewManager dismissActivityIndicator];
     [self saveMessage:self.commandRequest.itemName];
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)sender didReceiveCommandForm:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [CommandFormViewController form:iq inView:self.view.window];
 }
 
 //===================================================================================================================================

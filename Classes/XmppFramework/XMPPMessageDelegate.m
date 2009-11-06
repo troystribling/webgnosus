@@ -417,6 +417,11 @@
 	[self writeToLog:client message:@"xmppClient:didReceiveCommandError"];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveCommandForm:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveCommandForm"];
+}
+
 //===================================================================================================================================
 #pragma mark Disco
 

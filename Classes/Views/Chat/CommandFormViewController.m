@@ -1,107 +1,58 @@
 //
-//  AccountManagerViewController.m
+//  CommandFormViewController.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/1/09.
+//  Created by Troy Stribling on 11/5/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "AccountManagerViewController.h"
-#import "EditAccountViewController.h"
-#import "AddAccountViewController.h"
-#import "AccountModel.h"
-#import "NSObjectiPhoneAdditions.h"
+#import "CommandFormViewController.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface AccountManagerViewController (PrivateAPI)
-
-- (UIView*)createView:(Class)viewClass;
+@interface CommandFormViewController (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation AccountManagerViewController
+@implementation CommandFormViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize addAccountViewController;
-@synthesize editAccountViewController;
-@synthesize parentView;
-@synthesize contentView;
-@synthesize contentViewBorder;
-@synthesize currentView;
+@synthesize formScrollView;
+@synthesize cancelButton;
+@synthesize sendButton;
+@synthesize form;
 
 //===================================================================================================================================
-#pragma mark AccountManagerViewController
+#pragma mark CommandFormViewController PrivateAPI
+
+//===================================================================================================================================
+#pragma mark CommandFormViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)inView:(UIView*)containedView {
-    [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:containedView];
++ (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView {
+    [[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView andForm:initForm];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addAsSubview:(UIView*)parent {
-    self.parentView = parent;
-    [parent addSubview:self.view];
-    [parent addSubview:self.contentViewBorder];
-    [parent addSubview:self.contentView];
-    self.addAccountViewController.managerView = self;        
-    self.editAccountViewController.managerView = self;    
-    [self showView];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)dismiss {
+- (IBAction)cancelButtonPressed:(id)sender {
     [self.view removeFromSuperview];
-    [self.contentViewBorder removeFromSuperview];
-    [self.contentView removeFromSuperview];
-    self.parentView = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showView {
-    if ([AccountModel count] > 0) {
-        [self showEditAccountView];
-    } else {
-        [self showAddAccountView];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showEditAccountView {
-    [self.contentView addSubview:self.editAccountViewController.view];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)showAddAccountView {
-    [self.contentView addSubview:self.addAccountViewController.view];
-}
-
-//===================================================================================================================================
-#pragma mark AccountManagerViewController PrivateApi
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createContentView {
-    CGRect mainRect = self.view.frame;
-    CGFloat scaleFactor = 0.85f;
-    CGFloat boarderWideth = 2.0f;
-    CGFloat xoffset = mainRect.origin.x + (1.0f-scaleFactor)*mainRect.size.width/2.0f;
-    CGFloat yoffset = mainRect.origin.y + (1.0f-scaleFactor)*mainRect.size.height/2.0f;
-    self.contentView = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset, yoffset)];
-    self.contentViewBorder = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset-boarderWideth, yoffset-boarderWideth)];
-    self.contentView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"dotted_tile.png"]];
-    self.contentViewBorder.backgroundColor = [UIColor blackColor];
+- (IBAction)sendButtonPressed:(id)sender {
 }
 
 //===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)containerView { 
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)parentView andForm:(XMPPIQ*)initForm { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        [self createContentView];
-        self.view.frame = containerView.frame;
-        [self addAsSubview:containerView];
+        self.view.frame = parentView.frame;
+        self.form = initForm;
+        self.view.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
+        [parentView addSubview:self.view];
 	} 
 	return self; 
 } 
