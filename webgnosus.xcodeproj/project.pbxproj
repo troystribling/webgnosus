@@ -334,6 +334,10 @@
 		05E83AF3106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */; };
 		05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
 		05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
+		05E9751710A490C7005F2440 /* CommandFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9751610A490C7005F2440 /* CommandFormView.m */; };
+		05E9751810A490C7005F2440 /* CommandFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9751610A490C7005F2440 /* CommandFormView.m */; };
+		05E9759D10A4E964005F2440 /* XMPPxDataField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9759C10A4E964005F2440 /* XMPPxDataField.m */; };
+		05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9759C10A4E964005F2440 /* XMPPxDataField.m */; };
 		05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
 		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
 		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
@@ -695,6 +699,10 @@
 		05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubDeleteDelegate.m; sourceTree = "<group>"; };
 		05E83AF6106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubUnsubscribeDelegate.h; sourceTree = "<group>"; };
 		05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubUnsubscribeDelegate.m; sourceTree = "<group>"; };
+		05E9751510A490C7005F2440 /* CommandFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandFormView.h; sourceTree = "<group>"; };
+		05E9751610A490C7005F2440 /* CommandFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandFormView.m; sourceTree = "<group>"; };
+		05E9759B10A4E964005F2440 /* XMPPxDataField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPxDataField.h; sourceTree = "<group>"; };
+		05E9759C10A4E964005F2440 /* XMPPxDataField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPxDataField.m; sourceTree = "<group>"; };
 		05EAB2F610509A9700AF71A2 /* left-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left-arrow.png"; sourceTree = "<group>"; };
 		05EAB2F710509A9800AF71A2 /* right-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right-arrow.png"; sourceTree = "<group>"; };
 		05ED2D90108B9140007F9413 /* service-directory.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-directory.png"; sourceTree = "<group>"; };
@@ -1103,6 +1111,8 @@
 				05DFCE6B10A35FE700C22524 /* XMPPCommandDelegate.m */,
 				05E206AA0FB9004100FCFC94 /* XMPPxData.h */,
 				05E206AB0FB9004100FCFC94 /* XMPPxData.m */,
+				05E9759B10A4E964005F2440 /* XMPPxDataField.h */,
+				05E9759C10A4E964005F2440 /* XMPPxDataField.m */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -1268,6 +1278,8 @@
 				05F5CD18109A66220055B10E /* ChatMessageCache.m */,
 				05E207BB0FB9046500FCFC94 /* CommandCell.h */,
 				05E207BC0FB9046500FCFC94 /* CommandCell.m */,
+				05E9751510A490C7005F2440 /* CommandFormView.h */,
+				05E9751610A490C7005F2440 /* CommandFormView.m */,
 				05DFCECF10A3B13D00C22524 /* CommandFormViewController.h */,
 				05DFCED010A3B13D00C22524 /* CommandFormViewController.m */,
 				05F8D50B109D08A9005FE8A5 /* CommandResponseMessageCache.h */,
@@ -1761,6 +1773,8 @@
 				0514556810A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */,
 				05DFCE6D10A35FE700C22524 /* XMPPCommandDelegate.m in Sources */,
 				05DFCED210A3B13D00C22524 /* CommandFormViewController.m in Sources */,
+				05E9751810A490C7005F2440 /* CommandFormView.m in Sources */,
+				05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1898,6 +1912,8 @@
 				0514556710A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */,
 				05DFCE6C10A35FE700C22524 /* XMPPCommandDelegate.m in Sources */,
 				05DFCED110A3B13D00C22524 /* CommandFormViewController.m in Sources */,
+				05E9751710A490C7005F2440 /* CommandFormView.m in Sources */,
+				05E9759D10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

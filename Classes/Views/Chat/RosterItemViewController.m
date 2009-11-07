@@ -346,7 +346,7 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
     SectionViewController* rosterHeader = 
-        [[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLable:[self.rosterItem fullJID]]; 
+        [[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:[self.rosterItem fullJID]]; 
     rosterHeaderView = rosterHeader.view;
 	return rosterHeaderView; 
 }

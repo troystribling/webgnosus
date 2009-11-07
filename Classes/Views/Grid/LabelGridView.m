@@ -49,15 +49,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithLabelViews:(NSMutableArray*)lableViews {
-    if (self = [self initWithLabelViews:lableViews borderWidth:kGRID_BORDER_WIDTH  maxWidth:kDISPLAY_WIDTH]) {
+- (id)initWithLabelViews:(NSMutableArray*)labelViews {
+    if (self = [self initWithLabelViews:labelViews borderWidth:kGRID_BORDER_WIDTH  maxWidth:kDISPLAY_WIDTH]) {
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithLabelViews:(NSMutableArray*)lableViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth {
-    if (self = [super initWithViews:lableViews borderWidth:initBorderWidth  maxWidth:(CGFloat)initMaxWidth]) {
+- (id)initWithLabelViews:(NSMutableArray*)labelViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth {
+    if (self = [super initWithViews:labelViews borderWidth:initBorderWidth  maxWidth:(CGFloat)initMaxWidth]) {
     }
     return self;
 }

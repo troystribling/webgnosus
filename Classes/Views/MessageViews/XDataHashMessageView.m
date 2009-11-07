@@ -31,7 +31,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)buildGridArray:(XMPPxData*)data {
-    NSMutableArray* fieldHash = [data fields];
+    NSMutableArray* fieldHash = [data fieldsToArrayOfHashes];
     NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldHash count]];
     for(int j = 0; j < [fieldHash count]; j++) {
         NSMutableArray* attrs = [fieldHash objectAtIndex:j];

@@ -38,9 +38,9 @@
         RoundedCornersView* contentView = [self createContentView:self withWidth:width];
         contentView.color = contentColor;
         [self createActivityIndicator:contentView withWidth:width];
-        UILabel* titleLable = [self createTitle:title inView:contentView withWidth:width];
-        titleLable.backgroundColor = contentColor;
-        titleLable.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+        UILabel* titleLabel = [self createTitle:title inView:contentView withWidth:width];
+        titleLabel.backgroundColor = contentColor;
+        titleLabel.textColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     }
     return self;
 }

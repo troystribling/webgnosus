@@ -19,7 +19,7 @@
 @interface EditAccountViewController : UIViewController <UITextFieldDelegate> {
 	IBOutlet UITextField* passwordTextField;
  	IBOutlet UITextField* reenterPasswordTextField;
-    IBOutlet UILabel* statusLable;
+    IBOutlet UILabel* statusLabel;
     IBOutlet UIButton* doneButton;
     IBOutlet UIButton* deleteButton;
     IBOutlet UIButton* addButton;
@@ -36,7 +36,7 @@
 @property (nonatomic, retain) UIButton* deleteButton;
 @property (nonatomic, retain) UIButton* addButton;
 @property (nonatomic, retain) UIButton* sendPasswordButton;
-@property (nonatomic, retain) UILabel* statusLable;
+@property (nonatomic, retain) UILabel* statusLabel;
 @property (nonatomic, retain) SegmentedListPicker* activeAccounts;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;

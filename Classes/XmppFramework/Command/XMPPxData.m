@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPxData.h"
+#import "XMPPxDataField.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPxData (PrivateAPI)
@@ -58,8 +59,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)fields {
+- (NSMutableArray*)fieldsToArrayOfHashes {
     return [self hashifyFields:self];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)fields {
+    NSArray* fieldElementArray = [self elementsForName:@"field"];
+    NSMutableArray* fieldArray = [NSMutableArray arrayWithCapacity:[fieldElementArray count]];
+    if (fieldElementArray) {
+        for(int i = 0; i < [fieldElementArray count]; i++) {
+            XMPPxDataField* field = [XMPPxDataField createFromElement:[fieldElementArray objectAtIndex:i]];
+            [fieldArray addObject:field];
+        }
+    }
+    return fieldArray;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -85,6 +99,16 @@
         }
     }
     return itemArray;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)title {
+	return [[self elementForName:@"title"] stringValue];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)instructions {
+	return [[self elementForName:@"instructions"] stringValue];
 }
 
 //===================================================================================================================================

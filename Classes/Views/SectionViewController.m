@@ -18,7 +18,7 @@
 @implementation SectionViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize nicknameLable;
+@synthesize nicknameLabel;
 @synthesize nickname;
 
 //===================================================================================================================================
@@ -31,22 +31,22 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIView*)viewWithLabel:(NSString*)viewLable {
-    SectionViewController* viewController = [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLable:viewLable] autorelease]; 
++ (UIView*)viewWithLabel:(NSString*)viewLabel {
+    SectionViewController* viewController = [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:viewLabel] autorelease]; 
     return viewController.view;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLable:(NSString*)lable {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLabel:(NSString*)label {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        self.nickname = lable;
+        self.nickname = label;
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    self.nicknameLable.text = self.nickname;
+    self.nicknameLabel.text = self.nickname;
     [super viewDidLoad];
 }
 

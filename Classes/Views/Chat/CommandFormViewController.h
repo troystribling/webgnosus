@@ -11,20 +11,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPIQ;
+@class CommandFormView;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandFormViewController : UIViewController {
-    IBOutlet UIView* formScrollView;
+    IBOutlet UIScrollView* formScrollView;
     IBOutlet UIButton* cancelButton;
     IBOutlet UIButton* sendButton;
+    CommandFormView* formView;
     XMPPIQ* form;
+    NSMutableDictionary* formFields;
+    CGFloat formYPos;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) UIView* formScrollView;
 @property (nonatomic, retain) UIButton* cancelButton;
 @property (nonatomic, retain) UIButton* sendButton;
+@property (nonatomic, retain) CommandFormView* formView;
 @property (nonatomic, retain) XMPPIQ* form;
+@property (nonatomic, retain) NSMutableDictionary* formFields;
+@property (nonatomic, assign) CGFloat formYPos;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView;

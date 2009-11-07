@@ -21,8 +21,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)dataType;
 - (void)addDataType:(NSString*)val;
+- (NSMutableArray*)fieldsToArrayOfHashes;
 - (NSMutableArray*)fields;
 - (NSMutableArray*)reported;
 - (NSMutableArray*)items;
+- (NSString*)title;
+- (NSString*)instructions;
 
 @end

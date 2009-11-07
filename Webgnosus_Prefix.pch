@@ -83,3 +83,8 @@
 // height of section title used in some table views
 #define kCELL_SECTION_TITLE_HEIGHT              30.0
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+// ServiceMessageViewController configurations
+#define kCOMMAND_FORM_WIDTH                     269.0
+#define kCOMMAND_FORM_XPOS                      10.0
+#define kCOMMAND_FORM_YPOS                      10.0

@@ -36,7 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)buildGridArray:(XMPPxData*)data {
-    NSMutableArray* valArray = [[[data fields] lastObject] lastObject];
+    NSMutableArray* valArray = [[[data fieldsToArrayOfHashes] lastObject] lastObject];
     NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:1];
     for(int j = 0; j < [valArray count]; j++) {
         NSMutableArray* val = [valArray objectAtIndex:j];

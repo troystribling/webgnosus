@@ -1,38 +1,40 @@
 //
-//  XDataScalarMessageView.m
+//  CommandFormView.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/24/09.
+//  Created by Troy Stribling on 11/6/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XDataScalarMessageView.h"
-#import "MessageModel.h"
-#import "XMPPxData.h"
+#import "CommandFormView.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XDataScalarMessageView (PrivateAPI)
+@interface CommandFormView (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XDataScalarMessageView
-
-//===================================================================================================================================
-#pragma mark XDataScalarMessageView
-
-//===================================================================================================================================
-#pragma mark XDataScalarMessageView PrivateAPI
+@implementation CommandFormView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)getMessageText:(MessageModel*)message {
-    XMPPxData* data = [message parseXDataMessage];
-    return [[[[data fieldsToArrayOfHashes] lastObject] lastObject] lastObject];
-}
 
 //===================================================================================================================================
-#pragma mark UITableViewCell
+#pragma mark CommandFormView
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        // Initialization code
+    }
+    return self;
+}
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
 
 //===================================================================================================================================
 #pragma mark NSObject
@@ -41,5 +43,6 @@
 - (void)dealloc {
     [super dealloc];
 }
+
 
 @end

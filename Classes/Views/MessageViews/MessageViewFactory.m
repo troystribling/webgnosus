@@ -92,10 +92,10 @@ typedef enum tagCommandDataType {
 + (CommandDataType)identifyXDataType:(XMPPxData*)data {
     CommandDataType dataType = CommandDataUnknown;
     if (data) {
-        NSInteger fields = [[data fields] count];
+        NSInteger fields = [[data fieldsToArrayOfHashes] count];
         NSInteger items = [[data items] count];
         if (fields == 1) {
-            NSInteger vals = [[[[data fields] objectAtIndex:0] lastObject] count];
+            NSInteger vals = [[[[data fieldsToArrayOfHashes] objectAtIndex:0] lastObject] count];
             if (vals > 1) {
                 dataType = CommandDataArray;
             } else {
