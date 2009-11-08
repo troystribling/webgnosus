@@ -23,6 +23,7 @@
 - (void)addDataType:(NSString*)val;
 - (NSMutableArray*)fieldsToArrayOfHashes;
 - (NSMutableArray*)fields;
+- (void)addFields:(NSArray*)fieldArray;
 - (NSMutableArray*)reported;
 - (NSMutableArray*)items;
 - (NSString*)title;

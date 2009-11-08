@@ -17,6 +17,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPxDataField*)createFromElement:(NSXMLElement*)element;
+- (XMPPxDataField*)initWithType:(NSString*)initType andVar:(NSString*)initVar;
+- (XMPPxDataField*)initWithType:(NSString*)initType var:(NSString*)initVar andValues:(NSArray*)initValues;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)type;

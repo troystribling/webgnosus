@@ -20,8 +20,6 @@
     IBOutlet UIButton* sendButton;
     CommandFormView* formView;
     XMPPIQ* form;
-    NSMutableDictionary* formFields;
-    CGFloat formYPos;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -30,8 +28,6 @@
 @property (nonatomic, retain) UIButton* sendButton;
 @property (nonatomic, retain) CommandFormView* formView;
 @property (nonatomic, retain) XMPPIQ* form;
-@property (nonatomic, retain) NSMutableDictionary* formFields;
-@property (nonatomic, assign) CGFloat formYPos;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView;

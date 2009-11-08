@@ -77,6 +77,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addFields:(NSArray*)fieldArray {
+    for(int i = 0; i < [fieldArray count]; i++) {
+        NSString* field = [fieldArray objectAtIndex:i];
+        [self addChild:field];	
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSMutableArray*)reported {
     NSArray* reportedElements = [[self elementForName:@"reported"]  elementsForName:@"field"];
     NSMutableArray* reportedArray = [NSMutableArray arrayWithCapacity:[reportedElements count]];

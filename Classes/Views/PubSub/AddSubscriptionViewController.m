@@ -110,7 +110,7 @@
 #pragma mark UITextFieldDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textFieldShouldReturn:(UITextField*)textField {
     if (![self.nodeTextField.text isEqualToString:@""] || ![self.jidTextField.text isEqualToString:@""]) {
         XMPPJID* userJID = [XMPPJID jidWithString:self.jidTextField.text];
         NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
