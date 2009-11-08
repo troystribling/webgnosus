@@ -27,8 +27,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPxDataField*)initWithType:(NSString*)initType andVar:(NSString*)initVar {
+- (XMPPxDataField*)init {
 	if(self = [super initWithName:@"field"]) {
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPxDataField*)initWithType:(NSString*)initType andVar:(NSString*)initVar {
+	if(self = [self init]) {
         [self addType:initType];
         [self addVar:initVar];
 	}
@@ -38,7 +45,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPxDataField*)initWithType:(NSString*)initType var:(NSString*)initVar andValues:(NSArray*)initValues {
 	if(self = [self initWithType:initType andVar:initVar]) {
-        [self addvalues:initValues];
+        [self addValues:initValues];
 	}
 	return self;
 }

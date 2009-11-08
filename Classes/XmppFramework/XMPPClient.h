@@ -37,6 +37,7 @@
 	SCNotificationManager *scNotificationManager;    
 	UInt16 port;	
     NSInteger stanzaID;
+    NSInteger sessionID;
 	int priority;    
    	NSError* streamError;	 
 }
@@ -51,11 +52,13 @@
 @property (nonatomic, retain) SCNotificationManager* scNotificationManager;
 @property (nonatomic, assign) UInt16 port;
 @property (nonatomic, assign) NSInteger stanzaID;
+@property (nonatomic, assign) NSInteger sessionID;
 @property (nonatomic, assign) int priority;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init;
 - (BOOL)isAccountJID:(NSString*)requestJID;
+- (NSString*)generateSessionID;
 
 // delegation
 - (void)addDelegate:(id)delegate;

@@ -78,6 +78,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)sessionID {
+    return [[self attributeForName:@"sessionid"] stringValue];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addSessionID:(NSString*)val {
+    [self addAttributeWithName:@"sessionid" stringValue:val];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)action {
     return [[self attributeForName:@"action"] stringValue];
 }
@@ -107,34 +117,34 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
-    [self set:client commandNode:node JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [self set:client commandNode:node JID:jid andSessionID:[client generateSessionID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
+    [self set:client commandNode:node JID:jid sessionID:sessionID andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    [cmd addSessionID:sessionID];
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid {
-    [self set:client commandNode:node withParameter:parameters JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
+    [self set:client commandNode:node withData:data JID:jid sessionID:sessionID andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
-    NSEnumerator* enumerator = [parameters keyEnumerator];
-    NSString* field;  
-    XMPPxData* cmdData = [[XMPPxData alloc] initWithDataType:@"submit"];
-    while ((field = (NSString*)[enumerator nextObject])) {
-//        NSString* fieldVal = (NSString*)[parameters objectForKey:field];
-//        [cmdData addField:field withValue:fieldVal]; 
-    }  
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"execute" andData:cmdData];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"submit" andData:data];
+    [cmd addSessionID:sessionID];
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 

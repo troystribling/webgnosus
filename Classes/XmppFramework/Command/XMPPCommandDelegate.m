@@ -23,6 +23,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPCommandDelegate (PrivateAPI)
 
+- (void)processCommandResult:(XMPPClient*)client forIQ:(XMPPIQ*)iq;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +37,13 @@
 
 //===================================================================================================================================
 #pragma mark XMPPDiscoInfoResponseDelegate PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)processCommandResult:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
+    [MessageModel insert:client commandResult:iq];
+    [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
+    [[client multicastDelegate] xmppClient:client didReceiveCommandResult:iq];        
+}
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
@@ -55,11 +64,13 @@
             if ([dataType isEqualToString:@"form"]) {
                 [[client multicastDelegate] xmppClient:client didReceiveCommandForm:iq];        
             } else if ([dataType isEqualToString:@"result"]) {
-                [MessageModel insert:client commandResult:iq];
-                [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];
-                [[client multicastDelegate] xmppClient:client didReceiveCommandResult:iq];        
+                [self processCommandResult:client forIQ:iq];
             }
-        }     
+        } else {
+            [self processCommandResult:client forIQ:iq];
+        }
+    } else {
+        [self processCommandResult:client forIQ:iq];
     }
 }
 

@@ -196,14 +196,15 @@
     NSMutableArray* fieldVals = [NSMutableArray arrayWithCapacity:[fieldVars count]];
     for (int i = 0; i < [fieldVars count]; i++) {
         NSString* var = [fieldVars objectAtIndex:i];
-        NSString* fieldViewValue;
-        XMPPxDataField* field;
         id fieldView = [self.formFields valueForKey:var];
+        XMPPxDataField* field =[[XMPPxDataField alloc] init];
+        [field addVar:var];
+        NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             fieldViewValue = [fieldView text];
-            field = [[XMPPxDataField alloc] initWithType:@"text-single" andVar:var];
-            [field addValues:[NSArray arrayWithObject:fieldViewValue]];
+            [field addType:@"text-single"];
         }
+        [field addValues:[NSArray arrayWithObject:fieldViewValue]];
         [fieldVals addObject:field];
         [field release];
     }

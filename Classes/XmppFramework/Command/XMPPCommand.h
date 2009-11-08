@@ -37,10 +37,14 @@
 - (XMPPxData*)data;
 - (void)addData:(XMPPxData*)child;
 
+- (NSString*)sessionID;
+- (void)addSessionID:(NSString*)val;
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid;
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate;
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid;
-+ (void)set:(XMPPClient*)client commandNode:(NSString*)node withParameter:(NSMutableDictionary*)parameters JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate;
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID;
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate;
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID;
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid sessionID:(NSString*)sessionId andDelegateResponse:(id)responseDelegate;
 
 @end

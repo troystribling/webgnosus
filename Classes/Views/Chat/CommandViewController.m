@@ -115,7 +115,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandForm:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [CommandFormViewController form:iq inView:self.view.window];
+    [CommandFormViewController form:iq inView:self.view.window forAccount:self.account];
 }
 
 //===================================================================================================================================

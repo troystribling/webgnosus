@@ -79,7 +79,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addFields:(NSArray*)fieldArray {
     for(int i = 0; i < [fieldArray count]; i++) {
-        NSString* field = [fieldArray objectAtIndex:i];
+        XMPPxDataField* field = [fieldArray objectAtIndex:i];
         [self addChild:field];	
     }
 }

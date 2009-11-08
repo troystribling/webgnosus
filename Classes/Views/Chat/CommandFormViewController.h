@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPIQ;
 @class CommandFormView;
+@class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandFormViewController : UIViewController {
@@ -20,6 +21,7 @@
     IBOutlet UIButton* sendButton;
     CommandFormView* formView;
     XMPPIQ* form;
+    AccountModel* account;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,10 +30,11 @@
 @property (nonatomic, retain) UIButton* sendButton;
 @property (nonatomic, retain) CommandFormView* formView;
 @property (nonatomic, retain) XMPPIQ* form;
+@property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView;
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)parentView andForm:(XMPPIQ*)initForm;
++ (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView forAccount:(AccountModel*)initAccount;
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)parentView forForm:(XMPPIQ*)initForm andAccount:(AccountModel*)initAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)cancelButtonPressed:(id)sender;

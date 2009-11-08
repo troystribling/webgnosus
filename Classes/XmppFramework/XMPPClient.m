@@ -32,7 +32,7 @@
 
 - (void)addResponseDelegate:(XMPPResponse*)request;
 - (XMPPResponse*)getResponseDelegateWithID:(NSString*)requestID;
-- (NSString*)getStanzaID;
+- (NSString*)generateStanzaID;
 - (void)removeResponseDelegateWithID:(NSString*)reqID;
 
 @end
@@ -50,6 +50,7 @@
 @synthesize scNotificationManager;
 @synthesize port;
 @synthesize stanzaID;
+@synthesize sessionID;
 @synthesize priority;
 
 //===================================================================================================================================
@@ -58,6 +59,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isAccountJID:(NSString*)requestJID {
     return [[self.myJID full] isEqualToString:requestJID];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)generateSessionID {
+    self.sessionID++;
+    return [NSString stringWithFormat:@"%d", self.sessionID];
 }
 
 //===================================================================================================================================
@@ -156,7 +163,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)send:(XMPPStanza*)stanza andDelegateResponse:(id)reqDelegate {
     XMPPResponse* xmppResp = [[XMPPResponse alloc] initWithDelegate:reqDelegate];
-    NSString* stanID = [self getStanzaID];
+    NSString* stanID = [self generateStanzaID];
     xmppResp.stanzaID = stanID;
     [self addResponseDelegate:xmppResp];
     [stanza addStanzaID:stanID];
@@ -327,7 +334,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)getStanzaID {
+- (NSString*)generateStanzaID {
     self.stanzaID++;
     return [NSString stringWithFormat:@"%d", self.stanzaID];
 }
