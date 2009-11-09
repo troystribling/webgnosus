@@ -9,15 +9,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandFormViewController.h"
 #import "CommandFormView.h"
+#import "MessageModel.h"
 #import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 #import "XMPPCommand.h"
 #import "XMPPIQ.h"
 #import "XMPPxData.h"
+#import "XMPPJID.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandFormViewController (PrivateAPI)
+
+- (void)saveMessage:(XMPPxData*)data forNode:(NSString*)node;
 
 @end
 
@@ -34,6 +38,22 @@
 
 //===================================================================================================================================
 #pragma mark CommandFormViewController PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)saveMessage:(XMPPxData*)data forNode:(NSString*)node {
+    MessageModel* model = [[MessageModel alloc] init];
+    model.messageText = [data XMLString];;
+    model.accountPk = self.account.pk;
+    model.toJid = [[self.form fromJID] full];
+    model.fromJid = [self.account fullJID];
+    model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    model.textType = MessageTextTypeCommandXData;
+    model.itemId = @"-1";
+    model.messageRead = YES;
+    model.node = node;
+    [model insert];
+    [model release];
+}
 
 //===================================================================================================================================
 #pragma mark CommandFormViewController
@@ -57,6 +77,7 @@
     NSString* node = [command node];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPCommand set:client commandNode:node withData:fields JID:toJID andSessionID:sessionID];
+    [self saveMessage:fields forNode:[command node]];
     [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting for Response"];
 }
 

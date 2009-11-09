@@ -77,6 +77,7 @@
         RosterItemModel* resourceModel = [RosterItemModel findByFullJid:serviceItem.service andAccount:self.account];
         if ([resourceModel isAvailable]) {
             [XMPPCommand set:client commandNode:self.commandRequest.node JID:[resourceModel toJID]];
+            [self saveMessage:self.commandRequest.itemName];
         }
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting for Response"];
     }
@@ -91,6 +92,8 @@
     model.fromJid = [self.account fullJID];
     model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
     model.textType = MessageTextTypeCommandText;
+    model.itemId = @"-1";
+    model.messageRead = YES;
     [model insert];
     [model release];
 }
@@ -108,7 +111,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [self saveMessage:self.commandRequest.itemName];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

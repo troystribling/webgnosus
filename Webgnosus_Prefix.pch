@@ -89,6 +89,7 @@
 #define kCOMMAND_FORM_XTRA_HEIGHT               369.0
 #define kCOMMAND_FORM_XPOS                      10.0
 #define kCOMMAND_FORM_YOFFSET                   10.0
-#define kCOMMAND_FORM_CONTROL_LABEL_YOFFSET     5.0
+#define kCOMMAND_FORM_CONTROL_YOFFSET           5.0
 #define kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET 10.0
-#define kCOMMAND_FORM_TEXTFIELD_SIZE            30.0
+#define kCOMMAND_FORM_TEXTFIELD_HEIGHT          25.0
+#define kCOMMAND_FORM_LIST_SIZE                 35.0

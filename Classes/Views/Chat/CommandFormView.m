@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandFormView.h"
 #import "NSObjectiPhoneAdditions.h"
+#import "SegmentedListPicker.h"
 #import "XMPPIQ.h"
 #import "XMPPCommand.h"
 #import "XMPPxData.h"
@@ -133,7 +134,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textSingleView:(XMPPxDataField*)field {
-    UITextField* fieldText = [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_SIZE)];
+    UITextField* fieldText = [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
     fieldText.placeholder = [field label];
     fieldText.borderStyle = UITextBorderStyleRoundedRect;
     fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -160,6 +161,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)listSingleView:(XMPPxDataField*)field {
+    UILabel* fieldLabel = [self createLable:[field label] withOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:[UIFont systemFontSize]];
+    [self addSubview:fieldLabel];
+//    SegmentedListPicker* fieldPicker = 
+//        [[SegmentedListPicker alloc] init:[field options] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
+//    [self addSubview:fieldPicker];
+//    NSString* fieldVar = [field var];
+//    self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
+//    [self.formFields setValue:fieldPicker forKey:fieldVar];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -203,6 +212,9 @@
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             fieldViewValue = [fieldView text];
             [field addType:@"text-single"];
+        } else if ([[fieldView className] isEqualToString:@"SegmentedListPicker"]) {
+//            fieldViewValue = [fieldView selectedItem];
+//            [field addType:@"list-single"];
         }
         [field addValues:[NSArray arrayWithObject:fieldViewValue]];
         [fieldVals addObject:field];

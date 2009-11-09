@@ -264,23 +264,25 @@
 + (void)insert:(XMPPClient*)client commandResult:(XMPPIQ*)iq {
     XMPPCommand* command = [iq command];
     if (command) {
-        XMPPxData* cmdData = [command data];
-        if (cmdData) {
-            AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-            if (account) {
-                MessageModel* messageModel = [[MessageModel alloc] init];
-                messageModel.fromJid = [[iq fromJID] full];
-                messageModel.accountPk = account.pk;
+        AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+        if (account) {
+            MessageModel* messageModel = [[MessageModel alloc] init];
+            messageModel.fromJid = [[iq fromJID] full];
+            messageModel.accountPk = account.pk;
+            messageModel.toJid = [account fullJID];
+            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.textType = MessageTextTypeCommandXData;
+            messageModel.node = [command node];
+            messageModel.itemId = @"-1";
+            messageModel.messageRead = NO;
+            XMPPxData* cmdData = [command data];
+            if (cmdData) {
                 messageModel.messageText = [cmdData XMLString];
-                messageModel.toJid = [account fullJID];
-                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
-                messageModel.textType = MessageTextTypeCommandXData;
-                messageModel.node = [command node];
-                messageModel.itemId = @"-1";
-                messageModel.messageRead = NO;
-                [messageModel insert];
-                [messageModel release];
+            } else {
+                messageModel.messageText = @"completed";
             }
+            [messageModel insert];
+            [messageModel release];            
         }
     }
 }
