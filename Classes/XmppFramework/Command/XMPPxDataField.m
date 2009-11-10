@@ -100,4 +100,19 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSDictionary*)options {
+    NSArray* optElements = [self elementsForName:@"option"];
+    NSMutableDictionary* opts = [NSMutableDictionary dictionaryWithCapacity:[optElements count]];
+    if (optElements) {
+        for(int i = 0; i < [optElements count]; i++) {
+            NSXMLElement* optElement = [optElements objectAtIndex:i];
+            NSString* label = [[optElement attributeForName:@"label"] stringValue];
+            NSString* value = [[[optElement elementsForName:@"value"] lastObject]  stringValue];
+            [opts setValue:value forKey:label];
+        }
+    }
+    return opts;
+}
+
 @end

@@ -40,7 +40,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize form;
-@synthesize formFields;
+@synthesize formFieldViews;
+@synthesize fields;
 @synthesize formYPos;
 @synthesize parentView;
 
@@ -107,9 +108,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fieldViews:(XMPPxData*)data {
-    NSArray* fields = [data fields];
-    for (int i = 0; i < [fields count]; i++) {
-        XMPPxDataField* field = [fields objectAtIndex:i];
+    NSArray* dataFields = [data fields];
+    for (int i = 0; i < [dataFields count]; i++) {
+        XMPPxDataField* field = [dataFields objectAtIndex:i];
         NSString* fieldType = [field type];
         if ([fieldType isEqualToString:@"text-single"]) {
             [self textSingleView:field];
@@ -126,8 +127,9 @@
         } else if ([fieldType isEqualToString:@"fixed"]) {
             [self fixedView:field];
         }
+        [self.fields setValue:field forKey:[field var]];
     }
-    if ([fields count] > 0) {
+    if ([dataFields count] > 0) {
         [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
     }
 }
@@ -140,11 +142,12 @@
     fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
     fieldText.returnKeyType = UIReturnKeyDone;
     fieldText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];;
     fieldText.delegate = self;
     [self addSubview:fieldText];
     NSString* fieldVar = [field var];
     self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
-    [self.formFields setValue:fieldText forKey:fieldVar];
+    [self.formFieldViews setValue:fieldText forKey:fieldVar];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -163,12 +166,16 @@
 - (void)listSingleView:(XMPPxDataField*)field {
     UILabel* fieldLabel = [self createLable:[field label] withOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:[UIFont systemFontSize]];
     [self addSubview:fieldLabel];
-//    SegmentedListPicker* fieldPicker = 
-//        [[SegmentedListPicker alloc] init:[field options] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
-//    [self addSubview:fieldPicker];
-//    NSString* fieldVar = [field var];
-//    self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
-//    [self.formFields setValue:fieldPicker forKey:fieldVar];
+    NSDictionary* opts = [field options];
+    if ([opts count] > 0) {
+        SegmentedListPicker* fieldPicker = 
+            [[SegmentedListPicker alloc] init:[opts allKeys] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
+        fieldPicker.tintColor = [UIColor colorWithWhite:0.95f alpha:1.0f];
+        [self addSubview:fieldPicker];
+        NSString* fieldVar = [field var];
+        self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
+        [self.formFieldViews setValue:fieldPicker forKey:fieldVar];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -192,7 +199,8 @@
         self.form = initForm;
         self.parentView = initParentView;
         self.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];
-        self.formFields = [[NSMutableDictionary alloc] initWithCapacity:10];
+        self.formFieldViews = [[NSMutableDictionary alloc] initWithCapacity:10];
+        self.fields = [[NSMutableDictionary alloc] initWithCapacity:10];
         [self createFormItemViews];
         [self.parentView addSubview:self];
     }
@@ -200,21 +208,23 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPxData*)fields {
-    NSArray* fieldVars = [self.formFields allKeys];
+- (XMPPxData*)formFields {
+    NSArray* fieldVars = [self.formFieldViews allKeys];
     NSMutableArray* fieldVals = [NSMutableArray arrayWithCapacity:[fieldVars count]];
     for (int i = 0; i < [fieldVars count]; i++) {
         NSString* var = [fieldVars objectAtIndex:i];
-        id fieldView = [self.formFields valueForKey:var];
+        id fieldView = [self.formFieldViews valueForKey:var];
         XMPPxDataField* field =[[XMPPxDataField alloc] init];
         [field addVar:var];
         NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
-            fieldViewValue = [fieldView text];
+            fieldViewValue = (NSString*)[fieldView text];
             [field addType:@"text-single"];
         } else if ([[fieldView className] isEqualToString:@"SegmentedListPicker"]) {
-//            fieldViewValue = [fieldView selectedItem];
-//            [field addType:@"list-single"];
+            NSString* fieldLabel = (NSString*)[fieldView selectedItem];
+            NSDictionary* opts = [(XMPPxDataField*)[self.fields valueForKey:var] options];
+            fieldViewValue = (NSString*)[opts valueForKey:fieldLabel];
+            [field addType:@"list-single"];
         }
         [field addValues:[NSArray arrayWithObject:fieldViewValue]];
         [fieldVals addObject:field];
@@ -234,7 +244,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
-    NSArray* fieldViews = [self.formFields allValues];
+    NSArray* fieldViews = [self.formFieldViews allValues];
     for (int i = 0; i < [fieldViews count]; i++) {
         id fieldView = [fieldViews objectAtIndex:i];
         if ([[fieldView className] isEqualToString:@"UITextField"]) {

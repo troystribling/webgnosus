@@ -29,5 +29,6 @@
 - (void)addVar:(NSString*)val;
 - (NSArray*)values;
 - (void)addValues:(NSArray*)val;
+- (NSDictionary*)options;
 
 @end

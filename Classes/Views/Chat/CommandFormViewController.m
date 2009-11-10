@@ -70,7 +70,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)sendButtonPressed:(id)sender {
-    XMPPxData* fields = [self.formView fields];
+    XMPPxData* fields = [self.formView formFields];
     XMPPCommand* command = [self.form command];
     XMPPJID* toJID = [self.form fromJID];
     NSString* sessionID =[command sessionID];

@@ -16,19 +16,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandFormView : UIView <UITextFieldDelegate> {
     XMPPIQ* form;
-    NSMutableDictionary* formFields;
+    NSMutableDictionary* formFieldViews;
+    NSMutableDictionary* fields;
     CGFloat formYPos;
     UIView* parentView;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) XMPPIQ* form;
-@property (nonatomic, retain) NSMutableDictionary* formFields;
+@property (nonatomic, retain) NSMutableDictionary* formFieldViews;
+@property (nonatomic, retain) NSMutableDictionary* fields;
 @property (nonatomic, assign) CGFloat formYPos;
 @property (nonatomic, retain) UIView* parentView;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView;
-- (XMPPxData*)fields;
+- (XMPPxData*)formFields;
 
 @end
