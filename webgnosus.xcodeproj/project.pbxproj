@@ -23,6 +23,8 @@
 		0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
 		050007421093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
 		050007431093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
+		0501553010AA516800B0B5FD /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0501552F10AA516800B0B5FD /* Entitlements.plist */; };
+		0501553110AA516800B0B5FD /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0501552F10AA516800B0B5FD /* Entitlements.plist */; };
 		050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
@@ -91,6 +93,8 @@
 		057BB16510587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
 		057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
+		05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
+		05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
 		05C6E9490F0F176F009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
 		05C6E95C0F0F17FA009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
 		05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
@@ -432,6 +436,7 @@
 		050007311093EE390046D0BC /* XDataScalarMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarMessageView.m; sourceTree = "<group>"; };
 		050007401093F1260046D0BC /* BodyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyMessageView.h; sourceTree = "<group>"; };
 		050007411093F1260046D0BC /* BodyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyMessageView.m; sourceTree = "<group>"; };
+		0501552F10AA516800B0B5FD /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		050263C01076E78C000B81C6 /* XMPPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPEntry.h; sourceTree = "<group>"; };
 		050263C11076E78C000B81C6 /* XMPPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPEntry.m; sourceTree = "<group>"; };
 		050263CF1076FA7E000B81C6 /* EventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
@@ -485,6 +490,7 @@
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
+		05AAB3DD10AA6B83008CF187 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
@@ -672,6 +678,8 @@
 		05E207E70FB9046500FCFC94 /* RosterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterCell.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
+		05E2278A10AA605D007BAE61 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05E2278C10AA6068007BAE61 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E3E96B109E779A0040E5D9 /* load-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "load-messages.png"; sourceTree = "<group>"; };
 		05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEntryDelegate.h; sourceTree = "<group>"; };
 		05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubEntryDelegate.m; sourceTree = "<group>"; };
@@ -717,7 +725,6 @@
 		05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-pubsub.png"; sourceTree = "<group>"; };
 		05ED38E0108AAA4E0079A3B3 /* service-socket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "service-socket.png"; sourceTree = "<group>"; };
 		05ED38E2108AAA4E0079A3B3 /* service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service.png; sourceTree = "<group>"; };
-		05ED45E8105163D300DB3396 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05ED464D1051932B00DB3396 /* SegmentedListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentedListPicker.h; sourceTree = "<group>"; };
 		05ED464E1051932B00DB3396 /* SegmentedListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentedListPicker.m; sourceTree = "<group>"; };
 		05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tablecell-background.png"; sourceTree = "<group>"; };
@@ -754,7 +761,6 @@
 		05FABADE10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoResponseDelegate.h; path = Disco/XMPPDiscoInfoResponseDelegate.h; sourceTree = "<group>"; };
 		05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoInfoResponseDelegate.m; path = Disco/XMPPDiscoInfoResponseDelegate.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D6058910D05DD3D006BFB54 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -1385,8 +1391,8 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* web.gnos.us.app */,
-				05ED45E8105163D300DB3396 /* web.gnos.us.app */,
+				05E2278A10AA605D007BAE61 /* web.gnos.us.app */,
+				05E2278C10AA6068007BAE61 /* web.gnos.us.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1399,6 +1405,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				0501552F10AA516800B0B5FD /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1415,6 +1422,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				05AAB3DD10AA6B83008CF187 /* iTunesArtwork */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				058868B60F0FC9190076891D /* Data */,
 				05509F6E0F34F38600C19E19 /* Images */,
@@ -1457,7 +1465,7 @@
 			);
 			name = webgnosus_simulator;
 			productName = webgnosus;
-			productReference = 05ED45E8105163D300DB3396 /* web.gnos.us.app */;
+			productReference = 05E2278A10AA605D007BAE61 /* web.gnos.us.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1D6058900D05DD3D006BFB54 /* webgnosus */ = {
@@ -1474,7 +1482,7 @@
 			);
 			name = webgnosus;
 			productName = webgnosus;
-			productReference = 1D6058910D05DD3D006BFB54 /* web.gnos.us.app */;
+			productReference = 05E2278C10AA6068007BAE61 /* web.gnos.us.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1563,6 +1571,8 @@
 				05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */,
 				051532A7109E9FD600E83386 /* Default.png in Resources */,
 				05DFCF2610A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
+				0501553110AA516800B0B5FD /* Entitlements.plist in Resources */,
+				05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1633,6 +1643,8 @@
 				05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */,
 				051532A6109E9FD600E83386 /* Default.png in Resources */,
 				05DFCF2510A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
+				0501553010AA516800B0B5FD /* Entitlements.plist in Resources */,
+				05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +1932,57 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		0501552310AA4E4C00B0B5FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				OTHER_LDFLAGS = "-lxml2";
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Distribution;
+		};
+		0501552410AA4E4C00B0B5FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: William Stribling";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Distribution;
+		};
+		0501552510AA4E4C00B0B5FD /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
+				INFOPLIST_FILE = "Info Simulator.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\\\"$(SRCROOT)\\\"",
+					"\"$(SRCROOT)\"",
+				);
+				PRODUCT_NAME = web.gnos.us;
+			};
+			name = Distribution;
+		};
 		05C6E9BF0F0F1B77009BD7C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1936,6 +1999,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Debug;
 		};
@@ -1972,6 +2036,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				SDKROOT = iphonesimulator3.1.2;
 			};
 			name = Debug;
 		};
@@ -1989,6 +2054,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				SDKROOT = iphoneos3.1.2;
 			};
 			name = Release;
 		};
@@ -2031,6 +2097,7 @@
 			buildConfigurations = (
 				05C6E9BF0F0F1B77009BD7C8 /* Debug */,
 				05C6E9C00F0F1B77009BD7C8 /* Release */,
+				0501552510AA4E4C00B0B5FD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2040,6 +2107,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				0501552410AA4E4C00B0B5FD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2049,6 +2117,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				0501552310AA4E4C00B0B5FD /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
