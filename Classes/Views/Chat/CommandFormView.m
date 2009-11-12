@@ -21,6 +21,7 @@
 - (void)createFormItemViews;
 - (UILabel*)createLable:(NSString*)labelText withOffSet:(CGFloat)offSet andFontSize:(CGFloat)fontSize;
 - (CGRect)labelRect:(NSString*)label withOffSet:(CGFloat)offSet andFontSize:(CGFloat)fontSize;
+- (UITextField*)textFieldViewWithLabel:(NSString*)label;
 - (void)addSeperatorWithOffSet:(CGFloat)offSet;
 - (void)titleView:(XMPPxData*)data;
 - (void)instructionsView:(XMPPxData*)data;
@@ -66,8 +67,9 @@
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.text = labelText;
     label.numberOfLines = 0;
+    label.font = [UIFont fontWithName:@"helvetica" size:17.0f];
     label.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];
-    return label;
+    return [label autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -78,6 +80,22 @@
     self.formYPos += size.height+offSet;
     return labelRect;
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (UITextField*)textFieldViewWithLabel:(NSString*)label {
+    UITextField* fieldText = [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
+    fieldText.placeholder = label;
+    fieldText.borderStyle = UITextBorderStyleRoundedRect;
+    fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
+    fieldText.returnKeyType = UIReturnKeyDone;
+    fieldText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
+    fieldText.delegate = self;
+    [self addSubview:fieldText];
+    self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
+    return [fieldText autorelease];
+}
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addSeperatorWithOffSet:(CGFloat)offSet {
@@ -93,16 +111,14 @@
     UILabel* titleLable = [self createLable:[data title] withOffSet:kCOMMAND_FORM_YOFFSET andFontSize:[UIFont systemFontSize]];
     titleLable.textAlignment = UITextAlignmentCenter;
     [self addSubview:titleLable];
-    [titleLable release];
     [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)instructionsView:(XMPPxData*)data {
     UILabel* instructionsLable = [self createLable:[data instructions] withOffSet:kCOMMAND_FORM_YOFFSET andFontSize:15.0f];
-    instructionsLable.font = [instructionsLable.font fontWithSize:15.0f];
+    instructionsLable.font = [UIFont fontWithName:@"helvetica" size:15.0f];
     [self addSubview:instructionsLable];
-    [instructionsLable release];
     [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
 }
 
@@ -136,30 +152,36 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textSingleView:(XMPPxDataField*)field {
-    UITextField* fieldText = [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
-    fieldText.placeholder = [field label];
-    fieldText.borderStyle = UITextBorderStyleRoundedRect;
-    fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
-    fieldText.returnKeyType = UIReturnKeyDone;
-    fieldText.clearButtonMode = UITextFieldViewModeWhileEditing;
-    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];;
-    fieldText.delegate = self;
-    [self addSubview:fieldText];
-    NSString* fieldVar = [field var];
-    self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
-    [self.formFieldViews setValue:fieldText forKey:fieldVar];
+    UITextField* fieldText = [self textFieldViewWithLabel:[field label]];
+    [self.formFieldViews setValue:fieldText forKey:[field var]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textMultiView:(XMPPxDataField*)field {
+    UILabel* fieldLabel = [self createLable:[field label] withOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:[UIFont systemFontSize]];
+    [self addSubview:fieldLabel];
+    UITextView* fieldText = [[UITextView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
+    fieldText.returnKeyType = UIReturnKeyDone;
+    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
+    fieldText.delegate = self;
+    [self addSubview:fieldText];
+    self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
+    [fieldText release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textPrivateView:(XMPPxDataField*)field {
+    UITextField* fieldText = [self textFieldViewWithLabel:[field label]];
+    fieldText.secureTextEntry = YES;
+    [self.formFieldViews setValue:fieldText forKey:[field var]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)booleanView:(XMPPxDataField*)field {
+	UISwitch* fieldBoolean = [[UISwitch alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_BOOLEAN_WIDTH, kCOMMAND_FORM_BOOLEAN_HEIGHT)];
+    [self addSubview:fieldBoolean];
+    self.formYPos += fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET;
+    [fieldBoolean release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -175,11 +197,14 @@
         NSString* fieldVar = [field var];
         self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
         [self.formFieldViews setValue:fieldPicker forKey:fieldVar];
+        [fieldPicker release];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)jidSingleView:(XMPPxDataField*)field {
+    UITextField* fieldText = [self textFieldViewWithLabel:[field label]];
+    [self.formFieldViews setValue:fieldText forKey:[field var]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -214,18 +239,26 @@
     for (int i = 0; i < [fieldVars count]; i++) {
         NSString* var = [fieldVars objectAtIndex:i];
         id fieldView = [self.formFieldViews valueForKey:var];
+        XMPPxDataField* formField = [self.formFieldViews valueForKey:var];
         XMPPxDataField* field =[[XMPPxDataField alloc] init];
         [field addVar:var];
         NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
-            fieldViewValue = (NSString*)[fieldView text];
-            [field addType:@"text-single"];
+            fieldViewValue = (NSString*)[(UITextView*)fieldView text];
+        } else if ([[fieldView className] isEqualToString:@"UITextView"]) {
+            fieldViewValue = (NSString*)[(UITextView*)fieldView text];
+        } else if ([[fieldView className] isEqualToString:@"UISwitch"]) {
+            if ([(UISwitch*)fieldView isOn]) {
+                fieldViewValue = @"true";
+            } else {
+                fieldViewValue = @"false";
+            }
         } else if ([[fieldView className] isEqualToString:@"SegmentedListPicker"]) {
-            NSString* fieldLabel = (NSString*)[fieldView selectedItem];
+            NSString* fieldLabel = (NSString*)[(SegmentedListPicker*)fieldView selectedItem];
             NSDictionary* opts = [(XMPPxDataField*)[self.fields valueForKey:var] options];
             fieldViewValue = (NSString*)[opts valueForKey:fieldLabel];
-            [field addType:@"list-single"];
         }
+        [field addType:[formField type]];
         [field addValues:[NSArray arrayWithObject:fieldViewValue]];
         [fieldVals addObject:field];
         [field release];
@@ -257,6 +290,26 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textFieldDidBeginEditing:(UITextField*)textField {
 }
+
+//===================================================================================================================================
+#pragma mark UITextViewDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)textViewShouldEndEditing:(UITextView*)textView {
+    NSArray* fieldViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [fieldViews count]; i++) {
+        id fieldView = [fieldViews objectAtIndex:i];
+        if ([[fieldView className] isEqualToString:@"UITextView"]) {
+            [fieldView resignFirstResponder];
+        }
+    }
+    return YES;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)textViewDidBeginEditing:(UITextView*)textView {
+}
+
 
 //===================================================================================================================================
 #pragma mark NSObject

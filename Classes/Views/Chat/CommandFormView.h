@@ -14,7 +14,7 @@
 @class XMPPxData;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface CommandFormView : UIView <UITextFieldDelegate> {
+@interface CommandFormView : UIView <UITextFieldDelegate,UITextViewDelegate> {
     XMPPIQ* form;
     NSMutableDictionary* formFieldViews;
     NSMutableDictionary* fields;
