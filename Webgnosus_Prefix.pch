@@ -96,3 +96,5 @@
 #define kCOMMAND_FORM_LIST_SIZE                 35.0
 #define kCOMMAND_FORM_BOOLEAN_HEIGHT            30.0
 #define kCOMMAND_FORM_BOOLEAN_WIDTH             95.0
+#define kCOMMAND_FORM_BOOLEAN_LABEL_WIDTH       159.0
+#define kCOMMAND_FORM_BOOLEAN_SEPERATOR         10.0
