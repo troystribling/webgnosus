@@ -125,6 +125,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     self.formView = [[CommandFormView alloc] initWithForm:self.form inParentView:self.formScrollView];
+    [self.formScrollView setContentSize:self.formView.frame.size];
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
     [self.formScrollView addSubview:self.formView];
 	[super viewWillAppear:animated];

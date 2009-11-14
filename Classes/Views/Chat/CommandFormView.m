@@ -22,6 +22,7 @@
 - (void)createFormItemViews;
 - (UILabel*)createLabel:(NSString*)labelText withXOffSet:(CGFloat)offSet width:(CGFloat)width andFontSize:(CGFloat)fontSize;
 - (UILabel*)createLabel:(NSString*)labelText withYOffSet:(CGFloat)offSet andFontSize:(CGFloat)fontSize;
+- (void)updateViewHeight:(CGFloat)heightDelta;
 - (CGRect)labelRect:(NSString*)label withXOffSet:(CGFloat)offSet width:(CGFloat)width andFontSize:(CGFloat)fontSize;
 - (UITextField*)textFieldViewWithLabel:(NSString*)label;
 - (void)addSeperatorWithOffSet:(CGFloat)offSet;
@@ -85,8 +86,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UILabel*)createLabel:(NSString*)labelText withYOffSet:(CGFloat)yOffSet andFontSize:(CGFloat)fontSize {
     UILabel* label = [self createLabel:labelText withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:fontSize];
+    [self updateViewHeight:label.frame.size.height+yOffSet];
     self.formYPos += label.frame.size.height+yOffSet;
     return label;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)updateViewHeight:(CGFloat)heightDelta {
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height+heightDelta);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -101,6 +108,7 @@
     fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
     fieldText.delegate = self;
     [self addSubview:fieldText];
+    [self updateViewHeight:fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET];
     self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
     return [fieldText autorelease];
 }
@@ -111,6 +119,7 @@
     UIView* seperator = [[UIView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, 2.0f)];
     seperator.backgroundColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
     [self addSubview:seperator];
+    [self updateViewHeight:seperator.frame.size.height+offSet];
     self.formYPos += seperator.frame.size.height+offSet;
     [seperator release];
 }
@@ -176,6 +185,7 @@
         [[CommandFormTextMultiView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
     fieldText.textView.delegate = self;
     [self addSubview:fieldText];
+    [self updateViewHeight:fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET];
     self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
     [self.formFieldViews setValue:fieldText forKey:[field var]];
     [fieldText release];
@@ -195,13 +205,16 @@
     if (fieldLabel.frame.size.height < kCOMMAND_FORM_BOOLEAN_HEIGHT) {
         self.formYPos += fieldLabel.frame.size.height+kCOMMAND_FORM_YOFFSET-kCOMMAND_FORM_BOOLEAN_HEIGHT;
         fieldLabel.frame = CGRectMake(fieldLabel.frame.origin.x, fieldLabel.frame.origin.y + kCOMMAND_FORM_YOFFSET, fieldLabel.frame.size.width, fieldLabel.frame.size.height);
+        [self updateViewHeight:fieldLabel.frame.size.height+kCOMMAND_FORM_YOFFSET-kCOMMAND_FORM_BOOLEAN_HEIGHT];
     } else {
+        [self updateViewHeight:fieldLabel.frame.size.height-kCOMMAND_FORM_BOOLEAN_HEIGHT];
         self.formYPos += fieldLabel.frame.size.height-kCOMMAND_FORM_BOOLEAN_HEIGHT;
     }
 	UISwitch* fieldBoolean = [[UISwitch alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_BOOLEAN_WIDTH, kCOMMAND_FORM_BOOLEAN_HEIGHT)];
     [self addSubview:fieldLabel];
     [self addSubview:fieldBoolean];
     [self.formFieldViews setValue:fieldBoolean forKey:[field var]];
+    [self updateViewHeight:fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET];
     self.formYPos += fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET;
     [fieldBoolean release];
 }
@@ -216,6 +229,7 @@
             [[SegmentedListPicker alloc] init:[opts allKeys] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
         fieldPicker.tintColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
         [self addSubview:fieldPicker];
+        [self updateViewHeight:fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET];
         self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
         [self.formFieldViews setValue:fieldPicker forKey:[field var]];
         [fieldPicker release];
@@ -240,7 +254,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView {
-    if (self = [super initWithFrame:CGRectMake(0.0f, 0.0f, kCOMMAND_FORM_WIDTH, kCOMMAND_FORM_XTRA_HEIGHT)]) {
+    if (self = [super initWithFrame:CGRectMake(0.0f, 0.0f, kCOMMAND_FORM_WIDTH, kCOMMAND_FORM_HEIGHT)]) {
         self.form = initForm;
         self.parentView = initParentView;
         self.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];

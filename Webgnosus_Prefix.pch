@@ -86,17 +86,17 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 // ServiceMessageViewController configurations
 #define kCOMMAND_FORM_WIDTH                     274.0
-#define kCOMMAND_FORM_XTRA_HEIGHT               369.0
+#define kCOMMAND_FORM_HEIGHT                    369.0
 #define kCOMMAND_FORM_XPOS                      10.0
 #define kCOMMAND_FORM_YOFFSET                   10.0
 #define kCOMMAND_FORM_CONTROL_YOFFSET           5.0
 #define kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET 10.0
 #define kCOMMAND_FORM_TEXTFIELD_HEIGHT          30.0
 #define kCOMMAND_FORM_TEXTVIEW_HEIGHT           100.0
+#define kCOMMAND_FORM_TEXT_MULTI_BORDER         2.0
 #define kCOMMAND_FORM_LIST_SIZE                 35.0
 #define kCOMMAND_FORM_BOOLEAN_HEIGHT            30.0
 #define kCOMMAND_FORM_BOOLEAN_WIDTH             95.0
 #define kCOMMAND_FORM_BOOLEAN_LABEL_WIDTH       159.0
 #define kCOMMAND_FORM_BOOLEAN_SEPERATOR         10.0
-#define kCOMMAND_FORM_TEXT_MULTI_BORDER         2.0
 

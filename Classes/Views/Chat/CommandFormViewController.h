@@ -25,7 +25,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UIView* formScrollView;
+@property (nonatomic, retain) UIScrollView* formScrollView;
 @property (nonatomic, retain) UIButton* cancelButton;
 @property (nonatomic, retain) UIButton* sendButton;
 @property (nonatomic, retain) CommandFormView* formView;
