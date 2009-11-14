@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandFormView.h"
+#import "CommandFormTextMultiView.h"
 #import "NSObjectiPhoneAdditions.h"
 #import "SegmentedListPicker.h"
 #import "XMPPIQ.h"
@@ -151,7 +152,10 @@
         } else if ([fieldType isEqualToString:@"fixed"]) {
             [self fixedView:field];
         }
-        [self.fields setValue:field forKey:[field var]];
+        NSString* var = [field var];
+        if (var) {
+            [self.fields setValue:field forKey:var];
+        }
     }
     if ([dataFields count] > 0) {
         [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
@@ -168,12 +172,12 @@
 - (void)textMultiView:(XMPPxDataField*)field {
     UILabel* fieldLabel = [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
     [self addSubview:fieldLabel];
-    UITextView* fieldText = [[UITextView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
-    fieldText.returnKeyType = UIReturnKeyDone;
-    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
-    fieldText.delegate = self;
+    CommandFormTextMultiView* fieldText = 
+        [[CommandFormTextMultiView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
+    fieldText.textView.delegate = self;
     [self addSubview:fieldText];
     self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
+    [self.formFieldViews setValue:fieldText forKey:[field var]];
     [fieldText release];
 }
 
@@ -198,8 +202,8 @@
     [self addSubview:fieldLabel];
     [self addSubview:fieldBoolean];
     [self.formFieldViews setValue:fieldBoolean forKey:[field var]];
-    [fieldBoolean release];
     self.formYPos += fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET;
+    [fieldBoolean release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -226,10 +230,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fixedView:(XMPPxDataField*)field {
-    NSArray* values = [field values];
-    UILabel* fixedLable = [self createLabel:[values lastObject] withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:17.0f];
+    NSString* val = [[field values] lastObject];
+    UILabel* fixedLable = [self createLabel:val withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:17.0f];
     [self addSubview:fixedLable];
-    [fixedLable release];
 }
 
 //===================================================================================================================================
@@ -262,8 +265,8 @@
         NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             fieldViewValue = (NSString*)[(UITextView*)fieldView text];
-        } else if ([[fieldView className] isEqualToString:@"UITextView"]) {
-            fieldViewValue = (NSString*)[(UITextView*)fieldView text];
+        } else if ([[fieldView className] isEqualToString:@"CommandFormTextMultiView"]) {
+            fieldViewValue = (NSString*)[(CommandFormTextMultiView*)fieldView text];
         } else if ([[fieldView className] isEqualToString:@"UISwitch"]) {
             if ([(UISwitch*)fieldView isOn]) {
                 fieldViewValue = @"true";
@@ -284,6 +287,9 @@
     [dataForm addFields:fieldVals];
     return [dataForm autorelease];
 }
+
+//===================================================================================================================================
+#pragma mark UIView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)drawRect:(CGRect)rect {
