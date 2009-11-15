@@ -22,7 +22,11 @@
 - (void)createFormItemViews;
 - (UILabel*)createLabel:(NSString*)labelText withXOffSet:(CGFloat)offSet width:(CGFloat)width andFontSize:(CGFloat)fontSize;
 - (UILabel*)createLabel:(NSString*)labelText withYOffSet:(CGFloat)offSet andFontSize:(CGFloat)fontSize;
+- (CGFloat)formHeight;
+- (void)keyBoardUp:(BOOL)up by:(CGFloat)amount;
 - (void)updateViewHeight:(CGFloat)heightDelta;
+- (void)addTextViewToolBar;
+- (void)textViewEditDoneWasPressed;
 - (CGRect)labelRect:(NSString*)label withXOffSet:(CGFloat)offSet width:(CGFloat)width andFontSize:(CGFloat)fontSize;
 - (UITextField*)textFieldViewWithLabel:(NSString*)label;
 - (void)addSeperatorWithOffSet:(CGFloat)offSet;
@@ -46,6 +50,7 @@
 @synthesize form;
 @synthesize formFieldViews;
 @synthesize fields;
+@synthesize textViewToolBar;
 @synthesize formYPos;
 @synthesize parentView;
 
@@ -92,8 +97,50 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (CGFloat)formHeight {
+    return self.frame.size.height;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)updateViewHeight:(CGFloat)heightDelta {
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height+heightDelta);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addTextViewToolBar {
+    self.textViewToolBar = 
+        [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, kCOMMAND_FORM_TOOLBAR_YPOS-kCOMMAND_FORM_TOOLBAR_HEIGHT, self.window.frame.size.width, kCOMMAND_FORM_TOOLBAR_HEIGHT)];
+    self.textViewToolBar.tintColor = [UIColor blackColor];
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(textViewEditDoneWasPressed)];
+    [self.textViewToolBar setItems:[NSArray arrayWithObject:doneButton]];
+    [self.window addSubview:self.textViewToolBar];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)textViewEditDoneWasPressed {
+    NSArray* fieldViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [fieldViews count]; i++) {
+        id fieldView = [fieldViews objectAtIndex:i];
+        if ([[fieldView className] isEqualToString:@"CommandFormTextMultiView"]) {
+            [[fieldView textView] resignFirstResponder];
+        }
+    }
+    [self.textViewToolBar removeFromSuperview];
+    [self keyBoardUp:NO by:kKEYBOARD_HEIGHT+kCOMMAND_FORM_TOOLBAR_HEIGHT];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)keyBoardUp:(BOOL)up by:(CGFloat)amount {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.superview.frame;
+    if (up) {
+        rect.size.height -= amount;
+    } else {
+        rect.size.height += amount;
+    }
+    self.superview.frame = rect;    
+    [UIView commitAnimations];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +159,6 @@
     self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
     return [fieldText autorelease];
 }
-
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addSeperatorWithOffSet:(CGFloat)offSet {
@@ -244,9 +290,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fixedView:(XMPPxDataField*)field {
-    NSString* val = [[field values] lastObject];
-    UILabel* fixedLable = [self createLabel:val withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:17.0f];
+    [self addSeperatorWithOffSet:kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
+    UILabel* fixedLable = [self createLabel:[[field values] lastObject] withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:17.0f];
+    [self updateViewHeight:fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
+    self.formYPos += fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET;
     [self addSubview:fixedLable];
+    [self addSeperatorWithOffSet:kCOMMAND_FORM_YOFFSET];
 }
 
 //===================================================================================================================================
@@ -254,7 +303,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView {
-    if (self = [super initWithFrame:CGRectMake(0.0f, 0.0f, kCOMMAND_FORM_WIDTH, kCOMMAND_FORM_HEIGHT)]) {
+    if (self = [super initWithFrame:CGRectMake(0.0f, 0.0f, kCOMMAND_FORM_WIDTH, 0.0f)]) {
         self.form = initForm;
         self.parentView = initParentView;
         self.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];
@@ -321,32 +370,27 @@
             [fieldView resignFirstResponder];
         }
     }
+    [self keyBoardUp:NO by:kKEYBOARD_HEIGHT];
     return YES;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textFieldDidBeginEditing:(UITextField*)textField {
+    [self keyBoardUp:YES by:kKEYBOARD_HEIGHT];
 }
 
 //===================================================================================================================================
 #pragma mark UITextViewDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (BOOL)textViewShouldEndEditing:(UITextView*)textView {
-    NSArray* fieldViews = [self.formFieldViews allValues];
-    for (int i = 0; i < [fieldViews count]; i++) {
-        id fieldView = [fieldViews objectAtIndex:i];
-        if ([[fieldView className] isEqualToString:@"UITextView"]) {
-            [fieldView resignFirstResponder];
-        }
-    }
-    return YES;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textViewDidBeginEditing:(UITextView*)textView {
+    UIScrollView* scrollView = (UIScrollView*)self.superview;
+    CommandFormTextMultiView* formTextView = (CommandFormTextMultiView*)textView.superview;
+    CGRect formTextViewFrame = formTextView.frame;
+    [self keyBoardUp:YES by:kKEYBOARD_HEIGHT+kCOMMAND_FORM_TOOLBAR_HEIGHT];
+    [scrollView scrollRectToVisible:formTextViewFrame animated:YES];
+    [self addTextViewToolBar];
 }
-
 
 //===================================================================================================================================
 #pragma mark NSObject

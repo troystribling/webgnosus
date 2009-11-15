@@ -39,7 +39,7 @@
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
         self.textView = [[UITextView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_TEXT_MULTI_BORDER, kCOMMAND_FORM_TEXT_MULTI_BORDER, frame.size.width-2*kCOMMAND_FORM_TEXT_MULTI_BORDER, frame.size.height-2*kCOMMAND_FORM_TEXT_MULTI_BORDER)];
-        self.textView.returnKeyType = UIReturnKeyDone;
+        self.textView.returnKeyType = UIReturnKeyDefault;
         self.textView.font = [UIFont fontWithName:@"helvetica" size:15.0f];
         [self addSubview:self.textView];
     }

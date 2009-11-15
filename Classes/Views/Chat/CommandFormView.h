@@ -18,6 +18,7 @@
     XMPPIQ* form;
     NSMutableDictionary* formFieldViews;
     NSMutableDictionary* fields;
+    UIToolbar* textViewToolBar;
     CGFloat formYPos;
     UIView* parentView;
 }
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) XMPPIQ* form;
 @property (nonatomic, retain) NSMutableDictionary* formFieldViews;
 @property (nonatomic, retain) NSMutableDictionary* fields;
+@property (nonatomic, retain) UIToolbar* textViewToolBar;
 @property (nonatomic, assign) CGFloat formYPos;
 @property (nonatomic, retain) UIView* parentView;
 

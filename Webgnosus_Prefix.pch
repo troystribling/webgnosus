@@ -85,8 +85,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // ServiceMessageViewController configurations
+#define kKEYBOARD_HEIGHT                        150.0
 #define kCOMMAND_FORM_WIDTH                     274.0
 #define kCOMMAND_FORM_HEIGHT                    369.0
+#define kCOMMAND_FORM_OFFSET                    3.0
+#define kCOMMAND_FORM_TOOLBAR_HEIGHT            40.0
+#define kCOMMAND_FORM_TOOLBAR_YPOS              265.0
 #define kCOMMAND_FORM_XPOS                      10.0
 #define kCOMMAND_FORM_YOFFSET                   10.0
 #define kCOMMAND_FORM_CONTROL_YOFFSET           5.0
@@ -99,4 +103,5 @@
 #define kCOMMAND_FORM_BOOLEAN_WIDTH             95.0
 #define kCOMMAND_FORM_BOOLEAN_LABEL_WIDTH       159.0
 #define kCOMMAND_FORM_BOOLEAN_SEPERATOR         10.0
+#define kCOMMAND_FORM_FIXED_VIEW_YOFFSET        3.0
 
