@@ -51,7 +51,6 @@
 @synthesize formFieldViews;
 @synthesize fields;
 @synthesize textViewToolBar;
-@synthesize formYPos;
 @synthesize parentView;
 
 //===================================================================================================================================
@@ -59,7 +58,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createFormItemViews {
-    self.formYPos = kCOMMAND_FORM_YOFFSET;
+    [self updateViewHeight:kCOMMAND_FORM_YOFFSET];
     XMPPCommand* command = [self.form command];
     XMPPxData* cmdData = [command data];
     [self titleView:cmdData];
@@ -84,7 +83,7 @@
 - (CGRect)labelRect:(NSString*)label withXOffSet:(CGFloat)offSet width:(CGFloat)width andFontSize:(CGFloat)fontSize {
     CGSize textSize = {width, 20000.0f};
     CGSize size = [label sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
-    CGRect labelRect = CGRectMake(offSet, self.formYPos, width, size.height);
+    CGRect labelRect = CGRectMake(offSet, [self formHeight], width, size.height);
     return labelRect;
 }
 
@@ -92,7 +91,7 @@
 - (UILabel*)createLabel:(NSString*)labelText withYOffSet:(CGFloat)yOffSet andFontSize:(CGFloat)fontSize {
     UILabel* label = [self createLabel:labelText withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:fontSize];
     [self updateViewHeight:label.frame.size.height+yOffSet];
-    self.formYPos += label.frame.size.height+yOffSet;
+    [self addSubview:label];
     return label;
 }
 
@@ -134,9 +133,10 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     CGRect rect = self.superview.frame;
-    if (up) {
+    CGFloat upHeight = kCOMMAND_FORM_HEIGHT-amount;
+    if (up && rect.size.height > upHeight) {
         rect.size.height -= amount;
-    } else {
+    } else if (!up && rect.size.height == upHeight) {
         rect.size.height += amount;
     }
     self.superview.frame = rect;    
@@ -146,7 +146,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITextField*)textFieldViewWithLabel:(NSString*)label {
     UITextField* fieldText = 
-        [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
+        [[UITextField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
     fieldText.placeholder = label;
     fieldText.borderStyle = UITextBorderStyleRoundedRect;
     fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -156,34 +156,37 @@
     fieldText.delegate = self;
     [self addSubview:fieldText];
     [self updateViewHeight:fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET];
-    self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
     return [fieldText autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addSeperatorWithOffSet:(CGFloat)offSet {
-    UIView* seperator = [[UIView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, 2.0f)];
+    UIView* seperator = [[UIView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, 2.0f)];
     seperator.backgroundColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
     [self addSubview:seperator];
     [self updateViewHeight:seperator.frame.size.height+offSet];
-    self.formYPos += seperator.frame.size.height+offSet;
     [seperator release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)titleView:(XMPPxData*)data {
-    UILabel* titleLable = [self createLabel:[data title] withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:17.0f];
-    titleLable.textAlignment = UITextAlignmentCenter;
-    [self addSubview:titleLable];
-    [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
+    NSString* title = [data title];
+    if (title) {
+        UILabel* titleLable = [self createLabel:title withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:17.0f];
+        titleLable.textAlignment = UITextAlignmentCenter;
+        titleLable.font = [UIFont fontWithName:@"helvetica" size:18.0f];
+        [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)instructionsView:(XMPPxData*)data {
-    UILabel* instructionsLable = [self createLabel:[data instructions] withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:15.0f];
-    instructionsLable.font = [UIFont fontWithName:@"helvetica" size:15.0f];
-    [self addSubview:instructionsLable];
-    [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
+    NSString* instructions = [data instructions];
+    if (instructions) {
+        UILabel* instructionsLable = [self createLabel:instructions withYOffSet:kCOMMAND_FORM_YOFFSET andFontSize:15.0f];
+        instructionsLable.font = [UIFont fontWithName:@"helvetica" size:15.0f];
+        [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -212,9 +215,6 @@
             [self.fields setValue:field forKey:var];
         }
     }
-    if ([dataFields count] > 0) {
-        [self addSeperatorWithOffSet:kCOMMAND_FORM_CONTROL_SEPERATOR_YOFFSET];
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -225,14 +225,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textMultiView:(XMPPxDataField*)field {
-    UILabel* fieldLabel = [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
-    [self addSubview:fieldLabel];
+    [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
     CommandFormTextMultiView* fieldText = 
-        [[CommandFormTextMultiView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
+        [[CommandFormTextMultiView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
     fieldText.textView.delegate = self;
     [self addSubview:fieldText];
     [self updateViewHeight:fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET];
-    self.formYPos += fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET;
     [self.formFieldViews setValue:fieldText forKey:[field var]];
     [fieldText release];
 }
@@ -246,37 +244,35 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)booleanView:(XMPPxDataField*)field {
-    UILabel* fieldLabel = 
-        [self createLabel:[field label] withXOffSet:kCOMMAND_FORM_XPOS+kCOMMAND_FORM_BOOLEAN_WIDTH+kCOMMAND_FORM_BOOLEAN_SEPERATOR width:kCOMMAND_FORM_BOOLEAN_LABEL_WIDTH andFontSize:17.0f];
-    if (fieldLabel.frame.size.height < kCOMMAND_FORM_BOOLEAN_HEIGHT) {
-        self.formYPos += fieldLabel.frame.size.height+kCOMMAND_FORM_YOFFSET-kCOMMAND_FORM_BOOLEAN_HEIGHT;
-        fieldLabel.frame = CGRectMake(fieldLabel.frame.origin.x, fieldLabel.frame.origin.y + kCOMMAND_FORM_YOFFSET, fieldLabel.frame.size.width, fieldLabel.frame.size.height);
-        [self updateViewHeight:fieldLabel.frame.size.height+kCOMMAND_FORM_YOFFSET-kCOMMAND_FORM_BOOLEAN_HEIGHT];
-    } else {
-        [self updateViewHeight:fieldLabel.frame.size.height-kCOMMAND_FORM_BOOLEAN_HEIGHT];
-        self.formYPos += fieldLabel.frame.size.height-kCOMMAND_FORM_BOOLEAN_HEIGHT;
+    NSString* label = [field label];
+    if (label) {
+        UILabel* fieldLabel = 
+            [self createLabel:[field label] withXOffSet:kCOMMAND_FORM_XPOS+kCOMMAND_FORM_BOOLEAN_WIDTH+kCOMMAND_FORM_BOOLEAN_SEPERATOR width:kCOMMAND_FORM_BOOLEAN_LABEL_WIDTH andFontSize:17.0f];
+        if (fieldLabel.frame.size.height < kCOMMAND_FORM_BOOLEAN_HEIGHT) {
+            [self updateViewHeight:fieldLabel.frame.size.height+kCOMMAND_FORM_YOFFSET-kCOMMAND_FORM_BOOLEAN_HEIGHT];
+            fieldLabel.frame = CGRectMake(fieldLabel.frame.origin.x, fieldLabel.frame.origin.y+kCOMMAND_FORM_BOOLEAN_HEIGHT-fieldLabel.frame.size.height, fieldLabel.frame.size.width, fieldLabel.frame.size.height);
+        } else {
+            [self updateViewHeight:fieldLabel.frame.size.height-kCOMMAND_FORM_BOOLEAN_HEIGHT];
+        }
+        [self addSubview:fieldLabel];
     }
-	UISwitch* fieldBoolean = [[UISwitch alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_BOOLEAN_WIDTH, kCOMMAND_FORM_BOOLEAN_HEIGHT)];
-    [self addSubview:fieldLabel];
+	UISwitch* fieldBoolean = [[UISwitch alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_BOOLEAN_WIDTH, kCOMMAND_FORM_BOOLEAN_HEIGHT)];
+    [self updateViewHeight:kCOMMAND_FORM_BOOLEAN_HEIGHT+kCOMMAND_FORM_YOFFSET];
     [self addSubview:fieldBoolean];
     [self.formFieldViews setValue:fieldBoolean forKey:[field var]];
-    [self updateViewHeight:fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET];
-    self.formYPos += fieldBoolean.frame.size.height+kCOMMAND_FORM_YOFFSET;
     [fieldBoolean release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)listSingleView:(XMPPxDataField*)field {
-    UILabel* fieldLabel = [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
-    [self addSubview:fieldLabel];
+    [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
     NSDictionary* opts = [field options];
     if ([opts count] > 0) {
         SegmentedListPicker* fieldPicker = 
-            [[SegmentedListPicker alloc] init:[opts allKeys] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, self.formYPos, kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
+            [[SegmentedListPicker alloc] init:[opts allKeys] withValueAtIndex:0  andRect:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_LIST_SIZE)];
         fieldPicker.tintColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
         [self addSubview:fieldPicker];
         [self updateViewHeight:fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET];
-        self.formYPos += fieldPicker.frame.size.height+kCOMMAND_FORM_YOFFSET;
         [self.formFieldViews setValue:fieldPicker forKey:[field var]];
         [fieldPicker release];
     }
@@ -293,7 +289,6 @@
     [self addSeperatorWithOffSet:kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
     UILabel* fixedLable = [self createLabel:[[field values] lastObject] withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:17.0f];
     [self updateViewHeight:fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
-    self.formYPos += fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET;
     [self addSubview:fixedLable];
     [self addSeperatorWithOffSet:kCOMMAND_FORM_YOFFSET];
 }
@@ -323,8 +318,6 @@
         NSString* var = [fieldVars objectAtIndex:i];
         id fieldView = [self.formFieldViews valueForKey:var];
         XMPPxDataField* formField = [self.fields valueForKey:var];
-        XMPPxDataField* field =[[XMPPxDataField alloc] init];
-        [field addVar:var];
         NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             fieldViewValue = (NSString*)[(UITextView*)fieldView text];
@@ -341,10 +334,14 @@
             NSDictionary* opts = [(XMPPxDataField*)[self.fields valueForKey:var] options];
             fieldViewValue = (NSString*)[opts valueForKey:fieldLabel];
         }
-        [field addType:[formField type]];
-        [field addValues:[NSArray arrayWithObject:fieldViewValue]];
-        [fieldVals addObject:field];
-        [field release];
+        if (fieldViewValue) { 
+            XMPPxDataField* field =[[XMPPxDataField alloc] init];
+            [field addVar:var];
+            [field addType:[formField type]];
+            [field addValues:[NSArray arrayWithObject:fieldViewValue]];
+            [fieldVals addObject:field];
+            [field release];
+        }
     }
     XMPPxData* dataForm = [[XMPPxData alloc] initWithDataType:@"submit"];
     [dataForm addFields:fieldVals];

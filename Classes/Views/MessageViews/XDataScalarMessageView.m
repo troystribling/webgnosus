@@ -28,7 +28,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSString*)getMessageText:(MessageModel*)message {
     XMPPxData* data = [message parseXDataMessage];
-    return [[[[data fieldsToArrayOfHashes] lastObject] lastObject] lastObject];
+    NSArray* fields = [data fieldsToArrayOfHashes];
+    NSString* scalar = @"";
+    if ([fields count] > 0) {
+        scalar = [[[fields lastObject] lastObject] lastObject];
+    }    
+    return scalar;
 }
 
 //===================================================================================================================================
