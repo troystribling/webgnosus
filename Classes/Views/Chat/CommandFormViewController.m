@@ -66,6 +66,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.view removeFromSuperview];
+    XMPPCommand* command = [self.form command];
+    XMPPJID* toJID = [self.form fromJID];
+    NSString* sessionID =[command sessionID];
+    NSString* node = [command node];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+    [XMPPCommand cancel:client commandNode:node JID:toJID andSessionID:sessionID];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

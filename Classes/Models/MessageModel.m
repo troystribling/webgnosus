@@ -279,7 +279,7 @@
             if (cmdData) {
                 messageModel.messageText = [cmdData XMLString];
             } else {
-                messageModel.messageText = @"completed";
+                messageModel.messageText = [command status];
             }
             [messageModel insert];
             [messageModel release];            

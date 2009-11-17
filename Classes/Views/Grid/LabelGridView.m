@@ -35,10 +35,11 @@
         NSMutableArray* dataRow = [data objectAtIndex:i];
         NSMutableArray* labelViewRow = [NSMutableArray arrayWithCapacity:[dataRow count]];
         for (int j = 0; j < [dataRow count]; j++) {
-            CGSize constraintSize = {2000.0f, labelHeight};
-            CGSize labelSize = [[dataRow objectAtIndex:j] sizeWithFont:labelFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+            CGSize constraintSize = {100.0f, labelHeight};
+            NSString* labelText = [dataRow objectAtIndex:j];
+            CGSize labelSize = [labelText sizeWithFont:labelFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeTailTruncation];
             UILabel* labelView = [[UILabel alloc] initWithFrame:CGRectMake(labelOffSet, labelOffSet, labelSize.width + labelOffSet, labelHeight + labelOffSet)];
-            labelView.text = [dataRow objectAtIndex:j];
+            labelView.text = labelText;
             labelView.font = labelFont;
             [labelViewRow addObject:labelView];
             [labelView release];

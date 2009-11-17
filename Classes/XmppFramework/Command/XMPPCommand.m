@@ -150,6 +150,16 @@
     [iq release]; 
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)cancel:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"cancel"];
+    [cmd addSessionID:sessionID];
+    [iq addCommand:cmd];
+    [client send:iq andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [iq release]; 
+}
+
 //===================================================================================================================================
 #pragma mark NSObject
 

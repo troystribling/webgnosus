@@ -25,7 +25,6 @@ typedef enum tagCommandDataType {
     CommandDataArray,
     CommandDataHash,
     CommandDataArrayHash,
-    CommandDataEmpty,
 } CommandDataType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,9 +72,6 @@ typedef enum tagCommandDataType {
         case CommandDataScalar:
             view = [XDataScalarMessageView viewForMessage:message];
             break;
-        case CommandDataEmpty:
-            view = [XDataScalarMessageView viewForMessage:message];
-            break;
         case CommandDataArray:
             view = [XDataArrayMessageView viewForData:data];
             break;
@@ -109,8 +105,6 @@ typedef enum tagCommandDataType {
             dataType = CommandDataHash;
         } else if (items > 0) {
             dataType = CommandDataArrayHash;
-        } else if (fields == 0) {
-            dataType = CommandDataEmpty;
         }
     }    
     return dataType;
