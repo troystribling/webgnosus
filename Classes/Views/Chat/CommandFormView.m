@@ -52,6 +52,7 @@
 @synthesize fields;
 @synthesize textViewToolBar;
 @synthesize parentView;
+@synthesize upAmount;
 
 //===================================================================================================================================
 #pragma mark CommandFormViewController PrivateAPI
@@ -133,11 +134,12 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     CGRect rect = self.superview.frame;
-    CGFloat upHeight = kCOMMAND_FORM_HEIGHT-amount;
-    if (up && rect.size.height > upHeight) {
-        rect.size.height -= amount;
-    } else if (!up && rect.size.height == upHeight) {
+    if (up) {
+        rect.size.height -= (amount-self.upAmount);
+        self.upAmount = amount;
+    } else {
         rect.size.height += amount;
+        self.upAmount = 0.0f;
     }
     self.superview.frame = rect;    
     [UIView commitAnimations];
@@ -302,6 +304,7 @@
         self.form = initForm;
         self.parentView = initParentView;
         self.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];
+        self.upAmount = 0.0f;
         self.formFieldViews = [[NSMutableDictionary alloc] initWithCapacity:10];
         self.fields = [[NSMutableDictionary alloc] initWithCapacity:10];
         [self createFormItemViews];

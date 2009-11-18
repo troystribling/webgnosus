@@ -20,6 +20,7 @@
     NSMutableDictionary* fields;
     UIToolbar* textViewToolBar;
     UIView* parentView;
+    CGFloat upAmount;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) NSMutableDictionary* fields;
 @property (nonatomic, retain) UIToolbar* textViewToolBar;
 @property (nonatomic, retain) UIView* parentView;
+@property (nonatomic, assign) CGFloat upAmount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView;

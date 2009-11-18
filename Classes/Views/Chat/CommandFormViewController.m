@@ -21,7 +21,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandFormViewController (PrivateAPI)
 
-- (void)saveMessage:(XMPPxData*)data forNode:(NSString*)node;
+- (void)saveMessage:(NSString*)data forNode:(NSString*)node;
 
 @end
 
@@ -40,9 +40,9 @@
 #pragma mark CommandFormViewController PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)saveMessage:(XMPPxData*)data forNode:(NSString*)node {
+- (void)saveMessage:(NSString*)data forNode:(NSString*)node {
     MessageModel* model = [[MessageModel alloc] init];
-    model.messageText = [data XMLString];;
+    model.messageText = data;
     model.accountPk = self.account.pk;
     model.toJid = [[self.form fromJID] full];
     model.fromJid = [self.account fullJID];
@@ -72,6 +72,8 @@
     NSString* node = [command node];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPCommand cancel:client commandNode:node JID:toJID andSessionID:sessionID];
+    [self saveMessage:@"cancel" forNode:[command node]];
+    [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Canceling"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -83,7 +85,7 @@
     NSString* node = [command node];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPCommand set:client commandNode:node withData:fields JID:toJID andSessionID:sessionID];
-    [self saveMessage:fields forNode:[command node]];
+    [self saveMessage:[fields XMLString] forNode:[command node]];
     [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Waiting for Response"];
 }
 

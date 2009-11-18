@@ -153,8 +153,6 @@
             trimmedMaxWidth = maxWidth - deltaByElement / maxWidthCount;
         } 
         [GridView replaceArrayElements:viewWidthArray atIndexes:[maxWidthDictionary allKeys] withValue:trimmedMaxWidth];
-        [maxWidthDictionary release];
-        [lesserWidthArray release];
         if (maxWidthCount * deltaByElement < deltaWidth) {
             [self trimViewWidth:viewWidthArray toGridMaxWidth:gridMaxWidth];
         }
