@@ -23,7 +23,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ContactPubCell (PrivateAPI)
 
-- (void)setPubImage;
+- (void)setPubImageSubscribed:(BOOL)sub;
 - (void)loadSubscription;
 
 @end
@@ -45,8 +45,8 @@
 #pragma mark ContactPubCell PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setPubImage {
-    if (self.subscription) {
+- (void)setPubImageSubscribed:(BOOL)sub {
+    if (sub) {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
     } else {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
@@ -89,7 +89,7 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
-    [self setPubImage];
+    [self setPubImageSubscribed:YES];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
 }
 
@@ -106,7 +106,7 @@
     [AlertViewManager dismissActivityIndicator];
     [self loadSubscription];
     [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    [self setPubImage];
+    [self setPubImageSubscribed:NO];
 }
 
 //===================================================================================================================================
@@ -131,7 +131,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)drawRect:(CGRect)rect {
     [self loadSubscription];
-    [self setPubImage];
+    if (self.subscription) {
+        [self setPubImageSubscribed:YES];
+    } else {
+        [self setPubImageSubscribed:NO];
+    }
     [self addSubview:self.itemImage];
 }
 

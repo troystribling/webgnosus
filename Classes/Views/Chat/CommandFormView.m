@@ -227,7 +227,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textMultiView:(XMPPxDataField*)field {
-    [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
+    NSString* fieldLabel = [field label];
+    if (fieldLabel) {
+        [self createLabel:fieldLabel withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
+    }
     CommandFormTextMultiView* fieldText = 
         [[CommandFormTextMultiView alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTVIEW_HEIGHT)];
     fieldText.textView.delegate = self;
@@ -267,7 +270,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)listSingleView:(XMPPxDataField*)field {
-    [self createLabel:[field label] withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
+    NSString* fieldLabel = [field label];
+    if (fieldLabel) {
+        [self createLabel:fieldLabel withYOffSet:kCOMMAND_FORM_CONTROL_YOFFSET andFontSize:17.0f];
+    }
     NSDictionary* opts = [field options];
     if ([opts count] > 0) {
         SegmentedListPicker* fieldPicker = 
@@ -289,9 +295,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)fixedView:(XMPPxDataField*)field {
     [self addSeperatorWithOffSet:kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
-    UILabel* fixedLable = [self createLabel:[[field values] lastObject] withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:17.0f];
-    [self updateViewHeight:fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
-    [self addSubview:fixedLable];
+    NSString* val = [[field values] lastObject];
+    if (val) {
+        UILabel* fixedLable = [self createLabel:val withXOffSet:kCOMMAND_FORM_XPOS width:kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS andFontSize:17.0f];
+        [self updateViewHeight:fixedLable.frame.size.height+kCOMMAND_FORM_FIXED_VIEW_YOFFSET];
+        [self addSubview:fixedLable];
+    }
     [self addSeperatorWithOffSet:kCOMMAND_FORM_YOFFSET];
 }
 

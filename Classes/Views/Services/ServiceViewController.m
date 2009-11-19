@@ -338,7 +338,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubItemResult:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:self.selectedItem.itemName];
+    MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:self.selectedItem.itemName andAccount:self.account];
     [self loadTextViewController:message];
 }
 
@@ -464,7 +464,7 @@
     self.selectedItem = item;
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     if ([self.parentService.category isEqualToString:@"pubsub"] && [self.parentService.type isEqualToString:@"leaf"]) {
-        MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:item.itemName];
+        MessageModel* message = [MessageModel findEventByNode:self.parentService.node andItemId:item.itemName andAccount:self.account];
         if (message) {
             [self loadTextViewController:message];
         } else {

@@ -76,7 +76,7 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllSubscribedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit;
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
-+ (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId;
++ (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId andAccount:(AccountModel*)requestAccount;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
 + (void)markReadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestTextType andAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;

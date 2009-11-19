@@ -205,8 +205,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE node = '%@' AND itemId = '%@'", requestNode, requestItemId];
++ (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId andAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE node = '%@' AND itemId = '%@' AND accountPk = %d", requestNode, requestItemId, requestAccount.pk];
 	MessageModel* model = [[[MessageModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[MessageModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -425,7 +425,7 @@
         NSString* itemsNode = [items node];
         for (int i = 0; i < [itemsArray count]; i++) {
             XMPPPubSubItem* item = [XMPPPubSubItem createFromElement:[itemsArray objectAtIndex:i]];
-            if (![MessageModel findEventByNode:itemsNode andItemId:[item itemId]]) {
+            if (![MessageModel findEventByNode:itemsNode andItemId:[item itemId] andAccount:account]) {
                 MessageModel* messageModel = [[MessageModel alloc] init];
                 messageModel.fromJid = [fromJID full];
                 messageModel.accountPk = account.pk;

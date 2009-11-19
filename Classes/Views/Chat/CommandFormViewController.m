@@ -65,7 +65,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)cancelButtonPressed:(id)sender {
-    [self.view removeFromSuperview];
     XMPPCommand* command = [self.form command];
     XMPPJID* toJID = [self.form fromJID];
     NSString* sessionID =[command sessionID];
