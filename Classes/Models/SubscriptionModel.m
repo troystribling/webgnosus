@@ -113,13 +113,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)resetSyncFlag {
-	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE subscriptions SET synched = 0"];
++ (void)destroyAllUnsyched {
+	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM subscriptions WHERE synched = 0"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsyched {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM subscriptions WHERE synched = 0"];
++ (void)resetSyncFlagByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount {
+    NSString* updateStatement = [NSString stringWithFormat:@"UPDATE subscriptions SET synched = 0 WHERE service = '%@' AND  accountPk = %d", requestService, requestAccount.pk];
+	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -78,8 +78,6 @@
     [ServiceItemModel resetSyncFlag];
     [ServiceFeatureModel destroyAllUnsyched];
     [ServiceFeatureModel resetSyncFlag];
-    [SubscriptionModel destroyAllUnsyched];
-    [SubscriptionModel resetSyncFlag];
 	for (int i = 0; i < [accounts count]; i++) {
         AccountModel* account = [accounts objectAtIndex:i];
         [account update];

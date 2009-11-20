@@ -400,6 +400,8 @@
 		05F5CD1A109A66220055B10E /* ChatMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD18109A66220055B10E /* ChatMessageCache.m */; };
 		05F5CD1D109A66A80055B10E /* HistoryMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD1C109A66A80055B10E /* HistoryMessageCache.m */; };
 		05F5CD1E109A66A80055B10E /* HistoryMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD1C109A66A80055B10E /* HistoryMessageCache.m */; };
+		05F7411A10B658EE00BDF171 /* JIDField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F7411910B658EE00BDF171 /* JIDField.m */; };
+		05F7411B10B658EE00BDF171 /* JIDField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F7411910B658EE00BDF171 /* JIDField.m */; };
 		05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
 		05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
 		05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
@@ -751,6 +753,8 @@
 		05F5CD18109A66220055B10E /* ChatMessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessageCache.m; sourceTree = "<group>"; };
 		05F5CD1B109A66A80055B10E /* HistoryMessageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryMessageCache.h; sourceTree = "<group>"; };
 		05F5CD1C109A66A80055B10E /* HistoryMessageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryMessageCache.m; sourceTree = "<group>"; };
+		05F7411810B658EE00BDF171 /* JIDField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JIDField.h; sourceTree = "<group>"; };
+		05F7411910B658EE00BDF171 /* JIDField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JIDField.m; sourceTree = "<group>"; };
 		05F75D8010915FE200FC080B /* XMPPPubSubItemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubItemDelegate.h; sourceTree = "<group>"; };
 		05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubItemDelegate.m; sourceTree = "<group>"; };
 		05F79C2C1075A7D500B75735 /* ContactPubCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactPubCell.xib; sourceTree = "<group>"; };
@@ -1300,6 +1304,8 @@
 				05E207BE0FB9046500FCFC94 /* CommandViewController.m */,
 				05F79C451075AA8200B75735 /* ContactPubCell.h */,
 				05F79C461075AA8200B75735 /* ContactPubCell.m */,
+				05F7411810B658EE00BDF171 /* JIDField.h */,
+				05F7411910B658EE00BDF171 /* JIDField.m */,
 				05E207C10FB9046500FCFC94 /* RosterItemViewController.h */,
 				05E207C20FB9046500FCFC94 /* RosterItemViewController.m */,
 				05E207C30FB9046500FCFC94 /* MessageViewController.h */,
@@ -1794,6 +1800,7 @@
 				05E9751810A490C7005F2440 /* CommandFormView.m in Sources */,
 				05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 				0507514A10AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
+				05F7411B10B658EE00BDF171 /* JIDField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1934,6 +1941,7 @@
 				05E9751710A490C7005F2440 /* CommandFormView.m in Sources */,
 				05E9759D10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 				0507514910AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
+				05F7411A10B658EE00BDF171 /* JIDField.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

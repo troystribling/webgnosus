@@ -20,6 +20,7 @@
 
 - (void)accountConnectionFailed;
 - (BOOL)saveAccount;
+- (void)becomeFirstResponder;
 
 @end
 
@@ -58,10 +59,12 @@
     [AlertViewManager dismissActivityIndicator]; 
     [AlertViewManager showAlert:title];
     [[XMPPClientManager instance] removeXMPPClientForAccount:self.account];
+    [self becomeFirstResponder];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)saveAccount {
+    BOOL saveStatus = YES;
 	NSString* enteredJid = self.jidTextField.text;
 	NSString* enteredPassword = self.passwordTextField.text;
 	NSArray* splitJid = [enteredJid componentsSeparatedByString:@"@"];
@@ -73,8 +76,8 @@
         self.account.activated = YES;
         self.account.connectionState = AccountNotConnected;
         self.account.host = [splitJid objectAtIndex:1];
-        self.account.resource = @"iPhone";
-        self.account.nickname = [[NSString alloc] initWithFormat:@"%@", [self.account bareJID]];
+        self.account.resource = [NSString stringWithFormat:@"iPhone:%@", [[UIDevice currentDevice] name]];
+        self.account.nickname = [NSString stringWithFormat:@"%@", [self.account bareJID]];
         self.account.port = 5222;
         self.account.displayed = YES;
         [[XMPPClientManager instance] connectXmppClientForAccount:self.account];
@@ -84,13 +87,21 @@
         [self.account load];
         [[[XMPPClientManager instance] accountUpdateDelegate] didAddAccount];
 	} else {
+        saveStatus = NO;
         if (oldAccount) {
             [AlertViewManager showAlert:@"Account Exists"];
         } else {
             [AlertViewManager showAlert:@"JID is Invalid"];
         }
 	}
-	return NO; 
+	return saveStatus; 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)becomeFirstResponder {
+    if (self.isFirstAccount) {
+        [self.jidTextField becomeFirstResponder]; 
+    }
 }
 
 //===================================================================================================================================
@@ -124,9 +135,7 @@
 - (void)viewWillAppear:(BOOL)animated {
 	self.jidTextField.text = @"";
 	self.passwordTextField.text = @"";
-    if (self.isFirstAccount) {
-        [self.jidTextField becomeFirstResponder]; 
-    }
+    [self becomeFirstResponder];
 	[super viewWillAppear:animated];
 }
 
@@ -183,8 +192,10 @@
     BOOL shouldReturn = YES;
     if (self.isFirstAccount) {
         shouldReturn = [self saveAccount];
-    } 
-    [textField resignFirstResponder];
+    }
+    if (shouldReturn || !self.isFirstAccount) {
+        [textField resignFirstResponder];
+    }
     return shouldReturn;
 }
 

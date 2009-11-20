@@ -47,8 +47,8 @@
 + (NSArray*)findAllServicesByAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount;
-+ (void)resetSyncFlag;
 + (void)destroyAllUnsyched;
++ (void)resetSyncFlagByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount;
 + (void)destroyAllUnsychedByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount;
     
 //-----------------------------------------------------------------------------------------------------------------------------------

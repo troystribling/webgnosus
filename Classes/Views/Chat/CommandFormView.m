@@ -11,6 +11,7 @@
 #import "CommandFormTextMultiView.h"
 #import "NSObjectiPhoneAdditions.h"
 #import "SegmentedListPicker.h"
+#import "JIDField.h"
 #import "XMPPIQ.h"
 #import "XMPPCommand.h"
 #import "XMPPxData.h"
@@ -288,7 +289,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)jidSingleView:(XMPPxDataField*)field {
-    UITextField* fieldText = [self textFieldViewWithLabel:[field label]];
+    JIDField* fieldText = [[JIDField alloc] initWithFrame:CGRectMake(kCOMMAND_FORM_XPOS, [self formHeight], kCOMMAND_FORM_WIDTH-2*kCOMMAND_FORM_XPOS, kCOMMAND_FORM_TEXTFIELD_HEIGHT)];
+    fieldText.placeholder = [field label];
+    fieldText.borderStyle = UITextBorderStyleRoundedRect;
+    fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
+    fieldText.returnKeyType = UIReturnKeyDone;
+    fieldText.clearButtonMode = UITextFieldViewModeWhileEditing;
+    fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
+    fieldText.delegate = self;
+    [self addSubview:fieldText];
+    [self updateViewHeight:fieldText.frame.size.height+kCOMMAND_FORM_YOFFSET];
     [self.formFieldViews setValue:fieldText forKey:[field var]];
 }
 
