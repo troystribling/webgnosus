@@ -66,7 +66,7 @@
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     if (self.subscription) {
-        [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
+        [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node andSubId:self.subscription.subId];
         [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
     } else {
         [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];

@@ -76,13 +76,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
++ (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andSubId:(NSString*)subId {
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
     NSXMLElement* unsubElement = [NSXMLElement elementWithName:@"unsubscribe"];
     [unsubElement addAttributeWithName:@"node" stringValue:node];
     [unsubElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
+    [unsubElement addAttributeWithName:@"subid" stringValue:subId];
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init:node]];

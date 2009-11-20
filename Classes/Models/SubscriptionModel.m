@@ -65,8 +65,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode {
-    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d",  requestNode, requestAccount.pk];
++ (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount node:(NSString*)requestNode andSubId:(NSString*)requestSubId {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d AND subId= '%@'",  requestNode, requestAccount.pk, requestSubId];
 	SubscriptionModel* model = [[[SubscriptionModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -89,7 +89,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount {
-    SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount andNode:[insertSub node]];
+    SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount node:[insertSub node] andSubId:[insertSub subId]];
     if (!model) {
         SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
         if ([insertSub JID]) {

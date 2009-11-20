@@ -63,7 +63,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)imageTouched:(TouchImageView*)pubSubImage {
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.subscription.service] node:self.subscription.node];
+    [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.subscription.service] node:self.subscription.node andSubId:self.subscription.subId];
     [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
 }
 

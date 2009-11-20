@@ -28,6 +28,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid;
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
-+ (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;
++ (void)unsubscribe:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andSubId:(NSString*)subId;
 
 @end
