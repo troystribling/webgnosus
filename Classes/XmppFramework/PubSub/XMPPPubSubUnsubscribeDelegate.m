@@ -21,6 +21,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubUnsubscribeDelegate (PrivateAPI)
 
+- (void)destroySubscription:(XMPPClient*)account;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,20 +30,29 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize node;
+@synthesize subId;
 
 //===================================================================================================================================
 #pragma mark XMPPPubSubUnsubscribeDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSString*)initNode {
+- (id)initWithNode:(NSString*)initNode andSubId:(NSString*)initSubId {
 	if(self = [super init])  {
         self.node = initNode;
+        self.subId = initSubId;
 	}
 	return self;
 }
 
 //===================================================================================================================================
 #pragma mark XMPPPubSubUnsubscribeDelegate PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)destroySubscription:(XMPPClient*)client {
+    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    SubscriptionModel* subscription = [SubscriptionModel findByAccount:account node:self.node andSubId:self.subId];
+    [subscription destroy];
+}
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
@@ -51,13 +62,13 @@
     XMPPIQ* iq = (XMPPIQ*)stanza;
     XMPPError* error = [iq error];	
     if (error) {
-        if ([[error condition] isEqualToString:@"item-not-found"]) {
+        if ([[error condition] isEqualToString:@"item-not-found"] || 
+            [[error condition] isEqualToString:@"unexpected-request"] || 
+            [[error condition] isEqualToString:@"not-subscribed"]) {
             XMPPPubSub* pubSub = [iq pubsub];
             NSXMLElement* unsub = [pubSub elementForName:@"unsubscribe"];
             if (unsub) {
-                AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-                SubscriptionModel* sub = [SubscriptionModel findByAccount:account andNode:self.node];
-                [sub destroy];
+                [self destroySubscription:client];
             }
         }
     }    
@@ -66,9 +77,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    SubscriptionModel* sub = [SubscriptionModel findByAccount:account andNode:self.node];
-    [sub destroy];
+    [self destroySubscription:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeResult:(XMPPIQ*)stanza];
 }
 

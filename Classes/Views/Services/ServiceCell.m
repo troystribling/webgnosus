@@ -38,7 +38,7 @@
 @synthesize itemImage;
 @synthesize service;
 @synthesize account;
-@synthesize subscription;
+@synthesize subscriptions;
 @synthesize enableImageTouch;
 
 //===================================================================================================================================
@@ -51,7 +51,7 @@
 - (void)setPubImage {
     if ([self.service.node hasPrefix:[self.account pubSubRoot]]) {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-blue.png"]; 
-    } else if (self.subscription) {
+    } else if ([self.subscriptions count] > 0) {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-green.png"]; 
     } else {
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-grey.png"]; 
@@ -60,7 +60,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadSubscription {
-    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.service.node];
+    self.subscriptions = [SubscriptionModel findAllByAccount:self.account andNode:self.service.node];
 }
 
 //===================================================================================================================================
@@ -74,12 +74,15 @@
     if ([self.service.node hasPrefix:[self.account pubSubRoot]]) {
         [XMPPPubSubOwner delete:client JID:jid node:self.service.node];
         [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Deleting"];
-    } else if (!self.subscription) {
+    } else if ([self.subscriptions count] > 0) {
+        for(int i=0; i < [self.subscriptions count]; i++) {
+            SubscriptionModel* subscription = [self.subscriptions objectAtIndex:i];
+            [XMPPPubSubSubscriptions unsubscribe:client JID:jid node:self.service.node andSubId:subscription.subId];
+        }
+        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
+    } else {
         [XMPPPubSubSubscriptions subscribe:client JID:jid node:self.service.node];
         [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Subscribing"];
-    } else {
-        [XMPPPubSubSubscriptions unsubscribe:client JID:jid node:self.service.node];
-        [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
     }
 }
 

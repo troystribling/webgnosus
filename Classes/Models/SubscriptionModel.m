@@ -65,6 +65,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode {
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d",  requestNode, requestAccount.pk];
+	[[WebgnosusDbi instance] selectAllForModel:[SubscriptionModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount node:(NSString*)requestNode andSubId:(NSString*)requestSubId {
     NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM subscriptions WHERE node ='%@' AND accountPk = %d AND subId= '%@'",  requestNode, requestAccount.pk, requestSubId];
 	SubscriptionModel* model = [[[SubscriptionModel alloc] init] autorelease];

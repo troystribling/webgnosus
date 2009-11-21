@@ -185,10 +185,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIImage*)pubSubNodeImage:(ServiceModel*)itemService {
     UIImage* image;
-    SubscriptionModel* subscription = [SubscriptionModel findByAccount:self.account andNode:itemService.node];
     if ([[self.account pubSubRoot] isEqualToString:self.node]){
         image = [UIImage imageNamed:@"service-pubsub-node-blue.png"];
-    } else if (subscription) {
+    } else if ([[SubscriptionModel findAllByAccount:self.account andNode:itemService.node] count] > 0) {
         image = [UIImage imageNamed:@"service-pubsub-node-green.png"];
     } else {
         image = [UIImage imageNamed:@"service-pubsub-node-grey.png"];

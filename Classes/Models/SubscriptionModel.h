@@ -43,6 +43,7 @@
 + (void)create;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount node:(NSString*)requestNode andSubId:(NSString*)requestSubId;
 + (NSArray*)findAllServicesByAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;

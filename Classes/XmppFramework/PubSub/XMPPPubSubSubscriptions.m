@@ -86,7 +86,7 @@
     [unsubElement addAttributeWithName:@"subid" stringValue:subId];
     [pubsub addChild:unsubElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] init:node]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubUnsubscribeDelegate alloc] initWithNode:node andSubId:subId]];
     [iq release];
 }
 

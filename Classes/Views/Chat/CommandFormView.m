@@ -12,6 +12,7 @@
 #import "NSObjectiPhoneAdditions.h"
 #import "SegmentedListPicker.h"
 #import "JIDField.h"
+#import "AlertViewManager.h"
 #import "XMPPIQ.h"
 #import "XMPPCommand.h"
 #import "XMPPxData.h"
@@ -342,9 +343,11 @@
         XMPPxDataField* formField = [self.fields valueForKey:var];
         NSString* fieldViewValue;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
-            fieldViewValue = (NSString*)[(UITextView*)fieldView text];
+            fieldViewValue = (NSString*)[fieldView text];
+        } else if ([[fieldView className] isEqualToString:@"JIDField"]) {
+            fieldViewValue = (NSString*)[fieldView text];
         } else if ([[fieldView className] isEqualToString:@"CommandFormTextMultiView"]) {
-            fieldViewValue = (NSString*)[(CommandFormTextMultiView*)fieldView text];
+            fieldViewValue = (NSString*)[fieldView text];
         } else if ([[fieldView className] isEqualToString:@"UISwitch"]) {
             if ([(UISwitch*)fieldView isOn]) {
                 fieldViewValue = @"true";
@@ -382,15 +385,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
+    BOOL shouldReturn = YES;
     NSArray* fieldViews = [self.formFieldViews allValues];
     for (int i = 0; i < [fieldViews count]; i++) {
         id fieldView = [fieldViews objectAtIndex:i];
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             [fieldView resignFirstResponder];
+        } else if ([[fieldView className] isEqualToString:@"JIDField"]) {
+            if ([fieldView isValidJID]) {
+                [fieldView resignFirstResponder];
+            } else {
+                shouldReturn = NO;
+                [AlertViewManager showAlert:@"JID is Invalid"];
+            }
         }
     }
-    [self keyBoardUp:NO by:kKEYBOARD_HEIGHT];
-    return YES;
+    if (shouldReturn) {
+        [self keyBoardUp:NO by:kKEYBOARD_HEIGHT];
+    }
+    return shouldReturn;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

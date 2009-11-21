@@ -119,7 +119,7 @@
         [self.nodeTextField resignFirstResponder]; 
         [self.jidTextField resignFirstResponder]; 
         if (service) {
-            if (![SubscriptionModel findByAccount:self.account andNode:nodeFullPath]) {
+            if ([[SubscriptionModel findAllByAccount:self.account andNode:nodeFullPath] count] == 0) {
                 XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
                 [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:userPubSubService] node:nodeFullPath];
                 [self.nodeTextField resignFirstResponder]; 

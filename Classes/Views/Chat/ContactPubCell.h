@@ -21,7 +21,7 @@
     TouchImageView* itemImage;
     AccountModel* account;
     ServiceItemModel* serviceItem;
-    SubscriptionModel* subscription;
+    NSMutableArray* subscriptions;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -29,7 +29,7 @@
 @property (nonatomic, retain) TouchImageView* itemImage;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceItemModel* serviceItem;
-@property (nonatomic, retain) SubscriptionModel* subscription;
+@property (nonatomic, retain) NSMutableArray* subscriptions;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

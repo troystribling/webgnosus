@@ -399,7 +399,7 @@
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     XMPPPubSubEvent* event = [message event];
     NSString* node = [event node];
-    if (![SubscriptionModel findByAccount:account andNode:node]) {
+    if ([[SubscriptionModel findAllByAccount:account andNode:node] count] == 0) {
         [XMPPPubSubSubscriptions get:client JID:[message fromJID]];
     }
     [MessageModel insertEvent:client forMessage:message];

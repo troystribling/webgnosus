@@ -101,8 +101,7 @@
 - (UIViewController*)eventViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
     EventsViewController* viewController = nil;
     ServiceItemModel* item = [self.items objectAtIndex:indexPath.row];
-    SubscriptionModel* subscription = [SubscriptionModel findByAccount:self.account andNode:item.node];
-    if (subscription) {
+    if ([[SubscriptionModel findAllByAccount:self.account andNode:item.node] count] > 0) {
         viewController = [[[EventsViewController alloc] initWithNibName:@"EventsViewController" bundle:nil] autorelease];
         viewController.service = item.service;
         viewController.node = item.node;

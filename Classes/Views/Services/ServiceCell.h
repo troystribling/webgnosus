@@ -21,7 +21,7 @@
     TouchImageView* itemImage;
     AccountModel* account;
     ServiceModel* service;
-    SubscriptionModel* subscription;
+    NSArray* subscriptions;
     BOOL enableImageTouch;
 }
 
@@ -30,7 +30,7 @@
 @property (nonatomic, retain) TouchImageView* itemImage;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceModel* service;
-@property (nonatomic, retain) SubscriptionModel* subscription;
+@property (nonatomic, retain) NSArray* subscriptions;
 @property (nonatomic, assign) BOOL enableImageTouch;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

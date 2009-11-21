@@ -36,7 +36,7 @@
 @synthesize itemImage;
 @synthesize serviceItem;
 @synthesize account;
-@synthesize subscription;
+@synthesize subscriptions;
 
 //===================================================================================================================================
 #pragma mark ContactPubCell
@@ -55,7 +55,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadSubscription {
-    self.subscription = [SubscriptionModel findByAccount:self.account andNode:self.serviceItem.node];
+    self.subscriptions = [SubscriptionModel findAllByAccount:self.account andNode:self.serviceItem.node];
 }
 
 //===================================================================================================================================
@@ -65,8 +65,11 @@
 - (void)imageTouched:(TouchImageView*)pubSubImage {
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    if (self.subscription) {
-        [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node andSubId:self.subscription.subId];
+    if ([self.subscriptions count] > 0) {
+        for(int i=0; i < [self.subscriptions count]; i++) {
+            SubscriptionModel* subscription = [self.subscriptions objectAtIndex:i];
+            [XMPPPubSubSubscriptions unsubscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node andSubId:subscription.subId];
+        }
         [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Unsubscribing"];
     } else {
         [XMPPPubSubSubscriptions subscribe:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
@@ -131,7 +134,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)drawRect:(CGRect)rect {
     [self loadSubscription];
-    if (self.subscription) {
+    if ([self.subscriptions count] > 0) {
         [self setPubImageSubscribed:YES];
     } else {
         [self setPubImageSubscribed:NO];

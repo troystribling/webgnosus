@@ -12,12 +12,14 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubUnsubscribeDelegate : NSObject {
     NSString* node;
+    NSString* subId;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSString* node;
+@property (nonatomic, retain) NSString* subId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSString*)initNode;
+- (id)initWithNode:(NSString*)initNode andSubId:(NSString*)initSubId;
 
 @end
