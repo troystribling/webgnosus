@@ -42,6 +42,8 @@
 - (void)listSingleView:(XMPPxDataField*)field;
 - (void)jidSingleView:(XMPPxDataField*)field;
 - (void)fixedView:(XMPPxDataField*)field;
+- (BOOL)validateJIDFields;
+- (void)jidFieldFirstResponder;
 
 @end
 
@@ -129,6 +131,9 @@
     }
     [self.textViewToolBar removeFromSuperview];
     [self keyBoardUp:NO by:kKEYBOARD_HEIGHT+kCOMMAND_FORM_TOOLBAR_HEIGHT];
+    if (![self validateJIDFields]) {
+        [self jidFieldFirstResponder];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -315,6 +320,37 @@
     [self addSeperatorWithOffSet:kCOMMAND_FORM_YOFFSET];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)validateJIDFields {
+    BOOL shouldReturn = YES;
+    NSArray* jidViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [jidViews count]; i++) {
+        id jidView = [jidViews objectAtIndex:i];
+        if ([[jidView className] isEqualToString:@"JIDField"]) {
+            if (![(JIDField*)jidView isValidJID]) {
+                shouldReturn = NO;
+                [AlertViewManager showAlert:@"JID is Invalid"];
+                break;
+            }
+        }
+    }
+    return shouldReturn;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)jidFieldFirstResponder {
+    NSArray* jidViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [jidViews count]; i++) {
+        id jidView = [jidViews objectAtIndex:i];
+        if ([[jidView className] isEqualToString:@"JIDField"]) {
+            if (![(JIDField*)jidView isValidJID]) {
+                [jidView becomeFirstResponder];
+                break;
+            }
+        }
+    }
+}
+
 //===================================================================================================================================
 #pragma mark CommandFormView
 
@@ -386,21 +422,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField*)textField {
     BOOL shouldReturn = YES;
-    NSArray* fieldViews = [self.formFieldViews allValues];
-    for (int i = 0; i < [fieldViews count]; i++) {
-        id fieldView = [fieldViews objectAtIndex:i];
-        if ([[fieldView className] isEqualToString:@"UITextField"]) {
-            [fieldView resignFirstResponder];
-        } else if ([[fieldView className] isEqualToString:@"JIDField"]) {
-            if ([fieldView isValidJID]) {
-                [fieldView resignFirstResponder];
-            } else {
-                shouldReturn = NO;
-                [AlertViewManager showAlert:@"JID is Invalid"];
-            }
-        }
+    if ([[textField className] isEqualToString:@"JIDField"]) {
+        shouldReturn = [self validateJIDFields];
     }
     if (shouldReturn) {
+        [textField resignFirstResponder];
         [self keyBoardUp:NO by:kKEYBOARD_HEIGHT];
     }
     return shouldReturn;

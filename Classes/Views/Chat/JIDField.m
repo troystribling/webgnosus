@@ -22,14 +22,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isValidJID {
-    BOOL isValid = NO;
-    if (self.text) {
-        NSArray* splitJid = [self.text componentsSeparatedByString:@"@"];
-        if ([splitJid count] == 2) {
-            isValid = YES;
+    BOOL isValid = YES;
+    NSString* field = self.text;
+    if (field) {
+        if (![field isEqualToString:@""]) {
+            NSArray* splitJid = [self.text componentsSeparatedByString:@"@"];
+            if ([splitJid count] != 2) {
+                isValid = NO;
+            }
         }
-    } else {
-        isValid = YES;
     }
     return isValid;
 }

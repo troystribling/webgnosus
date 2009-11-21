@@ -123,8 +123,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     NSString* addr = self.addressTextField.text;
     NSString* node = self.nodeTextField.text;
-    [self.nodeTextField resignFirstResponder]; 
-    [self.addressTextField resignFirstResponder]; 
+    [textField resignFirstResponder]; 
     if (![self.addressTextField.text isEqualToString:@""]) {
         NSInteger count = [ServiceItemModel countByService:addr andParentNode:node];
         if (count == 0) {

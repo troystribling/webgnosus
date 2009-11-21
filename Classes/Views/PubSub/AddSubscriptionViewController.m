@@ -116,8 +116,7 @@
         NSString* nodeFullPath = [NSString stringWithFormat:@"%@/%@", [userJID pubSubRoot], self.nodeTextField.text];
         NSString* userPubSubService = [NSString stringWithFormat:@"pubsub.%@", [userJID domain]];
         ServiceModel* service = [ServiceModel findByService:[userJID domain] type:@"service" andCategory:@"pubsub"];
-        [self.nodeTextField resignFirstResponder]; 
-        [self.jidTextField resignFirstResponder]; 
+        [textField resignFirstResponder]; 
         if (service) {
             if ([[SubscriptionModel findAllByAccount:self.account andNode:nodeFullPath] count] == 0) {
                 XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
