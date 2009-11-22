@@ -233,11 +233,15 @@
     // Disco Items
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"get"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoItemsRequest:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoItemsQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoItemsError:iq];
     // Diso Info
 	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"result"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoResult:iq];
+	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"get"]) {
+        [multicastDelegate  xmppClient:self didReceiveDiscoInfoRequest:iq];
 	} else if ([[query className] isEqualToString:@"XMPPDiscoInfoQuery"] && [[iq type] isEqualToString:@"error"]) {
         [multicastDelegate  xmppClient:self didReceiveDiscoInfoError:iq];
     // PubSub    

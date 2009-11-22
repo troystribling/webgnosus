@@ -43,6 +43,13 @@
 #import "AlertViewManager.h"
 #import "NSObjectiPhoneAdditions.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+//static NSArray* ClientFeatures = [NSArray arrayWithObjects:@"http://jabber.org/protocol/disco#info", 
+//                                                           @"http://jabber.org/protocol/disco#items", 
+//                                                           @"jabber:iq:version", 
+//                                                           @"jabber:x:data", 
+//                                                           @"http://jabber.org/protocol/commands", nil];
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPMessageDelegate (PrivateAPI)
 
@@ -431,6 +438,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsRequest:(XMPPIQ*)iq {
+    XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
+    NSArray* identities = [query identities];	
+	NSString* node = [query node];
+	XMPPJID* fromJID = [iq fromJID];
+    if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
+    }
+	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsRequest"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsError"];
 }
@@ -438,6 +456,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoResult:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoRequest:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoRequest"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
