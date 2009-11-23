@@ -34,5 +34,12 @@
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid andNode:(NSString*)node;
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID;
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate;
-
++ (void)commands:(XMPPClient*)client toJID:(XMPPJID*)jid;
++ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
++ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
++ (void)notAllowed:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
++ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid;
++ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid;
++ (void)notAllowed:(XMPPClient*)client toJID:(XMPPJID*)jid;
+    
 @end

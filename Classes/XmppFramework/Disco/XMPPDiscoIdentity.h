@@ -19,7 +19,7 @@
 + (XMPPDiscoIdentity*)createFromElement:(NSXMLElement*)element;
 - (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory;
 - (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory andIname:(NSString*)identIname;
-- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname andNode:(NSString*)identNode;
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname andType:(NSString*)identType;
 - (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname node:(NSString*)identNode andType:(NSString*)identType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

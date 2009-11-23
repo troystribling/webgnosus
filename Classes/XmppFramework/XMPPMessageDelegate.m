@@ -43,13 +43,6 @@
 #import "AlertViewManager.h"
 #import "NSObjectiPhoneAdditions.h"
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-//static NSArray* ClientFeatures = [NSArray arrayWithObjects:@"http://jabber.org/protocol/disco#info", 
-//                                                           @"http://jabber.org/protocol/disco#items", 
-//                                                           @"jabber:iq:version", 
-//                                                           @"jabber:x:data", 
-//                                                           @"http://jabber.org/protocol/commands", nil];
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPMessageDelegate (PrivateAPI)
 
@@ -440,10 +433,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsRequest:(XMPPIQ*)iq {
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
-    NSArray* identities = [query identities];	
 	NSString* node = [query node];
 	XMPPJID* fromJID = [iq fromJID];
-    if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
+    if (!node) {
+        [XMPPDiscoItemsQuery serviceUnavailable:client toJID:fromJID];
+    } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
+        [XMPPDiscoItemsQuery commands:client toJID:fromJID];
+    } else {
+        [XMPPDiscoItemsQuery serviceUnavailable:client toJID:fromJID andNode:node];
     }
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsRequest"];
 }
@@ -460,6 +457,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoRequest:(XMPPIQ*)iq {
+    XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
+	NSString* node = [query node];
+	XMPPJID* fromJID = [iq fromJID];
+    if (!node) {
+        [XMPPDiscoInfoQuery features:client toJID:fromJID];
+    } else {
+        [XMPPDiscoInfoQuery serviceUnavailable:client toJID:fromJID andNode:node];
+    }
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoRequest"];
 }
 

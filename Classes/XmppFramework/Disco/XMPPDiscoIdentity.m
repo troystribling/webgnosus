@@ -43,16 +43,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname andNode:(NSString*)identNode {
+- (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname andType:(NSString*)identType {
 	if([self initWithCategory:identCategory andIname:identIname]) {
-        [self addNode:identNode];
+        [self addType:identType];
 	}
 	return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory iname:(NSString*)identIname node:(NSString*)identNode andType:(NSString*)identType {
-	if([self initWithCategory:identCategory iname:identIname andNode:identNode]) {
+	if([self initWithCategory:identCategory iname:identIname andType:identType]) {
+        [self addNode:identNode];
         [self addType:identType];
 	}
 	return self;

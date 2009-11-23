@@ -12,6 +12,8 @@
 #define kAPP_NAME       "web.gnos.us"
 #define kAPP_VERSION    "0.0"
 #define kOS_VERSION     "iPhone"
+#define kAPP_CATEGORY   "client"
+#define kAPP_TYPE       "handheld"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Define the debugging state

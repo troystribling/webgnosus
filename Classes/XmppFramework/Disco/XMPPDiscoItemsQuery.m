@@ -10,10 +10,19 @@
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoItemsResponseDelegate.h"
 #import "XMPPDiscoItem.h"
+#import "XMPPError.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPResponse.h"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface XMPPDiscoItem (PrivateAPI)
+
++ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
++ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid;
+
+@end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPDiscoItemsQuery
@@ -66,6 +75,37 @@
 }
 
 //===================================================================================================================================
+#pragma mark XMPPDiscoItemsQuery PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
+    XMPPDiscoItemsQuery* infoQuery = [[self alloc] init];
+    XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
+    NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
+    [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
+    [error addChild:errorCondition];
+    [iq addChild:error];
+    [iq addQuery:infoQuery];
+    [client sendElement:iq];
+    [iq release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
+    XMPPDiscoItemsQuery* infoQuery = [[self alloc] initWithNode:itemNode];
+    XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
+    NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
+    [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
+    [error addChild:errorCondition];
+    [iq addChild:error];
+    [iq addQuery:infoQuery];
+    [client sendElement:iq];
+    [iq release];
+}
+
+//===================================================================================================================================
 #pragma mark XMPPDiscoItemsQuery Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -92,6 +132,54 @@
     [iq addQuery:[[self alloc] initWithNode:node]];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)commands:(XMPPClient*)client toJID:(XMPPJID*)jid {
+    NSArray* commandNodes = [NSArray arrayWithObjects:nil];
+    NSArray* commandNames = [NSArray arrayWithObjects:nil];
+    NSString* thisJID = [[client myJID] full];
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
+    XMPPDiscoItemsQuery* itemQuery = [[self alloc] initWithNode:@"http://jabber.org/protocol/commands"];
+    for (int i=0; i < [commandNodes count]; i++) {
+        NSString* commandNode = [commandNodes objectAtIndex:i];
+        NSString* commandName = [commandNames objectAtIndex:i];
+        XMPPDiscoItem* item = [[XMPPDiscoItem alloc] initWithJID:thisJID iname:commandName andNode:commandNode];
+        [itemQuery addChild:item];
+    }
+    [iq addQuery:itemQuery];
+    [client sendElement:iq];
+    [iq release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
+    [self error:client condition:@"item-not-found" toJID:jid andNode:itemNode];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
+    [self error:client condition:@"service-unavailable" toJID:jid andNode:itemNode];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)notAllowed:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
+    [self error:client condition:@"not-allowed" toJID:jid andNode:itemNode];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid {
+    [self error:client condition:@"item-not-found" toJID:jid];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid {
+    [self error:client condition:@"service-unavailable" toJID:jid];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)notAllowed:(XMPPClient*)client toJID:(XMPPJID*)jid {
+    [self error:client condition:@"not-allowed" toJID:jid];
 }
 
 //===================================================================================================================================
