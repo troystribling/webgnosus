@@ -17,7 +17,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceFeatureModel : NSObject {
     NSInteger pk;
-    NSString* parentNode;
+    NSString* node;
     NSString* service;
     NSString* var;
     BOOL synched;
@@ -25,23 +25,23 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
-@property (nonatomic, retain) NSString* parentNode;
+@property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* var;
 @property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
-+ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
++ (NSInteger)countByService:(NSString*)requestService andNode:(NSString*)requestNode;
 + (void)drop;
 + (void)create;
 + (void)destroyAll;
-+ (void)destroyByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
++ (void)destroyByService:(NSString*)requestService andNode:(NSString*)requestNode;
 + (NSMutableArray*)findAll;
 + (ServiceFeatureModel*)findByService:(NSString*)requestService andVar:(NSString*)requestVar;
-+ (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode  andVar:(NSString*)requestVar;
-+ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
-+ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
++ (ServiceFeatureModel*)findByService:(NSString*)requestService node:(NSString*)requestNode  andVar:(NSString*)requestVar;
++ (NSMutableArray*)findAllByService:(NSString*)requestService andNode:(NSString*)requestNode;
++ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andNode:(NSString*)parent;
 + (void)resetSyncFlag;
 + (void)destroyAllUnsyched;
 + (void)destroyAllUnsychedByService:(NSString*)requestService;

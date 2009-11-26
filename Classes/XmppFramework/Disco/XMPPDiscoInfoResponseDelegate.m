@@ -83,7 +83,7 @@
     NSArray* features = [query features];		
     for(int i = 0; i < [features count]; i++) {
         XMPPDiscoFeature* feature = [XMPPDiscoFeature createFromElement:(NSXMLElement *)[features objectAtIndex:i]];
-        [ServiceFeatureModel insert:feature forService:serviceJID andParentNode:node];
+        [ServiceFeatureModel insert:feature forService:serviceJID andNode:node];
     }
     [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:iq];        
     [ServiceFeatureModel destroyAllUnsychedByService:[serviceJID full]];

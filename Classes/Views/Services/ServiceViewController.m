@@ -128,7 +128,7 @@
     if (![serviceType isEqualToString:@"leaf"]) {
         for (int i = 0; i < [self.serviceItems count]; i++) {
             ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
-            NSInteger count = [ServiceFeatureModel countByService:item.jid andParentNode:item.node];
+            NSInteger count = [ServiceFeatureModel countByService:item.jid andNode:item.node];
             if (count == 0) {
                 [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoInfoServiceResponseDelegate alloc] init]];
             }

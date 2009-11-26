@@ -66,7 +66,7 @@
     ServiceModel* service = [ServiceModel findByNode:self.node];
     if (service) {
         [service destroy];
-        [ServiceFeatureModel destroyByService:[[stanza fromJID] full] andParentNode:self.node]; 
+        [ServiceFeatureModel destroyByService:[[stanza fromJID] full] andNode:self.node]; 
     }
     [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteResult:(XMPPIQ*)stanza];
 }

@@ -24,7 +24,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize pk;
-@synthesize parentNode;
+@synthesize node;
 @synthesize service;
 @synthesize var;
 @synthesize synched;
@@ -38,12 +38,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSInteger)countByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
++ (NSInteger)countByService:(NSString*)requestService andNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {
-        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE node = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
     } else {
-        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+        selectStatement = [NSString stringWithFormat:@"SELECT COUNT(pk) FROM serviceFeatures WHERE node IS NULL AND service LIKE '%@%%'", requestService];
     }
 	return [[WebgnosusDbi instance]  selectIntExpression:selectStatement];
 }
@@ -55,7 +55,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, parentNode text, service text, var text, synched integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, node text, service text, var text, synched integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -77,10 +77,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (ServiceFeatureModel*)findByService:(NSString*)requestService parentNode:(NSString*)requestNode andVar:(NSString*)requestVar {
++ (ServiceFeatureModel*)findByService:(NSString*)requestService node:(NSString*)requestNode andVar:(NSString*)requestVar {
 	NSString* selectStatement;
     if (requestNode) {
-        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@' AND parentNode ='%@'",  requestService, requestVar, requestNode];
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@' AND node ='%@'",  requestService, requestVar, requestNode];
     } else {
         selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE service = '%@' AND var ='%@'",  requestService, requestVar];
     }
@@ -93,12 +93,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
++ (NSMutableArray*)findAllByService:(NSString*)requestService andNode:(NSString*)requestNode {
     NSString* selectStatement;
     if (requestNode) {
-        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE node = '%@' AND service LIKE '%@%%'",  requestNode, requestService];
     } else {
-        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE parentNode IS NULL AND service LIKE '%@%%'", requestService];
+        selectStatement = [NSString stringWithFormat:@"SELECT DISTINCT * FROM serviceFeatures WHERE node IS NULL AND service LIKE '%@%%'", requestService];
     }
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
 	[[WebgnosusDbi instance] selectAllForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:output];
@@ -106,12 +106,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] parentNode:parent andVar:[feature var]];
++ (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andNode:(NSString*)requestNode {
+    ServiceFeatureModel* model = [ServiceFeatureModel findByService:[serviceJID full] node:requestNode andVar:[feature var]];
     if (!model) {
         ServiceFeatureModel* serviceFeature = [[ServiceFeatureModel alloc] init];
-        if (parent) {
-            serviceFeature.parentNode = parent;
+        if (requestNode) {
+            serviceFeature.node = requestNode;
         }
         serviceFeature.var = [feature var];
         serviceFeature.service = [serviceJID full];
@@ -129,10 +129,10 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
++ (void)destroyByService:(NSString*)requestService andNode:(NSString*)requestNode {
 	NSString* deleteStatement;
     if (requestNode) {
-        deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@' AND parentNode ='%@'",  requestService, requestNode];
+        deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@' AND node ='%@'",  requestService, requestNode];
     } else {
         deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@'",  requestService];
     }
@@ -159,8 +159,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
     NSString* insertStatement;
-    if (self.parentNode) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (parentNode, service, var, synched) values ('%@', '%@', '%@', %d)", self.parentNode, self.service, self.var, [self synchedAsInteger]];	
+    if (self.node) {
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (node, service, var, synched) values ('%@', '%@', '%@', %d)", self.node, self.service, self.var, [self synchedAsInteger]];	
     } else {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, [self synchedAsInteger]];	
     }
@@ -175,16 +175,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)load {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE parentNode = '%@' AND service = '%@' AND var = '%@'", self.parentNode, self.service, self.var];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceFeatures WHERE node = '%@' AND service = '%@' AND var = '%@'", self.node, self.service, self.var];
 	[[WebgnosusDbi instance] selectForModel:[ServiceFeatureModel class] withStatement:selectStatement andOutputTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
     NSString* updateStatement;
-    if (self.parentNode) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET parentNode = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", 
-                            self.parentNode, self.service, self.var, [self synchedAsInteger], self.pk];	
+    if (self.node) {
+        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET node = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", 
+                            self.node, self.service, self.var, [self synchedAsInteger], self.pk];	
     } else {
         updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET service = '%@', var = '%@', synched = %d WHERE pk = %d", 
                             self.service, self.var, [self synchedAsInteger], self.pk];	
@@ -221,9 +221,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* parentNodeVal = (char*)sqlite3_column_text(statement, 1);
-	if (parentNodeVal != nil) {		
-		self.parentNode = [[NSString alloc] initWithUTF8String:parentNodeVal];
+	char* nodeVal = (char*)sqlite3_column_text(statement, 1);
+	if (nodeVal != nil) {		
+		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
 	}
 	char* serviceVal = (char*)sqlite3_column_text(statement, 2);
 	if (serviceVal != nil) {		
