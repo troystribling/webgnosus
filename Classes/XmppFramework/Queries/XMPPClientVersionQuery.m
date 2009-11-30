@@ -11,6 +11,7 @@
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
+#import "XMPPClientVersionQueryDeligate.h"
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +92,7 @@
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] init]];
-	[client sendElement:iq];
+    [client send:iq andDelegateResponse:[[XMPPClientVersionQueryDeligate alloc] init]];
     [iq release];
 }
 

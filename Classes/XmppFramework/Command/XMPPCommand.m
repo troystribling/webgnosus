@@ -32,11 +32,26 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPCommand*)initWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction {
+- (XMPPCommand*)initWithNode:(NSString*)cmdNode {
 	if(self = [super initWithName:@"command"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/commands"]];
         [self addNode:cmdNode];
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPCommand*)initWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction {
+	if([self initWithNode:cmdNode]) {
         [self addAction:cmdAction];
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPCommand*)initWithNode:(NSString*)cmdNode andData:(XMPPxData*)cmdData {
+	if([self initWithNode:cmdNode]) {
+        [self addData:cmdData];
 	}
 	return self;
 }
@@ -143,7 +158,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node action:@"submit" andData:data];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andData:data];
     [cmd addSessionID:sessionID];
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];

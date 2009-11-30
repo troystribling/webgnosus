@@ -73,6 +73,8 @@
 		051CA5231086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
 		051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
 		051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
+		051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
+		051D5D3D10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
 		052800D30FA54D4A007337FD /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D20FA54D4A007337FD /* libidn.a */; };
 		052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D40FA54D63007337FD /* libidn-simulator.a */; };
 		053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
@@ -478,6 +480,8 @@
 		051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSearchViewController.m; sourceTree = "<group>"; };
 		051CA51E1086D0090007DA81 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		051D5D3A10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQueryDeligate.h; sourceTree = "<group>"; };
+		051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQueryDeligate.m; sourceTree = "<group>"; };
 		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		052800D40FA54D63007337FD /* libidn-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-simulator.a"; sourceTree = "<group>"; };
 		053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoQuery.h; path = Disco/XMPPDiscoInfoQuery.h; sourceTree = "<group>"; };
@@ -1149,6 +1153,8 @@
 				05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */,
 				05E206B70FB9004100FCFC94 /* XMPPClientVersionQuery.h */,
 				05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */,
+				051D5D3A10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.h */,
+				051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */,
 				05E206B90FB9004100FCFC94 /* XMPPQuery.h */,
 				05E206BA0FB9004100FCFC94 /* XMPPQuery.m */,
 				05E206BB0FB9004100FCFC94 /* XMPPRegisterQuery.h */,
@@ -1801,6 +1807,7 @@
 				05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 				0507514A10AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
 				05F7411B10B658EE00BDF171 /* JIDField.m in Sources */,
+				051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1942,6 +1949,7 @@
 				05E9759D10A4E964005F2440 /* XMPPxDataField.m in Sources */,
 				0507514910AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
 				05F7411A10B658EE00BDF171 /* JIDField.m in Sources */,
+				051D5D3D10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

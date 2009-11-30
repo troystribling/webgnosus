@@ -44,6 +44,8 @@
 - (void)fixedView:(XMPPxDataField*)field;
 - (BOOL)validateJIDFields;
 - (void)jidFieldFirstResponder;
+- (void)disableAllViews;
+- (void)enableAllViews;
 
 @end
 
@@ -122,6 +124,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)textViewEditDoneWasPressed {
+    [self enableAllViews];
     NSArray* fieldViews = [self.formFieldViews allValues];
     for (int i = 0; i < [fieldViews count]; i++) {
         id fieldView = [fieldViews objectAtIndex:i];
@@ -351,6 +354,24 @@
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)disableAllViews {
+    NSArray* allViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [allViews count]; i++) {
+        UIView* theView = (UIView*)[allViews objectAtIndex:i];
+        theView.userInteractionEnabled = NO;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)enableAllViews {
+    NSArray* allViews = [self.formFieldViews allValues];
+    for (int i = 0; i < [allViews count]; i++) {
+        UIView* theView = (UIView*)[allViews objectAtIndex:i];
+        theView.userInteractionEnabled = YES;
+    }
+}
+
 //===================================================================================================================================
 #pragma mark CommandFormView
 
@@ -386,9 +407,9 @@
             fieldViewValue = (NSString*)[fieldView text];
         } else if ([[fieldView className] isEqualToString:@"UISwitch"]) {
             if ([(UISwitch*)fieldView isOn]) {
-                fieldViewValue = @"true";
+                fieldViewValue = @"1";
             } else {
-                fieldViewValue = @"false";
+                fieldViewValue = @"0";
             }
         } else if ([[fieldView className] isEqualToString:@"SegmentedListPicker"]) {
             NSString* fieldLabel = (NSString*)[(SegmentedListPicker*)fieldView selectedItem];
@@ -448,6 +469,7 @@
     [self keyBoardUp:YES by:kKEYBOARD_HEIGHT+kCOMMAND_FORM_TOOLBAR_HEIGHT];
     [scrollView scrollRectToVisible:formTextViewFrame animated:YES];
     [self addTextViewToolBar];
+    [self disableAllViews];
 }
 
 //===================================================================================================================================
