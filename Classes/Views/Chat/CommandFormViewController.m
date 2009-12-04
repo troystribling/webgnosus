@@ -13,6 +13,7 @@
 #import "AlertViewManager.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
+#import "XMPPError.h"
 #import "XMPPCommand.h"
 #import "XMPPIQ.h"
 #import "XMPPxData.h"
@@ -94,7 +95,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [AlertViewManager showAlert:@"Command Request Failed"];
+    XMPPError* error = [iq error];
+    NSString* msg = @"";
+    if (error) {
+        msg = [error text];
+    } 
+    [AlertViewManager showAlert:@"Command Error" withMessage:msg];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

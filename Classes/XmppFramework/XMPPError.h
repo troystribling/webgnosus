@@ -28,4 +28,7 @@
 - (NSString*)condition;
 - (void)addCondition:(NSString*)val;
 
+- (NSString*)text;
+- (void)addText:(NSString*)val;
+
 @end

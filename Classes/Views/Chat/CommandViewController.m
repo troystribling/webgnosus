@@ -23,11 +23,11 @@
 #import "XMPPClient.h"
 #import "XMPPJID.h"
 #import "XMPPCommand.h"
+#import "XMPPError.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandViewController (PrivateAPI)
 
-- (void)failureAlert;
 - (void)loadAccount;
 - (void)loadCommands;
 - (void)handleCommand:(NSIndexPath*)indexPath;
@@ -44,17 +44,13 @@
 @synthesize rosterItem;
 @synthesize commands;
 @synthesize commandRequest;
+@synthesize formDisplayed;
 
 //===================================================================================================================================
 #pragma mark CommandViewController
 
 //===================================================================================================================================
 #pragma mark CommandViewController PrivateAPI
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)failureAlert { 
-    [AlertViewManager showAlert:@"Command Request Failed"];
-}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadAccount {
@@ -103,9 +99,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandError:(XMPPIQ*)iq {
-    [AlertViewManager dismissActivityIndicator];
-    [self failureAlert];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (!self.formDisplayed) {
+        [AlertViewManager dismissActivityIndicator];
+        XMPPError* error = [iq error];
+        NSString* msg = @"";
+        if (error) {
+            msg = [error text];
+        } 
+        [AlertViewManager showAlert:@"Command Error" withMessage:msg];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -116,6 +119,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandForm:(XMPPIQ*)iq {
+    self.formDisplayed = YES;
     [AlertViewManager dismissActivityIndicator];
     [CommandFormViewController form:iq inView:self.view.window forAccount:self.account];
 }
@@ -127,6 +131,7 @@
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         self.navigationItem.title = @"Select Command";
+        self.formDisplayed = NO;
 	} 
 	return self; 
 } 

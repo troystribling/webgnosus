@@ -20,6 +20,7 @@
     UserModel* rosterItem;
     NSMutableArray* commands;
     ServiceItemModel* commandRequest;
+    BOOL formDisplayed;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -27,6 +28,7 @@
 @property (nonatomic, retain) UserModel* rosterItem;
 @property (nonatomic, retain) NSMutableArray* commands;
 @property (nonatomic, retain) ServiceItemModel* commandRequest;
+@property (nonatomic, assign) BOOL formDisplayed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
