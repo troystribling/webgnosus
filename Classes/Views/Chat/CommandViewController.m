@@ -24,6 +24,7 @@
 #import "XMPPJID.h"
 #import "XMPPCommand.h"
 #import "XMPPError.h"
+#import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface CommandViewController (PrivateAPI)
@@ -32,6 +33,8 @@
 - (void)loadCommands;
 - (void)handleCommand:(NSIndexPath*)indexPath;
 - (void)saveMessage:(NSString*)msg;
+- (NSString*)commandRootPath:(NSString*)cmd;
+- (NSString*)commandName:(NSString*)cmd;
 
 @end
 
@@ -59,12 +62,26 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadCommands {
-    self.commands = [ServiceItemModel findAllByService:[self.rosterItem fullJID] andParentNode:@"http://jabber.org/protocol/commands"];
+    NSArray* commandInfoArray = [ServiceItemModel findAllByService:[self.rosterItem fullJID] andParentNode:@"http://jabber.org/protocol/commands"];
+    for (int i=0; i < [commandInfoArray count]; i++) {
+        ServiceItemModel* commandInfo = [commandInfoArray objectAtIndex:i];
+        NSString* key = [self commandRootPath:commandInfo.node];
+        NSMutableArray* commandArray = [self.commands valueForKey:key];
+        if (commandArray) {
+            [commandArray addObject:commandInfo];
+        } else {
+            commandArray = [NSMutableArray arrayWithObject:commandInfo];
+            [self.commands setValue:commandArray forKey:key];
+        }
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleCommand:(NSIndexPath*)indexPath {
-    self.commandRequest = [self.commands objectAtIndex:indexPath.row];
+    NSArray* sections = [self.commands allKeys];
+    NSString* sectionName = [sections objectAtIndex:indexPath.section];
+    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
+    self.commandRequest = [commandInfoArray objectAtIndex:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     NSMutableArray* serviceItems = [ServiceItemModel findAllByService:[toJID full] parentNode:@"http://jabber.org/protocol/commands" andNode:self.commandRequest.node];
@@ -92,6 +109,33 @@
     model.messageRead = YES;
     [model insert];
     [model release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)commandName:(NSString*)cmd {
+    NSString* cmdName = nil;
+    NSMutableArray* cmdComp = [NSMutableArray arrayWithCapacity:10];
+    [cmdComp addObjectsFromArray:[cmd componentsSeparatedByString:@"/"]];
+    if ([[cmdComp objectAtIndex:0] isEqualToString:@""] && [cmdComp count] > 2) {
+        [cmdComp removeObjectAtIndex:0];
+        [cmdComp removeObjectAtIndex:1];
+    } else if ([cmdComp count] > 1) {
+        [cmdComp removeObjectAtIndex:0];
+    }
+    cmdName = [cmdComp componentsJoinedByString:@" "];
+    return [cmdName stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)commandRootPath:(NSString*)cmd {
+    NSString* rootPath = [self.rosterItem fullJID];
+    NSArray* cmdComp = [cmd componentsSeparatedByString:@"/"];
+    if ([[cmdComp objectAtIndex:0] isEqualToString:@""] && [cmdComp count] > 2) {
+        rootPath = [cmdComp objectAtIndex:1];
+    } else if (![[cmdComp objectAtIndex:0] isEqualToString:@""] && [cmdComp count] > 1) {
+        rootPath = [cmdComp objectAtIndex:0];
+    }
+    return rootPath;
 }
 
 //===================================================================================================================================
@@ -178,11 +222,10 @@
 #pragma mark UITableViewDeligate
 
  //-----------------------------------------------------------------------------------------------------------------------------------
- - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {    
-     UIView* sectionView = nil;
-     if (self.account) {
-         sectionView = [SectionViewController viewWithLabel:[self.rosterItem fullJID]]; 
-     }
+ - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {   
+     NSArray* sections = [self.commands allKeys];
+     NSString* sectionName = [sections objectAtIndex:section];
+     UIView* sectionView = [SectionViewController viewWithLabel:sectionName]; 
      return sectionView; 
 }
 
@@ -201,19 +244,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    NSInteger sectionCount = [[self.commands allKeys] count];
+    return sectionCount;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.commands count];
+    NSArray* sections = [self.commands allKeys];
+    NSString* sectionName = [sections objectAtIndex:section];
+    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
+    NSInteger count = [commandInfoArray count];
+    return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {  
-    ServiceItemModel* commandInfo = [self.commands objectAtIndex:indexPath.row];
+    NSArray* sections = [self.commands allKeys];
+    NSString* sectionName = [sections objectAtIndex:indexPath.section];
+    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
+    ServiceItemModel* commandInfo = [commandInfoArray objectAtIndex:indexPath.row];
     CommandCell* cell = (CommandCell*)[CellUtils createCell:[CommandCell class] forTableView:tableView];
-    cell.commandLabel.text = commandInfo.itemName;
+    cell.commandLabel.text = [self commandName:commandInfo.node];
     return cell;
 }
 

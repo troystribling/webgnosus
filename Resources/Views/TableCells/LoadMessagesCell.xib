@@ -49,7 +49,7 @@
 									<object class="IBUIImageView" id="1071261547">
 										<reference key="NSNextResponder" ref="908466206"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{150, 5}, {20, 20}}</string>
+										<string key="NSFrame">{{150, 8}, {20, 35}}</string>
 										<reference key="NSSuperview" ref="908466206"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -61,7 +61,7 @@
 										</object>
 									</object>
 								</object>
-								<string key="NSFrameSize">{320, 35}</string>
+								<string key="NSFrameSize">{320, 50}</string>
 								<reference key="NSSuperview" ref="373711406"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
@@ -73,7 +73,7 @@
 								<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 							</object>
 						</object>
-						<string key="NSFrameSize">{320, 34}</string>
+						<string key="NSFrameSize">{320, 50}</string>
 						<reference key="NSSuperview" ref="986232705"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -85,7 +85,7 @@
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 					</object>
 				</object>
-				<string key="NSFrameSize">{320, 35}</string>
+				<string key="NSFrameSize">{320, 51}</string>
 				<reference key="NSSuperview"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -164,7 +164,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIResponder</string>
 					<string>LoadMessagesCell</string>
-					<string>{{912, 572}, {320, 35}}</string>
+					<string>{{912, 556}, {320, 51}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>

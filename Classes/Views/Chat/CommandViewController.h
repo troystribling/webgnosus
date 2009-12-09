@@ -18,7 +18,7 @@
 @interface CommandViewController : UITableViewController {
     AccountModel* account;
     UserModel* rosterItem;
-    NSMutableArray* commands;
+    NSMutableDictionary* commands;
     ServiceItemModel* commandRequest;
     BOOL formDisplayed;
 }
@@ -26,7 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) UserModel* rosterItem;
-@property (nonatomic, retain) NSMutableArray* commands;
+@property (nonatomic, retain) NSMutableDictionary* commands;
 @property (nonatomic, retain) ServiceItemModel* commandRequest;
 @property (nonatomic, assign) BOOL formDisplayed;
 

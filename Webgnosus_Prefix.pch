@@ -21,9 +21,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Global configuration 
-#define kMESSAGE_CACHE_SIZE                     10          // number of messages cached in message views
-#define kCELL_WIDTH                             320.0       // size of table cells
-#define kDISPLAY_WIDTH                          270.0       // width of message display portion of table cell
+#define kMESSAGE_CACHE_SIZE                     10         
+#define kCELL_WIDTH                             320.0       
+#define kDISPLAY_WIDTH                          270.0      
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // GridView configuration
@@ -46,7 +46,7 @@
 // MessageCell configuration
 #define kMESSAGE_CELL_FONT_SIZE                 17.0
 #define kMESSAGE_CELL_HEIGHT_PAD                30.0
-#define kLOAD_MESSAGE_CELL_HEIGHT               35.0
+#define kLOAD_MESSAGE_CELL_HEIGHT               50.0
 #define kMESSAGE_CELL_X_OFFSET                  20.0
 #define kMESSAGE_CELL_Y_OFFSET                  20.0
 
