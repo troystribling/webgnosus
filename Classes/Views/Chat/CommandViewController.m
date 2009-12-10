@@ -35,6 +35,8 @@
 - (void)saveMessage:(NSString*)msg;
 - (NSString*)commandRootPath:(NSString*)cmd;
 - (NSString*)commandName:(NSString*)cmd;
+- (NSArray*)sectionNameArray;
+- (ServiceItemModel*)commandInfoForSection:(NSString*)sectionName atRow:(NSInteger)row;
 
 @end
 
@@ -78,10 +80,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleCommand:(NSIndexPath*)indexPath {
-    NSArray* sections = [self.commands allKeys];
-    NSString* sectionName = [sections objectAtIndex:indexPath.section];
-    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
-    self.commandRequest = [commandInfoArray objectAtIndex:indexPath.row];
+    NSString* sectionName = [[self sectionNameArray] objectAtIndex:indexPath.section];
+    self.commandRequest = [self commandInfoForSection:sectionName atRow:indexPath.row];
     XMPPJID* toJID = [self.rosterItem toJID];
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     NSMutableArray* serviceItems = [ServiceItemModel findAllByService:[toJID full] parentNode:@"http://jabber.org/protocol/commands" andNode:self.commandRequest.node];
@@ -118,12 +118,12 @@
     [cmdComp addObjectsFromArray:[cmd componentsSeparatedByString:@"/"]];
     if ([[cmdComp objectAtIndex:0] isEqualToString:@""] && [cmdComp count] > 2) {
         [cmdComp removeObjectAtIndex:0];
-        [cmdComp removeObjectAtIndex:1];
+        [cmdComp removeObjectAtIndex:0];
     } else if ([cmdComp count] > 1) {
         [cmdComp removeObjectAtIndex:0];
     }
     cmdName = [cmdComp componentsJoinedByString:@" "];
-    return [cmdName stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+    return [cmdName stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -136,6 +136,16 @@
         rootPath = [cmdComp objectAtIndex:0];
     }
     return rootPath;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSArray*)sectionNameArray {
+    return [[self.commands allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (ServiceItemModel*)commandInfoForSection:(NSString*)sectionName atRow:(NSInteger)row {
+    return [[self.commands valueForKey:sectionName] objectAtIndex:row];
 }
 
 //===================================================================================================================================
@@ -176,6 +186,7 @@
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         self.navigationItem.title = @"Select Command";
         self.formDisplayed = NO;
+        self.commands = [NSMutableDictionary dictionaryWithCapacity:100];
 	} 
 	return self; 
 } 
@@ -223,10 +234,7 @@
 
  //-----------------------------------------------------------------------------------------------------------------------------------
  - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {   
-     NSArray* sections = [self.commands allKeys];
-     NSString* sectionName = [sections objectAtIndex:section];
-     UIView* sectionView = [SectionViewController viewWithLabel:sectionName]; 
-     return sectionView; 
+     return [SectionViewController viewWithLabel:[[self sectionNameArray] objectAtIndex:section]]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -244,25 +252,20 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger sectionCount = [[self.commands allKeys] count];
-    return sectionCount;
+    return [[self.commands allKeys] count];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray* sections = [self.commands allKeys];
-    NSString* sectionName = [sections objectAtIndex:section];
-    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
+    NSArray* commandInfoArray = [self.commands valueForKey:[[self sectionNameArray] objectAtIndex:section]];    
     NSInteger count = [commandInfoArray count];
     return count;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {  
-    NSArray* sections = [self.commands allKeys];
-    NSString* sectionName = [sections objectAtIndex:indexPath.section];
-    NSArray* commandInfoArray = [self.commands valueForKey:sectionName];
-    ServiceItemModel* commandInfo = [commandInfoArray objectAtIndex:indexPath.row];
+    NSString* sectionName = [[self sectionNameArray] objectAtIndex:indexPath.section];
+    ServiceItemModel* commandInfo = [self commandInfoForSection:sectionName atRow:indexPath.row];
     CommandCell* cell = (CommandCell*)[CellUtils createCell:[CommandCell class] forTableView:tableView];
     cell.commandLabel.text = [self commandName:commandInfo.node];
     return cell;
