@@ -49,11 +49,10 @@
 									<object class="IBUIImageView" id="1071261547">
 										<reference key="NSNextResponder" ref="908466206"/>
 										<int key="NSvFlags">274</int>
-										<string key="NSFrame">{{150, 8}, {20, 35}}</string>
+										<string key="NSFrame">{{140, 10}, {40, 30}}</string>
 										<reference key="NSSuperview" ref="908466206"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-										<int key="IBUIContentMode">4</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<object class="NSCustomResource" key="IBUIImage">
 											<string key="NSClassName">NSImage</string>
