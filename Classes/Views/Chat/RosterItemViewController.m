@@ -18,17 +18,21 @@
 #import "ServiceItemModel.h"
 #import "SubscriptionModel.h"
 #import "AccountModel.h"
+#import "ServiceModel.h"
 #import "ChatMessageCache.h"
 #import "CommandResponseMessageCache.h"
 #import "MessageCellFactory.h"
 #import "RosterCell.h"
 #import "ContactPubCell.h"
 #import "XMPPClientManager.h"
+#import "XMPPDiscoItemsQuery.h"
+#import "XMPPDiscoInfoQuery.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
 #import "XMPPJID.h"
 #import "CellUtils.h"
 #import "SegmentedCycleList.h"
+#import "AlertViewManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController (PrivateAPI)
@@ -194,7 +198,15 @@
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
         self.items = [[CommandResponseMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
-        self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
+        XMPPJID* itemJID = [self.rosterItem toJID];
+        XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
+        if (![ServiceModel findSynchedIMService:[serverJID full]]) {
+            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
+            XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+            [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
+            [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
+        }
+        self.items = [ServiceItemModel findAllByParentNode:[itemJID pubSubRoot]];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
     }
@@ -247,6 +259,30 @@
     if ([self.selectedMode isEqualToString:@"Commands"]) {
         [self loadItems];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID {
+    [AlertViewManager dismissActivityIndicator];
+    self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didFailToDiscoverUserPubSubNode:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"PubSub Disco Error"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"PubSub Disco Error"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [AlertViewManager showAlert:@"PubSub Disco Error"];
 }
 
 //===================================================================================================================================

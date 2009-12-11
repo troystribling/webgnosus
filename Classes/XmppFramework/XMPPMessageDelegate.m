@@ -179,8 +179,7 @@
     [XMPPRosterQuery get:client];
     [XMPPPresence goOnline:client withPriority:1];
     XMPPJID* serverJID = [XMPPJID jidWithString:[[client myJID] domain]];
-    ServiceModel* imServer = [ServiceModel findSynchedIMService:[serverJID full]];
-    if (!imServer) {
+    if (![ServiceModel findSynchedIMService:[serverJID full]]) {
         [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:[client myJID]];
         [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:[client myJID]];
     }

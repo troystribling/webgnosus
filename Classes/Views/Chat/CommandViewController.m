@@ -18,7 +18,6 @@
 #import "RosterItemModel.h"
 #import "CellUtils.h"
 #import "AlertViewManager.h"
-
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"

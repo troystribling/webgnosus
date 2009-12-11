@@ -303,6 +303,8 @@
     fieldText.borderStyle = UITextBorderStyleRoundedRect;
     fieldText.autocorrectionType = UITextAutocorrectionTypeNo;
     fieldText.returnKeyType = UIReturnKeyDone;
+    fieldText.keyboardType = UIKeyboardTypeEmailAddress;    
+    fieldText.autocapitalizationType = UITextAutocapitalizationTypeNone;    
     fieldText.clearButtonMode = UITextFieldViewModeWhileEditing;
     fieldText.font = [UIFont fontWithName:@"helvetica" size:17.0f];
     fieldText.delegate = self;
