@@ -120,6 +120,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceItemModel*)findSynchedByNode:(NSString*)requestNode {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@' AND synched = 1 LIMIT 1",  requestNode];
+	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[ServiceItemModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceItemModel*)findByService:(NSString*)requestService andNode:(NSString*)requestNode {
     NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM serviceItems WHERE node ='%@' AND service = '%@' LIMIT 1", requestNode,  requestService];
 	ServiceItemModel* model = [[[ServiceItemModel alloc] init] autorelease];

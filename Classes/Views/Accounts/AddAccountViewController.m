@@ -173,7 +173,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)sender didReceiveAllRosterItems:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)sender didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID {
     [AlertViewManager dismissActivityIndicator]; 
     [self.view removeFromSuperview];
     if ([AccountModel count] == 1) {

@@ -81,7 +81,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (ServiceModel*)findSynchedIMService:(NSString*)requestJID {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='im' AND category = 'server'", requestJID];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='im' AND category = 'server' AND synched = 1", requestJID];
 	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {

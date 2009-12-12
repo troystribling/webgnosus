@@ -51,7 +51,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didDiscoverPubSubService:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
+    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubDomain] forTarget:self.targetJID];
 }
 
 //===================================================================================================================================

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPDiscoItemsResponseDelegate.h"
 #import "XMPPDiscoInfoQuery.h"
+#import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoItem.h"
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
@@ -121,11 +122,20 @@
             [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];
         }
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
+    } else if ([parentNode isEqualToString:[self.targetJID pubSubDomain]]) {
+        for(int i = 0; i < [items count]; i++) {
+            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
+            if ([[item node] isEqualToString:[self.targetJID pubSubRoot]]) {
+                [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+                [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
+            }
+        }
+        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
     } else if (parentNode == nil) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-            [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
             [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+            [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
         }
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
     }

@@ -126,7 +126,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)triedToConnectAll { 
-    NSUInteger count = [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM accounts WHERE connectionState < 3"];
+    NSUInteger count = [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM accounts WHERE connectionState < 4"];
     return count == 0 ? YES : NO;
 }
 

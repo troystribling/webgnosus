@@ -200,11 +200,14 @@
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         XMPPJID* itemJID = [self.rosterItem toJID];
         XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         if (![ServiceModel findSynchedIMService:[serverJID full]]) {
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
-            XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
             [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
             [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
+        } else if (![ServiceItemModel findSynchedByNode:[itemJID pubSubRoot]]) {
+            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
+            [XMPPDiscoItemsQuery get:client JID:[self.rosterItem pubSubService] node:[itemJID pubSubDomain] forTarget:itemJID];
         }
         self.items = [ServiceItemModel findAllByParentNode:[itemJID pubSubRoot]];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
@@ -264,7 +267,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)targetJID {
     [AlertViewManager dismissActivityIndicator];
-    self.items = [ServiceItemModel findAllByParentNode:[[self.rosterItem toJID] pubSubRoot]];
+    [self loadItems];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

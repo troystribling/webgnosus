@@ -287,12 +287,6 @@
         if ([rosterItem.presenceType isEqualToString:@"available"] && ![client isAccountJID:[fromJID full]]) {
             [XMPPClientVersionQuery get:client JID:fromJID];
             [XMPPDiscoItemsQuery get:client JID:fromJID andNode:@"http://jabber.org/protocol/commands"];
-            XMPPJID* serverJID = [XMPPJID jidWithString:[fromJID domain]];
-            ServiceModel* imServer = [ServiceModel findSynchedIMService:[serverJID full]];
-            if (!imServer) {
-                [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:fromJID];
-                [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:fromJID];
-            }    
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];

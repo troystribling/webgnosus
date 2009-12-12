@@ -40,6 +40,7 @@
 - (XMPPJID*)toJID;
 - (NSString*)pubSubRoot;
 - (XMPPJID*)pubSubService;
+- (NSString*)pubSubDomain;
 - (void)load;
 
 @end
