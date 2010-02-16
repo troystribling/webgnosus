@@ -62,6 +62,7 @@
 - (void)didFailToDiscoverUserPubSubNode:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
     if ([client isAccountJID:[self.targetJID full]]) {
         [XMPPPubSub create:client JID:[iq fromJID] node:[self.targetJID pubSubRoot]];
+        [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
     }
 }
 
@@ -71,17 +72,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
     XMPPIQ* iq = (XMPPIQ*)stanza;
-    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
-	NSString* node = [query node];
     XMPPError* error = [iq error];	
     if (error) {
-        if ([node isEqualToString:[self.targetJID pubSubRoot]] && [[error condition] isEqualToString:@"item-not-found"]) {
-            [self didFailToDiscoverUserPubSubNode:client forIQ:iq];        
-            [[client multicastDelegate] xmppClient:client didFailToDiscoverUserPubSubNode:iq];        
-        }else {
-            if ([client isAccountJID:[self.targetJID full]]) {
-                [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
-            }
+        if ([client isAccountJID:[self.targetJID full]]) {
+            [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
         }
     }    
     [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsError:iq];        
@@ -123,14 +117,19 @@
         }
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
     } else if ([parentNode isEqualToString:[self.targetJID pubSubDomain]]) {
-        for(int i = 0; i < [items count]; i++) {
-            XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
-            if ([[item node] isEqualToString:[self.targetJID pubSubRoot]]) {
-                [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
-                [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
+        NSInteger itemCount = [items count];
+        if (itemCount > 0) {
+            for(int i = 0; i < itemCount; i++) {
+                XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
+                if ([[item node] isEqualToString:[self.targetJID pubSubRoot]]) {
+                    [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+                    [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
+                }
             }
+        } else {
+            [self didFailToDiscoverUserPubSubNode:client forIQ:iq];
         }
-        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
+        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
     } else if (parentNode == nil) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
