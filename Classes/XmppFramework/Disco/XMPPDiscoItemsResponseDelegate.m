@@ -118,15 +118,18 @@
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
     } else if ([parentNode isEqualToString:[self.targetJID pubSubDomain]]) {
         NSInteger itemCount = [items count];
+        BOOL didNotDiscoverPubSubRoot = YES;
         if (itemCount > 0) {
             for(int i = 0; i < itemCount; i++) {
                 XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
                 if ([[item node] isEqualToString:[self.targetJID pubSubRoot]]) {
+                    didNotDiscoverPubSubRoot = NO;
                     [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
                     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
                 }
             }
-        } else {
+        } 
+        if (didNotDiscoverPubSubRoot) {
             [self didFailToDiscoverUserPubSubNode:client forIQ:iq];
         }
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
