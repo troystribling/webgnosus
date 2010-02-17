@@ -132,7 +132,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID {
-    [self get:client JID:jid node:node andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
+    if (node) {
+        [self get:client JID:jid node:node andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
+    } else {
+        [self get:client JID:jid forTarget:targetJID];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

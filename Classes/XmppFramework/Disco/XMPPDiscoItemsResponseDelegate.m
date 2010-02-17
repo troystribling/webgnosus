@@ -124,7 +124,7 @@
                 XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
                 if ([[item node] isEqualToString:[self.targetJID pubSubRoot]]) {
                     didNotDiscoverPubSubRoot = NO;
-                    [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
+                    [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];
                     [XMPPDiscoItemsQuery get:client JID:[iq fromJID] node:[self.targetJID pubSubRoot] forTarget:self.targetJID];
                 }
             }
@@ -137,7 +137,7 @@
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
-            [XMPPDiscoInfoQuery get:client JID:[item JID] forTarget:self.targetJID];
+            [XMPPDiscoInfoQuery get:client JID:[item JID] node:[item node] forTarget:self.targetJID];
         }
         [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
     }
