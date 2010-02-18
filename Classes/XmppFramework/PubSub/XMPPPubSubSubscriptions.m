@@ -71,7 +71,7 @@
     [subElement addAttributeWithName:@"jid" stringValue:[account bareJID]];
     [pubsub addChild:subElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubSubscribeDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[[XMPPPubSubSubscribeDelegate alloc] init:node]];
     [iq release];
 }
 

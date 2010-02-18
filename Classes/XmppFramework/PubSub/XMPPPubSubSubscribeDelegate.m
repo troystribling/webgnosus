@@ -27,8 +27,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubSubscribeDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@synthesize node;
+
 //===================================================================================================================================
 #pragma mark XMPPPubSubSubscribeDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init:(NSString*)initNode {
+	if(self = [super init])  {
+        self.node = initNode;
+	}
+	return self;
+}
 
 //===================================================================================================================================
 #pragma mark XMPPPubSubSubscribeDelegate PrivateAPI
@@ -46,7 +57,7 @@
     XMPPIQ* iq = (XMPPIQ*)stanza;
     XMPPPubSub* pubsub = [iq pubsub];
     XMPPPubSubSubscription* subscription = [pubsub subscription];	
-    [SubscriptionModel insert:subscription forService:[[iq fromJID] full] andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
+    [SubscriptionModel insert:subscription forService:[[iq fromJID] full] node:node andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeResult:(XMPPIQ*)stanza];
 }
 

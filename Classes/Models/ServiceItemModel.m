@@ -175,7 +175,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent {
-    ServiceItemModel* model = [ServiceItemModel findByJID:[[item JID] full] andNode:[item node]];
+    NSString* itemNode = [item node];
+    if (!itemNode) {
+        itemNode = [item iname];
+    } 
+    ServiceItemModel* model = [ServiceItemModel findByJID:[[item JID] full] andNode:itemNode];
     if (!model) {
         ServiceItemModel* serviceItem = [[ServiceItemModel alloc] init];
         if (parent) {
@@ -186,10 +190,10 @@
         if ([item iname]) {
             serviceItem.itemName = [item iname];
         }
-        if ([item node]) {
-            serviceItem.node = [item node];
+        if ([item JID]) {
+            serviceItem.jid = [[item JID] full];
         }
-        serviceItem.jid = [[item JID] full];
+        serviceItem.node = itemNode;
         serviceItem.service = [serviceJID full];
         serviceItem.synched = YES;
         [serviceItem insert];

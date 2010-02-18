@@ -550,8 +550,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)writeToLog:(XMPPClient*)client message:(NSString*)message {
     if(DEBUG) {
-        NSString* msg = [NSString stringWithFormat:@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]];
-        NSLog(msg);
+        NSLog(@"XMPPMessageDelegate %@: JID %@", message, [client.myJID full]);
     }
 }
 

@@ -96,7 +96,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount {
++ (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID node:insertNone andAccount:(AccountModel*)insertAccount {
     SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount node:[insertSub node] andSubId:[insertSub subId]];
     if (!model) {
         SubscriptionModel* subModel = [[SubscriptionModel alloc] init];
@@ -109,7 +109,7 @@
             subModel.subId =@"-1";
         }
         subModel.accountPk = insertAccount.pk;
-        subModel.node = [insertSub node];
+        subModel.node = insertNone;
         subModel.service = serviceJID;
         subModel.subscription = [insertSub subscription];
         subModel.synched = YES;

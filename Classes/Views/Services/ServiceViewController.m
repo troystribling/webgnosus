@@ -459,7 +459,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ServiceItemModel* item = [self.serviceItems objectAtIndex:indexPath.row];
-    NSInteger count = [ServiceItemModel countByService:item.jid andParentNode:item.node];
     self.selectedItem = item;
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     if ([self.parentService.category isEqualToString:@"pubsub"] && [self.parentService.type isEqualToString:@"leaf"]) {
@@ -469,11 +468,9 @@
         } else {
             [XMPPPubSub get:client JID:[XMPPJID jidWithString:item.jid] node:self.parentService.node withId:item.itemName];
         }
-    } else if (count == 0) {
+    } else {
         [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
-    } else {
-        [self loadNextViewController];
     }
 }
 

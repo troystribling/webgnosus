@@ -116,7 +116,7 @@ static NSString* dbFileName = @"webgnosus.db";
 	sqlite3_prepare_v2 (sqlDb, [statement UTF8String], -1, &statementPrepared, NULL);
     while (sqlite3_step(statementPrepared) == SQLITE_ROW) {
         char* textVal = (char*)sqlite3_column_text(statementPrepared, 0);
-        [result addObject:[NSString stringWithCString:textVal]];
+        [result addObject:[NSString stringWithUTF8String:textVal]];
     }
 	if (sqlite3_finalize(statementPrepared)) {
 		[self logError:statement];
@@ -157,7 +157,7 @@ static NSString* dbFileName = @"webgnosus.db";
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)logError:(NSString*)statement {
-	NSLog([@"SQL STATEMENT FAILED: " stringByAppendingString:statement]);
+	NSLog(@"SQL STATEMENT FAILED: %@", statement);
 }
 
 //===================================================================================================================================
