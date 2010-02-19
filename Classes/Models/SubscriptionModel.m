@@ -96,6 +96,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount {
+    [self insert:insertSub forService:serviceJID node:[insertSub node] andAccount:insertAccount];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID node:insertNone andAccount:(AccountModel*)insertAccount {
     SubscriptionModel* model = [SubscriptionModel findByAccount:insertAccount node:[insertSub node] andSubId:[insertSub subId]];
     if (!model) {

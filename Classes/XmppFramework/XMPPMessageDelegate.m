@@ -178,11 +178,6 @@
     [XMPPMessageDelegate updateAccountConnectionState:AccountAuthenticated forClient:client];
     [XMPPRosterQuery get:client];
     [XMPPPresence goOnline:client withPriority:1];
-    XMPPJID* serverJID = [XMPPJID jidWithString:[[client myJID] domain]];
-    if (![ServiceModel findSynchedIMService:[serverJID full]]) {
-        [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:[client myJID]];
-        [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:[client myJID]];
-    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -244,6 +239,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveAllRosterItems:(XMPPIQ *)iq {
 	[self writeToLog:client message:@"didReceiveAllRosterItems"];
+    XMPPJID* serverJID = [XMPPJID jidWithString:[[client myJID] domain]];
+    [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:[client myJID]];
+    [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:[client myJID]];
     [XMPPMessageDelegate updateAccountConnectionState:AccountRosterUpdated forClient:client];
 }
 
