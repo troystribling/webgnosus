@@ -31,7 +31,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithClient:(XMPPClient*)client buddyJid:(XMPPJID*)aBuddyJid andDelegate:(id)delegate {
     NSString* message = [[NSString alloc] initWithFormat:@"contact request from \n '%@'", [aBuddyJid full]];
-    if (self = [super initWithTitle:[[client myJID] full] message:message delegate:delegate cancelButtonTitle:@"decline" otherButtonTitles:nil]) {
+    if (self = [super initWithTitle:[[client myJID] full] message:message delegate:delegate cancelButtonTitle:@"reject" otherButtonTitles:nil]) {
         [self addButtonWithTitle:@"accept"];
         self.xmppClient = client;
         self.buddyJid = aBuddyJid;
