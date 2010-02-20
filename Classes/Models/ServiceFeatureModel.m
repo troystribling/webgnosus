@@ -27,7 +27,6 @@
 @synthesize node;
 @synthesize service;
 @synthesize var;
-@synthesize synched;
 
 //===================================================================================================================================
 #pragma mark ServiceFeatureModel
@@ -55,7 +54,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, node text, service text, var text, synched integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE serviceFeatures (pk integer primary key, node text, service text, var text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -115,11 +114,10 @@
         }
         serviceFeature.var = [feature var];
         serviceFeature.service = [serviceJID full];
-        serviceFeature.synched = YES;
         [serviceFeature insert];
         [serviceFeature release];
     } else {
-        [model sync];
+        [model update];
     }
 }
 
@@ -140,18 +138,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)resetSyncFlag {
-	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE serviceFeatures SET synched = 0"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsyched {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM serviceFeatures WHERE synched = 0"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsychedByService:(NSString*)requestService {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@' AND synched = 0", requestService];
++ (void)destroyAllByService:(NSString*)requestService {
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceFeatures WHERE service = '%@'", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
@@ -160,9 +148,9 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.node) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (node, service, var, synched) values ('%@', '%@', '%@', %d)", self.node, self.service, self.var, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (node, service, var) values ('%@', '%@', '%@')", self.node, self.service, self.var];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var, synched) values ('%@', '%@', %d)", self.service, self.var, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceFeatures (service, var) values ('%@', '%@')", self.service, self.var];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -183,33 +171,13 @@
 - (void)update {
     NSString* updateStatement;
     if (self.node) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET node = '%@', service = '%@', var = '%@', synched = %d WHERE pk = %d", 
-                            self.node, self.service, self.var, [self synchedAsInteger], self.pk];	
+        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET node = '%@', service = '%@', var = '%@' WHERE pk = %d", 
+                            self.node, self.service, self.var, self.pk];	
     } else {
-        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET service = '%@', var = '%@', synched = %d WHERE pk = %d", 
-                            self.service, self.var, [self synchedAsInteger], self.pk];	
+        updateStatement = [NSString stringWithFormat:@"UPDATE serviceFeatures SET service = '%@', var = '%@' WHERE pk = %d", 
+                            self.service, self.var, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)synchedAsInteger {
-	return self.synched == YES ? 1 : 0;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setSynchedAsInteger:(NSInteger)value {
-	if (value == 1) {
-		self.synched = YES; 
-	} else {
-		self.synched = NO;
-	};
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sync {
-    self.synched = YES;
-    [self update];
 }
 
 //===================================================================================================================================
@@ -233,7 +201,6 @@
 	if (varVal != nil) {		
 		self.var = [[NSString alloc] initWithUTF8String:varVal];
 	}
-	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 4)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

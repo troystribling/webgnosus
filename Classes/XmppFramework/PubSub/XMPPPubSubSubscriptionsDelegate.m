@@ -47,14 +47,11 @@
     NSString* fromJID = [[iq fromJID] full];
     XMPPPubSub* pubsub = [iq pubsub];
     NSArray* subscriptions = [pubsub subscriptions];	
-    AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
-    [SubscriptionModel resetSyncFlagByService:fromJID andAccount:account];
     for(int i = 0; i < [subscriptions count]; i++) {
         XMPPPubSubSubscription* subscription = [XMPPPubSubSubscription createFromElement:(NSXMLElement *)[subscriptions objectAtIndex:i]];
         [SubscriptionModel insert:subscription forService:fromJID andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     }
     [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdated forClient:client];
-    [SubscriptionModel destroyAllUnsychedByService:fromJID andAccount:account];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
 }
 

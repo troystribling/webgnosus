@@ -86,7 +86,6 @@
         [ServiceFeatureModel insert:feature forService:serviceJID andNode:node];
     }
     [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:iq];        
-    [ServiceFeatureModel destroyAllUnsychedByService:[serviceJID full]];
 }
 
 //===================================================================================================================================

@@ -20,7 +20,6 @@
     NSString* node;
     NSString* service;
     NSString* var;
-    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +27,6 @@
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* var;
-@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -42,17 +40,12 @@
 + (ServiceFeatureModel*)findByService:(NSString*)requestService node:(NSString*)requestNode  andVar:(NSString*)requestVar;
 + (NSMutableArray*)findAllByService:(NSString*)requestService andNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoFeature*)feature forService:(XMPPJID*)serviceJID andNode:(NSString*)parent;
-+ (void)resetSyncFlag;
-+ (void)destroyAllUnsyched;
-+ (void)destroyAllUnsychedByService:(NSString*)requestService;
++ (void)destroyAllByService:(NSString*)requestService;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSInteger)synchedAsInteger;
-- (void)setSynchedAsInteger:(NSInteger)value;
-- (void)sync;
     
 @end

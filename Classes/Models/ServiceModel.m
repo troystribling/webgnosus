@@ -28,7 +28,6 @@
 @synthesize category;
 @synthesize type;
 @synthesize node;
-@synthesize synched;
 
 //===================================================================================================================================
 #pragma mark ServiceModel
@@ -45,7 +44,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, name text, category text, type text, node text, synched integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE services (pk integer primary key, jid text, name text, category text, type text, node text)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -71,17 +70,6 @@
     } else {
         selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='%@' AND category = '%@' AND node IS NULL", requestJID, requestType, requestCategory];
     }
-	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
-	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
-    if (model.pk == 0) {
-        model = nil;
-    }
-	return model;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (ServiceModel*)findSynchedIMService:(NSString*)requestJID {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='im' AND category = 'server' AND synched = 1", requestJID];
 	ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -130,6 +118,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ServiceModel*)findIMService:(NSString*)requestJID {
+    NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM services WHERE jid = '%@' AND type ='im' AND category = 'server'", requestJID];
+    ServiceModel* model = [[[ServiceModel alloc] init] autorelease];
+    [[WebgnosusDbi instance] selectForModel:[ServiceModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+    return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAll {
 	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services"];
 }
@@ -148,27 +147,16 @@
         service.jid = [serviceJID full];
         service.category = [ident category];
         service.type = [ident type];
-        service.synched = YES;
         [service insert];
         [service release];
     } else {
-        [model sync];
+        [model update];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)resetSyncFlag {
-	[[WebgnosusDbi instance]  updateWithStatement:@"UPDATE services SET synched = 0"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsyched {
-	[[WebgnosusDbi instance]  updateWithStatement:@"DELETE FROM services WHERE synched = 0"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllUnsychedByDomain:(NSString*)requestService {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM services WHERE jid LIKE '%%%@' AND synched = 0", requestService];
++ (void)destroyAllByDomain:(NSString*)requestService {
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM services WHERE jid LIKE '%%%@'", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
@@ -177,13 +165,13 @@
 - (void)insert {
     NSString* insertStatement;
     if (self.name && self.node) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type, node, synched) values ('%@', '%@', '%@', '%@', '%@', %d)", self.jid, self.name, self.category, self.type, self.node, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type, node) values ('%@', '%@', '%@', '%@', '%@')", self.jid, self.name, self.category, self.type, self.node];	
     } else if (self.name) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type, synched) values ('%@', '%@', '%@', '%@', %d)", self.jid, self.name, self.category, self.type, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, name, category, type) values ('%@', '%@', '%@', '%@')", self.jid, self.name, self.category, self.type];	
     } else if (self.node) {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type, node, synched) values ('%@', '%@', '%@', '%@', %d)", self.jid, self.category, self.type, self.node, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type, node) values ('%@', '%@', '%@', '%@')", self.jid, self.category, self.type, self.node];	
     } else {
-        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type, synched) values ('%@', '%@', '%@', %d)", self.jid, self.category, self.type, [self synchedAsInteger]];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO services (jid, category, type) values ('%@', '%@', '%@')", self.jid, self.category, self.type];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -204,39 +192,19 @@
 - (void)update {
     NSString* updateStatement;
     if (self.name && self.node) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@', node= '%@', synched = %d WHERE pk = %d", 
-                            self.jid, self.name, self.category, self.type, self.node, [self synchedAsInteger], self.pk];
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@', node= '%@' WHERE pk = %d", 
+                            self.jid, self.name, self.category, self.type, self.node, self.pk];
     } else if (self.name) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@', synched = %d WHERE pk = %d", 
-                           self.jid, self.name, self.category, self.type, [self synchedAsInteger], self.pk];
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', name = '%@', category = '%@', type = '%@' WHERE pk = %d", 
+                           self.jid, self.name, self.category, self.type, self.pk];
     } else if (self.node) {
-        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@',category = '%@', type = '%@', node= '%@', synched = %d WHERE pk = %d", 
-                           self.jid, self.category, self.type, self.node, [self synchedAsInteger], self.pk];
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@',category = '%@', type = '%@', node= '%@' WHERE pk = %d", 
+                           self.jid, self.category, self.type, self.node, self.pk];
     } else {
-        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', category = '%@', type = '%@', synched = %d WHERE pk = %d", 
-                           self.jid, self.category, self.type, [self synchedAsInteger], self.pk];
+        updateStatement = [NSString stringWithFormat:@"UPDATE services SET jid = '%@', category = '%@', type = '%@' WHERE pk = %d", 
+                           self.jid, self.category, self.type, self.pk];
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSInteger)synchedAsInteger {
-	return self.synched == YES ? 1 : 0;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)setSynchedAsInteger:(NSInteger)value {
-	if (value == 1) {
-		self.synched = YES; 
-	} else {
-		self.synched = NO;
-	};
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)sync {
-    self.synched = YES;
-    [self update];
 }
 
 //===================================================================================================================================
@@ -268,7 +236,6 @@
 	if (nodeVal != nil) {		
 		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
 	}
-	[self setSynchedAsInteger:(int)sqlite3_column_int(statement, 6)];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

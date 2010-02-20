@@ -22,7 +22,6 @@
     NSString* node;
     NSString* jid;
     NSString* itemName;
-    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -32,7 +31,6 @@
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* jid;
 @property (nonatomic, retain) NSString* itemName;
-@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -42,7 +40,6 @@
 + (void)destroyAll;
 + (ServiceItemModel*)findByJID:(NSString*)requestJID;
 + (ServiceItemModel*)findByNode:(NSString*)requestNode;
-+ (ServiceItemModel*)findSynchedByNode:(NSString*)requestNode;
 + (ServiceItemModel*)findByService:(NSString*)requestService andNode:(NSString*)requestNode;
 + (ServiceItemModel*)findByService:(NSString*)requestService;
 + (NSMutableArray*)findAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode ;
@@ -50,18 +47,13 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
-+ (void)resetSyncFlag;
-+ (void)destroyAllUnsyched;
-+ (void)destroyAllUnsychedByService:(NSString*)requestService;
-+ (void)destroyAllUnsychedByService:(NSString*)requestService andNode:(NSString*)requestNode;
++ (void)destroyAllByService:(NSString*)requestService;
++ (void)destroyAllByService:(NSString*)requestService andNode:(NSString*)requestNode;
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSInteger)synchedAsInteger;
-- (void)setSynchedAsInteger:(NSInteger)value;
-- (void)sync;
 
 @end

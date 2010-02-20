@@ -96,9 +96,6 @@
         }
         [XMPPPubSubSubscriptions get:client JID:serviceJID];
         [[client multicastDelegate] xmppClient:client didDiscoverAllUserPubSubNodes:self.targetJID];  
-        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
-        ServiceItemModel* pubSubServiceItem = [ServiceItemModel findByJID:[serviceJID full]];
-        [ServiceModel destroyAllUnsychedByDomain:pubSubServiceItem.service];
         if ([client isAccountJID:[self.targetJID full]]) {
             [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoCompleted forClient:client];
             AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
@@ -115,7 +112,6 @@
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];
         }
-        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
     } else if ([parentNode isEqualToString:[self.targetJID pubSubDomain]]) {
         NSInteger itemCount = [items count];
         BOOL didNotDiscoverPubSubRoot = YES;
@@ -132,14 +128,12 @@
         if (didNotDiscoverPubSubRoot) {
             [self didFailToDiscoverUserPubSubNode:client forIQ:iq];
         }
-        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full] andNode:parentNode];
     } else if (parentNode == nil) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [ServiceItemModel insert:item forService:serviceJID andParentNode:nil];
             [XMPPDiscoInfoQuery get:client JID:[item JID] node:[item node] forTarget:self.targetJID];
         }
-        [ServiceItemModel destroyAllUnsychedByService:[serviceJID full]];
     }
     [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsResult:iq];        
 }

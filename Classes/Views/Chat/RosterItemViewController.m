@@ -201,11 +201,11 @@
         XMPPJID* itemJID = [self.rosterItem toJID];
         XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
         XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        if (![ServiceModel findSynchedIMService:[serverJID full]]) {
+        if (![ServiceModel findIMService:[serverJID full]]) {
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
             [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
             [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
-        } else if (![ServiceItemModel findSynchedByNode:[itemJID pubSubRoot]]) {
+        } else if (![ServiceItemModel findByNode:[itemJID pubSubRoot]]) {
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
             [XMPPDiscoItemsQuery get:client JID:[self.rosterItem pubSubService] node:[itemJID pubSubDomain] forTarget:itemJID];
         }

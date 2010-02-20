@@ -24,7 +24,6 @@
     NSString* service;
     NSString* subscription;
     NSString* jid;
-    BOOL synched;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -35,7 +34,6 @@
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* subscription;
 @property (nonatomic, retain) NSString* jid;
-@property (nonatomic, assign) BOOL synched;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count;
@@ -46,19 +44,16 @@
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount andNode:(NSString*)requestNode;
 + (SubscriptionModel*)findByAccount:(AccountModel*)requestAccount node:(NSString*)requestNode andSubId:(NSString*)requestSubId;
 + (NSArray*)findAllServicesByAccount:(AccountModel*)requestAccount;
++ (void)destroyAll;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
++ (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID andAccount:(AccountModel*)insertAccount;
 + (void)insert:(XMPPPubSubSubscription*)insertSub forService:(NSString*)serviceJID node:insertNone andAccount:(AccountModel*)insertAccount;
-+ (void)destroyAllUnsyched;
-+ (void)resetSyncFlagByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount;
-+ (void)destroyAllUnsychedByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount;
++ (void)destroyAllByService:(NSString*)requestService andAccount:(AccountModel*)requestAccount;
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
 - (void)load;
 - (void)update;
-- (NSInteger)synchedAsInteger;
-- (void)setSynchedAsInteger:(NSInteger)value;
-- (void)sync;
 
 @end
