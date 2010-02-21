@@ -28,6 +28,7 @@
 + (XMPPIQ*)createFromElement:(NSXMLElement *)element;
 - (XMPPIQ*)initWithType:(NSString*)iqType;
 - (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqTo;
+- (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqTo andId:(NSString*)iqId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPQuery*)query;

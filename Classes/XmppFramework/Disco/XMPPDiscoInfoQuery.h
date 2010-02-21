@@ -14,6 +14,7 @@
 @class XMPPDiscoFeature;
 @class XMPPDiscoIdentity;
 @class XMPPJID;
+@class XMPPIQ;
 @class XMPPClient;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,10 +39,8 @@
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID;
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID;
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate;
-+ (void)features:(XMPPClient*)client toJID:(XMPPJID*)jid;
-+ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
-+ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
-+ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid;
-+ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid;
++ (void)features:(XMPPClient*)client forRequest:iq;
++ (void)itemNotFound:(XMPPClient*)client forRequest:(XMPPIQ*)iq;
++ (void)serviceUnavailable:(XMPPClient*)client forRequest:(XMPPIQ*)iq;
     
 @end

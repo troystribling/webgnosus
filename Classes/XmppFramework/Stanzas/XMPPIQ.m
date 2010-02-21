@@ -65,6 +65,14 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqToJID andId:(NSString*)iqId {
+	if([self initWithType:iqType toJID:iqToJID]) {
+        [self addStanzaID:iqId];
+	}
+	return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPQuery*)query {
     return [self createQueryFromElement];
 }

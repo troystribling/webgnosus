@@ -408,12 +408,10 @@
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
 	NSString* node = [query node];
 	XMPPJID* fromJID = [iq fromJID];
-    if (!node) {
-        [XMPPDiscoItemsQuery serviceUnavailable:client toJID:fromJID];
-    } else if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
-        [XMPPDiscoItemsQuery commands:client toJID:fromJID];
+    if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
+        [XMPPDiscoItemsQuery commands:client forRequest:iq];
     } else {
-        [XMPPDiscoItemsQuery serviceUnavailable:client toJID:fromJID andNode:node];
+        [XMPPDiscoItemsQuery serviceUnavailable:client forRequest:iq];
     }
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoItemsRequest"];
 }
@@ -434,9 +432,9 @@
 	NSString* node = [query node];
 	XMPPJID* fromJID = [iq fromJID];
     if (!node) {
-        [XMPPDiscoInfoQuery features:client toJID:fromJID];
+        [XMPPDiscoInfoQuery features:client forRequest:iq];
     } else {
-        [XMPPDiscoInfoQuery serviceUnavailable:client toJID:fromJID andNode:node];
+        [XMPPDiscoInfoQuery serviceUnavailable:client forRequest:iq];
     }
 	[self writeToLog:client message:@"xmppClient:didReceiveDiscoInfoRequest"];
 }

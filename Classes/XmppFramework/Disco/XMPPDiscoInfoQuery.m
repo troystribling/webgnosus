@@ -20,8 +20,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPDiscoInfoQuery (PrivateAPI)
 
-+ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid andNode:(NSString*)itemNode;
-+ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid;
++ (void)error:(XMPPClient*)client condition:(NSString*)condition forRequest:(XMPPIQ*)iq;
 
 @end
 
@@ -91,33 +90,24 @@
 #pragma mark XMPPDiscoInfoQuery PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
-    XMPPDiscoInfoQuery* infoQuery = [[self alloc] initWithNode:itemNode];
++ (void)error:(XMPPClient*)client condition:(NSString*)condition forRequest:(XMPPIQ*)iq {
+    XMPPIQ* respIq = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
+    XMPPDiscoInfoQuery* infoQuery;
+    NSString* node = [[iq query] node];
+    if (node) {
+        infoQuery = [[self alloc] initWithNode:node];
+    } else {
+        infoQuery = [[self alloc] init];
+    }
     XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
     NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
     [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
     [error addChild:errorCondition];
-    [iq addChild:error];
-    [iq addQuery:infoQuery];
-    [client sendElement:iq];
-    [iq release];
+    [respIq addChild:error];
+    [respIq addQuery:infoQuery];
+    [client sendElement:respIq];
+    [respIq release];
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)error:(XMPPClient*)client condition:(NSString*)condition toJID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
-    XMPPDiscoInfoQuery* infoQuery = [[self alloc] init];
-    XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
-    NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
-    [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
-    [error addChild:errorCondition];
-    [iq addChild:error];
-    [iq addQuery:infoQuery];
-    [client sendElement:iq];
-    [iq release];
-}
-
 
 //===================================================================================================================================
 #pragma mark XMPPDiscoInfoQuery Messages
@@ -148,7 +138,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)features:(XMPPClient*)client toJID:(XMPPJID*)jid {
++ (void)features:(XMPPClient*)client forRequest:iq {
     NSArray* clientFeatures = [NSArray arrayWithObjects:@"http://jabber.org/protocol/disco#info", 
                                                         @"http://jabber.org/protocol/disco#items", 
                                                         @"jabber:iq:version", 
@@ -159,7 +149,7 @@
                                                         @"http://jabber.org/protocol/pubsub#subscribe",
                                                         @"http://jabber.org/protocol/pubsub#create-nodes",
                                                         @"http://jabber.org/protocol/pubsub#delete-nodes", nil];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"result" toJID:[jid full]];
+    XMPPIQ* respIq = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
     XMPPDiscoInfoQuery* infoQuery = [[self alloc] init];
     XMPPDiscoIdentity* identity = [[XMPPDiscoIdentity alloc] initWithCategory:[NSString stringWithUTF8String:kAPP_CATEGORY] iname:[NSString stringWithUTF8String:kAPP_NAME] andType:[NSString stringWithUTF8String:kAPP_TYPE]];
     [infoQuery addChild:identity];
@@ -168,29 +158,19 @@
         XMPPDiscoFeature* feature = [[XMPPDiscoFeature alloc] initWithVar:var];
         [infoQuery addChild:feature];
     }
-    [iq addQuery:infoQuery];
-    [client sendElement:iq];
-    [iq release];
+    [respIq addQuery:infoQuery];
+    [client sendElement:respIq];
+    [respIq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
-    [self error:client condition:@"item-not-found" toJID:jid andNode:itemNode];
++ (void)itemNotFound:(XMPPClient*)client forRequest:(XMPPIQ*)iq {
+    [self error:client condition:@"item-not-found" forRequest:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid andNode:(NSString*)itemNode {
-    [self error:client condition:@"service-unavailable" toJID:jid andNode:itemNode];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)itemNotFound:(XMPPClient*)client toJID:(XMPPJID*)jid {
-    [self error:client condition:@"item-not-found" toJID:jid];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)serviceUnavailable:(XMPPClient*)client toJID:(XMPPJID*)jid {
-    [self error:client condition:@"service-unavailable" toJID:jid];
++ (void)serviceUnavailable:(XMPPClient*)client forRequest:(XMPPIQ*)iq {
+    [self error:client condition:@"service-unavailable" forRequest:iq];
 }
 
 //===================================================================================================================================
