@@ -47,9 +47,9 @@ typedef enum tagCommandDataType {
     } else if (message.textType ==  MessageTextTypeEventxData) {
         cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
-        cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
+        cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventText) {
-        cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
+        cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     }
@@ -64,9 +64,9 @@ typedef enum tagCommandDataType {
     } else if (message.textType ==  MessageTextTypeEventxData) {
         cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventEntry) {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventText) {
-        cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+        cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[[XMPPJID jidWithString:message.fromJid] bare]];
     }

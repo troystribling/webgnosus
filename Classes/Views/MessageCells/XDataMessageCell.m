@@ -18,6 +18,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataMessageCell (PrivateAPI)
 
++ (NSString*)nodeFromFullNode:(NSString*)fullNode;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +43,7 @@
     XDataMessageCell* cell = (XDataMessageCell*)[CellUtils createCell:[XDataMessageCell class] forTableView:tableView];
     [self set:cell Jid:jid];
     [self setTime:cell forMessage:message];
-    cell.nodeLabel.text = [message.node stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    cell.nodeLabel.text = [[self nodeFromFullNode:message.node] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     UIView* dataView = [MessageViewFactory viewForMessage:message];
     CGRect dataRect = [dataView frame];
     UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_MESSAGE_CELL_X_OFFSET, kXDATA_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)];
@@ -52,6 +54,17 @@
 
 //===================================================================================================================================
 #pragma mark XDataMessageCell PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSString*)nodeFromFullNode:(NSString*)fullNode {
+    NSString* node = fullNode;
+    NSArray* nodeComp = [fullNode componentsSeparatedByString:@"/"];
+    if ([[nodeComp objectAtIndex:1] isEqualToString:@"home"]) {
+        NSArray* nodeVals = [nodeComp subarrayWithRange:NSMakeRange(4, [nodeComp count]-4)];
+        node = [nodeVals componentsJoinedByString:@"/"];
+    }
+    return node;
+}
 
 //===================================================================================================================================
 #pragma mark UITableViewCell
