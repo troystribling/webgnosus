@@ -284,7 +284,6 @@
         [rosterItem update];
         if ([rosterItem.presenceType isEqualToString:@"available"] && ![client isAccountJID:[fromJID full]]) {
             [XMPPClientVersionQuery get:client JID:fromJID];
-            [XMPPDiscoItemsQuery get:client JID:fromJID andNode:@"http://jabber.org/protocol/commands"];
         } 
         ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
         RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];
@@ -407,7 +406,6 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsRequest:(XMPPIQ*)iq {
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
 	NSString* node = [query node];
-	XMPPJID* fromJID = [iq fromJID];
     if ([node isEqualToString:@"http://jabber.org/protocol/commands"]) {
         [XMPPDiscoItemsQuery commands:client forRequest:iq];
     } else {
@@ -430,7 +428,6 @@
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoRequest:(XMPPIQ*)iq {
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
 	NSString* node = [query node];
-	XMPPJID* fromJID = [iq fromJID];
     if (!node) {
         [XMPPDiscoInfoQuery features:client forRequest:iq];
     } else {

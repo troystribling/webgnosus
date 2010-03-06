@@ -199,16 +199,6 @@
         self.items = [[CommandResponseMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         XMPPJID* itemJID = [self.rosterItem toJID];
-        XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        if (![ServiceModel findIMService:[serverJID full]]) {
-            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
-            [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
-            [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
-        } else if (![ServiceItemModel findByNode:[itemJID pubSubRoot]]) {
-            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Running PubSub Disco"];
-            [XMPPDiscoItemsQuery get:client JID:[self.rosterItem pubSubService] node:[itemJID pubSubDomain] forTarget:itemJID];
-        }
         self.items = [ServiceItemModel findAllByParentNode:[itemJID pubSubRoot]];
     } else if ([self.selectedMode isEqualToString:@"Resources"]) {
         self.items = [RosterItemModel findAllByJid:[self.rosterItem fullJID] andAccount:self.account];
@@ -306,6 +296,14 @@
     [self selectedModeFromIndex:sender.selectedItemIndex];
     [self createAddItemButton];
     [self labelBackButton];
+    if ([self.selectedMode isEqualToString:@"Publications"]) {
+        XMPPJID* itemJID = [self.rosterItem toJID];
+        XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
+        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"PubSub Disco"];
+        [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
+        [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
+    }    
     [self loadItems];
 }
 

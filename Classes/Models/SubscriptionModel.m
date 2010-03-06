@@ -203,7 +203,7 @@
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
 	}
-	self.accountPk = (int)sqlite3_column_int(statement, 7);
+	self.accountPk = (int)sqlite3_column_int(statement, 6);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -38,6 +38,7 @@
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;
++ (NSMutableArray*)findAllByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount;
 + (NSMutableArray*)findAllResourcesByAccount:(AccountModel*)requestAccount;
 + (RosterItemModel*)findByPk:(NSInteger)requestPk;
 + (RosterItemModel*)findByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount;

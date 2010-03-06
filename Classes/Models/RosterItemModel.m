@@ -98,6 +98,22 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (NSMutableArray*)findAllByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount {
+	NSString* selectStatement;
+	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
+	NSArray* splitJid = [requestFullJid componentsSeparatedByString:@"/"];
+	if ([splitJid count] > 1) {
+        selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@'  AND resource = '%@' AND accountPk = %d", 
+                           [splitJid objectAtIndex:0], [splitJid objectAtIndex:1], requestAccount.pk];
+    } else {
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND accountPk = %d", 
+                           [splitJid objectAtIndex:0], requestAccount.pk];
+    }
+	[[WebgnosusDbi instance] selectAllForModel:[RosterItemModel class] withStatement:selectStatement andOutputTo:output];
+	return output;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (RosterItemModel*)findByPk:(NSInteger)requestPk {
 	NSString *selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE pk = %d", requestPk];
 	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];
@@ -113,13 +129,8 @@
 	NSString *selectStatement;
 	NSArray* splitJid = [requestFullJid componentsSeparatedByString:@"/"];
 	if ([splitJid count] > 1) {
-        NSInteger resourceCount = [splitJid count] - 1;
-        id* resourceList = calloc(resourceCount, sizeof(id));
-        [splitJid getObjects:resourceList range:NSMakeRange(1, resourceCount)];
-        NSArray* resourceArray = [NSArray arrayWithObjects:resourceList count:resourceCount];
-        NSString* resourceString = [resourceArray componentsJoinedByString:@"/"];
 		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", 
-                           [splitJid objectAtIndex:0], resourceString, requestAccount.pk];
+                           [splitJid objectAtIndex:0], [splitJid objectAtIndex:1], requestAccount.pk];
 	} else {
 		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
                                [splitJid objectAtIndex:0], requestAccount.pk];
