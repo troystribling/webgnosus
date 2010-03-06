@@ -129,10 +129,10 @@
 	NSString *selectStatement;
 	NSArray* splitJid = [requestFullJid componentsSeparatedByString:@"/"];
 	if ([splitJid count] > 1) {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", 
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d LIMIT 1", 
                            [splitJid objectAtIndex:0], [splitJid objectAtIndex:1], requestAccount.pk];
 	} else {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
+		selectStatement = [NSString stringWithFormat:@"SELECT * FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d LIMIT 1", 
                                [splitJid objectAtIndex:0], requestAccount.pk];
 	}
 	RosterItemModel* model = [[[RosterItemModel alloc] init] autorelease];

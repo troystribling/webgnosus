@@ -24,7 +24,7 @@
 @implementation XDataMessageCell
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@synthesize titleLabel;
+@synthesize nodeLabel;
 
 //===================================================================================================================================
 #pragma mark XDataMessageCell
@@ -41,7 +41,7 @@
     XDataMessageCell* cell = (XDataMessageCell*)[CellUtils createCell:[XDataMessageCell class] forTableView:tableView];
     [self set:cell Jid:jid];
     [self setTime:cell forMessage:message];
-    cell.titleLabel.text = [message.node stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    cell.nodeLabel.text = [message.node stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     UIView* dataView = [MessageViewFactory viewForMessage:message];
     CGRect dataRect = [dataView frame];
     UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_MESSAGE_CELL_X_OFFSET, kXDATA_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)];

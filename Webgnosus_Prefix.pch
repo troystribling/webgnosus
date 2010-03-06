@@ -38,9 +38,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // XDataMessageCell configurations
-#define kXDATA_MESSAGE_CELL_HEIGHT_PAD          55.0
+#define kXDATA_MESSAGE_CELL_HEIGHT_PAD          50.0
 #define kXDATA_MESSAGE_CELL_X_OFFSET            20.0
-#define kXDATA_MESSAGE_CELL_Y_OFFSET            40.0
+#define kXDATA_MESSAGE_CELL_Y_OFFSET            35.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // MessageCell configuration

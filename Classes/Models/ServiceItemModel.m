@@ -197,7 +197,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)destroyAllByService:(NSString*)requestService andNode:(NSString*)requestNode {
++ (void)destroyAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
 	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%@' AND parentNode = '%@'", requestService, requestNode];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }

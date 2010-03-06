@@ -178,18 +178,6 @@
     [CommandFormViewController form:iq inView:self.view.window forAccount:self.account];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq {
-    [self loadCommands];
-    [AlertViewManager dismissActivityIndicator];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq {
-    [AlertViewManager dismissActivityIndicator];
-    [AlertViewManager showAlert:@"Command Disco Error"];
-}
-
 //===================================================================================================================================
 #pragma mark UIViewController
 
@@ -211,10 +199,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
+    [self loadCommands];
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
-    [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Command Disco"];
-    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [XMPPDiscoItemsQuery get:client JID:[self.rosterItem toJID] andNode:@"http://jabber.org/protocol/commands"];
     [super viewWillAppear:animated];
 }
 

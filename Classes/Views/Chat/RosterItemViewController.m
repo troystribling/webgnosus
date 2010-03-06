@@ -62,6 +62,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize rosterMode;
 @synthesize selectedMode;
+@synthesize pendingRequests;
 @synthesize modes;
 @synthesize sendMessageButton;
 @synthesize items;
@@ -267,15 +268,35 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsResult:(XMPPIQ*)iq {
+    XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
+	NSString* parentNode = [query node];
+    NSString* fromJID = [[iq fromJID] full];
+    if ([parentNode isEqualToString:@"http://jabber.org/protocol/commands"]) {
+        RosterItemModel* item = [RosterItemModel findByFullJid:fromJID andAccount:self.account];
+        for (int i = 0; i < [self.pendingRequests count]; i++) {
+            RosterItemModel* pendingReq = [self.pendingRequests objectAtIndex:i];
+            if ([[pendingReq fullJID] isEqualToString:[item fullJID]]) {
+                [self.pendingRequests removeObjectAtIndex:i];
+                break;
+            }
+        }
+        if ([self.pendingRequests count] == 0) {
+            [AlertViewManager dismissActivityIndicator];
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoItemsError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [AlertViewManager showAlert:@"PubSub Disco Error"];
+    [AlertViewManager showAlert:@"Disco Error"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveDiscoInfoError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
-    [AlertViewManager showAlert:@"PubSub Disco Error"];
+    [AlertViewManager showAlert:@"Disco Error"];
 }
 
 //===================================================================================================================================
@@ -296,15 +317,23 @@
     [self selectedModeFromIndex:sender.selectedItemIndex];
     [self createAddItemButton];
     [self labelBackButton];
+    [self loadItems];
+    XMPPJID* itemJID = [self.rosterItem toJID];
+    XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     if ([self.selectedMode isEqualToString:@"Publications"]) {
-        XMPPJID* itemJID = [self.rosterItem toJID];
         XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
-        XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"PubSub Disco"];
         [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
         [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];
-    }    
-    [self loadItems];
+    }  else if ([self.selectedMode isEqualToString:@"Commands"]) {
+        [ServiceItemModel destroyAllByService:[itemJID full] andParentNode:@"http://jabber.org/protocol/commands"];
+        self.pendingRequests = [RosterItemModel findAllByFullJid:[itemJID full] andAccount: self.account];
+        for (int i = 0; i < [self.pendingRequests count]; i++) {
+            RosterItemModel* item = [self.pendingRequests objectAtIndex:i];
+            [XMPPDiscoItemsQuery get:client JID:[item toJID] andNode:@"http://jabber.org/protocol/commands"];        
+        }
+        [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Command Disco"];
+    }
 }
 
 //===================================================================================================================================
@@ -315,6 +344,7 @@
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         self.sendMessageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
                                    action:@selector(sendMessageButtonWasPressed:)];
+        self.pendingRequests = [NSMutableArray arrayWithCapacity:10];
 	} 
 	return self; 
 } 

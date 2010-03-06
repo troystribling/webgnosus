@@ -18,6 +18,7 @@
     NSInteger rosterMode;
     NSString* selectedMode;
     NSMutableArray* modes;
+    NSMutableArray* pendingRequests;
 	UIBarButtonItem* sendMessageButton;
     id items;
     AccountModel* account;
@@ -28,6 +29,7 @@
 @property (nonatomic, assign) NSInteger rosterMode;
 @property (nonatomic, retain) NSString* selectedMode;
 @property (nonatomic, retain) NSMutableArray* modes;
+@property (nonatomic, retain) NSMutableArray* pendingRequests;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
 @property (nonatomic, retain) id items;
 @property (nonatomic, retain) AccountModel* account;

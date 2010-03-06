@@ -16,11 +16,11 @@
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XDataMessageCell : MessageCell {
-    IBOutlet UILabel* titleLabel;
+    IBOutlet UILabel* nodeLabel;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UILabel* titleLabel;
+@property (nonatomic, retain) UILabel* nodeLabel;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (CGFloat)tableView:(UITableView *)tableView heightForRowWithMessage:(MessageModel*)message;

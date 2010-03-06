@@ -48,7 +48,7 @@
 + (NSMutableArray*)findAllByParentNode:(NSString*)requestNode;
 + (void)insert:(XMPPDiscoItem*)item forService:(XMPPJID*)serviceJID andParentNode:(NSString*)parent;
 + (void)destroyAllByService:(NSString*)requestService;
-+ (void)destroyAllByService:(NSString*)requestService andNode:(NSString*)requestNode;
++ (void)destroyAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode;
     
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
