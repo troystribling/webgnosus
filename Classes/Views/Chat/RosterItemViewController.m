@@ -322,6 +322,7 @@
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     if ([self.selectedMode isEqualToString:@"Publications"]) {
         XMPPJID* serverJID = [XMPPJID jidWithString:[itemJID domain]];
+        [ServiceItemModel destroyAllByService:[serverJID full]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"PubSub Disco"];
         [XMPPDiscoItemsQuery get:client JID:serverJID forTarget:itemJID];
         [XMPPDiscoInfoQuery get:client JID:serverJID forTarget:itemJID];

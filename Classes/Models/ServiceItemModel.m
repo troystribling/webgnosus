@@ -192,13 +192,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByService:(NSString*)requestService {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%@' AND parentNode IS NULL", requestService];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service LIKE '%%%@'", requestService];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)destroyAllByService:(NSString*)requestService andParentNode:(NSString*)requestNode {
-	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service = '%@' AND parentNode = '%@'", requestService, requestNode];
+	NSString* deleteStatement = [NSString stringWithFormat:@"DELETE FROM serviceItems WHERE service LIKE '%%%@' AND parentNode = '%@'", requestService, requestNode];
 	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
 }
 
