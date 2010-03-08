@@ -11,6 +11,7 @@
 #import "SectionViewController.h"
 #import "AccountManagerViewController.h"
 #import "RosterCell.h"
+#import "ResourceCell.h"
 #import "AddContactViewController.h"
 #import "RosterItemViewController.h"
 #import "ContactModel.h"
@@ -116,7 +117,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (RosterItemViewController*)getChatViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath  {
-    RosterItemViewController* chatViewController;
+    RosterItemViewController* chatViewController = nil;
     UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
         chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil];
@@ -385,20 +386,22 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
-    RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
     if (self.selectedRoster == kCONTACTS_MODE) {
+        RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
         ContactModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
-        cell.jidLabel.text = cellItem.jid;
+        cell.resourceLabel.text = cellItem.jid;
         cell.activeImage.image = [RosterCell contactImage:[self.roster objectAtIndex:indexPath.row]];
         cell.jid = [cellItem toJID];
+        [cell setUnreadMessageCount:self.account];
+        return cell;
     } else {
+        ResourceCell* cell = (ResourceCell*)[CellUtils createCell:[ResourceCell class] forTableView:tableView];
         RosterItemModel*  cellItem = [self.roster objectAtIndex:indexPath.row]; 
-        cell.jidLabel.text = cellItem.resource;
-        cell.activeImage.image = [RosterCell rosterItemImage:[self.roster objectAtIndex:indexPath.row]];
+        cell.resourceLabel.text = cellItem.resource;
         cell.jid = [cellItem toJID];
+        [cell setUnreadMessageCount:self.account];
+        return cell;
     }
-    [cell setUnreadMessageCount:self.account];
-    return cell;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -415,9 +418,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     RosterItemViewController* chatViewController = [self getChatViewControllerForRowAtIndexPath:indexPath];
-    [self labelBackButton];
-    [self.navigationController pushViewController:chatViewController animated:YES];
-    [chatViewController release];
+    if (chatViewController) {
+        [self labelBackButton];
+        [self.navigationController pushViewController:chatViewController animated:YES];
+        [chatViewController release];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

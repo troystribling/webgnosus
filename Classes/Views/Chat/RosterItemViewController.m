@@ -78,7 +78,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForResource:(RosterItemModel*)resource {
     RosterCell* cell = (RosterCell*)[CellUtils createCell:[RosterCell class] forTableView:tableView];
-    cell.jidLabel.text = resource.resource;
+    cell.resourceLabel.text = resource.resource;
     cell.activeImage.image = [RosterCell rosterItemImage:resource];
     return cell;
 }
@@ -176,9 +176,13 @@
 - (void)setModes {
     self.selectedMode = @"Chat";
     if (self.rosterMode == kCONTACTS_MODE) {
-        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Resources", @"Publications", nil];
+        if ([RosterItemModel isJidAvailable:[self.rosterItem bareJID]]) {
+            self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Resources", @"Publications", nil];
+        } else {
+            self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Publications", nil];
+        }
     } else {
-        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", @"Publications", nil];
+        self.modes = [NSMutableArray arrayWithObjects:@"Chat", @"Commands", nil];
     } 
 }
 

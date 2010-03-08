@@ -1,30 +1,33 @@
 //
-//  ContactCell.h
+//  ResourceCell.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 1/20/09.
-//  Copyright 2009 Plan-B Research. All rights reserved.
+//  Created by Troy Stribling on 3/7/10.
+//  Copyright 2010 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "ResourceCell.h"
+#import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class RosterItemModel;
-@class ContactModel;
 @class AccountModel;
 @class XMPPJID;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface RosterCell : ResourceCell {
-    IBOutlet UIImageView* activeImage;
+@interface ResourceCell : UITableViewCell {
+	IBOutlet UILabel* resourceLabel;
+	IBOutlet UILabel* messageCountLabel;
+    IBOutlet UIImageView* messageCountImage;
+    XMPPJID* jid;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@property (nonatomic, retain) UIImageView* activeImage;
+@property (nonatomic, retain) UILabel* resourceLabel;
+@property (nonatomic, retain) UILabel* messageCountLabel;
+@property (nonatomic, retain) UIImageView* messageCountImage;
+@property (nonatomic, retain) XMPPJID* jid;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIImage*)rosterItemImage:(RosterItemModel*)rosterItem;
-+ (UIImage*)contactImage:(ContactModel*)contact;
+- (void)setUnreadMessageCount:(AccountModel*)account;
 
 @end

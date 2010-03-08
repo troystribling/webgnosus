@@ -67,7 +67,7 @@
     NSArray* commandInfoArray = [ServiceItemModel findAllByService:[self.rosterItem fullJID] andParentNode:@"http://jabber.org/protocol/commands"];
     for (int i=0; i < [commandInfoArray count]; i++) {
         ServiceItemModel* commandInfo = [commandInfoArray objectAtIndex:i];
-        NSString* key = [self commandRootPath:commandInfo.node];
+        NSString* key = [self commandRootPath:commandInfo.itemName];
         NSMutableArray* commandArray = [self.commands valueForKey:key];
         if (commandArray) {
             [commandArray addObject:commandInfo];
@@ -113,7 +113,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)commandName:(NSString*)cmd {
-    NSString* cmdName = nil;
     NSMutableArray* cmdComp = [NSMutableArray arrayWithCapacity:10];
     [cmdComp addObjectsFromArray:[cmd componentsSeparatedByString:@"/"]];
     if ([[cmdComp objectAtIndex:0] isEqualToString:@""] && [cmdComp count] > 2) {
@@ -122,8 +121,7 @@
     } else if ([cmdComp count] > 1) {
         [cmdComp removeObjectAtIndex:0];
     }
-    cmdName = [cmdComp componentsJoinedByString:@" "];
-    return [cmdName stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    return [cmdComp componentsJoinedByString:@"/"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -267,7 +265,7 @@
     NSString* sectionName = [[self sectionNameArray] objectAtIndex:indexPath.section];
     ServiceItemModel* commandInfo = [self commandInfoForSection:sectionName atRow:indexPath.row];
     CommandCell* cell = (CommandCell*)[CellUtils createCell:[CommandCell class] forTableView:tableView];
-    cell.commandLabel.text = [self commandName:commandInfo.node];
+    cell.commandLabel.text = [self commandName:commandInfo.itemName];
     return cell;
 }
 

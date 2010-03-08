@@ -177,6 +177,8 @@
         }
         if ([item iname]) {
             serviceItem.itemName = [item iname];
+        } else {
+            serviceItem.itemName = itemNode;
         }
         if ([item JID]) {
             serviceItem.jid = [[item JID] full];

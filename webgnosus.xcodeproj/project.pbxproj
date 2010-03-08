@@ -97,6 +97,10 @@
 		057BB16510587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
 		057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
+		05816C4911444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
+		05816C4A11444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
+		05816C5511444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
+		05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
 		05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
 		05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
 		05C6E9490F0F176F009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
@@ -500,6 +504,9 @@
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
+		05816C4711444C70001D5DFA /* ResourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceCell.h; sourceTree = "<group>"; };
+		05816C4811444C70001D5DFA /* ResourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCell.m; sourceTree = "<group>"; };
+		05816C5411444E4F001D5DFA /* ResourceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResourceCell.xib; sourceTree = "<group>"; };
 		05AAB3DD10AA6B83008CF187 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1044,6 +1051,7 @@
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
 				0502D7EB108261E500218EC9 /* ServiceCell.xib */,
 				05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */,
+				05816C5411444E4F001D5DFA /* ResourceCell.xib */,
 			);
 			name = TableCells;
 			path = Resources/Views/TableCells;
@@ -1090,8 +1098,8 @@
 				05E206C10FB9004100FCFC94 /* SASL */,
 				05E206C40FB9004100FCFC94 /* Session */,
 				05E206CB0FB9004100FCFC94 /* Stanzas */,
-				05E206D40FB9004100FCFC94 /* Stream */,
 				05E206DB0FB9004100FCFC94 /* Utility */,
+				05E206D40FB9004100FCFC94 /* Stream */,
 				05E206E00FB9004100FCFC94 /* XMPP.h */,
 				05E206E10FB9004100FCFC94 /* XMPPClient.h */,
 				05E206E20FB9004100FCFC94 /* XMPPClient.m */,
@@ -1363,6 +1371,8 @@
 				05E207E70FB9046500FCFC94 /* RosterCell.m */,
 				05E207EA0FB9046500FCFC94 /* RosterViewController.h */,
 				05E207EB0FB9046500FCFC94 /* RosterViewController.m */,
+				05816C4711444C70001D5DFA /* ResourceCell.h */,
+				05816C4811444C70001D5DFA /* ResourceCell.m */,
 			);
 			path = Roster;
 			sourceTree = "<group>";
@@ -1591,6 +1601,7 @@
 				05DFCF2610A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
 				0501553110AA516800B0B5FD /* Entitlements.plist in Resources */,
 				05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */,
+				05816C5511444E4F001D5DFA /* ResourceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1663,6 +1674,7 @@
 				05DFCF2510A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
 				0501553010AA516800B0B5FD /* Entitlements.plist in Resources */,
 				05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */,
+				05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1808,6 +1820,7 @@
 				0507514A10AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
 				05F7411B10B658EE00BDF171 /* JIDField.m in Sources */,
 				051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */,
+				05816C4911444C70001D5DFA /* ResourceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1950,6 +1963,7 @@
 				0507514910AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
 				05F7411A10B658EE00BDF171 /* JIDField.m in Sources */,
 				051D5D3D10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */,
+				05816C4A11444C70001D5DFA /* ResourceCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

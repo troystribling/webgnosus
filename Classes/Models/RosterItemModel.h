@@ -47,6 +47,7 @@
 + (void)drop;
 + (void)create;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
++ (void)destroyByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;

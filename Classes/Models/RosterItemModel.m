@@ -161,6 +161,20 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (void)destroyByFullJid:(NSString*)requestFullJid andAccount:(AccountModel*)requestAccount {
+	NSString* deleteStatement;
+	NSArray* splitJid = [requestFullJid componentsSeparatedByString:@"/"];
+	if ([splitJid count] > 1) {
+		deleteStatement = [NSString stringWithFormat:@"DELETE FROM roster WHERE jid = '%@' AND resource = '%@' AND accountPk = %d", 
+                           [splitJid objectAtIndex:0], [splitJid objectAtIndex:1], requestAccount.pk];
+	} else {
+		deleteStatement = [NSString stringWithFormat:@"DELETE FROM roster WHERE jid = '%@' AND resource IS NULL AND accountPk = %d", 
+                           [splitJid objectAtIndex:0], requestAccount.pk];
+	}
+	[[WebgnosusDbi instance]  updateWithStatement:deleteStatement];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (BOOL)isJidAvailable:(NSString*)bareJid {
     BOOL isAvailable = NO;
    	NSMutableArray* rosterItems = [NSMutableArray arrayWithCapacity:10];	

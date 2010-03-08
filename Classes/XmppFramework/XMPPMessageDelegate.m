@@ -252,44 +252,50 @@
 - (void)xmppClient:(XMPPClient*)client didReceivePresence:(XMPPPresence*)presence {
     [self writeToLog:client message:@"xmppClient:didReceivePresence"];
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
+    XMPPJID* fromJID = [presence fromJID];
+    NSString* fromResource = [fromJID resource];
     if (account) {
-        XMPPJID* fromJID = [presence fromJID];
-        NSString* fromResource = [fromJID resource];
-        RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJID full] andAccount:account];    
-        if (!rosterItem) {
-            rosterItem = [[RosterItemModel alloc] init]; 
-            rosterItem.jid = [fromJID bare];
-            rosterItem.resource = fromResource;
-            rosterItem.host = [fromJID domain];
-            rosterItem.accountPk = account.pk;
-            rosterItem.clientName = @"";
-            rosterItem.clientVersion = @"";
-            [rosterItem insert];
-            [rosterItem load];
+        if (![account.resource isEqualToString:fromResource]) {
+            if ([[presence type] isEqualToString:@"available"]) {
+                RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJID full] andAccount:account];    
+                if (!rosterItem) {
+                    rosterItem = [[RosterItemModel alloc] init]; 
+                    rosterItem.jid = [fromJID bare];
+                    rosterItem.resource = fromResource;
+                    rosterItem.host = [fromJID domain];
+                    rosterItem.accountPk = account.pk;
+                    rosterItem.clientName = @"";
+                    rosterItem.clientVersion = @"";
+                    [rosterItem insert];
+                    [rosterItem load];
+                }
+                NSString* showVal = [presence show];
+                if (showVal) {
+                    rosterItem.show = showVal;
+                } else {
+                    rosterItem.show = @"";
+                }
+                NSString* statusVal = [presence status];
+                if (statusVal) {
+                    rosterItem.status = statusVal;
+                } else {
+                    rosterItem.status = @"";
+                }
+                rosterItem.priority = [presence priority];
+                rosterItem.presenceType = [presence type];
+                [rosterItem update];
+                if (![client isAccountJID:[fromJID full]]) {
+                    [XMPPClientVersionQuery get:client JID:fromJID];
+                } 
+                ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
+                RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];
+                contact.clientName = maxPriorityRosteritem.clientName;
+                contact.clientVersion = maxPriorityRosteritem.clientVersion;
+                [contact update];
+            } else if ([[presence type] isEqualToString:@"unavailable"]) {
+                [RosterItemModel destroyByFullJid:[fromJID full] andAccount:account];
+            }
         }
-        NSString* showVal = [presence show];
-        if (showVal) {
-            rosterItem.show = showVal;
-        } else {
-            rosterItem.show = @"";
-        }
-        NSString* statusVal = [presence status];
-        if (statusVal) {
-            rosterItem.status = statusVal;
-        } else {
-            rosterItem.status = @"";
-        }
-        rosterItem.priority = [presence priority];
-        rosterItem.presenceType = [presence type];
-        [rosterItem update];
-        if ([rosterItem.presenceType isEqualToString:@"available"] && ![client isAccountJID:[fromJID full]]) {
-            [XMPPClientVersionQuery get:client JID:fromJID];
-        } 
-        ContactModel* contact = [ContactModel findByJid:[fromJID bare] andAccount:account];
-        RosterItemModel* maxPriorityRosteritem =[RosterItemModel findWithMaxPriorityByJid:[fromJID bare] andAccount:account];
-        contact.clientName = maxPriorityRosteritem.clientName;
-        contact.clientVersion = maxPriorityRosteritem.clientVersion;
-        [contact update];
     }
 }
 
