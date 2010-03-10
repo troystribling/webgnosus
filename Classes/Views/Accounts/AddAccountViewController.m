@@ -76,7 +76,7 @@
         self.account.activated = YES;
         self.account.connectionState = AccountNotConnected;
         self.account.host = [splitJid objectAtIndex:1];
-        self.account.resource = [NSString stringWithFormat:@"iPhone:%@", [[UIDevice currentDevice] name]];
+        self.account.resource = [[UIDevice currentDevice] name];
         self.account.nickname = [NSString stringWithFormat:@"%@", [self.account bareJID]];
         self.account.port = 5222;
         self.account.displayed = YES;
