@@ -23,8 +23,6 @@
 		0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
 		050007421093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
 		050007431093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
-		0501553010AA516800B0B5FD /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0501552F10AA516800B0B5FD /* Entitlements.plist */; };
-		0501553110AA516800B0B5FD /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0501552F10AA516800B0B5FD /* Entitlements.plist */; };
 		050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
@@ -87,6 +85,7 @@
 		0534811410292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */; };
 		0534811710292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
 		0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
+		0542683311700F56006E4699 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0542683211700F56006E4699 /* Entitlements.plist */; };
 		056324081078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
@@ -446,7 +445,6 @@
 		050007311093EE390046D0BC /* XDataScalarMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDataScalarMessageView.m; sourceTree = "<group>"; };
 		050007401093F1260046D0BC /* BodyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyMessageView.h; sourceTree = "<group>"; };
 		050007411093F1260046D0BC /* BodyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BodyMessageView.m; sourceTree = "<group>"; };
-		0501552F10AA516800B0B5FD /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		050263C01076E78C000B81C6 /* XMPPEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPEntry.h; sourceTree = "<group>"; };
 		050263C11076E78C000B81C6 /* XMPPEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPEntry.m; sourceTree = "<group>"; };
 		050263CF1076FA7E000B81C6 /* EventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsViewController.xib; sourceTree = "<group>"; };
@@ -498,6 +496,9 @@
 		0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoIdentity.m; path = Disco/XMPPDiscoIdentity.m; sourceTree = "<group>"; };
 		0534811510292E5B002E6E2D /* XMPPDiscoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItem.h; path = Disco/XMPPDiscoItem.h; sourceTree = "<group>"; };
 		0534811610292E5B002E6E2D /* XMPPDiscoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItem.m; path = Disco/XMPPDiscoItem.m; sourceTree = "<group>"; };
+		0542683211700F56006E4699 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		0542684411701183006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0542684C117015DC006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
@@ -695,8 +696,6 @@
 		05E207E70FB9046500FCFC94 /* RosterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterCell.m; sourceTree = "<group>"; };
 		05E207EA0FB9046500FCFC94 /* RosterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RosterViewController.h; sourceTree = "<group>"; };
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
-		05E2278A10AA605D007BAE61 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		05E2278C10AA6068007BAE61 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05E3E96B109E779A0040E5D9 /* load-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "load-messages.png"; sourceTree = "<group>"; };
 		05E4DA521079AB6D00EAF629 /* XMPPPubSubEntryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubEntryDelegate.h; sourceTree = "<group>"; };
 		05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubEntryDelegate.m; sourceTree = "<group>"; };
@@ -1419,8 +1418,8 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05E2278A10AA605D007BAE61 /* web.gnos.us.app */,
-				05E2278C10AA6068007BAE61 /* web.gnos.us.app */,
+				0542684411701183006E4699 /* web.gnos.us.app */,
+				0542684C117015DC006E4699 /* web.gnos.us.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1433,7 +1432,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				0501552F10AA516800B0B5FD /* Entitlements.plist */,
+				0542683211700F56006E4699 /* Entitlements.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1493,7 +1492,7 @@
 			);
 			name = webgnosus_simulator;
 			productName = webgnosus;
-			productReference = 05E2278A10AA605D007BAE61 /* web.gnos.us.app */;
+			productReference = 0542684411701183006E4699 /* web.gnos.us.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1D6058900D05DD3D006BFB54 /* webgnosus */ = {
@@ -1510,7 +1509,7 @@
 			);
 			name = webgnosus;
 			productName = webgnosus;
-			productReference = 05E2278C10AA6068007BAE61 /* web.gnos.us.app */;
+			productReference = 0542684C117015DC006E4699 /* web.gnos.us.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1599,7 +1598,6 @@
 				05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */,
 				051532A7109E9FD600E83386 /* Default.png in Resources */,
 				05DFCF2610A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
-				0501553110AA516800B0B5FD /* Entitlements.plist in Resources */,
 				05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */,
 				05816C5511444E4F001D5DFA /* ResourceCell.xib in Resources */,
 			);
@@ -1672,9 +1670,9 @@
 				05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */,
 				051532A6109E9FD600E83386 /* Default.png in Resources */,
 				05DFCF2510A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
-				0501553010AA516800B0B5FD /* Entitlements.plist in Resources */,
 				05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */,
 				05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */,
+				0542683311700F56006E4699 /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2000,6 +1998,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B3C0333-B440-4178-90EE-B0FC7820887D";
 				SDKROOT = iphoneos3.1.2;
 			};
 			name = Distribution;
