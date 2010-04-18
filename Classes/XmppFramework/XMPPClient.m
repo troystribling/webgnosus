@@ -61,12 +61,6 @@
     return [[self.myJID full] isEqualToString:requestJID];
 }
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)generateSessionID {
-    self.sessionID++;
-    return [NSString stringWithFormat:@"%d", self.sessionID];
-}
-
 //===================================================================================================================================
 #pragma mark Delegation
 

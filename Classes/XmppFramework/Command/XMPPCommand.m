@@ -132,7 +132,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
-    [self set:client commandNode:node JID:jid andSessionID:[client generateSessionID]];
+    [self set:client commandNode:node JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
+    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
+    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    [iq addCommand:cmd];
+    [client send:iq andDelegateResponse:responseDelegate];
+    [iq release]; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -144,11 +153,14 @@
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
-    [cmd addSessionID:sessionID];
+    if (sessionID) {
+        [cmd addSessionID:sessionID];
+    }
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
 }
+
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
@@ -159,7 +171,9 @@
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
     XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andData:data];
-    [cmd addSessionID:sessionID];
+    if (sessionID) {
+        [cmd addSessionID:sessionID];
+    }
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
@@ -168,8 +182,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)cancel:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"cancel"];
-    [cmd addSessionID:sessionID];
+        XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"cancel"];
+    if (sessionID) {
+        [cmd addSessionID:sessionID];
+    }
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
     [iq release]; 

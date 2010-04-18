@@ -58,7 +58,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init;
 - (BOOL)isAccountJID:(NSString*)requestJID;
-- (NSString*)generateSessionID;
 
 // delegation
 - (void)addDelegate:(id)delegate;
