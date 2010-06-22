@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>main_icon.png</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.planb.${PRODUCT_NAME}</string>
+	<string>com.planbresearch.webgnosus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
