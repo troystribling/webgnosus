@@ -25,7 +25,6 @@
 #import "NSObjectiPhoneAdditions.h"
 #import "NSXMLElementAdditions.h"
 #import "MulticastDelegate.h"
-#import "SCNotificationManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient (PrivateAPI)
@@ -47,7 +46,6 @@
 @synthesize myJID;
 @synthesize password;
 @synthesize xmppStream;
-@synthesize scNotificationManager;
 @synthesize port;
 @synthesize stanzaID;
 @synthesize sessionID;
@@ -348,8 +346,6 @@
 		self.priority = 1;
 		self.xmppStream = [[XMPPStream alloc] initWithDelegate:self];				
         self.xmppResponseList = [NSMutableDictionary dictionaryWithCapacity:10];
-		self.scNotificationManager = [[SCNotificationManager alloc] init];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStatusDidChange:) name:@"State:/Network/Global/IPv4" object:scNotificationManager];
 	}
 	return self;
 }

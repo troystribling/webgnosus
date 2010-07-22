@@ -24,7 +24,6 @@
 @class XMPPClientVersionQuery;
 @class XMPPDiscoItemsQuery;
 @class MulticastDelegate;
-@class SCNotificationManager;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPClient : NSObject {
@@ -34,7 +33,6 @@
 	XMPPJID* myJID;
 	NSString *password;
 	XMPPStream* xmppStream;
-	SCNotificationManager *scNotificationManager;    
 	UInt16 port;	
     NSInteger stanzaID;
     NSInteger sessionID;
@@ -49,7 +47,6 @@
 @property (nonatomic, retain) XMPPJID* myJID;
 @property (nonatomic, retain) NSString* password;
 @property (nonatomic, retain) XMPPStream* xmppStream;
-@property (nonatomic, retain) SCNotificationManager* scNotificationManager;
 @property (nonatomic, assign) UInt16 port;
 @property (nonatomic, assign) NSInteger stanzaID;
 @property (nonatomic, assign) NSInteger sessionID;

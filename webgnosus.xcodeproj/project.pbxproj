@@ -73,8 +73,6 @@
 		051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
 		051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
 		051D5D3D10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
-		052800D30FA54D4A007337FD /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D20FA54D4A007337FD /* libidn.a */; };
-		052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 052800D40FA54D63007337FD /* libidn-simulator.a */; };
 		053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
 		053480FF10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
 		0534810310292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534810210292CBC002E6E2D /* XMPPDiscoItemsQuery.m */; };
@@ -90,6 +88,8 @@
 		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
 		0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
+		05706DE411F8017F00B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
+		05706DF811F802E300B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
 		057BB16210587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16310587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
@@ -237,7 +237,6 @@
 		05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D80FB9004100FCFC94 /* XMPPStreamError.m */; };
 		05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */; };
 		05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
-		05E206FF0FB9004100FCFC94 /* SCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */; };
 		05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
 		05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
 		05E207030FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
@@ -262,7 +261,6 @@
 		05E207180FB9004100FCFC94 /* XMPPStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D80FB9004100FCFC94 /* XMPPStreamError.m */; };
 		05E207190FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */; };
 		05E2071A0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
-		05E2071B0FB9004100FCFC94 /* SCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */; };
 		05E2071C0FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
 		05E2071E0FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
 		05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207220FB9016B00FCFC94 /* DDXMLDocument.m */; };
@@ -484,7 +482,6 @@
 		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		051D5D3A10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQueryDeligate.h; sourceTree = "<group>"; };
 		051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQueryDeligate.m; sourceTree = "<group>"; };
-		052800D20FA54D4A007337FD /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		052800D40FA54D63007337FD /* libidn-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-simulator.a"; sourceTree = "<group>"; };
 		053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoQuery.h; path = Disco/XMPPDiscoInfoQuery.h; sourceTree = "<group>"; };
 		053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoInfoQuery.m; path = Disco/XMPPDiscoInfoQuery.m; sourceTree = "<group>"; };
@@ -502,6 +499,8 @@
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
+		05706DB611F8000A00B0154F /* libidn-iphone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-iphone.a"; sourceTree = "<group>"; };
+		05706DE311F8017F00B0154F /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
@@ -641,8 +640,6 @@
 		05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPStreamFeatures.m; sourceTree = "<group>"; };
 		05E206DC0FB9004100FCFC94 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
 		05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
-		05E206DE0FB9004100FCFC94 /* SCNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNotificationManager.h; sourceTree = "<group>"; };
-		05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNotificationManager.m; sourceTree = "<group>"; };
 		05E206E00FB9004100FCFC94 /* XMPP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPP.h; sourceTree = "<group>"; };
 		05E206E10FB9004100FCFC94 /* XMPPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClient.h; sourceTree = "<group>"; };
 		05E206E20FB9004100FCFC94 /* XMPPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClient.m; sourceTree = "<group>"; };
@@ -799,7 +796,7 @@
 				05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */,
 				05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */,
 				051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
-				052800D50FA54D63007337FD /* libidn-simulator.a in Frameworks */,
+				05706DE411F8017F00B0154F /* libidn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +811,7 @@
 				05C6E95C0F0F17FA009BD7C8 /* SystemConfiguration.framework in Frameworks */,
 				05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */,
 				051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
-				052800D30FA54D4A007337FD /* libidn.a in Frameworks */,
+				05706DF811F802E300B0154F /* libidn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1229,8 +1226,6 @@
 			children = (
 				05E206DC0FB9004100FCFC94 /* MulticastDelegate.h */,
 				05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */,
-				05E206DE0FB9004100FCFC94 /* SCNotificationManager.h */,
-				05E206DF0FB9004100FCFC94 /* SCNotificationManager.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1433,6 +1428,8 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				0542683211700F56006E4699 /* Entitlements.plist */,
+				05706DB611F8000A00B0154F /* libidn-iphone.a */,
+				05706DE311F8017F00B0154F /* libidn.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1462,7 +1459,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				052800D20FA54D4A007337FD /* libidn.a */,
 				051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */,
 				05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */,
 				05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */,
@@ -1709,7 +1705,6 @@
 				05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */,
 				05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */,
 				05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */,
-				05E206FF0FB9004100FCFC94 /* SCNotificationManager.m in Sources */,
 				05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */,
 				05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */,
 				05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */,
@@ -1852,7 +1847,6 @@
 				05E207180FB9004100FCFC94 /* XMPPStreamError.m in Sources */,
 				05E207190FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */,
 				05E2071A0FB9004100FCFC94 /* MulticastDelegate.m in Sources */,
-				05E2071B0FB9004100FCFC94 /* SCNotificationManager.m in Sources */,
 				05E2071C0FB9004100FCFC94 /* XMPPClient.m in Sources */,
 				05E2071E0FB9004100FCFC94 /* XMPPJID.m in Sources */,
 				05E2072E0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */,
@@ -2002,7 +1996,7 @@
 				);
 				PRODUCT_NAME = web.gnos.us;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B3C0333-B440-4178-90EE-B0FC7820887D";
-				SDKROOT = iphoneos3.1.2;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Distribution;
 		};
@@ -2016,7 +2010,6 @@
 				INFOPLIST_FILE = "Info Simulator.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
@@ -2035,11 +2028,10 @@
 				INFOPLIST_FILE = "Info Simulator.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				SDKROOT = iphonesimulator3.1.2;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
@@ -2053,7 +2045,6 @@
 				INFOPLIST_FILE = "Info Simulator.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\\\"$(SRCROOT)\\\"",
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
@@ -2076,7 +2067,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				SDKROOT = iphonesimulator3.1.2;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
@@ -2094,7 +2085,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				SDKROOT = iphoneos3.1.2;
+				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
 		};
