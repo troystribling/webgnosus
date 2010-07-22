@@ -274,7 +274,6 @@
 		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
 		051D5D3A10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQueryDeligate.h; sourceTree = "<group>"; };
 		051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQueryDeligate.m; sourceTree = "<group>"; };
-		052800D40FA54D63007337FD /* libidn-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-simulator.a"; sourceTree = "<group>"; };
 		053480FC10292C8E002E6E2D /* XMPPDiscoInfoQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoInfoQuery.h; path = Disco/XMPPDiscoInfoQuery.h; sourceTree = "<group>"; };
 		053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoInfoQuery.m; path = Disco/XMPPDiscoInfoQuery.m; sourceTree = "<group>"; };
 		0534810110292CBC002E6E2D /* XMPPDiscoItemsQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItemsQuery.h; path = Disco/XMPPDiscoItemsQuery.h; sourceTree = "<group>"; };
@@ -290,7 +289,6 @@
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
-		05706DB611F8000A00B0154F /* libidn-iphone.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libidn-iphone.a"; sourceTree = "<group>"; };
 		05706DE311F8017F00B0154F /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
@@ -1203,8 +1201,6 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				0542683211700F56006E4699 /* Entitlements.plist */,
-				05706DB611F8000A00B0154F /* libidn-iphone.a */,
-				05706DE311F8017F00B0154F /* libidn.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -1234,6 +1230,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05706DE311F8017F00B0154F /* libidn.a */,
 				051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */,
 				05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */,
 				05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */,
@@ -1241,7 +1238,6 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
-				052800D40FA54D63007337FD /* libidn-simulator.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
