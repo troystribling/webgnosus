@@ -14,138 +14,66 @@
 		050007361093EE390046D0BC /* XDataHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072D1093EE390046D0BC /* XDataHashMessageView.m */; };
 		050007371093EE390046D0BC /* XDataMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072F1093EE390046D0BC /* XDataMessageView.m */; };
 		050007381093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
-		050007391093EE390046D0BC /* EntryMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007251093EE390046D0BC /* EntryMessageView.m */; };
-		0500073A1093EE390046D0BC /* MessageViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007271093EE390046D0BC /* MessageViewFactory.m */; };
-		0500073B1093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007291093EE390046D0BC /* XDataArrayHashMessageView.m */; };
-		0500073C1093EE390046D0BC /* XDataArrayMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072B1093EE390046D0BC /* XDataArrayMessageView.m */; };
-		0500073D1093EE390046D0BC /* XDataHashMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072D1093EE390046D0BC /* XDataHashMessageView.m */; };
-		0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0500072F1093EE390046D0BC /* XDataMessageView.m */; };
-		0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007311093EE390046D0BC /* XDataScalarMessageView.m */; };
 		050007421093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
-		050007431093F1260046D0BC /* BodyMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 050007411093F1260046D0BC /* BodyMessageView.m */; };
 		050263C21076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
-		050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 050263C11076E78C000B81C6 /* XMPPEntry.m */; };
 		050263D01076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
-		050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050263CF1076FA7E000B81C6 /* EventsViewController.xib */; };
-		0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
 		0502D7CB1082488200218EC9 /* ServiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7C91082488200218EC9 /* ServiceViewController.xib */; };
-		0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
 		0502D7ED108261E500218EC9 /* ServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D7EB108261E500218EC9 /* ServiceCell.xib */; };
-		0502D8501082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */; };
 		0502D8511082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */; };
-		0502D8A11082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
 		0502D8A21082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
-		0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
 		0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
 		050410FB1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
-		050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 050410FA1041C8C2004F7660 /* ServiceModel.m */; };
 		05046B56109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */; };
-		05046B57109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */; };
 		05046B5D109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */; };
-		05046B5E109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */; };
 		05046BEB109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
-		05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
 		0507514910AE450400FA1781 /* CommandFormTextMultiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0507514810AE450400FA1781 /* CommandFormTextMultiView.m */; };
-		0507514A10AE450400FA1781 /* CommandFormTextMultiView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0507514810AE450400FA1781 /* CommandFormTextMultiView.m */; };
 		050AA0761097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
-		050AA0771097F78700C053C5 /* unread-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 050AA0751097F78700C053C5 /* unread-messages.png */; };
 		0514556710A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */; };
-		0514556810A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0514556610A11FA80082605E /* XMPPRegisterQueryDelegate.m */; };
 		051532A6109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
-		051532A7109E9FD600E83386 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 051532A5109E9FD600E83386 /* Default.png */; };
-		0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		0517E5F2108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0517E5F0108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m */; };
 		051A48491092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
-		051A484A1092965000263D26 /* ServiceMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051A48481092965000263D26 /* ServiceMessageViewController.m */; };
 		051A48521092975200263D26 /* ServiceMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051A48511092975200263D26 /* ServiceMessageViewController.xib */; };
-		051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 051A48511092975200263D26 /* ServiceMessageViewController.xib */; };
 		051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
-		051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */; };
 		051AB4820F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
-		051AB4830F1068C500DD01DC /* webgnosus.db in Resources */ = {isa = PBXBuildFile; fileRef = 051AB4810F1068C500DD01DC /* webgnosus.db */; };
 		051CA4ED1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */; };
-		051CA4EE1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA4EC1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m */; };
 		051CA5201086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
 		051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
 		051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
-		051CA5231086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
-		051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
-		051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
-		051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
 		051D5D3D10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 051D5D3B10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m */; };
 		053480FE10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
-		053480FF10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 053480FD10292C8E002E6E2D /* XMPPDiscoInfoQuery.m */; };
 		0534810310292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534810210292CBC002E6E2D /* XMPPDiscoItemsQuery.m */; };
-		0534810410292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534810210292CBC002E6E2D /* XMPPDiscoItemsQuery.m */; };
 		0534810B10292D41002E6E2D /* XMPPDiscoFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534810A10292D41002E6E2D /* XMPPDiscoFeature.m */; };
-		0534810C10292D41002E6E2D /* XMPPDiscoFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534810A10292D41002E6E2D /* XMPPDiscoFeature.m */; };
 		0534811310292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */; };
-		0534811410292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811210292E4B002E6E2D /* XMPPDiscoIdentity.m */; };
 		0534811710292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
-		0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0534811610292E5B002E6E2D /* XMPPDiscoItem.m */; };
 		0542683311700F56006E4699 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0542683211700F56006E4699 /* Entitlements.plist */; };
 		056324081078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
-		0563240A1078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
-		0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
-		05706DE411F8017F00B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
 		05706DF811F802E300B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
-		057BB16210587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
-		057BB16310587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16510587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
-		057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
 		057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
-		05816C4911444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
 		05816C4A11444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
-		05816C5511444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
 		05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
 		05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
-		05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
 		05C6E9490F0F176F009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
 		05C6E95C0F0F17FA009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
 		05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
-		05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		05C6E99A0F0F1B77009BD7C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		05C6E9B60F0F1B77009BD7C8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		05C6E9B70F0F1B77009BD7C8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		05C6E9B80F0F1B77009BD7C8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		05C6E9B90F0F1B77009BD7C8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9480F0F176F009BD7C8 /* CFNetwork.framework */; };
-		05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E95B0F0F17FA009BD7C8 /* SystemConfiguration.framework */; };
-		05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
 		05CE074A0FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
 		05CE074B0FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
 		05CE074C0FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
 		05CE074E0FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
 		05CE074F0FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
 		05CE07500FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
-		05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073D0FB909CA0036DF5E /* AccountModel.m */; };
-		05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE073F0FB909CA0036DF5E /* ContactModel.m */; };
-		05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07410FB909CA0036DF5E /* MessageModel.m */; };
-		05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07450FB909CA0036DF5E /* RosterItemModel.m */; };
-		05CE07560FB909CA0036DF5E /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07470FB909CA0036DF5E /* UserModel.m */; };
-		05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07490FB909CA0036DF5E /* WebgnosusDbi.m */; };
 		05CE075D0FB909DB0036DF5E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075A0FB909DB0036DF5E /* AsyncSocket.m */; };
 		05CE075E0FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
-		05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075A0FB909DB0036DF5E /* AsyncSocket.m */; };
-		05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE075C0FB909DB0036DF5E /* AsyncUdpSocket.m */; };
 		05CE076C0FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
 		05CE076E0FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
-		05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE07660FB90A280036DF5E /* NSObjectiPhoneAdditions.m */; };
-		05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CE076A0FB90A280036DF5E /* UICustomSwitch.m */; };
 		05CF60B51048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
-		05CF60B61048A413003E012F /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CF60B41048A413003E012F /* ActivityView.m */; };
-		05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
-		05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC37107054830013734A /* SegmentedCycleList.m */; };
 		05D1EC39107054830013734A /* SegmentedCycleList.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC37107054830013734A /* SegmentedCycleList.m */; };
 		05D1EC481037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
-		05D1EC491037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC471037A46100DB3B3F /* XMPPMessageDelegate.m */; };
 		05D1EC4D1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
-		05D1EC4E1037A8C200DB3B3F /* AlertViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1EC4C1037A8C200DB3B3F /* AlertViewManager.m */; };
 		05D1ECA61037B58400DB3B3F /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */; };
-		05D1ECA71037B58400DB3B3F /* XMPPClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ECA51037B58400DB3B3F /* XMPPClientManager.m */; };
-		05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D1ECE6107070EB0013734A /* CommandViewController.xib */; };
 		05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D1ECE6107070EB0013734A /* CommandViewController.xib */; };
 		05D1ED791037BEF200DB3B3F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */; };
 		05D1ED7A1037BEF200DB3B3F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */; };
@@ -155,40 +83,19 @@
 		05D1ED7E1037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */; };
 		05D1ED7F1037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */; };
 		05D1ED801037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */; };
-		05D1ED811037BEF200DB3B3F /* XMPPPubSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6A1037BEF200DB3B3F /* XMPPPubSub.m */; };
-		05D1ED821037BEF200DB3B3F /* XMPPPubSubEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6C1037BEF200DB3B3F /* XMPPPubSubEvent.m */; };
-		05D1ED831037BEF200DB3B3F /* XMPPPubSubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED6E1037BEF200DB3B3F /* XMPPPubSubItem.m */; };
-		05D1ED841037BEF200DB3B3F /* XMPPPubSubItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED701037BEF200DB3B3F /* XMPPPubSubItems.m */; };
-		05D1ED851037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED721037BEF200DB3B3F /* XMPPPubSubPublish.m */; };
-		05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED741037BEF200DB3B3F /* XMPPPubSubSubscription.m */; };
-		05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED761037BEF200DB3B3F /* XMPPPubSubSubscriptions.m */; };
-		05D1ED881037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED781037BEF200DB3B3F /* XMPPPubSubOwner.m */; };
 		05D1ED931037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
 		05D1ED941037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
 		05D1ED951037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
-		05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8D1037BFBB00DB3B3F /* ServiceFeatureModel.m */; };
-		05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED8F1037BFBB00DB3B3F /* ServiceItemModel.m */; };
-		05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED911037BFBB00DB3B3F /* SubscriptionModel.m */; };
 		05D1ED9D1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
-		05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D1ED9C1037C07D00DB3B3F /* CellUtils.m */; };
-		05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */; };
 		05D7651F1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D7651D1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m */; };
 		05D83D5C104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
-		05D83D5D104EBF0A00078131 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D5B104EBF0A00078131 /* settings.png */; };
 		05D83D79104ED94F00078131 /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D78104ED94F00078131 /* red-button.png */; };
-		05D83D7A104ED94F00078131 /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D78104ED94F00078131 /* red-button.png */; };
 		05D83D7D104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
 		05D83D7E104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
-		05D83D7F104EDCBF00078131 /* green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7B104EDCBF00078131 /* green-button.png */; };
-		05D83D80104EDCBF00078131 /* grey-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D83D7C104EDCBF00078131 /* grey-button.png */; };
 		05DC8C880FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C8B0FBB15C60018AEEF /* XDataMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */; };
-		05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C830FBB15C60018AEEF /* CommandCell.xib */; };
-		05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
-		05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
-		05DC8C900FBB15C60018AEEF /* XDataMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */; };
 		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
@@ -198,47 +105,10 @@
 		05DC8CA60FBB15EB0018AEEF /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */; };
 		05DC8CA70FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
 		05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
-		05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
-		05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
-		05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
-		05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
-		05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C980FBB15EB0018AEEF /* EditAccountViewController.xib */; };
-		05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C990FBB15EB0018AEEF /* MessageViewController.xib */; };
-		05DC8CB20FBB15EB0018AEEF /* SectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9A0FBB15EB0018AEEF /* SectionViewController.xib */; };
-		05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9B0FBB15EB0018AEEF /* RosterViewController.xib */; };
-		05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C9D0FBB15EB0018AEEF /* HistoryViewController.xib */; };
 		05DE50F11062FC0400500F63 /* XMPPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPResponse.m */; };
-		05DE50F21062FC0400500F63 /* XMPPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DE50F01062FC0400500F63 /* XMPPResponse.m */; };
 		05DFCE6C10A35FE700C22524 /* XMPPCommandDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DFCE6B10A35FE700C22524 /* XMPPCommandDelegate.m */; };
-		05DFCE6D10A35FE700C22524 /* XMPPCommandDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DFCE6B10A35FE700C22524 /* XMPPCommandDelegate.m */; };
 		05DFCED110A3B13D00C22524 /* CommandFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DFCED010A3B13D00C22524 /* CommandFormViewController.m */; };
-		05DFCED210A3B13D00C22524 /* CommandFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05DFCED010A3B13D00C22524 /* CommandFormViewController.m */; };
 		05DFCF2510A3DD3A00C22524 /* CommandFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DFCF2410A3DD3A00C22524 /* CommandFormViewController.xib */; };
-		05DFCF2610A3DD3A00C22524 /* CommandFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DFCF2410A3DD3A00C22524 /* CommandFormViewController.xib */; };
-		05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
-		05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
-		05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
-		05E206EA0FB9004100FCFC94 /* XMPPxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206AB0FB9004100FCFC94 /* XMPPxData.m */; };
-		05E206EC0FB9004100FCFC94 /* LibIDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B20FB9004100FCFC94 /* LibIDN.m */; };
-		05E206ED0FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B60FB9004100FCFC94 /* XMPPAuthorizationQuery.m */; };
-		05E206EE0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206B80FB9004100FCFC94 /* XMPPClientVersionQuery.m */; };
-		05E206EF0FB9004100FCFC94 /* XMPPQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BA0FB9004100FCFC94 /* XMPPQuery.m */; };
-		05E206F00FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BC0FB9004100FCFC94 /* XMPPRegisterQuery.m */; };
-		05E206F10FB9004100FCFC94 /* XMPPRosterItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206BE0FB9004100FCFC94 /* XMPPRosterItem.m */; };
-		05E206F20FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C00FB9004100FCFC94 /* XMPPRosterQuery.m */; };
-		05E206F30FB9004100FCFC94 /* XMPPAuthorize.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C30FB9004100FCFC94 /* XMPPAuthorize.m */; };
-		05E206F40FB9004100FCFC94 /* XMPPBind.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206C60FB9004100FCFC94 /* XMPPBind.m */; };
-		05E206F60FB9004100FCFC94 /* XMPPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CA0FB9004100FCFC94 /* XMPPSession.m */; };
-		05E206F70FB9004100FCFC94 /* XMPPIQ.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CD0FB9004100FCFC94 /* XMPPIQ.m */; };
-		05E206F80FB9004100FCFC94 /* XMPPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206CF0FB9004100FCFC94 /* XMPPMessage.m */; };
-		05E206F90FB9004100FCFC94 /* XMPPPresence.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D10FB9004100FCFC94 /* XMPPPresence.m */; };
-		05E206FA0FB9004100FCFC94 /* XMPPStanza.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D30FB9004100FCFC94 /* XMPPStanza.m */; };
-		05E206FB0FB9004100FCFC94 /* XMPPStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D60FB9004100FCFC94 /* XMPPStream.m */; };
-		05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206D80FB9004100FCFC94 /* XMPPStreamError.m */; };
-		05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DA0FB9004100FCFC94 /* XMPPStreamFeatures.m */; };
-		05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
-		05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
-		05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
 		05E207030FB9004100FCFC94 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A40FB9004100FCFC94 /* NSDataAdditions.m */; };
 		05E207040FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A60FB9004100FCFC94 /* NSXMLElementAdditions.m */; };
 		05E207050FB9004100FCFC94 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206A90FB9004100FCFC94 /* XMPPCommand.m */; };
@@ -263,34 +133,11 @@
 		05E2071A0FB9004100FCFC94 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206DD0FB9004100FCFC94 /* MulticastDelegate.m */; };
 		05E2071C0FB9004100FCFC94 /* XMPPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E20FB9004100FCFC94 /* XMPPClient.m */; };
 		05E2071E0FB9004100FCFC94 /* XMPPJID.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E206E60FB9004100FCFC94 /* XMPPJID.m */; };
-		05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207220FB9016B00FCFC94 /* DDXMLDocument.m */; };
-		05E2072B0FB9016B00FCFC94 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207240FB9016B00FCFC94 /* DDXMLElement.m */; };
-		05E2072C0FB9016B00FCFC94 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207260FB9016B00FCFC94 /* DDXMLNode.m */; };
-		05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207290FB9016B00FCFC94 /* NSStringAdditions.m */; };
 		05E2072E0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207220FB9016B00FCFC94 /* DDXMLDocument.m */; };
 		05E2072F0FB9016B00FCFC94 /* DDXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207240FB9016B00FCFC94 /* DDXMLElement.m */; };
 		05E207300FB9016B00FCFC94 /* DDXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207260FB9016B00FCFC94 /* DDXMLNode.m */; };
 		05E207310FB9016B00FCFC94 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207290FB9016B00FCFC94 /* NSStringAdditions.m */; };
-		05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
 		05E207AB0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207A90FB903F100FCFC94 /* WebgnosusClientAppDelegate.m */; };
-		05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
-		05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
-		05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
-		05E207F20FB9046500FCFC94 /* CommandCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BC0FB9046500FCFC94 /* CommandCell.m */; };
-		05E207F30FB9046500FCFC94 /* CommandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207BE0FB9046500FCFC94 /* CommandViewController.m */; };
-		05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C20FB9046500FCFC94 /* RosterItemViewController.m */; };
-		05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C40FB9046500FCFC94 /* MessageViewController.m */; };
-		05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207C60FB9046500FCFC94 /* HistoryViewController.m */; };
-		05E207FA0FB9046500FCFC94 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CD0FB9046500FCFC94 /* GridView.m */; };
-		05E207FB0FB9046500FCFC94 /* LabelGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207CF0FB9046500FCFC94 /* LabelGridView.m */; };
-		05E207FD0FB9046500FCFC94 /* BodyMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207D40FB9046500FCFC94 /* BodyMessageCell.m */; };
-		05E208000FB9046500FCFC94 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DA0FB9046500FCFC94 /* MessageCell.m */; };
-		05E208010FB9046500FCFC94 /* MessageCellFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207DC0FB9046500FCFC94 /* MessageCellFactory.m */; };
-		05E208030FB9046500FCFC94 /* XDataMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E00FB9046500FCFC94 /* XDataMessageCell.m */; };
-		05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E30FB9046500FCFC94 /* AcceptBuddyRequestView.m */; };
-		05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E50FB9046500FCFC94 /* AddContactViewController.m */; };
-		05E208060FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
-		05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E2080B0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B30FB9046500FCFC94 /* AccountManagerViewController.m */; };
 		05E2080C0FB9046500FCFC94 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B50FB9046500FCFC94 /* AddAccountViewController.m */; };
 		05E2080D0FB9046500FCFC94 /* EditAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207B70FB9046500FCFC94 /* EditAccountViewController.m */; };
@@ -310,55 +157,30 @@
 		05E208230FB9046500FCFC94 /* RosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207E70FB9046500FCFC94 /* RosterCell.m */; };
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E3E96B109E779A0040E5D9 /* load-messages.png */; };
-		05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E3E96B109E779A0040E5D9 /* load-messages.png */; };
 		05E4DA541079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
-		05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E4DA531079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m */; };
-		05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
 		05E586C8106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586C6106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m */; };
-		05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
 		05E586D8106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E586D6106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m */; };
 		05E5A23010533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
-		05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E5A22F10533DE300D960B7 /* RoundedCornersView.m */; };
 		05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
 		05E6F15F104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
 		05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
-		05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
-		05E6F169104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
-		05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
 		05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
 		05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
-		05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
-		05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
-		05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */; };
 		05E6FB80105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB7C105B1C510067CF95 /* AddSubscriptionViewController.m */; };
-		05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */; };
 		05E6FB87105B1C700067CF95 /* AddPublicationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E6FB83105B1C700067CF95 /* AddPublicationViewController.m */; };
-		05E7EB871055CCE700C5F3FD /* PubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB861055CCE700C5F3FD /* PubSubViewController.m */; };
 		05E7EB881055CCE700C5F3FD /* PubSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB861055CCE700C5F3FD /* PubSubViewController.m */; };
-		05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */; };
 		05E7EB901055CD4B00C5F3FD /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E7EB8E1055CD4B00C5F3FD /* EventsViewController.m */; };
-		05E7EBAD1055D97600C5F3FD /* tabbar-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E7EBAC1055D97600C5F3FD /* tabbar-history.png */; };
 		05E7EBAE1055D97600C5F3FD /* tabbar-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E7EBAC1055D97600C5F3FD /* tabbar-history.png */; };
-		05E83AF2106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */; };
 		05E83AF3106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF1106AF53100266E1F /* XMPPPubSubDeleteDelegate.m */; };
-		05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
 		05E83AF9106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E83AF7106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m */; };
 		05E9751710A490C7005F2440 /* CommandFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9751610A490C7005F2440 /* CommandFormView.m */; };
-		05E9751810A490C7005F2440 /* CommandFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9751610A490C7005F2440 /* CommandFormView.m */; };
 		05E9759D10A4E964005F2440 /* XMPPxDataField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9759C10A4E964005F2440 /* XMPPxDataField.m */; };
-		05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E9759C10A4E964005F2440 /* XMPPxDataField.m */; };
 		05EAB2F810509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
 		05EAB2F910509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
-		05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F610509A9700AF71A2 /* left-arrow.png */; };
-		05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EAB2F710509A9800AF71A2 /* right-arrow.png */; };
 		05ED2D91108B9140007F9413 /* service-directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D90108B9140007F9413 /* service-directory.png */; };
-		05ED2D92108B9140007F9413 /* service-directory.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D90108B9140007F9413 /* service-directory.png */; };
 		05ED2D9D108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */; };
-		05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2D9C108B94ED007F9413 /* service-pubsub-node-blue.png */; };
 		05ED2E1B108BE96C007F9413 /* service-document.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2E1A108BE96C007F9413 /* service-document.png */; };
-		05ED2E1C108BE96C007F9413 /* service-document.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED2E1A108BE96C007F9413 /* service-document.png */; };
 		05ED2ED3108C171C007F9413 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED2ED2108C171C007F9413 /* TouchImageView.m */; };
-		05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED2ED2108C171C007F9413 /* TouchImageView.m */; };
 		05ED38E3108AAA4E0079A3B3 /* service-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DB108AAA4E0079A3B3 /* service-chat.png */; };
 		05ED38E4108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */; };
 		05ED38E5108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */; };
@@ -366,59 +188,29 @@
 		05ED38E7108AAA4E0079A3B3 /* service-pubsub.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */; };
 		05ED38E8108AAA4E0079A3B3 /* service-socket.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E0108AAA4E0079A3B3 /* service-socket.png */; };
 		05ED38EA108AAA4E0079A3B3 /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E2108AAA4E0079A3B3 /* service.png */; };
-		05ED38EB108AAA4E0079A3B3 /* service-chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DB108AAA4E0079A3B3 /* service-chat.png */; };
-		05ED38EC108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DC108AAA4E0079A3B3 /* service-pubsub-folder.png */; };
-		05ED38ED108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DD108AAA4E0079A3B3 /* service-pubsub-node-green.png */; };
-		05ED38EE108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DE108AAA4E0079A3B3 /* service-pubsub-node-grey.png */; };
-		05ED38EF108AAA4E0079A3B3 /* service-pubsub.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38DF108AAA4E0079A3B3 /* service-pubsub.png */; };
-		05ED38F0108AAA4E0079A3B3 /* service-socket.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E0108AAA4E0079A3B3 /* service-socket.png */; };
-		05ED38F2108AAA4E0079A3B3 /* service.png in Resources */ = {isa = PBXBuildFile; fileRef = 05ED38E2108AAA4E0079A3B3 /* service.png */; };
 		05ED464F1051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
-		05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 05ED464E1051932B00DB3396 /* SegmentedListPicker.m */; };
 		05EE151A109E1BDC00FD4DD6 /* tablecell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */; };
-		05EE151B109E1BDC00FD4DD6 /* tablecell-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1519109E1BDC00FD4DD6 /* tablecell-background.png */; };
 		05EE1525109E1E6600FD4DD6 /* account-on-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1524109E1E6600FD4DD6 /* account-on-led.png */; };
-		05EE1526109E1E6600FD4DD6 /* account-on-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1524109E1E6600FD4DD6 /* account-on-led.png */; };
 		05EE152A109E20B000FD4DD6 /* account-error-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1528109E20B000FD4DD6 /* account-error-led.png */; };
 		05EE152B109E20B000FD4DD6 /* account-off-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1529109E20B000FD4DD6 /* account-off-led.png */; };
-		05EE152C109E20B000FD4DD6 /* account-error-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1528109E20B000FD4DD6 /* account-error-led.png */; };
-		05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1529109E20B000FD4DD6 /* account-off-led.png */; };
 		05EE1546109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
-		05EE1547109E328300FD4DD6 /* roster-section.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EE1545109E328300FD4DD6 /* roster-section.png */; };
 		05EF00001057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
-		05EF0002105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
 		05EF0003105735690068AA06 /* AccountSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EF0001105735690068AA06 /* AccountSubCell.xib */; };
-		05EF0020105738840068AA06 /* AccountPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* AccountPubCell.m */; };
 		05EF0021105738840068AA06 /* AccountPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EF001F105738840068AA06 /* AccountPubCell.m */; };
-		05EFFFF410572B490068AA06 /* AccountSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* AccountSubCell.m */; };
 		05EFFFF510572B490068AA06 /* AccountSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EFFFF310572B490068AA06 /* AccountSubCell.m */; };
-		05EFFFFF1057351F0068AA06 /* AccountPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EFFFFE1057351F0068AA06 /* AccountPubCell.xib */; };
 		05F0441D10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
-		05F0441E10405872001223C4 /* XMPPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0441C10405872001223C4 /* XMPPError.m */; };
 		05F24BD41054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
-		05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F24BD31054077F000C886E /* AddContactViewController.xib */; };
-		05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
 		05F2F7971064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2F7951064754200B681ED /* XMPPDiscoItemsResponseDelegate.m */; };
 		05F5CD19109A66220055B10E /* ChatMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD18109A66220055B10E /* ChatMessageCache.m */; };
-		05F5CD1A109A66220055B10E /* ChatMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD18109A66220055B10E /* ChatMessageCache.m */; };
 		05F5CD1D109A66A80055B10E /* HistoryMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD1C109A66A80055B10E /* HistoryMessageCache.m */; };
-		05F5CD1E109A66A80055B10E /* HistoryMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F5CD1C109A66A80055B10E /* HistoryMessageCache.m */; };
 		05F7411A10B658EE00BDF171 /* JIDField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F7411910B658EE00BDF171 /* JIDField.m */; };
-		05F7411B10B658EE00BDF171 /* JIDField.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F7411910B658EE00BDF171 /* JIDField.m */; };
 		05F75D8210915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
-		05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F75D8110915FE200FC080B /* XMPPPubSubItemDelegate.m */; };
-		05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
 		05F79C2E1075A7D500B75735 /* ContactPubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05F79C2C1075A7D500B75735 /* ContactPubCell.xib */; };
-		05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F79C461075AA8200B75735 /* ContactPubCell.m */; };
 		05F79C481075AA8200B75735 /* ContactPubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F79C461075AA8200B75735 /* ContactPubCell.m */; };
 		05F8D50D109D08A9005FE8A5 /* CommandResponseMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D50C109D08A9005FE8A5 /* CommandResponseMessageCache.m */; };
-		05F8D50E109D08A9005FE8A5 /* CommandResponseMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D50C109D08A9005FE8A5 /* CommandResponseMessageCache.m */; };
 		05F8D5A0109D2422005FE8A5 /* PubMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D59F109D2422005FE8A5 /* PubMessageCache.m */; };
-		05F8D5A1109D2422005FE8A5 /* PubMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D59F109D2422005FE8A5 /* PubMessageCache.m */; };
 		05F8D5A4109D2433005FE8A5 /* SubMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D5A3109D2433005FE8A5 /* SubMessageCache.m */; };
-		05F8D5A5109D2433005FE8A5 /* SubMessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8D5A3109D2433005FE8A5 /* SubMessageCache.m */; };
 		05FABAE010810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */; };
-		05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FABADF10810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -494,7 +286,6 @@
 		0534811510292E5B002E6E2D /* XMPPDiscoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMPPDiscoItem.h; path = Disco/XMPPDiscoItem.h; sourceTree = "<group>"; };
 		0534811610292E5B002E6E2D /* XMPPDiscoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMPPDiscoItem.m; path = Disco/XMPPDiscoItem.m; sourceTree = "<group>"; };
 		0542683211700F56006E4699 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
-		0542684411701183006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0542684C117015DC006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
@@ -785,21 +576,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		05C6E9B50F0F1B77009BD7C8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05C6E9B60F0F1B77009BD7C8 /* Foundation.framework in Frameworks */,
-				05C6E9B70F0F1B77009BD7C8 /* UIKit.framework in Frameworks */,
-				05C6E9B80F0F1B77009BD7C8 /* CoreGraphics.framework in Frameworks */,
-				05C6E9B90F0F1B77009BD7C8 /* CFNetwork.framework in Frameworks */,
-				05C6E9BA0F0F1B77009BD7C8 /* SystemConfiguration.framework in Frameworks */,
-				05C6E9BD0F0F1B77009BD7C8 /* libxml2.2.dylib in Frameworks */,
-				051AB4800F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
-				05706DE411F8017F00B0154F /* libidn.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1413,7 +1189,6 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0542684411701183006E4699 /* web.gnos.us.app */,
 				0542684C117015DC006E4699 /* web.gnos.us.app */,
 			);
 			name = Products;
@@ -1474,23 +1249,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		05C6E9930F0F1B77009BD7C8 /* webgnosus_simulator */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 05C6E9BE0F0F1B77009BD7C8 /* Build configuration list for PBXNativeTarget "webgnosus_simulator" */;
-			buildPhases = (
-				05C6E9940F0F1B77009BD7C8 /* Resources */,
-				05C6E9990F0F1B77009BD7C8 /* Sources */,
-				05C6E9B50F0F1B77009BD7C8 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = webgnosus_simulator;
-			productName = webgnosus;
-			productReference = 0542684411701183006E4699 /* web.gnos.us.app */;
-			productType = "com.apple.product-type.application";
-		};
 		1D6058900D05DD3D006BFB54 /* webgnosus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "webgnosus" */;
@@ -1524,84 +1282,11 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* webgnosus */,
-				05C6E9930F0F1B77009BD7C8 /* webgnosus_simulator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		05C6E9940F0F1B77009BD7C8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05C6E9950F0F1B77009BD7C8 /* MainWindow.xib in Resources */,
-				051AB4830F1068C500DD01DC /* webgnosus.db in Resources */,
-				05DC8C8D0FBB15C60018AEEF /* CommandCell.xib in Resources */,
-				05DC8C8E0FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
-				05DC8C8F0FBB15C60018AEEF /* RosterCell.xib in Resources */,
-				05DC8C900FBB15C60018AEEF /* XDataMessageCell.xib in Resources */,
-				05DC8CAB0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
-				05DC8CAC0FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
-				05DC8CAE0FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
-				05DC8CAF0FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
-				05DC8CB00FBB15EB0018AEEF /* EditAccountViewController.xib in Resources */,
-				05DC8CB10FBB15EB0018AEEF /* MessageViewController.xib in Resources */,
-				05DC8CB20FBB15EB0018AEEF /* SectionViewController.xib in Resources */,
-				05DC8CB30FBB15EB0018AEEF /* RosterViewController.xib in Resources */,
-				05DC8CB50FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
-				05CF616E1048B141003E012F /* AccountManagerViewController.xib in Resources */,
-				05E6F168104A07FC00EF924B /* dotted_tile.png in Resources */,
-				05E6F169104A07FC00EF924B /* main_icon.png in Resources */,
-				05E6F16D104A07FC00EF924B /* tabbar-roster.png in Resources */,
-				05D83D5D104EBF0A00078131 /* settings.png in Resources */,
-				05D83D7A104ED94F00078131 /* red-button.png in Resources */,
-				05D83D7F104EDCBF00078131 /* green-button.png in Resources */,
-				05D83D80104EDCBF00078131 /* grey-button.png in Resources */,
-				05EAB2FA10509A9800AF71A2 /* left-arrow.png in Resources */,
-				05EAB2FB10509A9800AF71A2 /* right-arrow.png in Resources */,
-				05F24BD51054077F000C886E /* AddContactViewController.xib in Resources */,
-				05E7EBAD1055D97600C5F3FD /* tabbar-history.png in Resources */,
-				05EFFFFF1057351F0068AA06 /* AccountPubCell.xib in Resources */,
-				05EF0002105735690068AA06 /* AccountSubCell.xib in Resources */,
-				057BB16210587547006389D9 /* tabbar-events.png in Resources */,
-				057BB16310587547006389D9 /* tabbar-services.png in Resources */,
-				057BB1B710588788006389D9 /* PubSubViewController.xib in Resources */,
-				05E6FB65105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */,
-				05E6FB66105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */,
-				05D1ECE7107070EB0013734A /* CommandViewController.xib in Resources */,
-				05F79C2D1075A7D500B75735 /* ContactPubCell.xib in Resources */,
-				050263D11076FA7E000B81C6 /* EventsViewController.xib in Resources */,
-				0563240E1078290A00563274 /* EventMessageViewController.xib in Resources */,
-				0502D7CA1082488200218EC9 /* ServiceViewController.xib in Resources */,
-				0502D7EC108261E500218EC9 /* ServiceCell.xib in Resources */,
-				0502D8501082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */,
-				0502D8A11082CAB500218EC9 /* search.png in Resources */,
-				05ED38EB108AAA4E0079A3B3 /* service-chat.png in Resources */,
-				05ED38EC108AAA4E0079A3B3 /* service-pubsub-folder.png in Resources */,
-				05ED38ED108AAA4E0079A3B3 /* service-pubsub-node-green.png in Resources */,
-				05ED38EE108AAA4E0079A3B3 /* service-pubsub-node-grey.png in Resources */,
-				05ED38EF108AAA4E0079A3B3 /* service-pubsub.png in Resources */,
-				05ED38F0108AAA4E0079A3B3 /* service-socket.png in Resources */,
-				05ED38F2108AAA4E0079A3B3 /* service.png in Resources */,
-				05ED2D92108B9140007F9413 /* service-directory.png in Resources */,
-				05ED2D9E108B94ED007F9413 /* service-pubsub-node-blue.png in Resources */,
-				05ED2E1C108BE96C007F9413 /* service-document.png in Resources */,
-				051A48531092975200263D26 /* ServiceMessageViewController.xib in Resources */,
-				050AA0771097F78700C053C5 /* unread-messages.png in Resources */,
-				05046B57109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */,
-				05EE151B109E1BDC00FD4DD6 /* tablecell-background.png in Resources */,
-				05EE1526109E1E6600FD4DD6 /* account-on-led.png in Resources */,
-				05EE152C109E20B000FD4DD6 /* account-error-led.png in Resources */,
-				05EE152D109E20B000FD4DD6 /* account-off-led.png in Resources */,
-				05EE1547109E328300FD4DD6 /* roster-section.png in Resources */,
-				05E3E96D109E779A0040E5D9 /* load-messages.png in Resources */,
-				051532A7109E9FD600E83386 /* Default.png in Resources */,
-				05DFCF2610A3DD3A00C22524 /* CommandFormViewController.xib in Resources */,
-				05AAB3DF10AA6B83008CF187 /* iTunesArtwork in Resources */,
-				05816C5511444E4F001D5DFA /* ResourceCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1678,148 +1363,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		05C6E9990F0F1B77009BD7C8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05C6E99A0F0F1B77009BD7C8 /* main.m in Sources */,
-				05E206E70FB9004100FCFC94 /* NSDataAdditions.m in Sources */,
-				05E206E80FB9004100FCFC94 /* NSXMLElementAdditions.m in Sources */,
-				05E206E90FB9004100FCFC94 /* XMPPCommand.m in Sources */,
-				05E206EA0FB9004100FCFC94 /* XMPPxData.m in Sources */,
-				05E206EC0FB9004100FCFC94 /* LibIDN.m in Sources */,
-				05E206ED0FB9004100FCFC94 /* XMPPAuthorizationQuery.m in Sources */,
-				05E206EE0FB9004100FCFC94 /* XMPPClientVersionQuery.m in Sources */,
-				05E206EF0FB9004100FCFC94 /* XMPPQuery.m in Sources */,
-				05E206F00FB9004100FCFC94 /* XMPPRegisterQuery.m in Sources */,
-				05E206F10FB9004100FCFC94 /* XMPPRosterItem.m in Sources */,
-				05E206F20FB9004100FCFC94 /* XMPPRosterQuery.m in Sources */,
-				05E206F30FB9004100FCFC94 /* XMPPAuthorize.m in Sources */,
-				05E206F40FB9004100FCFC94 /* XMPPBind.m in Sources */,
-				05E206F60FB9004100FCFC94 /* XMPPSession.m in Sources */,
-				05E206F70FB9004100FCFC94 /* XMPPIQ.m in Sources */,
-				05E206F80FB9004100FCFC94 /* XMPPMessage.m in Sources */,
-				05E206F90FB9004100FCFC94 /* XMPPPresence.m in Sources */,
-				05E206FA0FB9004100FCFC94 /* XMPPStanza.m in Sources */,
-				05E206FB0FB9004100FCFC94 /* XMPPStream.m in Sources */,
-				05E206FC0FB9004100FCFC94 /* XMPPStreamError.m in Sources */,
-				05E206FD0FB9004100FCFC94 /* XMPPStreamFeatures.m in Sources */,
-				05E206FE0FB9004100FCFC94 /* MulticastDelegate.m in Sources */,
-				05E207000FB9004100FCFC94 /* XMPPClient.m in Sources */,
-				05E207020FB9004100FCFC94 /* XMPPJID.m in Sources */,
-				05E2072A0FB9016B00FCFC94 /* DDXMLDocument.m in Sources */,
-				05E2072B0FB9016B00FCFC94 /* DDXMLElement.m in Sources */,
-				05E2072C0FB9016B00FCFC94 /* DDXMLNode.m in Sources */,
-				05E2072D0FB9016B00FCFC94 /* NSStringAdditions.m in Sources */,
-				05E207AA0FB903F100FCFC94 /* WebgnosusClientAppDelegate.m in Sources */,
-				05E207EE0FB9046500FCFC94 /* AccountManagerViewController.m in Sources */,
-				05E207EF0FB9046500FCFC94 /* AddAccountViewController.m in Sources */,
-				05E207F00FB9046500FCFC94 /* EditAccountViewController.m in Sources */,
-				05E207F20FB9046500FCFC94 /* CommandCell.m in Sources */,
-				05E207F30FB9046500FCFC94 /* CommandViewController.m in Sources */,
-				05E207F50FB9046500FCFC94 /* RosterItemViewController.m in Sources */,
-				05E207F60FB9046500FCFC94 /* MessageViewController.m in Sources */,
-				05E207F70FB9046500FCFC94 /* HistoryViewController.m in Sources */,
-				05E207FA0FB9046500FCFC94 /* GridView.m in Sources */,
-				05E207FB0FB9046500FCFC94 /* LabelGridView.m in Sources */,
-				05E207FD0FB9046500FCFC94 /* BodyMessageCell.m in Sources */,
-				05E208000FB9046500FCFC94 /* MessageCell.m in Sources */,
-				05E208010FB9046500FCFC94 /* MessageCellFactory.m in Sources */,
-				05E208030FB9046500FCFC94 /* XDataMessageCell.m in Sources */,
-				05E208040FB9046500FCFC94 /* AcceptBuddyRequestView.m in Sources */,
-				05E208050FB9046500FCFC94 /* AddContactViewController.m in Sources */,
-				05E208060FB9046500FCFC94 /* RosterCell.m in Sources */,
-				05E208080FB9046500FCFC94 /* RosterViewController.m in Sources */,
-				05CE07510FB909CA0036DF5E /* AccountModel.m in Sources */,
-				05CE07520FB909CA0036DF5E /* ContactModel.m in Sources */,
-				05CE07530FB909CA0036DF5E /* MessageModel.m in Sources */,
-				05CE07550FB909CA0036DF5E /* RosterItemModel.m in Sources */,
-				05CE07560FB909CA0036DF5E /* UserModel.m in Sources */,
-				05CE07570FB909CA0036DF5E /* WebgnosusDbi.m in Sources */,
-				05CE075F0FB909DB0036DF5E /* AsyncSocket.m in Sources */,
-				05CE07600FB909DB0036DF5E /* AsyncUdpSocket.m in Sources */,
-				05CE07700FB90A280036DF5E /* NSObjectiPhoneAdditions.m in Sources */,
-				05CE07720FB90A280036DF5E /* UICustomSwitch.m in Sources */,
-				053480FF10292C8E002E6E2D /* XMPPDiscoInfoQuery.m in Sources */,
-				0534810410292CBC002E6E2D /* XMPPDiscoItemsQuery.m in Sources */,
-				0534810C10292D41002E6E2D /* XMPPDiscoFeature.m in Sources */,
-				0534811410292E4B002E6E2D /* XMPPDiscoIdentity.m in Sources */,
-				0534811810292E5B002E6E2D /* XMPPDiscoItem.m in Sources */,
-				05D1EC491037A46100DB3B3F /* XMPPMessageDelegate.m in Sources */,
-				05D1EC4E1037A8C200DB3B3F /* AlertViewManager.m in Sources */,
-				05D1ECA71037B58400DB3B3F /* XMPPClientManager.m in Sources */,
-				05D1ED811037BEF200DB3B3F /* XMPPPubSub.m in Sources */,
-				05D1ED821037BEF200DB3B3F /* XMPPPubSubEvent.m in Sources */,
-				05D1ED831037BEF200DB3B3F /* XMPPPubSubItem.m in Sources */,
-				05D1ED841037BEF200DB3B3F /* XMPPPubSubItems.m in Sources */,
-				05D1ED851037BEF200DB3B3F /* XMPPPubSubPublish.m in Sources */,
-				05D1ED861037BEF200DB3B3F /* XMPPPubSubSubscription.m in Sources */,
-				05D1ED871037BEF200DB3B3F /* XMPPPubSubSubscriptions.m in Sources */,
-				05D1ED881037BEF200DB3B3F /* XMPPPubSubOwner.m in Sources */,
-				05D1ED971037BFBB00DB3B3F /* ServiceFeatureModel.m in Sources */,
-				05D1ED981037BFBB00DB3B3F /* ServiceItemModel.m in Sources */,
-				05D1ED991037BFBB00DB3B3F /* SubscriptionModel.m in Sources */,
-				05D1ED9E1037C07D00DB3B3F /* CellUtils.m in Sources */,
-				05F0441E10405872001223C4 /* XMPPError.m in Sources */,
-				050410FC1041C8C2004F7660 /* ServiceModel.m in Sources */,
-				05CF60B61048A413003E012F /* ActivityView.m in Sources */,
-				05ED46501051932B00DB3396 /* SegmentedListPicker.m in Sources */,
-				05E5A23110533DE300D960B7 /* RoundedCornersView.m in Sources */,
-				05E7EB871055CCE700C5F3FD /* PubSubViewController.m in Sources */,
-				05E7EB8F1055CD4B00C5F3FD /* EventsViewController.m in Sources */,
-				05EFFFF410572B490068AA06 /* AccountSubCell.m in Sources */,
-				05EF0020105738840068AA06 /* AccountPubCell.m in Sources */,
-				05E6FB7E105B1C510067CF95 /* AddSubscriptionViewController.m in Sources */,
-				05E6FB85105B1C700067CF95 /* AddPublicationViewController.m in Sources */,
-				05DE50F21062FC0400500F63 /* XMPPResponse.m in Sources */,
-				05F2F7961064754200B681ED /* XMPPDiscoItemsResponseDelegate.m in Sources */,
-				05D7651E1065D54D0000C0D7 /* XMPPPubSubCeateDelegate.m in Sources */,
-				05E83AF2106AF53100266E1F /* XMPPPubSubDeleteDelegate.m in Sources */,
-				05E83AF8106AFB6400266E1F /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
-				05E586C7106C2FE700B9A535 /* XMPPPubSubSubscribeDelegate.m in Sources */,
-				05E586D7106C35D900B9A535 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
-				05D1EC38107054830013734A /* SegmentedCycleList.m in Sources */,
-				05F79C471075AA8200B75735 /* ContactPubCell.m in Sources */,
-				050263C31076E78C000B81C6 /* XMPPEntry.m in Sources */,
-				0563240A1078287800563274 /* EventMessageViewController.m in Sources */,
-				05E4DA551079AB6D00EAF629 /* XMPPPubSubEntryDelegate.m in Sources */,
-				05FABAE110810BC700CA07E2 /* XMPPDiscoInfoResponseDelegate.m in Sources */,
-				0502D8B41082D4E800218EC9 /* SectionViewController.m in Sources */,
-				0517E5F1108410860007CD6E /* XMPPDiscoItemsServiceResponseDelegate.m in Sources */,
-				051CA4EE1086BD4D0007DA81 /* XMPPDiscoInfoServiceResponseDelegate.m in Sources */,
-				051CA5231086D0090007DA81 /* ServiceCell.m in Sources */,
-				051CA5241086D0090007DA81 /* ServiceSearchViewController.m in Sources */,
-				051CA5251086D0090007DA81 /* ServiceViewController.m in Sources */,
-				05ED2ED4108C171C007F9413 /* TouchImageView.m in Sources */,
-				05F75D8310915FE200FC080B /* XMPPPubSubItemDelegate.m in Sources */,
-				051A484A1092965000263D26 /* ServiceMessageViewController.m in Sources */,
-				050007391093EE390046D0BC /* EntryMessageView.m in Sources */,
-				0500073A1093EE390046D0BC /* MessageViewFactory.m in Sources */,
-				0500073B1093EE390046D0BC /* XDataArrayHashMessageView.m in Sources */,
-				0500073C1093EE390046D0BC /* XDataArrayMessageView.m in Sources */,
-				0500073D1093EE390046D0BC /* XDataHashMessageView.m in Sources */,
-				0500073E1093EE390046D0BC /* XDataMessageView.m in Sources */,
-				0500073F1093EE390046D0BC /* XDataScalarMessageView.m in Sources */,
-				050007431093F1260046D0BC /* BodyMessageView.m in Sources */,
-				05F5CD1A109A66220055B10E /* ChatMessageCache.m in Sources */,
-				05F5CD1E109A66A80055B10E /* HistoryMessageCache.m in Sources */,
-				05046B5E109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */,
-				05046BEC109C0A1D001CBEA1 /* MessageCache.m in Sources */,
-				05F8D50E109D08A9005FE8A5 /* CommandResponseMessageCache.m in Sources */,
-				05F8D5A1109D2422005FE8A5 /* PubMessageCache.m in Sources */,
-				05F8D5A5109D2433005FE8A5 /* SubMessageCache.m in Sources */,
-				0514556810A11FA80082605E /* XMPPRegisterQueryDelegate.m in Sources */,
-				05DFCE6D10A35FE700C22524 /* XMPPCommandDelegate.m in Sources */,
-				05DFCED210A3B13D00C22524 /* CommandFormViewController.m in Sources */,
-				05E9751810A490C7005F2440 /* CommandFormView.m in Sources */,
-				05E9759E10A4E964005F2440 /* XMPPxDataField.m in Sources */,
-				0507514A10AE450400FA1781 /* CommandFormTextMultiView.m in Sources */,
-				05F7411B10B658EE00BDF171 /* JIDField.m in Sources */,
-				051D5D3C10C3322B0046AFDF /* XMPPClientVersionQueryDeligate.m in Sources */,
-				05816C4911444C70001D5DFA /* ResourceCell.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2000,57 +1543,6 @@
 			};
 			name = Distribution;
 		};
-		0501552510AA4E4C00B0B5FD /* Distribution */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
-				INFOPLIST_FILE = "Info Simulator.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				PRODUCT_NAME = web.gnos.us;
-			};
-			name = Distribution;
-		};
-		05C6E9BF0F0F1B77009BD7C8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
-				INFOPLIST_FILE = "Info Simulator.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				PRODUCT_NAME = web.gnos.us;
-				SDKROOT = iphonesimulator4.0;
-			};
-			name = Debug;
-		};
-		05C6E9C00F0F1B77009BD7C8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
-				INFOPLIST_FILE = "Info Simulator.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
-				PRODUCT_NAME = web.gnos.us;
-			};
-			name = Release;
-		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2075,7 +1567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling (EP33FMNW27)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
@@ -2085,6 +1577,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42048725-DCEF-4565-80FE-1EE6CD420615";
 				SDKROOT = iphoneos4.0;
 			};
 			name = Release;
@@ -2124,16 +1617,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		05C6E9BE0F0F1B77009BD7C8 /* Build configuration list for PBXNativeTarget "webgnosus_simulator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				05C6E9BF0F0F1B77009BD7C8 /* Debug */,
-				05C6E9C00F0F1B77009BD7C8 /* Release */,
-				0501552510AA4E4C00B0B5FD /* Distribution */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "webgnosus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
