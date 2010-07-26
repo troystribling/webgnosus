@@ -8,19 +8,16 @@
 
 #define DDLastErrorKey @"DDXML:LastError"
 
-struct _xmlRetain {
-	void * retainee;
-	struct _xmlRetain * next;
-};
-typedef struct _xmlRetain *xmlRetainPtr;
 
 @interface DDXMLNode (PrivateAPI)
 
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr;
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr;
++ (id)nodeWithUnknownPrimitive:(xmlKindPtr)kindPtr;
 
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr nsParent:(xmlNodePtr)parentPtr;
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr nsParent:(xmlNodePtr)parentPtr;
++ (id)nodeWithPrimitive:(xmlKindPtr)kindPtr;
+- (id)initWithCheckedPrimitive:(xmlKindPtr)kindPtr;
+
++ (id)nodeWithPrimitive:(xmlNsPtr)ns nsParent:(xmlNodePtr)parent;
+- (id)initWithCheckedPrimitive:(xmlNsPtr)ns nsParent:(xmlNodePtr)parent;
 
 + (BOOL)isXmlAttrPtr:(xmlKindPtr)kindPtr;
 - (BOOL)isXmlAttrPtr;
@@ -64,8 +61,8 @@ typedef struct _xmlRetain *xmlRetainPtr;
 
 @interface DDXMLElement (PrivateAPI)
 
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr;
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr;
++ (id)nodeWithPrimitive:(xmlKindPtr)kindPtr;
+- (id)initWithCheckedPrimitive:(xmlKindPtr)kindPtr;
 
 - (NSArray *)elementsWithName:(NSString *)name uri:(NSString *)URI;
 
@@ -76,7 +73,7 @@ typedef struct _xmlRetain *xmlRetainPtr;
 
 @interface DDXMLDocument (PrivateAPI)
 
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr;
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr;
++ (id)nodeWithPrimitive:(xmlKindPtr)kindPtr;
+- (id)initWithCheckedPrimitive:(xmlKindPtr)kindPtr;
 
 @end

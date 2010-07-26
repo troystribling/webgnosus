@@ -1,5 +1,5 @@
 //
-//  NSObjectiPhoneAdditions.h
+//  NSObjectWebgnosus.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/29/09.
@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (NSObjectiPhoneAdditions)
+@interface NSObject (NSObjectWebgnosus)
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)className;

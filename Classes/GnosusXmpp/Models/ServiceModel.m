@@ -11,7 +11,7 @@
 #import "WebgnosusDbi.h"
 #import "XMPPDiscoIdentity.h"
 #import "XMPPJID.h"
-#import "NSObjectiPhoneAdditions.h"
+#import "NSObjectWebgnosus.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface ServiceModel (PrivateAPI)

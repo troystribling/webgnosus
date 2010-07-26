@@ -1,5 +1,5 @@
 //
-//  NSObjectiPhoneAdditions.m
+//  NSObjectWebgnosus.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/29/09.
@@ -8,10 +8,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <objc/runtime.h>
-#import "NSObjectiPhoneAdditions.h"
+#import "NSObjectWebgnosus.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation NSObject (NSObjectiPhoneAdditions)
+@implementation NSObject (NSObjectWebgnosus)
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString *)className {

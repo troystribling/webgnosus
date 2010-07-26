@@ -11,7 +11,7 @@
 #import "EditAccountViewController.h"
 #import "AddAccountViewController.h"
 #import "AccountModel.h"
-#import "NSObjectiPhoneAdditions.h"
+#import "NSObjectWebgnosus.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountManagerViewController (PrivateAPI)

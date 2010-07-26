@@ -5,13 +5,48 @@
 
 @implementation DDXMLElement
 
+/**
+ * Returns a DDXML wrapper object for the given primitive node.
+ * The given node MUST be non-NULL and of the proper type.
+ * 
+ * If the wrapper object already exists, it is retained/autoreleased and returned.
+ * Otherwise a new wrapper object is alloc/init/autoreleased and returned.
+**/
++ (id)nodeWithPrimitive:(xmlKindPtr)kindPtr
+{
+	// If a wrapper object already exists, the _private variable is pointing to it.
+	
+	xmlNodePtr node = (xmlNodePtr)kindPtr;
+	if(node->_private == NULL)
+		return [[[DDXMLElement alloc] initWithCheckedPrimitive:kindPtr] autorelease];
+	else
+		return [[((DDXMLElement *)(node->_private)) retain] autorelease];
+}
+
+/**
+ * Returns a DDXML wrapper object for the given primitive node.
+ * The given node MUST be non-NULL and of the proper type.
+ *
+ * The given node is checked, meaning a wrapper object for it does not already exist.
+**/
+- (id)initWithCheckedPrimitive:(xmlKindPtr)kindPtr
+{
+	self = [super initWithCheckedPrimitive:kindPtr];
+	return self;
+}
+
 - (id)initWithName:(NSString *)name
 {
 	// Note: Make every guarantee that genericPtr is not null
 	
 	xmlNodePtr node = xmlNewNode(NULL, [name xmlChar]);
+	if(node == NULL)
+	{
+		[self release];
+		return nil;
+	}
 	
-	return [self initWithPrimitive:(xmlKindPtr)node];
+	return [self initWithCheckedPrimitive:(xmlKindPtr)node];
 }
 
 - (id)initWithName:(NSString *)name URI:(NSString *)URI
@@ -19,8 +54,13 @@
 	// Note: Make every guarantee that genericPtr is not null
 	
 	xmlNodePtr node = xmlNewNode(NULL, [name xmlChar]);
+	if(node == NULL)
+	{
+		[self release];
+		return nil;
+	}
 	
-	id result = [self initWithPrimitive:(xmlKindPtr)node];
+	DDXMLElement *result = [self initWithCheckedPrimitive:(xmlKindPtr)node];
 	[result setURI:URI];
 	
 	return result;
@@ -31,8 +71,13 @@
 	// Note: Make every guarantee that genericPtr is not null
 	
 	xmlNodePtr node = xmlNewNode(NULL, [name xmlChar]);
+	if(node == NULL)
+	{
+		[self release];
+		return nil;
+	}
 	
-	id result = [self initWithPrimitive:(xmlKindPtr)node];
+	DDXMLElement *result = [self initWithCheckedPrimitive:(xmlKindPtr)node];
 	[result setStringValue:string];
 	
 	return result;
@@ -41,34 +86,18 @@
 - (id)initWithXMLString:(NSString *)string error:(NSError **)error
 {
 	DDXMLDocument *doc = [[DDXMLDocument alloc] initWithXMLString:string options:0 error:error];
-	
 	if(doc == nil)
-	{
-		return nil;
-	}
-	
-	DDXMLNode *result = [doc rootElement];
-	[result detach];
-	[doc release];
-	
-	return [result retain];
-}
-
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr
-{
-	return [[[DDXMLElement alloc] initWithPrimitive:nodePtr] autorelease];
-}
-
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr
-{
-	if(nodePtr == NULL || nodePtr->type != XML_ELEMENT_NODE)
 	{
 		[self release];
 		return nil;
 	}
 	
-	self = [super initWithPrimitive:nodePtr];
-	return self;
+	DDXMLElement *result = [doc rootElement];
+	[result detach];
+	[doc release];
+	
+	[self release];
+	return [result retain];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -174,10 +203,7 @@
 			
 			if(match)
 			{
-				DDXMLElement *childElement = [[DDXMLElement alloc] initWithPrimitive:(xmlKindPtr)child];
-				
-				[result addObject:childElement];
-				[childElement release];
+				[result addObject:[DDXMLElement nodeWithPrimitive:(xmlKindPtr)child]];
 			}
 		}
 		
@@ -241,10 +267,7 @@
 	xmlAttrPtr attr = ((xmlNodePtr)genericPtr)->properties;
 	while(attr != NULL)
 	{
-		DDXMLNode *attrNode = [[DDXMLNode alloc] initWithPrimitive:(xmlKindPtr)attr];
-		
-		[result addObject:attrNode];
-		[attrNode release];
+		[result addObject:[DDXMLNode nodeWithPrimitive:(xmlKindPtr)attr]];
 		
 		attr = attr->next;
 	}
@@ -254,13 +277,32 @@
 
 - (DDXMLNode *)attributeForName:(NSString *)name
 {
+	const xmlChar *attrName = [name xmlChar];
+	
 	xmlAttrPtr attr = ((xmlNodePtr)genericPtr)->properties;
 	while(attr != NULL)
 	{
-		if(xmlStrEqual([name xmlChar], attr->name))
+		if(attr->ns && attr->ns->prefix)
 		{
-			return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)attr];
+			// If the attribute name was originally something like "xml:quack",
+			// then attr->name is "quack" and attr->ns->prefix is "xml".
+			// 
+			// So if the user is searching for "xml:quack" we need to take the prefix into account.
+			// Note that "xml:quack" is what would be printed if we output the attribute.
+			
+			if(xmlStrQEqual(attr->ns->prefix, attr->name, attrName))
+			{
+				return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)attr];
+			}
 		}
+		else
+		{
+			if(xmlStrEqual(attr->name, attrName))
+			{
+				return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)attr];
+			}
+		}
+		
 		attr = attr->next;
 	}
 	return nil;
@@ -362,10 +404,7 @@
 	xmlNsPtr ns = ((xmlNodePtr)genericPtr)->nsDef;
 	while(ns != NULL)
 	{
-		DDXMLNode *nsNode = [[DDXMLNode alloc] initWithPrimitive:(xmlKindPtr)ns nsParent:(xmlNodePtr)genericPtr];
-		
-		[result addObject:nsNode];
-		[nsNode release];
+		[result addObject:[DDXMLNode nodeWithPrimitive:ns nsParent:(xmlNodePtr)genericPtr]];
 		
 		ns = ns->next;
 	}
@@ -383,7 +422,7 @@
 		xmlNsPtr ns = ((xmlNodePtr)genericPtr)->ns;
 		if(ns != NULL)
 		{
-			return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)ns nsParent:(xmlNodePtr)genericPtr];
+			return [DDXMLNode nodeWithPrimitive:ns nsParent:(xmlNodePtr)genericPtr];
 		}
 	}
 	else
@@ -393,7 +432,7 @@
 		{
 			if(xmlStrEqual(ns->prefix, [prefix xmlChar]))
 			{
-				return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)ns nsParent:(xmlNodePtr)genericPtr];
+				return [DDXMLNode nodeWithPrimitive:ns nsParent:(xmlNodePtr)genericPtr];
 			}
 			ns = ns->next;
 		}
@@ -426,7 +465,7 @@
 	{
 		if(xmlStrEqual(ns->prefix, [prefix xmlChar]))
 		{
-			return [DDXMLNode nodeWithPrimitive:(xmlKindPtr)ns nsParent:nodePtr];
+			return [DDXMLNode nodeWithPrimitive:ns nsParent:nodePtr];
 		}
 		ns = ns->next;
 	}

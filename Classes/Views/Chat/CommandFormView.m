@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "CommandFormView.h"
 #import "CommandFormTextMultiView.h"
-#import "NSObjectiPhoneAdditions.h"
+#import "NSObjectWebgnosus.h"
 #import "SegmentedListPicker.h"
 #import "JIDField.h"
 #import "AlertViewManager.h"

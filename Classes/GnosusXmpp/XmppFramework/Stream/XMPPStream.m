@@ -255,7 +255,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (float)serverXmppStreamVersionNumber {
-	return [[[self.rootElement attributeForName:@"version"] stringValue] floatValue];
+	return [self.rootElement attributeFloatValueForName:@"version" withDefaultValue:0.0F];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

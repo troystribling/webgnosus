@@ -22,7 +22,7 @@
 #import "XMPPResponse.h"
 #import "XMPPxData.h"
 
-#import "NSObjectiPhoneAdditions.h"
+#import "NSObjectWebgnosus.h"
 #import "NSXMLElementAdditions.h"
 #import "MulticastDelegate.h"
 

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
 #import "XMPPDiscoItem.h"
+#import "XMPPDiscoItemsQuery.h"
 #import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"

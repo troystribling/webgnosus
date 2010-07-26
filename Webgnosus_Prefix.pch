@@ -2,10 +2,22 @@
 // Prefix header for all source files of the 'webgnosus' target in the 'webgnosus' project
 //
 
+//-----------------------------------------------------------------------------------------------------------------------------------
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// GridView configuration
+#define kGRID_BORDER_WIDTH                      2.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+//LabelGridView configuration
+#define kLABEL_GRID_FONT_SIZE                   13.0
+#define kLABEL_GRID_FONT                        "Helvetica"
+#define kLABEL_GRID_HEIGHT                      12.0
+#define kLABEL_OFFSET                           5.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Define application configuration
@@ -24,17 +36,6 @@
 #define kMESSAGE_CACHE_SIZE                     10         
 #define kCELL_WIDTH                             320.0       
 #define kDISPLAY_WIDTH                          270.0      
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// GridView configuration
-#define kGRID_BORDER_WIDTH                      2.0
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-//LabelGridView configuration
-#define kLABEL_GRID_FONT_SIZE                   13.0
-#define kLABEL_GRID_FONT                        "Helvetica"
-#define kLABEL_GRID_HEIGHT                      12.0
-#define kLABEL_OFFSET                           5.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // XDataMessageCell configurations

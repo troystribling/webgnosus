@@ -5,20 +5,33 @@
 
 @implementation DDXMLDocument
 
-+ (id)nodeWithPrimitive:(xmlKindPtr)nodePtr
+/**
+ * Returns a DDXML wrapper object for the given primitive node.
+ * The given node MUST be non-NULL and of the proper type.
+ * 
+ * If the wrapper object already exists, it is retained/autoreleased and returned.
+ * Otherwise a new wrapper object is alloc/init/autoreleased and returned.
+**/
++ (id)nodeWithPrimitive:(xmlKindPtr)kindPtr
 {
-	return [[[DDXMLDocument alloc] initWithPrimitive:nodePtr] autorelease];
+	// If a wrapper object already exists, the _private variable is pointing to it.
+	
+	xmlDocPtr doc = (xmlDocPtr)kindPtr;
+	if(doc->_private == NULL)
+		return [[[DDXMLDocument alloc] initWithCheckedPrimitive:kindPtr] autorelease];
+	else
+		return [[((DDXMLDocument *)(doc->_private)) retain] autorelease];
 }
 
-- (id)initWithPrimitive:(xmlKindPtr)nodePtr
+/**
+ * Returns a DDXML wrapper object for the given primitive node.
+ * The given node MUST be non-NULL and of the proper type.
+ * 
+ * The given node is checked, meaning a wrapper object for it does not already exist.
+**/
+- (id)initWithCheckedPrimitive:(xmlKindPtr)kindPtr
 {
-	if(nodePtr == NULL || nodePtr->type != XML_DOCUMENT_NODE)
-	{
-		[self release];
-		return nil;
-	}
-	
-	self = [super initWithPrimitive:nodePtr];
+	self = [super initWithCheckedPrimitive:kindPtr];
 	return self;
 }
 
@@ -65,7 +78,7 @@
 		return nil;
 	}
 	
-	return [self initWithPrimitive:(xmlKindPtr)doc];
+	return [self initWithCheckedPrimitive:(xmlKindPtr)doc];
 }
 
 /**
@@ -80,7 +93,7 @@
 	xmlNodePtr rootNode = xmlDocGetRootElement(doc);
 	
 	if(rootNode != NULL)
-		return [DDXMLElement nodeWithPrimitive:(xmlKindPtr)(rootNode)];
+		return [DDXMLElement nodeWithPrimitive:(xmlKindPtr)rootNode];
 	else
 		return nil;
 }
