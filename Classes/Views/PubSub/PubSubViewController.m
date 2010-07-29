@@ -89,8 +89,7 @@
     CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
     self.eventType = kSUB_MODE;
     SegmentedCycleList* segmentControl = 
-        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Subscriptions", @"Publications", nil] withValueAtIndex:kSUB_MODE rect:rect andColor:[UIColor whiteColor]];
-    segmentControl.tintColor = [UIColor colorWithRed:0.4 green:0.4 blue:0.4 alpha:1.0];
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Subscriptions", @"Publications", nil] withValueAtIndex:kSUB_MODE andRect:rect];
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
     [segmentControl release];

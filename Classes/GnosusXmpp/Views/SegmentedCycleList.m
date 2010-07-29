@@ -30,24 +30,17 @@
 @synthesize delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSMutableArray*)initList withValueAtIndex:(NSInteger)initIndex andRect:(CGRect)initRect {
-    if (self = [self init:initList withValueAtIndex:initIndex rect:initRect andColor:[UIColor blackColor]]) {
-    }
-    return self;
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index rect:(CGRect)rect andColor:(UIColor*)initFontColor {
+- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
     self.items = list;
     self.selectedItemIndex = index;
     self.font = [UIFont boldSystemFontOfSize:16];
-    self.fontColor = initFontColor;
+    self.fontColor = [UIColor whiteColor];
     if (self = [super initWithItems:[NSMutableArray arrayWithObjects:[self renderTextAsImage:rect], nil]]) {
         [self addTarget:self action:@selector(segmentControlSelectionChanged:) forControlEvents:UIControlEventValueChanged];
         self.frame = rect;
         self.momentary = YES;
         self.segmentedControlStyle = UISegmentedControlStyleBar;
-        self.tintColor = [UIColor colorWithWhite:0.85f alpha:1.0f];
+        self.tintColor = [UIColor blackColor];
     }
     return self;
 }

@@ -86,8 +86,7 @@
     CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
     self.selectedRoster = kCONTACTS_MODE;
     SegmentedCycleList* segmentControl = 
-        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Contacts", @"Resources", nil] withValueAtIndex:kCONTACTS_MODE rect:rect andColor:[UIColor whiteColor]];
-    segmentControl.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+        [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Contacts", @"Resources", nil] withValueAtIndex:kCONTACTS_MODE andRect:rect];
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
     [segmentControl release];

@@ -26,7 +26,6 @@
 @property (nonatomic, retain) id delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index rect:(CGRect)rect andColor:(UIColor*)initFontColor;
 - (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
 - (NSString*)selectedItem;
 - (void)removeItem:(NSString*)item;
