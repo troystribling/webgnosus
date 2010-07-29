@@ -1,5 +1,5 @@
 //
-//  XMPPMessage.m
+//  XMPPStanza.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 3/29/09.
@@ -8,33 +8,35 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "XMPPStanza.h"
+#import "DDXML.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPClient;
 @class XMPPJID;
-@class XMPPPubSubEvent;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPMessage : XMPPStanza
+@interface XMPPStanza : NSXMLElement
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPStanza*)createFromElement:(NSXMLElement*)element;
+- (XMPPStanza*)initWithName:(NSString*)stanzaName;
+- (XMPPStanza*)initWithName:(NSString*)stanzaName andToJID:(NSString*)stanzaTo;
+- (XMPPStanza*)initWithName:(NSString*)stanzaName andType:(NSString*)stanzaType;
+- (XMPPStanza*)initWithName:(NSString*)stanzaName type:(NSString*)stanzaType andToJID:(NSString*)stanzaTo;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (XMPPMessage*)createFromElement:(NSXMLElement*)element;
-- (XMPPMessage*)initWithType:(NSString*)msgType toJID:(NSString*)msgTo andBody:(NSString*)msgBody;
+- (NSString*)stanzaID;
+- (NSString*)elementID;
+- (void)addStanzaID:(NSString*)val;
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (NSString*)body;
-- (void)addBody:(NSString*)val;
+- (NSString*)type;
+- (void)addType:(NSString*)val;
 
-- (XMPPPubSubEvent*)event;
-- (void)addEvent:(XMPPPubSubEvent*)val;
+- (XMPPJID*)toJID;
+- (XMPPJID*)to;
+- (void)addToJID:(NSString*)val;
 
-- (BOOL)isChatMessage;
-- (BOOL)hasBody;
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)chat:(XMPPClient*)client JID:(XMPPJID*)jid messageBody:(NSString*)body;
+- (XMPPJID*)fromJID;
+- (XMPPJID*)from;
+- (void)addFromJID:(NSString*)val;
 
 @end

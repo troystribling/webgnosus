@@ -20,6 +20,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPresence *)presenceFromElement:(NSXMLElement*)element;
 + (XMPPPresence*)createFromElement:(NSXMLElement*)element;
 - (XMPPPresence*)initWithToJID:(NSString*)presenceTo;
 - (XMPPPresence*)initWithType:(NSString*)presenceType;
