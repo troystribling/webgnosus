@@ -108,3 +108,8 @@
 #define kCOMMAND_FORM_BOOLEAN_SEPERATOR         10.0
 #define kCOMMAND_FORM_FIXED_VIEW_YOFFSET        3.0
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+//LocationManager configuration
+#define kLOCATION_MANAGER_ACCURACY              10.0
+#define kLOCATION_MANAGER_DISTANCE_FILTER       20.0
+
