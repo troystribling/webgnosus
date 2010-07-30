@@ -23,6 +23,7 @@ static LocationManager* thisLocationManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize locationManager;
 @synthesize locationMeasurements;
+@synthesize accounts;
 @synthesize location;
 
 //===================================================================================================================================
@@ -70,7 +71,7 @@ static LocationManager* thisLocationManager = nil;
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     if ([error code] != kCLErrorLocationUnknown) {
         [self stop];
-        [AlertViewManager showAlert:@"Error Collection Location Data"];
+        [AlertViewManager showAlert:@"Error Collecting Location Data"];
     }
 }
 

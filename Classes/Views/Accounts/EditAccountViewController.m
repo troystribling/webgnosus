@@ -50,6 +50,9 @@
     [AccountModel setAllNotDisplayed];
     acct.displayed = YES;
     [acct update];
+    if (self.trackingSwitch.on) {
+    } else {
+    }
     [[[XMPPClientManager instance] accountUpdateDelegate] didUpdateAccount];
     [self.managerView dismiss];
 }

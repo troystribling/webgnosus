@@ -24,6 +24,7 @@
     IBOutlet UIButton* deleteButton;
     IBOutlet UIButton* addButton;
     IBOutlet UIButton* sendPasswordButton;   
+    IBOutlet UISwitch* trackingSwitch;   
     SegmentedListPicker* activeAccounts;
     AccountManagerViewController* managerView;
     AccountsViewController* accountsViewController;
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) UIButton* addButton;
 @property (nonatomic, retain) UIButton* sendPasswordButton;
 @property (nonatomic, retain) UILabel* statusLabel;
+@property (nonatomic, retain) UISwitch* trackingSwitch;
 @property (nonatomic, retain) SegmentedListPicker* activeAccounts;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
 @property (nonatomic, retain) AccountsViewController* accountsViewController;
