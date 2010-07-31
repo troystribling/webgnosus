@@ -1,5 +1,5 @@
 //
-//  XMPPLocationEvent.m
+//  XMPPGeoLocUpdate.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 7/30/10.
@@ -7,15 +7,15 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPLocationEvent.h"
+#import "XMPPGeoLocUpdate.h"
 #import <CoreLocation/CoreLocation.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPLocationEvent (PrivateAPI)
+@interface XMPPGeoLocUpdate (PrivateAPI)
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPLocationEvent
+@implementation XMPPGeoLocUpdate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

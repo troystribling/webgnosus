@@ -1,5 +1,5 @@
 //
-//  LocationManager.h
+//  GeoLocManager.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 7/29/10.
@@ -14,11 +14,12 @@
 @class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface LocationManager : NSObject <CLLocationManagerDelegate> {
+@interface GeoLocManager : NSObject <CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
     NSMutableArray *locationMeasurements;
     NSMutableDictionary *accountUpdates;
     CLLocation *location;
+    BOOL running;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -26,9 +27,10 @@
 @property (nonatomic, retain) NSMutableArray *locationMeasurements;
 @property (nonatomic, retain) NSMutableDictionary *accountUpdates;
 @property (nonatomic, retain) CLLocation *location;
+@property (nonatomic, assign) BOOL running;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (LocationManager*)instance;
++ (GeoLocManager*)instance;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)start;
@@ -42,7 +44,7 @@
 #pragma mark -
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (LocationManagerDelegate)
+@protocol GeoLocUpdateDelegate
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation;
 

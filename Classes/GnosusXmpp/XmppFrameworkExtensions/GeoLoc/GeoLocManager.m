@@ -1,5 +1,5 @@
 //
-//  LocationManager.m
+//  GeoLocManager.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 7/29/10.
@@ -7,31 +7,32 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "LocationManager.h"
+#import "GeoLocManager.h"
 #import "AlertViewManager.h"
 #import "AccountModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-static LocationManager* thisLocationManager = nil;
+static GeoLocManager* thisLocationManager = nil;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface LocationManager (PrivateAPI)
+@interface GeoLocManager (PrivateAPI)
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation LocationManager
+@implementation GeoLocManager
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize locationManager;
 @synthesize locationMeasurements;
 @synthesize accountUpdates;
 @synthesize location;
+@synthesize running;
 
 //===================================================================================================================================
-#pragma mark LocationManager
+#pragma mark GeoLocManager
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (LocationManager*)instance {	
++ (GeoLocManager*)instance {	
     @synchronized(self) {
         if (thisLocationManager == nil) {
             thisLocationManager = [[self alloc] init]; 
@@ -48,21 +49,28 @@ static LocationManager* thisLocationManager = nil;
     self.locationManager.desiredAccuracy = kLOCATION_MANAGER_ACCURACY;
     self.locationManager.distanceFilter = kLOCATION_MANAGER_DISTANCE_FILTER;
     self.accountUpdates = [NSMutableDictionary dictionaryWithCapacity:10];
+    self.running = NO;
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)start {
-    [self.locationManager startUpdatingLocation];
+    if (!self.running) {
+        self.running = YES;
+        [self.locationManager startUpdatingLocation];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stop {
-    [self.locationManager stopUpdatingLocation];
+    if (self.running) {
+        self.running = NO;
+        [self.locationManager stopUpdatingLocation];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addUpdateDelegate:(id)updateDelegate forAccount:(AccountModel*)account {
+- (void)addUpdateDelegate:(id<GeoLocUpdateDelegate>)updateDelegate forAccount:(AccountModel*)account {
     [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
 }
 

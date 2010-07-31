@@ -1,5 +1,5 @@
 //
-//  XMPPLocationEvent.h
+//  XMPPGeoLocUpdate.h
 //  webgnosus
 //
 //  Created by Troy Stribling on 7/30/10.
@@ -8,12 +8,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
-#import "LocationManager.h"
+#import "GeoLocManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPLocationEvent : NSObject {
+@interface XMPPGeoLocUpdate : NSObject <GeoLocUpdateDelegate> {
 
 }
 
