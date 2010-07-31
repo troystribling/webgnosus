@@ -83,8 +83,13 @@ static LocationManager* thisLocationManager = nil;
     NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
     if (locationAge > 5.0) return;
     if (newLocation.horizontalAccuracy < 0) return;
-    if (self.location == nil || self.location.horizontalAccuracy > newLocation.horizontalAccuracy) {
-        self.location = newLocation;
+    self.location = newLocation;
+    NSArray* updates = [self.accountUpdates allValues];
+    for (int i=0; i < [updates count]; i++) {
+        id update = [updates objectAtIndex:i];
+        if ([update respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)]) {
+            [update locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
+        } 
     }
 }
 
