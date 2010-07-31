@@ -1,24 +1,24 @@
 //
-//  ActivityView.h
+//  XMPPLocationEvent.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 2/16/09.
-//  Copyright 2009 Plan-B Research. All rights reserved.
+//  Created by Troy Stribling on 7/30/10.
+//  Copyright 2010 Plan-B Reserach. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "LocationManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface ActivityView : UIView {
+@interface XMPPLocationEvent : NSObject {
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithTitle:(NSString*)title inView:(UIView*)view;
-- (void)dismiss;
 
 @end

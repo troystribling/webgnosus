@@ -36,6 +36,7 @@
 @synthesize deleteButton;
 @synthesize addButton;
 @synthesize sendPasswordButton;
+@synthesize trackingSwitch;
 @synthesize statusLabel;
 @synthesize managerView;
 @synthesize accountsViewController;

@@ -131,6 +131,7 @@
 		05816C4A11444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
 		05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
 		05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
+		05C3B772120394B30080D432 /* XMPPLocationEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3B771120394B30080D432 /* XMPPLocationEvent.m */; };
 		05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
 		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
 		05D1ECE8107070EB0013734A /* CommandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D1ECE6107070EB0013734A /* CommandViewController.xib */; };
@@ -453,6 +454,8 @@
 		05816C4811444C70001D5DFA /* ResourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCell.m; sourceTree = "<group>"; };
 		05816C5411444E4F001D5DFA /* ResourceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResourceCell.xib; sourceTree = "<group>"; };
 		05AAB3DD10AA6B83008CF187 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
+		05C3B770120394B30080D432 /* XMPPLocationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLocationEvent.h; sourceTree = "<group>"; };
+		05C3B771120394B30080D432 /* XMPPLocationEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPLocationEvent.m; sourceTree = "<group>"; };
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
 		05CF616D1048B141003E012F /* AccountManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountManagerViewController.xib; sourceTree = "<group>"; };
@@ -714,6 +717,8 @@
 			children = (
 				0558417F1202522500989B9D /* LocationManager.h */,
 				055841801202522500989B9D /* LocationManager.m */,
+				05C3B770120394B30080D432 /* XMPPLocationEvent.h */,
+				05C3B771120394B30080D432 /* XMPPLocationEvent.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1492,6 +1497,7 @@
 				0524EB001200FCA20042FBAE /* XMPPStreamFeatures.m in Sources */,
 				0524EB111200FF710042FBAE /* XMPPAuthorize.m in Sources */,
 				055841811202522500989B9D /* LocationManager.m in Sources */,
+				05C3B772120394B30080D432 /* XMPPLocationEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "LocationManager.h"
 #import "AlertViewManager.h"
+#import "AccountModel.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static LocationManager* thisLocationManager = nil;
@@ -23,7 +24,7 @@ static LocationManager* thisLocationManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize locationManager;
 @synthesize locationMeasurements;
-@synthesize accounts;
+@synthesize accountUpdates;
 @synthesize location;
 
 //===================================================================================================================================
@@ -33,14 +34,21 @@ static LocationManager* thisLocationManager = nil;
 + (LocationManager*)instance {	
     @synchronized(self) {
         if (thisLocationManager == nil) {
-            [[self alloc] init]; 
-            thisLocationManager.locationManager = [[[CLLocationManager alloc] init] autorelease];
-            thisLocationManager.locationManager.delegate = thisLocationManager;
-            thisLocationManager.locationManager.desiredAccuracy = kLOCATION_MANAGER_ACCURACY;
-            thisLocationManager.locationManager.distanceFilter = kLOCATION_MANAGER_DISTANCE_FILTER;
+            thisLocationManager = [[self alloc] init]; 
         }
     }       
     return thisLocationManager;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)init {
+    self = [super init];
+    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kLOCATION_MANAGER_ACCURACY;
+    self.locationManager.distanceFilter = kLOCATION_MANAGER_DISTANCE_FILTER;
+    self.accountUpdates = [NSMutableDictionary dictionaryWithCapacity:10];
+    return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -53,11 +61,24 @@ static LocationManager* thisLocationManager = nil;
     [self.locationManager stopUpdatingLocation];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addUpdateDelegate:(id)updateDelegate forAccount:(AccountModel*)account {
+    [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeUpdateDelegateForAccount:(AccountModel*)account {
+    id updateDelegate = [self.accountUpdates valueForKey:[account fullJID]];
+	if (updateDelegate) {
+        [self.accountUpdates removeObjectForKey:[account fullJID]];
+    }
+}
+
 //===================================================================================================================================
 #pragma mark CLLocationManagerDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+- (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation {
     [self.locationMeasurements addObject:newLocation];
     NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
     if (locationAge > 5.0) return;
