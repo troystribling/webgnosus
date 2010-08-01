@@ -8,12 +8,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubEntryDelegate.h"
-#import "XMPPMessageDelegate.h"
-#import "XMPPDiscoItemsQuery.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,13 +30,13 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryError:(XMPPIQ*)stanza];
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryError:stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryResult:(XMPPIQ*)stanza];
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubEntryResult:stanza];
 }
 
 //===================================================================================================================================

@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class XMPPStanza;
+@class XMPPIQ;
 @class XMPPClient;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,14 +25,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithDelegate:(id)initDelegate;
-- (void)handleResponse:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
+- (void)handleResponse:(XMPPClient*)client forStanza:(XMPPIQ*)stanza;
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (XMPPResponse)
+@protocol XMPPResponseDelegate
 
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza;
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)stanza;
 
 @end

@@ -8,9 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubDeleteDelegate.h"
-#import "XMPPResponse.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPError.h"
 #import "XMPPJID.h"
@@ -47,8 +45,7 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPError* error = [iq error];	
     if (error) {
         if ([[error condition] isEqualToString:@"item-not-found"]) {
@@ -56,19 +53,19 @@
             [item destroy];
         }
     }    
-    [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteError:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     ServiceItemModel* item = [ServiceItemModel findByNode:self.node];
     [item destroy];
     ServiceModel* service = [ServiceModel findByNode:self.node];
     if (service) {
         [service destroy];
-        [ServiceFeatureModel destroyByService:[[stanza fromJID] full] andNode:self.node]; 
+        [ServiceFeatureModel destroyByService:[[iq fromJID] full] andNode:self.node]; 
     }
-    [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubDeleteResult:iq];
 }
 
 //===================================================================================================================================

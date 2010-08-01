@@ -10,10 +10,8 @@
 #import "XMPPPubSubItemDelegate.h"
 #import "XMPPMessageDelegate.h"
 #import "XMPPDiscoItemsQuery.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "MessageModel.h"
 
@@ -35,13 +33,12 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubItemError:(XMPPIQ*)stanza];
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubItemError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [MessageModel insertPubSubItems:client forIq:iq];
     [[client multicastDelegate] xmppClient:client didReceivePubSubItemResult:iq];
 }

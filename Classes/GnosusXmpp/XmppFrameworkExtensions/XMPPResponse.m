@@ -29,7 +29,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResponse:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleResponse:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
     if ([[stanza type] isEqualToString:@"result"]) {
         if ([self.delegate respondsToSelector:@selector(handleResult:forStanza:)]) {
             [self.delegate handleResult:client forStanza:stanza];

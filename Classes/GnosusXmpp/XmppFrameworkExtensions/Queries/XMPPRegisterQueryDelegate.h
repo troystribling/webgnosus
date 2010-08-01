@@ -8,9 +8,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
+#import "XMPPResponse.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPRegisterQueryDelegate : NSObject {
+@interface XMPPRegisterQueryDelegate : NSObject <XMPPResponseDelegate> {
 }
 
 @end

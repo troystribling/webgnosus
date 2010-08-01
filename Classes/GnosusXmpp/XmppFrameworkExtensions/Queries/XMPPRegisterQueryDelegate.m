@@ -8,9 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPRegisterQueryDelegate.h"
-#import "XMPPResponse.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPRegisterQuery.h"
 #import "AccountModel.h"
@@ -34,20 +32,19 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceiveRegisterError:(XMPPIQ*)stanza];
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
+    [[client multicastDelegate] xmppClient:client didReceiveRegisterError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPRegisterQuery* query = (XMPPRegisterQuery*)[iq query];
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     if (account) {
         account.password = [query password];
         [account update];
     }
-    [[client multicastDelegate] xmppClient:client didReceiveRegisterResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceiveRegisterResult:iq];
 }
 
 //===================================================================================================================================

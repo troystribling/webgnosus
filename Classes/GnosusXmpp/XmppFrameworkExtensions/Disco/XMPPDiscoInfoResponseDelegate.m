@@ -9,11 +9,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPDiscoInfoResponseDelegate.h"
 #import "XMPPMessageDelegate.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPIQ.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoIdentity.h"
@@ -58,16 +56,15 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     if ([client isAccountJID:[self.targetJID full]]) {
         [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
     }
-    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:(XMPPIQ*)stanza];        
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoResult:iq];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
     NSArray* identities = [query identities];	
 	NSString* node = [query node];

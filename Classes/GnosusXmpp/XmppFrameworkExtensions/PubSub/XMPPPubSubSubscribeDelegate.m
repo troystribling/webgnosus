@@ -9,9 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubSubscribeDelegate.h"
 #import "XMPPPubSubSubscription.h"
-#import "XMPPResponse.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPPubSub.h"
 #import "XMPPJID.h"
@@ -48,17 +46,17 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeError:(XMPPIQ*)stanza];
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeError:stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
     XMPPIQ* iq = (XMPPIQ*)stanza;
     XMPPPubSub* pubsub = [iq pubsub];
     XMPPPubSubSubscription* subscription = [pubsub subscription];	
     [SubscriptionModel insert:subscription forService:[[iq fromJID] full] node:node andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscribeResult:stanza];
 }
 
 //===================================================================================================================================

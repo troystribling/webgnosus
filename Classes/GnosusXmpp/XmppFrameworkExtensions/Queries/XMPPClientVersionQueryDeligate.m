@@ -8,9 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPClientVersionQueryDeligate.h"
-#import "XMPPResponse.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPRegisterQuery.h"
 #import "XMPPMessageDelegate.h"
@@ -37,13 +35,12 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceiveClientVersionError:(XMPPIQ*)stanza];
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
+    [[client multicastDelegate] xmppClient:client didReceiveClientVersionError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPClientVersionQuery* version = (XMPPClientVersionQuery*)[iq query];
     AccountModel* account = [XMPPMessageDelegate accountForXMPPClient:client];
     if (account) {
@@ -62,7 +59,7 @@
             }
         }
     }
-    [[client multicastDelegate] xmppClient:client didReceiveClientVersionResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceiveClientVersionResult:iq];
 }
 
 //===================================================================================================================================

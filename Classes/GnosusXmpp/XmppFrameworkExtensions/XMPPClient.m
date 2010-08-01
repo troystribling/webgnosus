@@ -153,7 +153,7 @@
 #pragma mark Sending Elements
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)send:(XMPPStanza*)stanza andDelegateResponse:(id)reqDelegate {
+- (void)send:(XMPPIQ*)stanza andDelegateResponse:(id)reqDelegate {
     XMPPResponse* xmppResp = [[XMPPResponse alloc] initWithDelegate:reqDelegate];
     NSString* stanID = [self generateStanzaID];
     xmppResp.stanzaID = stanID;

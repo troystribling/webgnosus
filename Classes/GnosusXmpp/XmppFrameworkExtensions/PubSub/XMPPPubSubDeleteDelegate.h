@@ -8,9 +8,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <Foundation/Foundation.h>
+#import "XMPPResponse.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubDeleteDelegate : NSObject {
+@interface XMPPPubSubDeleteDelegate : NSObject <XMPPResponseDelegate> {
     NSString* node;
 }
 

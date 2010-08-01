@@ -11,7 +11,7 @@
 #import "MessageModel.h"
 #import "AccountModel.h"
 
-#import "XMPPPubSub.h"
+#import "XMPPEntry.h"
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"
@@ -61,7 +61,7 @@
         [model insert];
         [model release];
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-        [XMPPPubSub entry:xmppClient  JID:[XMPPJID jidWithString:self.service] node:self.node withTitle:enteredMessageText];
+        [XMPPEntry publish:xmppClient  JID:[XMPPJID jidWithString:self.service] node:self.node withTitle:enteredMessageText];
     }    
     [self.messageView resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];

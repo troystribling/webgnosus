@@ -1,8 +1,8 @@
 //
-//  XMPPDiscoItemsServiceResponseDelegate.h
+//  XMPPPubSubGeoLocDelegate.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 10/12/09.
+//  Created by Troy Stribling on 10/5/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -13,11 +13,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPDiscoItemsServiceResponseDelegate : NSObject <XMPPResponseDelegate> {
+@interface XMPPPubSubGeoLocDelegate : NSObject <XMPPResponseDelegate> {
 }
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 
 @end

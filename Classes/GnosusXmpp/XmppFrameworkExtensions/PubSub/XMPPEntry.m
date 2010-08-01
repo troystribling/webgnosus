@@ -8,6 +8,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPEntry.h"
+#import "XMPPClient.h"
+#import "XMPPJID.h"
+#import "XMPPIQ.h"
+#import "XMPPPubSub.h"
+#import "XMPPPubSubEntryDelegate.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPEntry
@@ -51,6 +56,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addTitle:(NSString*)val {
 	[self addChild:[NSXMLElement elementWithName:@"title" stringValue:val]];	
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)publish:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
+    XMPPEntry* entry = [[XMPPEntry alloc] initWithTitle:title];
+    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:nil node:node andData:entry];
+    [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
 }
 
 @end

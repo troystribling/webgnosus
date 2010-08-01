@@ -9,7 +9,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPDiscoInfoServiceResponseDelegate.h"
 #import "XMPPDiscoItem.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
@@ -37,13 +36,12 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoServiceError:(XMPPIQ*)stanza];        
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoInfoServiceError:iq];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPDiscoInfoQuery* query = (XMPPDiscoInfoQuery*)[iq query];
     NSArray* identities = [query identities];	
 	NSString* node = [query node];

@@ -10,6 +10,10 @@
 #import <Foundation/Foundation.h>
 #import "NSXMLElementAdditions.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+@class XMPPClient;
+@class NSXMLElement;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPGeoLoc : NSXMLElement 
 
@@ -22,6 +26,8 @@
 - (void)addLat:(double)val;
 - (double)lon;
 - (void)addLon:(double)val;
+- (double)alt;
+- (void)addAlt:(double)val;
 - (double)accuracy;
 - (void)addAccuracy:(double)val;
 - (double)bearing;
@@ -32,5 +38,8 @@
 - (void)addCountry:(NSString*)val;
 - (NSDate*)timestamp;
 - (void)addTimestamp:(NSDate*)val;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (void)publish:(XMPPClient*)client withData:(NSXMLElement*)data;
 
 @end

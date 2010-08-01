@@ -24,6 +24,12 @@
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@interface XMPPPubSub (PrivateAPI)
+
+@end
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSub
 
 //===================================================================================================================================
@@ -103,22 +109,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)entry:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
-    XMPPEntry* entry = [[XMPPEntry alloc] initWithTitle:title];
-    NSXMLElement* publishElement = [NSXMLElement elementWithName:@"publish"];
-    [publishElement addAttributeWithName:@"node" stringValue:node];
-    NSXMLElement* itemsElement = [NSXMLElement elementWithName:@"item"];
-    [itemsElement addChild:entry];
-    [publishElement addChild:itemsElement];	
-    [pubsub addChild:publishElement];	
-    [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
-    [iq release];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withId:(NSString*)itemId {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
     XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
@@ -128,6 +118,20 @@
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubItemDelegate alloc] init]];
     [iq release];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPIQ*)buildPubSubIQWithJID:(XMPPJID*)jid node:(NSString*)node andData:(NSXMLElement*)data {
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    NSXMLElement* publishElement = [NSXMLElement elementWithName:@"publish"];
+    [publishElement addAttributeWithName:@"node" stringValue:node];
+    NSXMLElement* itemsElement = [NSXMLElement elementWithName:@"item"];
+    [itemsElement addChild:data];
+    [publishElement addChild:itemsElement];	
+    [pubsub addChild:publishElement];	
+    [iq addPubSub:pubsub];    
+    return iq;
 }
 
 //===================================================================================================================================

@@ -11,7 +11,6 @@
 #import "XMPPDiscoInfoQuery.h"
 #import "XMPPDiscoItemsQuery.h"
 #import "XMPPDiscoItem.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPPubSub.h"
@@ -70,8 +69,7 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPError* error = [iq error];	
     if (error) {
         if ([client isAccountJID:[self.targetJID full]]) {
@@ -82,12 +80,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
 	NSString* parentNode = [query node];
     NSArray* items = [query items];	
-	XMPPJID* serviceJID = [stanza fromJID];
+	XMPPJID* serviceJID = [iq fromJID];
     if ([parentNode isEqualToString:[self.targetJID pubSubRoot]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
@@ -107,7 +104,7 @@
                 }
             }
         }
-    } else if ([parentNode isEqualToString:@"http://jabber.org/protocol/commands"] && [[[stanza fromJID] full] isEqualToString:[self.targetJID full]]) {
+    } else if ([parentNode isEqualToString:@"http://jabber.org/protocol/commands"] && [[[iq fromJID] full] isEqualToString:[self.targetJID full]]) {
         for(int i = 0; i < [items count]; i++) {
             XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
             [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];

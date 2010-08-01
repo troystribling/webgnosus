@@ -10,7 +10,6 @@
 #import "XMPPDiscoItemsServiceResponseDelegate.h"
 #import "XMPPDiscoItem.h"
 #import "XMPPDiscoItemsQuery.h"
-#import "XMPPResponse.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
@@ -35,17 +34,16 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsServiceError:(XMPPIQ*)stanza];        
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
+    [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsServiceError:iq];        
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPDiscoItemsQuery* query = (XMPPDiscoItemsQuery*)[iq query];
 	NSString* parentNode = [query node];
     NSArray* items = [query items];	
-	XMPPJID* serviceJID = [stanza fromJID];
+	XMPPJID* serviceJID = [iq fromJID];
     for(int i = 0; i < [items count]; i++) {
         XMPPDiscoItem* item = [XMPPDiscoItem createFromElement:(NSXMLElement *)[items objectAtIndex:i]];
         [ServiceItemModel insert:item forService:serviceJID andParentNode:parentNode];

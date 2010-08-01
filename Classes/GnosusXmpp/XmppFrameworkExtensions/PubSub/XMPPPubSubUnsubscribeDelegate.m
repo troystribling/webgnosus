@@ -9,9 +9,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubUnsubscribeDelegate.h"
 #import "XMPPPubSub.h"
-#import "XMPPResponse.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPError.h"
 #import "AccountModel.h"
@@ -58,8 +56,7 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     XMPPError* error = [iq error];	
     if (error) {
         if ([[error condition] isEqualToString:@"item-not-found"] || 
@@ -72,13 +69,13 @@
             }
         }
     }    
-    [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeError:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [self destroySubscription:client];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubUnsubscribeResult:iq];
 }
 
 //===================================================================================================================================

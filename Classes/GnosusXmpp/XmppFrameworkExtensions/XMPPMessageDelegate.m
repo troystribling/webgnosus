@@ -471,16 +471,6 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryError:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryError"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryResult:(XMPPIQ*)iq {
-	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryResult"];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubSubscribeError:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubSubscribeError"];
 }
@@ -528,6 +518,32 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didDiscoverPubSubService:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didDiscoverPubSubService"];
+}
+
+//===================================================================================================================================
+#pragma mark Entry
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubEntryResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubEntryResult"];
+}
+
+//===================================================================================================================================
+#pragma mark GeoLoc
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubGeoLocError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubGeoLocError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubGeoLocResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubGeoLocResult"];
 }
 
 //===================================================================================================================================

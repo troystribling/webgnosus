@@ -1,46 +1,42 @@
 //
-//  XMPPPubSubCeateDelegate.m
+//  XMPPPubSubGeoLocDelegate.m
 //  webgnosus
 //
-//  Created by Troy Stribling on 9/19/09.
+//  Created by Troy Stribling on 10/5/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPPubSubCeateDelegate.h"
-#import "XMPPMessageDelegate.h"
-#import "XMPPDiscoItemsQuery.h"
+#import "XMPPPubSubGeoLocDelegate.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPPubSubCeateDelegate (PrivateAPI)
+@interface XMPPPubSubGeoLocDelegate (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPPubSubCeateDelegate
+@implementation XMPPPubSubGeoLocDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubCeateDelegate
+#pragma mark XMPPPubSubGeoLocDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPPubSubCeateDelegate PrivateAPI
+#pragma mark XMPPPubSubGeoLocDelegate PrivateAPI
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
-    [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubGeoLocError:stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
-    [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[[client myJID] pubSubRoot] forTarget:[client myJID]];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubGeoLocResult:stanza];
 }
 
 //===================================================================================================================================

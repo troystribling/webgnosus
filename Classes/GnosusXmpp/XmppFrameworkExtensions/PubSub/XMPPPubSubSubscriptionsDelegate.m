@@ -9,10 +9,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPPubSubSubscriptionsDelegate.h"
 #import "XMPPPubSubSubscription.h"
-#import "XMPPResponse.h"
 #import "XMPPPubSub.h"
 #import "XMPPClient.h"
-#import "XMPPStanza.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPMessageDelegate.h"
@@ -36,14 +34,13 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleError:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
+- (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdateError forClient:client];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:iq];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)handleResult:(XMPPClient*)client forStanza:(XMPPStanza*)stanza {
-    XMPPIQ* iq = (XMPPIQ*)stanza;
+- (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     NSString* fromJID = [[iq fromJID] full];
     XMPPPubSub* pubsub = [iq pubsub];
     NSArray* subscriptions = [pubsub subscriptions];	
@@ -52,7 +49,7 @@
         [SubscriptionModel insert:subscription forService:fromJID andAccount:[XMPPMessageDelegate accountForXMPPClient:client]];
     }
     [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdated forClient:client];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:(XMPPIQ*)stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:iq];
 }
 
 //===================================================================================================================================

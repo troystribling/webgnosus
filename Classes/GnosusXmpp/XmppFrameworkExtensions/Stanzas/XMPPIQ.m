@@ -59,7 +59,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqToJID {
 	if([self initWithType:iqType]) {
-        [self addToJID:iqToJID];
+        if (iqToJID) {
+            [self addToJID:iqToJID];
+        }
 	}
 	return self;
 }
