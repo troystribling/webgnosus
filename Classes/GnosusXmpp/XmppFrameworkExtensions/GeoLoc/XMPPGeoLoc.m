@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPGeoLoc.h"
+#import "XMPPTimestamp.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPGeoLoc (PrivateAPI)
@@ -24,7 +25,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPGeoLoc*)createFromElement:(NSXMLElement*)element {
-	XMPPGeoLoc* result = (XMPPxData*)element;
+	XMPPGeoLoc* result = (XMPPGeoLoc*)element;
 	result->isa = [XMPPGeoLoc class];
 	return result;
 }
@@ -99,12 +100,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSDate*)timestamp {
-	return [[[self elementForName:@"timestamp"] stringValue] doubleValue];
+	return [XMPPTimestamp stringToDate:[[self elementForName:@"timestamp"] stringValue]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addTimestamp:(NSDate*)val {
-	[self addChild:[NSXMLElement elementWithName:@"timestamp" stringValue:[val description]]];	
+	[self addChild:[NSXMLElement elementWithName:@"timestamp" stringValue:[XMPPTimestamp dateToString:val]]];	
 }
 
 //===================================================================================================================================

@@ -126,6 +126,7 @@
 		056B5CFB12047FED002F62D4 /* XMPPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5CC312047FED002F62D4 /* XMPPResponse.m */; };
 		056B5D08120482B1002F62D4 /* XMPPGeoLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5D05120482B1002F62D4 /* XMPPGeoLoc.m */; };
 		056B5D09120482B1002F62D4 /* XMPPGeoLocUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5D07120482B1002F62D4 /* XMPPGeoLocUpdate.m */; };
+		056C649E1204FDD500F84AEA /* XMPPTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C649D1204FDD500F84AEA /* XMPPTimestamp.m */; };
 		05706DF811F802E300B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16510587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
@@ -451,6 +452,8 @@
 		056B5D05120482B1002F62D4 /* XMPPGeoLoc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPGeoLoc.m; sourceTree = "<group>"; };
 		056B5D06120482B1002F62D4 /* XMPPGeoLocUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPGeoLocUpdate.h; sourceTree = "<group>"; };
 		056B5D07120482B1002F62D4 /* XMPPGeoLocUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPGeoLocUpdate.m; sourceTree = "<group>"; };
+		056C649C1204FDD500F84AEA /* XMPPTimestamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPTimestamp.h; sourceTree = "<group>"; };
+		056C649D1204FDD500F84AEA /* XMPPTimestamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTimestamp.m; sourceTree = "<group>"; };
 		05706DE311F8017F00B0154F /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
@@ -802,6 +805,8 @@
 		056B5C4C12047FED002F62D4 /* XmppFrameworkExtensions */ = {
 			isa = PBXGroup;
 			children = (
+				056C649C1204FDD500F84AEA /* XMPPTimestamp.h */,
+				056C649D1204FDD500F84AEA /* XMPPTimestamp.m */,
 				056B5C4D12047FED002F62D4 /* Command */,
 				056B5C5612047FED002F62D4 /* Disco */,
 				056B5C6912047FED002F62D4 /* GeoLoc */,
@@ -1504,6 +1509,7 @@
 				056B5CFB12047FED002F62D4 /* XMPPResponse.m in Sources */,
 				056B5D08120482B1002F62D4 /* XMPPGeoLoc.m in Sources */,
 				056B5D09120482B1002F62D4 /* XMPPGeoLocUpdate.m in Sources */,
+				056C649E1204FDD500F84AEA /* XMPPTimestamp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
