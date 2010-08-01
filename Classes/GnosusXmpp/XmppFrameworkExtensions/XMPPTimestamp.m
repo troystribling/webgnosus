@@ -25,17 +25,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSDateFormatter*)dateFormatter {
-    return nil;
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+    [dateFormatter setDateFormat:@"yyyy-MM-ddTHH:mm:ssZ"];
+    return dateFormatter;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)dateToString:(NSDate*)val {
-    return nil;
++ (NSString*)stringFromDate:(NSDate*)val {
+    return [[self dateFormatter] stringFromDate:val];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSDate*)stringToDate:(NSString*)val {
-    return nil;
++ (NSDate*)dateFromString:(NSString*)val {
+    return [[self dateFormatter] dateFromString:val];
 }
 
 @end

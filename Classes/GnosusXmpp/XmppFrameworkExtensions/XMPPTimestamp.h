@@ -15,7 +15,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSDateFormatter*)dateFormatter;
-+ (NSString*)dateToString:(NSDate*)val;
-+ (NSDate*)stringToDate:(NSString*)val;
++ (NSString*)stringFromDate:(NSDate*)val;
++ (NSDate*)dateFromString:(NSString*)val;
 
 @end

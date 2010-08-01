@@ -100,12 +100,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSDate*)timestamp {
-	return [XMPPTimestamp stringToDate:[[self elementForName:@"timestamp"] stringValue]];
+	return [XMPPTimestamp dateFromString:[[self elementForName:@"timestamp"] stringValue]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addTimestamp:(NSDate*)val {
-	[self addChild:[NSXMLElement elementWithName:@"timestamp" stringValue:[XMPPTimestamp dateToString:val]]];	
+	[self addChild:[NSXMLElement elementWithName:@"timestamp" stringValue:[XMPPTimestamp stringFromDate:val]]];	
 }
 
 //===================================================================================================================================
