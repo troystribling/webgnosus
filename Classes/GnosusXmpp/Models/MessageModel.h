@@ -26,7 +26,8 @@ typedef enum tagMessageTextType {
     MessageTextTypeCommandXData,
     MessageTextTypeEventText,
     MessageTextTypeEventEntry,
-    MessageTextTypeEventxData
+    MessageTextTypeEventxData,
+    MessageTextTypeGeoLocData
 } MessageTextType;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,5 +95,6 @@ typedef enum tagMessageTextType {
 - (void)setMessageReadAsInteger:(NSInteger)value;
 - (XMPPxData*)parseXDataMessage;
 - (XMPPEntry*)parseEntryMessage;
+- (XMPPxData*)parseGeoLocMessage;
 
 @end

@@ -10,6 +10,7 @@
 #import "XMPPPubSubItem.h"
 #import "XMPPxData.h"
 #import "XMPPEntry.h"
+#import "XMPPGeoLoc.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPPubSubItem
@@ -62,6 +63,16 @@
         entryData = [XMPPEntry createFromElement:entryElement];
     }
     return entryData;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPGeoLoc*)geoLoc {
+    XMPPGeoLoc* geoLocData = nil;
+    NSXMLElement* geoLocElement = [self elementForName:@"geoloc"];
+    if (geoLocElement) {
+        geoLocData = [XMPPGeoLoc createFromElement:geoLocElement];
+    }
+    return geoLocData;
 }
 
 //===================================================================================================================================

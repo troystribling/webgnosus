@@ -808,8 +808,6 @@
 		056B5C4C12047FED002F62D4 /* XmppFrameworkExtensions */ = {
 			isa = PBXGroup;
 			children = (
-				056C649C1204FDD500F84AEA /* XMPPTimestamp.h */,
-				056C649D1204FDD500F84AEA /* XMPPTimestamp.m */,
 				056B5C4D12047FED002F62D4 /* Command */,
 				056B5C5612047FED002F62D4 /* Disco */,
 				056B5C6912047FED002F62D4 /* GeoLoc */,
@@ -829,6 +827,8 @@
 				056B5CC112047FED002F62D4 /* XMPPMessageDelegate.m */,
 				056B5CC212047FED002F62D4 /* XMPPResponse.h */,
 				056B5CC312047FED002F62D4 /* XMPPResponse.m */,
+				056C649C1204FDD500F84AEA /* XMPPTimestamp.h */,
+				056C649D1204FDD500F84AEA /* XMPPTimestamp.m */,
 			);
 			path = XmppFrameworkExtensions;
 			sourceTree = "<group>";

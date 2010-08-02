@@ -17,6 +17,7 @@
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 #import "XMPPRegisterQuery.h"
+#import "GeoLocManager.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController (PrivateAPI)
@@ -172,6 +173,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self initAccountList];
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+    GeoLocManager* geoMgr = [GeoLocManager instance];
+    if ([geoMgr accountUpdatesEnabled:[self account]]) {
+        self.trackingSwitch.on = YES;
+    } else {
+        self.trackingSwitch.on = NO;
+    }
 	[super viewWillAppear:animated];
 }
 

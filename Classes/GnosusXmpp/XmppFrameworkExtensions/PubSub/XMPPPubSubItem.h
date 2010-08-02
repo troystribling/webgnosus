@@ -13,6 +13,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPxData;
 @class XMPPEntry;
+@class XMPPGeoLoc;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPPubSubItem : NSXMLElement 
@@ -26,5 +27,6 @@
 - (void)addItemId:(NSString*)val;
 - (XMPPxData*)data;
 - (XMPPEntry*)entry;
+- (XMPPGeoLoc*)geoLoc;
 
 @end

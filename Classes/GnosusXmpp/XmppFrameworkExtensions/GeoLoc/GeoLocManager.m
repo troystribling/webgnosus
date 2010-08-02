@@ -70,6 +70,15 @@ static GeoLocManager* thisLocationManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (BOOL)accountUpdatesEnabled:(AccountModel*)account {
+    if ([self.accountUpdates valueForKey:[account fullJID]]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addUpdateDelegate:(id<GeoLocUpdateDelegate>)updateDelegate forAccount:(AccountModel*)account {
     [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
 }

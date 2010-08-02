@@ -16,6 +16,7 @@
 #import "WebgnosusDbi.h"
 #import "XMPPxData.h"
 #import "XMPPEntry.h"
+#import "XMPPGeoLoc.h"
 #import "XMPPClient.h"
 #import "XMPPMessage.h"
 #import "XMPPIQ.h"
@@ -372,6 +373,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (XMPPxData*)parseGeoLocMessage {
+    XMPPxData* data = nil;
+    NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:self.messageText options:0 error:nil] autorelease];
+	NSXMLElement* dataElement = [xmlDoc rootElement];
+    if ([[dataElement xmlns] isEqualToString:@"http://jabber.org/protocol/geoloc"]) {
+        data = [XMPPxData createFromElement:dataElement];
+    }
+    return data;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPEntry*)parseEntryMessage {
     XMPPEntry* entry = nil;
     NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:self.messageText options:0 error:nil] autorelease];
@@ -434,14 +446,18 @@
                 messageModel.node = itemsNode;
                 messageModel.itemId = [item itemId];
                 messageModel.messageRead = readFlag;
-                XMPPxData* data = [item data];
-                XMPPEntry* entry = [item entry];
-                if (data) {
+                XMPPxData* data;
+                XMPPEntry* entry;
+                XMPPGeoLoc* geoLoc;
+                if (data = [item data]) {
                     messageModel.textType = MessageTextTypeEventxData;
                     messageModel.messageText = [data XMLString];
-                } else if (entry) {
+                } else if (entry = [item entry]) {
                     messageModel.textType = MessageTextTypeEventEntry;
                     messageModel.messageText = [entry XMLString];
+                } else if (geoLoc = [item geoLoc]) {
+                    messageModel.textType = MessageTextTypeGeoLocData;
+                    messageModel.messageText = [geoLoc XMLString];
                 } else {
                     messageModel.textType = MessageTextTypeEventText;
                     messageModel.messageText = [[[item children] objectAtIndex:0] XMLString];

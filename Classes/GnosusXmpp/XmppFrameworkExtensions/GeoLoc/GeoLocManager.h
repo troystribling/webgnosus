@@ -35,7 +35,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)start;
 - (void)stop;
-- (void)addUpdateDelegate:(id)account forAccount:(AccountModel*)account;
+- (BOOL)accountUpdatesEnabled:(AccountModel*)account;
+- (void)addUpdateDelegate:(id)updateDelegate forAccount:(AccountModel*)account;
 - (void)removeUpdateDelegateForAccount:(AccountModel*)account;
 
 @end
