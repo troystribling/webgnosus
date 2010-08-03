@@ -35,6 +35,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)start;
 - (void)stop;
+- (void)stopIfNotUpdating;
 - (BOOL)accountUpdatesEnabled:(AccountModel*)account;
 - (void)addUpdateDelegate:(id)updateDelegate forAccount:(AccountModel*)account;
 - (void)removeUpdateDelegateForAccount:(AccountModel*)account;

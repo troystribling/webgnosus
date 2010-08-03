@@ -43,7 +43,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation {
     XMPPGeoLoc* geoLoc = [[[XMPPGeoLoc alloc] init] autorelease];
-    MessageModel* model = [[MessageModel alloc] init];
+    [geoLoc addAlt:newLocation.altitude];
+    [geoLoc addLat:newLocation.coordinate.latitude];
+    [geoLoc addLon:newLocation.coordinate.longitude];
+    [geoLoc addAccuracy:newLocation.horizontalAccuracy];
+    [geoLoc addTimestamp:newLocation.timestamp];
+    MessageModel* model = [[[MessageModel alloc] init] autorelease];
     model.accountPk = self.account.pk;
     model.toJid = [[self.account toJID] domain];
     model.fromJid = [self.account fullJID];
@@ -54,7 +59,6 @@
     model.node = @"http://jabber.org/protocol/geoloc";
     model.messageRead = YES;
     [model insert];
-    [model release];
     XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPGeoLoc publish:xmppClient withData:geoLoc];    
 }

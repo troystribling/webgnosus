@@ -123,7 +123,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)publish:(XMPPClient*)client withData:(NSXMLElement*)data {
++ (void)publish:(XMPPClient*)client withData:(XMPPGeoLoc*)data {
     XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:nil node:@"http://jabber.org/protocol/geoloc" andData:data];
     [client send:iq andDelegateResponse:[[XMPPPubSubGeoLocDelegate alloc] init]];
 }

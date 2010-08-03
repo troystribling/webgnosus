@@ -14,10 +14,11 @@
 #import "AccountManagerViewController.h"
 #import "SegmentedListPicker.h"
 #import "AccountModel.h"
+#import "GeoLocManager.h"
 #import "XMPPClient.h"
 #import "XMPPClientManager.h"
 #import "XMPPRegisterQuery.h"
-#import "GeoLocManager.h"
+#import "XMPPGeoLocUpdate.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController (PrivateAPI)
@@ -52,8 +53,13 @@
     [AccountModel setAllNotDisplayed];
     acct.displayed = YES;
     [acct update];
+    GeoLocManager* geoLoc = [GeoLocManager instance];
     if (self.trackingSwitch.on) {
+        [geoLoc addUpdateDelegate:[[[XMPPGeoLocUpdate alloc] init:[self account]] autorelease] forAccount:[self account]];
+        [geoLoc start];
     } else {
+        [geoLoc removeUpdateDelegateForAccount:[self account]];
+        [geoLoc stopIfNotUpdating];
     }
     [[[XMPPClientManager instance] accountUpdateDelegate] didUpdateAccount];
     [self.managerView dismiss];
@@ -173,8 +179,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [self initAccountList];
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
-    GeoLocManager* geoMgr = [GeoLocManager instance];
-    if ([geoMgr accountUpdatesEnabled:[self account]]) {
+    if ([[GeoLocManager instance] accountUpdatesEnabled:[self account]]) {
         self.trackingSwitch.on = YES;
     } else {
         self.trackingSwitch.on = NO;

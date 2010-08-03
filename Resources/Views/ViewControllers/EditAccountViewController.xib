@@ -463,6 +463,14 @@
 					</object>
 					<int key="connectionID">44</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">trackingSwitch</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="13757942"/>
+					</object>
+					<int key="connectionID">48</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -619,7 +627,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>EditAccountViewController</string>
 					<string>UIResponder</string>
-					<string>{{177, 299}, {280, 350}}</string>
+					<string>{{80, 299}, {280, 350}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -655,7 +663,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">47</int>
+			<int key="maxID">48</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -720,6 +728,7 @@
 							<string>reenterPasswordTextField</string>
 							<string>sendPasswordButton</string>
 							<string>statusLabel</string>
+							<string>trackingSwitch</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -730,6 +739,7 @@
 							<string>UITextField</string>
 							<string>UIButton</string>
 							<string>UILabel</string>
+							<string>UISwitch</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -743,6 +753,7 @@
 							<string>reenterPasswordTextField</string>
 							<string>sendPasswordButton</string>
 							<string>statusLabel</string>
+							<string>trackingSwitch</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -773,6 +784,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">statusLabel</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">trackingSwitch</string>
+								<string key="candidateClassName">UISwitch</string>
 							</object>
 						</object>
 					</object>
@@ -969,30 +984,23 @@
 							</object>
 						</object>
 					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="859410811">
+					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="381480981">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/GnosusXmpp/XmppMessages/Stream/XMPPStream.h</string>
+						<string key="minorKey">Classes/GnosusXmpp/XmppFrameworkExtensions/Stream/XMPPStream.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/GnosusXmpp/XmppMessages/XMPPClient.h</string>
+						<string key="minorKey">Classes/GnosusXmpp/XmppFrameworkExtensions/XMPPClient.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">NSObject</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/GnosusXmpp/XmppMessages/XMPPClientManager.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">NSObject</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/GnosusXmpp/XmppMessages/XMPPResponse.h</string>
+						<string key="minorKey">Classes/GnosusXmpp/XmppFrameworkExtensions/XMPPClientManager.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -1023,7 +1031,7 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
-					<reference key="sourceIdentifier" ref="859410811"/>
+					<reference key="sourceIdentifier" ref="381480981"/>
 				</object>
 			</object>
 			<object class="NSMutableArray" key="referencedPartialClassDescriptionsV3.2+">

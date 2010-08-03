@@ -16,6 +16,7 @@ static GeoLocManager* thisLocationManager = nil;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface GeoLocManager (PrivateAPI)
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +71,13 @@ static GeoLocManager* thisLocationManager = nil;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)stopIfNotUpdating {
+    if ([self.accountUpdates count]) {
+        [self stop];
+    } 
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)accountUpdatesEnabled:(AccountModel*)account {
     if ([self.accountUpdates valueForKey:[account fullJID]]) {
         return YES;
@@ -80,7 +88,10 @@ static GeoLocManager* thisLocationManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addUpdateDelegate:(id<GeoLocUpdateDelegate>)updateDelegate forAccount:(AccountModel*)account {
-    [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
+    id testUpdateDelegate = [self.accountUpdates valueForKey:[account fullJID]];
+    if (!testUpdateDelegate) {
+        [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -90,6 +101,9 @@ static GeoLocManager* thisLocationManager = nil;
         [self.accountUpdates removeObjectForKey:[account fullJID]];
     }
 }
+
+//===================================================================================================================================
+#pragma mark GeoLocManager PrivateAPI
 
 //===================================================================================================================================
 #pragma mark CLLocationManagerDelegate

@@ -40,6 +40,6 @@
 - (void)addTimestamp:(NSDate*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)publish:(XMPPClient*)client withData:(NSXMLElement*)data;
++ (void)publish:(XMPPClient*)client withData:(XMPPGeoLoc*)data;
 
 @end
