@@ -60,7 +60,7 @@
     model.messageRead = YES;
     [model insert];
     XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-    [XMPPGeoLoc publish:xmppClient withData:geoLoc];    
+    [XMPPGeoLoc publish:xmppClient forAccount:self.account withData:geoLoc];    
 }
 
 @end

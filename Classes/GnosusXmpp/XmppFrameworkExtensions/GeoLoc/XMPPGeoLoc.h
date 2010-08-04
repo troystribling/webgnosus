@@ -12,7 +12,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class XMPPClient;
-@class NSXMLElement;
+@class AccountModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPGeoLoc : NSXMLElement 
@@ -40,6 +40,6 @@
 - (void)addTimestamp:(NSDate*)val;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)publish:(XMPPClient*)client withData:(XMPPGeoLoc*)data;
++ (void)publish:(XMPPClient*)client forAccount:(AccountModel*)account withData:(XMPPGeoLoc*)data;
 
 @end

@@ -13,6 +13,7 @@
 #import "XMPPIQ.h"
 #import "XMPPPubSubGeoLocDelegate.h"
 #import "XMPPClient.h"
+#import "AccountModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPGeoLoc (PrivateAPI)
@@ -123,9 +124,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)publish:(XMPPClient*)client withData:(XMPPGeoLoc*)data {
-    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:nil node:@"http://jabber.org/protocol/geoloc" andData:data];
-    [client send:iq andDelegateResponse:[[XMPPPubSubGeoLocDelegate alloc] init]];
++ (void)publish:(XMPPClient*)client forAccount:(AccountModel*)account withData:(XMPPGeoLoc*)data {
+    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:[account pubSubService] node:[NSString stringWithFormat:@"%@/geoloc", [account pubSubRoot]] andData:data];
+    [client send:iq andDelegateResponse:[[[XMPPPubSubGeoLocDelegate alloc] init] autorelease]];
 }
 
 //===================================================================================================================================

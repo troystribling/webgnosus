@@ -61,8 +61,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)publish:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
     XMPPEntry* entry = [[XMPPEntry alloc] initWithTitle:title];
-    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:nil node:node andData:entry];
-    [client send:iq andDelegateResponse:[[XMPPPubSubEntryDelegate alloc] init]];
+    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:jid node:node andData:entry];
+    [client send:iq andDelegateResponse:[[[XMPPPubSubEntryDelegate alloc] init] autorelease]];
 }
 
 @end

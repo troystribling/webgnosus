@@ -75,6 +75,11 @@
 - (IBAction)deleteButtonPressed:(id)sender {
     AccountModel* acct = [self account];
     [[XMPPClientManager instance] removeXMPPClientForAccount:acct];
+    GeoLocManager* geoLoc = [GeoLocManager instance];
+    if ([geoLoc accountUpdatesEnabled:acct]) {
+        [geoLoc removeUpdateDelegateForAccount:acct];
+        [geoLoc stopIfNotUpdating];
+    }
     [acct destroy];
     if ([AccountModel count] > 0) {    
         [self.activeAccounts removeItem:[acct bareJID]];

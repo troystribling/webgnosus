@@ -96,8 +96,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
+    XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
     NSXMLElement* createElement = [NSXMLElement elementWithName:@"create"];
     [createElement addAttributeWithName:@"node" stringValue:node];
     NSXMLElement* configElement = [NSXMLElement elementWithName:@"configure"];
@@ -105,19 +105,17 @@
     [pubsub addChild:configElement];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withId:(NSString*)itemId {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
+    XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
     XMPPPubSubItems* items = [[XMPPPubSubItems alloc] initWithNode:node];
     [items addItem:[[XMPPPubSubItem alloc] initWithId:itemId]];
     [pubsub addChild:items];	
     [iq addPubSub:pubsub];    
     [client send:iq andDelegateResponse:[[XMPPPubSubItemDelegate alloc] init]];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

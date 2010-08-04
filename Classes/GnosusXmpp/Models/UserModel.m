@@ -46,7 +46,7 @@
 - (NSString*)fullJID {
 	NSString* aFullJid;
 	if (self.resource) {
-		aFullJid = [[NSString alloc] initWithFormat:@"%@/%@", self.jid, self.resource];
+		aFullJid = [NSString stringWithFormat:@"%@/%@", self.jid, self.resource];
 	} else {
 		aFullJid = self.jid;
 	}
@@ -56,13 +56,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)pubSubRoot {
     XMPPJID* myJid = [self toJID];
-	return [[NSString alloc] initWithFormat:@"/home/%@/%@", [myJid domain], [myJid user]];
+	return [NSString stringWithFormat:@"/home/%@/%@", [myJid domain], [myJid user]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)pubSubDomain {
     XMPPJID* myJid = [self toJID];
-	return [[NSString alloc] initWithFormat:@"/home/%@", [myJid domain]];
+	return [NSString stringWithFormat:@"/home/%@", [myJid domain]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
