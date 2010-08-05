@@ -45,14 +45,14 @@
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsError:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [self.nodeTextField becomeFirstResponder]; 
     [self failureAlert:@"Invalid Node"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)xmppClient:(XMPPClient*)client didReceiveSubscriptionsResult:(XMPPIQ*)iq {
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateResult:(XMPPIQ*)iq {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

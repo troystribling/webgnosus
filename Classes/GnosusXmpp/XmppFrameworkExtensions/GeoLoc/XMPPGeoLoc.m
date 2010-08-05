@@ -125,7 +125,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)publish:(XMPPClient*)client forAccount:(AccountModel*)account withData:(XMPPGeoLoc*)data {
-    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:[account pubSubService] node:[NSString stringWithFormat:@"%@/geoloc", [account pubSubRoot]] andData:data];
+    XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:[account pubSubService] node:[account geoLocPubSubNode] andData:data];
     [client send:iq andDelegateResponse:[[[XMPPPubSubGeoLocDelegate alloc] init] autorelease]];
 }
 

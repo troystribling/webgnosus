@@ -461,6 +461,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateError:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubCreateError"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateResult:(XMPPIQ*)iq {
+	[self writeToLog:client message:@"xmppClient:didReceivePubSubCreateResult"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceivePubSubDeleteError:(XMPPIQ*)iq {
 	[self writeToLog:client message:@"xmppClient:didReceivePubSubDeleteError"];
 }

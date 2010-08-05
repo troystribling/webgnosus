@@ -10,6 +10,7 @@
 #import "EditAccountViewController.h"
 #import "UICustomSwitch.h"
 #import "AccountModel.h"
+#import "ServiceItemModel.h"
 #import "AlertViewManager.h"
 #import "AccountManagerViewController.h"
 #import "SegmentedListPicker.h"
@@ -19,12 +20,14 @@
 #import "XMPPClientManager.h"
 #import "XMPPRegisterQuery.h"
 #import "XMPPGeoLocUpdate.h"
+#import "XMPPPubSub.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface EditAccountViewController (PrivateAPI)
 
 - (void)initAccountList;
 - (void)updateStatus;
+- (void)trackingSwitchChanged:(id)sender;
 
 @end
 
@@ -53,14 +56,6 @@
     [AccountModel setAllNotDisplayed];
     acct.displayed = YES;
     [acct update];
-    GeoLocManager* geoLoc = [GeoLocManager instance];
-    if (self.trackingSwitch.on) {
-        [geoLoc addUpdateDelegate:[[[XMPPGeoLocUpdate alloc] init:[self account]] autorelease] forAccount:[self account]];
-        [geoLoc start];
-    } else {
-        [geoLoc removeUpdateDelegateForAccount:[self account]];
-        [geoLoc stopIfNotUpdating];
-    }
     [[[XMPPClientManager instance] accountUpdateDelegate] didUpdateAccount];
     [self.managerView dismiss];
 }
@@ -114,6 +109,25 @@
 #pragma mark EditAccountViewController PrivateApi
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)trackingSwitchChanged:(id)sender {
+    GeoLocManager* geoLoc = [GeoLocManager instance];
+    if (self.trackingSwitch.on) {
+        NSString* geoLocNode = [[self account] geoLocPubSubNode];
+        if (![ServiceItemModel findByNode:geoLocNode]) {
+            XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
+            [XMPPPubSub create:client JID:[self.account pubSubService] node:geoLocNode];
+            [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Adding Node"];
+        } else {
+            [geoLoc addUpdateDelegate:[[[XMPPGeoLocUpdate alloc] init:[self account]] autorelease] forAccount:[self account]];
+            [geoLoc start];
+        }
+    } else {
+        [geoLoc removeUpdateDelegateForAccount:[self account]];
+        [geoLoc stopIfNotUpdating];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void) initAccountList {
     NSMutableArray* accountJIDs = [NSMutableArray arrayWithCapacity:10];
     NSInteger selectedAccountIndex = 0;
@@ -152,6 +166,25 @@
 #pragma mark XMPPClientDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateError:(XMPPIQ*)iq {
+    [AlertViewManager dismissActivityIndicator];
+    [self.trackingSwitch setOn:NO animated:YES];
+    [AlertViewManager showAlert:@"geoloc node create failed"];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didReceivePubSubCreateResult:(XMPPIQ*)iq {
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)xmppClient:(XMPPClient*)client didDiscoverAllUserPubSubNodes:(XMPPJID*)jid {
+    [AlertViewManager dismissActivityIndicator];
+    GeoLocManager* geoLoc = [GeoLocManager instance];
+    [geoLoc addUpdateDelegate:[[[XMPPGeoLocUpdate alloc] init:[self account]] autorelease] forAccount:[self account]];
+    [geoLoc start];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)client didReceiveRegisterError:(XMPPIQ*)iq {
     [AlertViewManager dismissActivityIndicator];
     [AlertViewManager showAlert:@"Error Changing Password"];
@@ -177,6 +210,7 @@
 - (void)viewDidLoad {
     self.passwordTextField.delegate = self;
     self.reenterPasswordTextField.delegate = self;
+    [self.trackingSwitch addTarget:self action:@selector(trackingSwitchChanged:) forControlEvents:UIControlEventValueChanged];    
     [super viewDidLoad];
 }
 

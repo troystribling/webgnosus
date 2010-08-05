@@ -34,13 +34,13 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
     [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubCreateError:stanza];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleResult:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
     [XMPPDiscoItemsQuery get:client JID:[stanza fromJID] node:[[client myJID] pubSubRoot] forTarget:[client myJID]];
-    [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsResult:stanza];
+    [[client multicastDelegate] xmppClient:client didReceivePubSubCreateResult:stanza];
 }
 
 //===================================================================================================================================

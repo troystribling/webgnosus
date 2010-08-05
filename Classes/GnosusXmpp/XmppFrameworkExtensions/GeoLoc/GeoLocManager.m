@@ -17,6 +17,8 @@ static GeoLocManager* thisLocationManager = nil;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface GeoLocManager (PrivateAPI)
 
+- (void)applyUpdates;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,6 +61,7 @@ static GeoLocManager* thisLocationManager = nil;
     if (!self.running) {
         self.running = YES;
         [self.locationManager startUpdatingLocation];
+        NSLog(@"Geoloc Started");
     }
 }
 
@@ -67,6 +70,7 @@ static GeoLocManager* thisLocationManager = nil;
     if (self.running) {
         self.running = NO;
         [self.locationManager stopUpdatingLocation];
+        NSLog(@"Geoloc Stopped");
     }
 }
 
@@ -104,6 +108,17 @@ static GeoLocManager* thisLocationManager = nil;
 
 //===================================================================================================================================
 #pragma mark GeoLocManager PrivateAPI
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)applyUpdates {
+//    NSArray* updates = [self.accountUpdates allValues];
+//    for (int i=0; i < [updates count]; i++) {
+//        id update = [updates objectAtIndex:i];
+//        if ([update respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)]) {
+//            [update locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
+//        } 
+//    }
+}
 
 //===================================================================================================================================
 #pragma mark CLLocationManagerDelegate

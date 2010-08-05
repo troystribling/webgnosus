@@ -72,5 +72,6 @@ typedef enum {
 - (BOOL)isReady;
 - (BOOL)hasError;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;
+- (NSString*)geoLocPubSubNode;
 
 @end
