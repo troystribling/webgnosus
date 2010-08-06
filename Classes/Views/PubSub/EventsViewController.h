@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import "GeoLocManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
@@ -15,7 +16,7 @@
 @class MessageCache;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface EventsViewController : UITableViewController {
+@interface EventsViewController : UITableViewController <GeoLocUpdateDelegate> {
     MessageCache* events;
     AccountModel* account;
     NSString* service;

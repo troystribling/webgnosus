@@ -94,7 +94,7 @@ static GeoLocManager* thisLocationManager = nil;
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)accountUpdatesEnabled:(AccountModel*)account {
     if ([self.accountUpdates valueForKey:[account fullJID]]) {
-        return YES;
+        return self.running;
     } else {
         return NO;
     }
@@ -130,6 +130,23 @@ static GeoLocManager* thisLocationManager = nil;
     }
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeUpdateDelegate:(id)delegate forAccount:(AccountModel*)account {
+    NSMutableArray* updateDelegates = [self.accountUpdates valueForKey:[account fullJID]];
+	if (updateDelegates) {
+        for (int i = 0; i < [updateDelegates count]; i++) {
+            id update = [updateDelegates objectAtIndex:i];
+            if (update == delegate) {
+                if ([update respondsToSelector:@selector(geoLocManager:didRemoveDelegate:forAccount:)]) {
+                    [update geoLocManager:self didRemoveDelegate:(id)delegate forAccount:account];
+                } 
+                [updateDelegates removeObjectAtIndex:i];
+                break;
+            }
+        }
+    }
+}
+
 //===================================================================================================================================
 #pragma mark GeoLocManager PrivateAPI
 
@@ -158,6 +175,11 @@ static GeoLocManager* thisLocationManager = nil;
     [self applyUpdate:^(id updateInterface) {
         if ([updateInterface respondsToSelector:@selector(geoLocManager:didUpdateToLocation:fromLocation:)]) {
             [updateInterface geoLocManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];
+        } 
+    }];
+    [self applyUpdate:^(id updateInterface) {
+        if ([updateInterface respondsToSelector:@selector(didFinishGeoLocManagerUpdate:)]) {
+            [updateInterface didFinishGeoLocManagerUpdate:self];
         } 
     }];
 }

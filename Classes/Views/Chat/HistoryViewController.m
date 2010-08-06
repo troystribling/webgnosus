@@ -28,10 +28,8 @@
 - (void)loadMessages;
 - (void)loadAccount;
 - (void)reloadMessages;
-- (void)addXMPPClientDelgate;
-- (void)removeXMPPClientDelgate;
-- (void)addXMPPAccountUpdateDelgate;
-- (void)removeXMPPAccountUpdateDelgate;
+- (void)addDelgates;
+- (void)removeDelgates;
 
 @end
 
@@ -68,35 +66,28 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)reloadMessages {
     [self loadAccount];
-    [self removeXMPPClientDelgate];
-    [self addXMPPClientDelgate];
+    [self removeDelgates];
+    [self addDelgates];
     [self loadMessages];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addXMPPClientDelgate {
+- (void)addDelgates {
     if (self.account) {
         [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+        [[GeoLocManager instance] addUpdateDelegate:self forAccount:self.account];
     }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeXMPPClientDelgate {
-    if (self.account) {
-        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
-    }
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addXMPPAccountUpdateDelgate {
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeXMPPAccountUpdateDelgate {
+- (void)removeDelgates {
+    if (self.account) {
+        [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+        [[GeoLocManager instance] removeUpdateDelegate:self forAccount:self.account];
+    }
     [[XMPPClientManager instance] removeAccountUpdateDelegate:self];
 }
-
 
 //===================================================================================================================================
 #pragma mark XMPPClientManagerAccountUpdateDelegate
@@ -134,6 +125,14 @@
 }
 
 //===================================================================================================================================
+#pragma mark GeoLocUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didFinishGeoLocManagerUpdate:(GeoLocManager*)geoLocMgr {
+    [self loadMessages];
+}
+
+//===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -153,16 +152,14 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
-    [self addXMPPClientDelgate];
-    [self addXMPPAccountUpdateDelgate];
+    [self addDelgates];
     [self loadMessages];
 	[super viewWillAppear:animated];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [self removeXMPPClientDelgate];
-    [self removeXMPPAccountUpdateDelgate];
+    [self removeDelgates];
 	[super viewWillDisappear:animated];
 }
 

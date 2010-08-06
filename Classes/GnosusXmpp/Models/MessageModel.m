@@ -179,8 +179,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)findAllPublishedEventsByNode:(NSString*)requestNode forAccount:(AccountModel*)requestAccount withPkGreaterThan:(NSInteger)requestPk andLimit:(NSInteger)requestLimit {
 	NSMutableArray* output = [NSMutableArray arrayWithCapacity:10];	
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@'  AND itemId = '-1' AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
-                                 MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventxData, requestPk, requestNode, requestAccount.pk, requestLimit];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE (textType = %d OR textType = %d OR textType = %d OR textType = %d)  AND pk < %d AND node = '%@'  AND itemId = '-1' AND accountPk = %d ORDER BY pk DESC LIMIT %d", 
+                                 MessageTextTypeEventText, MessageTextTypeEventEntry, MessageTextTypeEventxData, MessageTextTypeGeoLocData, requestPk, requestNode, requestAccount.pk, requestLimit];
 	[[WebgnosusDbi instance] selectAllForModel:[MessageModel class] withStatement:selectStatement andOutputTo:output];
 	return output;
 }

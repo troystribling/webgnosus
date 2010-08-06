@@ -25,8 +25,8 @@
 @interface EventsViewController (PrivateAPI)
 
 - (void)addEventButton;
-- (void)addXMPPClientDelgate;
-- (void)removeXMPPClientDelgate;
+- (void)addDelgate;
+- (void)removeDelgate;
 - (void)loadAccount;
 - (void)loadMessages;
 
@@ -66,16 +66,18 @@
 }	
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)addXMPPClientDelgate {
+- (void)addDelgates {
     if (self.account) {
         [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
+        [[GeoLocManager instance] addUpdateDelegate:self forAccount:self.account];
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeXMPPClientDelgate {
+- (void)removeDelgates {
     if (self.account) {
         [[XMPPClientManager instance] removeXMPPClientDelegate:self forAccount:self.account];
+        [[GeoLocManager instance] removeUpdateDelegate:self forAccount:self.account];
     }
 }
 
@@ -103,6 +105,16 @@
 }
 
 //===================================================================================================================================
+#pragma mark GeoLocUpdateDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)didFinishGeoLocManagerUpdate:(GeoLocManager*)geoLocMgr {
+    if (self.eventType == kPUB_MODE) { 
+        [self loadEvents];
+    }
+}
+
+//===================================================================================================================================
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -122,7 +134,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
-    [self addXMPPClientDelgate];
+    [self addDelgates];
     self.navigationItem.title = @"Events";
     [self loadEvents];
     [super viewWillAppear:animated];
@@ -135,7 +147,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillDisappear:(BOOL)animated {
-    [self removeXMPPClientDelgate];
+    [self removeDelgates];
 	[super viewWillDisappear:animated];
 }
 

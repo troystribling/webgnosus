@@ -39,6 +39,7 @@
 - (BOOL)accountUpdatesEnabled:(AccountModel*)account;
 - (void)addUpdateDelegate:(id)updateDelegate forAccount:(AccountModel*)account;
 - (void)removeUpdateDelegatesForAccount:(AccountModel*)account;
+- (void)removeUpdateDelegate:(id)delegate forAccount:(AccountModel*)account;
 
 @end
 
@@ -51,12 +52,11 @@
 @optional
 
 - (void)geoLocManager:(GeoLocManager*)geoLocMgr didAddAccount:(AccountModel*)account;
+- (void)geoLocManager:(GeoLocManager*)geoLocMgr didRemoveDelegate:(id)delegate forAccount:(AccountModel*)account;
 - (void)geoLocManager:(GeoLocManager*)geoLocMgr didRemoveAccount:(AccountModel*)account;
 - (void)didStartGeoLocManager:(GeoLocManager*)geoLocMgr;
 - (void)didStopGeoLocManager:(GeoLocManager*)geoLocMgr;
-
-@required
-
 - (void)geoLocManager:(GeoLocManager*)geoLocMgr didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation;
+- (void)didFinishGeoLocManagerUpdate:(GeoLocManager*)geoLocMgr;
 
 @end

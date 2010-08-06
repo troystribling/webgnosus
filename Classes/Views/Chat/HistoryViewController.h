@@ -8,13 +8,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import "GeoLocManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class HistoryMessageCache;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface HistoryViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface HistoryViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, GeoLocUpdateDelegate> {
     HistoryMessageCache* messages;
 	UIBarButtonItem* editAccountsButton;
     AccountModel* account;
