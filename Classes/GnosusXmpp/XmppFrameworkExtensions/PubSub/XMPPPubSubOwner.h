@@ -20,6 +20,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubOwner*)createFromElement:(NSXMLElement*)element;
 - (XMPPPubSubOwner*)init;
+- (NSString*)node;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)delete:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node;

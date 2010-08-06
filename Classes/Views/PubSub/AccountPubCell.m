@@ -13,6 +13,7 @@
 #import "ServiceItemModel.h"
 #import "SubscriptionModel.h"
 #import "AlertViewManager.h"
+#import "GeoLocManager.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
@@ -46,6 +47,11 @@
 - (void)imageTouched:(TouchImageView*)pubSubImage {
     XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
     [XMPPPubSubOwner delete:client JID:[XMPPJID jidWithString:self.serviceItem.service] node:self.serviceItem.node];
+    if ([self.serviceItem.node isEqualToString:[self.account geoLocPubSubNode]]) {
+        GeoLocManager* geoLoc = [GeoLocManager instance];
+        [geoLoc removeUpdateDelegatesForAccount:[self account]];
+        [geoLoc stopIfNotUpdating];
+    }
     [AlertViewManager showActivityIndicatorInView:self.window withTitle:@"Deleting"];
 }
 

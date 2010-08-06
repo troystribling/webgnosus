@@ -24,6 +24,7 @@
 #import "SegmentedCycleList.h"
 
 #import "XMPPJID.h"
+#import "XMPPIQ.h"
 #import "XMPPClientManager.h"
 #import "XMPPPubSubOwner.h"
 #import "XMPPPubSubSubscriptions.h"

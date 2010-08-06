@@ -41,7 +41,7 @@
 #pragma mark LocationManagerDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation {
+- (void)geoLocManager:(GeoLocManager*)geoLocMgr didUpdateToLocation:(CLLocation*)newLocation fromLocation:(CLLocation*)oldLocation {
     XMPPGeoLoc* geoLoc = [[[XMPPGeoLoc alloc] init] autorelease];
     [geoLoc addAlt:newLocation.altitude];
     [geoLoc addLat:newLocation.coordinate.latitude];
@@ -56,7 +56,7 @@
     model.textType = MessageTextTypeGeoLocData;
     model.messageText = [geoLoc XMLString];
     model.itemId = @"-1";
-    model.node = @"http://jabber.org/protocol/geoloc";
+    model.node = [self.account geoLocPubSubNode];
     model.messageRead = YES;
     [model insert];
     XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];

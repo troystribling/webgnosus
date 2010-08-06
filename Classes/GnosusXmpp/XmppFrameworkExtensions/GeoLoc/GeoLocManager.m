@@ -17,7 +17,7 @@ static GeoLocManager* thisLocationManager = nil;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface GeoLocManager (PrivateAPI)
 
-- (void)applyUpdates;
+- (void)applyUpdate:(void (^)(id updateInterface))updateBlock;
 
 @end
 
@@ -61,6 +61,11 @@ static GeoLocManager* thisLocationManager = nil;
     if (!self.running) {
         self.running = YES;
         [self.locationManager startUpdatingLocation];
+        [self applyUpdate:^(id updateInterface) {
+            if ([updateInterface respondsToSelector:@selector(didStopGeoLocManager:)]) {
+                [updateInterface didStopGeoLocManager:self];
+            } 
+        }];
         NSLog(@"Geoloc Started");
     }
 }
@@ -70,13 +75,18 @@ static GeoLocManager* thisLocationManager = nil;
     if (self.running) {
         self.running = NO;
         [self.locationManager stopUpdatingLocation];
+        [self applyUpdate:^(id updateInterface) {
+            if ([updateInterface respondsToSelector:@selector(didStartGeoLocManager:)]) {
+                [updateInterface didStartGeoLocManager:self];
+            } 
+        }];
         NSLog(@"Geoloc Stopped");
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)stopIfNotUpdating {
-    if ([self.accountUpdates count]) {
+    if ([self.accountUpdates count] == 0) {
         [self stop];
     } 
 }
@@ -92,16 +102,30 @@ static GeoLocManager* thisLocationManager = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addUpdateDelegate:(id<GeoLocUpdateDelegate>)updateDelegate forAccount:(AccountModel*)account {
-    id testUpdateDelegate = [self.accountUpdates valueForKey:[account fullJID]];
-    if (!testUpdateDelegate) {
-        [self.accountUpdates setObject:updateDelegate forKey:[account fullJID]];
+    NSMutableArray* updateDelegates = [self.accountUpdates valueForKey:[account fullJID]];
+    if (!updateDelegates) {
+        updateDelegates = [NSMutableArray arrayWithCapacity:10];
+        [self.accountUpdates setObject:updateDelegates forKey:[account fullJID]];
+    }
+    [updateDelegates addObject:updateDelegate];
+    for (int i = 0; i < [updateDelegates count]; i++) {
+        id update = [updateDelegates objectAtIndex:i];
+        if ([update respondsToSelector:@selector(geoLocManager:didAddAccount:)]) {
+            [update geoLocManager:self didAddAccount:account];
+        } 
     }
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)removeUpdateDelegateForAccount:(AccountModel*)account {
-    id updateDelegate = [self.accountUpdates valueForKey:[account fullJID]];
-	if (updateDelegate) {
+- (void)removeUpdateDelegatesForAccount:(AccountModel*)account {
+    NSArray* updateDelegates = [self.accountUpdates valueForKey:[account fullJID]];
+	if (updateDelegates) {
+        for (int i = 0; i < [updateDelegates count]; i++) {
+            id update = [updateDelegates objectAtIndex:i];
+            if ([update respondsToSelector:@selector(geoLocManager:didRemoveAccount:)]) {
+                [update geoLocManager:self didRemoveAccount:account];
+            } 
+        }
         [self.accountUpdates removeObjectForKey:[account fullJID]];
     }
 }
@@ -110,14 +134,15 @@ static GeoLocManager* thisLocationManager = nil;
 #pragma mark GeoLocManager PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)applyUpdates {
-//    NSArray* updates = [self.accountUpdates allValues];
-//    for (int i=0; i < [updates count]; i++) {
-//        id update = [updates objectAtIndex:i];
-//        if ([update respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)]) {
-//            [update locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
-//        } 
-//    }
+- (void)applyUpdate:(void (^)(id updateInterface))updateBlock {
+    NSArray* updateArrays = [self.accountUpdates allValues];
+    for (int i = 0; i < [updateArrays count]; i++) {
+        NSArray* updateArray = [updateArrays objectAtIndex:i];
+        for (int j = 0; j < [updateArray count]; j++) {
+            id update = [updateArray objectAtIndex:j];
+            updateBlock(update);
+        }
+    }
 }
 
 //===================================================================================================================================
@@ -130,13 +155,11 @@ static GeoLocManager* thisLocationManager = nil;
     if (locationAge > 5.0) return;
     if (newLocation.horizontalAccuracy < 0) return;
     self.location = newLocation;
-    NSArray* updates = [self.accountUpdates allValues];
-    for (int i=0; i < [updates count]; i++) {
-        id update = [updates objectAtIndex:i];
-        if ([update respondsToSelector:@selector(locationManager:didUpdateToLocation:fromLocation:)]) {
-            [update locationManager:manager didUpdateToLocation:newLocation fromLocation:oldLocation];
+    [self applyUpdate:^(id updateInterface) {
+        if ([updateInterface respondsToSelector:@selector(geoLocManager:didUpdateToLocation:fromLocation:)]) {
+            [updateInterface geoLocManager:self didUpdateToLocation:newLocation fromLocation:oldLocation];
         } 
-    }
+    }];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
