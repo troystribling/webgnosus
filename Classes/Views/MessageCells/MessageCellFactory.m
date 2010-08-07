@@ -9,9 +9,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "MessageCellFactory.h"
 #import "BodyMessageCell.h"
+#import "XDataMessageCell.h"
+#import "GeoLocMessageCell.h"
 #import "XMPPxData.h"
 #import "XMPPJID.h"
-#import "XDataMessageCell.h"
 #import "MessageModel.h"
 #import "UserModel.h"
 
@@ -50,6 +51,8 @@ typedef enum tagCommandDataType {
         cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
     } else if (message.textType ==  MessageTextTypeEventText) {
         cellHeight = [XDataMessageCell tableView:tableView heightForRowWithMessage:message];
+    } else if (message.textType ==  MessageTextTypeGeoLocData) {
+        cellHeight = [GeoLocMessageCell tableView:tableView heightForRowWithMessage:message];
     } else {
         cellHeight = [BodyMessageCell tableView:tableView heightForRowWithMessage:message];
     }
@@ -67,6 +70,8 @@ typedef enum tagCommandDataType {
         cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
     } else if (message.textType ==  MessageTextTypeEventText) {
         cell = [XDataMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[self jidFromNode:message.node]];
+    } else if (message.textType ==  MessageTextTypeGeoLocData) {
+        cell = [GeoLocMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[[XMPPJID jidWithString:message.fromJid] bare]];
     } else {
         cell = [BodyMessageCell tableView:tableView cellForRowAtIndexPath:indexPath forMessage:message fromJid:[[XMPPJID jidWithString:message.fromJid] bare]];
     }

@@ -8,7 +8,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XDataMessageCell.h"
-#import "LabelGridView.h"
 #import "MessageCell.h"
 #import "MessageModel.h"
 #import "MessageViewFactory.h"

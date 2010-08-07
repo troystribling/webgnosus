@@ -134,6 +134,8 @@
 		057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
 		05816C4A11444C70001D5DFA /* ResourceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05816C4811444C70001D5DFA /* ResourceCell.m */; };
 		05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05816C5411444E4F001D5DFA /* ResourceCell.xib */; };
+		059AE684120D127F00990B14 /* GeoLocMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 059AE683120D127F00990B14 /* GeoLocMessageCell.m */; };
+		059AE68F120D178600990B14 /* GeoLocMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059AE68E120D178600990B14 /* GeoLocMessageCell.xib */; };
 		05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 05AAB3DD10AA6B83008CF187 /* iTunesArtwork */; };
 		05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */; };
 		05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CF616D1048B141003E012F /* AccountManagerViewController.xib */; };
@@ -464,6 +466,9 @@
 		05816C4711444C70001D5DFA /* ResourceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceCell.h; sourceTree = "<group>"; };
 		05816C4811444C70001D5DFA /* ResourceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCell.m; sourceTree = "<group>"; };
 		05816C5411444E4F001D5DFA /* ResourceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResourceCell.xib; sourceTree = "<group>"; };
+		059AE682120D127F00990B14 /* GeoLocMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoLocMessageCell.h; sourceTree = "<group>"; };
+		059AE683120D127F00990B14 /* GeoLocMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoLocMessageCell.m; sourceTree = "<group>"; };
+		059AE68E120D178600990B14 /* GeoLocMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeoLocMessageCell.xib; sourceTree = "<group>"; };
 		05AAB3DD10AA6B83008CF187 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = Resources/iTunesArtwork; sourceTree = "<group>"; };
 		05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		05C6E9C30F0F1B77009BD7C8 /* Info Simulator.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info Simulator.plist"; sourceTree = "<group>"; };
@@ -1021,6 +1026,7 @@
 				05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */,
 				05DC8C830FBB15C60018AEEF /* CommandCell.xib */,
 				05F79C2C1075A7D500B75735 /* ContactPubCell.xib */,
+				059AE68E120D178600990B14 /* GeoLocMessageCell.xib */,
 				05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */,
 				05DC8C850FBB15C60018AEEF /* RosterCell.xib */,
 				0502D7EB108261E500218EC9 /* ServiceCell.xib */,
@@ -1133,6 +1139,8 @@
 				05E207D40FB9046500FCFC94 /* BodyMessageCell.m */,
 				05046B5B109BEBEC001CBEA1 /* LoadMessagesCell.h */,
 				05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */,
+				059AE682120D127F00990B14 /* GeoLocMessageCell.h */,
+				059AE683120D127F00990B14 /* GeoLocMessageCell.m */,
 				05E207D90FB9046500FCFC94 /* MessageCell.h */,
 				05E207DA0FB9046500FCFC94 /* MessageCell.m */,
 				05E207DB0FB9046500FCFC94 /* MessageCellFactory.h */,
@@ -1365,6 +1373,7 @@
 				05AAB3DE10AA6B83008CF187 /* iTunesArtwork in Resources */,
 				05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */,
 				0542683311700F56006E4699 /* Entitlements.plist in Resources */,
+				059AE68F120D178600990B14 /* GeoLocMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1516,6 +1525,7 @@
 				056B5D09120482B1002F62D4 /* XMPPGeoLocUpdate.m in Sources */,
 				056C649E1204FDD500F84AEA /* XMPPTimestamp.m in Sources */,
 				0568A9371205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m in Sources */,
+				059AE684120D127F00990B14 /* GeoLocMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
