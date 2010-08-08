@@ -26,7 +26,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSDateFormatter*)dateFormatter {
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-    [dateFormatter setDateFormat:@"yyyy-MM-ddTHH:mm:ssZ"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mmZ"];
     return dateFormatter;
 }
 
