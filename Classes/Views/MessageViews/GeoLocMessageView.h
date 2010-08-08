@@ -1,8 +1,8 @@
 //
-//  XDataMessageView.h
+//  GeoLocMessageView.h
 //  webgnosus
 //
-//  Created by Troy Stribling on 4/16/09.
+//  Created by Troy Stribling on 10/24/09.
 //  Copyright 2009 Plan-B Research. All rights reserved.
 //
 
@@ -10,25 +10,15 @@
 #import <UIKit/UIKit.h>
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-@class LabelGridView;
-@class XMPPxData;
+@class MessageModel;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XDataMessageView : NSObject {
+@interface GeoLocMessageView : NSObject {
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (NSString*)humanizeString:(NSString*)nonHuman;
-+ (NSString*)stringifyArray:(NSArray*)stringArray;
-+ (UIView*)viewForData:(XMPPxData*)data;
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (UIView*)viewForMessage:(MessageModel*)message;
 
 @end
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface NSObject (DataMessageView)
-
-+ (NSMutableArray*)buildGridArray:(XMPPxData*)data;
-+ (void)initLabelGridView:(LabelGridView*)labelGridView;
-
-@end
-

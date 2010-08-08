@@ -31,10 +31,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSMutableArray*)buildGridArray:(XMPPxData*)data {
-    NSMutableArray* fieldHash = [data fieldsToArrayOfHashes];
-    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldHash count]];
-    for(int j = 0; j < [fieldHash count]; j++) {
-        NSMutableArray* attrs = [fieldHash objectAtIndex:j];
+    NSMutableArray* fieldArrays = [data fieldsToArrays];
+    NSMutableArray* gridArray = [NSMutableArray arrayWithCapacity:[fieldArrays count]];
+    for(int j = 0; j < [fieldArrays count]; j++) {
+        NSMutableArray* attrs = [fieldArrays objectAtIndex:j];
         NSString* attr = [self humanizeString:[attrs objectAtIndex:0]];
         NSString* val = [self stringifyArray:[attrs lastObject]];
         [gridArray addObject:[NSMutableArray arrayWithObjects:attr, val, nil]];

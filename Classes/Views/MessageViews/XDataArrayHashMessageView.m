@@ -40,10 +40,10 @@
     }
     [gridArray addObject:gridRow];
     for(int i = 0; i < [itemsArray count]; i++) {
-        NSMutableArray* fieldHash = [itemsArray objectAtIndex:i];
-        NSMutableArray* gridRow = [NSMutableArray arrayWithCapacity:[fieldHash count]];
-        for(int j = 0; j < [fieldHash count]; j++) {
-            NSMutableArray* attrs = [fieldHash objectAtIndex:j];
+        NSMutableArray* fieldArray = [itemsArray objectAtIndex:i];
+        NSMutableArray* gridRow = [NSMutableArray arrayWithCapacity:[fieldArray count]];
+        for(int j = 0; j < [fieldArray count]; j++) {
+            NSMutableArray* attrs = [fieldArray objectAtIndex:j];
             [gridRow addObject:[self stringifyArray:[attrs lastObject]]];
         }
         [gridArray addObject:gridRow];

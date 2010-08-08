@@ -17,6 +17,7 @@
 @class XMPPEntry;
 @class XMPPClient;
 @class XMPPMessage;
+@class XMPPGeoLoc;
 @class XMPPIQ;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -95,6 +96,6 @@ typedef enum tagMessageTextType {
 - (void)setMessageReadAsInteger:(NSInteger)value;
 - (XMPPxData*)parseXDataMessage;
 - (XMPPEntry*)parseEntryMessage;
-- (XMPPxData*)parseGeoLocMessage;
+- (XMPPGeoLoc*)parseGeoLocMessage;
 
 @end

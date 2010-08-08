@@ -38,6 +38,7 @@
 - (void)addCountry:(NSString*)val;
 - (NSDate*)timestamp;
 - (void)addTimestamp:(NSDate*)val;
+- (NSMutableArray*)toArrays;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)publish:(XMPPClient*)client forAccount:(AccountModel*)account withData:(XMPPGeoLoc*)data;

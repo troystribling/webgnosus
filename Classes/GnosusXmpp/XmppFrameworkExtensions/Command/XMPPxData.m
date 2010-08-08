@@ -13,7 +13,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface XMPPxData (PrivateAPI)
 
-- (NSMutableArray*)hashifyFields:(NSXMLElement*)structElement;
+- (NSMutableArray*)extractFields:(NSXMLElement*)structElement;
 
 @end
 
@@ -59,8 +59,8 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)fieldsToArrayOfHashes {
-    return [self hashifyFields:self];
+- (NSMutableArray*)fieldsToArrays {
+    return [self extractFields:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@
     NSMutableArray* itemArray = [NSMutableArray arrayWithCapacity:[itemElementArray count]];
     if (itemElementArray) {
         for(int i = 0; i < [itemElementArray count]; i++) {
-            [itemArray addObject:[self hashifyFields:[itemElementArray objectAtIndex:i]]];
+            [itemArray addObject:[self extractFields:[itemElementArray objectAtIndex:i]]];
         }
     }
     return itemArray;
@@ -123,7 +123,7 @@
 #pragma mark XMPPxData PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (NSMutableArray*)hashifyFields:(NSXMLElement*)fieldsElement {
+- (NSMutableArray*)extractFields:(NSXMLElement*)fieldsElement {
     NSArray* fieldArray = [fieldsElement elementsForName:@"field"];
     NSMutableArray* fieldHash = [NSMutableArray arrayWithCapacity:[fieldArray count]];
     if (fieldArray) {

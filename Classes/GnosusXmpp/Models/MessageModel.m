@@ -373,12 +373,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (XMPPxData*)parseGeoLocMessage {
-    XMPPxData* data = nil;
+- (XMPPGeoLoc*)parseGeoLocMessage {
+    XMPPGeoLoc* data = nil;
     NSXMLDocument* xmlDoc = [[[NSXMLDocument alloc] initWithXMLString:self.messageText options:0 error:nil] autorelease];
 	NSXMLElement* dataElement = [xmlDoc rootElement];
     if ([[dataElement xmlns] isEqualToString:@"http://jabber.org/protocol/geoloc"]) {
-        data = [XMPPxData createFromElement:dataElement];
+        data = [XMPPGeoLoc createFromElement:dataElement];
     }
     return data;
 }

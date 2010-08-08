@@ -124,6 +124,18 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+- (NSMutableArray*)toArrays {
+    NSArray* tags = [NSArray arrayWithObjects:@"lat", @"lon", @"alt", @"accuracy", @"timestamp", nil];
+    NSMutableArray* geoVals = [NSMutableArray arrayWithCapacity:10];
+    for (int i = 0; i < [tags count]; i++) {
+        NSString* tag = [tags objectAtIndex:i];
+        NSString* val = [[self elementForName:tag] stringValue];
+        [geoVals addObject:[NSArray arrayWithObjects:tag, val, nil]];
+    }
+    return geoVals;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)publish:(XMPPClient*)client forAccount:(AccountModel*)account withData:(XMPPGeoLoc*)data {
     XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:[account pubSubService] node:[account geoLocPubSubNode] andData:data];
     [client send:iq andDelegateResponse:[[[XMPPPubSubGeoLocDelegate alloc] init] autorelease]];

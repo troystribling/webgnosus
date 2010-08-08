@@ -14,6 +14,7 @@
 #import "XDataArrayMessageView.h"
 #import "XDataHashMessageView.h"
 #import "XDataArrayHashMessageView.h"
+#import "GeoLocMessageView.h"
 #import "XMPPxData.h"
 #import "MessageModel.h"
 #import "UserModel.h"
@@ -54,6 +55,8 @@ typedef enum tagCommandDataType {
         view = [EntryMessageView viewForMessage:message];
     } else if (message.textType ==  MessageTextTypeEventText) {
         view = [BodyMessageView  viewForMessage:message];
+    } else if (message.textType ==  MessageTextTypeGeoLocData) {
+        view = [GeoLocMessageView  viewForMessage:message];
     } else {
         view = [BodyMessageView  viewForMessage:message];
     }
@@ -92,10 +95,11 @@ typedef enum tagCommandDataType {
 + (CommandDataType)identifyXDataType:(XMPPxData*)data {
     CommandDataType dataType = CommandDataUnknown;
     if (data) {
-        NSInteger fields = [[data fieldsToArrayOfHashes] count];
+        NSArray* fieldsArray = [data fieldsToArrays];
+        NSInteger fields = [fieldsArray count];
         NSInteger items = [[data items] count];
         if (fields == 1) {
-            NSInteger vals = [[[[data fieldsToArrayOfHashes] objectAtIndex:0] lastObject] count];
+            NSInteger vals = [[[fieldsArray objectAtIndex:0] lastObject] count];
             if (vals > 1) {
                 dataType = CommandDataArray;
             } else {

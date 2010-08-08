@@ -70,6 +70,7 @@
 		0566456A11FC88CD008E0FF9 /* UICustomSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 056644D011FC88CD008E0FF9 /* UICustomSwitch.m */; };
 		0566BBAC11F91CB80037D47F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0566BBAB11F91CB80037D47F /* CFNetwork.framework */; };
 		0568A9371205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0568A9361205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m */; };
+		05699177120DB410002D5EED /* GeoLocMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05699176120DB410002D5EED /* GeoLocMessageView.m */; };
 		056B5CC412047FED002F62D4 /* XMPPCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C4F12047FED002F62D4 /* XMPPCommand.m */; };
 		056B5CC512047FED002F62D4 /* XMPPCommandDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C5112047FED002F62D4 /* XMPPCommandDelegate.m */; };
 		056B5CC612047FED002F62D4 /* XMPPxData.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C5312047FED002F62D4 /* XMPPxData.m */; };
@@ -343,6 +344,8 @@
 		0566BBAB11F91CB80037D47F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0568A9351205E17600FF5393 /* XMPPPubSubGeoLocDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubGeoLocDelegate.h; sourceTree = "<group>"; };
 		0568A9361205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubGeoLocDelegate.m; sourceTree = "<group>"; };
+		05699175120DB410002D5EED /* GeoLocMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoLocMessageView.h; sourceTree = "<group>"; };
+		05699176120DB410002D5EED /* GeoLocMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoLocMessageView.m; sourceTree = "<group>"; };
 		056B5C4E12047FED002F62D4 /* XMPPCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCommand.h; sourceTree = "<group>"; };
 		056B5C4F12047FED002F62D4 /* XMPPCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPCommand.m; sourceTree = "<group>"; };
 		056B5C5012047FED002F62D4 /* XMPPCommandDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPCommandDelegate.h; sourceTree = "<group>"; };
@@ -621,6 +624,8 @@
 				050007411093F1260046D0BC /* BodyMessageView.m */,
 				050007241093EE390046D0BC /* EntryMessageView.h */,
 				050007251093EE390046D0BC /* EntryMessageView.m */,
+				05699175120DB410002D5EED /* GeoLocMessageView.h */,
+				05699176120DB410002D5EED /* GeoLocMessageView.m */,
 				050007261093EE390046D0BC /* MessageViewFactory.h */,
 				050007271093EE390046D0BC /* MessageViewFactory.m */,
 				050007281093EE390046D0BC /* XDataArrayHashMessageView.h */,
@@ -1526,6 +1531,7 @@
 				056C649E1204FDD500F84AEA /* XMPPTimestamp.m in Sources */,
 				0568A9371205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m in Sources */,
 				059AE684120D127F00990B14 /* GeoLocMessageCell.m in Sources */,
+				05699177120DB410002D5EED /* GeoLocMessageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
