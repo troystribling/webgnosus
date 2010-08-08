@@ -80,6 +80,11 @@
 #define kSERVICE_CELL_HEIGHT                    45.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// display mode setting used in Events View for geoloc node
+#define kEVENTS_MODE                              0
+#define kGEOLOC_MODE                              1
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // adjust message size for edit mode when cell has status indicator
 #define kLARGE_MESSAGE_WITH_STATUS_WIDTH        235.0
 #define kSMALL_MESSAGE_WITH_STATUS_WIDTH        180.0

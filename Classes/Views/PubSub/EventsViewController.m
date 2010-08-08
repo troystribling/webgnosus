@@ -13,6 +13,7 @@
 #import "ServiceItemModel.h"
 #import "MessageCellFactory.h"
 #import "SectionViewController.h"
+#import "SegmentedCycleList.h"
 #import "EventMessageViewController.h"
 #import "PubMessageCache.h"
 #import "SubMessageCache.h"
@@ -29,6 +30,7 @@
 - (void)removeDelgate;
 - (void)loadAccount;
 - (void)loadMessages;
+- (void)createSegementedController;
 
 @end
 
@@ -96,6 +98,19 @@
     [self.tableView reloadData];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)createSegementedController {
+    if ([self.node isEqualToString:[self.account geoLocPubSubNode]]) {
+        CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
+        self.eventType = kEVENTS_MODE;
+        SegmentedCycleList* segmentControl = 
+            [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Events", @"Map", nil] withValueAtIndex:kEVENTS_MODE andRect:rect];
+        segmentControl.delegate = self;
+        self.navigationItem.titleView = segmentControl;
+        [segmentControl release];
+    }
+}
+
 //===================================================================================================================================
 #pragma mark XMPPClientDelegate
 
@@ -134,6 +149,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
+    [self createSegementedController];
     [self addDelgates];
     self.navigationItem.title = @"Events";
     [self loadEvents];
