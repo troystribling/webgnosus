@@ -44,40 +44,47 @@
 #define kXDATA_MESSAGE_CELL_Y_OFFSET            30.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+// MessageCell configuration
+#define kMESSAGE_CELL_FONT_SIZE 17.0
+#define kMESSAGE_CELL_HEIGHT_PAD 30.0
+#define kLOAD_MESSAGE_CELL_HEIGHT 50.0
+#define kMESSAGE_CELL_X_OFFSET 20.0
+#define kMESSAGE_CELL_Y_OFFSET 20.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// ServiceMessageViewController configurations
+#define kXDATA_SERVICE_MESSAGE_X_OFFSET 20.0
+#define kXDATA_SERVICE_MESSAGE_Y_OFFSET 35.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// default configurations used by MessageCellFactory
+#define kMESSAGE_CELL_HEIGHT_DEFAULT 30.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// display mode setting used in RosterItemViewController and RosterViewController
+#define kCONTACTS_MODE 0
+#define kRESOURCE_MODE 1
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+// display mode setting used in PubSubViewController and cell height
+#define kSUB_MODE 0
+#define kPUB_MODE 1
+#define kSUB_CELL_HEIGHT 55.0
+#define kPUB_CELL_HEIGHT 45.0
+#define kSERVICE_CELL_HEIGHT 45.0
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 // GeoLocMessageCell configurations
 #define kGEOLOC_MESSAGE_CELL_HEIGHT_PAD         40.0
 #define kGEOLOC_MESSAGE_CELL_X_OFFSET           20.0
 #define kGEOLOC_MESSAGE_CELL_Y_OFFSET           30.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// MessageCell configuration
-#define kMESSAGE_CELL_FONT_SIZE                 17.0
-#define kMESSAGE_CELL_HEIGHT_PAD                30.0
-#define kLOAD_MESSAGE_CELL_HEIGHT               50.0
-#define kMESSAGE_CELL_X_OFFSET                  20.0
-#define kMESSAGE_CELL_Y_OFFSET                  20.0
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// ServiceMessageViewController configurations
-#define kXDATA_SERVICE_MESSAGE_X_OFFSET         20.0
-#define kXDATA_SERVICE_MESSAGE_Y_OFFSET         35.0
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// default configurations used by MessageCellFactory
-#define kMESSAGE_CELL_HEIGHT_DEFAULT            30.0    
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// display mode setting used in RosterItemViewController and RosterViewController
-#define kCONTACTS_MODE                          0
-#define kRESOURCE_MODE                          1
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-// display mode setting used in PubSubViewController and cell height
-#define kSUB_MODE                               0
-#define kPUB_MODE                               1
-#define kSUB_CELL_HEIGHT                        55.0
-#define kPUB_CELL_HEIGHT                        45.0
-#define kSERVICE_CELL_HEIGHT                    45.0
+// GeoLoc Data
+#define kEARTHS_RADIUS_METERS                   6357000.0
+#define kRADIANS_PER_DEGREE                     0.01745329
+#define kMETERS_PER_DEGREE_LAT                  110950.0
+#define k_GEOLOC_ACCURACY_SCALE                 10.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // display mode setting used in Events View for geoloc node

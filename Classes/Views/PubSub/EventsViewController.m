@@ -118,17 +118,25 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addMapView {
-    [self.view addSubview:self.map];
     MessageModel* geoLocMessage = [MessageModel findLatestGeoLocMessage];
     if (geoLocMessage) {
         XMPPGeoLoc* geoLoc = [geoLocMessage parseGeoLocMessage];
         MKCoordinateRegion newRegion;
-        newRegion.center.latitude = [geoLoc lat];
-        newRegion.center.longitude = [geoLoc lon];
-        newRegion.span.latitudeDelta = 0.112872;
-        newRegion.span.longitudeDelta = 0.109863;    
-        [self.map setRegion:newRegion animated:YES];    
+        double lat = [geoLoc lat];
+        double lon = [geoLoc lon];
+        double lonm = abs(kRADIANS_PER_DEGREE*kEARTHS_RADIUS_METERS*sin(kRADIANS_PER_DEGREE*lon));
+        double accuracy = [geoLoc accuracy];
+        double displayAspect = self.view.frame.size.width/self.view.frame.size.height;
+        double lat_delta = k_GEOLOC_ACCURACY_SCALE*accuracy/kMETERS_PER_DEGREE_LAT;
+        double lon_delta = displayAspect*k_GEOLOC_ACCURACY_SCALE*accuracy/lonm;
+        newRegion.center.latitude = lat;
+        newRegion.center.longitude = lon;        
+        newRegion.span.latitudeDelta = lat_delta;
+        newRegion.span.longitudeDelta = lon_delta;    
+        [self.map setRegion:newRegion animated:NO];    
+        self.map.showsUserLocation = YES;
     }
+    [self.view addSubview:self.map];
 }
      
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -195,6 +203,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidDisappear:(BOOL)animated {
+    if (self.displayType == kGEOLOC_MODE) {
+        [self removeMapView];
+    }        
 	[super viewDidDisappear:animated];
 }
 
