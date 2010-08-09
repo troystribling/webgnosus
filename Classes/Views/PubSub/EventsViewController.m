@@ -124,11 +124,12 @@
         MKCoordinateRegion newRegion;
         double lat = [geoLoc lat];
         double lon = [geoLoc lon];
-        double lonm = abs(kRADIANS_PER_DEGREE*kEARTHS_RADIUS_METERS*sin(kRADIANS_PER_DEGREE*lon));
         double accuracy = [geoLoc accuracy];
+        double meters_per_degree_lon = abs(kRADIANS_PER_DEGREE*kEARTHS_RADIUS_METERS*sin(kRADIANS_PER_DEGREE*lon));
+        double display_scale = MAX(kGEOLOC_ACCURACY_SCALE*accuracy, kMAP_SCALE_MIN);
         double displayAspect = self.view.frame.size.width/self.view.frame.size.height;
-        double lat_delta = k_GEOLOC_ACCURACY_SCALE*accuracy/kMETERS_PER_DEGREE_LAT;
-        double lon_delta = displayAspect*k_GEOLOC_ACCURACY_SCALE*accuracy/lonm;
+        double lat_delta = display_scale/kMETERS_PER_DEGREE_LAT;
+        double lon_delta = displayAspect*display_scale/meters_per_degree_lon;
         newRegion.center.latitude = lat;
         newRegion.center.longitude = lon;        
         newRegion.span.latitudeDelta = lat_delta;

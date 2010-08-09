@@ -84,7 +84,8 @@
 #define kEARTHS_RADIUS_METERS                   6357000.0
 #define kRADIANS_PER_DEGREE                     0.01745329
 #define kMETERS_PER_DEGREE_LAT                  110950.0
-#define k_GEOLOC_ACCURACY_SCALE                 10.0
+#define kGEOLOC_ACCURACY_SCALE                  10.0
+#define kMAP_SCALE_MIN                          1000.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // display mode setting used in Events View for geoloc node
