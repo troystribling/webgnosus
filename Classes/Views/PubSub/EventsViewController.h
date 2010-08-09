@@ -8,6 +8,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 #import "GeoLocManager.h"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -19,20 +20,24 @@
 @interface EventsViewController : UITableViewController <GeoLocUpdateDelegate> {
     MessageCache* events;
     AccountModel* account;
+    MKMapView* map;
     NSString* service;
     NSString* node;
     NSString* name;
     NSInteger eventType;
+    NSInteger displayType;
 	UIBarButtonItem* addEventButton;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) MessageCache* events;
 @property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) MKMapView* map;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, assign) NSInteger eventType;
+@property (nonatomic, assign) NSInteger displayType;
 @property (nonatomic, retain) UIBarButtonItem* addEventButton;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

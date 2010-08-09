@@ -42,6 +42,7 @@
 		0558416D120246FD00989B9D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558416C120246FD00989B9D /* CoreLocation.framework */; };
 		056324081078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
+		05645BBF120F2BAC0037318C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05645BBE120F2BAC0037318C /* MapKit.framework */; };
 		0566454F11FC88CD008E0FF9 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0566449111FC88CD008E0FF9 /* AsyncSocket.m */; };
 		0566455011FC88CD008E0FF9 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0566449311FC88CD008E0FF9 /* AsyncUdpSocket.m */; };
 		0566455111FC88CD008E0FF9 /* NSObjectWebgnosus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0566449611FC88CD008E0FF9 /* NSObjectWebgnosus.m */; };
@@ -287,6 +288,7 @@
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
 		0563240C1078290A00563274 /* EventMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventMessageViewController.xib; sourceTree = "<group>"; };
+		05645BBE120F2BAC0037318C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0566449011FC88CD008E0FF9 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		0566449111FC88CD008E0FF9 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		0566449211FC88CD008E0FF9 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -611,6 +613,7 @@
 				05706DF811F802E300B0154F /* libidn.a in Frameworks */,
 				0566BBAC11F91CB80037D47F /* CFNetwork.framework in Frameworks */,
 				0558416D120246FD00989B9D /* CoreLocation.framework in Frameworks */,
+				05645BBF120F2BAC0037318C /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1263,6 +1266,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				0566BBAB11F91CB80037D47F /* CFNetwork.framework */,
 				0558416C120246FD00989B9D /* CoreLocation.framework */,
+				05645BBE120F2BAC0037318C /* MapKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

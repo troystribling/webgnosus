@@ -80,6 +80,7 @@ typedef enum tagMessageTextType {
 + (NSMutableArray*)findAllByJid:(NSString*)requestJID andAccount:(AccountModel*)requestAccount withLimit:(NSInteger)requestLimit;
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId andAccount:(AccountModel*)requestAccount;
 + (MessageModel*)findByPk:(NSInteger)requestPk;
++ (MessageModel*)findLatestGeoLocMessage;
 + (void)markReadByFromJid:(NSString*)requestFromJid textType:(MessageTextType)requestTextType andAccount:(AccountModel*)requestAccount;
 + (void)destroyAllByAccount:(AccountModel*)requestAccount;
 + (void)insert:(XMPPClient*)client message:(XMPPMessage*)message;

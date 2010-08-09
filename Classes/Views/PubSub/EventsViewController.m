@@ -20,6 +20,7 @@
 #import "XMPPClientManager.h"
 #import "XMPPClient.h"
 #import "XMPPJID.h"
+#import "XMPPGeoLoc.h"
 #import "XMPPMessage.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +32,8 @@
 - (void)loadAccount;
 - (void)loadMessages;
 - (void)createSegementedController;
+- (void)addMapView;
+- (void)removeMapView;
 
 @end
 
@@ -40,10 +43,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize events;
 @synthesize service;
+@synthesize map;
 @synthesize node;
 @synthesize name;
 @synthesize account;
 @synthesize eventType;
+@synthesize displayType;
 @synthesize addEventButton;
 
 //===================================================================================================================================
@@ -102,13 +107,33 @@
 - (void)createSegementedController {
     if ([self.node isEqualToString:[self.account geoLocPubSubNode]]) {
         CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
-        self.eventType = kEVENTS_MODE;
+        self.displayType = kEVENTS_MODE;
         SegmentedCycleList* segmentControl = 
             [[SegmentedCycleList alloc] init:[NSMutableArray arrayWithObjects:@"Events", @"Map", nil] withValueAtIndex:kEVENTS_MODE andRect:rect];
         segmentControl.delegate = self;
         self.navigationItem.titleView = segmentControl;
         [segmentControl release];
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)addMapView {
+    [self.view addSubview:self.map];
+    MessageModel* geoLocMessage = [MessageModel findLatestGeoLocMessage];
+    if (geoLocMessage) {
+        XMPPGeoLoc* geoLoc = [geoLocMessage parseGeoLocMessage];
+        MKCoordinateRegion newRegion;
+        newRegion.center.latitude = [geoLoc lat];
+        newRegion.center.longitude = [geoLoc lon];
+        newRegion.span.latitudeDelta = 0.112872;
+        newRegion.span.longitudeDelta = 0.109863;    
+        [self.map setRegion:newRegion animated:YES];    
+    }
+}
+     
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeMapView {
+    [self.map removeFromSuperview];
 }
 
 //===================================================================================================================================
@@ -136,6 +161,7 @@
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle  {
     if (self = [super initWithNibName:nibName bundle:nibBundle]) {
         self.addEventButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendEventButtonWasPressed:)];
+        self.map = [[MKMapView alloc] initWithFrame:self.view.frame];
     }
     return self;
 }
@@ -180,6 +206,19 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+//===================================================================================================================================
+#pragma mark SegmentedCycleList Delegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)selectedItemChanged:(SegmentedCycleList*)sender {
+    self.displayType = sender.selectedItemIndex;
+    if (self.displayType == kEVENTS_MODE) {
+        [self removeMapView];
+    } else {
+        [self addMapView];
+    }
 }
 
 //===================================================================================================================================

@@ -206,6 +206,17 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (MessageModel*)findLatestGeoLocMessage {
+	NSString* selectStatement = @"SELECT * FROM messages WHERE pk = (SELECT MAX(pk) FROM messages WHERE node = '/home/test.gnos.us/troy/geoloc')";
+	MessageModel* model = [[[MessageModel alloc] init] autorelease];
+	[[WebgnosusDbi instance] selectForModel:[MessageModel class] withStatement:selectStatement andOutputTo:model];
+    if (model.pk == 0) {
+        model = nil;
+    }
+	return model;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (MessageModel*)findEventByNode:(NSString*)requestNode andItemId:(NSString*)requestItemId andAccount:(AccountModel*)requestAccount {
 	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM messages WHERE node = '%@' AND itemId = '%@' AND accountPk = %d", requestNode, requestItemId, requestAccount.pk];
 	MessageModel* model = [[[MessageModel alloc] init] autorelease];

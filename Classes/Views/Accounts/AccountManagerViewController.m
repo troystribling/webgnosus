@@ -36,7 +36,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)inView:(UIView*)containedView {
-    [[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:containedView];
+    [[[AccountManagerViewController alloc] initWithNibName:@"AccountManagerViewController" bundle:nil inView:containedView] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
