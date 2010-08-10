@@ -95,12 +95,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadEvents {
-    if (self.eventType == kPUB_MODE) { 
-        self.events = [[PubMessageCache alloc] initWithNode:self.node andAccount:self.account];
-    } else {
-        self.events = [[SubMessageCache alloc] initWithNode:self.node andAccount:self.account];
+    if (self.displayType == kEVENTS_MODE) {
+        if (self.eventType == kPUB_MODE) { 
+            self.events = [[PubMessageCache alloc] initWithNode:self.node andAccount:self.account];
+        } else {
+            self.events = [[SubMessageCache alloc] initWithNode:self.node andAccount:self.account];
+        }
+        [self.tableView reloadData];
     }
-    [self.tableView reloadData];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
