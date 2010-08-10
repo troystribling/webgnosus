@@ -20,7 +20,7 @@
 @interface EventsViewController : UITableViewController <GeoLocUpdateDelegate> {
     MessageCache* events;
     AccountModel* account;
-    MKMapView* map;
+    MKMapView* geoLocMap;
     NSString* service;
     NSString* node;
     NSString* name;
@@ -32,7 +32,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) MessageCache* events;
 @property (nonatomic, retain) AccountModel* account;
-@property (nonatomic, retain) MKMapView* map;
+@property (nonatomic, retain) MKMapView* geoLocMap;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* name;

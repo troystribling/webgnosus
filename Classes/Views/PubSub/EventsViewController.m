@@ -31,7 +31,7 @@
 - (void)removeDelgate;
 - (void)loadAccount;
 - (void)loadMessages;
-- (void)createSegementedController;
+- (void)createNavBarButtons;
 - (void)addMapView;
 - (void)removeMapView;
 
@@ -43,7 +43,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize events;
 @synthesize service;
-@synthesize map;
+@synthesize geoLocMap;
 @synthesize node;
 @synthesize name;
 @synthesize account;
@@ -104,7 +104,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)createSegementedController {
+- (void)createNavBarButtons {
     if ([self.node isEqualToString:[self.account geoLocPubSubNode]]) {
         CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
         self.displayType = kEVENTS_MODE;
@@ -113,7 +113,11 @@
         segmentControl.delegate = self;
         self.navigationItem.titleView = segmentControl;
         [segmentControl release];
+    } else {
+        [self createAddEventButton];
+        self.navigationItem.title = @"Events";
     }
+
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -134,15 +138,15 @@
         newRegion.center.longitude = lon;        
         newRegion.span.latitudeDelta = lat_delta;
         newRegion.span.longitudeDelta = lon_delta;    
-        [self.map setRegion:newRegion animated:NO];    
-        self.map.showsUserLocation = YES;
+        [self.geoLocMap setRegion:newRegion animated:NO];    
+        self.geoLocMap.showsUserLocation = YES;
     }
-    [self.view addSubview:self.map];
+    [self.view addSubview:self.geoLocMap];
 }
      
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)removeMapView {
-    [self.map removeFromSuperview];
+    [self.geoLocMap removeFromSuperview];
 }
 
 //===================================================================================================================================
@@ -170,23 +174,21 @@
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle  {
     if (self = [super initWithNibName:nibName bundle:nibBundle]) {
         self.addEventButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendEventButtonWasPressed:)];
-        self.map = [[MKMapView alloc] initWithFrame:self.view.frame];
+        self.geoLocMap = [[MKMapView alloc] initWithFrame:self.view.frame];
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {
-    [self createAddEventButton];
     [super viewDidLoad];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
     [self loadAccount];
-    [self createSegementedController];
+    [self createNavBarButtons];
     [self addDelgates];
-    self.navigationItem.title = @"Events";
     [self loadEvents];
     [super viewWillAppear:animated];
 }
