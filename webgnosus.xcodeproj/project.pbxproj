@@ -38,7 +38,6 @@
 		0557AC8A11FE590C003B8A82 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */; };
 		0557AC8B11FE590C003B8A82 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6D11FE590C003B8A82 /* NSDataAdditions.m */; };
 		0557AC8C11FE590C003B8A82 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6F11FE590C003B8A82 /* NSXMLElementAdditions.m */; };
-		0557AD4811FE6DC1003B8A82 /* LibIDN.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AD4411FE6DC1003B8A82 /* LibIDN.m */; };
 		0558416D120246FD00989B9D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558416C120246FD00989B9D /* CoreLocation.framework */; };
 		056324081078287800563274 /* EventMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056324061078287800563274 /* EventMessageViewController.m */; };
 		0563240D1078290A00563274 /* EventMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0563240C1078290A00563274 /* EventMessageViewController.xib */; };
@@ -130,7 +129,6 @@
 		056B5D08120482B1002F62D4 /* XMPPGeoLoc.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5D05120482B1002F62D4 /* XMPPGeoLoc.m */; };
 		056B5D09120482B1002F62D4 /* XMPPGeoLocUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5D07120482B1002F62D4 /* XMPPGeoLocUpdate.m */; };
 		056C649E1204FDD500F84AEA /* XMPPTimestamp.m in Sources */ = {isa = PBXBuildFile; fileRef = 056C649D1204FDD500F84AEA /* XMPPTimestamp.m */; };
-		05706DF811F802E300B0154F /* libidn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05706DE311F8017F00B0154F /* libidn.a */; };
 		057BB16410587547006389D9 /* tabbar-events.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16010587547006389D9 /* tabbar-events.png */; };
 		057BB16510587547006389D9 /* tabbar-services.png in Resources */ = {isa = PBXBuildFile; fileRef = 057BB16110587547006389D9 /* tabbar-services.png */; };
 		057BB1B810588788006389D9 /* PubSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 057BB1B610588788006389D9 /* PubSubViewController.xib */; };
@@ -280,10 +278,6 @@
 		0557AC6D11FE590C003B8A82 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
 		0557AC6E11FE590C003B8A82 /* NSXMLElementAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSXMLElementAdditions.h; sourceTree = "<group>"; };
 		0557AC6F11FE590C003B8A82 /* NSXMLElementAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSXMLElementAdditions.m; sourceTree = "<group>"; };
-		0557AD4211FE6DC1003B8A82 /* idn-int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "idn-int.h"; sourceTree = "<group>"; };
-		0557AD4311FE6DC1003B8A82 /* LibIDN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibIDN.h; sourceTree = "<group>"; };
-		0557AD4411FE6DC1003B8A82 /* LibIDN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibIDN.m; sourceTree = "<group>"; };
-		0557AD4511FE6DC1003B8A82 /* stringprep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stringprep.h; sourceTree = "<group>"; };
 		0558416C120246FD00989B9D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		056324051078287800563274 /* EventMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventMessageViewController.h; sourceTree = "<group>"; };
 		056324061078287800563274 /* EventMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventMessageViewController.m; sourceTree = "<group>"; };
@@ -464,7 +458,6 @@
 		056B5D07120482B1002F62D4 /* XMPPGeoLocUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPGeoLocUpdate.m; sourceTree = "<group>"; };
 		056C649C1204FDD500F84AEA /* XMPPTimestamp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPTimestamp.h; sourceTree = "<group>"; };
 		056C649D1204FDD500F84AEA /* XMPPTimestamp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPTimestamp.m; sourceTree = "<group>"; };
-		05706DE311F8017F00B0154F /* libidn.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libidn.a; sourceTree = "<group>"; };
 		057BB16010587547006389D9 /* tabbar-events.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-events.png"; sourceTree = "<group>"; };
 		057BB16110587547006389D9 /* tabbar-services.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-services.png"; sourceTree = "<group>"; };
 		057BB1B610588788006389D9 /* PubSubViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PubSubViewController.xib; sourceTree = "<group>"; };
@@ -610,7 +603,6 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				05C6E9730F0F197B009BD7C8 /* libxml2.2.dylib in Frameworks */,
 				051AB47F0F1067BA00DD01DC /* libsqlite3.dylib in Frameworks */,
-				05706DF811F802E300B0154F /* libidn.a in Frameworks */,
 				0566BBAC11F91CB80037D47F /* CFNetwork.framework in Frameworks */,
 				0558416D120246FD00989B9D /* CoreLocation.framework in Frameworks */,
 				05645BBF120F2BAC0037318C /* MapKit.framework in Frameworks */,
@@ -701,10 +693,6 @@
 		0557AC6411FE590C003B8A82 /* XmppFramework */ = {
 			isa = PBXGroup;
 			children = (
-				0557AD4211FE6DC1003B8A82 /* idn-int.h */,
-				0557AD4311FE6DC1003B8A82 /* LibIDN.h */,
-				0557AD4411FE6DC1003B8A82 /* LibIDN.m */,
-				0557AD4511FE6DC1003B8A82 /* stringprep.h */,
 				0557AC6A11FE590C003B8A82 /* MulticastDelegate.h */,
 				0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */,
 				0557AC6C11FE590C003B8A82 /* NSDataAdditions.h */,
@@ -1258,7 +1246,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				05706DE311F8017F00B0154F /* libidn.a */,
 				051AB47E0F1067BA00DD01DC /* libsqlite3.dylib */,
 				05C6E9720F0F197B009BD7C8 /* libxml2.2.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -1474,7 +1461,6 @@
 				0557AC8A11FE590C003B8A82 /* MulticastDelegate.m in Sources */,
 				0557AC8B11FE590C003B8A82 /* NSDataAdditions.m in Sources */,
 				0557AC8C11FE590C003B8A82 /* NSXMLElementAdditions.m in Sources */,
-				0557AD4811FE6DC1003B8A82 /* LibIDN.m in Sources */,
 				056B5CC412047FED002F62D4 /* XMPPCommand.m in Sources */,
 				056B5CC512047FED002F62D4 /* XMPPCommandDelegate.m in Sources */,
 				056B5CC612047FED002F62D4 /* XMPPxData.m in Sources */,

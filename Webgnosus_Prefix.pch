@@ -9,15 +9,17 @@
 #endif
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// GridView configuration
-#define kGRID_BORDER_WIDTH                      2.0
+// GnosusXMPP Framework
+//-----------------------------------------------------------------------------------------------------------------------------------
+// Define the debugging state
+#define DEBUG      YES
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-//LabelGridView configuration
-#define kLABEL_GRID_FONT_SIZE                   13.0
-#define kLABEL_GRID_FONT                        "Helvetica"
-#define kLABEL_GRID_HEIGHT                      12.0
-#define kLABEL_OFFSET                           5.0
+// Global configuration 
+#define kGRID_BORDER_WIDTH                      2.0
+#define kDISPLAY_WIDTH                          270.0      
+#define kMESSAGE_CACHE_SIZE                     10         
+#define kCELL_WIDTH                             320.0       
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Define application configuration
@@ -28,15 +30,19 @@
 #define kAPP_TYPE       "handheld"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// Define the debugging state
-#define DEBUG      YES
+//LabelGridView configuration
+#define kLABEL_GRID_FONT_SIZE                   13.0
+#define kLABEL_GRID_FONT                        "Helvetica"
+#define kLABEL_GRID_HEIGHT                      12.0
+#define kLABEL_OFFSET                           5.0
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// Global configuration 
-#define kMESSAGE_CACHE_SIZE                     10         
-#define kCELL_WIDTH                             320.0       
-#define kDISPLAY_WIDTH                          270.0      
+//LocationManager configuration
+#define kLOCATION_MANAGER_ACCURACY              10.0
+#define kLOCATION_MANAGER_DISTANCE_FILTER       20.0
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+// Application
 //-----------------------------------------------------------------------------------------------------------------------------------
 // XDataMessageCell configurations
 #define kXDATA_MESSAGE_CELL_HEIGHT_PAD          40.0
@@ -127,8 +133,4 @@
 #define kCOMMAND_FORM_BOOLEAN_SEPERATOR         10.0
 #define kCOMMAND_FORM_FIXED_VIEW_YOFFSET        3.0
 
-//-----------------------------------------------------------------------------------------------------------------------------------
-//LocationManager configuration
-#define kLOCATION_MANAGER_ACCURACY              10.0
-#define kLOCATION_MANAGER_DISTANCE_FILTER       20.0
 

@@ -1,6 +1,5 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #import "XMPPJID.h"
-#import "LibIDN.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @implementation XMPPJID
@@ -67,14 +66,10 @@
 		}
 	}
 	
-	NSString *prepUser = [LibIDN prepNode:rawUser];
-	NSString *prepDomain = [LibIDN prepDomain:rawDomain];
-	NSString *prepResource = [LibIDN prepResource:rawResource];
-	
-	if([XMPPJID validateUser:prepUser domain:prepDomain resource:prepResource]) {
-		*user = prepUser;
-		*domain = prepDomain;
-		*resource = prepResource;
+	if([XMPPJID validateUser:rawUser domain:rawDomain resource:rawResource]) {
+		*user = rawUser;
+		*domain = rawDomain;
+		*resource = rawResource;
 		
 		return YES;
 	}
@@ -122,15 +117,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPJID*)jidWithUser:(NSString*)user domain:(NSString*)domain resource:(NSString*)resource
 {
-	NSString *prepUser = [LibIDN prepNode:user];
-	NSString *prepDomain = [LibIDN prepDomain:domain];
-	NSString *prepResource = [LibIDN prepResource:resource];
-
-	if([XMPPJID validateUser:prepUser domain:prepDomain resource:prepResource]) {
+	if([XMPPJID validateUser:user domain:domain resource:resource]) {
 		XMPPJID *jid = [[XMPPJID alloc] init];
-		jid->user = [prepUser copy];
-		jid->domain = [prepDomain copy];
-		jid->resource = [prepResource copy];
+		jid->user = [user copy];
+		jid->domain = [domain copy];
+		jid->resource = [resource copy];
 		
 		return [jid autorelease];
 	}
