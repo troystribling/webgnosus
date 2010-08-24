@@ -149,7 +149,6 @@
 		05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */; };
 		05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C850FBB15C60018AEEF /* RosterCell.xib */; };
 		05DC8C8B0FBB15C60018AEEF /* XDataMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */; };
-		05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */; };
 		05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */; };
 		05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */; };
 		05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */; };
@@ -482,7 +481,6 @@
 		05DC8C840FBB15C60018AEEF /* BodyMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BodyMessageCell.xib; sourceTree = "<group>"; };
 		05DC8C850FBB15C60018AEEF /* RosterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterCell.xib; sourceTree = "<group>"; };
 		05DC8C860FBB15C60018AEEF /* XDataMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDataMessageCell.xib; sourceTree = "<group>"; };
-		05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
 		05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 		05DC8C960FBB15EB0018AEEF /* AgentXmppViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AgentXmppViewController.xib; sourceTree = "<group>"; };
 		05DC8C970FBB15EB0018AEEF /* RosterItemViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RosterItemViewController.xib; sourceTree = "<group>"; };
@@ -1037,7 +1035,6 @@
 			isa = PBXGroup;
 			children = (
 				05CF616D1048B141003E012F /* AccountManagerViewController.xib */,
-				05DC8C930FBB15EB0018AEEF /* AccountsViewController.xib */,
 				05DC8C940FBB15EB0018AEEF /* AddAccountViewController.xib */,
 				05F24BD31054077F000C886E /* AddContactViewController.xib */,
 				05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */,
@@ -1309,7 +1306,6 @@
 				05DC8C890FBB15C60018AEEF /* BodyMessageCell.xib in Resources */,
 				05DC8C8A0FBB15C60018AEEF /* RosterCell.xib in Resources */,
 				05DC8C8B0FBB15C60018AEEF /* XDataMessageCell.xib in Resources */,
-				05DC8C9F0FBB15EB0018AEEF /* AccountsViewController.xib in Resources */,
 				05DC8CA00FBB15EB0018AEEF /* AddAccountViewController.xib in Resources */,
 				05DC8CA20FBB15EB0018AEEF /* AgentXmppViewController.xib in Resources */,
 				05DC8CA30FBB15EB0018AEEF /* RosterItemViewController.xib in Resources */,
