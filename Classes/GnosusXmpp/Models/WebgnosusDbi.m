@@ -11,9 +11,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static WebgnosusDbi* thisWebgnosusDbi = nil;
-static NSString* dbResourceName = @"webgnosus";
 static NSString* dbResourceType = @"db";
-static NSString* dbFileName = @"webgnosus.db";
+static NSString* dbResourceName = kRESOURCE_NAME;
+static NSString* dbFileName = kDATABASE_NAME;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface WebgnosusDbi (PrivateAPI)
