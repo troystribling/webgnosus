@@ -34,7 +34,7 @@ static NSString* dbFileName = kDATABASE_NAME;
 + (WebgnosusDbi*)instance {	
     @synchronized(self) {
         if (thisWebgnosusDbi == nil) {
-            [[self alloc] init]; 
+            thisWebgnosusDbi = [[self alloc] init]; 
         }
     }
     return thisWebgnosusDbi;

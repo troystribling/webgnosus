@@ -44,7 +44,6 @@
 @synthesize trackingSwitch;
 @synthesize statusLabel;
 @synthesize managerView;
-@synthesize accountsViewController;
 @synthesize activeAccounts;
 
 //===================================================================================================================================

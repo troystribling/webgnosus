@@ -12,7 +12,6 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class AccountManagerViewController;
-@class AccountsViewController;
 @class SegmentedListPicker;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +26,6 @@
     IBOutlet UISwitch* trackingSwitch;   
     SegmentedListPicker* activeAccounts;
     AccountManagerViewController* managerView;
-    AccountsViewController* accountsViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +39,6 @@
 @property (nonatomic, retain) UISwitch* trackingSwitch;
 @property (nonatomic, retain) SegmentedListPicker* activeAccounts;
 @property (nonatomic, retain) AccountManagerViewController* managerView;
-@property (nonatomic, retain) AccountsViewController* accountsViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)doneButtonPressed:(id)sender;
