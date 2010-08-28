@@ -11,9 +11,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 static WebgnosusDbi* thisWebgnosusDbi = nil;
-static NSString* dbResourceType = @"db";
-static NSString* dbResourceName = kRESOURCE_NAME;
-static NSString* dbFileName = kDATABASE_NAME;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface WebgnosusDbi (PrivateAPI)
@@ -44,10 +41,10 @@ static NSString* dbFileName = kDATABASE_NAME;
 - (BOOL)copyDbFile {	
 	NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentFolderPath = [searchPaths objectAtIndex: 0];
-	dbFilePath = [documentFolderPath stringByAppendingPathComponent:dbFileName];
+	dbFilePath = [documentFolderPath stringByAppendingPathComponent:[NSString stringWithUTF8String:kDATABASE_NAME]];
 	[dbFilePath retain];	
 	if (![[NSFileManager defaultManager] fileExistsAtPath: dbFilePath]) {
-		NSString *backupDbPath = [[NSBundle mainBundle] pathForResource:dbResourceName ofType:dbResourceType];
+		NSString *backupDbPath = [[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:kRESOURCE_NAME] ofType:@"db"];
 		if (backupDbPath == nil) {
 			return NO;
 		} else {

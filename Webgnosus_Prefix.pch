@@ -43,8 +43,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Database configuration 
-#define kRESOURCE_NAME                          @"webgnosus"
-#define kDATABASE_NAME                          @"webgnosus.db"
+#define kRESOURCE_NAME                          "webgnosus"
+#define kDATABASE_NAME                          "webgnosus.db"
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 // Application
