@@ -282,7 +282,7 @@
             messageModel.fromJid = [[iq fromJID] full];
             messageModel.accountPk = account.pk;
             messageModel.toJid = [account fullJID];
-            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.createdAt = [NSDate date];
             messageModel.textType = MessageTextTypeCommandXData;
             messageModel.node = [command node];
             messageModel.itemId = @"-1";
@@ -311,7 +311,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)createdAtAsString {
-    return [self.createdAt description];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+    NSString* dateString = [df stringFromDate:self.createdAt];
+    [df release];
+    return dateString;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -413,28 +417,31 @@
     self.pk = (int)sqlite3_column_int(statement, 0);
     char* messageTextVal = (char*)sqlite3_column_text(statement, 1);
     if (messageTextVal != nil) {		
-        self.messageText = [[NSString alloc] initWithUTF8String:messageTextVal];
+        self.messageText = [NSString stringWithCString:messageTextVal encoding:NSUTF8StringEncoding];
     }
     char* createdAtVal = (char*)sqlite3_column_text(statement, 2);
     if (createdAtVal != nil) {		
-        self.createdAt = [[NSDate alloc] initWithString:[[NSString alloc]initWithUTF8String:createdAtVal]];
+        NSDateFormatter *df = [[NSDateFormatter alloc] init];
+        [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
+        self.createdAt = [df dateFromString:[NSString stringWithCString:createdAtVal encoding:NSUTF8StringEncoding]];
+        [df release];
     }
     char* toJidVal = (char*)sqlite3_column_text(statement, 3);
     if (toJidVal != nil) {		
-        self.toJid = [[NSString alloc] initWithUTF8String:toJidVal];
+        self.toJid = [NSString stringWithCString:toJidVal encoding:NSUTF8StringEncoding];
     }
     char* fromJidVal = (char*)sqlite3_column_text(statement, 4);
     if (fromJidVal != nil) {		
-        self.fromJid = [[NSString alloc] initWithUTF8String:fromJidVal];
+        self.fromJid = [NSString stringWithCString:fromJidVal encoding:NSUTF8StringEncoding];
     }
     self.textType = (int)sqlite3_column_int(statement, 5);
     char* nodeVal = (char*)sqlite3_column_text(statement, 6);
     if (nodeVal != nil) {		
-        self.node = [[NSString alloc] initWithUTF8String:nodeVal];
+        self.node = [NSString stringWithCString:nodeVal encoding:NSUTF8StringEncoding];
     }
     char* itemIdVal = (char*)sqlite3_column_text(statement, 7);
     if (itemIdVal != nil) {		
-        self.itemId = [[NSString alloc] initWithUTF8String:itemIdVal];
+        self.itemId = [NSString stringWithCString:itemIdVal encoding:NSUTF8StringEncoding];
     }
 	[self setMessageReadAsInteger:(int)sqlite3_column_int(statement, 8)];
     self.accountPk = (int)sqlite3_column_int(statement, 9);
