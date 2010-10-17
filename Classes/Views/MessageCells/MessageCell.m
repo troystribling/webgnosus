@@ -29,7 +29,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)setTime:(MessageCell*)cell forMessage:(MessageModel*)message {
     NSRange dateAndTime = {0, 19};
-    cell.dateLabel.text = [[message.createdAt description] substringWithRange:dateAndTime];
+    cell.dateLabel.text = [[message createdAtAsString] substringWithRange:dateAndTime];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
