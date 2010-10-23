@@ -1605,7 +1605,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42048725-DCEF-4565-80FE-1EE6CD420615";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79491088-FF8D-47AA-A356-E1E975CDA985";
 				SDKROOT = iphoneos4.1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1645,6 +1645,7 @@
 					"-lxml2",
 				);
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79491088-FF8D-47AA-A356-E1E975CDA985";
 				SDKROOT = iphoneos4.1;
 			};
 			name = Release;

@@ -45,6 +45,7 @@
 + (ServiceModel*)findIMService:(NSString*)requestJID;
 + (NSMutableArray*)findAll;
 + (NSMutableArray*)findAllByServiceType:(NSString*)requestType;
++ (NSMutableArray*)findAllByServiceCategory:(NSString*)requestCategory;
 + (void)insert:(XMPPDiscoIdentity*)ident forService:(XMPPJID*)serviceJID andNode:(NSString*)serviceNode;
 + (void)destroyAllByDomain:(NSString*)requestService;
     
