@@ -33,7 +33,7 @@
 
 + (void)insert:(XMPPClient*)client pubSubItems:(XMPPPubSubItems*)items fromJID:(XMPPJID*)fromJID withReadFlag:(BOOL)readFlag;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;
-- (UserModel*)findUserModel:(NSString*)jid;
+- (NSString*)sqlEscapeText;
 
 @end
 
@@ -355,16 +355,16 @@
     NSString* insertStatement;
     if (self.node && self.itemId) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, itemId, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', '%@', %d, %d)", 
-                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, [self messageReadAsInteger], self.accountPk];	
+                            [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, [self messageReadAsInteger], self.accountPk];	
     } else if (self.node) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, node, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d, %d)", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, [self messageReadAsInteger], self.accountPk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, [self messageReadAsInteger], self.accountPk];	
     } else if (self.itemId) {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, itemId, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, '%@', %d, %d)", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, [self messageReadAsInteger], self.accountPk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, [self messageReadAsInteger], self.accountPk];	
     } else {
         insertStatement = [NSString stringWithFormat:@"INSERT INTO messages (messageText, createdAt, toJid, fromJid, textType, messageRead, accountPk) values ('%@', '%@', '%@', '%@', %d, %d, %d)", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, [self messageReadAsInteger], self.accountPk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, [self messageReadAsInteger], self.accountPk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -374,16 +374,16 @@
     NSString* updateStatement;
     if (self.node && self.itemId) {
         updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', itemId = '%@', messageRead = '%d', accountPk = %d WHERE pk = %d", 
-                            self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, [self messageReadAsInteger], self.accountPk, self.pk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, self.itemId, [self messageReadAsInteger], self.accountPk, self.pk];	
     } else if (self.node) {
         updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, node = '%@', messageRead = '%d', accountPk = %d WHERE pk = %d", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, [self messageReadAsInteger], self.accountPk, self.pk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.node, [self messageReadAsInteger], self.accountPk, self.pk];	
     } else if (self.itemId) {
         updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, itemId = '%@', messageRead = '%d', accountPk = %d WHERE pk = %d", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, [self messageReadAsInteger], self.accountPk, self.pk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, self.itemId, [self messageReadAsInteger], self.accountPk, self.pk];	
     } else {
         updateStatement = [NSString stringWithFormat:@"UPDATE messages SET messageText = '%@', createdAt = '%@', toJid = '%@', fromJid = '%@', textType = %d, messageRead = '%d', accountPk = %d WHERE pk = %d", 
-                           self.messageText, [self createdAtAsString], self.toJid, self.fromJid, self.textType, [self messageReadAsInteger], self.accountPk, self.pk];	
+                           [self sqlEscapeText], [self createdAtAsString], self.toJid, self.fromJid, self.textType, [self messageReadAsInteger], self.accountPk, self.pk];	
     }
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
@@ -517,6 +517,11 @@
             }
         }
     }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (NSString*)sqlEscapeText {
+    return [self.messageText stringByReplacingOccurrencesOfString:@"'" withString:@"''"];
 }
 
 //===================================================================================================================================
