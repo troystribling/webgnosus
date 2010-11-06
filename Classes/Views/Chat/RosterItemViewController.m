@@ -198,9 +198,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadItems {
     if ([self.selectedMode isEqualToString:@"Chat"]) {
-        self.items = [[ChatMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
+        self.items = [[[ChatMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account] autorelease];
     } else if ([self.selectedMode isEqualToString:@"Commands"]) {
-        self.items = [[CommandResponseMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account];
+        self.items = [[[CommandResponseMessageCache alloc] initWithJid:[self.rosterItem fullJID] andAccount:self.account] autorelease];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         XMPPJID* itemJID = [self.rosterItem toJID];
         self.items = [ServiceItemModel findAllByParentNode:[itemJID pubSubRoot]];

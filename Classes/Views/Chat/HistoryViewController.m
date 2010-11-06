@@ -54,7 +54,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)loadMessages {
-    self.messages = [[HistoryMessageCache alloc] initWithAccount:self.account];
+    self.messages = [[[HistoryMessageCache alloc] initWithAccount:self.account] autorelease];
     [self.tableView reloadData];
 }
 

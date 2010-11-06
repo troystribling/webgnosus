@@ -21,6 +21,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize delegate;
+@synthesize viewName;
 
 //===================================================================================================================================
 #pragma mark TouchImageView
@@ -39,8 +40,13 @@
 #pragma mark UIView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
++ (id)createWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate {
+    return [[TouchImageView alloc] initWithFrame:_frame name:_viewName andDelegate:_delegate];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithFrame:(CGRect)_frame {
+    if (self = [super initWithFrame:_frame]) {
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeCenter;
     }
@@ -48,19 +54,35 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate {
-    if (self = [self initWithFrame:frame]) {
-        self.delegate = initDelegate;
+- (id)initWithFrame:(CGRect)_frame andDelegate:(id)_delegate {
+    if (self = [self initWithFrame:_frame]) {
+        self.delegate = _delegate;
     }
     return self;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithImage:(UIImage*)image andDelegate:(id)initDelegate {
-    if (self = [super initWithImage:image]) {
-        self.delegate = initDelegate;
+- (id)initWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate {
+    if (self = [self initWithFrame:_frame andDelegate:_delegate]) {
+        self.viewName = _viewName;
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithImage:(UIImage*)_image andDelegate:(id)_delegate {
+    if (self = [super initWithImage:_image]) {
+        self.delegate = _delegate;
         self.userInteractionEnabled = YES;
         self.contentMode = UIViewContentModeCenter;
+    }
+    return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (id)initWithImage:(UIImage*)_image name:(NSString*)_viewName andDelegate:(id)_delegate {
+    if (self = [self initWithImage:_image andDelegate:_delegate]) {
+        self.viewName = _viewName;
     }
     return self;
 }

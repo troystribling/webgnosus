@@ -97,9 +97,9 @@
 - (void)loadEvents {
     if (self.displayType == kEVENTS_MODE) {
         if (self.eventType == kPUB_MODE) { 
-            self.events = [[PubMessageCache alloc] initWithNode:self.node andAccount:self.account];
+            self.events = [[[PubMessageCache alloc] initWithNode:self.node andAccount:self.account] autorelease];
         } else {
-            self.events = [[SubMessageCache alloc] initWithNode:self.node andAccount:self.account];
+            self.events = [[[SubMessageCache alloc] initWithNode:self.node andAccount:self.account] autorelease];
         }
         [self.tableView reloadData];
     }

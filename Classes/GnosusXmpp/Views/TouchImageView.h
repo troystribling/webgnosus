@@ -14,15 +14,19 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface TouchImageView : UIImageView {
     id delegate;
+    NSString* viewName;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) id delegate;
+@property (nonatomic, retain) NSString* viewName;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithFrame:(CGRect)frame;
-- (id)initWithFrame:(CGRect)frame andDelegate:(id)initDelegate;
-- (id)initWithImage:(UIImage*)image andDelegate:(id)initDelegate;
++ (id)createWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate;
+- (id)initWithFrame:(CGRect)_frame;
+- (id)initWithFrame:(CGRect)_frame andDelegate:(id)_delegate;
+- (id)initWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate;
+- (id)initWithImage:(UIImage*)_image name:(NSString*)_viewName andDelegate:(id)_delegate;
 
 @end
 
