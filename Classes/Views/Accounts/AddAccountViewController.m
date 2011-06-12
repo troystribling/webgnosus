@@ -20,7 +20,7 @@
 
 - (void)accountConnectionFailed;
 - (BOOL)saveAccount;
-- (void)becomeFirstResponder;
+- (BOOL)becomeFirstResponder;
 
 @end
 
@@ -98,10 +98,12 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (void)becomeFirstResponder {
+- (BOOL)becomeFirstResponder {
     if (self.isFirstAccount) {
         [self.jidTextField becomeFirstResponder]; 
+        return NO;
     }
+    return YES;
 }
 
 //===================================================================================================================================
@@ -109,7 +111,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
-	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
+	if ((self = [super initWithNibName:nibName bundle:nibBundle])) { 
 	} 
 	return self; 
 } 

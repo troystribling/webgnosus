@@ -1565,7 +1565,7 @@
 				);
 				PRODUCT_NAME = web.gnos.us;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B3C0333-B440-4178-90EE-B0FC7820887D";
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Distribution;
@@ -1586,7 +1586,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				SDKROOT = iphonesimulator4.1;
+				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1606,7 +1606,7 @@
 				);
 				PRODUCT_NAME = web.gnos.us;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79491088-FF8D-47AA-A356-E1E975CDA985";
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
