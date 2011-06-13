@@ -58,9 +58,11 @@
 + (NSString*)nodeFromFullNode:(NSString*)fullNode {
     NSString* node = fullNode;
     NSArray* nodeComp = [fullNode componentsSeparatedByString:@"/"];
-    if ([[nodeComp objectAtIndex:1] isEqualToString:@"home"]) {
-        NSArray* nodeVals = [nodeComp subarrayWithRange:NSMakeRange(4, [nodeComp count]-4)];
-        node = [nodeVals componentsJoinedByString:@"/"];
+    if ([nodeComp count] > 4) {
+        if ([[nodeComp objectAtIndex:1] isEqualToString:@"home"]) {
+            NSArray* nodeVals = [nodeComp subarrayWithRange:NSMakeRange(4, [nodeComp count]-4)];
+            node = [nodeVals componentsJoinedByString:@"/"];
+        }
     }
     return node;
 }
