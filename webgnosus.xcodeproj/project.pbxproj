@@ -100,7 +100,6 @@
 		056B5CDF12047FED002F62D4 /* XMPPPubSubSubscription.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C8812047FED002F62D4 /* XMPPPubSubSubscription.m */; };
 		056B5CE012047FED002F62D4 /* XMPPPubSubSubscriptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C8A12047FED002F62D4 /* XMPPPubSubSubscriptions.m */; };
 		056B5CE112047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C8C12047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.m */; };
-		056B5CE212047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C8E12047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.m */; };
 		056B5CE312047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9012047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m */; };
 		056B5CE412047FED002F62D4 /* XMPPAuthorizationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9312047FED002F62D4 /* XMPPAuthorizationQuery.m */; };
 		056B5CE512047FED002F62D4 /* XMPPClientVersionQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9512047FED002F62D4 /* XMPPClientVersionQuery.m */; };
@@ -399,8 +398,6 @@
 		056B5C8A12047FED002F62D4 /* XMPPPubSubSubscriptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptions.m; sourceTree = "<group>"; };
 		056B5C8B12047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubscriptionsDelegate.h; sourceTree = "<group>"; };
 		056B5C8C12047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubscriptionsDelegate.m; sourceTree = "<group>"; };
-		056B5C8D12047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubSubSubscriptionsDelegate.h; sourceTree = "<group>"; };
-		056B5C8E12047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubSubSubscriptionsDelegate.m; sourceTree = "<group>"; };
 		056B5C8F12047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPPubSubUnsubscribeDelegate.h; sourceTree = "<group>"; };
 		056B5C9012047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPPubSubUnsubscribeDelegate.m; sourceTree = "<group>"; };
 		056B5C9212047FED002F62D4 /* XMPPAuthorizationQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPAuthorizationQuery.h; sourceTree = "<group>"; };
@@ -920,8 +917,6 @@
 				056B5C8A12047FED002F62D4 /* XMPPPubSubSubscriptions.m */,
 				056B5C8B12047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.h */,
 				056B5C8C12047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.m */,
-				056B5C8D12047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.h */,
-				056B5C8E12047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.m */,
 				056B5C8F12047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.h */,
 				056B5C9012047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m */,
 			);
@@ -1493,7 +1488,6 @@
 				056B5CDF12047FED002F62D4 /* XMPPPubSubSubscription.m in Sources */,
 				056B5CE012047FED002F62D4 /* XMPPPubSubSubscriptions.m in Sources */,
 				056B5CE112047FED002F62D4 /* XMPPPubSubSubscriptionsDelegate.m in Sources */,
-				056B5CE212047FED002F62D4 /* XMPPPubSubSubSubscriptionsDelegate.m in Sources */,
 				056B5CE312047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 				056B5CE412047FED002F62D4 /* XMPPAuthorizationQuery.m in Sources */,
 				056B5CE512047FED002F62D4 /* XMPPClientVersionQuery.m in Sources */,

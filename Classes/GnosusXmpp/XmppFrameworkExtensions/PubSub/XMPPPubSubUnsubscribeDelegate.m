@@ -35,7 +35,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNode:(NSString*)initNode andSubId:(NSString*)initSubId {
-	if(self = [super init])  {
+	if((self = [super init]))  {
         self.node = initNode;
         self.subId = initSubId;
 	}
