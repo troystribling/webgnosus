@@ -34,6 +34,7 @@
 		051CA5201086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
 		051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
 		051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
+		053B384F13CBFCE000A2E4E2 /* main_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */; };
 		0542683311700F56006E4699 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0542683211700F56006E4699 /* Entitlements.plist */; };
 		0557AC8A11FE590C003B8A82 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */; };
 		0557AC8B11FE590C003B8A82 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6D11FE590C003B8A82 /* NSDataAdditions.m */; };
@@ -268,6 +269,7 @@
 		051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSearchViewController.m; sourceTree = "<group>"; };
 		051CA51E1086D0090007DA81 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
+		053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_icon@2x.png"; sourceTree = "<group>"; };
 		0542683211700F56006E4699 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0542684C117015DC006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0557AC6A11FE590C003B8A82 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */,
 				05EE1528109E20B000FD4DD6 /* account-error-led.png */,
 				05EE1529109E20B000FD4DD6 /* account-off-led.png */,
 				05EE1524109E1E6600FD4DD6 /* account-on-led.png */,
@@ -1368,6 +1371,7 @@
 				05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */,
 				0542683311700F56006E4699 /* Entitlements.plist in Resources */,
 				059AE68F120D178600990B14 /* GeoLocMessageCell.xib in Resources */,
+				053B384F13CBFCE000A2E4E2 /* main_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1548,7 +1552,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: William Stribling";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: William Stribling (EP33FMNW27)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Webgnosus_Prefix.pch;
@@ -1558,7 +1562,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7B3C0333-B440-4178-90EE-B0FC7820887D";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5250E128-5F1B-4B58-B40C-CCDACAF13240";
 				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1580,6 +1584,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5250E128-5F1B-4B58-B40C-CCDACAF13240";
 				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -1599,7 +1604,7 @@
 					"\"$(SRCROOT)\"",
 				);
 				PRODUCT_NAME = web.gnos.us;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "79491088-FF8D-47AA-A356-E1E975CDA985";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5250E128-5F1B-4B58-B40C-CCDACAF13240";
 				SDKROOT = iphoneos4.3;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
