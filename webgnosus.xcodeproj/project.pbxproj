@@ -34,7 +34,8 @@
 		051CA5201086D0090007DA81 /* ServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51B1086D0090007DA81 /* ServiceCell.m */; };
 		051CA5211086D0090007DA81 /* ServiceSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */; };
 		051CA5221086D0090007DA81 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 051CA51F1086D0090007DA81 /* ServiceViewController.m */; };
-		053B384F13CBFCE000A2E4E2 /* main_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */; };
+		05302AC213F886E300C45D22 /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05302AC113F886E300C45D22 /* main_icon.png */; };
+		05302AC413F886F800C45D22 /* main_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05302AC313F886F800C45D22 /* main_icon@2x.png */; };
 		0542683311700F56006E4699 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0542683211700F56006E4699 /* Entitlements.plist */; };
 		0557AC8A11FE590C003B8A82 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */; };
 		0557AC8B11FE590C003B8A82 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6D11FE590C003B8A82 /* NSDataAdditions.m */; };
@@ -178,7 +179,6 @@
 		05E208250FB9046500FCFC94 /* RosterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E207EB0FB9046500FCFC94 /* RosterViewController.m */; };
 		05E3E96C109E779A0040E5D9 /* load-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E3E96B109E779A0040E5D9 /* load-messages.png */; };
 		05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F154104A07FC00EF924B /* dotted_tile.png */; };
-		05E6F15F104A07FC00EF924B /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F155104A07FC00EF924B /* main_icon.png */; };
 		05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */ = {isa = PBXBuildFile; fileRef = 05E6F159104A07FC00EF924B /* tabbar-roster.png */; };
 		05E6FB63105B1AF60067CF95 /* AddPublicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */; };
 		05E6FB64105B1AF60067CF95 /* AddSubscriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */; };
@@ -269,7 +269,8 @@
 		051CA51D1086D0090007DA81 /* ServiceSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceSearchViewController.m; sourceTree = "<group>"; };
 		051CA51E1086D0090007DA81 /* ServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceViewController.h; sourceTree = "<group>"; };
 		051CA51F1086D0090007DA81 /* ServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceViewController.m; sourceTree = "<group>"; };
-		053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main_icon@2x.png"; sourceTree = "<group>"; };
+		05302AC113F886E300C45D22 /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_icon.png; path = ../../main_icon.png; sourceTree = "<group>"; };
+		05302AC313F886F800C45D22 /* main_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main_icon@2x.png"; path = "../../main_icon@2x.png"; sourceTree = "<group>"; };
 		0542683211700F56006E4699 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0542684C117015DC006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0557AC6A11FE590C003B8A82 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
@@ -527,7 +528,6 @@
 		05E207EB0FB9046500FCFC94 /* RosterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RosterViewController.m; sourceTree = "<group>"; };
 		05E3E96B109E779A0040E5D9 /* load-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "load-messages.png"; sourceTree = "<group>"; };
 		05E6F154104A07FC00EF924B /* dotted_tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dotted_tile.png; sourceTree = "<group>"; };
-		05E6F155104A07FC00EF924B /* main_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_icon.png; sourceTree = "<group>"; };
 		05E6F159104A07FC00EF924B /* tabbar-roster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar-roster.png"; sourceTree = "<group>"; };
 		05E6FB61105B1AF60067CF95 /* AddPublicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPublicationViewController.xib; sourceTree = "<group>"; };
 		05E6FB62105B1AF60067CF95 /* AddSubscriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSubscriptionViewController.xib; sourceTree = "<group>"; };
@@ -652,7 +652,8 @@
 		05509F6E0F34F38600C19E19 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				053B384E13CBFCE000A2E4E2 /* main_icon@2x.png */,
+				05302AC313F886F800C45D22 /* main_icon@2x.png */,
+				05302AC113F886E300C45D22 /* main_icon.png */,
 				05EE1528109E20B000FD4DD6 /* account-error-led.png */,
 				05EE1529109E20B000FD4DD6 /* account-off-led.png */,
 				05EE1524109E1E6600FD4DD6 /* account-on-led.png */,
@@ -661,7 +662,6 @@
 				05D83D7C104EDCBF00078131 /* grey-button.png */,
 				05EAB2F610509A9700AF71A2 /* left-arrow.png */,
 				05E3E96B109E779A0040E5D9 /* load-messages.png */,
-				05E6F155104A07FC00EF924B /* main_icon.png */,
 				05D83D78104ED94F00078131 /* red-button.png */,
 				05EAB2F710509A9800AF71A2 /* right-arrow.png */,
 				05EE1545109E328300FD4DD6 /* roster-section.png */,
@@ -1322,7 +1322,6 @@
 				05DC8CA90FBB15EB0018AEEF /* HistoryViewController.xib in Resources */,
 				05CF616F1048B141003E012F /* AccountManagerViewController.xib in Resources */,
 				05E6F15E104A07FC00EF924B /* dotted_tile.png in Resources */,
-				05E6F15F104A07FC00EF924B /* main_icon.png in Resources */,
 				05E6F163104A07FC00EF924B /* tabbar-roster.png in Resources */,
 				05D83D5C104EBF0A00078131 /* settings.png in Resources */,
 				05D83D79104ED94F00078131 /* red-button.png in Resources */,
@@ -1372,7 +1371,8 @@
 				05816C5611444E4F001D5DFA /* ResourceCell.xib in Resources */,
 				0542683311700F56006E4699 /* Entitlements.plist in Resources */,
 				059AE68F120D178600990B14 /* GeoLocMessageCell.xib in Resources */,
-				053B384F13CBFCE000A2E4E2 /* main_icon@2x.png in Resources */,
+				05302AC213F886E300C45D22 /* main_icon.png in Resources */,
+				05302AC413F886F800C45D22 /* main_icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

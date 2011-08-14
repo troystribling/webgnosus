@@ -10,8 +10,13 @@
 	<array/>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string>main_icon.png</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>main_icon.png</string>
+		<string>main_icon@2x.png</string>
+		<string>main_icon.png</string>
+		<string>main_icon@2x.png</string>
+	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.imaginaryProducts.webgnosus</string>
 	<key>CFBundleInfoDictionaryVersion</key>
