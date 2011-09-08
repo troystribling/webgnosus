@@ -16,6 +16,7 @@
 #import "ServiceFeatureModel.h"
 #import "ServiceItemModel.h"
 #import "WebgnosusDbi.h"
+#import "KeychainItemWrapper.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountModel (PrivateAPI)
@@ -27,6 +28,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize password;
+@synthesize passwordItem;
 @synthesize activated;
 @synthesize displayed;
 @synthesize connectionState;
@@ -143,7 +145,6 @@
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
 	NSString* insertStatement;
 	if (self.resource) {
@@ -241,6 +242,11 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (NSString*)geoLocPubSubNode {
     return [NSString stringWithFormat:@"%@/geoloc", [self pubSubRoot]];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (KeychainItemWrapper*)getPasswordKeychainItem {
+    return [[KeychainItemWrapper alloc] initWithIdentifier:self.jid accessGroup:@"XT6RN64UZM.com.imaginaryProducts.GenericKeychainSuite"];
 }
 
 //===================================================================================================================================
