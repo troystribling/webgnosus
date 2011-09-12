@@ -18,6 +18,9 @@
 #import "WebgnosusDbi.h"
 #import "KeychainItemWrapper.h"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kPASSWORD_KEY  "XT6RN64UZM.com.imaginaryProducts"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountModel (PrivateAPI)
 
@@ -28,7 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize password;
-@synthesize passwordItem;
 @synthesize activated;
 @synthesize displayed;
 @synthesize connectionState;
@@ -59,7 +61,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, jid text, password text, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -90,8 +92,9 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (AccountModel*)findByJID:(NSString*)requestJID {
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@'", requestJID];
++ (AccountModel*)findByJID:(NSString*)_jid {
+    NSInteger _pk = [self getPkForJid:_jid];
+	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE pk = %d", _pk];
 	AccountModel* model = [[[AccountModel alloc] init] autorelease];
 	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
     if (model.pk == 0) {
@@ -144,17 +147,40 @@
     [[WebgnosusDbi instance]  updateWithStatement:@"UPDATE accounts SET displayed = 0 WHERE displayed = 1"];
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (NSInteger)getPkForJid:(NSString*)_jid {
+    KeychainItemWrapper* keychain = [self getKeychainItem];
+    NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
+    NSInteger _pk;
+    for (NSNumber* key in [accounts allKeys]) {
+        NSString* accountJid = [[accounts objectForKey:key] objectForKey:@"jid"];
+        if ([accountJid isEqualToString:_jid]) {
+            _pk = [key intValue];
+            break;
+        }
+    }
+    return _pk;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (KeychainItemWrapper*)getKeychainItem {
+    return [[KeychainItemWrapper alloc] initWithIdentifier:@"accounts" accessGroup:[NSString stringWithUTF8String:kRESOURCE_NAME]];
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
 	NSString* insertStatement;
+    [self putAccountInKeychain];
 	if (self.resource) {
 		insertStatement = 
-			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d, %d)",
-                self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
+			[NSString stringWithFormat:@"INSERT INTO accounts (resource, nickname, host, activated, displayed, connectionState, port) values (%@', '%@', '%@', %d, %d, %d, %d)",
+                self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	} else {
 		insertStatement = 
-			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d, %d)", 
-                self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
+			[NSString stringWithFormat:@"INSERT INTO accounts (resource, nickname, host, activated, displayed, connectionState, port) values (null, '%@', '%@', %d, %d, %d, %d)", 
+                self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -162,14 +188,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement;
+    [self putAccountInKeychain];
 	if (self.resource) {
 		updateStatement = 
-			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
+			[NSString stringWithFormat:@"UPDATE accounts SET resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	} else {
 		updateStatement = 
-			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
+			[NSString stringWithFormat:@"UPDATE accounts SET nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
@@ -204,23 +231,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
+    [self removeAccountFromKeychain];
     [ContactModel destroyAllByAccount:self];
     [RosterItemModel destroyAllByAccount:self];
     [MessageModel destroyAllByAccount:self];
     [SubscriptionModel destroyAllByAccount:self];
 	NSString *insertStatement = [NSString stringWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)load {
-	NSString* selectStatement;
-	if (self.resource) {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@' AND resource = '%@'", self.jid, self.host, self.resource];
-	} else {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
-	}
-	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -245,8 +262,36 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (KeychainItemWrapper*)getPasswordKeychainItem {
-    return [[KeychainItemWrapper alloc] initWithIdentifier:self.jid accessGroup:@"XT6RN64UZM.com.imaginaryProducts.GenericKeychainSuite"];
+- (void)getAccountFromKeychain {
+    KeychainItemWrapper* keychain = [self.class getKeychainItem];
+    NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
+    if ([accounts respondsToSelector:@selector(objectForKey:)]) {
+        NSMutableDictionary* acc = [accounts objectForKey:[NSNumber numberWithInt:self.pk]];
+        self.password = [acc objectForKey:@"password"];
+        self.jid = [acc objectForKey:@"jid"];
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)putAccountInKeychain {
+    KeychainItemWrapper* keychain = [self.class getKeychainItem];
+    NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
+    if (![accounts respondsToSelector:@selector(objectForKey:)]) {
+        accounts = [NSMutableDictionary dictionary];
+    }
+    NSMutableDictionary* acc = [NSMutableDictionary dictionary];
+    [acc setObject:self.password forKey:@"password"];
+    [acc setObject:self.jid forKey:@"jid"];
+    [accounts setObject:acc forKey:[NSNumber numberWithInt:self.pk]];
+    [keychain setObject:accounts forKey:(id)kSecValueData];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removeAccountFromKeychain {
+    KeychainItemWrapper* keychain = [self.class getKeychainItem];
+    NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
+    [accounts removeObjectForKey:[NSNumber numberWithInt:self.pk]];
+    [keychain setObject:accounts forKey:(id)kSecValueData];
 }
 
 //===================================================================================================================================
@@ -258,30 +303,23 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement {
 	self.pk = (int)sqlite3_column_int(statement, 0);
-	char* jidVal = (char*)sqlite3_column_text(statement, 1);
-	if (jidVal != nil) {		
-		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
-	}
-	char* passwordVal = (char*)sqlite3_column_text(statement, 2);
-	if (passwordVal != nil) {
-		self.password = [[NSString alloc] initWithUTF8String:passwordVal];
-	}
-	char* resourceVal = (char*)sqlite3_column_text(statement, 3);
+    [self getAccountFromKeychain];
+	char* resourceVal = (char*)sqlite3_column_text(statement, 1);
 	if (resourceVal != nil) {
 		self.resource = [[NSString alloc] initWithUTF8String:resourceVal];
 	}
-	char* nicknameVal = (char*)sqlite3_column_text(statement, 4);
+	char* nicknameVal = (char*)sqlite3_column_text(statement, 2);
 	if (nicknameVal != nil) {
 		self.nickname = [[NSString alloc] initWithUTF8String:nicknameVal];
 	}
-	char* hostVal = (char*)sqlite3_column_text(statement, 5);
+	char* hostVal = (char*)sqlite3_column_text(statement, 3);
 	if (hostVal != nil) {
 		self.host = [[NSString alloc] initWithUTF8String:hostVal];
 	}
-	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 6)];
-	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 7)];
-	self.connectionState = (int)sqlite3_column_int(statement, 8);
-	self.port = (int)sqlite3_column_int(statement, 9);
+	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 4)];
+	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 5)];
+	self.connectionState = (int)sqlite3_column_int(statement, 6);
+	self.port = (int)sqlite3_column_int(statement, 7);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
