@@ -94,12 +94,16 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)findByJID:(NSString*)_jid {
     NSInteger _pk = [self getPkForJid:_jid];
-	NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE pk = %d", _pk];
-	AccountModel* model = [[[AccountModel alloc] init] autorelease];
-	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
-    if (model.pk == 0) {
+    AccountModel* model = [[[AccountModel alloc] init] autorelease];
+    if (_pk > 0) {
+        NSString* selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE pk = %d", _pk];
+        [[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:model];
+        if (model.pk == 0) {
+            model = nil;
+        }
+    } else {
         model = nil;
-    }
+    }    
 	return model;
 }
 
@@ -150,13 +154,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)getPkForJid:(NSString*)_jid {
     KeychainItemWrapper* keychain = [self getKeychainItem];
+    NSInteger _pk = -1;
     NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
-    NSInteger _pk;
-    for (NSNumber* key in [accounts allKeys]) {
-        NSString* accountJid = [[accounts objectForKey:key] objectForKey:@"jid"];
-        if ([accountJid isEqualToString:_jid]) {
-            _pk = [key intValue];
-            break;
+    if (accounts) {
+        for (NSNumber* key in [accounts allKeys]) {
+            NSString* accountJid = [[accounts objectForKey:key] objectForKey:@"jid"];
+            if ([accountJid isEqualToString:_jid]) {
+                _pk = [key intValue];
+                break;
+            }
         }
     }
     return _pk;
@@ -265,7 +271,7 @@
 - (void)getAccountFromKeychain {
     KeychainItemWrapper* keychain = [self.class getKeychainItem];
     NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
-    if ([accounts respondsToSelector:@selector(objectForKey:)]) {
+    if (accounts) {
         NSMutableDictionary* acc = [accounts objectForKey:[NSNumber numberWithInt:self.pk]];
         self.password = [acc objectForKey:@"password"];
         self.jid = [acc objectForKey:@"jid"];
@@ -276,7 +282,7 @@
 - (void)putAccountInKeychain {
     KeychainItemWrapper* keychain = [self.class getKeychainItem];
     NSMutableDictionary* accounts = [keychain objectForKey:(id)kSecValueData];
-    if (![accounts respondsToSelector:@selector(objectForKey:)]) {
+    if (!accounts) {
         accounts = [NSMutableDictionary dictionary];
     }
     NSMutableDictionary* acc = [NSMutableDictionary dictionary];
