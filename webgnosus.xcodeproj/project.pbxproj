@@ -21,6 +21,7 @@
 		0502D8511082AE1A00218EC9 /* ServiceSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0502D84F1082AE1A00218EC9 /* ServiceSearchViewController.xib */; };
 		0502D8A21082CAB500218EC9 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0502D8A01082CAB500218EC9 /* search.png */; };
 		0502D8B51082D4E800218EC9 /* SectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502D8B31082D4E800218EC9 /* SectionViewController.m */; };
+		0502FA4B1422E9FE00565E99 /* SimpleKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0502FA4A1422E9FE00565E99 /* SimpleKeychain.m */; };
 		05046B56109BE907001CBEA1 /* LoadMessagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */; };
 		05046B5D109BEBEC001CBEA1 /* LoadMessagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */; };
 		05046BEB109C0A1D001CBEA1 /* MessageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 05046BEA109C0A1D001CBEA1 /* MessageCache.m */; };
@@ -36,7 +37,6 @@
 		05302AC213F886E300C45D22 /* main_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05302AC113F886E300C45D22 /* main_icon.png */; };
 		05302AC413F886F800C45D22 /* main_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05302AC313F886F800C45D22 /* main_icon@2x.png */; };
 		0542683311700F56006E4699 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0542683211700F56006E4699 /* Entitlements.plist */; };
-		0547366D141449F6003A77C4 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0547366C141449F6003A77C4 /* KeychainItemWrapper.m */; };
 		0557AC8A11FE590C003B8A82 /* MulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */; };
 		0557AC8B11FE590C003B8A82 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6D11FE590C003B8A82 /* NSDataAdditions.m */; };
 		0557AC8C11FE590C003B8A82 /* NSXMLElementAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0557AC6F11FE590C003B8A82 /* NSXMLElementAdditions.m */; };
@@ -251,6 +251,8 @@
 		0502D8A01082CAB500218EC9 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		0502D8B21082D4E800218EC9 /* SectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionViewController.h; sourceTree = "<group>"; };
 		0502D8B31082D4E800218EC9 /* SectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionViewController.m; sourceTree = "<group>"; };
+		0502FA491422E9FE00565E99 /* SimpleKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleKeychain.h; sourceTree = "<group>"; };
+		0502FA4A1422E9FE00565E99 /* SimpleKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleKeychain.m; sourceTree = "<group>"; };
 		05046B55109BE907001CBEA1 /* LoadMessagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMessagesCell.xib; sourceTree = "<group>"; };
 		05046B5B109BEBEC001CBEA1 /* LoadMessagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMessagesCell.h; sourceTree = "<group>"; };
 		05046B5C109BEBEC001CBEA1 /* LoadMessagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMessagesCell.m; sourceTree = "<group>"; };
@@ -274,8 +276,6 @@
 		05302AC313F886F800C45D22 /* main_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "main_icon@2x.png"; path = "../../main_icon@2x.png"; sourceTree = "<group>"; };
 		0542683211700F56006E4699 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0542684C117015DC006E4699 /* web.gnos.us.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = web.gnos.us.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0547366B141449F6003A77C4 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
-		0547366C141449F6003A77C4 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		0557AC6A11FE590C003B8A82 /* MulticastDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MulticastDelegate.h; sourceTree = "<group>"; };
 		0557AC6B11FE590C003B8A82 /* MulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MulticastDelegate.m; sourceTree = "<group>"; };
 		0557AC6C11FE590C003B8A82 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
@@ -658,8 +658,8 @@
 		0547366A141449F6003A77C4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0547366B141449F6003A77C4 /* KeychainItemWrapper.h */,
-				0547366C141449F6003A77C4 /* KeychainItemWrapper.m */,
+				0502FA491422E9FE00565E99 /* SimpleKeychain.h */,
+				0502FA4A1422E9FE00565E99 /* SimpleKeychain.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1541,7 +1541,7 @@
 				0568A9371205E17600FF5393 /* XMPPPubSubGeoLocDelegate.m in Sources */,
 				059AE684120D127F00990B14 /* GeoLocMessageCell.m in Sources */,
 				05699177120DB410002D5EED /* GeoLocMessageView.m in Sources */,
-				0547366D141449F6003A77C4 /* KeychainItemWrapper.m in Sources */,
+				0502FA4B1422E9FE00565E99 /* SimpleKeychain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

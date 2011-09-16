@@ -32,7 +32,6 @@ typedef enum {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountModel : UserModel {
 	NSString* password;
-    KeychainItemWrapper* passwordItem;
 	BOOL activated;
     BOOL displayed;
     NSInteger port;
@@ -41,7 +40,6 @@ typedef enum {
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) NSString* password;
-@property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, assign) BOOL activated;
 @property (nonatomic, assign) BOOL displayed;
 @property (nonatomic, assign) AccountConnectionState connectionState;
@@ -76,5 +74,7 @@ typedef enum {
 - (BOOL)hasError;
 - (void)setAttributesWithStatement:(sqlite3_stmt*)statement;
 - (NSString*)geoLocPubSubNode;
+- (void)getPasswordFromKeychain;
+- (void)savePasswordInKeychain;
 
 @end

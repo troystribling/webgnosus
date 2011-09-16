@@ -16,7 +16,10 @@
 #import "ServiceFeatureModel.h"
 #import "ServiceItemModel.h"
 #import "WebgnosusDbi.h"
-#import "KeychainItemWrapper.h"
+#import "SimpleKeychain.h"
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kPASSWORD_KEY  "XT6RN64UZM.com.imaginaryProducts"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountModel (PrivateAPI)
@@ -28,7 +31,6 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize password;
-@synthesize passwordItem;
 @synthesize activated;
 @synthesize displayed;
 @synthesize connectionState;
@@ -145,16 +147,18 @@
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
 	NSString* insertStatement;
+    [self savePasswordInKeychain];
 	if (self.resource) {
 		insertStatement = 
-			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', '%@', %d, %d, %d, %d)",
-                self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
+			[NSString stringWithFormat:@"INSERT INTO accounts (jid, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', '%@', '%@', %d, %d, %d, %d)",
+                self.jid, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	} else {
 		insertStatement = 
-			[NSString stringWithFormat:@"INSERT INTO accounts (jid, password, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', '%@', null, '%@', '%@', %d, %d, %d, %d)", 
-                self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
+			[NSString stringWithFormat:@"INSERT INTO accounts (jid, resource, nickname, host, activated, displayed, connectionState, port) values ('%@', null, '%@', '%@', %d, %d, %d, %d)", 
+                self.jid, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }
@@ -162,14 +166,15 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)update {
 	NSString* updateStatement;
+    [self savePasswordInKeychain];
 	if (self.resource) {
 		updateStatement = 
-			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
+			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', resource = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.jid, self.resource, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	} else {
 		updateStatement = 
-			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', password = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
-                 self.jid, self.password, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
+			[NSString stringWithFormat:@"UPDATE accounts SET jid = '%@', nickname = '%@', host = '%@', activated = %d, displayed = %d, connectionState = %d, port = %d WHERE pk = %d", 
+                 self.jid, self.nickname, self.host, [self activatedAsInteger], [self displayedAsInteger], self.connectionState, self.port, self.pk];	
 	}
 	[[WebgnosusDbi instance]  updateWithStatement:updateStatement];
 }
@@ -245,8 +250,15 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (KeychainItemWrapper*)getPasswordKeychainItem {
-    return [[KeychainItemWrapper alloc] initWithIdentifier:self.jid accessGroup:@"XT6RN64UZM.com.imaginaryProducts.GenericKeychainSuite"];
+- (void)getPasswordFromKeychain {
+    NSData* passwrdData = [SimpleKeychain get:self.jid];
+    NSString* passwrd = [[NSString alloc] initWithBytes:[passwrdData bytes] length:[passwrdData length] encoding:NSUTF8StringEncoding];
+    self.password = [passwrd autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)savePasswordInKeychain {
+    [SimpleKeychain save:self.jid data:[self.password dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 //===================================================================================================================================
@@ -261,27 +273,24 @@
 	char* jidVal = (char*)sqlite3_column_text(statement, 1);
 	if (jidVal != nil) {		
 		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+        [self getPasswordFromKeychain];
 	}
-	char* passwordVal = (char*)sqlite3_column_text(statement, 2);
-	if (passwordVal != nil) {
-		self.password = [[NSString alloc] initWithUTF8String:passwordVal];
-	}
-	char* resourceVal = (char*)sqlite3_column_text(statement, 3);
+	char* resourceVal = (char*)sqlite3_column_text(statement, 2);
 	if (resourceVal != nil) {
 		self.resource = [[NSString alloc] initWithUTF8String:resourceVal];
 	}
-	char* nicknameVal = (char*)sqlite3_column_text(statement, 4);
+	char* nicknameVal = (char*)sqlite3_column_text(statement, 3);
 	if (nicknameVal != nil) {
 		self.nickname = [[NSString alloc] initWithUTF8String:nicknameVal];
 	}
-	char* hostVal = (char*)sqlite3_column_text(statement, 5);
+	char* hostVal = (char*)sqlite3_column_text(statement, 4);
 	if (hostVal != nil) {
 		self.host = [[NSString alloc] initWithUTF8String:hostVal];
 	}
-	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 6)];
-	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 7)];
-	self.connectionState = (int)sqlite3_column_int(statement, 8);
-	self.port = (int)sqlite3_column_int(statement, 9);
+	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 5)];
+	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 6)];
+	self.connectionState = (int)sqlite3_column_int(statement, 7);
+	self.port = (int)sqlite3_column_int(statement, 8);
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
