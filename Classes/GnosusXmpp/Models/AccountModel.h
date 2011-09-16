@@ -64,7 +64,6 @@ typedef enum {
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert;
 - (void)destroy;
-- (void)load;
 - (void)update;
 - (NSInteger)activatedAsInteger;
 - (void)setActivatedAsInteger:(NSInteger)value;

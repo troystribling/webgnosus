@@ -21,6 +21,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 #define kPASSWORD_KEY  "XT6RN64UZM.com.imaginaryProducts"
 
+//-----------------------------------------------------------------------------------------------------------------------------------
+#define kPASSWORD_KEY  "XT6RN64UZM.com.imaginaryProducts"
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface AccountModel (PrivateAPI)
 
@@ -61,7 +64,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, jid text, password text, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -146,6 +149,7 @@
     [[WebgnosusDbi instance]  updateWithStatement:@"UPDATE accounts SET displayed = 0 WHERE displayed = 1"];
 }
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)insert {
@@ -215,17 +219,6 @@
     [SubscriptionModel destroyAllByAccount:self];
 	NSString *insertStatement = [NSString stringWithFormat:@"DELETE FROM accounts WHERE pk = %d", self.pk];	
 	[[WebgnosusDbi instance]  updateWithStatement:insertStatement];
-}
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-- (void)load {
-	NSString* selectStatement;
-	if (self.resource) {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@' AND resource = '%@'", self.jid, self.host, self.resource];
-	} else {
-		selectStatement = [NSString stringWithFormat:@"SELECT * FROM accounts WHERE jid = '%@' AND host = '%@'", self.jid, self.host];
-	}
-	[[WebgnosusDbi instance] selectForModel:[AccountModel class] withStatement:selectStatement andOutputTo:self];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
