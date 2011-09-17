@@ -29,7 +29,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, assign) NSInteger pk;
 @property (nonatomic, assign) NSInteger accountPk;
-@property (nonatomic, assign) NSString* subId;
+@property (nonatomic, retain) NSString* subId;
 @property (nonatomic, retain) NSString* node;
 @property (nonatomic, retain) NSString* service;
 @property (nonatomic, retain) NSString* subscription;

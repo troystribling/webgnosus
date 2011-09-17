@@ -260,23 +260,23 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	char* parentNodeVal = (char*)sqlite3_column_text(statement, 1);
 	if (parentNodeVal != nil) {		
-		self.parentNode = [[NSString alloc] initWithUTF8String:parentNodeVal];
+		self.parentNode = [NSString stringWithUTF8String:parentNodeVal];
 	}
 	char* serviceVal = (char*)sqlite3_column_text(statement, 2);
 	if (serviceVal != nil) {		
-		self.service = [[NSString alloc] initWithUTF8String:serviceVal];
+		self.service = [NSString stringWithUTF8String:serviceVal];
 	}
 	char* nodeVal = (char*)sqlite3_column_text(statement, 3);
 	if (nodeVal != nil) {		
-		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
+		self.node = [NSString stringWithUTF8String:nodeVal];
 	}
 	char* jidVal = (char*)sqlite3_column_text(statement, 4);
 	if (jidVal != nil) {		
-		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+		self.jid = [NSString stringWithUTF8String:jidVal];
 	}
 	char* inameVal = (char*)sqlite3_column_text(statement, 5);
 	if (inameVal != nil) {		
-		self.itemName = [[NSString alloc] initWithUTF8String:inameVal];
+		self.itemName = [NSString stringWithUTF8String:inameVal];
 	}
 }
 
@@ -298,6 +298,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.parentNode release];
+    [self.service release];
+    [self.node release];
+    [self.jid release];
+    [self.itemName release];
     [super dealloc];
 }
 

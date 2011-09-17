@@ -260,36 +260,36 @@
     self.pk = (int)sqlite3_column_int(statement, 0);
     char* jidVal = (char*)sqlite3_column_text(statement, 1);
     if (jidVal != nil) {		
-        self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+        self.jid = [NSString stringWithUTF8String:jidVal];
     }
     char* resourceVal = (char*)sqlite3_column_text(statement, 2);
     if (resourceVal != nil) {		
-        self.resource = [[NSString alloc] initWithUTF8String:resourceVal];
+        self.resource = [NSString stringWithUTF8String:resourceVal];
     }
     char* hostVal = (char*)sqlite3_column_text(statement, 3);
     if (hostVal != nil) {		
-        self.host = [[NSString alloc] initWithUTF8String:hostVal];
+        self.host = [NSString stringWithUTF8String:hostVal];
     }
     char* statusVal = (char*)sqlite3_column_text(statement, 4);
     if (statusVal != nil) {
-        self.status = [[NSString alloc] initWithUTF8String:statusVal];
+        self.status = [NSString stringWithUTF8String:statusVal];
     }
     char* showVal = (char*)sqlite3_column_text(statement, 5);
     if (showVal != nil) {
-        self.show = [[NSString alloc] initWithUTF8String:showVal];
+        self.show = [NSString stringWithUTF8String:showVal];
     }
     char* typeVal = (char*)sqlite3_column_text(statement, 6);
     if (typeVal != nil) {
-        self.presenceType = [[NSString alloc] initWithUTF8String:typeVal];
+        self.presenceType = [NSString stringWithUTF8String:typeVal];
     }
     self.priority = (int)sqlite3_column_int(statement, 7);
     char* clientNameVal = (char*)sqlite3_column_text(statement, 8);
     if (clientNameVal != nil) {
-        self.clientName = [[NSString alloc] initWithUTF8String:clientNameVal];
+        self.clientName = [NSString stringWithUTF8String:clientNameVal];
     }
     char* clientVersionVal = (char*)sqlite3_column_text(statement, 9);
     if (clientVersionVal != nil) {
-        self.clientVersion = [[NSString alloc] initWithUTF8String:clientVersionVal];
+        self.clientVersion = [NSString stringWithUTF8String:clientVersionVal];
     }
     self.accountPk = (int)sqlite3_column_int(statement, 10);
 }
@@ -315,6 +315,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.status release];
+    [self.show release];
+    [self.presenceType release];
     [super dealloc];
 }
 

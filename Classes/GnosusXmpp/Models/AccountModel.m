@@ -272,20 +272,20 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	char* jidVal = (char*)sqlite3_column_text(statement, 1);
 	if (jidVal != nil) {		
-		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+		self.jid = [NSString stringWithUTF8String:jidVal];
         [self getPasswordFromKeychain];
 	}
 	char* resourceVal = (char*)sqlite3_column_text(statement, 2);
 	if (resourceVal != nil) {
-		self.resource = [[NSString alloc] initWithUTF8String:resourceVal];
+		self.resource = [NSString stringWithUTF8String:resourceVal];
 	}
 	char* nicknameVal = (char*)sqlite3_column_text(statement, 3);
 	if (nicknameVal != nil) {
-		self.nickname = [[NSString alloc] initWithUTF8String:nicknameVal];
+		self.nickname = [NSString stringWithUTF8String:nicknameVal];
 	}
 	char* hostVal = (char*)sqlite3_column_text(statement, 4);
 	if (hostVal != nil) {
-		self.host = [[NSString alloc] initWithUTF8String:hostVal];
+		self.host = [NSString stringWithUTF8String:hostVal];
 	}
 	[self setActivatedAsInteger:(int)sqlite3_column_int(statement, 5)];
 	[self setDisplayedAsInteger:(int)sqlite3_column_int(statement, 6)];
@@ -311,6 +311,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.password release];
     [super dealloc];
 }
 

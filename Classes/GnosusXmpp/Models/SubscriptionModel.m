@@ -185,23 +185,23 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	char* subIdVal = (char*)sqlite3_column_text(statement, 1);
 	if (subIdVal != nil) {		
-		self.subId = [[NSString alloc] initWithUTF8String:subIdVal];
+		self.subId = [NSString stringWithUTF8String:subIdVal];
 	}
 	char* nodeVal = (char*)sqlite3_column_text(statement, 2);
 	if (nodeVal != nil) {		
-		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
+		self.node = [NSString stringWithUTF8String:nodeVal];
 	}
 	char* serviceVal = (char*)sqlite3_column_text(statement, 3);
 	if (serviceVal != nil) {		
-		self.service = [[NSString alloc] initWithUTF8String:serviceVal];
+		self.service = [NSString stringWithUTF8String:serviceVal];
 	}
 	char* subVal = (char*)sqlite3_column_text(statement, 4);
 	if (subVal != nil) {		
-		self.subscription = [[NSString alloc] initWithUTF8String:subVal];
+		self.subscription = [NSString stringWithUTF8String:subVal];
 	}
 	char* jidVal = (char*)sqlite3_column_text(statement, 5);
 	if (jidVal != nil) {		
-		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+		self.jid = [NSString stringWithUTF8String:jidVal];
 	}
 	self.accountPk = (int)sqlite3_column_int(statement, 6);
 }
@@ -224,6 +224,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.subId release];
+    [self.node release];
+    [self.service release];
+    [self.subscription release];
+    [self.jid release];
     [super dealloc];
 }
 

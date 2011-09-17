@@ -148,23 +148,23 @@
     self.pk = (int)sqlite3_column_int(statement, 0);
     char* jidVal = (char*)sqlite3_column_text(statement, 1);
     if (jidVal != nil) {		
-        self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+        self.jid = [NSString stringWithUTF8String:jidVal];
     }
     char* hostVal = (char*)sqlite3_column_text(statement, 2);
     if (hostVal != nil) {		
-        self.host = [[NSString alloc] initWithUTF8String:hostVal];
+        self.host = [NSString stringWithUTF8String:hostVal];
     }
     char* nicknameVal = (char*)sqlite3_column_text(statement, 3);
     if (nicknameVal != nil) {
-        self.nickname = [[NSString alloc] initWithUTF8String:nicknameVal];
+        self.nickname = [NSString stringWithUTF8String:nicknameVal];
     }
     char* clientNameVal = (char*)sqlite3_column_text(statement, 4);
     if (clientNameVal != nil) {
-        self.clientName = [[NSString alloc] initWithUTF8String:clientNameVal];
+        self.clientName = [NSString stringWithUTF8String:clientNameVal];
     }
     char* clientVersionVal = (char*)sqlite3_column_text(statement, 5);
     if (clientVersionVal != nil) {
-        self.clientVersion = [[NSString alloc] initWithUTF8String:clientVersionVal];
+        self.clientVersion = [NSString stringWithUTF8String:clientVersionVal];
     }
     self.contactState = (int)sqlite3_column_int(statement, 6);
     self.accountPk = (int)sqlite3_column_int(statement, 7);
@@ -188,6 +188,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.latestClient release];
     [super dealloc];
 }
 

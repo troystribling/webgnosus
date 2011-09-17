@@ -191,15 +191,15 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	char* nodeVal = (char*)sqlite3_column_text(statement, 1);
 	if (nodeVal != nil) {		
-		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
+		self.node = [NSString stringWithUTF8String:nodeVal];
 	}
 	char* serviceVal = (char*)sqlite3_column_text(statement, 2);
 	if (serviceVal != nil) {		
-		self.service = [[NSString alloc] initWithUTF8String:serviceVal];
+		self.service = [NSString stringWithUTF8String:serviceVal];
 	}
 	char* varVal = (char*)sqlite3_column_text(statement, 3);
 	if (varVal != nil) {		
-		self.var = [[NSString alloc] initWithUTF8String:varVal];
+		self.var = [NSString stringWithUTF8String:varVal];
 	}
 }
 
@@ -221,6 +221,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.node release];
+    [self.service release];
+    [self.var release];
     [super dealloc];
 }
 

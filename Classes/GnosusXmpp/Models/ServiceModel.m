@@ -226,23 +226,23 @@
 	self.pk = (int)sqlite3_column_int(statement, 0);
 	char* jidVal = (char*)sqlite3_column_text(statement, 1);
 	if (jidVal != nil) {		
-		self.jid = [[NSString alloc] initWithUTF8String:jidVal];
+		self.jid = [NSString stringWithUTF8String:jidVal];
 	}
 	char* nameVal = (char*)sqlite3_column_text(statement, 2);
 	if (nameVal != nil) {		
-		self.name = [[NSString alloc] initWithUTF8String:nameVal];
+		self.name = [NSString stringWithUTF8String:nameVal];
 	}
 	char* categoryVal = (char*)sqlite3_column_text(statement, 3);
 	if (categoryVal != nil) {		
-		self.category = [[NSString alloc] initWithUTF8String:categoryVal];
+		self.category = [NSString stringWithUTF8String:categoryVal];
 	}
 	char* typeVal = (char*)sqlite3_column_text(statement, 4);
 	if (typeVal != nil) {		
-		self.type = [[NSString alloc] initWithUTF8String:typeVal];
+		self.type = [NSString stringWithUTF8String:typeVal];
 	}
 	char* nodeVal = (char*)sqlite3_column_text(statement, 5);
 	if (nodeVal != nil) {		
-		self.node = [[NSString alloc] initWithUTF8String:nodeVal];
+		self.node = [NSString stringWithUTF8String:nodeVal];
 	}
 }
 
@@ -264,6 +264,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.jid release];
+    [self.name release];
+    [self.category release];
+    [self.type release];
+    [self.node release];
     [super dealloc];
 }
 

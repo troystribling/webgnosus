@@ -172,6 +172,7 @@ static WebgnosusDbi* thisWebgnosusDbi = nil;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.dbFilePath release]; 
     [super dealloc];
 }
 

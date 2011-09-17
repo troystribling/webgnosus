@@ -449,31 +449,31 @@
     self.pk = (int)sqlite3_column_int(statement, 0);
     char* messageTextVal = (char*)sqlite3_column_text(statement, 1);
     if (messageTextVal != nil) {		
-        self.messageText = [NSString stringWithCString:messageTextVal encoding:NSUTF8StringEncoding];
+        self.messageText = [NSString stringWithUTF8String:messageTextVal];
     }
     char* createdAtVal = (char*)sqlite3_column_text(statement, 2);
     if (createdAtVal != nil) {		
         NSDateFormatter *df = [[NSDateFormatter alloc] init];
         [df setDateFormat:@"yyyy-MM-dd hh:mm:ss zzz"];
-        self.createdAt = [df dateFromString:[NSString stringWithCString:createdAtVal encoding:NSUTF8StringEncoding]];
+        self.createdAt = [df dateFromString:[NSString stringWithUTF8String:createdAtVal]];
         [df release];
     }
     char* toJidVal = (char*)sqlite3_column_text(statement, 3);
     if (toJidVal != nil) {		
-        self.toJid = [NSString stringWithCString:toJidVal encoding:NSUTF8StringEncoding];
+        self.toJid = [NSString stringWithUTF8String:toJidVal];
     }
     char* fromJidVal = (char*)sqlite3_column_text(statement, 4);
     if (fromJidVal != nil) {		
-        self.fromJid = [NSString stringWithCString:fromJidVal encoding:NSUTF8StringEncoding];
+        self.fromJid = [NSString stringWithUTF8String:fromJidVal];
     }
     self.textType = (int)sqlite3_column_int(statement, 5);
     char* nodeVal = (char*)sqlite3_column_text(statement, 6);
     if (nodeVal != nil) {		
-        self.node = [NSString stringWithCString:nodeVal encoding:NSUTF8StringEncoding];
+        self.node = [NSString stringWithUTF8String:nodeVal];
     }
     char* itemIdVal = (char*)sqlite3_column_text(statement, 7);
     if (itemIdVal != nil) {		
-        self.itemId = [NSString stringWithCString:itemIdVal encoding:NSUTF8StringEncoding];
+        self.itemId = [NSString stringWithUTF8String:itemIdVal];
     }
 	[self setMessageReadAsInteger:(int)sqlite3_column_int(statement, 8)];
     self.accountPk = (int)sqlite3_column_int(statement, 9);
@@ -499,13 +499,13 @@
                 XMPPxData* data;
                 XMPPEntry* entry;
                 XMPPGeoLoc* geoLoc;
-                if (data = [item data]) {
+                if ((data = [item data])) {
                     messageModel.textType = MessageTextTypeEventxData;
                     messageModel.messageText = [data XMLString];
-                } else if (entry = [item entry]) {
+                } else if ((entry = [item entry])) {
                     messageModel.textType = MessageTextTypeEventEntry;
                     messageModel.messageText = [entry XMLString];
-                } else if (geoLoc = [item geoLoc]) {
+                } else if ((geoLoc = [item geoLoc])) {
                     messageModel.textType = MessageTextTypeGeoLocData;
                     messageModel.messageText = [geoLoc XMLString];
                 } else {
@@ -545,6 +545,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.messageText release];
+    [self.createdAt release];
+    [self.toJid release];
+    [self.fromJid release];
+    [self.node release];
+    [self.itemId release];
     [super dealloc];
 }
 

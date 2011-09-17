@@ -86,6 +86,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.jid release];
+    [self.resource release];
+    [self.nickname release];
+    [self.host release];
+    [self.clientName release];
+    [self.clientVersion release];
     [super dealloc];
 }
 
