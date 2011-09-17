@@ -75,5 +75,6 @@ typedef enum {
 - (NSString*)geoLocPubSubNode;
 - (void)getPasswordFromKeychain;
 - (void)savePasswordInKeychain;
+- (void)removePasswordFromKeychain;
 
 @end

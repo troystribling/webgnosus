@@ -213,6 +213,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)destroy {	
+    [self removePasswordFromKeychain];
     [ContactModel destroyAllByAccount:self];
     [RosterItemModel destroyAllByAccount:self];
     [MessageModel destroyAllByAccount:self];
@@ -253,6 +254,12 @@
 - (void)savePasswordInKeychain {
     [SimpleKeychain save:self.jid data:[self.password dataUsingEncoding:NSUTF8StringEncoding]];
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+- (void)removePasswordFromKeychain {
+    [SimpleKeychain delete:self.jid];
+}
+
 
 //===================================================================================================================================
 #pragma mark AccountModel PrivateAPI
