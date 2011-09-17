@@ -42,6 +42,10 @@
 //===================================================================================================================================
 #pragma mark AccountModel
 
++ (AccountModel*)account {
+    return [[AccountModel alloc] init];
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
 	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM accounts"];

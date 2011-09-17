@@ -45,7 +45,7 @@
     cell.nodeLabel.text = [[self nodeFromFullNode:message.node] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
     UIView* dataView = [MessageViewFactory viewForMessage:message];
     CGRect dataRect = [dataView frame];
-    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_MESSAGE_CELL_X_OFFSET, kXDATA_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)];
+    UIView* container = [[[UIView alloc] initWithFrame:CGRectMake(kXDATA_MESSAGE_CELL_X_OFFSET, kXDATA_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)] autorelease];
     [container addSubview:dataView];
     [cell addSubview:container];
     return cell;

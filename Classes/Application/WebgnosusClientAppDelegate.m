@@ -94,15 +94,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITabBarController*)createTabBarController {
-    UITabBarController* tabBarController = [[UITabBarController alloc] init];	
+    UITabBarController* tabBarController = [[[UITabBarController alloc] init] autorelease];	
     self.navRosterViewController = [self createNavigationController:self.rosterViewController];
-    self.navRosterViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1];
+    self.navRosterViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1] autorelease];
     self.navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
-    self.navPubSubViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2];
+    self.navPubSubViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Events" image:[UIImage imageNamed:@"tabbar-events.png"] tag:2] autorelease];
     UINavigationController* navServiceViewController = [self createNavigationController:self.serviceViewController];	
-    navServiceViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2];
+    navServiceViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2] autorelease];
     self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
-    self.navHistoryViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0];
+    self.navHistoryViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0] autorelease];
     tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, navServiceViewController, self.navHistoryViewController, nil];	
     return tabBarController;
 }
@@ -140,7 +140,7 @@
 		return;
 	}	
 	[dbi open];
-	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
+	[[XMPPClientManager instance] addDelegate:[[[XMPPMessageDelegate alloc] init] autorelease]];
 	[[XMPPClientManager instance] addDelegate:self];
     [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
@@ -219,7 +219,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence {
     NSString* title = [[presence toJID] full];
-    NSString* message = [[NSString alloc] initWithFormat:@"Error with contact '%@'", [[presence fromJID] full]];
+    NSString* message = [NSString stringWithFormat:@"Error with contact '%@'", [[presence fromJID] full]];
     [AlertViewManager showAlert:title withMessage:message];
 }
 

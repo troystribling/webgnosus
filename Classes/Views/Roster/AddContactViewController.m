@@ -118,6 +118,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.account release];
+    [self.newContactJidString release];
+    [self.jidTextField release];
     [super dealloc];
 }
 

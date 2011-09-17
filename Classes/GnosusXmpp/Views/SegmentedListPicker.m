@@ -31,6 +31,10 @@
 //===================================================================================================================================
 #pragma mark SegmentedListPicker
 
++ (SegmentedListPicker*)view:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
+    return [[[SegmentedListPicker alloc] init:list withValueAtIndex:index andRect:rect] autorelease];
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init:(NSMutableArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect {
     self.items = list;

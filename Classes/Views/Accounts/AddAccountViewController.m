@@ -123,7 +123,7 @@
     } else {
         self.isFirstAccount = NO;
     }    
-	self.account = [[AccountModel alloc] init];
+	self.account = [AccountModel account];
 	self.jidTextField.returnKeyType = UIReturnKeyDone;
     self.jidTextField.delegate = self;
 	self.jidTextField.clearButtonMode = UITextFieldViewModeWhileEditing;

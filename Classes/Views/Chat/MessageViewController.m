@@ -53,7 +53,7 @@
         model.toJid = [self.rosterItem fullJID];
         model.fromJid = [self.account fullJID];
         model.textType = MessageTextTypeBody;
-        model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        model.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
         model.itemId = @"-1";
         model.messageRead = YES;
         [model insert];

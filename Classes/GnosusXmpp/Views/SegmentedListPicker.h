@@ -24,6 +24,7 @@
 @property (nonatomic, retain) id delegate;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (SegmentedListPicker*)view:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
 - (id)init:(NSArray*)list withValueAtIndex:(NSInteger)index andRect:(CGRect)rect;
 - (NSString*)selectedItem;
 - (void)removeItem:(NSString*)item;

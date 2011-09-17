@@ -346,8 +346,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        self.sendMessageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
-                                   action:@selector(sendMessageButtonWasPressed:)];
+        self.sendMessageButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendMessageButtonWasPressed:)] autorelease];
         self.pendingRequests = [NSMutableArray arrayWithCapacity:10];
 	} 
 	return self; 
@@ -401,13 +400,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    CGFloat cellHeight;
+    CGFloat cellHeight = kROSTER_CELL_HEIGHT;
     if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
         cellHeight = [self.items tableView:tableView heightForRowAtIndexPath:indexPath];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         cellHeight = kPUB_CELL_HEIGHT;
-    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
-        cellHeight = kROSTER_CELL_HEIGHT;
     }
     return cellHeight;
 }
@@ -415,8 +412,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* rosterHeaderView = nil;
-    SectionViewController* rosterHeader = 
-        [[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:[self.rosterItem fullJID]]; 
+    SectionViewController* rosterHeader = [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:[self.rosterItem fullJID]] autorelease]; 
     rosterHeaderView = rosterHeader.view;
 	return rosterHeaderView; 
 }

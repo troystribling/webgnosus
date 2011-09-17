@@ -46,6 +46,7 @@ typedef enum {
 @property (nonatomic, assign) NSInteger port;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (AccountModel*)account;
 + (NSInteger)count;
 + (NSInteger)activateCount;
 + (void)drop;
