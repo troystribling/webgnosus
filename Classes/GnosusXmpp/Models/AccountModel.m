@@ -64,7 +64,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)create {
-	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
+	[[WebgnosusDbi instance]  updateWithStatement:@"CREATE TABLE accounts (pk integer primary key, jid text, resource text, nickname text, host text, activated integer, displayed integer, connectionState integer, port integer)"];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
