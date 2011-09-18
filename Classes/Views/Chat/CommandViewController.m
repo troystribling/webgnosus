@@ -49,6 +49,7 @@
 @synthesize rosterItem;
 @synthesize commands;
 @synthesize commandRequest;
+@synthesize sectionViewControllers;
 @synthesize formDisplayed;
 
 //===================================================================================================================================
@@ -185,6 +186,7 @@
         self.navigationItem.title = @"Select Command";
         self.formDisplayed = NO;
         self.commands = [NSMutableDictionary dictionaryWithCapacity:100];
+        self.sectionViewControllers = [NSMutableArray arrayWithCapacity:10];
 	} 
 	return self; 
 } 
@@ -231,8 +233,10 @@
 #pragma mark UITableViewDeligate
 
  //-----------------------------------------------------------------------------------------------------------------------------------
- - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {   
-     return [SectionViewController viewWithLabel:[[self sectionNameArray] objectAtIndex:section]]; 
+ - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
+     SectionViewController* sectionVewController = [SectionViewController viewControllerWithLabel:[[self sectionNameArray] objectAtIndex:section]];
+     [self.sectionViewControllers addObject:sectionVewController];
+     return sectionVewController.view; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -279,6 +283,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [account release];
+    [rosterItem release];
+    [commands release];
+    [commandRequest release];
+    [sectionViewControllers release];
     [super dealloc];
 }
 

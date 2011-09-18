@@ -68,6 +68,7 @@
 @synthesize items;
 @synthesize account;
 @synthesize rosterItem;
+@synthesize rosterHeader;
 
 //===================================================================================================================================
 #pragma mark RosterItemViewController
@@ -346,8 +347,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        self.sendMessageButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
-                                   action:@selector(sendMessageButtonWasPressed:)];
+        self.sendMessageButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self 
+                                   action:@selector(sendMessageButtonWasPressed:)] autorelease];
         self.pendingRequests = [NSMutableArray arrayWithCapacity:10];
 	} 
 	return self; 
@@ -401,24 +402,19 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-    CGFloat cellHeight;
+    CGFloat cellHeight = kROSTER_CELL_HEIGHT;
     if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
         cellHeight = [self.items tableView:tableView heightForRowAtIndexPath:indexPath];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
         cellHeight = kPUB_CELL_HEIGHT;
-    } else if ([self.selectedMode isEqualToString:@"Resources"]) {
-        cellHeight = kROSTER_CELL_HEIGHT;
     }
     return cellHeight;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView* rosterHeaderView = nil;
-    SectionViewController* rosterHeader = 
-        [[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:[self.rosterItem fullJID]]; 
-    rosterHeaderView = rosterHeader.view;
-	return rosterHeaderView; 
+    self.rosterHeader = [SectionViewController viewControllerWithLabel:[self.rosterItem fullJID]]; 
+	return self.rosterHeader.view; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -441,7 +437,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {   
-    UITableViewCell* cell;
+    UITableViewCell* cell = nil;
     if ([self.selectedMode isEqualToString:@"Chat"] || [self.selectedMode isEqualToString:@"Commands"]) {
         cell = [self.items tableView:tableView cellForRowAtIndexPath:indexPath];
     } else if ([self.selectedMode isEqualToString:@"Publications"]) {
@@ -470,6 +466,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.selectedMode release];
+    [self.modes release];
+    [self.pendingRequests release];
+    [self.sendMessageButton release];
+    [self.rosterHeader release];
+    [self.items release];
+    [self.account release];
+    [self.rosterItem release];
     [super dealloc];
 }
 

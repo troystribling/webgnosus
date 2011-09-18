@@ -73,6 +73,7 @@
 @synthesize account;
 @synthesize selectedItem;
 @synthesize parentService;
+@synthesize sectionViewControllers;
 
 //===================================================================================================================================
 #pragma mark ServiceViewController
@@ -410,7 +411,9 @@
         } else {
             parentNode = self.service; 
         }
-        sectionView = [SectionViewController viewWithLabel:parentNode]; 
+        SectionViewController* sectionViewController = [SectionViewController viewControllerWithLabel:parentNode]; 
+        [self.sectionViewControllers addObject:sectionViewController];
+        sectionView = sectionViewController.view;
     }
     return sectionView; 
 }
@@ -484,6 +487,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.editAccountsButton release];
+    [self.searchServiceButton release];
+    [self.rootServiceViewController release];
+    [self.serviceItems release];
+    [self.node release];
+    [self.service release];
+    [self.account release];
+    [self.selectedItem release];
+    [self.parentService release];
+    [self.sectionViewControllers release];
     [super dealloc];
 }
 

@@ -40,6 +40,7 @@
 @synthesize editAccountsButton;
 @synthesize messages;
 @synthesize account;
+@synthesize sectionViewController;
 
 //===================================================================================================================================
 #pragma mark HistoryViewController
@@ -138,7 +139,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.editAccountsButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)] autorelease];
 	} 
 	return self; 
 } 
@@ -183,7 +184,8 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:[self.account jid]]; 
+        self.sectionViewController = [SectionViewController viewControllerWithLabel:[self.account jid]];
+        sectionView = self.sectionViewController.view;
     }
 	return sectionView; 
 }
@@ -236,6 +238,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.messages release];
+    [self.editAccountsButton release];
+    [self.account release];
+    [self.sectionViewController release];
     [super dealloc];
 }
 

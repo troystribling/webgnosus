@@ -58,6 +58,7 @@
 @synthesize editAccountsButton;
 @synthesize pubSubItems;
 @synthesize account;
+@synthesize sectionViewController;
 @synthesize eventType;
 
 //===================================================================================================================================
@@ -305,9 +306,10 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:[self.account bareJID]]; 
+        self.sectionViewController = [SectionViewController viewControllerWithLabel:[self.account bareJID]];
+        sectionView = self.sectionViewController.view;
     }
-    return sectionView; 
+	return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -386,6 +388,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.addPubSubItemButton release];
+    [self.editAccountsButton release];
+    [self.pubSubItems release];
+    [self.account release];
+    [self.sectionViewController release];
     [super dealloc];
 }
 

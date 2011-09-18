@@ -82,17 +82,16 @@
 	NSString *user;
 	NSString *domain;
 	NSString *resource;
+    XMPPJID* jid = nil;
 	
 	if([XMPPJID parse:jidStr outUser:&user outDomain:&domain outResource:&resource]) {
-		XMPPJID *jid = [[XMPPJID alloc] init];
+		jid = [[[XMPPJID alloc] init] autorelease];
 		jid->user = [user copy];
 		jid->domain = [domain copy];
 		jid->resource = [resource copy];
-		
-		return [jid autorelease];
 	}
 	
-	return nil;
+    return jid;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

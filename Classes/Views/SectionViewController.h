@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString* nickname;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIView*)viewWithLabel:(NSString*)viewLabel;
++ (SectionViewController*)viewControllerWithLabel:(NSString*)label;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil andLabel:(NSString*)label;
 
 @end

@@ -44,6 +44,7 @@
 @synthesize events;
 @synthesize service;
 @synthesize geoLocMap;
+@synthesize sectionViewController;
 @synthesize node;
 @synthesize name;
 @synthesize account;
@@ -252,9 +253,10 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:[NSString stringWithFormat:@"%@/%@", [[UserModel nodeToJID:self.node] full], self.name]]; 
+        self.sectionViewController = [SectionViewController viewControllerWithLabel:[NSString stringWithFormat:@"%@/%@", [[UserModel nodeToJID:self.node] full], self.name]];
+        sectionView = self.sectionViewController.view;
     }
-    return sectionView; 
+	return sectionView; 
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -297,6 +299,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.events release];
+    [self.account release];
+    [self.geoLocMap release];
+    [self.sectionViewController release];
+    [self.service release];
+    [self.node release];
+    [self.events release];
+    [self.name release];
+    [self.addEventButton release];
     [super dealloc];
 }
 

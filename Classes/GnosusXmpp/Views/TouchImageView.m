@@ -40,8 +40,13 @@
 #pragma mark UIView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)createWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate {
-    return [[TouchImageView alloc] initWithFrame:_frame name:_viewName andDelegate:_delegate];
++ (TouchImageView*)viewWithFrame:(CGRect)_frame andDelegate:(id)_delegate {
+    return [[[TouchImageView alloc] initWithFrame:_frame andDelegate:_delegate] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (TouchImageView*)viewWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate {
+    return [[[TouchImageView alloc] initWithFrame:_frame name:_viewName andDelegate:_delegate] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

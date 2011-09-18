@@ -11,6 +11,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
+@class SectionViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface PubSubViewController : UITableViewController {
@@ -18,6 +19,7 @@
 	UIBarButtonItem* editAccountsButton;
 	NSMutableArray* pubSubItems;
     AccountModel* account;
+    SectionViewController* sectionViewController;
     NSInteger eventType;
 }
 
@@ -26,6 +28,7 @@
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
 @property (nonatomic, retain) NSMutableArray* pubSubItems;
 @property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) SectionViewController* sectionViewController;
 @property (nonatomic, assign) NSInteger eventType;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -12,6 +12,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class UserModel;
+@class SectionViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface RosterItemViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate> {
@@ -20,6 +21,7 @@
     NSMutableArray* modes;
     NSMutableArray* pendingRequests;
 	UIBarButtonItem* sendMessageButton;
+    SectionViewController* rosterHeader;
     id items;
     AccountModel* account;
     UserModel* rosterItem;
@@ -31,6 +33,7 @@
 @property (nonatomic, retain) NSMutableArray* modes;
 @property (nonatomic, retain) NSMutableArray* pendingRequests;
 @property (nonatomic, retain) UIBarButtonItem* sendMessageButton;
+@property (nonatomic, retain) SectionViewController* rosterHeader;
 @property (nonatomic, retain) id items;
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) UserModel* rosterItem;

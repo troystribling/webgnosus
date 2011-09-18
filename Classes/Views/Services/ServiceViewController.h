@@ -25,6 +25,7 @@
     AccountModel* account;
     ServiceItemModel* selectedItem;
     ServiceModel* parentService;
+    NSMutableArray* sectionViewControllers;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -37,6 +38,7 @@
 @property (nonatomic, retain) AccountModel* account;
 @property (nonatomic, retain) ServiceItemModel* selectedItem;
 @property (nonatomic, retain) ServiceModel* parentService;
+@property (nonatomic, retain) NSMutableArray* sectionViewControllers;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)setService:(NSString*)initService andNode:(NSString*)initNode;

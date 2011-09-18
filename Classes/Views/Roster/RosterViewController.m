@@ -59,6 +59,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @synthesize addContactButton;
 @synthesize editAccountsButton;
+@synthesize sectionViewController;
 @synthesize roster;
 @synthesize account;
 @synthesize selectedRoster;
@@ -351,7 +352,8 @@
 - (UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section {
     UIView* sectionView = nil;
     if (self.account) {
-        sectionView = [SectionViewController viewWithLabel:[self.account jid]]; 
+        self.sectionViewController = [SectionViewController viewControllerWithLabel:[self.account jid]];
+        sectionView = self.sectionViewController.view;
     }
 	return sectionView; 
 }
@@ -438,6 +440,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.addContactButton release];
+    [self.editAccountsButton release];
+    [self.sectionViewController release];
+    [self.roster release];
+    [self.account release];
     [super dealloc];
 }
 

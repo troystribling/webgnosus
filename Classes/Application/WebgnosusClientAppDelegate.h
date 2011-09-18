@@ -25,7 +25,7 @@
     UINavigationController* navRosterViewController;
     UINavigationController* navPubSubViewController;
     UINavigationController* navHistoryViewController;
-    
+    UITabBarController* tabBarController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -37,6 +37,7 @@
 @property (nonatomic, retain) UINavigationController* navRosterViewController;
 @property (nonatomic, retain) UINavigationController* navPubSubViewController;
 @property (nonatomic, retain) UINavigationController* navHistoryViewController;
+@property (nonatomic, retain) UITabBarController* tabBarController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

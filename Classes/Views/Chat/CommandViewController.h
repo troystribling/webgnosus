@@ -20,6 +20,7 @@
     UserModel* rosterItem;
     NSMutableDictionary* commands;
     ServiceItemModel* commandRequest;
+    NSMutableArray* sectionViewControllers;
     BOOL formDisplayed;
 }
 
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) UserModel* rosterItem;
 @property (nonatomic, retain) NSMutableDictionary* commands;
 @property (nonatomic, retain) ServiceItemModel* commandRequest;
+@property (nonatomic, retain) NSMutableArray* sectionViewControllers;
 @property (nonatomic, assign) BOOL formDisplayed;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

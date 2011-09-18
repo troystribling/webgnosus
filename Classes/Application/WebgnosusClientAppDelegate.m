@@ -39,7 +39,7 @@
 - (void)openActivatedAccounts;
 - (UINavigationController*)createNavigationController:(UIViewController*)viewController;
 - (void)accountConnectionFailedForClient:(XMPPClient*)sender;
-- (UITabBarController*)createTabBarController;
+- (void)createTabBarController;
 - (void)createAccountManager;
 
 @end
@@ -56,6 +56,7 @@
 @synthesize navRosterViewController;
 @synthesize navPubSubViewController;
 @synthesize navHistoryViewController;
+@synthesize tabBarController;
 
 //===================================================================================================================================
 #pragma mark WebgnosusClientAppDelegate
@@ -93,8 +94,7 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (UITabBarController*)createTabBarController {
-    UITabBarController* tabBarController = [[UITabBarController alloc] init];	
+- (void)createTabBarController {
     self.navRosterViewController = [self createNavigationController:self.rosterViewController];
     self.navRosterViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Roster" image:[UIImage imageNamed:@"tabbar-roster.png"] tag:1] autorelease];
     self.navPubSubViewController = [self createNavigationController:self.pubSubViewController];	
@@ -103,8 +103,9 @@
     navServiceViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"Services" image:[UIImage imageNamed:@"tabbar-services.png"] tag:2] autorelease];
     self.navHistoryViewController = [self createNavigationController:self.historyViewController];	
     self.navHistoryViewController.tabBarItem = [[[UITabBarItem alloc] initWithTitle:@"History" image:[UIImage imageNamed:@"tabbar-history.png"] tag:0] autorelease];
-    tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, navServiceViewController, self.navHistoryViewController, nil];	
-    return tabBarController;
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];	
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:self.navRosterViewController, self.navPubSubViewController, navServiceViewController, self.navHistoryViewController, nil];	
+	[self.window addSubview:self.tabBarController.view];	
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -144,8 +145,8 @@
 	[[XMPPClientManager instance] addDelegate:self];
     [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
+    [self createTabBarController];
     [self openActivatedAccounts];
-	[window addSubview:[self createTabBarController].view];	
     [AlertViewManager onStartshowConnectingIndicatorInView:window];
     NSInteger count = [AccountModel count];
     if (count == 0) {
@@ -173,6 +174,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
+    [self.window release];
+    [self.rosterViewController release];
+    [self.pubSubViewController release];
+    [self.historyViewController release];
+    [self.serviceViewController release];
+    [self.navRosterViewController release];
+    [self.navPubSubViewController release];
+    [self.navHistoryViewController release];
+    [self.tabBarController release];
 	[super dealloc];
 }
 

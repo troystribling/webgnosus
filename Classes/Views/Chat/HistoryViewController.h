@@ -13,18 +13,21 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 @class AccountModel;
 @class HistoryMessageCache;
+@class SectionViewController;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 @interface HistoryViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, GeoLocUpdateDelegate> {
     HistoryMessageCache* messages;
 	UIBarButtonItem* editAccountsButton;
     AccountModel* account;
+    SectionViewController* sectionViewController;
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 @property (nonatomic, retain) HistoryMessageCache* messages;
 @property (nonatomic, retain) UIBarButtonItem* editAccountsButton;
 @property (nonatomic, retain) AccountModel* account;
+@property (nonatomic, retain) SectionViewController* sectionViewController;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 

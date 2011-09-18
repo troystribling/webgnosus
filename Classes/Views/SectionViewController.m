@@ -31,9 +31,8 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (UIView*)viewWithLabel:(NSString*)viewLabel {
-    SectionViewController* viewController = [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:viewLabel] autorelease]; 
-    return viewController.view;
++ (SectionViewController*)viewControllerWithLabel:(NSString*)label {
+    return [[[SectionViewController alloc] initWithNibName:@"SectionViewController" bundle:nil andLabel:label] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

@@ -22,7 +22,8 @@
 @property (nonatomic, retain) NSString* viewName;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (id)createWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate;
++ (TouchImageView*)viewWithFrame:(CGRect)_frame andDelegate:(id)_delegate;
++ (TouchImageView*)viewWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate;
 - (id)initWithFrame:(CGRect)_frame;
 - (id)initWithFrame:(CGRect)_frame andDelegate:(id)_delegate;
 - (id)initWithFrame:(CGRect)_frame name:(NSString*)_viewName andDelegate:(id)_delegate;
