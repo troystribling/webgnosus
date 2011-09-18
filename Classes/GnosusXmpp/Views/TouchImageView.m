@@ -40,6 +40,11 @@
 #pragma mark UIView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (TouchImageView*)viewWithFrame:(CGRect)_frame {
+    return [[[TouchImageView alloc] initWithFrame:_frame] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (TouchImageView*)viewWithFrame:(CGRect)_frame andDelegate:(id)_delegate {
     return [[[TouchImageView alloc] initWithFrame:_frame andDelegate:_delegate] autorelease];
 }
