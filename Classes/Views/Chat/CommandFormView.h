@@ -32,6 +32,7 @@
 @property (nonatomic, assign) CGFloat upAmount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (CommandFormView*)viewWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView;
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView;
 - (XMPPxData*)formFields;
 

@@ -53,7 +53,7 @@
     self.nodeLabel.text = self.node;
     UIView* msgView = [MessageViewFactory viewForMessage:self.message];
     CGRect msgRect = [msgView frame];
-    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kXDATA_SERVICE_MESSAGE_X_OFFSET, kXDATA_SERVICE_MESSAGE_Y_OFFSET, msgRect.size.width,  msgRect.size.width)];
+    UIView* container = [[[UIView alloc] initWithFrame:CGRectMake(kXDATA_SERVICE_MESSAGE_X_OFFSET, kXDATA_SERVICE_MESSAGE_Y_OFFSET, msgRect.size.width,  msgRect.size.width)] autorelease];
     [container addSubview:msgView];
     [self.view addSubview:container];
 	[super viewWillAppear:animated];

@@ -66,7 +66,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)sendEventButtonWasPressed:(id)sender {
-    EventMessageViewController* viewController = [[EventMessageViewController alloc] initWithNibName:@"EventMessageViewController" bundle:nil];
+    EventMessageViewController* viewController = [EventMessageViewController viewWithNibName:@"EventMessageViewController" bundle:nil];
     viewController.service = self.service;
     viewController.node = self.node;
 	[self.navigationController pushViewController:viewController animated:YES]; 
@@ -175,8 +175,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle  {
     if (self = [super initWithNibName:nibName bundle:nibBundle]) {
-        self.addEventButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendEventButtonWasPressed:)];
-        self.geoLocMap = [[MKMapView alloc] initWithFrame:self.view.frame];
+        self.addEventButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendEventButtonWasPressed:)] autorelease];
+        self.geoLocMap = [[[MKMapView alloc] initWithFrame:self.view.frame] autorelease];
     }
     return self;
 }

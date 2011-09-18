@@ -243,8 +243,8 @@
         CGFloat viewWidth = [[viewWidthArray objectAtIndex:i] floatValue];
         CGRect borderRect = [self makeBorderRectWithViewWidth:viewWidth rowHeight:rowRect.size.height andBorderWidth:borderWidth];
         CGRect cellRect = [self makeCellRectWithViewWidth:viewWidth rowHeight:rowRect.size.height andBorderWidth:borderWidth];
-        UIView* borderView = [[UIView alloc] initWithFrame:borderRect];
-        UIView* cellView = [[UIView alloc] initWithFrame:CGRectMake(cellOriginX, cellRect.origin.y, cellRect.size.width, cellRect.size.height)];
+        UIView* borderView = [[[UIView alloc] initWithFrame:borderRect] autorelease];
+        UIView* cellView = [[[UIView alloc] initWithFrame:CGRectMake(cellOriginX, cellRect.origin.y, cellRect.size.width, cellRect.size.height)] autorelease];
         [borderView addSubview:view];
         [cellView addSubview:borderView];
         [rowView addSubview:cellView];

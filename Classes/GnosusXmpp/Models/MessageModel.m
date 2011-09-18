@@ -281,7 +281,7 @@
             messageModel.accountPk = account.pk;
             messageModel.messageText = [message body];
             messageModel.toJid = [account fullJID];
-            messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+            messageModel.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
             messageModel.textType = MessageTextTypeBody;
             messageModel.node = @"";
             messageModel.itemId = @"-1";
@@ -492,7 +492,7 @@
                 messageModel.fromJid = [fromJID full];
                 messageModel.accountPk = account.pk;
                 messageModel.toJid = [account fullJID];
-                messageModel.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+                messageModel.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
                 messageModel.node = itemsNode;
                 messageModel.itemId = [item itemId];
                 messageModel.messageRead = readFlag;

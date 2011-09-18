@@ -115,9 +115,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)addTextViewToolBar {
     self.textViewToolBar = 
-        [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, kCOMMAND_FORM_TOOLBAR_YPOS-kCOMMAND_FORM_TOOLBAR_HEIGHT, self.window.frame.size.width, kCOMMAND_FORM_TOOLBAR_HEIGHT)];
+        [[[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, kCOMMAND_FORM_TOOLBAR_YPOS-kCOMMAND_FORM_TOOLBAR_HEIGHT, self.window.frame.size.width, kCOMMAND_FORM_TOOLBAR_HEIGHT)] autorelease];
     self.textViewToolBar.tintColor = [UIColor blackColor];
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(textViewEditDoneWasPressed)];
+    UIBarButtonItem* doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(textViewEditDoneWasPressed)] autorelease];
     [self.textViewToolBar setItems:[NSArray arrayWithObject:doneButton]];
     [self.window addSubview:self.textViewToolBar];
 }
@@ -378,14 +378,19 @@
 #pragma mark CommandFormView
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (CommandFormView*)viewWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView {
+    return [[[CommandFormView alloc] initWithForm:initForm inParentView:initParentView] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithForm:(XMPPIQ*)initForm inParentView:(UIView*)initParentView {
     if (self = [super initWithFrame:CGRectMake(0.0f, 0.0f, kCOMMAND_FORM_WIDTH, 0.0f)]) {
         self.form = initForm;
         self.parentView = initParentView;
         self.backgroundColor = [UIColor colorWithWhite:0.75f alpha:1.0f];
         self.upAmount = 0.0f;
-        self.formFieldViews = [[NSMutableDictionary alloc] initWithCapacity:10];
-        self.fields = [[NSMutableDictionary alloc] initWithCapacity:10];
+        self.formFieldViews = [NSMutableDictionary dictionaryWithCapacity:10];
+        self.fields = [NSMutableDictionary dictionaryWithCapacity:10];
         [self createFormItemViews];
         [self.parentView addSubview:self];
     }

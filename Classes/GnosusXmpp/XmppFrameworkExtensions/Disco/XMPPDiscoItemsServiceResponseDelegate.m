@@ -34,6 +34,11 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoItemsServiceResponseDelegate*)delegate {    
+    return [[[XMPPDiscoItemsServiceResponseDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [[client multicastDelegate] xmppClient:client didReceiveDiscoItemsServiceError:iq];        
 }

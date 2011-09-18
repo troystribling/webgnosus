@@ -30,6 +30,7 @@
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (EventMessageViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle;
 - (IBAction)sendMessageButtonWasPressed:(id)sender;
 
 @end

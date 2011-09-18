@@ -344,6 +344,16 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle {
+    return [[[RosterItemViewController alloc] initWithNibName:nibName bundle:nibBundle] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle {
+    return [[[RosterItemViewController alloc] initWithNibName:nibName bundle:nibBundle andTitle:viewTitle] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
         self.sendMessageButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(sendMessageButtonWasPressed:)] autorelease];

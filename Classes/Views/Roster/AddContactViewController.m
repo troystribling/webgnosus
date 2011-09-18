@@ -100,7 +100,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	self.newContactJidString = self.jidTextField.text;
-	NSArray* splitJid = [self.newContactJidString componentsSeparatedByString:@"@"];
+	NSArray* splitJid = [[self.newContactJidString componentsSeparatedByString:@"@"] autorelease];
     [self.jidTextField resignFirstResponder]; 
 	if ([splitJid count] == 2) {
         XMPPClient* xmppClient = [[XMPPClientManager instance] xmppClientForAccount:self.account];

@@ -53,7 +53,7 @@
         model.accountPk = self.account.pk;
         model.toJid = self.service;
         model.fromJid = [self.account fullJID];
-        model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+        model.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
         model.textType = MessageTextTypeEventText;
         model.itemId = @"-1";
         model.node = self.node;
@@ -69,6 +69,11 @@
 
 //===================================================================================================================================
 #pragma mark UIViewController
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (EventMessageViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle {
+    return [[[EventMessageViewController alloc] initWithNibName:nibName bundle:nibBundle] autorelease];
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 

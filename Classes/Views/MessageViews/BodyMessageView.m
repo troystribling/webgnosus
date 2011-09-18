@@ -44,7 +44,7 @@
 + (UIView*)viewForMessage:(MessageModel*)message {
     NSString* messageText = [self getMessageText:message];
     CGRect viewRect = [self getMessageRect:messageText];
-    UILabel* messageView = [[UILabel alloc] initWithFrame:viewRect];
+    UILabel* messageView = [[[UILabel alloc] initWithFrame:viewRect] autorelease];
     messageView.backgroundColor = [UIColor clearColor];
     messageView.lineBreakMode = UILineBreakModeWordWrap;
     messageView.numberOfLines = 0;
