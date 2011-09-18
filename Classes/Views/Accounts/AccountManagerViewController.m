@@ -87,8 +87,8 @@
     CGFloat boarderWideth = 2.0f;
     CGFloat xoffset = mainRect.origin.x + (1.0f-scaleFactor)*mainRect.size.width/2.0f;
     CGFloat yoffset = mainRect.origin.y + (1.0f-scaleFactor)*mainRect.size.height/2.0f;
-    self.contentView = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset, yoffset)];
-    self.contentViewBorder = [[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset-boarderWideth, yoffset-boarderWideth)];
+    self.contentView = [[[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset, yoffset)] autorelease];
+    self.contentViewBorder = [[[UIView alloc] initWithFrame:CGRectInset(mainRect, xoffset-boarderWideth, yoffset-boarderWideth)] autorelease];
     self.contentView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"dotted_tile.png"]];
     self.contentViewBorder.backgroundColor = [UIColor blackColor];
 }

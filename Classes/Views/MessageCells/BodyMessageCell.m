@@ -41,7 +41,7 @@
     [self setTime:cell forMessage:message];
     UIView* msgView = [MessageViewFactory viewForMessage:message];
     CGRect msgRect = msgView.frame;
-    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kMESSAGE_CELL_X_OFFSET, kMESSAGE_CELL_Y_OFFSET, msgRect.size.width,  msgRect.size.width)];
+    UIView* container = [[[UIView alloc] initWithFrame:CGRectMake(kMESSAGE_CELL_X_OFFSET, kMESSAGE_CELL_Y_OFFSET, msgRect.size.width,  msgRect.size.width)] autorelease];
     [container addSubview:msgView];
     [cell addSubview:container];
     return cell;

@@ -103,7 +103,7 @@
     model.accountPk = self.account.pk;
     model.toJid = [self.rosterItem fullJID];
     model.fromJid = [self.account fullJID];
-    model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    model.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
     model.textType = MessageTextTypeCommandText;
     model.itemId = @"-1";
     model.messageRead = YES;
