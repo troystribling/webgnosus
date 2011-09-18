@@ -61,7 +61,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView forAccount:(AccountModel*)initAccount {
-    [[[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView forForm:initForm andAccount:initAccount] autorelease];
+    [[[[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView forForm:initForm andAccount:initAccount] autorelease] retain];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
