@@ -224,11 +224,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.subId release];
-    [self.node release];
-    [self.service release];
-    [self.subscription release];
-    [self.jid release];
+    [subId release];
+    [node release];
+    [service release];
+    [subscription release];
+    [jid release];
     [super dealloc];
 }
 

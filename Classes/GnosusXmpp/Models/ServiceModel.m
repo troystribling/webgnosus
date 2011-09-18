@@ -264,11 +264,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.jid release];
-    [self.name release];
-    [self.category release];
-    [self.type release];
-    [self.node release];
+    [jid release];
+    [name release];
+    [category release];
+    [type release];
+    [node release];
     [super dealloc];
 }
 

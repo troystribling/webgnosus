@@ -388,11 +388,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.addPubSubItemButton release];
-    [self.editAccountsButton release];
-    [self.pubSubItems release];
-    [self.account release];
-    [self.sectionViewController release];
+    [addPubSubItemButton release];
+    [editAccountsButton release];
+    [pubSubItems release];
+    [account release];
+    [sectionViewController release];
     [super dealloc];
 }
 

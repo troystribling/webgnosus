@@ -487,16 +487,16 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.editAccountsButton release];
-    [self.searchServiceButton release];
-    [self.rootServiceViewController release];
-    [self.serviceItems release];
-    [self.node release];
-    [self.service release];
-    [self.account release];
-    [self.selectedItem release];
-    [self.parentService release];
-    [self.sectionViewControllers release];
+    [editAccountsButton release];
+    [searchServiceButton release];
+    [rootServiceViewController release];
+    [serviceItems release];
+    [node release];
+    [service release];
+    [account release];
+    [selectedItem release];
+    [parentService release];
+    [sectionViewControllers release];
     [super dealloc];
 }
 

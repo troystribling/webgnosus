@@ -545,12 +545,12 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.messageText release];
-    [self.createdAt release];
-    [self.toJid release];
-    [self.fromJid release];
-    [self.node release];
-    [self.itemId release];
+    [messageText release];
+    [createdAt release];
+    [toJid release];
+    [fromJid release];
+    [node release];
+    [itemId release];
     [super dealloc];
 }
 

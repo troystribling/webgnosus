@@ -299,15 +299,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.events release];
-    [self.account release];
-    [self.geoLocMap release];
-    [self.sectionViewController release];
-    [self.service release];
-    [self.node release];
-    [self.events release];
-    [self.name release];
-    [self.addEventButton release];
+    [events release];
+    [account release];
+    [geoLocMap release];
+    [sectionViewController release];
+    [service release];
+    [node release];
+    [name release];
+    [addEventButton release];
     [super dealloc];
 }
 

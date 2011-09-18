@@ -315,9 +315,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.status release];
-    [self.show release];
-    [self.presenceType release];
+    [status release];
+    [show release];
+    [presenceType release];
     [super dealloc];
 }
 

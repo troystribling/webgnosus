@@ -440,11 +440,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.addContactButton release];
-    [self.editAccountsButton release];
-    [self.sectionViewController release];
-    [self.roster release];
-    [self.account release];
+    [addContactButton release];
+    [editAccountsButton release];
+    [sectionViewController release];
+    [roster release];
+    [account release];
     [super dealloc];
 }
 

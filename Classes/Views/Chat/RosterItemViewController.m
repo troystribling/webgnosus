@@ -466,14 +466,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.selectedMode release];
-    [self.modes release];
-    [self.pendingRequests release];
-    [self.sendMessageButton release];
-    [self.rosterHeader release];
-    [self.items release];
-    [self.account release];
-    [self.rosterItem release];
+    [selectedMode release];
+    [modes release];
+    [pendingRequests release];
+    [sendMessageButton release];
+    [rosterHeader release];
+    [items release];
+    [account release];
+    [rosterItem release];
     [super dealloc];
 }
 

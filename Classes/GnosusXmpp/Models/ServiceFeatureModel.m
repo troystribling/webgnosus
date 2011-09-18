@@ -221,9 +221,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.node release];
-    [self.service release];
-    [self.var release];
+    [node release];
+    [service release];
+    [var release];
     [super dealloc];
 }
 

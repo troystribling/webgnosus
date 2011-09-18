@@ -174,15 +174,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.window release];
-    [self.rosterViewController release];
-    [self.pubSubViewController release];
-    [self.historyViewController release];
-    [self.serviceViewController release];
-    [self.navRosterViewController release];
-    [self.navPubSubViewController release];
-    [self.navHistoryViewController release];
-    [self.tabBarController release];
+    [window release];
+    [rosterViewController release];
+    [pubSubViewController release];
+    [historyViewController release];
+    [serviceViewController release];
+    [navRosterViewController release];
+    [navPubSubViewController release];
+    [navHistoryViewController release];
+    [tabBarController release];
 	[super dealloc];
 }
 

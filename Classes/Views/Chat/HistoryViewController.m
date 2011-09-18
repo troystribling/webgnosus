@@ -238,10 +238,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.messages release];
-    [self.editAccountsButton release];
-    [self.account release];
-    [self.sectionViewController release];
+    [messages release];
+    [editAccountsButton release];
+    [account release];
+    [sectionViewController release];
     [super dealloc];
 }
 

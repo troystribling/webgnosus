@@ -105,16 +105,16 @@
 - (void)dealloc {
 	[self.asyncSocket setDelegate:nil];
 	[self.asyncSocket disconnect];
-	[self.asyncSocket release];
-	[self.xmppHostName release];
-	[self.buffer release];
-	[self.rootElement release];
-	[self.terminator release];
-	[self.authUsername release];
-	[self.authResource release];
-	[self.tempPassword release];
-	[self.keepAliveTimer invalidate];
-	[self.keepAliveTimer release];
+	[asyncSocket release];
+	[xmppHostName release];
+	[buffer release];
+	[rootElement release];
+	[terminator release];
+	[authUsername release];
+	[authResource release];
+	[tempPassword release];
+	[keepAliveTimer invalidate];
+	[keepAliveTimer release];
 	[super dealloc];
 }
 

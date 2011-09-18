@@ -298,11 +298,11 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)dealloc {
-    [self.parentNode release];
-    [self.service release];
-    [self.node release];
-    [self.jid release];
-    [self.itemName release];
+    [parentNode release];
+    [service release];
+    [node release];
+    [jid release];
+    [itemName release];
     [super dealloc];
 }
 
