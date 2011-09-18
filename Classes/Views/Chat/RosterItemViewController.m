@@ -95,7 +95,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
     UserModel* user = [self.items objectAtIndex:indexPath.row];
-    RosterItemViewController* chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
+    RosterItemViewController* chatViewController = [[[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]] autorelease];
     [chatViewController setAccount:self.account];
     chatViewController.rosterItem = user;
     [self.navigationController pushViewController:chatViewController animated:YES];
@@ -134,10 +134,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)createSegementedController {
     CGRect rect = CGRectMake(0.0f, 0.0f, 120.0f, 30.0f);
-    SegmentedCycleList* segmentControl = [[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] andRect:rect];
+    SegmentedCycleList* segmentControl = [[[SegmentedCycleList alloc] init:self.modes withValueAtIndex:[self selectedIndexFromMode] andRect:rect] autorelease];
     segmentControl.delegate = self;
     self.navigationItem.titleView = segmentControl;
-    [segmentControl release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
