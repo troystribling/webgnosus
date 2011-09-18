@@ -78,7 +78,7 @@ static BOOL DismissConnectionIndicatorOnStart = YES;
     NSMutableArray* accounts = [AccountModel findAllActivatedByConnectionState:state];
     for (int i = 0; i < [accounts count]; i++) {
         AccountModel* account = [accounts objectAtIndex:i];
-        [self showAlert:title withMessage:[[NSString alloc] initWithFormat:@"%@", [account fullJID]]];
+        [self showAlert:title withMessage:[NSString stringWithFormat:@"%@", [account fullJID]]];
     }
 }
 

@@ -71,6 +71,11 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (EventMessageViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle {
+    return [[[EventMessageViewController alloc] initWithNibName:nibName bundle:nibBundle] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
 	} 

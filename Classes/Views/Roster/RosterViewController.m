@@ -120,9 +120,9 @@
     RosterItemViewController* chatViewController = nil;
     UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil];
+        chatViewController = [RosterItemViewController viewWithNibName:@"RosterItemViewController" bundle:nil];
     } else {
-        chatViewController = [[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
+        chatViewController = [RosterItemViewController viewWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
     }
     chatViewController.rosterMode = self.selectedRoster;
     chatViewController.account = self.account;
@@ -300,8 +300,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.addContactButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactButtonWasPressed)];
-        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.addContactButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addContactButtonWasPressed)] autorelease];
+        self.editAccountsButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)] autorelease];
 	} 
 	return self; 
 } 
@@ -422,7 +422,6 @@
     if (chatViewController) {
         [self labelBackButton];
         [self.navigationController pushViewController:chatViewController animated:YES];
-        [chatViewController release];
     }
 }
 

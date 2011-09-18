@@ -128,7 +128,7 @@
         NSInteger count = [ServiceItemModel countByService:addr andParentNode:node];
         if (count == 0) {
             XMPPClient* client = [[XMPPClientManager instance] xmppClientForAccount:self.account];
-            [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:addr] node:node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
+            [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:addr] node:node andDelegateResponse:[XMPPDiscoItemsServiceResponseDelegate delegate]];
             [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
         } else {
             [self.navigationController popToRootViewControllerAnimated:YES];

@@ -135,7 +135,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f)];
+        self.itemImage = [TouchImageView viewWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f)];
         self.enableImageTouch = NO;
 	} 
 	return self; 

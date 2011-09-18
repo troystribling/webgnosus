@@ -37,6 +37,11 @@
 #pragma mark XMPPDiscoInfoResponseDelegate PrivateAPI
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++(XMPPCommandDelegate*)delegate {
+    return [[[XMPPCommandDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)processCommandResult:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
     [MessageModel insert:client commandResult:iq];
     [[[XMPPClientManager instance] messageCountUpdateDelegate] messageCountDidChange];

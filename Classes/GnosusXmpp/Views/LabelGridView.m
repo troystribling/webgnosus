@@ -51,6 +51,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (LabelGridView*)viewWithLabelViews:(NSMutableArray*)labelViews {
+    return [[[LabelGridView alloc] initWithLabelViews:labelViews] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithLabelViews:(NSMutableArray*)labelViews {
     if (self = [self initWithLabelViews:labelViews borderWidth:kGRID_BORDER_WIDTH  maxWidth:kDISPLAY_WIDTH]) {
     }

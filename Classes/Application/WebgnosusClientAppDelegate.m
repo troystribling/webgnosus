@@ -141,7 +141,7 @@
 		return;
 	}	
 	[dbi open];
-	[[XMPPClientManager instance] addDelegate:[[XMPPMessageDelegate alloc] init]];
+	[[XMPPClientManager instance] addDelegate:[[[XMPPMessageDelegate alloc] init] autorelease]];
 	[[XMPPClientManager instance] addDelegate:self];
     [[XMPPClientManager instance] addMessageCountUpdateDelegate:self];
     [[XMPPClientManager instance] addAccountUpdateDelegate:self];
@@ -229,7 +229,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)xmppClient:(XMPPClient*)sender didReceiveErrorPresence:(XMPPPresence*)presence {
     NSString* title = [[presence toJID] full];
-    NSString* message = [[NSString alloc] initWithFormat:@"Error with contact '%@'", [[presence fromJID] full]];
+    NSString* message = [NSString stringWithFormat:@"Error with contact '%@'", [[presence fromJID] full]];
     [AlertViewManager showAlert:title withMessage:message];
 }
 

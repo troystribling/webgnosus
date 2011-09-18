@@ -32,6 +32,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPCommand*)messageWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction {
+    return [[[XMPPCommand alloc] initWithNode:cmdNode andAction:cmdAction] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode {
 	if(self = [super initWithName:@"command"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/commands"]];
@@ -132,13 +137,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid {
-    [self set:client commandNode:node JID:jid andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [self set:client commandNode:node JID:jid andDelegateResponse:[XMPPCommandDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    XMPPCommand* cmd = [XMPPCommand messageWithNode:node andAction:@"execute"];
     [iq addCommand:cmd];
     [client send:iq andDelegateResponse:responseDelegate];
     [iq release]; 
@@ -146,13 +151,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
-    [self set:client commandNode:node JID:jid sessionID:sessionID andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [self set:client commandNode:node JID:jid sessionID:sessionID andDelegateResponse:[XMPPCommandDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"execute"];
+    XMPPCommand* cmd = [XMPPCommand messageWithNode:node andAction:@"execute"];
     if (sessionID) {
         [cmd addSessionID:sessionID];
     }
@@ -164,7 +169,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
-    [self set:client commandNode:node withData:data JID:jid sessionID:sessionID andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [self set:client commandNode:node withData:data JID:jid sessionID:sessionID andDelegateResponse:[XMPPCommandDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -182,12 +187,12 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)cancel:(XMPPClient*)client commandNode:(NSString*)node JID:(XMPPJID*)jid andSessionID:(NSString*)sessionID {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-        XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andAction:@"cancel"];
+        XMPPCommand* cmd = [XMPPCommand messageWithNode:node andAction:@"cancel"];
     if (sessionID) {
         [cmd addSessionID:sessionID];
     }
     [iq addCommand:cmd];
-    [client send:iq andDelegateResponse:[[XMPPCommandDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[XMPPCommandDelegate delegate]];
     [iq release]; 
 }
 

@@ -17,6 +17,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (LabelGridView*)viewWithLabelViews:(NSMutableArray*)labelViews;
 - (id)initWithLabelViews:(NSMutableArray*)labelViews;
 - (id)initWithLabelViews:(NSMutableArray*)labelViews borderWidth:(CGFloat)initBorderWidth maxWidth:(CGFloat)initMaxWidth;
 - (void)setTextAlignment:(UITextAlignment)textAlignment forColumn:(NSUInteger)column;

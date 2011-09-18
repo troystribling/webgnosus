@@ -69,7 +69,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.itemImage = [[TouchImageView alloc] initWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f) andDelegate:self];
+        self.itemImage = [TouchImageView viewWithFrame:CGRectMake(20.0f, 7.0f, 30.0f, 30.0f) andDelegate:self];
         self.itemImage.image = [UIImage imageNamed:@"service-pubsub-node-blue.png"]; 
 	} 
 	return self; 

@@ -215,7 +215,7 @@
         insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, node, jid, itemName) values ('%@', '%@', '%@', '%@')", 
                            self.service, self.node, self.jid, self.itemName];	
     } else {
-        insertStatement = [[NSString alloc] initWithFormat:@"INSERT INTO serviceItems (service, jid) values ('%@', '%@')", self.service, self.jid];	
+        insertStatement = [NSString stringWithFormat:@"INSERT INTO serviceItems (service, jid) values ('%@', '%@')", self.service, self.jid];	
     }
     [[WebgnosusDbi instance]  updateWithStatement:insertStatement];
 }

@@ -47,7 +47,7 @@
     model.accountPk = self.account.pk;
     model.toJid = [[self.form fromJID] full];
     model.fromJid = [self.account fullJID];
-    model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    model.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
     model.textType = MessageTextTypeCommandXData;
     model.itemId = @"-1";
     model.messageRead = YES;
@@ -61,7 +61,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView forAccount:(AccountModel*)initAccount {
-    [[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView forForm:initForm andAccount:initAccount];
+    [[[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView forForm:initForm andAccount:initAccount] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -137,7 +137,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewWillAppear:(BOOL)animated {
-    self.formView = [[CommandFormView alloc] initWithForm:self.form inParentView:self.formScrollView];
+    self.formView = [CommandFormView viewWithForm:self.form inParentView:self.formScrollView];
     [self.formScrollView setContentSize:self.formView.frame.size];
     [[XMPPClientManager instance] delegateTo:self forAccount:self.account];
     [self.formScrollView addSubview:self.formView];

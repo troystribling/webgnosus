@@ -42,6 +42,10 @@
 //===================================================================================================================================
 #pragma mark AccountModel
 
++ (AccountModel*)account {
+    return [[[AccountModel alloc] init] autorelease];
+}
+
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (AccountModel*)model {
     return [[[AccountModel alloc] init] autorelease];
