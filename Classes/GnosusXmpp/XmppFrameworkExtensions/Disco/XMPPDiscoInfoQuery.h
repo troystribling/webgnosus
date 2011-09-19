@@ -22,6 +22,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPDiscoInfoQuery*)createFromElement:(NSXMLElement*)element;
++ (XMPPDiscoInfoQuery*)message;
++ (XMPPDiscoInfoQuery*)messageWithNode:(NSString*)_node;
 - (XMPPDiscoInfoQuery*)init;
 - (XMPPDiscoInfoQuery*)initWithNode:(NSString*)itemsNode;
 

@@ -50,6 +50,7 @@
 @synthesize commands;
 @synthesize commandRequest;
 @synthesize sectionViewControllers;
+@synthesize formController;
 @synthesize formDisplayed;
 
 //===================================================================================================================================
@@ -174,7 +175,9 @@
 - (void)xmppClient:(XMPPClient*)sender didReceiveCommandForm:(XMPPIQ*)iq {
     self.formDisplayed = YES;
     [AlertViewManager dismissActivityIndicator];
-    [CommandFormViewController form:iq inView:self.view.window forAccount:self.account];
+    self.formController = [CommandFormViewController viewController:iq forAccount:self.account];
+    self.formController.view.frame = self.view.window.frame;
+    [self.view.window addSubview:self.formController.view];
 }
 
 //===================================================================================================================================
@@ -288,6 +291,7 @@
     [commands release];
     [commandRequest release];
     [sectionViewControllers release];
+    [formController release];
     [super dealloc];
 }
 

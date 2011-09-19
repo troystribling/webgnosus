@@ -11,7 +11,7 @@
 #import "XMPPIQ.h"
 #import "XMPPJID.h"
 #import "XMPPClient.h"
-#import "XMPPClientVersionQueryDeligate.h"
+#import "XMPPClientVersionQueryDelegate.h"
 #import "NSXMLElementAdditions.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,11 +89,15 @@
 #pragma mark XMPPClientVersionQuery Messages
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPClientVersionQuery*)message {
+    return [[[XMPPClientVersionQuery alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[self alloc] init]];
-    [client send:iq andDelegateResponse:[[XMPPClientVersionQueryDeligate alloc] init]];
-    [iq release];
+    [iq addQuery:[XMPPClientVersionQuery message]];
+    [client send:iq andDelegateResponse:[XMPPClientVersionQueryDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

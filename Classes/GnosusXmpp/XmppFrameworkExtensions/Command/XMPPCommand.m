@@ -37,6 +37,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPCommand*)messageWithNode:(NSString*)cmdNode andData:(XMPPxData*)cmdData {
+    return [[[XMPPCommand alloc] initWithNode:cmdNode andData:cmdData] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPCommand*)messageWithNode:(NSString*)cmdNode {
+    return [[[XMPPCommand alloc] initWithNode:cmdNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode {
 	if(self = [super initWithName:@"command"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/commands"]];
@@ -175,7 +185,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client commandNode:(NSString*)node withData:(XMPPxData*)data JID:(XMPPJID*)jid sessionID:(NSString*)sessionID andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPCommand* cmd = [[XMPPCommand alloc] initWithNode:node andData:data];
+    XMPPCommand* cmd = [XMPPCommand messageWithNode:node andData:data];
     if (sessionID) {
         [cmd addSessionID:sessionID];
     }

@@ -20,6 +20,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPClientVersionQuery*)createFromElement:(NSXMLElement*)element;
++ (XMPPClientVersionQuery*)message;
 - (XMPPClientVersionQuery*)init;
 - (XMPPClientVersionQuery*)initWithName:(NSString*)name andVersion:(NSString*)version;
 - (XMPPClientVersionQuery*)initWithName:(NSString*)name version:(NSString*)version andOs:(NSString*)os;

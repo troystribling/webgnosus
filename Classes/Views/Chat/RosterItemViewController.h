@@ -39,8 +39,8 @@
 @property (nonatomic, retain) UserModel* rosterItem;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle;
-+ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle;
++ (RosterItemViewController*)viewController;
++ (RosterItemViewController*)viewControllerWithTitle:(NSString*)viewTitle;
 - (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle;
 
 @end

@@ -11,7 +11,12 @@
 #import "XMPPResponse.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPClientVersionQueryDeligate : NSObject <XMPPResponseDelegate> {
+@interface XMPPClientVersionQueryDelegate : NSObject <XMPPResponseDelegate> {
 }
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++(XMPPClientVersionQueryDelegate*)delegate;
 
 @end

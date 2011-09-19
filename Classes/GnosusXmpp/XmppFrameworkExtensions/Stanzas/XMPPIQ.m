@@ -49,6 +49,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPIQ*)messageWithType:(NSString*)_type {
+    return [[[XMPPIQ alloc] initWithType:_type] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPIQ*)messageWithType:(NSString*)_type toJID:(NSString*)_jid {
+    return [[[XMPPIQ alloc] initWithType:_type toJID:_jid] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPIQ*)messageWithType:(NSString*)_type toJID:(NSString*)_jid andId:(NSString*)_id {
+    return [[[XMPPIQ alloc] initWithType:_type toJID:_jid] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPIQ*)initWithType:(NSString*)iqType {
 	if(self = (XMPPIQ*)[super initWithName:@"iq"]) {
         [self addType:iqType];

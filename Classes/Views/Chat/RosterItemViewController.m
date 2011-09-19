@@ -96,11 +96,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)resourceViewControllerForRowAtIndexPath:(NSIndexPath*)indexPath {
     UserModel* user = [self.items objectAtIndex:indexPath.row];
-    RosterItemViewController* chatViewController = [[[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]] autorelease];
+    RosterItemViewController* chatViewController = [RosterItemViewController viewControllerWithTitle:[user resource]];
     [chatViewController setAccount:self.account];
     chatViewController.rosterItem = user;
     [self.navigationController pushViewController:chatViewController animated:YES];
-    [chatViewController release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -344,13 +343,13 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle {
-    return [[[RosterItemViewController alloc] initWithNibName:nibName bundle:nibBundle] autorelease];
++ (RosterItemViewController*)viewController {
+    return [[[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (RosterItemViewController*)viewWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle andTitle:(NSString*)viewTitle {
-    return [[[RosterItemViewController alloc] initWithNibName:nibName bundle:nibBundle andTitle:viewTitle] autorelease];
++ (RosterItemViewController*)viewControllerWithTitle:(NSString*)viewTitle {
+    return [[[RosterItemViewController alloc] initWithNibName:@"RosterItemViewController" bundle:nil andTitle:viewTitle] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

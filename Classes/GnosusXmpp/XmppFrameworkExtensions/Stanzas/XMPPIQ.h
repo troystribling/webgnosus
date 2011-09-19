@@ -26,6 +26,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPIQ*)createFromElement:(NSXMLElement *)element;
++ (XMPPIQ*)messageWithType:(NSString*)_type;
++ (XMPPIQ*)messageWithType:(NSString*)_type toJID:(NSString*)_jid;;
++ (XMPPIQ*)messageWithType:(NSString*)_type toJID:(NSString*)_jid andId:(NSString*)_id;
 - (XMPPIQ*)initWithType:(NSString*)iqType;
 - (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqTo;
 - (XMPPIQ*)initWithType:(NSString*)iqType toJID:(NSString*)iqTo andId:(NSString*)iqId;

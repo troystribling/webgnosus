@@ -60,8 +60,8 @@
 #pragma mark CommandFormViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView forAccount:(AccountModel*)initAccount {
-    [[[[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil inView:containedView forForm:initForm andAccount:initAccount] autorelease] retain];
++ (CommandFormViewController*)viewController:(XMPPIQ*)initForm forAccount:(AccountModel*)initAccount {
+    return [[[CommandFormViewController alloc] initWithNibName:@"CommandFormViewController" bundle:nil forForm:initForm andAccount:initAccount] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -119,13 +119,11 @@
 #pragma mark UIViewController
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)parentView forForm:(XMPPIQ*)initForm andAccount:(AccountModel*)initAccount { 
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle forForm:(XMPPIQ*)initForm andAccount:(AccountModel*)initAccount { 
 	if (self = [super initWithNibName:nibName bundle:nibBundle]) { 
-        self.view.frame = parentView.frame;
         self.form = initForm;
         self.account = initAccount;
         self.view.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
-        [parentView addSubview:self.view];
 	} 
 	return self; 
 } 

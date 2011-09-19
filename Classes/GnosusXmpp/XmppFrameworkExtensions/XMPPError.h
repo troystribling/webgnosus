@@ -15,6 +15,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPError*)createFromElement:(NSXMLElement*)element;
++ (XMPPError*)message;
++ (XMPPError*)messageWithType:(NSString*)_type;
 - (XMPPError*)init;
 - (XMPPError*)initWithType:(NSString*)errotType;
 

@@ -120,9 +120,9 @@
     RosterItemViewController* chatViewController = nil;
     UserModel* user = [self.roster objectAtIndex:indexPath.row];
     if (self.selectedRoster == kCONTACTS_MODE) {
-        chatViewController = [RosterItemViewController viewWithNibName:@"RosterItemViewController" bundle:nil];
+        chatViewController = [RosterItemViewController viewController];
     } else {
-        chatViewController = [RosterItemViewController viewWithNibName:@"RosterItemViewController" bundle:nil andTitle:[user resource]];
+        chatViewController = [RosterItemViewController viewControllerWithTitle:[user resource]];
     }
     chatViewController.rosterMode = self.selectedRoster;
     chatViewController.account = self.account;

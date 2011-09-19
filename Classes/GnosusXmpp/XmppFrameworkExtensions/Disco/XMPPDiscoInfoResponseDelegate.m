@@ -37,6 +37,11 @@
 #pragma mark XMPPDiscoInfoResponseDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoInfoResponseDelegate*)delegate:(XMPPJID*)_jid {
+    return [[[XMPPDiscoInfoResponseDelegate alloc] init:_jid] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init:(XMPPJID*)initJID {
 	if(self = [super init])  {
         self.targetJID = initJID;

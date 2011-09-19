@@ -22,6 +22,7 @@
 @property (nonatomic, retain) XMPPJID* targetJID;
            
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoInfoResponseDelegate*)delegate:(XMPPJID*)_jid;
 - (id)init:(XMPPJID*)initJID;
            
 @end

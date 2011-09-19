@@ -29,6 +29,11 @@
 //===================================================================================================================================
 #pragma mark XMPPDiscoInfoServiceResponseDelegate
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoInfoServiceResponseDelegate*)delegate {
+    return [[[XMPPDiscoInfoServiceResponseDelegate alloc] init] autorelease];
+}
+
 //===================================================================================================================================
 #pragma mark XMPPDiscoInfoServiceResponseDelegate PrivateAPI
 

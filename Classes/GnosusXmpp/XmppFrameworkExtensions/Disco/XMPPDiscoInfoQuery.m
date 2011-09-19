@@ -31,12 +31,20 @@
 #pragma mark XMPPDiscoInfoQuery
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPDiscoInfoQuery*)createFromElement:(NSXMLElement*)element {
 	XMPPDiscoInfoQuery* result = (XMPPDiscoInfoQuery*)element;
 	result->isa = [XMPPDiscoInfoQuery class];
 	return result;
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoInfoQuery*)message {
+    return [[[XMPPDiscoInfoQuery alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoInfoQuery*)messageWithNode:(NSString*)_node {
+    return [[[XMPPDiscoInfoQuery alloc] initWithNode:_node] autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -91,22 +99,21 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)error:(XMPPClient*)client condition:(NSString*)condition forRequest:(XMPPIQ*)iq {
-    XMPPIQ* respIq = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
+    XMPPIQ* respIq = [XMPPIQ messageWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
     XMPPDiscoInfoQuery* infoQuery;
     NSString* node = [[iq query] node];
     if (node) {
-        infoQuery = [[self alloc] initWithNode:node];
+        infoQuery = [self messageWithNode:node];
     } else {
-        infoQuery = [[self alloc] init];
+        infoQuery = [self message];
     }
-    XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
+    XMPPError* error = [XMPPError messageWithType:@"cancel"];
     NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
     [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
     [error addChild:errorCondition];
     [respIq addChild:error];
     [respIq addQuery:infoQuery];
     [client sendElement:respIq];
-    [respIq release];
 }
 
 //===================================================================================================================================
@@ -114,16 +121,15 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[self alloc] init]];
-    [client send:iq andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
-    [iq release];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
+    [iq addQuery:[self message]];
+    [client send:iq andDelegateResponse:[XMPPDiscoInfoResponseDelegate delegate:targetJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID {
     if (node) {
-        [self get:client JID:jid node:node andDelegateResponse:[[XMPPDiscoInfoResponseDelegate alloc] init:targetJID]];
+        [self get:client JID:jid node:node andDelegateResponse:[XMPPDiscoInfoResponseDelegate delegate:targetJID]];
     } else {
         [self get:client JID:jid forTarget:targetJID];
     }
@@ -131,10 +137,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
     [iq addQuery:[[self alloc] initWithNode:node]];
     [client send:iq andDelegateResponse:responseDelegate];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

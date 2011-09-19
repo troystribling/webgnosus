@@ -131,7 +131,7 @@
             ServiceItemModel* item = [self.serviceItems objectAtIndex:i]; 
             NSInteger count = [ServiceFeatureModel countByService:item.jid andNode:item.node];
             if (count == 0) {
-                [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoInfoServiceResponseDelegate alloc] init]];
+                [XMPPDiscoInfoQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[XMPPDiscoInfoServiceResponseDelegate delegate]];
             }
         }
     }
@@ -348,7 +348,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)initWithCoder:(NSCoder *)coder { 
 	if (self = [super initWithCoder:coder]) { 
-        self.editAccountsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)];
+        self.editAccountsButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(editAccountButtonWasPressed)] autorelease];
         self.navigationItem.leftBarButtonItem = self.editAccountsButton;
 	} 
 	return self; 
@@ -356,7 +356,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (void)viewDidLoad {    
-    self.searchServiceButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(serachServiceButtonWasPressed)];
+    self.searchServiceButton = [[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"search.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(serachServiceButtonWasPressed)] autorelease];
     self.navigationItem.rightBarButtonItem = self.searchServiceButton;
 	self.title = @"Services";
     UIBarButtonItem* temporaryBarButtonItem = [[UIBarButtonItem alloc] init];
@@ -472,7 +472,7 @@
             [XMPPPubSub get:client JID:[XMPPJID jidWithString:item.jid] node:self.parentService.node withId:item.itemName];
         }
     } else {
-        [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[[XMPPDiscoItemsServiceResponseDelegate alloc] init]];
+        [XMPPDiscoItemsQuery get:client JID:[XMPPJID jidWithString:item.jid] node:item.node andDelegateResponse:[XMPPDiscoItemsServiceResponseDelegate delegate]];
         [AlertViewManager showActivityIndicatorInView:self.view.window withTitle:@"Service Disco"];
     }
 }

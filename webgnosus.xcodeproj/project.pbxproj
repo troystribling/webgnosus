@@ -111,7 +111,7 @@
 		056B5CE312047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9012047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m */; };
 		056B5CE412047FED002F62D4 /* XMPPAuthorizationQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9312047FED002F62D4 /* XMPPAuthorizationQuery.m */; };
 		056B5CE512047FED002F62D4 /* XMPPClientVersionQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9512047FED002F62D4 /* XMPPClientVersionQuery.m */; };
-		056B5CE612047FED002F62D4 /* XMPPClientVersionQueryDeligate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDeligate.m */; };
+		056B5CE612047FED002F62D4 /* XMPPClientVersionQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDelegate.m */; };
 		056B5CE712047FED002F62D4 /* XMPPQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9912047FED002F62D4 /* XMPPQuery.m */; };
 		056B5CE812047FED002F62D4 /* XMPPRegisterQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9B12047FED002F62D4 /* XMPPRegisterQuery.m */; };
 		056B5CE912047FED002F62D4 /* XMPPRegisterQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 056B5C9D12047FED002F62D4 /* XMPPRegisterQueryDelegate.m */; };
@@ -416,8 +416,8 @@
 		056B5C9312047FED002F62D4 /* XMPPAuthorizationQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPAuthorizationQuery.m; sourceTree = "<group>"; };
 		056B5C9412047FED002F62D4 /* XMPPClientVersionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQuery.h; sourceTree = "<group>"; };
 		056B5C9512047FED002F62D4 /* XMPPClientVersionQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQuery.m; sourceTree = "<group>"; };
-		056B5C9612047FED002F62D4 /* XMPPClientVersionQueryDeligate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPClientVersionQueryDeligate.h; sourceTree = "<group>"; };
-		056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDeligate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQueryDeligate.m; sourceTree = "<group>"; };
+		056B5C9612047FED002F62D4 /* XMPPClientVersionQueryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; path = XMPPClientVersionQueryDelegate.h; sourceTree = "<group>"; };
+		056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPClientVersionQueryDelegate.m; sourceTree = "<group>"; };
 		056B5C9812047FED002F62D4 /* XMPPQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPQuery.h; sourceTree = "<group>"; };
 		056B5C9912047FED002F62D4 /* XMPPQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPQuery.m; sourceTree = "<group>"; };
 		056B5C9A12047FED002F62D4 /* XMPPRegisterQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPRegisterQuery.h; sourceTree = "<group>"; };
@@ -948,8 +948,8 @@
 				056B5C9312047FED002F62D4 /* XMPPAuthorizationQuery.m */,
 				056B5C9412047FED002F62D4 /* XMPPClientVersionQuery.h */,
 				056B5C9512047FED002F62D4 /* XMPPClientVersionQuery.m */,
-				056B5C9612047FED002F62D4 /* XMPPClientVersionQueryDeligate.h */,
-				056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDeligate.m */,
+				056B5C9612047FED002F62D4 /* XMPPClientVersionQueryDelegate.h */,
+				056B5C9712047FED002F62D4 /* XMPPClientVersionQueryDelegate.m */,
 				056B5C9812047FED002F62D4 /* XMPPQuery.h */,
 				056B5C9912047FED002F62D4 /* XMPPQuery.m */,
 				056B5C9A12047FED002F62D4 /* XMPPRegisterQuery.h */,
@@ -1513,7 +1513,7 @@
 				056B5CE312047FED002F62D4 /* XMPPPubSubUnsubscribeDelegate.m in Sources */,
 				056B5CE412047FED002F62D4 /* XMPPAuthorizationQuery.m in Sources */,
 				056B5CE512047FED002F62D4 /* XMPPClientVersionQuery.m in Sources */,
-				056B5CE612047FED002F62D4 /* XMPPClientVersionQueryDeligate.m in Sources */,
+				056B5CE612047FED002F62D4 /* XMPPClientVersionQueryDelegate.m in Sources */,
 				056B5CE712047FED002F62D4 /* XMPPQuery.m in Sources */,
 				056B5CE812047FED002F62D4 /* XMPPRegisterQuery.m in Sources */,
 				056B5CE912047FED002F62D4 /* XMPPRegisterQueryDelegate.m in Sources */,

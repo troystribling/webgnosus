@@ -20,7 +20,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPCommand*)createFromElement:(NSXMLElement*)element;
++ (XMPPCommand*)messageWithNode:(NSString*)cmdNode;
 + (XMPPCommand*)messageWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction;
++ (XMPPCommand*)messageWithNode:(NSString*)cmdNode andData:(XMPPxData*)cmdData;
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode;
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode andAction:(NSString*)cmdAction;
 - (XMPPCommand*)initWithNode:(NSString*)cmdNode andData:(XMPPxData*)cmdData;

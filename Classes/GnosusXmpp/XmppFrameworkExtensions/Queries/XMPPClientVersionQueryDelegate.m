@@ -1,5 +1,5 @@
 //
-//  XMPPClientVersionQueryDeligate.m
+//  XMPPClientVersionQueryDelegate.m
 //  webgnosus
 //
 //  Created by Troy Stribling on 11/29/09.
@@ -7,7 +7,7 @@
 //
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-#import "XMPPClientVersionQueryDeligate.h"
+#import "XMPPClientVersionQueryDelegate.h"
 #import "XMPPClient.h"
 #import "XMPPIQ.h"
 #import "XMPPRegisterQuery.h"
@@ -18,18 +18,23 @@
 #import "ContactModel.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@interface XMPPClientVersionQueryDeligate (PrivateAPI)
+@interface XMPPClientVersionQueryDelegate (PrivateAPI)
 
 @end
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-@implementation XMPPClientVersionQueryDeligate
+@implementation XMPPClientVersionQueryDelegate
 
 //===================================================================================================================================
-#pragma mark XMPPClientVersionQueryDeligate
+#pragma mark XMPPClientVersionQueryDelegate
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++(XMPPClientVersionQueryDelegate*)delegate {
+    return [[[XMPPClientVersionQueryDelegate alloc] init] autorelease];
+}
 
 //===================================================================================================================================
-#pragma mark XMPPClientVersionQueryDeligate PrivateAPI
+#pragma mark XMPPClientVersionQueryDelegate PrivateAPI
 
 //===================================================================================================================================
 #pragma mark XMPPResponse Delegate

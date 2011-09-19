@@ -33,8 +33,8 @@
 @property (nonatomic, retain) AccountModel* account;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-+ (void)form:(XMPPIQ*)initForm inView:(UIView*)containedView forAccount:(AccountModel*)initAccount;
-- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle inView:(UIView*)parentView forForm:(XMPPIQ*)initForm andAccount:(AccountModel*)initAccount;
++ (CommandFormViewController*)viewController:(XMPPIQ*)initForm forAccount:(AccountModel*)initAccount;
+- (id)initWithNibName:(NSString*)nibName bundle:(NSBundle*)nibBundle forForm:(XMPPIQ*)initForm andAccount:(AccountModel*)initAccount;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (IBAction)cancelButtonPressed:(id)sender;

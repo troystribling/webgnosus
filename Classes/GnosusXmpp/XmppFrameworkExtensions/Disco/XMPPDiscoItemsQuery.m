@@ -40,6 +40,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoItemsQuery*)message {
+    return [[[XMPPDiscoItemsQuery alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoItemsQuery*)messageWithNode:(NSString*)itemsNode {
+    return [[[XMPPDiscoItemsQuery alloc] initWithNode:itemsNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoItemsQuery*)init {
 	if(self = (XMPPDiscoItemsQuery*)[super initWithXMLNS:@"http://jabber.org/protocol/disco#items"]) {
 	}
@@ -83,11 +93,11 @@
     XMPPDiscoItemsQuery* itemsQuery;
     NSString* node = [[iq query] node];
     if (node) {
-        itemsQuery = [[self alloc] initWithNode:node];
+        itemsQuery = [self messageWithNode:node];
     } else {
-        itemsQuery = [[self alloc] init];
+        itemsQuery = [self message];
     }
-    XMPPError* error = [[XMPPError alloc] initWithType:@"cancel"];
+    XMPPError* error = [XMPPError messageWithType:@"cancel"];
     NSXMLElement* errorCondition = [NSXMLElement elementWithName:condition];
     [errorCondition addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-stanzas"]];
     [error addChild:errorCondition];
@@ -103,8 +113,8 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID {
     XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[self alloc] init]];
-    [client send:iq andDelegateResponse:[[XMPPDiscoItemsResponseDelegate alloc] init:targetJID]];
+    [iq addQuery:[self message]];
+    [client send:iq andDelegateResponse:[XMPPDiscoItemsResponseDelegate delegate:targetJID]];
     [iq release];
 }
 
