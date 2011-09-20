@@ -32,6 +32,11 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubCeateDelegate*)delegate {
+    return [[[XMPPPubSubCeateDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)stanza {
     [XMPPMessageDelegate updateAccountConnectionState:AccountDiscoError forClient:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubCreateError:stanza];

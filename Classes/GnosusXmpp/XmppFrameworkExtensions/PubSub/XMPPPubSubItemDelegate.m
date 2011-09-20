@@ -33,6 +33,11 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubItemDelegate*)delegate {
+    return [[[XMPPPubSubItemDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [[client multicastDelegate] xmppClient:client didReceivePubSubItemError:iq];
 }

@@ -48,6 +48,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSub*)message {
+    return [[[XMPPPubSub alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSub*)init {
 	if(self = [super initWithName:@"pubsub"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub"]];
@@ -104,24 +109,24 @@
     [pubsub addChild:createElement];	
     [pubsub addChild:configElement];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubCeateDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[XMPPPubSubCeateDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withId:(NSString*)itemId {
     XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]] autorelease];
     XMPPPubSub* pubsub = [[[XMPPPubSub alloc] init] autorelease];
-    XMPPPubSubItems* items = [[XMPPPubSubItems alloc] initWithNode:node];
-    [items addItem:[[XMPPPubSubItem alloc] initWithId:itemId]];
+    XMPPPubSubItems* items = [XMPPPubSubItems messageWithNode:node];
+    [items addItem:[XMPPPubSubItem messageWithId:itemId]];
     [pubsub addChild:items];	
     [iq addPubSub:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubItemDelegate alloc] init]];
+    [client send:iq andDelegateResponse:[XMPPPubSubItemDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPIQ*)buildPubSubIQWithJID:(XMPPJID*)jid node:(NSString*)node andData:(NSXMLElement*)data {
     XMPPIQ* iq = [[[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]] autorelease];
-    XMPPPubSub* pubsub = [[XMPPPubSub alloc] init];
+    XMPPPubSub* pubsub = [self message];
     NSXMLElement* publishElement = [NSXMLElement elementWithName:@"publish"];
     [publishElement addAttributeWithName:@"node" stringValue:node];
     NSXMLElement* itemsElement = [NSXMLElement elementWithName:@"item"];

@@ -26,6 +26,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoItem*)messageWithJID:(NSString*)itemJID iname:(NSString*)itemIname andNode:(NSString*)itemNode {
+    return [[[XMPPDiscoItem alloc] initWithJID:itemJID iname:itemIname andNode:itemNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoItem*)initWithJID:(NSString*)itemJID {
 	if(self = [super initWithName:@"item"]) {
         [self addJID:itemJID];

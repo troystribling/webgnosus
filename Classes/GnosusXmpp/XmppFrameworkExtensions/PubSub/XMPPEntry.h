@@ -19,6 +19,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPEntry*)createFromElement:(NSXMLElement*)element;
++ (XMPPEntry*)messageWithTitle:(NSString*)msgTitle;
 - (XMPPEntry*)init;
 - (XMPPEntry*)initWithTitle:(NSString*)msgTitle;
 

@@ -30,6 +30,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoFeature*)messageWithVar:(NSString*)featVar {
+    return [[[XMPPDiscoFeature alloc] initWithVar:featVar] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoFeature*)initWithVar:(NSString*)featVar {
 	if(self = [super initWithName:@"feature"]) {
         [self addVar:featVar];

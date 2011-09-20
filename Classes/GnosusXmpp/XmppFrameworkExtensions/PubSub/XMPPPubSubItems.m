@@ -28,6 +28,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubItems*)messageWithNode:(NSString*)itemNode {
+    return [[[XMPPPubSubItems alloc] initWithNode:itemNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItems*)initWithNode:(NSString*)itemNode {
 	if(self = [super initWithName:@"items"]) {
         [self addNode:itemNode];

@@ -32,6 +32,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubOwner*)message {
+    return [[[XMPPPubSubOwner alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubOwner*)init {
 	if(self = [super initWithName:@"pubsub"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://jabber.org/protocol/pubsub#owner"]];
@@ -49,14 +54,13 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)delete:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set" toJID:[jid full]];
-    XMPPPubSubOwner* pubsub = [[XMPPPubSubOwner alloc] init];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"set" toJID:[jid full]];
+    XMPPPubSubOwner* pubsub = [XMPPPubSubOwner message];
     NSXMLElement* deleteElement = [NSXMLElement elementWithName:@"delete"];
     [deleteElement addAttributeWithName:@"node" stringValue:node];
     [pubsub addChild:deleteElement];	
     [iq addPubSubOwner:pubsub];    
-    [client send:iq andDelegateResponse:[[XMPPPubSubDeleteDelegate alloc] init:node]];
-    [iq release];
+    [client send:iq andDelegateResponse:[XMPPPubSubDeleteDelegate delegate:node]];
 }
 
 //===================================================================================================================================

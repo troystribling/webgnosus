@@ -33,6 +33,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPEntry*)messageWithTitle:(NSString*)msgTitle {
+    return [[[XMPPEntry alloc] initWithName:msgTitle] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPEntry*)init {
 	if(self = [super initWithName:@"entry"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"http://www.w3.org/2005/Atom"]];
@@ -60,9 +65,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)publish:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node withTitle:(NSString*)title {
-    XMPPEntry* entry = [[XMPPEntry alloc] initWithTitle:title];
+    XMPPEntry* entry = [XMPPEntry messageWithTitle:title];
     XMPPIQ* iq = [XMPPPubSub buildPubSubIQWithJID:jid node:node andData:entry];
-    [client send:iq andDelegateResponse:[[[XMPPPubSubEntryDelegate alloc] init] autorelease]];
+    [client send:iq andDelegateResponse:[XMPPPubSubEntryDelegate delegate]];
 }
 
 @end

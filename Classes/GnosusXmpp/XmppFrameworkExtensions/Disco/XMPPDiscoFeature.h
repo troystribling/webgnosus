@@ -17,6 +17,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPDiscoFeature*)createFromElement:(NSXMLElement*)element;
++ (XMPPDiscoFeature*)messageWithVar:(NSString*)featVar;
 - (XMPPDiscoFeature*)initWithVar:(NSString*)featVar;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

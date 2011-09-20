@@ -112,10 +112,9 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid forTarget:(XMPPJID*)targetJID {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
     [iq addQuery:[self message]];
     [client send:iq andDelegateResponse:[XMPPDiscoItemsResponseDelegate delegate:targetJID]];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -125,15 +124,14 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node forTarget:(XMPPJID*)targetJID {
-    [self get:client JID:jid node:node andDelegateResponse:[[XMPPDiscoItemsResponseDelegate alloc] init:targetJID]];
+    [self get:client JID:jid node:node andDelegateResponse:[XMPPDiscoItemsResponseDelegate delegate:targetJID]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[self alloc] initWithNode:node]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
+    [iq addQuery:[self messageWithNode:node]];
     [client send:iq andDelegateResponse:responseDelegate];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -141,17 +139,16 @@
     NSArray* commandNodes = [NSArray arrayWithObjects:nil];
     NSArray* commandNames = [NSArray arrayWithObjects:nil];
     NSString* thisJID = [[client myJID] full];
-    XMPPIQ* respIq = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
-    XMPPDiscoItemsQuery* itemQuery = [[self alloc] initWithNode:@"http://jabber.org/protocol/commands"];
+    XMPPIQ* respIq = [XMPPIQ messageWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
+    XMPPDiscoItemsQuery* itemQuery = [self messageWithNode:@"http://jabber.org/protocol/commands"];
     for (int i=0; i < [commandNodes count]; i++) {
         NSString* commandNode = [commandNodes objectAtIndex:i];
         NSString* commandName = [commandNames objectAtIndex:i];
-        XMPPDiscoItem* item = [[XMPPDiscoItem alloc] initWithJID:thisJID iname:commandName andNode:commandNode];
+        XMPPDiscoItem* item = [XMPPDiscoItem messageWithJID:thisJID iname:commandName andNode:commandNode];
         [itemQuery addChild:item];
     }
     [respIq addQuery:itemQuery];
     [client sendElement:respIq];
-    [respIq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

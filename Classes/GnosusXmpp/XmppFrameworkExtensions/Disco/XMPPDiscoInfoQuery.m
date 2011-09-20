@@ -138,7 +138,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid node:(NSString*)node andDelegateResponse:(id)responseDelegate {
     XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
-    [iq addQuery:[[self alloc] initWithNode:node]];
+    [iq addQuery:[self messageWithNode:node]];
     [client send:iq andDelegateResponse:responseDelegate];
 }
 
@@ -154,18 +154,17 @@
                                                         @"http://jabber.org/protocol/pubsub#subscribe",
                                                         @"http://jabber.org/protocol/pubsub#create-nodes",
                                                         @"http://jabber.org/protocol/pubsub#delete-nodes", nil];
-    XMPPIQ* respIq = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
-    XMPPDiscoInfoQuery* infoQuery = [[self alloc] init];
-    XMPPDiscoIdentity* identity = [[XMPPDiscoIdentity alloc] initWithCategory:[NSString stringWithUTF8String:kAPP_CATEGORY] iname:[NSString stringWithUTF8String:kAPP_NAME] andType:[NSString stringWithUTF8String:kAPP_TYPE]];
+    XMPPIQ* respIq = [XMPPIQ messageWithType:@"result" toJID:[[iq fromJID] full] andId:[iq stanzaID]];
+    XMPPDiscoInfoQuery* infoQuery = [self message];
+    XMPPDiscoIdentity* identity = [XMPPDiscoIdentity messageWithCategory:[NSString stringWithUTF8String:kAPP_CATEGORY] iname:[NSString stringWithUTF8String:kAPP_NAME] andType:[NSString stringWithUTF8String:kAPP_TYPE]];
     [infoQuery addChild:identity];
     for (int i=0; i < [clientFeatures count]; i++) {
         NSString* var = [clientFeatures objectAtIndex:i];
-        XMPPDiscoFeature* feature = [[XMPPDiscoFeature alloc] initWithVar:var];
+        XMPPDiscoFeature* feature = [XMPPDiscoFeature messageWithVar:var];
         [infoQuery addChild:feature];
     }
     [respIq addQuery:infoQuery];
     [client sendElement:respIq];
-    [respIq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

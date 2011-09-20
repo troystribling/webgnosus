@@ -18,6 +18,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubItems*)createFromElement:(NSXMLElement*)element;
++ (XMPPPubSubItems*)messageWithNode:(NSString*)itemNode;
 - (XMPPPubSubItems*)initWithNode:(NSString*)itemNode;
 - (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId;
 - (XMPPPubSubItems*)initWithNode:(NSString*)itemNode andSubId:(NSInteger)itemSubId andMaxItems:(NSInteger)itemMaxItems;

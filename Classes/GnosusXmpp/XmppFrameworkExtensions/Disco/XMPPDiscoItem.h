@@ -18,6 +18,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPDiscoItem*)createFromElement:(NSXMLElement*)element;
++ (XMPPDiscoItem*)messageWithJID:(NSString*)itemJID iname:(NSString*)itemIname andNode:(NSString*)itemNode;
 - (XMPPDiscoItem*)initWithJID:(NSString*)itemJID;
 - (XMPPDiscoItem*)initWithJID:(NSString*)itemJID andIname:(NSString*)itemIname;
 - (XMPPDiscoItem*)initWithJID:(NSString*)itemJID iname:(NSString*)itemIname andNode:(NSString*)itemNode;

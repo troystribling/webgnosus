@@ -19,6 +19,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPubSubOwner*)createFromElement:(NSXMLElement*)element;
++ (XMPPPubSubOwner*)message;
 - (XMPPPubSubOwner*)init;
 - (NSString*)node;
 

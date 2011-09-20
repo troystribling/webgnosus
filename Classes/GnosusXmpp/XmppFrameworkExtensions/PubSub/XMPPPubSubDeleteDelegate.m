@@ -31,6 +31,11 @@
 #pragma mark XMPPPubSubDeleteDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubDeleteDelegate*)delegate:(NSString*)initNode {
+    return [[[XMPPPubSubDeleteDelegate alloc] init:initNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init:(NSString*)initNode {
 	if(self = [super init])  {
         self.node = initNode;

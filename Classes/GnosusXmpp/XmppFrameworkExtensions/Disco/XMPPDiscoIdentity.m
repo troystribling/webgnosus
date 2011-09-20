@@ -27,6 +27,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPDiscoIdentity*)messageWithCategory:(NSString*)identCategory iname:(NSString*)identIname andType:(NSString*)identType {
+    return [[[XMPPDiscoIdentity alloc] initWithCategory:identCategory iname:identIname andType:identType] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPDiscoIdentity*)initWithCategory:(NSString*)identCategory {
 	if(self = [super initWithName:@"identity"]) {
         [self addCategory:identCategory];

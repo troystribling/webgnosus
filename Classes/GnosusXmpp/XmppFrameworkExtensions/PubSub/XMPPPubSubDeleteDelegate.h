@@ -20,5 +20,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init:(NSString*)initNode;
++ (XMPPPubSubDeleteDelegate*)delegate:(NSString*)initNode;
+
 
 @end

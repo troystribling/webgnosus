@@ -16,4 +16,7 @@
 @interface XMPPPubSubEntryDelegate : NSObject <XMPPResponseDelegate> {
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubEntryDelegate*)delegate;
+
 @end

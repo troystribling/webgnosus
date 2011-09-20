@@ -28,6 +28,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubItem*)messageWithId:(NSString*)itemId {
+    return [[[XMPPPubSubItem alloc] initWithId:itemId] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPubSubItem*)initWithId:(NSString*)initItemId {
     if(self = [super initWithName:@"item"]) {
         [self addItemId:initItemId];
