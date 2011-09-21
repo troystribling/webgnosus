@@ -32,6 +32,11 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRegisterQueryDelegate*)delegate {
+    return [[[XMPPRegisterQueryDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [[client multicastDelegate] xmppClient:client didReceiveRegisterError:iq];
 }

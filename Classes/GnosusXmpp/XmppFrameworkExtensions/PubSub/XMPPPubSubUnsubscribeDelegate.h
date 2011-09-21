@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString* subId;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubUnsubscribeDelegate*)delegateWithNode:(NSString*)initNode andSubId:(NSString*)initSubId;
 - (id)initWithNode:(NSString*)initNode andSubId:(NSString*)initSubId;
 
 @end

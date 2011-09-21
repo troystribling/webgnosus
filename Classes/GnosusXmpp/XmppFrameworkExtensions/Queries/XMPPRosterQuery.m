@@ -29,6 +29,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRosterQuery*)message {
+    return [[[XMPPRosterQuery alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPRosterQuery*)init {
 	if(self = (XMPPRosterQuery*)[super initWithXMLNS:@"jabber:iq:roster"]) {
 	}
@@ -50,30 +55,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get"];
-    [iq addQuery:[[self alloc] init]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get"];
+    [iq addQuery:[self message]];
     [client sendElement:iq];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)update:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare]]];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+    XMPPRosterQuery* query = [self message];
+    [query addItem:[XMPPRosterItem messageWithJID:[jid bare]]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
     [iq addQuery:query];
     [client sendElement:iq];
-    [iq release];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)remove:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPRosterQuery* query = [[XMPPRosterQuery alloc] init];
-    [query addItem:[[XMPPRosterItem alloc] initWithJID:[jid bare] andSubscription:@"remove"]];
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
+    XMPPRosterQuery* query = [self message];
+    [query addItem:[XMPPRosterItem messageWithJID:[jid bare] andSubscription:@"remove"]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
     [iq addQuery:query];
     [client sendElement:iq];
-    [iq release];
 }
 
 //===================================================================================================================================

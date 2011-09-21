@@ -34,6 +34,11 @@
 #pragma mark XMPPResponse Delegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubSubscriptionsDelegate*)delegate {
+    return [[[XMPPPubSubSubscriptionsDelegate alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (void)handleError:(XMPPClient*)client forStanza:(XMPPIQ*)iq {
     [XMPPMessageDelegate updateAccountConnectionState:AccountSubscriptionsUpdateError forClient:client];
     [[client multicastDelegate] xmppClient:client didReceivePubSubSubscriptionsError:iq];

@@ -30,6 +30,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPClientVersionQuery*)messageWithName:(NSString*)name version:(NSString*)version andOs:(NSString*)os {
+    return [[[XMPPClientVersionQuery alloc] initWithName:name version:version andOs:os] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPClientVersionQuery*)init {
 	if(self = (XMPPClientVersionQuery*)[super initWithXMLNS:@"jabber:iq:version"]) {
 	}
@@ -95,19 +100,18 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)get:(XMPPClient*)client JID:(XMPPJID*)jid {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"get" toJID:[jid full]];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"get" toJID:[jid full]];
     [iq addQuery:[XMPPClientVersionQuery message]];
     [client send:iq andDelegateResponse:[XMPPClientVersionQueryDelegate delegate]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)result:(XMPPClient*)client forIQ:(XMPPIQ*)iq {
-    XMPPClientVersionQuery* version = [[self alloc] initWithName:[NSString stringWithUTF8String:kAPP_NAME] version:[NSString stringWithUTF8String:kAPP_VERSION] andOs:[NSString stringWithUTF8String:kOS_VERSION]];
-    XMPPIQ* responseIQ = [[XMPPIQ alloc] initWithType:@"result" toJID:[[iq fromJID] full]];
+    XMPPClientVersionQuery* version = [self messageWithName:[NSString stringWithUTF8String:kAPP_NAME] version:[NSString stringWithUTF8String:kAPP_VERSION] andOs:[NSString stringWithUTF8String:kOS_VERSION]];
+    XMPPIQ* responseIQ = [XMPPIQ messageWithType:@"result" toJID:[[iq fromJID] full]];
     [responseIQ addStanzaID:[iq stanzaID]];
     [responseIQ addQuery:version];
 	[client sendElement:responseIQ];
-    [responseIQ release];
 }
 
 //===================================================================================================================================

@@ -36,6 +36,21 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPresence*)messageWithType:(NSString*)presenceType {
+    return [[[XMPPPresence alloc] initWithType:presenceType] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPresence*)messageWithPriority:(NSString*)presencePriority {
+    return [[[XMPPPresence alloc] initWithPriority:presencePriority] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPresence*)messageWithType:(NSString*)presenceType toJID:(NSString*)presenceTo {
+    return [[[XMPPPresence alloc] initWithName:presenceType andToJID:presenceTo] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPPresence*)initWithToJID:(NSString*)presenceTo {
 	if(self = (XMPPPresence*)[super initWithName:@"presence" andToJID:presenceTo]) {
 	}
@@ -114,27 +129,27 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)goOnline:(XMPPClient*)client withPriority:(NSInteger)priority {
-	[client sendElement:[[XMPPPresence alloc] initWithPriority:[NSString stringWithFormat:@"%i", priority]]];
+	[client sendElement:[XMPPPresence messageWithPriority:[NSString stringWithFormat:@"%i", priority]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)goOffline:(XMPPClient*)client {
-	[client sendElement:[[XMPPPresence alloc] initWithType:@"unavailable"]];
+	[client sendElement:[XMPPPresence messageWithType:@"unavailable"]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)accept:(XMPPClient*)client JID:(XMPPJID*)jid {
-    [client sendElement:[[XMPPPresence alloc] initWithType:@"subscribed" toJID:[jid bare]]];
+    [client sendElement:[XMPPPresence messageWithType:@"subscribed" toJID:[jid bare]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)decline:(XMPPClient*)client JID:(XMPPJID*)jid{
-    [client sendElement:[[XMPPPresence alloc] initWithType:@"unsubscribed" toJID:[jid bare]]];
+    [client sendElement:[XMPPPresence messageWithType:@"unsubscribed" toJID:[jid bare]]];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)subscribe:(XMPPClient*)client JID:(XMPPJID*)jid {
-    [client sendElement:[[XMPPPresence alloc] initWithType:@"subscribe" toJID:[jid bare]]];
+    [client sendElement:[XMPPPresence messageWithType:@"subscribe" toJID:[jid bare]]];
 }
 
 

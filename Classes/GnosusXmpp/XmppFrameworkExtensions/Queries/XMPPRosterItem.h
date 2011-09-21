@@ -18,6 +18,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPRosterItem*)createFromElement:(NSXMLElement*)element;
++ (XMPPRosterItem*)messageWithJID:(NSString*)itemJID;
++ (XMPPRosterItem*)messageWithJID:(NSString*)itemJID andSubscription:(NSString*)itemSubscrition;
 - (XMPPRosterItem*)initWithJID:(NSString*)itemJID;
 - (XMPPRosterItem*)initWithJID:(NSString*)itemJID andSubscription:(NSString*)itemSubscrition;
 

@@ -18,6 +18,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPRegisterQuery*)createFromElement:(NSXMLElement*)element;
++ (XMPPRegisterQuery*)messageWithUsername:(NSString*)regUsername andPassword:(NSString*)regPassword;
 - (XMPPRegisterQuery*)init;
 - (XMPPRegisterQuery*)initWithUsername:(NSString*)regUsername andPassword:(NSString*)regPassword;
 

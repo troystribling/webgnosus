@@ -22,6 +22,9 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPPresence *)presenceFromElement:(NSXMLElement*)element;
 + (XMPPPresence*)createFromElement:(NSXMLElement*)element;
++ (XMPPPresence*)messageWithType:(NSString*)presenceType;
++ (XMPPPresence*)messageWithPriority:(NSString*)presencePriority;
++ (XMPPPresence*)messageWithType:(NSString*)presenceType toJID:(NSString*)presenceTo;
 - (XMPPPresence*)initWithToJID:(NSString*)presenceTo;
 - (XMPPPresence*)initWithType:(NSString*)presenceType;
 - (XMPPPresence*)initWithPriority:(NSString*)presencePriority;

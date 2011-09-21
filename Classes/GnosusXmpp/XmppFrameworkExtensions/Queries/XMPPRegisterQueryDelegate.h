@@ -14,4 +14,7 @@
 @interface XMPPRegisterQueryDelegate : NSObject <XMPPResponseDelegate> {
 }
 
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRegisterQueryDelegate*)delegate;
+
 @end

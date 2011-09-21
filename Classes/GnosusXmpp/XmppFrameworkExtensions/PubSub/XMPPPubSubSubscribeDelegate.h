@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString* node;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubSubscribeDelegate*)delegate:(NSString*)initNode;
 - (id)init:(NSString*)initNode;
 
 @end

@@ -32,6 +32,11 @@
 #pragma mark XMPPPubSubSubscribeDelegate
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPPubSubSubscribeDelegate*)delegate:(NSString*)initNode {
+    return [[[XMPPPubSubSubscribeDelegate alloc] init:initNode] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init:(NSString*)initNode {
 	if(self = [super init])  {
         self.node = initNode;

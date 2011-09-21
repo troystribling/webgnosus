@@ -27,6 +27,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRosterItem*)messageWithJID:(NSString*)itemJID {
+    return [[[XMPPRosterItem alloc] initWithJID:itemJID] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRosterItem*)messageWithJID:(NSString*)itemJID andSubscription:(NSString*)itemSubscrition {
+    return [[[XMPPRosterItem alloc] initWithJID:itemJID andSubscription:itemSubscrition] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPRosterItem*)initWithJID:(NSString*)itemJID {
 	if(self = [super initWithName:@"item"]) {
         [self addJID:itemJID];

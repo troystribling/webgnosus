@@ -29,6 +29,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPRegisterQuery*)messageWithUsername:(NSString*)regUsername andPassword:(NSString*)regPassword {
+    return [[[XMPPRegisterQuery alloc] initWithUsername:regUsername andPassword:regPassword] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPRegisterQuery*)init {
 	if(self = (XMPPRegisterQuery*)[super initWithXMLNS:@"jabber:iq:register"]) {
 	}
@@ -79,11 +84,10 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (void)set:(XMPPClient*)client user:(NSString *)username withPassword:(NSString *)password {
-    XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-    XMPPRegisterQuery* regQuery = [[XMPPRegisterQuery alloc] initWithUsername:username andPassword:password];
+    XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
+    XMPPRegisterQuery* regQuery = [XMPPRegisterQuery messageWithUsername:username andPassword:password];
     [iq addQuery:regQuery];			    
-    [client send:iq andDelegateResponse:[[XMPPRegisterQueryDelegate alloc] init]];
-    [iq release];
+    [client send:iq andDelegateResponse:[XMPPRegisterQueryDelegate delegate]];
 }
 
 //===================================================================================================================================
