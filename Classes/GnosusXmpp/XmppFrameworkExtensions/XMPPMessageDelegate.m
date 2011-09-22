@@ -85,7 +85,7 @@
     if (account) {
         ContactModel* contact = [ContactModel findByJid:[contactJid bare] andAccount:account];	
         if (contact == nil) {
-            contact = [[ContactModel alloc] init];
+            contact = [ContactModel model];
             contact.accountPk = account.pk;	
             contact.jid = [contactJid bare];
             contact.host = [contactJid domain];
@@ -259,7 +259,7 @@
             if ([[presence type] isEqualToString:@"available"]) {
                 RosterItemModel* rosterItem = [RosterItemModel findByFullJid:[fromJID full] andAccount:account];    
                 if (!rosterItem) {
-                    rosterItem = [[RosterItemModel alloc] init]; 
+                    rosterItem = [RosterItemModel model]; 
                     rosterItem.jid = [fromJID bare];
                     rosterItem.resource = fromResource;
                     rosterItem.host = [fromJID domain];

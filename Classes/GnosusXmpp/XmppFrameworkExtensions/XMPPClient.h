@@ -53,6 +53,7 @@
 @property (nonatomic, assign) int priority;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPClient*)client;
 - (id)init;
 - (BOOL)isAccountJID:(NSString*)requestJID;
 

@@ -17,6 +17,7 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPAuthorizationQuery*)createFromElement:(NSXMLElement*)element;
++ (XMPPAuthorizationQuery*)messageWithUsername:(NSString*)queryUsername digest:(NSString*)queryDigest andResource:(NSString*)queryResource;
 - (XMPPAuthorizationQuery*)initWithUsername:(NSString*)queryUsername digest:(NSString*)queryDigest andResource:(NSString*)queryResource;
 
 //-----------------------------------------------------------------------------------------------------------------------------------

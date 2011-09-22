@@ -99,7 +99,6 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 		if([xmppClient isConnected]) {
             [xmppClient removeAllDelgates];
 			[xmppClient disconnect];
-            [xmppClient release];
 		}
 		[xmppClientDictionary removeObjectForKey:[account fullJID]];
 	}
@@ -115,7 +114,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 
 //----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPClient*)createXMPPClientForAccount:(AccountModel*)account {
-	XMPPClient* xmppClient = [[XMPPClient alloc] init];
+	XMPPClient* xmppClient = [XMPPClient client];
 	[self addDelegatesToClient:xmppClient];
 	XMPPJID* jid;
 	if (account.resource) {
@@ -149,8 +148,8 @@ static XMPPClientManager* thisXMPPClientManager = nil;
     thisXMPPClientManager = self;
 	self.xmppClientDictionary = [NSMutableDictionary dictionaryWithCapacity:10];
     self.delegates = [NSMutableArray arrayWithCapacity:10];
-    self.accountUpdateDelegate = [[MulticastDelegate alloc] init];		
-    self.messageCountUpdateDelegate = [[MulticastDelegate alloc] init];		
+    self.accountUpdateDelegate = [[[MulticastDelegate alloc] init] autorelease];		
+    self.messageCountUpdateDelegate = [[[MulticastDelegate alloc] init] autorelease];		
     return self;
 }
 

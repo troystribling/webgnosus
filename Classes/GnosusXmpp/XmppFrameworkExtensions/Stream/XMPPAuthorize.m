@@ -28,6 +28,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPAuthorize*)messageWithMechanism:(NSString*)authMechanism {
+    return [[[XMPPAuthorize alloc] initWithMechanism:authMechanism] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPAuthorize*)messageWithMechanism:(NSString*)authMechanism andPlainCredentials:(NSString*)authCredentials {
+    return [[[XMPPAuthorize alloc] initWithMechanism:authMechanism andPlainCredentials:authCredentials] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPAuthorize*)init {
 	if(self = [super initWithName:@"auth"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-sasl" ]];

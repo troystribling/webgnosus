@@ -55,6 +55,11 @@
 #pragma mark XMPPClient
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPClient*)client {
+    return [[[XMPPClient alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (BOOL)isAccountJID:(NSString*)requestJID {
     return [[self.myJID full] isEqualToString:requestJID];
 }
@@ -340,10 +345,10 @@
 //-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	if(self = [super init]) {
-		self.multicastDelegate = [[MulticastDelegate alloc] init];	
+		self.multicastDelegate = [[[MulticastDelegate alloc] init] autorelease];	
         self.stanzaID = 0;
 		self.priority = 1;
-		self.xmppStream = [[XMPPStream alloc] initWithDelegate:self];				
+		self.xmppStream = [XMPPStream streamWithDelegate:self];				
         self.xmppResponseList = [NSMutableDictionary dictionaryWithCapacity:10];
 	}
 	return self;

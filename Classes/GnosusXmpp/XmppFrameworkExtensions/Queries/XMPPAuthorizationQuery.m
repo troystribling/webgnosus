@@ -26,6 +26,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPAuthorizationQuery*)messageWithUsername:(NSString*)queryUsername digest:(NSString*)queryDigest andResource:(NSString*)queryResource {
+    return [[[XMPPAuthorizationQuery alloc] initWithUsername:queryUsername digest:queryDigest andResource:queryResource] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPAuthorizationQuery*)initWithUsername:(NSString*)queryUsername digest:(NSString*)queryDigest andResource:(NSString*)queryResource {
 	if(self = (XMPPAuthorizationQuery*)[super initWithXMLNS:@"jabber:iq:auth"]) {
         [self addUsername:queryUsername];

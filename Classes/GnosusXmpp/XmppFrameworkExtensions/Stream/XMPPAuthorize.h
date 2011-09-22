@@ -15,6 +15,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPAuthorize*)createFromElement:(NSXMLElement*)element;
++ (XMPPAuthorize*)messageWithMechanism:(NSString*)authMechanism;
++ (XMPPAuthorize*)messageWithMechanism:(NSString*)authMechanism andPlainCredentials:(NSString*)authCredentials;
 - (XMPPAuthorize*)init;
 - (XMPPAuthorize*)initWithMechanism:(NSString*)authMechanism;
 - (XMPPAuthorize*)initWithMechanism:(NSString*)authMechanism andPlainCredentials:(NSString*)authCredentials;

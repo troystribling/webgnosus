@@ -47,8 +47,9 @@
 @property (nonatomic, retain) NSTimer* keepAliveTimer;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPStream*)streamWithDelegate:(id)_delegate;
 - (id)init;
-- (id)initWithDelegate:(id)delegate;
+- (id)initWithDelegate:(id)_delegate;
 
 - (BOOL)isDisconnected;
 - (BOOL)isConnected;

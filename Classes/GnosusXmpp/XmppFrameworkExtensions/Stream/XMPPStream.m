@@ -69,6 +69,11 @@
 #pragma mark XMPPStream
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPStream*)streamWithDelegate:(id)_delegate {
+    return [[[XMPPStream alloc] initWithDelegate:_delegate] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (id)init {
 	return [self initWithDelegate:nil];
 }
@@ -81,7 +86,7 @@
 		
 		// Initialize state and socket
 		self.state = STATE_DISCONNECTED;
-		self.asyncSocket = [[AsyncSocket alloc] initWithDelegate:self];
+		self.asyncSocket = [[[AsyncSocket alloc] initWithDelegate:self] autorelease];
 		
 		// Enable pre-buffering on the socket to improve readDataToData performance
 		[self.asyncSocket enablePreBuffering];
@@ -92,11 +97,11 @@
 		self.allowsSelfSignedCertificates = NO;
 		
 		// We initialize an empty buffer of data to store data as it arrives
-		self.buffer = [[NSMutableData alloc] initWithCapacity:100];
+		self.buffer = [NSMutableData dataWithCapacity:100];
 		
 		// Initialize the standard terminator to listen for
 		// We try to parse the data everytime we encouter an XML ending tag character
-		self.terminator = [[@">" dataUsingEncoding:NSUTF8StringEncoding] retain];
+		self.terminator = [@">" dataUsingEncoding:NSUTF8StringEncoding];
 	}
 	return self;
 }
@@ -207,7 +212,7 @@
 	if(self.state == STATE_CONNECTED)
 	{
 		if([self supportsDigestMD5Authentication]) {
-            XMPPAuthorize* auth = [[XMPPAuthorize alloc] initWithMechanism:@"DIGEST-MD5"];			
+            XMPPAuthorize* auth = [XMPPAuthorize messageWithMechanism:@"DIGEST-MD5"];			
 			if(DEBUG) {
 				NSLog(@"SEND: %@", auth);
 			}
@@ -217,7 +222,7 @@
 		else if([self supportsPlainAuthentication]) {
 			NSString* payload = [NSString stringWithFormat:@"%C%@%C%@", 0, username, 0, password];
 			NSString* base64 = [[payload dataUsingEncoding:NSUTF8StringEncoding] base64Encoded];			
-            XMPPAuthorize* auth = [[XMPPAuthorize alloc] initWithMechanism:@"PLAIN" andPlainCredentials:base64];			
+            XMPPAuthorize* auth = [XMPPAuthorize messageWithMechanism:@"PLAIN" andPlainCredentials:base64];			
 			if(DEBUG) {
 				NSLog(@"SEND: %@", [auth XMLString]);
 			}
@@ -227,8 +232,8 @@
 			NSString *digestStr = [NSString stringWithFormat:@"%@%@", rootID, password];
 			NSData *digestData = [digestStr dataUsingEncoding:NSUTF8StringEncoding];			
 			NSString *digest = [[digestData sha1Digest] hexStringValue];			
-            XMPPIQ* auth = [[XMPPIQ alloc] initWithType:@"set"];
-            [auth addQuery:[[XMPPAuthorizationQuery alloc] initWithUsername:username digest:digest andResource:resource]];			
+            XMPPIQ* auth = [XMPPIQ messageWithType:@"set"];
+            [auth addQuery:[XMPPAuthorizationQuery messageWithUsername:username digest:digest andResource:resource]];			
 			if(DEBUG) {
 				NSLog(@"SEND: %@", [auth XMLString]);
 			}

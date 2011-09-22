@@ -30,6 +30,11 @@
 #pragma mark ContactModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ContactModel*)model {
+    return [[[ContactModel alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
 	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM contacts"];
 }

@@ -32,6 +32,11 @@
 #pragma mark RosterItemModel
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (RosterItemModel*)model {
+    return [[[RosterItemModel alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 + (NSInteger)count {
 	return [[WebgnosusDbi instance]  selectIntExpression:@"SELECT COUNT(pk) FROM roster"];
 }

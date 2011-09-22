@@ -36,7 +36,7 @@
     [self setTime:cell forMessage:message];
     UIView* dataView = [MessageViewFactory viewForMessage:message];
     CGRect dataRect = [dataView frame];
-    UIView* container = [[UIView alloc] initWithFrame:CGRectMake(kGEOLOC_MESSAGE_CELL_X_OFFSET, kGEOLOC_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)];
+    UIView* container = [[[UIView alloc] initWithFrame:CGRectMake(kGEOLOC_MESSAGE_CELL_X_OFFSET, kGEOLOC_MESSAGE_CELL_Y_OFFSET, dataRect.size.width,  dataRect.size.width)] autorelease];
     [container addSubview:dataView];
     [cell addSubview:container];
     return cell;

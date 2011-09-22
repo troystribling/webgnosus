@@ -33,7 +33,7 @@
     XMPPGeoLoc* data = [message parseGeoLocMessage];
     NSMutableArray* gridArray = [self buildGridArray:data];
     NSMutableArray* labelArray = [LabelGridView buildViews:gridArray];
-    LabelGridView* labelGridView = [[LabelGridView alloc] initWithLabelViews:labelArray];
+    LabelGridView* labelGridView = [LabelGridView viewWithLabelViews:labelArray];
     [labelGridView setCellColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
     [labelGridView setBorderColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]]; 
     [labelGridView setCellColor:[UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:1.0f] forColumn:0];

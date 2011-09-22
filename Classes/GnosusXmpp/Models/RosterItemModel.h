@@ -31,6 +31,7 @@
 @property (nonatomic, assign) NSInteger accountPk;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (RosterItemModel*)model; 
 + (NSInteger)count;
 + (NSInteger)countByAccount:(AccountModel*)requestAccount;
 + (NSInteger)countByJid:(NSString*)bareJid andAccount:(AccountModel*)requestAccount;

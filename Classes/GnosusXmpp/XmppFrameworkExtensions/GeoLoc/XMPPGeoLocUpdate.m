@@ -52,7 +52,7 @@
     model.accountPk = self.account.pk;
     model.toJid = [[self.account toJID] domain];
     model.fromJid = [self.account fullJID];
-    model.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:0];
+    model.createdAt = [NSDate dateWithTimeIntervalSinceNow:0];
     model.textType = MessageTextTypeGeoLocData;
     model.messageText = [geoLoc XMLString];
     model.itemId = @"-1";

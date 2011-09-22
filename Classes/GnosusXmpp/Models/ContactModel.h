@@ -33,6 +33,7 @@ typedef enum {
 @property (nonatomic, assign) ContactState contactState;
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (ContactModel*)model;
 + (NSInteger)count;
 + (NSInteger)countByAccount:(AccountModel*)account;
 + (void)drop;
