@@ -332,15 +332,15 @@
 	if([[self streamFeatures] requiresBind]) {
 		self.state = STATE_BINDING;		
 		if([self.authResource length] > 0) {
-            XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-            [iq addBind:[[XMPPBind alloc] initWithResource:self.authResource]];
+            XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
+            [iq addBind:[XMPPBind messageWithResource:self.authResource]];
 			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
 			[self.asyncSocket writeData:[[iq XMLString] dataUsingEncoding:NSUTF8StringEncoding] withTimeout:TIMEOUT_WRITE tag:TAG_WRITE_STREAM];
 		} else {
-            XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-            [iq addBind:[[XMPPBind alloc] init]];						
+            XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
+            [iq addBind:[XMPPBind message]];						
 			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
@@ -352,7 +352,7 @@
 	self.state = STATE_CONNECTED;	
 	if(!self.isAuthenticated) {
 		[self.keepAliveTimer invalidate];
-		self.keepAliveTimer = [[NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(keepAlive:) userInfo:nil repeats:YES] retain];
+		self.keepAliveTimer = [NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(keepAlive:) userInfo:nil repeats:YES];
 		if([self.delegate respondsToSelector:@selector(xmppStreamDidOpen:)]) {
 			[self.delegate xmppStreamDidOpen:self];
 		}
@@ -610,12 +610,12 @@
 	
 	if(r_jid) {
 		NSString *fullJID = [r_jid stringValue];
-		self.authResource = [[fullJID lastPathComponent] copy];
+		self.authResource = [fullJID lastPathComponent];
         XMPPStreamFeatures* features = [XMPPStreamFeatures createFromElement:[self streamFeatures]]; 
 		if([features supportsSession])
 		{
-            XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-            [iq addSession:[[XMPPSession alloc] init]];
+            XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
+            [iq addSession:[XMPPSession session]];
 			if(DEBUG) {
 				NSLog(@"SEND: %@", iq);
 			}
@@ -640,8 +640,8 @@
 		// It appears the server didn't allow our resource choice
 		// We'll simply let the server choose then
 		
-        XMPPIQ* iq = [[XMPPIQ alloc] initWithType:@"set"];
-        [iq addBind:[[XMPPBind alloc] init]];
+        XMPPIQ* iq = [XMPPIQ messageWithType:@"set"];
+        [iq addBind:[XMPPBind message]];
 		if(DEBUG) {
 			NSLog(@"SEND: %@", iq);
 		}

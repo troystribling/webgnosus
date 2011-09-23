@@ -39,7 +39,7 @@ static XMPPClientManager* thisXMPPClientManager = nil;
 + (XMPPClientManager*)instance {	
     @synchronized(self) {
         if (thisXMPPClientManager == nil) {
-            [[self alloc] init]; 
+            thisXMPPClientManager = [[self alloc] init]; 
         }
     }       
     return thisXMPPClientManager;

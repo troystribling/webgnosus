@@ -27,6 +27,11 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPSession*)session {
+    return [[[XMPPSession alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPSession*)init {
 	if(self = [super initWithName:@"session"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-session"]];

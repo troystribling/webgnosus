@@ -28,6 +28,16 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPBind*)message {
+    return [[[XMPPBind  alloc] init] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
++ (XMPPBind*)messageWithResource:(NSString*)bindResource {
+    return [[[XMPPBind alloc] initWithResource:bindResource] autorelease];
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
 - (XMPPBind*)init {
 	if(self = [super initWithName:@"bind"]) {
         [self addNamespace:[NSXMLNode namespaceWithName:@"" stringValue:@"urn:ietf:params:xml:ns:xmpp-bind"]];

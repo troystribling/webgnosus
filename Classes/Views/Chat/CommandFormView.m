@@ -405,7 +405,7 @@
         NSString* var = [fieldVars objectAtIndex:i];
         id fieldView = [self.formFieldViews valueForKey:var];
         XMPPxDataField* formField = [self.fields valueForKey:var];
-        NSString* fieldViewValue;
+        NSString* fieldViewValue = nil;
         if ([[fieldView className] isEqualToString:@"UITextField"]) {
             fieldViewValue = (NSString*)[fieldView text];
         } else if ([[fieldView className] isEqualToString:@"JIDField"]) {

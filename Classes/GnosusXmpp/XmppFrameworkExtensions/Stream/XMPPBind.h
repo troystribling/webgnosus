@@ -15,6 +15,8 @@
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPBind*)createFromElement:(NSXMLElement*)element;
++ (XMPPBind*)message;
++ (XMPPBind*)messageWithResource:(NSString*)bindResource;
 - (XMPPBind*)init;
 - (XMPPBind*)initWithResource:(NSString*)bindResource;
 

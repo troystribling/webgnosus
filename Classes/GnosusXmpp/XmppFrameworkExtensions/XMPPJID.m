@@ -82,16 +82,15 @@
 	NSString *user;
 	NSString *domain;
 	NSString *resource;
-    XMPPJID* jid = nil;
+    XMPPJID* jid = [[XMPPJID alloc] init];
 	
 	if([XMPPJID parse:jidStr outUser:&user outDomain:&domain outResource:&resource]) {
-		jid = [[[XMPPJID alloc] init] autorelease];
 		jid->user = [user copy];
 		jid->domain = [domain copy];
 		jid->resource = [resource copy];
 	}
 	
-    return jid;
+    return [jid autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
@@ -100,32 +99,28 @@
 	NSString *user;
 	NSString *domain;
 	NSString *ignore;
+    XMPPJID *jid = [[XMPPJID alloc] init];
 	
 	if([XMPPJID parse:jidStr outUser:&user outDomain:&domain outResource:&ignore]) {
-		XMPPJID *jid = [[XMPPJID alloc] init];
 		jid->user = [user copy];
 		jid->domain = [domain copy];
 		jid->resource = [resource copy];
-		
-		return [jid autorelease];
 	}
 	
-	return nil;
+	return [jid autorelease];
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 + (XMPPJID*)jidWithUser:(NSString*)user domain:(NSString*)domain resource:(NSString*)resource
 {
+    XMPPJID *jid = [[XMPPJID alloc] init];
 	if([XMPPJID validateUser:user domain:domain resource:resource]) {
-		XMPPJID *jid = [[XMPPJID alloc] init];
 		jid->user = [user copy];
 		jid->domain = [domain copy];
 		jid->resource = [resource copy];
-		
-		return [jid autorelease];
 	}
 	
-	return nil;
+	return [jid autorelease];
 }
 
 //===================================================================================================================================
